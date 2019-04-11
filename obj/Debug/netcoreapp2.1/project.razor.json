@@ -1,0 +1,14 @@
+{
+  "ProjectFilePath": "c:\\Users\\cmaheu\\Projects\\StarWars5e.Site\\starWars5e.csproj",
+  "TargetFramework": "netcoreapp2.1",
+  "TagHelpers": [],
+  "Configuration": {
+    "ConfigurationName": "MVC-2.1",
+    "LanguageVersion": "2.1",
+    "Extensions": [
+      {
+        "ExtensionName": "MVC-2.1"
+      }
+    ]
+  }
+}

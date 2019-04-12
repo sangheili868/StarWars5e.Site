@@ -1,7 +1,7 @@
 {
   "name": "starwars5e",
   "version": "1.0.0",
-  "description": "Website for Star Wars D&D 5e Conversion",
+  "description": "The Front-End Web App Project for Star Wars 5e",
   "author": "sangheili868",
   "private": true,
   "scripts": {
@@ -11,6 +11,7 @@
     "build": "node build/build.js"
   },
   "dependencies": {
+    "azure-storage": "^2.10.2",
     "vue": "^2.5.2",
     "vue-router": "^3.0.1"
   },
@@ -58,7 +59,7 @@
     "vue-template-compiler": "^2.5.2",
     "webpack": "^3.6.0",
     "webpack-bundle-analyzer": "^2.9.0",
-    "webpack-dev-server": "^3.3.1",
+    "webpack-dev-server": "^2.9.1",
     "webpack-merge": "^4.1.0"
   },
   "engines": {

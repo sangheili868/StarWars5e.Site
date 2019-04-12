@@ -1,4 +1,4 @@
-# starwars5e
+# StarWars5e
 
 > The Front-End Web App Project for Star Wars 5e
 

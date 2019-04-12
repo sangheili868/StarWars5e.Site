@@ -16,7 +16,7 @@ export default {
     const tableQuery = new azure.TableQuery().top(200)
     tableService.queryEntities('classes', tableQuery, null, (error, results) => {
       if (!error) {
-        this.msg = 'Classes: ' + results.entries.map(({Name}) => Name._).join(', ')
+        this.msg = 'Classes: ' + results.entries.map(({ Name }) => Name._).join(', ')
       }
     })
   }

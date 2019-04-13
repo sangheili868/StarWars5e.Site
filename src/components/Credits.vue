@@ -10,6 +10,7 @@ export default {
   },
 
   created () {
+    // console.log(process.env.SW5E_SAS)
     const sas = process.env.TABLE_STORAGE_SAS
     const uri = process.env.TABLE_STORAGE_URL
     const tableService = azure.createTableServiceWithSas(uri, sas)

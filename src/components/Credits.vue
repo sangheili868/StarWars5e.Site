@@ -1,6 +1,5 @@
 <script>
 import azure from 'azure-storage'
-// import dotenv from 'dotenv'
 
 export default {
   name: 'Credits',
@@ -11,14 +10,15 @@ export default {
   },
 
   created () {
-    // dotenv.config()
-    const sas = process.env.SW5E_SAS
-    const uri = 'https://starwars5e.table.core.windows.net'
+    const sas = process.env.TABLE_STORAGE_SAS
+    const uri = process.env.TABLE_STORAGE_URL
     const tableService = azure.createTableServiceWithSas(uri, sas)
     const tableQuery = new azure.TableQuery().top(200).where('PartitionKey eq ?', 'Credit')
     tableService.queryEntities('credits', tableQuery, null, (error, results) => {
       if (!error) {
-        this.msg = results.entries.map(({ RowKey }) => RowKey._).join(', ')
+        this.msg = results.entries.map(({ RowKey }) => RowKey._).sort((a, b) => {
+          return a.toLowerCase().localeCompare(b.toLowerCase())
+        }).join(', ')
       }
     })
   }
@@ -26,7 +26,7 @@ export default {
 </script>
 
 <template>
-  <div class="hello">
+  <div class="credits">
     <h1>Credits</h1>
     <h2>{{ msg }}</h2>
   </div>

@@ -10,8 +10,8 @@ export default {
   },
 
   created () {
-    const sas = 'sv=2018-03-28&ss=bfqt&srt=sco&sp=rl&se=2019-12-31T05:44:10Z&st=2019-04-07T20:44:10Z&spr=https&sig=0dTdKw%2BfYmlFhbeUOhIZy%2FXMg22Bj2LIedcL803efbQ%3D'
-    const uri = 'https://starwars5e.table.core.windows.net'
+    const sas = process.env.TABLE_STORAGE_SAS
+    const uri = process.env.TABLE_STORAGE_URL
     const tableService = azure.createTableServiceWithSas(uri, sas)
     const tableQuery = new azure.TableQuery().top(200)
     tableService.queryEntities('classes', tableQuery, null, (error, results) => {

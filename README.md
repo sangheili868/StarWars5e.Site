@@ -4,6 +4,17 @@
 
 ## Build Setup
 
+Create a dev.secrets.js file in the config directory with the following format (fill in the `<>` variables):
+
+```javascript
+'use strict'
+module.exports = {
+  TABLE_STORAGE_SAS: '"<SAS>"',
+  TABLE_STORAGE_URL: '"<URL>"'
+}
+
+```
+
 ``` bash
 # install dependencies
 yarn

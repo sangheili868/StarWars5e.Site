@@ -1,5 +1,6 @@
 <script>
 import azure from 'azure-storage'
+// import dotenv from 'dotenv'
 
 export default {
   name: 'Credits',
@@ -10,10 +11,11 @@ export default {
   },
 
   created () {
-    const sas = 'sv=2018-03-28&ss=bfqt&srt=sco&sp=rl&se=2019-12-31T05:44:10Z&st=2019-04-07T20:44:10Z&spr=https&sig=0dTdKw%2BfYmlFhbeUOhIZy%2FXMg22Bj2LIedcL803efbQ%3D'
+    // dotenv.config()
+    const sas = process.env.SW5E_SAS
     const uri = 'https://starwars5e.table.core.windows.net'
     const tableService = azure.createTableServiceWithSas(uri, sas)
-    const tableQuery = new azure.TableQuery().top(200).where('PartitionKey eq ?', 'Credit' )
+    const tableQuery = new azure.TableQuery().top(200).where('PartitionKey eq ?', 'Credit')
     tableService.queryEntities('credits', tableQuery, null, (error, results) => {
       if (!error) {
         this.msg = results.entries.map(({ RowKey }) => RowKey._).join(', ')

@@ -21,10 +21,13 @@ steps:
   displayName: 'Install Node.js'
 
 - script: |
-    echo $(tablestoragesas)
-    echo $(tablestorageurl)
+    
     export tablestoragesas=$(tablestoragesas)
     export tablestorageurl=$(tablestorageurl)
+    echo $tablestoragesas
+    echo $tablestorageurl
+    echo $TABLESTORAGESAS
+    echo $TABLESTORAGEURL
     npm install
     npm run build
   displayName: 'npm install and build'

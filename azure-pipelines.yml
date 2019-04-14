@@ -9,8 +9,8 @@ trigger:
 pool:
   vmImage: 'Ubuntu-16.04'
 
-variables:
-  NODE_ENV: 'production'
+# variables:
+#   NODE_ENV: 'production'
 
 steps:
 - task: AzureKeyVault@1

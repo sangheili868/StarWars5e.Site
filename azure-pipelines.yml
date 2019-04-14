@@ -20,17 +20,22 @@ steps:
     versionSpec: '10.x'
   displayName: 'Install Node.js'
 
-- script: |
-    
-    export tablestoragesas=$(tablestoragesas)
-    export tablestorageurl=$(tablestorageurl)
-    echo $tablestoragesas
-    echo $tablestorageurl
-    echo $TABLESTORAGESAS
-    echo $TABLESTORAGEURL
-    npm install
-    npm run build
-  displayName: 'npm install and build'
+- task: PowerShell@2
+  inputs:
+    targetType: 'inline'
+    script: npm install; npm run build
+  env:
+    tablestoragesas: $(tablestoragesas)
+    tablestorageurl: $(tablestorageurl)
+
+# - script: |
+#     export tablestoragesas=$(tablestoragesas)
+#     export tablestorageurl=$(tablestorageurl)
+#     echo $tablestoragesas
+#     echo $tablestorageurl
+#     npm install
+#     npm run build
+#   displayName: 'npm install and build'
   
 - task: ArchiveFiles@2
   inputs:

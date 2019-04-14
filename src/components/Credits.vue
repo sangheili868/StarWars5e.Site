@@ -2,7 +2,7 @@
 import azure from 'azure-storage'
 
 export default {
-  name: 'HelloWorld',
+  name: 'Credits',
   data () {
     return {
       msg: 'Loading'
@@ -13,10 +13,12 @@ export default {
     const sas = process.env.tablestoragesas
     const uri = process.env.tablestorageurl
     const tableService = azure.createTableServiceWithSas(uri, sas)
-    const tableQuery = new azure.TableQuery().top(200)
-    tableService.queryEntities('classes', tableQuery, null, (error, results) => {
+    const tableQuery = new azure.TableQuery().top(200).where('PartitionKey eq ?', 'Credit')
+    tableService.queryEntities('credits', tableQuery, null, (error, results) => {
       if (!error) {
-        this.msg = 'Classes: ' + results.entries.map(({ Name }) => Name._).join(', ')
+        this.msg = results.entries.map(({ RowKey }) => RowKey._).sort((a, b) => {
+          return a.toLowerCase().localeCompare(b.toLowerCase())
+        }).join(', ')
       }
     })
   }
@@ -24,8 +26,8 @@ export default {
 </script>
 
 <template>
-  <div class="hello">
-    <h1>Star Wars</h1>
+  <div class="credits">
+    <h1>Credits</h1>
     <h2>{{ msg }}</h2>
   </div>
 </template>

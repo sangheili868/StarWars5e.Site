@@ -39,7 +39,7 @@ const webpackConfig = merge(baseWebpackConfig, {
   },
   plugins: [
     // http://vuejs.github.io/vue-loader/en/workflow/production.html
-    new webpack.EnvironmentPlugin(['NODE_ENV', 'TABLE_STORAGE_SAS', 'TABLE_STORAGE_URL']),
+    new webpack.EnvironmentPlugin(['NODE_ENV', 'tablestoragesas', 'tablestorageurl']),
     new UglifyJsPlugin({
       uglifyOptions: {
         compress: {

@@ -9,9 +9,6 @@ trigger:
 pool:
   vmImage: 'Ubuntu-16.04'
 
-# variables:
-#   NODE_ENV: 'production'
-
 steps:
 - task: AzureKeyVault@1
   inputs:
@@ -23,9 +20,9 @@ steps:
     versionSpec: '10.x'
   displayName: 'Install Node.js'
 
-
-
 - script: |
+    echo $(tablestoragesas)
+    echo $(tablestorageurl)
     export tablestoragesas=$(tablestoragesas)
     export tablestorageurl=$(tablestorageurl)
     npm install

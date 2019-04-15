@@ -1,28 +1,27 @@
 <script>
-import azure from 'azure-storage'
 
-export default {
-  name: 'Credits',
-  data () {
-    return {
-      msg: 'Loading'
-    }
-  },
-
-  created () {
-    const sas = process.env.tablestoragesas
-    const uri = process.env.tablestorageurl
-    const tableService = azure.createTableServiceWithSas(uri, sas)
-    const tableQuery = new azure.TableQuery().top(200).where('PartitionKey eq ?', 'Credit')
-    tableService.queryEntities('credits', tableQuery, null, (error, results) => {
-      if (!error) {
-        this.msg = results.entries.map(({ RowKey }) => RowKey._).sort((a, b) => {
-          return a.toLowerCase().localeCompare(b.toLowerCase())
-        }).join(', ')
+  export default {
+    name: 'Credits',
+    data () {
+      return {
+        msg: 'Loading'
       }
-    })
+    }
+
+    // created () {
+    //   const sas = process.env.tablestoragesas
+    //   const uri = process.env.tablestorageurl
+    //   const tableService = azure.createTableServiceWithSas(uri, sas)
+    //   const tableQuery = new azure.TableQuery().top(200).where('PartitionKey eq ?', 'Credit')
+    //   tableService.queryEntities('credits', tableQuery, null, (error, results) => {
+    //     if (!error) {
+    //       this.msg = results.entries.map(({ RowKey }) => RowKey._).sort((a, b) => {
+    //         return a.toLowerCase().localeCompare(b.toLowerCase())
+    //       }).join(', ')
+    //     }
+    //   })
+    // }
   }
-}
 </script>
 
 <template>

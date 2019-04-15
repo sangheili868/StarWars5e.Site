@@ -1,49 +1,31 @@
-<script>
-import azure from 'azure-storage'
+<script lang="ts">
+  import { Component, Prop, Vue } from 'vue-property-decorator'
 
-export default {
-  name: 'HelloWorld',
-  data () {
-    return {
-      msg: 'Loading'
-    }
-  },
-
-  created () {
-    const sas = process.env.tablestoragesas
-    const uri = process.env.tablestorageurl
-    const tableService = azure.createTableServiceWithSas(uri, sas)
-    const tableQuery = new azure.TableQuery().top(200)
-    tableService.queryEntities('classes', tableQuery, null, (error, results) => {
-      if (!error) {
-        this.msg = 'Classes: ' + results.entries.map(({ Name }) => Name._).join(', ')
-      }
-    })
+  @Component
+  export default class HelloWorld extends Vue {
+    @Prop() private msg!: string;
   }
-}
 </script>
 
 <template>
   <div class="hello">
-    <h1>Star Wars</h1>
-    <h2>{{ msg }}</h2>
+    <h1>{{ msg }}</h1>
   </div>
 </template>
 
-<!-- Add "scoped" attribute to limit CSS to this component only -->
-<style scoped>
-h1, h2 {
-  font-weight: normal;
-}
-ul {
-  list-style-type: none;
-  padding: 0;
-}
-li {
-  display: inline-block;
-  margin: 0 10px;
-}
-a {
-  color: #42b983;
-}
+<style scoped lang="scss">
+  h3 {
+    margin: 40px 0 0;
+  }
+  ul {
+    list-style-type: none;
+    padding: 0;
+  }
+  li {
+    display: inline-block;
+    margin: 0 10px;
+  }
+  a {
+    color: #42b983;
+  }
 </style>

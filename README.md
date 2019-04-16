@@ -7,11 +7,7 @@
 Set the environment variables:
 
 `NODE_ENV` = "development" or "production"
-
-`tablestorageurl` = the Azure Table Storage URL
-
-`tablestoragesas` = the full Azure Table Storage SAS
-
+`sw5eapiurl` = the URL of the API (https://localhost:44341 for local dev)
 
 ``` bash
 # install dependencies

@@ -38,12 +38,15 @@ steps:
     script: yarn; yarn build;
   env:
     VUE_APP_sw5eapiurl: $(sw5eapiurl)
+  displayName: 'Yarn Build'
   
 - task: ArchiveFiles@2
   inputs:
     rootFolderOrFile: '$(System.DefaultWorkingDirectory)/dist'
     includeRootFolder: false
+  displayName: 'Archive Dist'
 
 - task: PublishBuildArtifacts@1
   inputs:
     ArtifactName: 'drop'
+  displayName: 'Publish Artifact'

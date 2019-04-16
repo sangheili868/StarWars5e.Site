@@ -25,17 +25,7 @@ steps:
     targetType: 'inline'
     script: npm install; npm run build
   env:
-    tablestoragesas: $(tablestoragesas)
-    tablestorageurl: $(tablestorageurl)
-
-# - script: |
-#     export tablestoragesas=$(tablestoragesas)
-#     export tablestorageurl=$(tablestorageurl)
-#     echo $tablestoragesas
-#     echo $tablestorageurl
-#     npm install
-#     npm run build
-#   displayName: 'npm install and build'
+    sw5eapiurl: $(sw5eapiurl)
   
 - task: ArchiveFiles@2
   inputs:

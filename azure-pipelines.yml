@@ -35,10 +35,9 @@ steps:
 - task: PowerShell@2
   inputs:
     targetType: 'inline'
-    script: yarn; yarn build;
-  displayName: 'Install Packages and Build'
-  # env:
-  #   sw5eapiurl: $(sw5eapiurl)
+    script: yarn build;
+  env:
+    VUE_APP_sw5eapiurl: $(sw5eapiurl)
   
 - task: ArchiveFiles@2
   inputs:

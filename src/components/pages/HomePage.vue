@@ -17,29 +17,14 @@
   }
 </script>
 
-<template>
-  <div class="hello">
-    <h1>Star Wars</h1>
-    <h2>{{ this.classList }}</h2>
-  </div>
+<template lang="pug">
+  div(:class="$style.hello")
+    h1 Star Wars
+    h2 {{ this.classList }}
 </template>
 
-<style scoped lang="scss">
-  h3 {
-    margin: 40px 0 0;
-  }
-
-  ul {
-    list-style-type: none;
-    padding: 0;
-  }
-
-  li {
-    display: inline-block;
-    margin: 0 10px;
-  }
-
-  a {
+<style module lang="scss">
+  .hello {
     color: #42b983;
   }
 </style>

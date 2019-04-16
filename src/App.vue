@@ -1,12 +1,11 @@
-<template>
-  <div id="app">
-    <div id="nav">
-      <img src="./assets/small-logo.png">
-      <router-link to="/">Home</router-link> |
-      <router-link to="/credits">Credits</router-link>
-    </div>
-    <router-view/>
-  </div>
+<template lang="pug">
+  div#app
+    div#nav
+      img(src="./assets/small-logo.png")
+      router-link(to="/") Home
+      span |
+      router-link(to="/credits") Credits
+      router-view
 </template>
 
 <style lang="scss">

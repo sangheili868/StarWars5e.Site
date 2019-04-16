@@ -12,7 +12,7 @@ export default {
 
   created () {
     axios
-      .get('https://localhost:44341/api/Class')
+      .get(`${process.env.sw5eapiurl}/api/Class`)
       .then(results => {
         this.msg = _(results.data)
           .flatMap(credit => credit.rowKey)

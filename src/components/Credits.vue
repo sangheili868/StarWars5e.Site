@@ -12,7 +12,7 @@ export default {
 
   created () {
     axios
-      .get('https://localhost:44341/api/Credit')
+      .get(`${process.env.sw5eapiurl}/api/Credit`)
       .then(results => {
         this.msg = _(results.data)
           .filter(credit => credit.partitionKey === 'Credit')

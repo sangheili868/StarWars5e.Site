@@ -15,15 +15,27 @@ steps:
     ConnectedServiceName: 'Azure'
     KeyVaultName: 'kv-sw5eweb-dev'
 
-- task: NodeTool@0
+- task: YarnInstaller@2
   inputs:
-    versionSpec: '10.x'
-  displayName: 'Install Node.js'
+    versionSpec: '1.x'
+    checkLatest: true
+  displayName: 'Install Yarn'
+
+# - task: Yarn@2
+#   inputs:
+#     Arguments: 'build'
+#     ProductionMode: true
+#   displayName: 'Install Yarn'
+
+# - task: NodeTool@0
+#   inputs:
+#     versionSpec: '10.x'
+#   displayName: 'Install Node.js'
 
 - task: PowerShell@2
   inputs:
     targetType: 'inline'
-    script: npm install; npm run build
+    script: yarn build;
   env:
     sw5eapiurl: $(sw5eapiurl)
   

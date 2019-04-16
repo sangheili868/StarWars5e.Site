@@ -1,5 +1,6 @@
 <script>
-import azure from 'azure-storage'
+import axios from 'axios'
+import _ from 'lodash'
 
 export default {
   name: 'HelloWorld',
@@ -10,15 +11,13 @@ export default {
   },
 
   created () {
-    const sas = process.env.tablestoragesas
-    const uri = process.env.tablestorageurl
-    const tableService = azure.createTableServiceWithSas(uri, sas)
-    const tableQuery = new azure.TableQuery().top(200)
-    tableService.queryEntities('classes', tableQuery, null, (error, results) => {
-      if (!error) {
-        this.msg = 'Classes: ' + results.entries.map(({ Name }) => Name._).join(', ')
-      }
-    })
+    axios
+      .get('https://localhost:44341/api/Class')
+      .then(results => {
+        this.msg = _(results.data)
+          .flatMap(credit => credit.rowKey)
+          .join(', ')
+      })
   }
 }
 </script>

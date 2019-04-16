@@ -1,5 +1,6 @@
 <script>
-import azure from 'azure-storage'
+import axios from 'axios'
+import _ from 'lodash'
 
 export default {
   name: 'Credits',
@@ -10,17 +11,14 @@ export default {
   },
 
   created () {
-    const sas = process.env.tablestoragesas
-    const uri = process.env.tablestorageurl
-    const tableService = azure.createTableServiceWithSas(uri, sas)
-    const tableQuery = new azure.TableQuery().top(200).where('PartitionKey eq ?', 'Credit')
-    tableService.queryEntities('credits', tableQuery, null, (error, results) => {
-      if (!error) {
-        this.msg = results.entries.map(({ RowKey }) => RowKey._).sort((a, b) => {
-          return a.toLowerCase().localeCompare(b.toLowerCase())
-        }).join(', ')
-      }
-    })
+    axios
+      .get('https://localhost:44341/api/Credit')
+      .then(results => {
+        this.msg = _(results.data)
+          .filter(credit => credit.partitionKey === 'Credit')
+          .flatMap(credit => credit.rowKey)
+          .join(', ')
+      })
   }
 }
 </script>

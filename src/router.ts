@@ -1,7 +1,7 @@
 import Vue from 'vue'
 import Router from 'vue-router'
-import HelloWorld from './components/HelloWorld.vue'
-import Credits from './components/Credits.vue'
+import HomePage from './components/pages/HomePage.vue'
+import CreditsPage from './components/pages/CreditsPage.vue'
 
 Vue.use(Router)
 
@@ -9,13 +9,13 @@ export default new Router({
   routes: [
     {
       path: '/',
-      name: 'HelloWorld',
-      component: HelloWorld
+      name: 'Home',
+      component: HomePage
     },
     {
       path: '/credits',
-      name: 'credits',
-      component: Credits
+      name: 'Credits',
+      component: CreditsPage
     }
   ]
 })

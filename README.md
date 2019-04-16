@@ -1,38 +1,33 @@
-# starwars5e
+# StarWars5e
 
-## Project setup
+The Front-End Web App Project for Star Wars 5e
+
+Backend: https://github.com/speedreeder/StarWars5e.Core
+
+## Project Setup
 
 Set the environment variables:
 
 `NODE_ENV` = "development" or "production"
 
-`tablestorageurl` = the Azure Table Storage URL
+`sw5eapiurl` = the URL of the API (https://localhost:44341 for local dev)
 
-`tablestoragesas` = the full Azure Table Storage SAS
-
+### Install dependencies
 ```
-yarn install
+yarn
 ```
 
 ### Compiles and hot-reloads for development
 ```
-yarn run serve
+yarn serve
 ```
 
 ### Compiles and minifies for production
 ```
-yarn run build
-```
-
-### Run your tests
-```
-yarn run test
+yarn build
 ```
 
 ### Lints and fixes files
 ```
-yarn run lint
+yarn lint
 ```
-
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).

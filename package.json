@@ -8,15 +8,17 @@
     "lint": "vue-cli-service lint"
   },
   "dependencies": {
+    "@types/axios": "^0.14.0",
+    "@types/lodash": "^4.14.123",
     "@types/node": "^11.13.4",
-    "azure-storage": "^2.10.2",
     "core-js": "^2.6.5",
     "register-service-worker": "^1.6.2",
     "vue": "^2.6.10",
     "vue-class-component": "^7.0.2",
     "vue-property-decorator": "^8.1.0",
     "vue-router": "^3.0.3",
-    "vuex": "^3.0.1"
+    "vuex": "^3.0.1",
+    "vuex-class": "^0.3.2"
   },
   "devDependencies": {
     "@vue/cli-plugin-babel": "^3.6.0",

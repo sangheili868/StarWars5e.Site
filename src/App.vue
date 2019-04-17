@@ -1,12 +1,31 @@
 <template lang="pug">
-  div#app
-    div#nav
-      img(src="./assets/small-logo.png")
-      router-link(to="/") Home
-      span |
-      router-link(to="/credits") Credits
-      router-view
+  v-app
+    MainToolbar
+    v-content
+      v-container(fluid)
+        router-view
+    v-footer(app)
+  // div#app
+  //   div#nav
+  //     img(src="./assets/small-logo.png")
+  //     span |
+  //     router-link(to="/credits") Credits
+  //     router-view
 </template>
+
+<script lang="ts">
+  import MainToolbar from '@/components/MainToolbar.vue'
+  import { Component, Prop, Vue } from 'vue-property-decorator'
+
+  @Component({
+    components: {
+      MainToolbar
+    }
+  })
+  export default class App extends Vue {
+
+  }
+</script>
 
 <style lang="scss">
 #app {

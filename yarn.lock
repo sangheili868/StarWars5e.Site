@@ -5261,6 +5261,11 @@ map-visit@^1.0.0:
   dependencies:
     object-visit "^1.0.0"
 
+material-design-icons-iconfont@^4.0.5:
+  version "4.0.5"
+  resolved "https://registry.yarnpkg.com/material-design-icons-iconfont/-/material-design-icons-iconfont-4.0.5.tgz#4107ba3b8a9d688a3d9325fc7363af51b17d3aee"
+  integrity sha512-ByJJ1yz8+RfCx2uNiC5WjVCR7K3UWRb8ytWV3RMaoFRzQLNr/J5x7+Wg1+3OlIZahNXrId9Hu+BfXfQIo01v7g==
+
 md5.js@^1.3.4:
   version "1.3.5"
   resolved "https://registry.yarnpkg.com/md5.js/-/md5.js-1.3.5.tgz#b5d07b8e3216e3e27cd728d72f70d1e6a342005f"
@@ -8516,6 +8521,16 @@ vue@^2.6.10:
   version "2.6.10"
   resolved "https://registry.yarnpkg.com/vue/-/vue-2.6.10.tgz#a72b1a42a4d82a721ea438d1b6bf55e66195c637"
   integrity sha512-ImThpeNU9HbdZL3utgMCq0oiMzAkt1mcgy3/E6zWC/G6AaQoeuFdsl9nDhTDU3X1R6FK7nsIUuRACVcjI+A2GQ==
+
+vuetify-scss@^1.4.0:
+  version "1.4.0"
+  resolved "https://registry.yarnpkg.com/vuetify-scss/-/vuetify-scss-1.4.0.tgz#4b5cace35403a002c3cdd1b002ad97643e63d7f4"
+  integrity sha512-4GFB+/oJzgD6bDI5TX3g5u6HKfcO604CSXs+RlAb+6huo3uoWMIGR725v0xoO8kahDMzdenHuAPIQGM16LkoUA==
+
+vuetify@^1.5.12:
+  version "1.5.12"
+  resolved "https://registry.yarnpkg.com/vuetify/-/vuetify-1.5.12.tgz#77d18fc7ea5d6297bac40880df83fc241ba840a2"
+  integrity sha512-NxYNPiqEEgprTzNft0x0oiyOgbclbARgOJMKWRfeu3qx8pE0JG3XMgljVv1Ttq0ErKf1lvNLFRuajDgRdQxR/Q==
 
 vuex-class@^0.3.2:
   version "0.3.2"

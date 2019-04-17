@@ -18,13 +18,7 @@
 </script>
 
 <template lang="pug">
-  div(:class="$style.hello")
-    h1 Star Wars
-    h2 {{ this.creditsList }}
+  div
+    h1 Credits
+    | {{ this.creditsList }}
 </template>
-
-<style module lang="scss">
-  .hello {
-    color: #42b983;
-  }
-</style>

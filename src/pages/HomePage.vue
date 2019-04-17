@@ -1,3 +1,8 @@
+<template lang="pug">
+  div
+    h1 Star Wars 5e
+</template>
+
 <script lang="ts">
   import { Component, Prop, Vue } from 'vue-property-decorator'
   import { State, Action } from 'vuex-class'
@@ -16,15 +21,3 @@
     }
   }
 </script>
-
-<template lang="pug">
-  div(:class="$style.hello")
-    h1 Star Wars
-    h2 {{ this.classList }}
-</template>
-
-<style module lang="scss">
-  .hello {
-    color: #42b983;
-  }
-</style>

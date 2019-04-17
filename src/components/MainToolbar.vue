@@ -1,12 +1,14 @@
 <template lang="pug">
-  v-toolbar
+  v-toolbar(app, clipped-left)
     v-toolbar-title
       v-img(:src="require('@/assets/sw5e-logo.png')", width="100px")
     v-spacer
     v-toolbar-items
-      v-btn(flat, to="/") Home
-      v-btn(flat, to="/credits") Credits
+      v-btn(flat, color="primary", to="/") Home
+      v-btn(flat, color="primary", to="/handbook") Handbook
+      v-btn(flat, color="primary", to="/credits") Credits
 </template>
+
 <script lang="ts">
   import { Component, Prop, Vue } from 'vue-property-decorator'
 

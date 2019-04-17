@@ -1,13 +1,18 @@
 import Vue from 'vue'
-import App from './App.vue'
-import router from './router'
+import App from './components/App.vue'
+import router from './pages/router'
 import store from './store'
 import Vuetify from 'vuetify'
 import './registerServiceWorker'
-import './global.scss'
+import '@/assets/styles/global.scss'
+import theme from '@/assets/styles/theme'
+import '@fortawesome/fontawesome-free/css/all.css'
 
 Vue.config.productionTip = false
-Vue.use(Vuetify)
+Vue.use(Vuetify, {
+  theme,
+  iconfont: 'fa'
+})
 
 new Vue({
   router,

@@ -1,7 +1,8 @@
 import Vue from 'vue'
 import Router from 'vue-router'
-import HomePage from './components/pages/HomePage.vue'
-import CreditsPage from './components/pages/CreditsPage.vue'
+import HomePage from './HomePage.vue'
+import CreditsPage from './CreditsPage.vue'
+import handbookRoute from './Handbook/router'
 
 Vue.use(Router)
 
@@ -9,12 +10,11 @@ export default new Router({
   routes: [
     {
       path: '/',
-      name: 'Home',
       component: HomePage
     },
+    handbookRoute,
     {
       path: '/credits',
-      name: 'Credits',
       component: CreditsPage
     }
   ]

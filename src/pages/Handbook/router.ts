@@ -3,6 +3,8 @@ import HandbookPage from './HandbookPage.vue'
 import HandbookNavigation from './HandbookNavigation.vue'
 import HandbookSpecies from './HandbookSpecies.vue'
 import HandbookIntroduction from './HandbookIntroduction.vue'
+import HandbookClasses from './HandbookClasses.vue'
+import HandbookClassesDetail from './HandbookClassesDetail.vue'
 
 export default {
   path: '/handbook',
@@ -23,7 +25,13 @@ export default {
       component: HandbookSpecies
     },
     {
-      path: 'classes'
+      path: 'classes',
+      component: HandbookClasses
+    },
+    {
+      path: 'classes/:className',
+      component: HandbookClassesDetail,
+      props: true
     },
     {
       path: 'backgrounds'

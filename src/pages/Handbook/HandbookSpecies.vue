@@ -1,6 +1,3 @@
-<template lang="pug">
-    h1 Species
-</template>
 <script lang="ts">
   import { Component, Prop, Vue } from 'vue-property-decorator'
 
@@ -9,6 +6,10 @@
 
   }
 </script>
+
+<template lang="pug">
+    h1 Species
+</template>
 
 <style lang="scss">
 

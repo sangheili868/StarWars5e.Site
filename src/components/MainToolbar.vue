@@ -1,3 +1,12 @@
+<script lang="ts">
+  import { Component, Prop, Vue } from 'vue-property-decorator'
+
+  @Component
+  export default class MainToolbar extends Vue {
+
+  }
+</script>
+
 <template lang="pug">
   v-toolbar(app, clipped-left)
     v-toolbar-title
@@ -8,16 +17,3 @@
       v-btn(flat, color="primary", to="/handbook") Handbook
       v-btn(flat, color="primary", to="/credits") Credits
 </template>
-
-<script lang="ts">
-  import { Component, Prop, Vue } from 'vue-property-decorator'
-
-  @Component
-  export default class MainToolbar extends Vue {
-
-  }
-</script>
-
-<style lang="scss">
-
-</style>

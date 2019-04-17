@@ -11,6 +11,7 @@
     "@types/axios": "^0.14.0",
     "@types/lodash": "^4.14.123",
     "@types/node": "^11.13.4",
+    "@types/vue-markdown": "^2.2.1",
     "core-js": "^2.6.5",
     "material-design-icons-iconfont": "^4.0.5",
     "pug": "^2.0.3",
@@ -18,12 +19,14 @@
     "register-service-worker": "^1.6.2",
     "vue": "^2.6.10",
     "vue-class-component": "^7.0.2",
+    "vue-markdown": "^2.2.4",
     "vue-property-decorator": "^8.1.0",
     "vue-router": "^3.0.3",
     "vuetify": "^1.5.12",
     "vuetify-scss": "^1.4.0",
     "vuex": "^3.0.1",
-    "vuex-class": "^0.3.2"
+    "vuex-class": "^0.3.2",
+    "vuex-module-decorators": "^0.9.8"
   },
   "devDependencies": {
     "@fortawesome/fontawesome-free": "^5.8.1",

@@ -1,14 +1,16 @@
 <script lang="ts">
   import { Component, Prop, Vue } from 'vue-property-decorator'
-  import { State, Action } from 'vuex-class'
+  import { namespace } from 'vuex-class'
+
+  const creditsModule = namespace('credits')
 
   @Component
   export default class CreditsPage extends Vue {
-    @State credits!: string[]
-    @Action fetchCredits!: () => void
+    @creditsModule.State credits!: string[]
+    @creditsModule.Action fetchCredits!: () => void
 
     get creditsList () {
-      return this.credits.join(', ')
+      return this.credits && this.credits.join(', ')
     }
 
     created () {

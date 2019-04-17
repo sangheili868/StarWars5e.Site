@@ -1,5 +1,5 @@
-
-export interface CharacterClass {  archetypeFlavorName: String
+export interface CharacterClass {
+  archetypeFlavorName: String
   archetypeFlavorText: String
   archetypes: any[]
   armorProficiencies: String[]
@@ -23,9 +23,4 @@ export interface CharacterClass {  archetypeFlavorName: String
   summary: String
   toolProficiencies: String[]
   weaponProficiencies: String[]
-}
-
-export interface RootState {
-  classes: CharacterClass[],
-  credits: String[]
 }

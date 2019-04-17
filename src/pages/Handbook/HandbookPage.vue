@@ -1,7 +1,3 @@
-<template lang="pug">
-  router-view
-</template>
-
 <script lang="ts">
   import { Component, Prop, Vue } from 'vue-property-decorator'
 
@@ -10,6 +6,10 @@
 
   }
 </script>
+
+<template lang="pug">
+  router-view(exact)
+</template>
 
 <style lang="scss">
 

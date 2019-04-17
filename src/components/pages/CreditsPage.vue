@@ -1,8 +1,6 @@
 <script lang="ts">
   import { Component, Prop, Vue } from 'vue-property-decorator'
   import { State, Action } from 'vuex-class'
-  import axios from 'axios'
-  import _ from 'lodash'
 
   @Component
   export default class CreditsPage extends Vue {
@@ -22,10 +20,10 @@
 <template lang="pug">
   div(:class="$style.hello")
     h1 Star Wars
-    h2 {{ this.classList }}
+    h2 {{ this.creditsList }}
 </template>
 
-<style scoped lang="scss">
+<style module lang="scss">
   .hello {
     color: #42b983;
   }

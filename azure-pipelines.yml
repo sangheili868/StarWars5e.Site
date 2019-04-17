@@ -35,15 +35,18 @@ steps:
 - task: PowerShell@2
   inputs:
     targetType: 'inline'
-    script: yarn build;
+    script: yarn; yarn build;
   env:
-    sw5eapiurl: $(sw5eapiurl)
+    VUE_APP_sw5eapiurl: $(sw5eapiurl)
+  displayName: 'Yarn Build'
   
 - task: ArchiveFiles@2
   inputs:
     rootFolderOrFile: '$(System.DefaultWorkingDirectory)/dist'
     includeRootFolder: false
+  displayName: 'Archive Dist'
 
 - task: PublishBuildArtifacts@1
   inputs:
     ArtifactName: 'drop'
+  displayName: 'Publish Artifact'

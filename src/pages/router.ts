@@ -3,6 +3,7 @@ import Router from 'vue-router'
 import HomePage from './HomePage.vue'
 import CreditsPage from './CreditsPage.vue'
 import handbookRoute from './Handbook/router'
+import referenceRoutes from './Reference/router'
 
 Vue.use(Router)
 
@@ -13,6 +14,7 @@ export default new Router({
       component: HomePage
     },
     handbookRoute,
+    ...referenceRoutes,
     {
       path: '/credits',
       component: CreditsPage

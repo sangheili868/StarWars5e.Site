@@ -19,7 +19,8 @@
     chapterMap: { [key: string]: string } = {
       introduction: 'Introduction',
       stepByStep: 'Step-By-Step Characters',
-      classes: 'classes',
+      species: 'Species',
+      classes: 'Classes',
       backgrounds: 'Personality and Backgrounds',
       equipment: 'Equipment',
       customization: 'Customization Options',

@@ -1,4 +1,5 @@
 export interface ClassType {
+  contentType: string,
   archetypeFlavorName: String
   archetypeFlavorText: String
   archetypes: any[]
@@ -26,6 +27,7 @@ export interface ClassType {
 }
 
 export interface SpeciesType {
+  contentType: string,
   colorScheme: String,
   distinctions: String,
   eyeColorOptions: String,

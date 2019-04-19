@@ -21,7 +21,6 @@
     v-content(:class="$style.content")
       v-container(fluid)
         router-view
-    v-footer(app)
 </template>
 
 <style module lang="scss">

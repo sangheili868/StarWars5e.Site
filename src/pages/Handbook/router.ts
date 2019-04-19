@@ -1,8 +1,8 @@
-
 import HandbookPage from './HandbookPage.vue'
 import HandbookNavigation from './HandbookNavigation.vue'
+import HandbookChapter from './HandbookChapter.vue'
 import HandbookSpecies from './HandbookSpecies.vue'
-import HandbookIntroduction from './HandbookIntroduction.vue'
+import HandbookSpeciesDetail from './HandbookSpeciesDetail.vue'
 import HandbookClasses from './HandbookClasses.vue'
 import HandbookClassesDetail from './HandbookClassesDetail.vue'
 
@@ -14,15 +14,13 @@ export default {
   },
   children: [
     {
-      path: '',
-      component: HandbookIntroduction
-    },
-    {
-      path: 'stepByStep'
-    },
-    {
       path: 'species',
       component: HandbookSpecies
+    },
+    {
+      path: 'species/:speciesName',
+      component: HandbookSpeciesDetail,
+      props: true
     },
     {
       path: 'classes',
@@ -34,37 +32,16 @@ export default {
       props: true
     },
     {
-      path: 'backgrounds'
+      path: ':chapter',
+      component: HandbookChapter,
+      props: true
     },
     {
-      path: 'equipment'
-    },
-    {
-      path: 'customization'
-    },
-    {
-      path: 'abilityScores'
-    },
-    {
-      path: 'adventuring'
-    },
-    {
-      path: 'combat'
-    },
-    {
-      path: 'casting'
-    },
-    {
-      path: 'forcePowers'
-    },
-    {
-      path: 'techPowers'
-    },
-    {
-      path: 'conditions'
-    },
-    {
-      path: 'variantRules'
+      path: '',
+      component: HandbookChapter,
+      props: {
+        chapter: 'introduction'
+      }
     }
   ]
 }

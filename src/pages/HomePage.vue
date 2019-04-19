@@ -4,16 +4,7 @@
 
   @Component
   export default class HomePage extends Vue {
-    @State classes!: []
-    @Action fetchClasses!: () => void
 
-    get classList () {
-      return this.classes.map(({ name }) => name).join(', ')
-    }
-
-    created () {
-      this.fetchClasses()
-    }
   }
 </script>
 

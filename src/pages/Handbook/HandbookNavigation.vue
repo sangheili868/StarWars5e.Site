@@ -56,18 +56,8 @@
       },
       {
         title: 'Force- and Tech- Casting',
-        icon: 'fa-sun',
-        route: '/handbook/casting'
-      },
-      {
-        title: 'Force Powers',
-        icon: 'fab fa-jedi-order',
-        route: '/handbook/forcePowers'
-      },
-      {
-        title: 'Tech Powers',
         icon: 'fa-bolt',
-        route: '/handbook/techPowers'
+        route: '/handbook/casting'
       },
       {
         title: 'Conditions',

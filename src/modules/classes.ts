@@ -1,10 +1,10 @@
 import axios from 'axios'
 import { Module, VuexModule, MutationAction } from 'vuex-module-decorators'
-import { CharacterClass } from '@/types.ts'
+import { ClassType } from '@/types.ts'
 
 @Module({ namespaced: true, name: 'classes' })
 export default class Classes extends VuexModule {
-  classes: CharacterClass[] = []
+  classes: ClassType[] = []
 
   @MutationAction({ mutate: ['classes'] })
   async fetchClasses () {

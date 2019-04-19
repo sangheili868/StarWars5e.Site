@@ -1,7 +1,7 @@
 <script lang="ts">
   import { Component, Prop, Vue } from 'vue-property-decorator'
   import { namespace } from 'vuex-class'
-  import { CharacterClass } from '@/types.ts'
+  import { ClassType } from '@/types.ts'
   import VueMarkdown from 'vue-markdown'
 
   const classesModule = namespace('classes')
@@ -12,7 +12,7 @@
     }
   })
   export default class HandbookClassesDetail extends Vue {
-    @classesModule.State classes!: CharacterClass[]
+    @classesModule.State classes!: ClassType[]
     @classesModule.Action fetchClasses!: () => void
 
     @Prop(String) readonly className!: string

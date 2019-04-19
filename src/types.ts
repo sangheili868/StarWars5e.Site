@@ -1,4 +1,4 @@
-export interface CharacterClass {
+export interface ClassType {
   archetypeFlavorName: String
   archetypeFlavorText: String
   archetypes: any[]
@@ -23,4 +23,25 @@ export interface CharacterClass {
   summary: String
   toolProficiencies: String[]
   weaponProficiencies: String[]
+}
+
+export interface SpeciesType {
+  colorScheme: String,
+  distinctions: String,
+  eyeColorOptions: String,
+  flavorText: String,
+  hairColorOptions: String,
+  heightAverage: String,
+  heightRollMod: String,
+  homeworld: String,
+  language: String,
+  manufacturer: String,
+  name: String,
+  skinColorOptions: String,
+  traits: {
+    description: String,
+    name: String
+  }[],
+  weightAverage: String,
+  weightRollMod: String
 }

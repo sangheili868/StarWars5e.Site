@@ -47,3 +47,18 @@ export interface SpeciesType {
   weightAverage: String,
   weightRollMod: String
 }
+
+export interface PowerType {
+  name: string,
+  castingPeriod: string,
+  castingPeriodText: string,
+  concentration: boolean,
+  contentType: string,
+  description: string,
+  duration: string,
+  forceAlignment: string,
+  level: number,
+  powerType: string,
+  range: string,
+  prerequisite: string
+}

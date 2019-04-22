@@ -11,7 +11,7 @@
   })
   export default class HandbookSpecies extends Vue {
 
-}
+  }
 </script>
 
 <template lang="pug">

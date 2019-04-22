@@ -1,7 +1,12 @@
 <script lang="ts">
   import { Component, Prop, Vue } from 'vue-property-decorator'
+  import NavigationDrawer from '@/components/NavigationDrawer.vue'
 
-  @Component
+  @Component({
+    components: {
+      NavigationDrawer
+    }
+  })
   export default class StarshipNavigation extends Vue {
     items = [
       {
@@ -64,20 +69,5 @@
 </script>
 
 <template lang="pug">
-  v-navigation-drawer(permanent, fixed, app, clipped)
-    v-list.dense
-      v-list-tile(v-for="item in items", :key="item.title", :to="item.route" :exact="item.route === '/starships'")
-
-        v-list-tile-action
-          v-icon(:class="$style.icon") {{ item.icon }}
-
-        v-list-tile-content
-          v-list-tile-title {{ item.title }}
+  NavigationDrawer(:items="items", baseRoute="/starships")
 </template>
-
-<style module lang="scss">
-  .icon {
-    text-align: center;
-    width: 30px;
-  }
-</style>

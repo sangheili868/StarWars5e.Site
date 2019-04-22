@@ -5,8 +5,13 @@ import ReferenceEquipment from './ReferenceEquipment.vue'
 import ReferenceMonsters from './ReferenceMonsters.vue'
 import ReferenceForcePowers from './ReferenceForcePowers.vue'
 import ReferenceTechPowers from './ReferenceTechPowers.vue'
+import ReferencePage from './ReferencePage.vue'
 
 export default [
+  {
+    path: '/reference',
+    component: ReferencePage
+  },
   {
     path: '/reference/species',
     component: ReferenceSpecies

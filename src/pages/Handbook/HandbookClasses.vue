@@ -4,7 +4,7 @@
   import VueMarkdown from 'vue-markdown'
 
   const classesModule = namespace('classes')
-  const handbookBlobsModule = namespace('handbookBlobs')
+  const blobsModule = namespace('blobs')
 
   @Component({
     components: {
@@ -14,8 +14,8 @@
   export default class HandbookClasses extends Vue {
     @classesModule.State classes!: string[]
     @classesModule.Action fetchClasses!: () => void
-    @handbookBlobsModule.State handbookBlobs!: { [key: string]: string }
-    @handbookBlobsModule.Action fetchHandbookBlob!: (chapter: string) => void
+    @blobsModule.State handbookBlobs!: { [key: string]: string }
+    @blobsModule.Action fetchHandbookBlob!: (chapter: string) => void
 
     created () {
       this.fetchHandbookBlob('Classes')

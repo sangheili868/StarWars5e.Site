@@ -2,7 +2,7 @@ import axios from 'axios'
 import _ from 'lodash'
 import { Module, VuexModule, MutationAction } from 'vuex-module-decorators'
 
-@Module({ namespaced: true, name: 'handbookBlobs' })
+@Module({ namespaced: true, name: 'blobs' })
 export default class Blobs extends VuexModule {
   handbookBlobs: { [blob: string]: string } = {}
   starshipBlobs: { [blob: string]: string } = {}

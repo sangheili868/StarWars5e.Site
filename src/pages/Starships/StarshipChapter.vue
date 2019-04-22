@@ -3,7 +3,7 @@
   import { namespace } from 'vuex-class'
   import VueMarkdown from 'vue-markdown'
 
-  const handbookBlobsModule = namespace('handbookBlobs')
+  const blobsModule = namespace('blobs')
 
   @Component({
     components: {
@@ -11,8 +11,8 @@
     }
   })
   export default class StarshipChapter extends Vue {
-    @handbookBlobsModule.State starshipBlobs!: { [key: string]: string }
-    @handbookBlobsModule.Action fetchStarshipBlob!: (chapter: string) => void
+    @blobsModule.State starshipBlobs!: { [key: string]: string }
+    @blobsModule.Action fetchStarshipBlob!: (chapter: string) => void
 
     @Prop(String) readonly chapter!: string
 

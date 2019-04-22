@@ -5,7 +5,6 @@ import ReferenceEquipment from './ReferenceEquipment.vue'
 import ReferenceMonsters from './ReferenceMonsters.vue'
 import ReferenceForcePowers from './ReferenceForcePowers.vue'
 import ReferenceTechPowers from './ReferenceTechPowers.vue'
-import ReferencePower from './ReferencePower.vue'
 
 export default [
   {
@@ -35,10 +34,5 @@ export default [
   {
     path: '/reference/techPowers',
     component: ReferenceTechPowers
-  },
-  {
-    path: '/reference/powers/:powerName',
-    component: ReferencePower,
-    props: true
   }
 ]

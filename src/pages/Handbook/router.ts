@@ -5,6 +5,7 @@ import HandbookSpecies from './HandbookSpecies.vue'
 import HandbookSpeciesDetail from './HandbookSpeciesDetail.vue'
 import HandbookClasses from './HandbookClasses.vue'
 import HandbookClassesDetail from './HandbookClassesDetail.vue'
+import HandbookCasting from './HandbookCasting.vue'
 
 export default {
   path: '/handbook',
@@ -25,6 +26,10 @@ export default {
     {
       path: 'classes',
       component: HandbookClasses
+    },
+    {
+      path: 'casting',
+      component: HandbookCasting
     },
     {
       path: 'classes/:className',

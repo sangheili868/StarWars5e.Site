@@ -4,18 +4,19 @@
   import SearchTable from '@/components/SearchTable.vue'
   import { PowerType } from '@/types'
   import _ from 'lodash'
+  import VueMarkdown from 'vue-markdown'
 
   const powersModule = namespace('powers')
 
   @Component({
     components: {
-      SearchTable
+      SearchTable,
+      VueMarkdown
     }
   })
   export default class ReferenceForcePowers extends Vue {
     @powersModule.State powers!: PowerType[]
     @powersModule.Action fetchPowers!: () => void
-    @Prop({ type: Boolean, default: false }) readonly isInHandbook!: boolean
 
     created () {
       this.fetchPowers()
@@ -26,19 +27,19 @@
         .filter(({ powerType }) => powerType === 'Tech')
         .map(powers => ({
           ...powers,
-          to: `/reference/powers/${powers.name}`
+          to: `/reference/powers/${powers.name}`,
+          id: powers.name
         })).value()
     }
 
     get headers () {
       return [
-        { text: 'Level', value: 'level' },
+        { text: 'Level', value: 'level', render: (value: string) => value || 'At-will' },
         { text: 'Name', value: 'name' },
         { text: 'Casting Period', value: 'castingPeriodText' },
-        { text: 'Concentration', value: 'concentration' },
-        { text: 'Duration', value: 'duration' },
         { text: 'Range', value: 'range' },
-        { text: 'Prerequisite', value: 'prerequisite' }
+        { text: 'Duration', value: 'duration', render: _.upperFirst },
+        { text: 'Concentration', value: 'concentration', render: (value: boolean) => value ? 'Concentration' : '-' }
       ]
     }
   }
@@ -46,7 +47,9 @@
 
 <template lang="pug">
   div
-    h1(v-if="!isInHandbook") Tech Powers
+    h1 Tech Powers
     br
-    SearchTable(v-bind="{ headers, items }")
+    SearchTable(v-bind="{ headers, items }", isExpandable)
+      template(v-slot:default="props")
+        VueMarkdown {{ props.item.description }}
 </template>

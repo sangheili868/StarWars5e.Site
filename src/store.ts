@@ -4,7 +4,7 @@ import credits from './modules/credits'
 import classes from './modules/classes'
 import species from './modules/species'
 import powers from './modules/powers'
-import handbookBlobs from './modules/handbookBlobs'
+import blobs from './modules/blobs'
 
 Vue.use(Vuex)
 
@@ -13,7 +13,7 @@ export default new Vuex.Store({
     credits,
     classes,
     species,
-    handbookBlobs,
+    blobs,
     powers
   }
 })

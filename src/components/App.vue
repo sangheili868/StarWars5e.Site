@@ -2,11 +2,13 @@
   import { Component, Prop, Vue } from 'vue-property-decorator'
   import MainToolbar from '@/components/MainToolbar.vue'
   import HandbookNavigation from '@/pages/Handbook/HandbookNavigation.vue'
+  import StarshipNavigation from '@/pages/Starships/StarshipNavigation.vue'
 
   @Component({
     components: {
       MainToolbar,
-      HandbookNavigation
+      HandbookNavigation,
+      StarshipNavigation
     }
   })
   export default class App extends Vue {

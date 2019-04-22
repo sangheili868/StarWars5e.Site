@@ -6,6 +6,7 @@
     v-toolbar-items
       v-btn(flat, color="primary", to="/") Home
       v-btn(flat, color="primary", to="/handbook") Handbook
+      v-btn(flat, color="primary", to="/starships") Starships
       v-menu(open-on-hover, offset-y, attach)
         template(v-slot:activator="{ on }")
           v-btn(flat, color="primary", :ripple="false", v-on="on") Reference

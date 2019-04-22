@@ -10,35 +10,33 @@
       VueMarkdown
     }
   })
-  export default class HandbookChapter extends Vue {
-    @blobsModule.State handbookBlobs!: { [key: string]: string }
-    @blobsModule.Action fetchHandbookBlob!: (chapter: string) => void
+  export default class StarshipChapter extends Vue {
+    @blobsModule.State starshipBlobs!: { [key: string]: string }
+    @blobsModule.Action fetchStarshipBlob!: (chapter: string) => void
 
     @Prop(String) readonly chapter!: string
 
     chapterMap: { [key: string]: string } = {
       introduction: 'Introduction',
-      stepByStep: 'Step-By-Step Characters',
-      species: 'Species',
-      classes: 'Classes',
-      backgrounds: 'Personality and Backgrounds',
+      stepByStep: 'Step-By-Step Starships',
+      deployments: 'Deployments',
+      starships: 'Starships',
+      modifications: 'Modifications',
       equipment: 'Equipment',
       customization: 'Customization Options',
       abilityScores: 'Using Ability Scores',
       adventuring: 'Adventuring',
       combat: 'Combat',
-      casting: 'Force- and Tech-casting',
-      conditions: 'Appendix A: Conditions',
-      variantRules: 'Appendix B: Recommended Variant Rules'
+      conditions: 'Appendix A: Conditions'
     }
 
     created () {
-      this.fetchHandbookBlob(this.blobName)
+      this.fetchStarshipBlob(this.blobName)
     }
 
     @Watch('$route')
     fetchData () {
-      this.fetchHandbookBlob(this.blobName)
+      this.fetchStarshipBlob(this.blobName)
     }
 
     get blobName () {
@@ -46,7 +44,7 @@
     }
 
     get blob () {
-      return this.handbookBlobs[this.blobName]
+      return this.starshipBlobs[this.blobName]
     }
   }
 </script>

@@ -2,6 +2,8 @@
 
 The Front-End Web App Project for Star Wars 5e
 
+Live Site: http://sw5e.com/#/
+
 Backend: https://github.com/speedreeder/StarWars5e.Core
 
 ## Project Setup

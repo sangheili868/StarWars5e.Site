@@ -2,7 +2,7 @@
   import { Component, Prop, Vue } from 'vue-property-decorator'
   import { namespace } from 'vuex-class'
   import SearchTable from '@/components/SearchTable.vue'
-  import { starshipEquipmentType } from '@/types'
+  import { StarshipEquipmentType } from '@/types'
   import _ from 'lodash'
   import VueMarkdown from 'vue-markdown'
 
@@ -14,8 +14,8 @@
       VueMarkdown
     }
   })
-  export default class ReferencestarshipEquipment extends Vue {
-    @starshipEquipmentModule.State starshipEquipment!: starshipEquipmentType[]
+  export default class ReferenceStarshipEquipment extends Vue {
+    @starshipEquipmentModule.State starshipEquipment!: StarshipEquipmentType[]
     @starshipEquipmentModule.Action fetchStarshipEquipment!: () => void
 
     created () {

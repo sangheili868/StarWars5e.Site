@@ -11,7 +11,7 @@
       VueMarkdown
     }
   })
-  export default class HandbookSpeciesDetail extends Vue {
+  export default class ReferenceSpeciesDetail extends Vue {
     @speciesModule.State species!: SpeciesType[]
     @speciesModule.Action fetchSpecies!: () => void
 

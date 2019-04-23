@@ -22,11 +22,12 @@
     }
 
     get items () {
+      const page = this.isInHandbook ? 'handbook' : 'reference'
       return _(this.species)
         .filter(({ contentType }) => !this.isInHandbook || contentType === 'Base')
         .map(species => ({
           ...species,
-          to: `/handbook/species/${species.name}`
+          to: `/${page}/species/${species.name}`
         })).value()
     }
 

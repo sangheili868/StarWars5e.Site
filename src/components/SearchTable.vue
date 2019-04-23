@@ -26,7 +26,7 @@
 </script>
 
 <template lang="pug">
-  v-data-table(:headers="alignedHeaders", v-bind="{ items }", :pagination.sync="pagination")
+  v-data-table(v-if=" items.length" :headers="alignedHeaders", v-bind="{ items }", :pagination.sync="pagination")
     template(v-slot:items="props")
       tr(v-if="isExpandable", :class="$style.row", @click="props.expanded = !props.expanded")
         td(v-for="{ value, render } in alignedHeaders", :to="props.item.to") {{ render(props.item[value]) }}
@@ -36,6 +36,7 @@
       v-card(flat)
         v-card-text
           slot(:item="props.item")
+  h2(v-else) Loading...
 </template>
 
 <style module lang="scss">

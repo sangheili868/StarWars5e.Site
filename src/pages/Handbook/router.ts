@@ -2,7 +2,7 @@ import HandbookPage from './HandbookPage.vue'
 import HandbookNavigation from './HandbookNavigation.vue'
 import HandbookChapter from './HandbookChapter.vue'
 import HandbookSpecies from './HandbookSpecies.vue'
-import HandbookSpeciesDetail from './HandbookSpeciesDetail.vue'
+import ReferenceSpeciesDetail from '@/pages/Reference/ReferenceSpeciesDetail.vue'
 import HandbookClasses from './HandbookClasses.vue'
 import HandbookClassesDetail from './HandbookClassesDetail.vue'
 import HandbookCasting from './HandbookCasting.vue'
@@ -20,7 +20,7 @@ export default {
     },
     {
       path: 'species/:speciesName',
-      component: HandbookSpeciesDetail,
+      component: ReferenceSpeciesDetail,
       props: true
     },
     {

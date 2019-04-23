@@ -67,8 +67,42 @@ export interface ClassType {
   weaponProficiencies: string[]
 }
 
-export interface EquipmentType {
+export interface WeaponType {
+  contentType: string,
+  cost: number,
+  damageDieModifier: number,
+  damageDieType: number,
+  damageNumberOfDice: number,
+  damageType: string,
+  description: string
+  equipmentCategory: string,
+  modes: WeaponType[],
+  name: string,
+  properties: string[],
+  weaponClassification: string,
+  weight: number
+}
 
+export interface ArmorType {
+  ac: number,
+  armorClassification: string,
+  contentType: string,
+  cost: number,
+  description: string,
+  equipmentCategory: string,
+  name: string,
+  stealthDisadvantage: boolean,
+  strengthRequirement: string,
+  weight: number
+}
+
+export interface GearType {
+  contentType: string,
+  cost: number,
+  description: string,
+  equipmentCategory: string,
+  name: string,
+  weight: number
 }
 
 export interface MonsterType {
@@ -167,7 +201,7 @@ export interface DeploymentType {
   featureText: string
 }
 
-export interface starshipSizeType {
+export interface StarshipSizeType {
   additionalHitDiceText: string,
   constitution: number,
   constitutionModifier: number,
@@ -192,4 +226,49 @@ export interface starshipSizeType {
   stockModificationSuiteChoices: string[],
   strength: number,
   strengthModifier: number
+}
+
+export interface StarshipWeaponType {
+  attackBonus: number,
+  attacksPerRound: number,
+  contentType: string,
+  cost: number,
+  damageDieModifier: number,
+  damageDieType: number,
+  damageNumberOfDice: number,
+  damageType: string,
+  longRange: number,
+  name: string,
+  properties: string,
+  reload: number,
+  shortRange: number,
+  type: string,
+  weaponCategory: string,
+  weaponSize: string
+}
+
+export interface StarshipEquipmentType {
+  armorClassBonus?: number, // armor
+  bonus?: number, // navcomputer
+  contentType: string,
+  cost: number,
+  hitPointsPerHitDie?: number, // armor
+  name: string,
+  starshipWeaponCategory?: string, // ammunition
+  type: string
+}
+
+export interface StarshipModificationType {
+  content: string,
+  contentType: string,
+  name: string,
+  prerequisites: string[],
+  type: string
+}
+
+export interface VentureType {
+  content: string,
+  contentType: string,
+  name: string,
+  prerequisites: string[]
 }

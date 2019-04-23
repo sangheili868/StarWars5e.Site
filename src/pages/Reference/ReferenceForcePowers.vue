@@ -27,7 +27,6 @@
         .filter(({ powerType }) => powerType === 'Force')
         .map(powers => ({
           ...powers,
-          to: `/reference/powers/${powers.name}`,
           id: powers.name
         })).value()
     }

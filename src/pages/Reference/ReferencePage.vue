@@ -18,12 +18,16 @@
           title: 'Backgrounds'
         },
         {
-          to: '/reference/equipment',
-          title: 'Equipment'
+          to: '/reference/armor',
+          title: 'Armor'
         },
         {
-          to: '/reference/monsters',
-          title: 'Monsters'
+          to: '/reference/weapons',
+          title: 'Weapons'
+        },
+        {
+          to: '/reference/gear',
+          title: 'Gear'
         },
         {
           to: '/reference/forcePowers',
@@ -32,6 +36,26 @@
         {
           to: '/reference/techPowers',
           title: 'Tech Powers'
+        },
+        {
+          to: '/reference/monsters',
+          title: 'Monsters'
+        },
+        {
+          to: '/reference/starshipEquipment',
+          title: 'Starship Equipment'
+        },
+        {
+          to: '/reference/starshipModifications',
+          title: 'Starship Modifications'
+        },
+        {
+          to: '/reference/starshipWeapons',
+          title: 'Starship Weapons'
+        },
+        {
+          to: '/reference/ventures',
+          title: 'Ventures'
         }
       ]
     }

@@ -1,18 +1,48 @@
 <script lang="ts">
   import { Component, Prop, Vue } from 'vue-property-decorator'
+  import { namespace } from 'vuex-class'
+  import SearchTable from '@/components/SearchTable.vue'
+  import { MonsterType } from '@/types'
+  import _ from 'lodash'
 
-  @Component
+  const monsterModule = namespace('monsters')
+
+  @Component({
+    components: {
+      SearchTable
+    }
+  })
   export default class ReferenceMonsters extends Vue {
+    @monsterModule.State monsters!: MonsterType[]
+    @monsterModule.Action fetchMonsters!: () => void
+    @Prop({ type: Boolean, default: false }) readonly isInHandbook!: boolean
 
+    created () {
+      this.fetchMonsters()
+    }
+
+    get items () {
+      const page = this.isInHandbook ? 'handbook' : 'reference'
+      return _(this.monsters)
+        .filter(({ contentType }) => !this.isInHandbook || contentType === 'Base')
+        .map(monster => ({
+          ...monster,
+          to: `/${page}/monsters/${monster.name}`
+        })).value()
+    }
+
+    get headers () {
+      return [
+        { text: 'Content Type', value: 'contentType' },
+        { text: 'Name', value: 'name' }
+      ]
+    }
   }
 </script>
 
 <template lang="pug">
   div
-    h1 Monsters
+    h1(v-if="!isInHandbook") Monsters
     br
+    SearchTable(v-bind="{ headers, items }")
 </template>
-
-<style module lang="scss">
-
-</style>

@@ -7,8 +7,8 @@ export default class Archetypes extends VuexModule {
   archetypes: ArchetypeType[] = []
 
   @MutationAction({ mutate: ['archetypes'] })
-  async fetchs () {
-    const results = await axios.get(`${process.env.VUE_APP_sw5eapiurl}/api/`)
+  async fetchArchetypes () {
+    const results = await axios.get(`${process.env.VUE_APP_sw5eapiurl}/api/Archetype`)
     return {
       archetypes: results.data
     }

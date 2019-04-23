@@ -33,9 +33,9 @@
 
     get headers () {
       return [
-        { text: 'Content Type', value: 'contentType' },
         { text: 'Name', value: 'name' },
-        { text: 'Distinctions', value: 'distinctions' }
+        { text: 'Distinctions', value: 'distinctions' },
+        { text: 'Source', value: 'contentType', render: _.startCase }
       ]
     }
   }

@@ -14,7 +14,7 @@
       VueMarkdown
     }
   })
-  export default class ReferencestarshipEquipment extends Vue {
+  export default class ReferenceStarshipEquipment extends Vue {
     @starshipEquipmentModule.State starshipEquipment!: StarshipEquipmentType[]
     @starshipEquipmentModule.Action fetchStarshipEquipment!: () => void
 

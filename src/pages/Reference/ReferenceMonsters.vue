@@ -33,7 +33,6 @@
 
     get headers () {
       return [
-        { text: 'Content Type', value: 'contentType' },
         { text: 'Name', value: 'name' }
       ]
     }

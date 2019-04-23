@@ -32,8 +32,17 @@
 
     get headers () {
       return [
-        { text: 'Name', value: 'name' }
+        { text: 'Type', value: 'weaponClassification', render: _.startCase },
+        { text: 'Name', value: 'name' },
+        { text: 'Cost', value: 'cost' },
+        { text: 'Weight', value: 'weight' },
+        { text: 'Damage', value: 'damageNumberOfDice', render: this.weaponDamage },
+        { text: 'Source', value: 'contentType', render: _.startCase }
       ]
+    }
+
+    weaponDamage (field: string, fields: WeaponType) {
+      return fields.damageNumberOfDice ? `${fields.damageNumberOfDice}d${fields.damageDieType} ${fields.damageType}` : 'Special'
     }
   }
 </script>
@@ -44,5 +53,8 @@
     br
     SearchTable(v-bind="{ headers, items }", isExpandable)
       template(v-slot:default="props")
+        div #[strong Properties:] {{ props.item.properties.join(', ') }}
         VueMarkdown {{ props.item.description }}
+        div(v-for="(mode, index) in props.item.modes", :key="index").
+          #[strong {{ mode.name }}:] {{ weaponDamage('', mode) }}, {{ mode.properties.join(', ') }}
 </template>

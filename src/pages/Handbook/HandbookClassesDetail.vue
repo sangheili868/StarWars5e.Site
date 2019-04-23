@@ -30,7 +30,7 @@
 <template lang="pug">
   div( v-if="classData" ).text-xs-left
     h1 {{ classData.name }}
-    VueMarkdown {{ classData.flavorText }}
+    VueMarkdown(:source="classData.flavorText")
     p {{ classData.creatingText }}
     h4 Quick Build
     p {{ classData.quickBuildText }}
@@ -52,7 +52,7 @@
     h4 Equipment
     p You start with the following equipment, in addition to the equipment granted by your background
     div(v-for="equipmentLine in classData.equipmentLines")
-      VueMarkdown {{ equipmentLine }}
+      VueMarkdown(:source="equipmentLine")
     br
     h4 Variant: Starting Wealth
     p.
@@ -61,6 +61,6 @@
       using the criteria below:
     div {{ classData.name }}: {{ classData.startingWealthVariant }}
     br
-    VueMarkdown {{ classData.classFeatureText }}
-    VueMarkdown {{ classData.classFeatureText2 }}
+    VueMarkdown(:source="classData.classFeatureText")
+    VueMarkdown(v-if="classData.classFeatureText2", :source="classData.classFeatureText2")
 </template>

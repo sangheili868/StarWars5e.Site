@@ -27,27 +27,27 @@
           {
             title: 'Coordinator',
             icon: 'fa-headset',
-            route: 'starships/deployments/Coordinator'
+            route: '/starships/deployments/Coordinator'
           },
           {
             title: 'Gunner',
             icon: 'fa-fighter-jet',
-            route: 'starships/deployments/Gunner'
+            route: '/starships/deployments/Gunner'
           },
           {
             title: 'Mechanic',
             icon: 'fa-wrench',
-            route: 'starships/deployments/Mechanic'
+            route: '/starships/deployments/Mechanic'
           },
           {
             title: 'Operator',
             icon: 'fa-eye',
-            route: 'starships/deployments/Operator'
+            route: '/starships/deployments/Operator'
           },
           {
             title: 'Pilot',
             icon: 'fa-helicopter',
-            route: 'starships/deployments/Pilot'
+            route: '/starships/deployments/Pilot'
           }
         ]
       },

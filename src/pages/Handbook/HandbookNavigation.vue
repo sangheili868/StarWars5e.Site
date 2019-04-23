@@ -27,7 +27,59 @@
       {
         title: 'Classes',
         icon: 'fab fa-galactic-republic',
-        route: '/handbook/classes'
+        route: '/handbook/classes',
+        items: [
+          {
+            title: 'Berserker',
+            icon: '',
+            route: '/handbook/classes/Berserker'
+          },
+          {
+            title: 'Consular',
+            icon: '',
+            route: '/handbook/classes/Consular'
+          },
+          {
+            title: 'Engineer',
+            icon: '',
+            route: '/handbook/classes/Engineer'
+          },
+          {
+            title: 'Fighter',
+            icon: '',
+            route: '/handbook/classes/Fighter'
+          },
+          {
+            title: 'Guardian',
+            icon: '',
+            route: '/handbook/classes/Guardian'
+          },
+          {
+            title: 'Monk',
+            icon: '',
+            route: '/handbook/classes/Monk'
+          },
+          {
+            title: 'Operative',
+            icon: '',
+            route: '/handbook/classes/Operative'
+          },
+          {
+            title: 'Scholar',
+            icon: '',
+            route: '/handbook/classes/Scholar'
+          },
+          {
+            title: 'Scout',
+            icon: '',
+            route: '/handbook/classes/Scout'
+          },
+          {
+            title: 'Sentinel',
+            icon: '',
+            route: '/handbook/classes/Sentinel'
+          }
+        ]
       },
       {
         title: 'Backgrounds',

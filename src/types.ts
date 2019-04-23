@@ -160,9 +160,36 @@ export interface SpeciesType {
 }
 
 export interface DeploymentType {
+  name: string,
+  contentType: string,
+  flavorText: string,
+  description: string,
+  featureText: string
+}
+
+export interface starshipSizeType {
+  additionalHitDiceText: string,
+  constitution: number,
+  constitutionModifier: number,
+  contentType: string,
+  dexterity: number,
+  dexterityModifier: number,
+  features: {
     name: string,
-    contentType: string,
-    flavorText: string,
-    description: string,
-    featureText: string
-  }
+    content: string,
+    tier: number
+  }[],
+  hitDiceType: number,
+  hitDiceNumberOfDice: number,
+  maxSuiteSystems: number,
+  modSlotsAtTier0: number,
+  modSlotsPerLevel: number,
+  name: string,
+  savingThrowOptions: string[],
+  startingEquipmentArmorChoice: string[],
+  startingEquipmentNonSheild: string[],
+  stockEquipmentNames: string[],
+  stockModificationSuiteChoices: string[],
+  strength: number,
+  strengthModifier: number
+}

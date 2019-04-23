@@ -7,7 +7,8 @@
   interface NavItem {
     title: string
     icon: string
-    route: string
+    route: string,
+    items?: NavItem[]
   }
 
   @Component
@@ -17,18 +18,40 @@
 
     @Prop(Array) readonly items!: NavItem[]
     @Prop(String) readonly baseRoute!: string
+
+    hasSubItems ({ items }: NavItem) {
+      return items && items.length
+    }
+
+    buildComponentProps (item: NavItem) {
+      return this.hasSubItems(item) ? {
+        is: 'v-list-group'
+      } : {
+        is: 'v-list-tile',
+        exact: item.route === this.baseRoute,
+        to: item.route
+      }
+    }
   }
 </script>
 
 <template lang="pug">
   v-navigation-drawer(:value="isSideBarOpen", :permanent="$vuetify.breakpoint.mdAndUp", fixed, app, clipped @input="updateSideBar")
     v-list.dense
-      v-list-tile(v-for="item in items", :key="item.title", :to="item.route" :exact="item.route === baseRoute")
-
-        v-list-tile-action
-          v-icon(:class="$style.icon") {{ item.icon }}
-
-        v-list-tile-content
+      component(v-for="(item, index) in items", :key="index", v-bind="buildComponentProps(item)")
+        template(v-if="hasSubItems(item)" v-slot:activator)
+          v-list-tile(:to="item.route")
+            v-list-tile-action
+              v-icon(:class="$style.icon") {{ item.icon }}
+            v-list-tile-title {{ item.title }}
+        template(v-if="hasSubItems(item)")
+          v-list-tile(v-for="(subitem, index) in item.items", :key="index", :to="subitem.route")
+            v-list-tile-action.ml-5
+              v-icon {{ subitem.icon }}
+            v-list-tile-title {{ subitem.title }}
+        template(v-else)
+          v-list-tile-action
+            v-icon(:class="$style.icon") {{ item.icon }}
           v-list-tile-title {{ item.title }}
 </template>
 

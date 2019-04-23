@@ -30,6 +30,6 @@
 <template lang="pug">
   div( v-if="deploymentData" ).text-xs-left
     h1 {{ deploymentData.name }}
-    VueMarkdown {{ deploymentData.flavorText }}
-    VueMarkdown {{ deploymentData.featureText }}
+    VueMarkdown(:source="deploymentData.flavorText")
+    VueMarkdown(:source="deploymentData.featureText")
 </template>

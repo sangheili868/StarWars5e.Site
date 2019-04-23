@@ -32,7 +32,14 @@
 
     get headers () {
       return [
-        { text: 'Name', value: 'name' }
+        { text: 'Type', value: 'armorClassification' },
+        { text: 'Name', value: 'name', render: _.startCase },
+        { text: 'Cost', value: 'cost' },
+        { text: 'Weight', value: 'weight' },
+        { text: 'AC', value: 'ac' },
+        { text: 'Strength', value: 'strengthRequirement' },
+        { text: 'Stealth', value: 'stealthDisadvantage', render: (isDisadvantage: boolean) => isDisadvantage ? 'Disadvantage' : '-' },
+        { text: 'Source', value: 'contentType', render: _.startCase }
       ]
     }
   }

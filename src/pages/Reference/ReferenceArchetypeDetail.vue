@@ -30,5 +30,5 @@
 <template lang="pug">
   div( v-if="archetypeData" ).text-xs-left
     h1 {{ archetypeData.name }}
-    p {{ archetypeData }}
+    VueMarkdown(:source="archetypeData.text")
 </template>

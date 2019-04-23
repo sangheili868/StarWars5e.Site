@@ -32,7 +32,11 @@
 
     get headers () {
       return [
-        { text: 'Name', value: 'name' }
+        { text: 'Category', value: 'equipmentCategory', render: _.startCase },
+        { text: 'Name', value: 'name' },
+        { text: 'Cost', value: 'cost' },
+        { text: 'Weight', value: 'weight' },
+        { text: 'Source', value: 'contentType', render: _.startCase }
       ]
     }
   }

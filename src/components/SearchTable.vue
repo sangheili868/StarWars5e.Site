@@ -29,9 +29,9 @@
   v-data-table(v-if=" items.length" :headers="alignedHeaders", v-bind="{ items }", :pagination.sync="pagination")
     template(v-slot:items="props")
       tr(v-if="isExpandable", :class="$style.row", @click="props.expanded = !props.expanded")
-        td(v-for="{ value, render } in alignedHeaders", :to="props.item.to") {{ render(props.item[value]) }}
+        td(v-for="{ value, render } in alignedHeaders", :to="props.item.to") {{ render(props.item[value], props.item) }}
       router-link(tag="tr", v-else, :class="$style.row", :to="props.item.to")
-        td(v-for="{ value, render } in alignedHeaders", :to="props.item.to") {{ render(props.item[value]) }}
+        td(v-for="{ value, render } in alignedHeaders", :to="props.item.to") {{ render(props.item[value], props.item) }}
     template(v-slot:expand="props")
       v-card(flat)
         v-card-text

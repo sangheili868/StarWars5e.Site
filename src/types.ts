@@ -158,3 +158,11 @@ export interface SpeciesType {
   weightAverage: string,
   weightRollMod: string
 }
+
+export interface DeploymentType {
+    name: string,
+    contentType: string,
+    flavorText: string,
+    description: string,
+    featureText: string
+  }

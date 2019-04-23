@@ -1,0 +1,16 @@
+import axios from 'axios'
+import { Module, VuexModule, MutationAction } from 'vuex-module-decorators'
+import { ArchetypeType } from '@/types'
+
+@Module({ namespaced: true, name: 'archetype' })
+export default class Archetypes extends VuexModule {
+  archetypes: ArchetypeType[] = []
+
+  @MutationAction({ mutate: ['archetypes'] })
+  async fetchs () {
+    const results = await axios.get(`${process.env.VUE_APP_sw5eapiurl}/api/`)
+    return {
+      archetypes: results.data
+    }
+  }
+}

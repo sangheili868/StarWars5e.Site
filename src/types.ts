@@ -1,51 +1,125 @@
-export interface ClassType {
+export interface ArchetypeType {
+  className: string,
   contentType: string,
-  archetypeFlavorName: String
-  archetypeFlavorText: String
-  archetypes: any[]
-  armorProficiencies: String[]
-  classFeatureText: String
-  classFeatureText2?: String
-  creatingText: String
-  equipmentLines: String[]
-  flavorText: String
-  hitDiceDieType: Number
-  hitPointsAtFirstLevel: String
-  hitPointsAtHigherLevels: String
-  levelChangeHeadersJson: String
-  levelChanges: any
-  name: String
-  primaryAbility: String
-  quickBuildText: String
-  rowKey: String
-  savingThrows: String[]
-  skillChoices: String
-  startingWealthVariant: String
-  summary: String
-  toolProficiencies: String[]
-  weaponProficiencies: String[]
+  leveledTable: {
+    [key: string]: {
+      [key: string]: string
+    }
+  },
+  leveledTableHeaders: string[]
+  name: string,
+  text: string,
+  text2: string,
 }
 
-export interface SpeciesType {
+interface backgroundTableRow {
+  name: string,
+  roll: number,
+  description: string
+}
+
+export interface BackgroundType {
+  bondOptions: backgroundTableRow[],
   contentType: string,
-  colorScheme: String,
-  distinctions: String,
-  eyeColorOptions: String,
-  flavorText: String,
-  hairColorOptions: String,
-  heightAverage: String,
-  heightRollMod: String,
-  homeworld: String,
-  language: String,
-  manufacturer: String,
-  name: String,
-  skinColorOptions: String,
-  traits: {
-    description: String,
-    name: String
+  equipment: string,
+  featOptions: backgroundTableRow[],
+  featureName: string,
+  featureText: string,
+  flavorDescription: string,
+  flavorName: string,
+  flavorOptions: backgroundTableRow[],
+  flavorText: string,
+  flawOptions: backgroundTableRow[],
+  idealOptions: backgroundTableRow[],
+  languages: string,
+  name: string,
+  personalityTraitOptions: backgroundTableRow[],
+  skillProficiencies: string,
+  suggestedCharacteristics: string,
+  toolProficiencies: string
+}
+
+export interface ClassType {
+  contentType: string,
+  archetypeFlavorName: string
+  archetypeFlavorText: string
+  archetypes: any[]
+  armorProficiencies: string[]
+  classFeatureText: string
+  classFeatureText2?: string
+  creatingText: string
+  equipmentLines: string[]
+  flavorText: string
+  hitDiceDieType: Number
+  hitPointsAtFirstLevel: string
+  hitPointsAtHigherLevels: string
+  levelChangeHeadersJson: string
+  levelChanges: any
+  name: string
+  primaryAbility: string
+  quickBuildText: string
+  rowKey: string
+  savingThrows: string[]
+  skillChoices: string
+  startingWealthVariant: string
+  summary: string
+  toolProficiencies: string[]
+  weaponProficiencies: string[]
+}
+
+export interface EquipmentType {
+
+}
+
+export interface MonsterType {
+  alignment: string,
+  armorClass: number,
+  armorType: string,
+  behaviors: {
+    name: string,
+    monsterBehaviorType: string,
+    description: string,
+    attackType: string,
+    restrictions: string,
+    attackBonus: number,
+    range: string,
+    numberOfTargets: string,
+    damage: string,
+    damageType: string
   }[],
-  weightAverage: String,
-  weightRollMod: String
+  challengeRating: number,
+  charisma: number,
+  charismaModifier: number,
+  conditionsImmunitiesOther: string[],
+  conditionsImmunitiesParsed: number[],
+  constitution: number,
+  constitutionModifier: number,
+  contentType: string,
+  damageImmunitiesOther: string[],
+  damageImmunitiesParsed: number[],
+  damageResistancesOther: string[],
+  damageResistancesParsed: number[],
+  damageVulnerabilitiesOther: string[],
+  damageVulnerabilitiesParsed: number[],
+  dexterity: number,
+  dexterityModifier: number,
+  experiencePoints: number,
+  hitPointRoll: string,
+  hitPoints: number,
+  intelligence: number,
+  intelligenceModifier: number,
+  languages: string[],
+  name: string,
+  savingThrows: string[],
+  senses: string[],
+  size: string,
+  skills: string[],
+  speed: number,
+  strength: number,
+  strengthModifier: number,
+  types: string[],
+  wisdom: number,
+  wisdomModifier: number
 }
 
 export interface PowerType {
@@ -61,4 +135,26 @@ export interface PowerType {
   powerType: string,
   range: string,
   prerequisite: string
+}
+
+export interface SpeciesType {
+  contentType: string,
+  colorScheme: string,
+  distinctions: string,
+  eyeColorOptions: string,
+  flavorText: string,
+  hairColorOptions: string,
+  heightAverage: string,
+  heightRollMod: string,
+  homeworld: string,
+  language: string,
+  manufacturer: string,
+  name: string,
+  skinColorOptions: string,
+  traits: {
+    description: string,
+    name: string
+  }[],
+  weightAverage: string,
+  weightRollMod: string
 }

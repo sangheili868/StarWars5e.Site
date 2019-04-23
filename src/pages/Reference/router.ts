@@ -93,5 +93,5 @@ export default [
   {
     path: '/reference/ventures',
     component: ReferenceVentures
-  },
+  }
 ]

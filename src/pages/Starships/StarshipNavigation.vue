@@ -54,7 +54,33 @@
       {
         title: 'Starships',
         icon: 'fa-rocket',
-        route: '/starships/starships'
+        route: '/starships/starshipSizes',
+        items: [
+          {
+            title: 'Tiny',
+            route: '/starships/starshipSizes/Tiny'
+          },
+          {
+            title: 'Small',
+            route: '/starships/starshipSizes/Small'
+          },
+          {
+            title: 'Medium',
+            route: '/starships/starshipSizes/Medium'
+          },
+          {
+            title: 'Large',
+            route: '/starships/starshipSizes/Large'
+          },
+          {
+            title: 'Huge',
+            route: '/starships/starshipSizes/Huge'
+          },
+          {
+            title: 'Gargantuan',
+            route: '/starships/starshipSizes/Gargantuan'
+          }
+        ]
       },
       {
         title: 'Modifications',

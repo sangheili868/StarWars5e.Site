@@ -62,3 +62,11 @@ export interface PowerType {
   range: string,
   prerequisite: string
 }
+
+export interface DeploymentType {
+    name: string,
+    contentType: string,
+    flavorText: string,
+    description: string,
+    featureText: string
+  }

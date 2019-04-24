@@ -32,7 +32,12 @@
 
     get headers () {
       return [
-        { text: 'Name', value: 'name' }
+        { text: 'Name', value: 'name' },
+        {
+          text: 'Prerequisites',
+          value: 'prerequisites',
+          render: (prerequisites: string[]) => _.upperFirst(prerequisites.join(', ') || '---')
+        }
       ]
     }
   }
@@ -44,5 +49,5 @@
     br
     SearchTable(v-bind="{ headers, items }", isExpandable)
       template(v-slot:default="props")
-        VueMarkdown {{ props.item.description }}
+        VueMarkdown {{ props.item.content }}
 </template>

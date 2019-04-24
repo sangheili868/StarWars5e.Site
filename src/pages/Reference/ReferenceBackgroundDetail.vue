@@ -3,11 +3,13 @@
   import { namespace } from 'vuex-class'
   import { BackgroundType } from '@/types.ts'
   import VueMarkdown from 'vue-markdown'
+  import RollTable from '@/components/RollTable.vue'
 
   const backgroundModule = namespace('backgrounds')
 
   @Component({
     components: {
+      RollTable,
       VueMarkdown
     }
   })
@@ -21,32 +23,34 @@
       this.fetchBackgrounds()
     }
 
-    get backgroundData () {
+    get background () {
       return this.backgrounds.find(({ name }: BackgroundType) => name === this.backgroundName)
     }
   }
 </script>
 
 <template lang="pug">
-  div( v-if="backgroundData" ).text-xs-left
-    h1 {{ backgroundData.name }}
-    VueMarkdown {{ backgroundData.flavorText }}
-    div #[strong Skill Proficiencies:] {{ backgroundData.skillProficiencies }}
-    div #[strong Tool Proficiencies:] {{ backgroundData.toolProficiencies }}
-    div #[strong Languages:] {{ backgroundData.languages }}
-    div #[strong Equipment:] {{ backgroundData.equipment }}
-    br
-    h3 Feature: {{ backgroundData.featureName }}
-    p {{ backgroundData.featureText }}
-    br
+  div( v-if="background" ).text-xs-left
+    h1 {{ background.name }}
+    VueMarkdown {{ background.flavorText }}
+    div #[strong Skill Proficiencies:] {{ background.skillProficiencies }}
+    div(v-if="background.toolProficiencies") #[strong Tool Proficiencies:] {{ background.toolProficiencies }}
+    div(v-if="background.languages") #[strong Languages:] {{ background.languages }}
+    div.mb-2 #[strong Equipment:] {{ background.equipment }}
+
+    h4 {{ background.flavorName }}
+    RollTable(:title="background.flavorName", :items="background.flavorOptions").mb-2
+    h3 Feature: {{ background.featureName }}
+    VueMarkdown {{ background.featureText }}
+
     h3 Background Feat
     p As a further embodiment of the experience and training of your background, you can choose from the following feats:
-    p {{ backgroundData.featOptions }}
-    br
+    RollTable.mb-2(title="Feat", :items="background.featOptions")
+
     h4 Suggested Characteristics
-    p {{ backgroundData.suggestedCharacteristics }}
-    div #[strong Personality Trait:] {{ backgroundData.personalityTraitOptions }}
-    div #[strong Ideal:] {{ backgroundData.idealOptions }}
-    div #[strong Bond:] {{ backgroundData.bondOptions }}
-    div #[strong Flaw:] {{ backgroundData.flawOptions }}
+    p {{ background.suggestedCharacteristics }}
+    RollTable(title="Personality Trait", :items="background.personalityTraitOptions", isLeftAlign)
+    RollTable(title="Ideal", :items="background.idealOptions", isLeftAlign)
+    RollTable(title="Bond", :items="background.bondOptions", isLeftAlign)
+    RollTable(title="Flaw", :items="background.flawOptions", isLeftAlign)
 </template>

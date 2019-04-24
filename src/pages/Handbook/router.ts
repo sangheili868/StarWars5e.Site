@@ -6,6 +6,7 @@ import ReferenceSpeciesDetail from '@/pages/Reference/ReferenceSpeciesDetail.vue
 import HandbookClasses from './HandbookClasses.vue'
 import HandbookClassesDetail from './HandbookClassesDetail.vue'
 import HandbookCasting from './HandbookCasting.vue'
+import HandbookBackgrounds from './HandbookBackgrounds.vue'
 
 export default {
   path: '/handbook',
@@ -30,6 +31,10 @@ export default {
     {
       path: 'casting',
       component: HandbookCasting
+    },
+    {
+      path: 'backgrounds',
+      component: HandbookBackgrounds
     },
     {
       path: 'classes/:className',

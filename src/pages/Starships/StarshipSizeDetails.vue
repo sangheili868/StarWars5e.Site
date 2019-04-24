@@ -29,6 +29,6 @@
 
 <template lang="pug">
   div( v-if="starshipSizeData" ).text-xs-left
-    h1 {{ starshipSizeData.name }}
+    h1 {{ starshipSizeData.name }} Ships
     VueMarkdown(:source="starshipSizeData.fullText")
 </template>

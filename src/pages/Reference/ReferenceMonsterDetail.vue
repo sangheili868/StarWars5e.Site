@@ -32,7 +32,7 @@
         { score: 'CON', value: this.monster.constitution, modifier: this.addPlus(this.monster.constitutionModifier) },
         { score: 'INT', value: this.monster.intelligence, modifier: this.addPlus(this.monster.intelligenceModifier) },
         { score: 'WIS', value: this.monster.wisdom, modifier: this.addPlus(this.monster.wisdomModifier) },
-        { score: 'CHA', value: this.monster.charisma, modifier: this.addPlus(this.monster.charismaModifier) },
+        { score: 'CHA', value: this.monster.charisma, modifier: this.addPlus(this.monster.charismaModifier) }
       ]
     }
 

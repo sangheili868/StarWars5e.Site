@@ -7,14 +7,13 @@
       HandbookChapter
     }
   })
-  export default class HandbookCasting extends Vue {
+  export default class HandbookBackgrounds extends Vue {
 
   }
 </script>
 
 <template lang="pug">
   div
-    HandbookChapter(chapter="casting")
-    v-btn(to="/reference/forcePowers", color="primary") Force Powers List
-    v-btn(to="/reference/techPowers", color="primary") Tech Powers List
+    HandbookChapter(chapter="backgrounds")
+    v-btn(to="/reference/backgrounds", color="primary") Backgrounds List
 </template>

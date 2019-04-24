@@ -12,28 +12,28 @@ export interface ArchetypeType {
   text2: string,
 }
 
-interface backgroundTableRow {
+export interface RollTableRowType {
   name: string,
   roll: number,
   description: string
 }
 
 export interface BackgroundType {
-  bondOptions: backgroundTableRow[],
+  bondOptions: RollTableRowType[],
   contentType: string,
   equipment: string,
-  featOptions: backgroundTableRow[],
+  featOptions: RollTableRowType[],
   featureName: string,
   featureText: string,
   flavorDescription: string,
   flavorName: string,
-  flavorOptions: backgroundTableRow[],
+  flavorOptions: RollTableRowType[],
   flavorText: string,
-  flawOptions: backgroundTableRow[],
-  idealOptions: backgroundTableRow[],
+  flawOptions: RollTableRowType[],
+  idealOptions: RollTableRowType[],
   languages: string,
   name: string,
-  personalityTraitOptions: backgroundTableRow[],
+  personalityTraitOptions: RollTableRowType[],
   skillProficiencies: string,
   suggestedCharacteristics: string,
   toolProficiencies: string
@@ -213,7 +213,9 @@ export interface StarshipSizeType {
     content: string,
     tier: number
   }[],
-  hitDiceType: number,
+  flavorText: string,
+  fullText: string,
+  hitDiceDieType: number,
   hitDiceNumberOfDice: number,
   maxSuiteSystems: number,
   modSlotsAtTier0: number,
@@ -221,7 +223,7 @@ export interface StarshipSizeType {
   name: string,
   savingThrowOptions: string[],
   startingEquipmentArmorChoice: string[],
-  startingEquipmentNonSheild: string[],
+  startingEquipmentNonShield: string[],
   stockEquipmentNames: string[],
   stockModificationSuiteChoices: string[],
   strength: number,

@@ -33,7 +33,12 @@
 
     get headers () {
       return [
-        { text: 'Name', value: 'name' }
+        { text: 'Name', value: 'name' },
+        { text: 'Size', value: 'size' },
+        { text: 'Types', value: 'types', render: (types: string[]) => types.map(_.upperFirst).join(', ') },
+        { text: 'Alignment', value: 'alignment', render: _.startCase },
+        { text: 'CR', value: 'challengeRating' },
+        { text: 'Source', value: 'contentType' }
       ]
     }
   }

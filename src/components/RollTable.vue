@@ -11,7 +11,7 @@
 </script>
 
 <template lang="pug">
-  table(:class="$style.table").text-xs-center
+  table(v-if="items && items.length", :class="$style.table").text-xs-center
     thead
       tr
         th.px-2.py-1 d{{ items.length }}

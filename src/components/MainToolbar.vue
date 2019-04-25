@@ -77,7 +77,8 @@
   v-toolbar(app, clipped-left)
     v-toolbar-side-icon(v-if="isPageWithNavigation", @click="handleSideIconClick").hidden-md-and-up
     v-toolbar-title
-      v-img(:src="require('@/assets/sw5e-logo.png')", width="100px")
+      router-link(to="/")
+        v-img(:src="require('@/assets/sw5e-logo.png')", width="100px")
     v-spacer
     v-toolbar-items.hidden-sm-and-down
       component(v-for="({ to, title, nested}) in routes", :key="title", v-bind="buildComponentProps(to, nested)")

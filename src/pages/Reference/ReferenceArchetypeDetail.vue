@@ -3,6 +3,7 @@
   import { namespace } from 'vuex-class'
   import { ArchetypeType } from '@/types.ts'
   import VueMarkdown from 'vue-markdown'
+  import LevelTable from '@/components/LevelTable.vue'
   import Loading from '@/components/Loading.vue'
 
   const archetypeModule = namespace('archetypes')
@@ -10,6 +11,7 @@
   @Component({
     components: {
       VueMarkdown,
+      LevelTable,
       Loading
     }
   })
@@ -23,15 +25,16 @@
       this.fetchArchetypes()
     }
 
-    get archetypeData () {
+    get archetype () {
       return this.archetypes.find(({ name }: ArchetypeType) => name === this.archetypeName)
     }
   }
 </script>
 
 <template lang="pug">
-  div( v-if="archetypeData" ).text-xs-left
-    h1 {{ archetypeData.name }}
-    VueMarkdown(:source="archetypeData.text")
+  div( v-if="archetype" ).text-xs-left
+    h1 {{ archetype.name }}
+    VueMarkdown(:source="archetype.text")
+    LevelTable(:title="archetype.name", :levels="archetype.leveledTable")
   Loading(v-else)
 </template>

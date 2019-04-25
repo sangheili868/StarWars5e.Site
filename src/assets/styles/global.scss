@@ -5,8 +5,8 @@ $primary: #c40f0f;
 $secondary: #0d99cc;
 $background: #afc6d6;
 $backgroundGradient: linear-gradient(to right, #afc6d6 0%,#d6d6d6 30%,#d6d6d6 70%,#afc6d6 100%);
-$tableRowOdd: #c9d6db;
-$tableRowEven: #bdc8cc;
+$lightGrey: #c9d6db;
+$darkGrey: #bdc8cc;
 $black: black;
 
 @import url('https://fonts.googleapis.com/css?family=Russo+One|Bungee+Inline');
@@ -33,4 +33,37 @@ h3 {
 
 h4 {
   font-size: 0.35cm;
+}
+
+hr {
+  visibility: hidden;
+}
+
+.block {
+  padding: 15px 10px;
+  margin: 15px;
+  background-color: $darkGrey;
+  border-top: 0.2em solid $secondary;
+  border-bottom: 0.2em solid $secondary;
+  border-left: 0;
+  border-right: 0;
+  box-shadow: 0 0 1.5em rgba($secondary, 0.5);
+  overflow-x: scroll;
+
+  h2 {
+    color: $black;
+  }
+}
+
+.table {
+  border-collapse: collapse;
+
+  .rows {
+    &:nth-child(odd) {
+      background-color: $lightGrey;
+    }
+    &:nth-child(even) {
+      background-color: $darkGrey;
+    }
+  }
 }

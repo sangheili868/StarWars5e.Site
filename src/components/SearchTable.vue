@@ -32,19 +32,14 @@
 </script>
 
 <template lang="pug">
-  div
+  div(v-if=" items.length")
     v-card
       v-card-title
         v-spacer
         v-spacer
         v-spacer
         v-text-field(v-model="search", append-icon="fa-search", label="Search", single-line, hide-details)
-    v-data-table(
-      v-if=" items.length",
-      :headers="alignedHeaders",
-      v-bind="{ items, search }",
-      :pagination.sync="pagination"
-    )
+    v-data-table(:headers="alignedHeaders", v-bind="{ items, search }", :pagination.sync="pagination")
       template(v-slot:items="props")
         tr(v-if="isExpandable", :class="$style.row", @click="props.expanded = !props.expanded")
           td(v-for="{ value, render } in alignedHeaders", :to="props.item.to") {{ render(props.item[value], props.item) }}
@@ -54,7 +49,7 @@
         v-card(flat)
           v-card-text
             slot(:item="props.item")
-    Loading(v-else)
+  Loading(v-else)
 </template>
 
 <style module lang="scss">

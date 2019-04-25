@@ -3,12 +3,14 @@
   import { namespace } from 'vuex-class'
   import { ClassType } from '@/types.ts'
   import VueMarkdown from 'vue-markdown'
+  import LevelTable from '@/components/LevelTable.vue'
 
   const classesModule = namespace('classes')
 
   @Component({
     components: {
-      VueMarkdown
+      VueMarkdown,
+      LevelTable
     }
   })
   export default class HandbookClassesDetail extends Vue {
@@ -34,6 +36,9 @@
     p {{ classData.creatingText }}
     h4 Quick Build
     p {{ classData.quickBuildText }}
+
+    LevelTable(:title="classData.name", :levels="classData.levelChanges")
+
     h2 Class Features
     p As a {{ classData.name }}, you gain the following class features.
 
@@ -41,26 +46,44 @@
     div #[strong Hit Dice:] 1d{{ classData.hitDiceDieType }} per {{ classData.name }} level
     div #[strong Hit Points at 1st Level:] {{ classData.hitPointsAtFirstLevel }}
     div #[strong Hit Points at Higher Levels:] {{ classData.hitPointsAtHigherLevels }}
+    br
 
     h4 Proficiencies
     div #[strong Armor:] {{ classData.armorProficiencies.join(', ') }}
     div #[strong Weapons:] {{ classData.weaponProficiencies.join(', ') }}
-    div #[strong Tools:] {{ classData.toolProficiencies.join(', ') }}
+    div.mb-2 #[strong Tools:] {{ classData.toolProficiencies.join(', ') }}
+
     div #[strong Saving Throws:] {{ classData.savingThrows.join(', ') }}
     div #[strong Skills:] {{ classData.skillChoices }}
-
+    br
     h4 Equipment
     p You start with the following equipment, in addition to the equipment granted by your background
     div(v-for="equipmentLine in classData.equipmentLines")
       VueMarkdown(:source="equipmentLine")
-    br
-    h4 Variant: Starting Wealth
+
+    h4.mt-2 Variant: Starting Wealth
     p.
       In lieu of the equipment granted by your class and background, you can elect to purchase your starting gear. If
       you do so, you receive no equipment from your class and background, and instead roll for your starting wealth
       using the criteria below:
-    div {{ classData.name }}: {{ classData.startingWealthVariant }}
+    div(:class="$style.variantWealth")
+      div.d-flex
+        strong Class
+        strong.text-xs-right Funds
+      div(:class="$style.funds").d-flex
+        div {{ classData.name }}
+        div.text-xs-right {{ classData.startingWealthVariant }}
     br
     VueMarkdown(:source="classData.classFeatureText")
     VueMarkdown(v-if="classData.classFeatureText2", :source="classData.classFeatureText2")
 </template>
+
+<style module lang="scss">
+  @import "@/assets/styles/global.scss";
+  .variantWealth {
+    max-width: 500px;
+  }
+  .funds {
+    background: $lightGrey;
+  }
+</style>

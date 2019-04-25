@@ -40,7 +40,7 @@
     v-container(grid-list-lg, fluid)
       v-layout(row, wrap, justify-center)
         v-flex(v-for="charClass in classes", :key="charClass.name", d-flex).xs12.sm6.md4
-          v-card(:to="`classes/${chatrClass.name}`", hover, exact).ma-2
+          v-card(:to="`classes/${charClass.name}`", hover, exact).ma-2
             v-card-text(primary-title)
               h3 {{ charClass.name }}
               div.text-xs-left

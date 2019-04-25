@@ -45,8 +45,7 @@
     h4 Hit Points
     div #[strong Hit Dice:] 1d{{ classData.hitDiceDieType }} per {{ classData.name }} level
     div #[strong Hit Points at 1st Level:] {{ classData.hitPointsAtFirstLevel }}
-    div #[strong Hit Points at Higher Levels:] {{ classData.hitPointsAtHigherLevels }}
-    br
+    div.mb-2 #[strong Hit Points at Higher Levels:] {{ classData.hitPointsAtHigherLevels }}
 
     h4 Proficiencies
     div #[strong Armor:] {{ classData.armorProficiencies.join(', ') }}
@@ -54,12 +53,11 @@
     div.mb-2 #[strong Tools:] {{ classData.toolProficiencies.join(', ') }}
 
     div #[strong Saving Throws:] {{ classData.savingThrows.join(', ') }}
-    div #[strong Skills:] {{ classData.skillChoices }}
-    br
+    div.mb-2 #[strong Skills:] {{ classData.skillChoices }}
+
     h4 Equipment
     p You start with the following equipment, in addition to the equipment granted by your background
-    div(v-for="equipmentLine in classData.equipmentLines")
-      VueMarkdown(:source="equipmentLine")
+    VueMarkdown(:source="classData.equipmentLines.join('\\n')")
 
     h4.mt-2 Variant: Starting Wealth
     p.
@@ -79,10 +77,11 @@
 </template>
 
 <style module lang="scss">
-  @import "@/assets/styles/global.scss";
+  @import "@/assets/styles/colors.scss";
   .variantWealth {
     max-width: 500px;
   }
+
   .funds {
     background: $lightGrey;
   }

@@ -36,7 +36,7 @@
         {
           text: 'Prerequisites',
           value: 'prerequisites',
-          render: (prerequisites: string[]) => _.upperFirst(prerequisites.join(', ') || '---')
+          render: (prerequisites: string[]) => _.upperFirst(prerequisites.join(', ') || '-')
         }
       ]
     }

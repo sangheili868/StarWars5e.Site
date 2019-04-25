@@ -1,14 +1,6 @@
 
 @import '~vuetify-scss';
-
-$primary: #c40f0f;
-$secondary: #0d99cc;
-$background: #afc6d6;
-$backgroundGradient: linear-gradient(to right, #afc6d6 0%,#d6d6d6 30%,#d6d6d6 70%,#afc6d6 100%);
-$lightGrey: #c9d6db;
-$darkGrey: #bdc8cc;
-$black: black;
-
+@import './colors.scss';
 @import url('https://fonts.googleapis.com/css?family=Russo+One|Bungee+Inline');
 
 h1, h2, h3, h4 {
@@ -35,8 +27,24 @@ h4 {
   font-size: 0.35cm;
 }
 
+h5 {
+  font-size: .4cm;
+}
+
 hr {
   visibility: hidden;
+}
+
+ul {
+  margin-bottom: 1rem;
+}
+
+blockquote {
+  margin-bottom: 1em;
+  padding: 5px 10px;
+  background-color: $darkGrey;
+  border: 1px solid $secondary;
+  box-shadow: 0px 0px 20px rgba($secondary, 0.5);
 }
 
 .block {
@@ -48,22 +56,40 @@ hr {
   border-left: 0;
   border-right: 0;
   box-shadow: 0 0 1.5em rgba($secondary, 0.5);
-  overflow-x: scroll;
 
-  h2 {
+  h2, h4 {
     color: $black;
+  }
+
+  hr {
+    visibility: visible;
+    background-color: $secondary;
+    height: 5px;
+    border: none;
   }
 }
 
 .table {
   border-collapse: collapse;
+  min-width: 200px;
+  margin-bottom: 15px;
 
-  .rows {
+  tbody tr {
+
     &:nth-child(odd) {
       background-color: $lightGrey;
     }
+
     &:nth-child(even) {
       background-color: $darkGrey;
+    }
+  }
+
+  td, th {
+    padding-right: 10px;
+
+    &:last-child {
+      padding-right: 0;
     }
   }
 }

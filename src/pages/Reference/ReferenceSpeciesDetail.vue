@@ -31,28 +31,72 @@
 
 <template lang="pug">
   div( v-if="speciesData" ).text-xs-left
-    h1 {{ speciesData.name }}
+    div(:class="$style.bioBlock").block
+      h2 {{ speciesData.name }}
+      hr
 
-    h4 Visual Characteristics
-    div(v-if="speciesData.skinColorOptions") #[strong Skin Color:] {{ speciesData.skinColorOptions }}
-    div(v-if="speciesData.hairColorOptions") #[strong Hair Color:] {{ speciesData.hairColorOptions }}
-    div(v-if="speciesData.eyeColorOptions") #[strong Eye Color:] {{ speciesData.eyeColorOptions }}
-    div(v-if="speciesData.colorScheme") #[strong Color Scheme:] {{ speciesData.colorScheme }}
-    div(v-if="speciesData.distinctions") #[strong Distinctions:] {{ speciesData.distinctions }}
-    br
-    h4 Physical Characteristics
-    div #[strong Height:] {{ speciesData.heightAverage }} {{ speciesData.heightRollMod }}
-    div #[strong Weight:] {{ speciesData.weightAverage }} {{ speciesData.weightRollMod }}
-    br
-    h4 Sociocultural Characteristics
-    div(v-if="speciesData.homeworld") #[strong Homeworld:] {{ speciesData.homeworld }}
-    div(v-if="speciesData.manufacturer") #[strong Manufacturer:] {{ speciesData.manufacturer}}
-    div(v-if="speciesData.language") #[strong Language:] {{ speciesData.language }}
-    br
+      h4 Visual Characteristics
+      table(:class="$style.bioTable").table
+        tbody
+          tr(v-if="speciesData.skinColorOptions")
+            td #[strong #[em Skin Color] ]
+            td {{ speciesData.skinColorOptions }}
+          tr(v-if="speciesData.hairColorOptions")
+            td #[strong #[em Hair Color] ]
+            td {{ speciesData.hairColorOptions }}
+          tr(v-if="speciesData.eyeColorOptions")
+            td #[strong #[em Eye Color] ]
+            td {{ speciesData.eyeColorOptions }}
+          tr(v-if="speciesData.colorScheme")
+            td #[strong #[em Color Scheme] ]
+            td {{ speciesData.colorScheme }}
+          tr(v-if="speciesData.distinctions")
+            td #[strong #[em Distinctions] ]
+            td {{ speciesData.distinctions }}
+      hr
+
+      h4 Physical Characteristics
+      table(:class="$style.bioTable").table
+        tbody
+          tr
+            td #[strong #[em Height] ]
+            td {{ speciesData.heightAverage }}
+            td {{ speciesData.heightRollMod }}
+          tr
+            td #[strong #[em Weight] ]
+            td {{ speciesData.weightAverage }}
+            td {{ speciesData.weightRollMod }}
+      hr
+
+      h4 Sociocultural Characteristics
+      table(:class="$style.bioTable").table
+        tbody
+          tr(v-if="speciesData.homeworld")
+            td #[strong #[em Homeworld] ]
+            td {{ speciesData.homeworld }}
+          tr(v-if="speciesData.manufacturer")
+            td #[strong #[em Manufacturer] ]
+            td {{ speciesData.manufacturer}}
+          tr(v-if="speciesData.language")
+            td #[strong #[em Language] ]
+            td {{ speciesData.language }}
+
     VueMarkdown {{ speciesData.flavorText }}
 
     h3 {{ speciesData.name }} Traits
+    p As a {{ speciesData.name }}, you have the following special traits.
     div(v-for="trait in speciesData.traits", :key="trait.name")
-      div #[strong {{trait.name}}] {{ trait.description }}
+      div #[strong #[em {{trait.name}}] ] {{ trait.description }}
   Loading(v-else)
 </template>
+
+<style module lang="scss">
+  .bioBlock {
+    max-width: 350px;
+
+    .bioTable {
+      width: 100%;
+      font-size: 12px;
+    }
+  }
+</style>

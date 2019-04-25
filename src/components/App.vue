@@ -25,10 +25,11 @@
 </template>
 
 <style module lang="scss">
-  @import '@/assets/styles/global.scss';
+  @import '@/assets/styles/colors.scss';
 
   .content {
     text-align: center;
     background: $backgroundGradient;
+    font-family: 'Open Sans', sans-serif;
   }
 </style>

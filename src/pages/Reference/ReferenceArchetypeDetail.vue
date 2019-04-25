@@ -3,12 +3,14 @@
   import { namespace } from 'vuex-class'
   import { ArchetypeType } from '@/types.ts'
   import VueMarkdown from 'vue-markdown'
+  import Loading from '@/components/Loading.vue'
 
   const archetypeModule = namespace('archetypes')
 
   @Component({
     components: {
-      VueMarkdown
+      VueMarkdown,
+      Loading
     }
   })
   export default class ReferenceArchetypesDetail extends Vue {
@@ -31,4 +33,5 @@
   div( v-if="archetypeData" ).text-xs-left
     h1 {{ archetypeData.name }}
     VueMarkdown(:source="archetypeData.text")
+  Loading(v-else)
 </template>

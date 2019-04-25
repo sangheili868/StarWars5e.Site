@@ -3,12 +3,14 @@
   import { namespace } from 'vuex-class'
   import { MonsterType } from '@/types.ts'
   import VueMarkdown from 'vue-markdown'
+  import Loading from '@/components/Loading.vue'
 
   const monsterModule = namespace('monsters')
 
   @Component({
     components: {
-      VueMarkdown
+      VueMarkdown,
+      Loading
     }
   })
   export default class ReferenceMonstersDetail extends Vue {
@@ -87,6 +89,7 @@
     p(v-for="{ name, description } in behaviors('Trait')", :key="name") #[strong {{ name }}] {{ description }}
     h3 Actions
     VueMarkdown(v-for="{ name, description } in behaviors('Action')", :key="name") **{{ name }}** {{ description }}
+  Loading(v-else)
 </template>
 
 <style module lang="scss">

@@ -3,12 +3,14 @@
   import { namespace } from 'vuex-class'
   import { StarshipSizeType } from '@/types.ts'
   import VueMarkdown from 'vue-markdown'
+  import Loading from '@/components/Loading.vue'
 
   const starshipSizeModule = namespace('starshipSizes')
 
   @Component({
     components: {
-      VueMarkdown
+      VueMarkdown,
+      Loading
     }
   })
   export default class StarshipSizeDetails extends Vue {
@@ -31,4 +33,5 @@
   div( v-if="starshipSizeData" ).text-xs-left
     h1 {{ starshipSizeData.name }} Ships
     VueMarkdown(:source="starshipSizeData.fullText")
+  Loading(v-else)
 </template>

@@ -2,12 +2,14 @@
   import { Component, Prop, Vue, Watch } from 'vue-property-decorator'
   import { namespace } from 'vuex-class'
   import VueMarkdown from 'vue-markdown'
+  import Loading from '@/components/Loading.vue'
 
   const blobsModule = namespace('blobs')
 
   @Component({
     components: {
-      VueMarkdown
+      VueMarkdown,
+      Loading
     }
   })
   export default class HandbookChapter extends Vue {
@@ -52,5 +54,8 @@
 </script>
 
 <template lang="pug">
-  VueMarkdown(:source="blob").text-xs-left
+  div(v-if="blob")
+    VueMarkdown(:source="blob").text-xs-left
+    slot
+  Loading(v-else)
 </template>

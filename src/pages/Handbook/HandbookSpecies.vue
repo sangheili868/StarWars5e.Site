@@ -17,5 +17,5 @@
 <template lang="pug">
   div
     HandbookChapter(chapter='species')
-    ReferenceSpecies(isInHandbook)
+      ReferenceSpecies(isInHandbook)
 </template>

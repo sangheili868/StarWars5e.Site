@@ -4,13 +4,15 @@
   import { BackgroundType } from '@/types.ts'
   import VueMarkdown from 'vue-markdown'
   import RollTable from '@/components/RollTable.vue'
+  import Loading from '@/components/Loading.vue'
 
   const backgroundModule = namespace('backgrounds')
 
   @Component({
     components: {
       RollTable,
-      VueMarkdown
+      VueMarkdown,
+      Loading
     }
   })
   export default class ReferenceBackgroundsDetail extends Vue {
@@ -53,4 +55,5 @@
     RollTable(title="Ideal", :items="background.idealOptions", isLeftAlign)
     RollTable(title="Bond", :items="background.bondOptions", isLeftAlign)
     RollTable(title="Flaw", :items="background.flawOptions", isLeftAlign)
+  Loading(v-else)
 </template>

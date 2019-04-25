@@ -3,12 +3,14 @@
   import { namespace } from 'vuex-class'
   import { ClassType, DeploymentType } from '@/types.ts'
   import VueMarkdown from 'vue-markdown'
+  import Loading from '@/components/Loading.vue'
 
   const deploymentsModule = namespace('deployments')
 
   @Component({
     components: {
-      VueMarkdown
+      VueMarkdown,
+      Loading
     }
   })
   export default class StarshipDeploymentDetails extends Vue {
@@ -32,4 +34,5 @@
     h1 {{ deploymentData.name }}
     VueMarkdown(:source="deploymentData.flavorText")
     VueMarkdown(:source="deploymentData.featureText")
+  Loading(v-else)
 </template>

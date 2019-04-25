@@ -3,12 +3,14 @@
   import { namespace } from 'vuex-class'
   import { SpeciesType } from '@/types.ts'
   import VueMarkdown from 'vue-markdown'
+  import Loading from '@/components/Loading.vue'
 
   const speciesModule = namespace('species')
 
   @Component({
     components: {
-      VueMarkdown
+      VueMarkdown,
+      Loading
     }
   })
   export default class ReferenceSpeciesDetail extends Vue {
@@ -52,4 +54,5 @@
     h3 {{ speciesData.name }} Traits
     div(v-for="trait in speciesData.traits", :key="trait.name")
       div #[strong {{trait.name}}] {{ trait.description }}
+  Loading(v-else)
 </template>

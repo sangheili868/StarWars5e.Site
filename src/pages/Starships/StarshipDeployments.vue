@@ -3,13 +3,15 @@
   import { namespace } from 'vuex-class'
   import VueMarkdown from 'vue-markdown'
   import { DeploymentType } from '@/types.ts'
+  import Loading from '@/components/Loading.vue'
 
   const deploymentsModule = namespace('deployments')
   const blobsModule = namespace('blobs')
 
   @Component({
     components: {
-      VueMarkdown
+      VueMarkdown,
+      Loading
     }
   })
   export default class StarshipDeployments extends Vue {
@@ -34,10 +36,11 @@
     VueMarkdown(:source="blob").text-xs-left
     v-container(grid-list-lg, fluid)
       v-layout(row, wrap, justify-center)
-        v-flex(v-for="deployment in this.deployments", :key="deployment.name", d-flex).xs12.sm6.md4
+        v-flex(v-for="deployment in deployments", :key="deployment.name", d-flex).xs12.sm6.md4
           v-card(:to="`deployments/${deployment.name}`", hover, exact).ma-2
             v-card-text(primary-title)
               h3 {{ deployment.name }}
               div.text-xs-left
                 p {{ deployment.description }}
+    Loading(v-if="!blob || !deployments.length")
 </template>

@@ -1,5 +1,6 @@
 <script lang="ts">
   import { Component, Prop, Vue } from 'vue-property-decorator'
+  import Loading from '@/components/Loading.vue'
 
   interface HeaderType {
     text: string
@@ -7,7 +8,11 @@
     align: string
   }
 
-  @Component
+  @Component({
+    components: {
+      Loading
+    }
+  })
   export default class SearchTable extends Vue {
     @Prop(Array) readonly items!: { [key: string]: string }
     @Prop(Array) readonly headers!: HeaderType[]
@@ -36,7 +41,7 @@
       v-card(flat)
         v-card-text
           slot(:item="props.item")
-  h2(v-else) Loading...
+  Loading(v-else)
 </template>
 
 <style module lang="scss">

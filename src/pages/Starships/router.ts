@@ -5,6 +5,8 @@ import StarshipDeployments from './StarshipDeployments.vue'
 import StarshipDeploymentDetails from './StarshipDeploymentDetails.vue'
 import StarshipSizes from './StarshipSizes.vue'
 import StarshipSizeDetails from './StarshipSizeDetails.vue'
+import StarshipModifications from './StarshipModifications.vue'
+import StarshipCustomization from './StarshipCustomization.vue'
 
 export default {
   path: '/starships',
@@ -30,6 +32,14 @@ export default {
     {
       path: 'deployments',
       component: StarshipDeployments
+    },
+    {
+      path: 'modifications',
+      component: StarshipModifications
+    },
+    {
+      path: 'customization',
+      component: StarshipCustomization
     },
     {
       path: ':chapter',

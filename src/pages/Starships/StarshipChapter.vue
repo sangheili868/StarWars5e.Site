@@ -46,7 +46,8 @@
     }
 
     get blob () {
-      return this.starshipBlobs[this.blobName]
+      const blob = this.starshipBlobs[this.blobName]
+      return blob && blob.replace(/\ufffd/g, ' - ')
     }
   }
 </script>

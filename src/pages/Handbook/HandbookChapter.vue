@@ -48,7 +48,8 @@
     }
 
     get blob () {
-      return this.handbookBlobs[this.blobName]
+      const blob = this.handbookBlobs[this.blobName]
+      return blob && blob.replace(/\t/g, '').replace(/\ufffd/g, '-')
     }
   }
 </script>

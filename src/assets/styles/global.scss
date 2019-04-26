@@ -45,6 +45,21 @@ blockquote {
   background-color: $darkGrey;
   border: 1px solid $secondary;
   box-shadow: 0px 0px 20px rgba($secondary, 0.5);
+
+  h2, h4 {
+    color: $black;
+  }
+
+  hr {
+    visibility: visible;
+    background-color: $secondary;
+    height: 5px;
+    border: none;
+  }
+
+  .table {
+    width: 100%;
+  }
 }
 
 .block {

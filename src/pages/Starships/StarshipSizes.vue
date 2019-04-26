@@ -59,5 +59,5 @@
               p.ma-0 #[strong Constitution at Tier 0:] {{ starshipSize.constitution }}
 
     VueMarkdown(v-if="variant").text-xs-left {{spaceStation}}
-    VueMarkdown(:source="variant").text-xs-left
+    VueMarkdown(:source="variant.replace(/\ufffd/g, ' - ')").text-xs-left
 </template>

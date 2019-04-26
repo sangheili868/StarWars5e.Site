@@ -32,6 +32,6 @@
 <template lang="pug">
   div( v-if="starshipSizeData" ).text-xs-left
     h1 {{ starshipSizeData.name }} Ships
-    VueMarkdown(:source="starshipSizeData.fullText")
+    VueMarkdown(:source="starshipSizeData.fullText.replace(/\ufffd/g, '-')")
   Loading(v-else)
 </template>

@@ -30,7 +30,7 @@
 </script>
 
 <template lang="pug">
-  div( v-if="classData" ).text-xs-left
+  div(v-if="classData").text-xs-left
     h1 {{ classData.name }}
     VueMarkdown(:source="classData.flavorText")
     p {{ classData.creatingText }}

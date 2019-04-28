@@ -279,5 +279,6 @@ export interface FeatType {
   text: string,
   contentType: string,
   name: string,
-  prerequisites: string
+  prerequisites: string,
+  attributesIncreased: string[]
 }

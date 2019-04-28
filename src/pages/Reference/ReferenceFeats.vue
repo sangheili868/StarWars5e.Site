@@ -37,6 +37,11 @@
       return [
         { text: 'Name', value: 'name' },
         { text: 'Prerequisite', value: 'prerequisite' },
+        {
+          text: 'Attribute Increase Options',
+          value: 'attributesIncreased',
+          render: (value: any) => _.upperFirst(value ? value.join(', ') : '-')
+        },
         { text: 'Source', value: 'contentType', render: _.startCase }
       ]
     }

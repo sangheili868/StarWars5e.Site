@@ -5,6 +5,7 @@ import ReferenceArchetypes from './ReferenceArchetypes.vue'
 import ReferenceArchetypeDetail from './ReferenceArchetypeDetail.vue'
 import ReferenceBackgrounds from './ReferenceBackgrounds.vue'
 import ReferenceBackgroundDetail from './ReferenceBackgroundDetail.vue'
+import ReferenceFeats from './ReferenceFeats.vue'
 import ReferenceArmor from './ReferenceArmor.vue'
 import ReferenceWeapons from './ReferenceWeapons.vue'
 import ReferenceGear from './ReferenceGear.vue'
@@ -48,6 +49,10 @@ export default [
     path: '/reference/backgrounds/:backgroundName',
     component: ReferenceBackgroundDetail,
     props: true
+  },
+  {
+    path: '/reference/feats',
+    component: ReferenceFeats
   },
   {
     path: '/reference/armor',

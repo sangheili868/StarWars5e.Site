@@ -7,6 +7,7 @@ import blobs from './modules/blobs'
 import classes from './modules/classes'
 import credits from './modules/credits'
 import deployments from './modules/deployments'
+import feats from './modules/feats'
 import gear from './modules/gear'
 import monsters from './modules/monsters'
 import powers from './modules/powers'
@@ -30,6 +31,7 @@ export default new Vuex.Store({
     classes,
     credits,
     deployments,
+    feats,
     gear,
     monsters,
     powers,

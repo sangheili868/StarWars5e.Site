@@ -7,6 +7,7 @@ import HandbookClasses from './HandbookClasses.vue'
 import HandbookClassesDetail from './HandbookClassesDetail.vue'
 import HandbookCasting from './HandbookCasting.vue'
 import HandbookBackgrounds from './HandbookBackgrounds.vue'
+import HandbookCustomizationOptions from './HandbookCustomizationOptions.vue'
 
 export default {
   path: '/handbook',
@@ -35,6 +36,10 @@ export default {
     {
       path: 'backgrounds',
       component: HandbookBackgrounds
+    },
+    {
+      path: 'customization',
+      component: HandbookCustomizationOptions
     },
     {
       path: 'classes/:className',

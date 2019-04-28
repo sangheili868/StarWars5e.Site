@@ -30,6 +30,7 @@
             { to: '/species', title: 'Species' },
             { to: '/archetypes', title: 'Archetypes' },
             { to: '/backgrounds', title: 'Backgrounds' },
+            { to: '/feats', title: 'Feats' },
             { to: '/armor', title: 'Armor' },
             { to: '/weapons', title: 'Weapons' },
             { to: '/gear', title: 'Gear' },

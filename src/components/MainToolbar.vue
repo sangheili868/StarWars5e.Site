@@ -91,7 +91,7 @@
             v-list-tile-title {{ nestedRoute.title }}
         template(v-if="!nested || !nested.length") {{ title }}
     v-toolbar-items.hidden-md-and-up
-      v-menu(open-on-hover, bottom, left, offset-y, attach)
+      v-menu(bottom, left, offset-y, attach)
         template(v-slot:activator="{ on }")
           v-btn(icon, v-on="on")
             v-icon fa-ellipsis-v

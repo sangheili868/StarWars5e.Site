@@ -14,10 +14,6 @@
     @creditsModule.State credits!: string[]
     @creditsModule.Action fetchCredits!: () => void
 
-    get creditsList () {
-      return this.credits && this.credits.join(', ')
-    }
-
     created () {
       this.fetchCredits()
     }
@@ -27,6 +23,21 @@
 <template lang="pug">
   div
     h1 Credits
-    | {{ creditsList }}
-    Loading(v-if="!creditsList")
+    div(v-if="credits", :class="$style.credits")
+      div(v-for="credit in credits", :key="credit", :class="$style.credit") {{ credit }}
+    Loading(v-else)
 </template>
+
+<style module lang="scss">
+  .credits {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+
+    .credit {
+      margin: 5px;
+      min-width: 150px;
+      text-align: left;
+    }
+  }
+</style>

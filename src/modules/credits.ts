@@ -13,6 +13,7 @@ export default class Credits extends VuexModule {
       credits: _(results.data)
         .filter((credit: any) => credit.partitionKey === 'Credit')
         .map('rowKey')
+        .value()
     }
   }
 }

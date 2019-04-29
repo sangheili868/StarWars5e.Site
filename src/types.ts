@@ -274,3 +274,11 @@ export interface VentureType {
   name: string,
   prerequisites: string[]
 }
+
+export interface FeatType {
+  text: string,
+  contentType: string,
+  name: string,
+  prerequisites: string,
+  attributesIncreased: string[]
+}

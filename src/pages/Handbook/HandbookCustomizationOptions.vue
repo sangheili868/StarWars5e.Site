@@ -7,7 +7,7 @@
       HandbookChapter
     }
   })
-  export default class HandbookCustomization extends Vue {
+  export default class HandbookCustomizationOptions extends Vue {
 
   }
 </script>
@@ -15,5 +15,5 @@
 <template lang="pug">
   div
     HandbookChapter(chapter="customization")
-      v-btn(to="/reference/feats", color="primary") Feat List
+      v-btn(to="/reference/feats", color="primary") Feats List
 </template>

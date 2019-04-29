@@ -26,6 +26,10 @@
               title: 'Backgrounds'
             },
             {
+              to: '/reference/feats',
+              title: 'Feats'
+            },
+            {
               to: '/reference/forcePowers',
               title: 'Force Powers'
             },

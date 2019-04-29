@@ -27,7 +27,8 @@
           th(v-for="header in headers", :key="header", :class="{ 'text-xs-left': header === 'Features' }").px-2 {{ header }}
       tbody
         tr(v-for="levelChanges, level in levels", :key="level").rows
-          td(v-for="header in headers", :key="header", :class="{ 'text-xs-left': header === 'Features' }").px-2 {{ levelChanges[header] }}
+          td(v-for="header in headers", :key="header", :class="{ 'text-xs-left': header === 'Features' }").px-2
+            | {{ levelChanges[header].replace(/\ufffd/g, '-') }}
 </template>
 
 <style module lang="scss">

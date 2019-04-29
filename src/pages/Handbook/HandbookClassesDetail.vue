@@ -33,7 +33,7 @@
   div(v-if="classData").text-xs-left
     h1 {{ classData.name }}
     VueMarkdown(:source="classData.flavorText")
-    p {{ classData.creatingText }}
+    p {{ classData.creatingText.replace(/\ufffd/g, '-') }}
     h4 Quick Build
     p {{ classData.quickBuildText }}
 

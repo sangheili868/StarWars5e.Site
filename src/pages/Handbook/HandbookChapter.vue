@@ -49,7 +49,7 @@
 
     get blob () {
       const blob = this.handbookBlobs[this.blobName]
-      return blob && blob.replace(/\t/g, '').replace(/\ufffd/g, '-')
+      return blob && blob.replace(/\ufffd/g, '-')
     }
   }
 </script>

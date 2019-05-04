@@ -1,6 +1,10 @@
 <script lang="ts">
   import { Component, Prop, Vue } from 'vue-property-decorator'
+  import { namespace } from 'vuex-class'
   import NavigationDrawer from '@/components/NavigationDrawer.vue'
+  import _ from 'lodash'
+
+  const blobsModule = namespace('blobs')
 
   @Component({
     components: {
@@ -8,7 +12,15 @@
     }
   })
   export default class HandbookNavigation extends Vue {
-    items = [
+    @blobsModule.State variantRuleBlobs!: any[]
+    @blobsModule.Action fetchVariantRuleBlobs!: () => void
+
+    created () {
+      this.fetchVariantRuleBlobs()
+    }
+
+    get items () {
+      return [
       {
         title: 'Introduction',
         icon: 'fa-journal-whills',
@@ -125,8 +137,20 @@
         title: 'Recommended Variant Rules',
         icon: 'fa-cogs',
         route: '/handbook/variantRules'
+      },
+      {
+        title: 'Other Variations',
+        icon: 'fa-check-double',
+        route: '/handbook/otherVariantRules',
+        items: _.map(this.variantRuleBlobs, (v:any) => {
+          return {
+            title: v.chapterName,
+            route: `/handbook/otherVariantRules/${v.chapterName}`
+          }
+        })
       }
     ]
+    }
   }
 </script>
 

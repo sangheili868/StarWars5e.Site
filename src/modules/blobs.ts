@@ -6,6 +6,7 @@ import { Module, VuexModule, MutationAction } from 'vuex-module-decorators'
 export default class Blobs extends VuexModule {
   handbookBlobs: { [blob: string]: string } = {}
   starshipBlobs: { [blob: string]: string } = {}
+  variantRuleBlobs: any[] = []
 
   @MutationAction({ mutate: ['handbookBlobs'] })
   async fetchHandbookBlobs () {
@@ -34,6 +35,19 @@ export default class Blobs extends VuexModule {
         ...this.state && (this.state as any).starshipBlobs,
         [results.data.chapterName]: results.data.contentMarkdown
       }
+    }
+  }
+
+  @MutationAction({ mutate: ['variantRuleBlobs'] })
+  async fetchVariantRuleBlobs () {
+    const results = await axios.get(`${process.env.VUE_APP_sw5eapiurl}/api/VariantRule`)
+    return {
+      variantRuleBlobs: _.map(results.data, (u:any) => {
+        return {
+          chapterName: u.chapterName,
+          contentMarkdown: u.contentMarkdown
+        }
+      })
     }
   }
 }

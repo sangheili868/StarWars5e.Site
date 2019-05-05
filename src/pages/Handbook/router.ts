@@ -8,6 +8,8 @@ import HandbookClassesDetail from './HandbookClassesDetail.vue'
 import HandbookCasting from './HandbookCasting.vue'
 import HandbookBackgrounds from './HandbookBackgrounds.vue'
 import HandbookCustomizationOptions from './HandbookCustomizationOptions.vue'
+import VariantRules from './VariantRules.vue'
+import VariantRulesDetail from './VariantRulesDetail.vue'
 
 export default {
   path: '/handbook',
@@ -44,6 +46,15 @@ export default {
     {
       path: 'classes/:className',
       component: HandbookClassesDetail,
+      props: true
+    },
+    {
+      path: 'otherVariantRules',
+      component: VariantRules
+    },
+    {
+      path: 'otherVariantRules/:variantRuleName',
+      component: VariantRulesDetail,
       props: true
     },
     {

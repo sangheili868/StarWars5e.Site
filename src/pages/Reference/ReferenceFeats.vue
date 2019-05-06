@@ -38,9 +38,9 @@
         { text: 'Name', value: 'name' },
         { text: 'Prerequisite', value: 'prerequisite' },
         {
-          text: 'Attribute Increase Options',
+          text: 'Ability Score Increase',
           value: 'attributesIncreased',
-          render: (value: any) => _.upperFirst(value ? value.join(', ') : '-')
+          render: (value: any) => _.upperFirst(value ? value.join('; ') : '-')
         },
         { text: 'Source', value: 'contentType', render: _.startCase }
       ]

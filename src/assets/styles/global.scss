@@ -3,6 +3,10 @@
 @import './colors.scss';
 @import url('https://fonts.googleapis.com/css?family=Russo+One|Bungee+Inline');
 
+a {
+  text-decoration: none;
+}
+
 h1, h2, h3, h4 {
   font-family: 'Russo One', sans-serif;
   color: $primary;

@@ -35,6 +35,22 @@
       return [
         { text: 'Name', value: 'name' },
         { text: 'Distinctions', value: 'distinctions' },
+        {
+          text: 'Ability Score Increase',
+          value: 'abilitiesIncreased',
+          render: (value: any) => {
+            var mappedBroadChoices = _.map(value, (broadChoices:any) => {
+              var mappedSpecificChoices = _.map(broadChoices, (specificChoice: any) => {
+                if (specificChoice.abilities.count > 1) {
+                return `${specificChoice.abilities.join(' or ')} +${specificChoice.amount}`
+                }
+                return `${specificChoice.abilities[0]} +${specificChoice.amount}`
+              })
+              return mappedSpecificChoices.join(', ')
+            })
+            return mappedBroadChoices.join('; ')
+          }
+        },
         { text: 'Source', value: 'contentType', render: _.startCase }
       ]
     }

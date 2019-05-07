@@ -27,6 +27,11 @@
         route: '/handbook'
       },
       {
+        title: 'What\'s Different?',
+        icon: 'fa-exclamation-circle',
+        route: '/handbook/whatsDifferent'
+      },
+      {
         title: 'Step-By-Step Characters',
         icon: 'fa-male',
         route: '/handbook/stepByStep'

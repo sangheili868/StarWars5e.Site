@@ -44,6 +44,10 @@
           ]
         },
         {
+          to: '/assets',
+          title: 'Assets'
+        },
+        {
           to: '/credits',
           title: 'Credits'
         }

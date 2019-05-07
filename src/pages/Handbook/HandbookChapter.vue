@@ -20,6 +20,7 @@
 
     chapterMap: { [key: string]: string } = {
       introduction: 'Introduction',
+      whatsDifferent: 'Whats Different',
       stepByStep: 'Step-By-Step Characters',
       species: 'Species',
       classes: 'Classes',

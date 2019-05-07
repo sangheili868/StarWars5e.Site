@@ -3,6 +3,7 @@
   import { namespace } from 'vuex-class'
   import VueMarkdown from 'vue-markdown'
   import { DeploymentType } from '@/types.ts'
+  import CardSet from '@/components/CardSet.vue'
   import Loading from '@/components/Loading.vue'
 
   const deploymentsModule = namespace('deployments')
@@ -11,7 +12,8 @@
   @Component({
     components: {
       VueMarkdown,
-      Loading
+      Loading,
+      CardSet
     }
   })
   export default class StarshipDeployments extends Vue {
@@ -28,19 +30,24 @@
     get blob () {
       return this.starshipBlobs['Deployments']
     }
+
+    get deploymentsWithLinks () {
+      return this.deployments.map(deployment => ({
+        ...deployment,
+        to: `deployments/${deployment.name}`
+      }))
+    }
   }
 </script>
 
 <template lang="pug">
   div
     VueMarkdown(:source="blob").text-xs-left
-    v-container(grid-list-lg, fluid)
-      v-layout(row, wrap, justify-center)
-        v-flex(v-for="deployment in deployments", :key="deployment.name", d-flex).xs12.sm6.md4
-          v-card(:to="`deployments/${deployment.name}`", hover, exact).ma-2
-            v-card-text(primary-title)
-              h3 {{ deployment.name }}
-              div.text-xs-left
-                p {{ deployment.description }}
+    CardSet(:cards="deploymentsWithLinks")
+      template(v-slot="{ card }")
+        v-card-text(primary-title)
+          h3 {{ card.name }}
+          div.text-xs-left
+            p {{ card.description }}
     Loading(v-if="!blob || !deployments.length")
 </template>

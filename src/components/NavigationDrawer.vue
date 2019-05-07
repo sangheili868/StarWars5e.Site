@@ -46,8 +46,8 @@
             v-list-tile-title {{ item.title }}
         template(v-if="hasSubItems(item)")
           v-list-tile(v-for="(subitem, index) in item.items", :key="index", :to="subitem.route")
-            v-list-tile-action.ml-5
-              v-icon {{ subitem.icon }}
+            v-list-tile-action(:class="subitem.icon ? 'ml-5' : ''")
+              v-icon(v-if="subitem.icon") {{ subitem.icon }}
             v-list-tile-title {{ subitem.title }}
         template(v-else)
           v-list-tile-action

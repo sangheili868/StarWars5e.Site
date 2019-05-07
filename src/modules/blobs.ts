@@ -1,12 +1,13 @@
 import axios from 'axios'
 import _ from 'lodash'
 import { Module, VuexModule, MutationAction } from 'vuex-module-decorators'
+import { VariantRuleBlobType } from '@/types'
 
 @Module({ namespaced: true, name: 'blobs' })
 export default class Blobs extends VuexModule {
   handbookBlobs: { [blob: string]: string } = {}
   starshipBlobs: { [blob: string]: string } = {}
-  variantRuleBlobs: any[] = []
+  variantRuleBlobs: VariantRuleBlobType[] = []
 
   @MutationAction({ mutate: ['handbookBlobs'] })
   async fetchHandbookBlobs () {
@@ -42,12 +43,9 @@ export default class Blobs extends VuexModule {
   async fetchVariantRuleBlobs () {
     const results = await axios.get(`${process.env.VUE_APP_sw5eapiurl}/api/VariantRule`)
     return {
-      variantRuleBlobs: _.map(results.data, (u:any) => {
-        return {
-          chapterName: u.chapterName,
-          contentMarkdown: u.contentMarkdown
-        }
-      })
+      variantRuleBlobs: results.data.map((variantRuleBlob: VariantRuleBlobType) =>
+        _.pick(variantRuleBlob, ['chapterName', 'contentMarkdown'])
+      )
     }
   }
 }

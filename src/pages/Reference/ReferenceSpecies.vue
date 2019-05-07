@@ -2,7 +2,7 @@
   import { Component, Prop, Vue } from 'vue-property-decorator'
   import { namespace } from 'vuex-class'
   import SearchTable from '@/components/SearchTable.vue'
-  import { SpeciesType, abilitiesIncreasedType } from '@/types'
+  import { SpeciesType, AbilitiesIncreasedType } from '@/types'
   import _ from 'lodash'
 
   const speciesModule = namespace('species')
@@ -23,26 +23,57 @@
 
     get items () {
       const page = this.isInHandbook ? 'handbook' : 'reference'
-      return _(this.species)
-        .filter(({ contentType }) => !this.isInHandbook || contentType === 'Base')
+
+      return _.filter(this.species, ({ contentType }) => !this.isInHandbook || contentType === 'Base')
         .map(species => ({
           ...species,
           to: `/${page}/species/${species.name}`
-        })).value()
+        }))
     }
 
     get headers () {
       return [
         { text: 'Name', value: 'name' },
-        { text: 'Distinctions', value: 'distinctions' },
         {
           text: 'Ability Score Increase',
           value: 'abilitiesIncreased',
-          render: (value: abilitiesIncreasedType[][]) => value.map(broadChoices =>
+          isFilterable: true,
+          isMultiSelect: true,
+          filterChoices: ['Strength', 'Dexterity', 'Constitution', 'Intelligence', 'Wisdom', 'Charisma', 'Any'],
+           render: (value: AbilitiesIncreasedType[][]) => value.map(broadChoices =>
             broadChoices.map(({ abilities, amount }) => `${abilities.join(' or ')} +${amount}`).join(', ')
-          ).join('; ')
+          ).join('; '),
+          filterFunction: (item: SpeciesType, filterValue: string[]) => {
+            let abilities : string[]
+            var mappedBroadChoices = _.map(item.abilitiesIncreased, (broadChoices:any) => {
+              let mappedSpecificChoices = _.map(broadChoices, (specificChoice: any) => {
+                return specificChoice.abilities
+              })
+              return _.flatten(mappedSpecificChoices)
+            })
+            let x = _.flatten(mappedBroadChoices)
+            if (_.difference(filterValue, x).length === 0) {
+              return true
+            }
+            return false
+          },
+         
         },
-        { text: 'Source', value: 'contentType', render: _.startCase }
+        {
+          text: 'Size',
+          value: 'size',
+          isFilterable: true,
+          filterChoices: ['Medium', 'Small'],
+          filterFunction: (item: SpeciesType, filterValue: string) => _.includes(item.size, filterValue)
+        },
+        {
+          text: 'Source',
+          value: 'contentType',
+          render: _.startCase,
+          isFilterable: true,
+          filterChoices: ['Base', 'Expanded Content'],
+          filterFunction: (item: SpeciesType, filterValue: string) => _.includes(item.contentType, filterValue.replace(/\s/g, ''))
+        }
       ]
     }
   }

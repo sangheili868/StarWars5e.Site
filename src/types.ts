@@ -171,7 +171,13 @@ export interface PowerType {
   prerequisite: string
 }
 
+export interface abilitiesIncreasedType {
+  abilities: string[],
+  amount: number
+}
+
 export interface SpeciesType {
+  abilitiesIncreased: abilitiesIncreasedType[][]
   contentType: string,
   colorScheme: string,
   distinctions: string,
@@ -281,4 +287,9 @@ export interface FeatType {
   name: string,
   prerequisites: string,
   attributesIncreased: string[]
+}
+
+export interface VariantRuleBlobType {
+  chapterName: string,
+  contentMarkdown: string
 }

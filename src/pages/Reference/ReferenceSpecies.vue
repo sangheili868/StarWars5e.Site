@@ -2,7 +2,7 @@
   import { Component, Prop, Vue } from 'vue-property-decorator'
   import { namespace } from 'vuex-class'
   import SearchTable from '@/components/SearchTable.vue'
-  import { SpeciesType } from '@/types'
+  import { SpeciesType, abilitiesIncreasedType } from '@/types'
   import _ from 'lodash'
 
   const speciesModule = namespace('species')
@@ -38,18 +38,9 @@
         {
           text: 'Ability Score Increase',
           value: 'abilitiesIncreased',
-          render: (value: any) => {
-            var mappedBroadChoices = _.map(value, (broadChoices:any) => {
-              var mappedSpecificChoices = _.map(broadChoices, (specificChoice: any) => {
-                if (specificChoice.abilities.count > 1) {
-                return `${specificChoice.abilities.join(' or ')} +${specificChoice.amount}`
-                }
-                return `${specificChoice.abilities[0]} +${specificChoice.amount}`
-              })
-              return mappedSpecificChoices.join(', ')
-            })
-            return mappedBroadChoices.join('; ')
-          }
+          render: (value: abilitiesIncreasedType[][]) => value.map(broadChoices =>
+            broadChoices.map(({ abilities, amount }) => `${abilities.join(' or ')} +${amount}`).join(', ')
+          ).join('; ')
         },
         { text: 'Source', value: 'contentType', render: _.startCase }
       ]

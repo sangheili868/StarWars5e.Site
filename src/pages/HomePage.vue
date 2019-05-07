@@ -63,7 +63,7 @@
     h1 Star Wars 5e
     CardSet(:cards="books")
       template(v-slot="{ card }")
-        v-img(:src="`https://starwars5e.blob.core.windows.net/site-images/other/${card.image}.jpg`")
+        v-img(:src="require(`@/assets/${card.image}.jpg`)", :class="$style.image")
     p
       | What is Star Wars 5e? It's a full conversion for Dungeons and Dragon Fifth Edition to the Star Wars Universe.
       | Here you can find rules on creating a lightsaber-swinging jedi sentinel, a devil-may-care smuggler operative, or
@@ -78,6 +78,12 @@
 </template>
 
 <style module lang="scss">
+  @import "src/assets/styles/colors.scss";
+
+  .image {
+    background-color: $black;
+  }
+
   .routes {
     display: flex;
     flex-wrap: wrap;

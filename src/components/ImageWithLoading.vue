@@ -9,7 +9,6 @@
     }
   })
   export default class ImageWithLoading extends Vue {
-
     isLoaded = false
 
     @Watch('$route')

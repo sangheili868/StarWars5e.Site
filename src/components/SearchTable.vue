@@ -49,13 +49,13 @@
     get filteredItems () {
       let fItems = this.items
       if (this.filterOne && this.filter[this.filterOne.value]) {
-        fItems = this.items.filter((i: any) => this.filter[this.filterOne.value] && this.filterOne.filterFunction(i, this.filter[this.filterOne.value]))
+        fItems = fItems.filter((i: any) => this.filter[this.filterOne.value] && this.filterOne.filterFunction(i, this.filter[this.filterOne.value]))
       }
       if (this.filterTwo && this.filter[this.filterTwo.value]) {
-        fItems = this.items.filter((i: any) => this.filter[this.filterTwo.value] && this.filterTwo.filterFunction(i, this.filter[this.filterTwo.value]))
+        fItems = fItems.filter((i: any) => this.filter[this.filterTwo.value] && this.filterTwo.filterFunction(i, this.filter[this.filterTwo.value]))
       }
       if (this.filterThree && this.filter[this.filterThree.value]) {
-        fItems = this.items.filter((i: any) => this.filter[this.filterThree.value] && this.filterThree.filterFunction(i, this.filter[this.filterThree.value]))
+        fItems = fItems.filter((i: any) => this.filter[this.filterThree.value] && this.filterThree.filterFunction(i, this.filter[this.filterThree.value]))
       }
       return fItems
     }

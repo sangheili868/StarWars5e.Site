@@ -44,20 +44,14 @@
             broadChoices.map(({ abilities, amount }) => `${abilities.join(' or ')} +${amount}`).join(', ')
           ).join('; '),
           filterFunction: (item: SpeciesType, filterValue: string[]) => {
-            let abilities : string[]
-            var mappedBroadChoices = _.map(item.abilitiesIncreased, (broadChoices:any) => {
-              let mappedSpecificChoices = _.map(broadChoices, (specificChoice: any) => {
-                return specificChoice.abilities
-              })
-              return _.flatten(mappedSpecificChoices)
-            })
-            let x = _.flatten(mappedBroadChoices)
-            if (_.difference(filterValue, x).length === 0) {
+            let choices = _.flatten(item.abilitiesIncreased.map(broadChoices => 
+             _.flatten(broadChoices.map(specificChoice => specificChoice.abilities))))
+
+            if (_.difference(filterValue, choices).length === 0) {
               return true
             }
             return false
-          },
-         
+          }
         },
         {
           text: 'Size',

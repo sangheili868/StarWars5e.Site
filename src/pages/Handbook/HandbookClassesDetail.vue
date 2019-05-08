@@ -83,6 +83,8 @@
 
   .portrait {
     float: right;
+    min-height: 350px;
+    min-width: 350px;
   }
 
   .variantWealth {

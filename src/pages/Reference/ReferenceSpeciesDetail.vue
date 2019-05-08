@@ -84,7 +84,7 @@
               td #[strong #[em Language] ]
               td {{ speciesData.language }}
 
-      ImageWithLoading(:src="speciesData.imageUrls[0]", height="350", width="350", contain).ma-2
+      ImageWithLoading(:src="speciesData.imageUrls[0]", height="350", width="350", contain).ma-auto
     VueMarkdown {{ speciesData.flavorText }}
 
     h3 {{ speciesData.name }} Traits

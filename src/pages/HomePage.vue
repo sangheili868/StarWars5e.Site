@@ -2,10 +2,12 @@
   import { Component, Prop, Vue } from 'vue-property-decorator'
   import { State, Action } from 'vuex-class'
   import RoutesList from '@/components/RoutesList.vue'
+  import CardSet from '@/components/CardSet.vue'
 
   @Component({
     components: {
-      RoutesList
+      RoutesList,
+      CardSet
     }
   })
   export default class HomePage extends Vue {
@@ -33,120 +35,23 @@
         }
       ]
     }
-    get categories () {
+
+    get books () {
       return [
         {
-          category: 'Books',
-          routes: [
-            {
-              href: 'https://drive.google.com/file/d/1bVVk719__eeJC388VXV6KXqwRjUOQJ0m/view?usp=sharing',
-              title: 'Player\' Handbook'
-            },
-            {
-              href: '',
-              title: 'Monster Manual'
-            },
-            {
-              href: '',
-              title: 'Starships of the Galaxy'
-            }
-          ]
+          to: 'handbook',
+          title: 'Player\' Handbook',
+          image: 'phb_cover'
         },
         {
-          category: 'Expanded Content',
-          routes: [
-            {
-              href: '',
-              title: 'Species'
-            },
-            {
-              href: '',
-              title: 'Archetypes'
-            },
-            {
-              href: '',
-              title: 'Backgroudns'
-            },
-            {
-              href: '',
-              title: 'Equipment'
-            },
-            {
-              href: '',
-              title: 'Customization Options'
-            },
-            {
-              href: '',
-              title: 'Force Powers'
-            },
-            {
-              href: '',
-              title: 'Tech Powers'
-            },
-            {
-              href: '',
-              title: 'Variant Rules'
-            }
-          ]
+          to: 'reference/monsters',
+          title: 'Monster Manual',
+          image: 'mm_cover'
         },
         {
-          category: 'Special Equipment',
-          routes: [
-            {
-              href: '',
-              title: 'Enhanced Items'
-            },
-            {
-              href: '',
-              title: 'Cybernetic Augmentations'
-            },
-            {
-              href: '',
-              title: 'Droid Customization'
-            },
-            {
-              href: '',
-              title: 'Modifiable Items'
-            }
-          ]
-        },
-        {
-          category: 'Character Sheets',
-          routes: [
-            {
-              href: '',
-              title: 'Character Sheet'
-            },
-            {
-              href: '',
-              title: 'Character Sheet: Form Fillable'
-            },
-            {
-              href: '',
-              title: 'Pre-generated Characters',
-              author: '/u/papasmurf008'
-            },
-            {
-              href: '',
-              title: 'More Pre-generated Characters (level 5)',
-              author: '/u/cpthogie'
-            }
-          ]
-        },
-        {
-          category: 'Deployment and Starship Sheets',
-          routes: [
-            {
-              href: '',
-              title: 'Deployment Sheet',
-              author: '/u/speedreeder'
-            },
-            {
-              href: '',
-              title: 'Starship Sheet',
-              author: '/u/speedreeder'
-            }
-          ]
+          to: 'starships',
+          title: 'Starships of the Galaxy',
+          image: 'sotg_cover'
         }
       ]
     }
@@ -156,21 +61,29 @@
 <template lang="pug">
   div
     h1 Star Wars 5e
+    CardSet(:cards="books")
+      template(v-slot="{ card }")
+        v-img(:src="require(`@/assets/${card.image}.jpg`)", :class="$style.image")
+    p
+      | What is Star Wars 5e? It's a full conversion for Dungeons and Dragon Fifth Edition to the Star Wars Universe.
+      | Here you can find rules on creating a lightsaber-swinging jedi sentinel, a devil-may-care smuggler operative, or
+      | a droid-hacking engineer. There's also a full collection of Star Wars monsters, NPCs, and constructs to fight
+      | against. Ready to take to the stars? All the rules on piloting and customizing your very own spaceship are here
+      | too. If you want to help contribute to this conversion, join one of the active communities at the links below!
     div(:class="$style.routes").mb-5
       a(v-for="{ href, icon, title, author } in socialLinks", :key="title", :href="href", target="_blank")
         v-btn
           v-icon(:color="title").mr-3 {{ icon }}
           | {{ title }}
-    div(v-for="{ category, routes } in categories", :key="category").mb-5
-      h3 {{ category }}
-      div(:class="$style.routes")
-        div(v-for="{ href, title, author } in routes", :key="title" )
-          a(:href="href", target="_blank")
-            v-btn(color="primary") {{ title }}
-          div(v-if="author") courtesy of {{ author}}
 </template>
 
 <style module lang="scss">
+  @import "src/assets/styles/colors.scss";
+
+  .image {
+    background-color: $black;
+  }
+
   .routes {
     display: flex;
     flex-wrap: wrap;

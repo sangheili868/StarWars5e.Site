@@ -3,6 +3,8 @@ import HandbookNavigation from './HandbookNavigation.vue'
 import HandbookChapter from './HandbookChapter.vue'
 import HandbookSpecies from './HandbookSpecies.vue'
 import ReferenceSpeciesDetail from '@/pages/Reference/ReferenceSpeciesDetail.vue'
+import ReferenceForcePowers from '@/pages/Reference/ReferenceForcePowers.vue'
+import ReferenceTechPowers from '@/pages/Reference/ReferenceTechPowers.vue'
 import HandbookClasses from './HandbookClasses.vue'
 import HandbookClassesDetail from './HandbookClassesDetail.vue'
 import HandbookCasting from './HandbookCasting.vue'
@@ -34,6 +36,14 @@ export default {
     {
       path: 'casting',
       component: HandbookCasting
+    },
+    {
+      path: 'forcePowers',
+      component: ReferenceForcePowers
+    },
+    {
+      path: 'techPowers',
+      component: ReferenceTechPowers
     },
     {
       path: 'backgrounds',

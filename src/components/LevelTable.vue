@@ -19,7 +19,7 @@
 </script>
 
 <template lang="pug">
-  div(v-if="hasLevels").block
+  div(v-if="hasLevels").block.ma-0
     h2 The {{ title }}
     table(:class="$style.levelTable").table.text-xs-center
       thead

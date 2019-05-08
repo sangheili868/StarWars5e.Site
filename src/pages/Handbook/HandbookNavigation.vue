@@ -3,9 +3,10 @@
   import { namespace } from 'vuex-class'
   import NavigationDrawer from '@/components/NavigationDrawer.vue'
   import _ from 'lodash'
-  import { VariantRuleBlobType } from '@/types'
+  import { VariantRuleBlobType, SpeciesType } from '@/types'
 
   const blobsModule = namespace('blobs')
+  const speciesModule = namespace('species')
 
   @Component({
     components: {
@@ -13,11 +14,14 @@
     }
   })
   export default class HandbookNavigation extends Vue {
-    @blobsModule.State variantRuleBlobs!: any[]
+    @blobsModule.State variantRuleBlobs!: VariantRuleBlobType[]
     @blobsModule.Action fetchVariantRuleBlobs!: () => void
+    @speciesModule.State species!: SpeciesType[]
+    @speciesModule.Action fetchSpecies!: () => void
 
     created () {
       this.fetchVariantRuleBlobs()
+      this.fetchSpecies()
     }
 
     get items () {
@@ -40,7 +44,12 @@
         {
           title: 'Species',
           icon: 'fa-users',
-          route: '/handbook/species'
+          route: '/handbook/species',
+          items: this.species.filter(({ contentType }) => contentType === 'Base').map(({ name }) => ({
+            title: name,
+            icon: '',
+            route: '/handbook/species/' + name
+          }))
         },
         {
           title: 'Classes',
@@ -132,7 +141,19 @@
         {
           title: 'Force- and Tech- Casting',
           icon: 'fa-bolt',
-          route: '/handbook/casting'
+          route: '/handbook/casting',
+          items: [
+            {
+              title: 'Force Powers',
+              icon: 'fas fa-jedi',
+              route: '/handbook/forcePowers'
+            },
+            {
+              title: 'Tech Powers',
+              icon: 'fa-microchip',
+              route: '/handbook/techPowers'
+            }
+          ]
         },
         {
           title: 'Conditions',

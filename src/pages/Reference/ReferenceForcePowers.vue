@@ -34,8 +34,8 @@
     get headers () {
       return [
         { text: 'Level', value: 'level', render: (value: string) => value || 'At-will' },
-        { text: 'Force Alignment', value: 'forceAlignment' },
         { text: 'Name', value: 'name' },
+        { text: 'Force Alignment', value: 'forceAlignment' },
         { text: 'Casting Period', value: 'castingPeriodText' },
         { text: 'Range', value: 'range' },
         { text: 'Duration', value: 'duration', render: _.upperFirst },

@@ -4,13 +4,14 @@
   import { ClassType } from '@/types.ts'
   import VueMarkdown from 'vue-markdown'
   import LevelTable from '@/components/LevelTable.vue'
-
+  import ImageWithLoading from '@/components/ImageWithLoading.vue'
   const classesModule = namespace('classes')
 
   @Component({
     components: {
       VueMarkdown,
-      LevelTable
+      LevelTable,
+      ImageWithLoading
     }
   })
   export default class HandbookClassesDetail extends Vue {
@@ -32,6 +33,7 @@
 <template lang="pug">
   div(v-if="classData").text-xs-left
     h1 {{ classData.name }}
+    ImageWithLoading(:src="classData.imageUrls[0]", :class="$style.portrait", height="350", width="350", contain).ma-2
     VueMarkdown(:source="classData.flavorText")
     p {{ classData.creatingText.replace(/\ufffd/g, '-') }}
     h4 Quick Build
@@ -78,6 +80,11 @@
 
 <style module lang="scss">
   @import "@/assets/styles/colors.scss";
+
+  .portrait {
+    float: right;
+  }
+
   .variantWealth {
     max-width: 500px;
   }

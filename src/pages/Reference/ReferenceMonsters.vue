@@ -24,7 +24,7 @@
     get items () {
       const page = this.isInHandbook ? 'handbook' : 'reference'
       return _(this.monsters)
-        .filter(({ contentType }) => !this.isInHandbook || contentType === 'Base')
+        .filter(({ contentType }) => !this.isInHandbook || contentType === 'Core')
         .map(monster => ({
           ...monster,
           to: `/${page}/monsters/${monster.name}`

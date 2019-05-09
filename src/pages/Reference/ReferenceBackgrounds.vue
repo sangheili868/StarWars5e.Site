@@ -24,7 +24,7 @@
     get items () {
       const page = this.isInHandbook ? 'handbook' : 'reference'
       return _(this.backgrounds)
-        .filter(({ contentType }) => !this.isInHandbook || contentType === 'Base')
+        .filter(({ contentType }) => !this.isInHandbook || contentType === 'Core')
         .map(background => ({
           ...background,
           to: `/${page}/backgrounds/${background.name}`

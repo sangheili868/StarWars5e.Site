@@ -26,7 +26,7 @@
     get items () {
       const page = this.isInHandbook ? 'handbook' : 'reference'
       return _(this.feats)
-        .filter(({ contentType }) => !this.isInHandbook || contentType === 'Base')
+        .filter(({ contentType }) => !this.isInHandbook || contentType === 'Core')
         .map(feat => ({
           ...feat,
           id: feat.name

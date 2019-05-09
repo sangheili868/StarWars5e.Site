@@ -45,7 +45,7 @@
           title: 'Species',
           icon: 'fa-users',
           route: '/handbook/species',
-          items: this.species.filter(({ contentType }) => contentType === 'Base').map(({ name }) => ({
+          items: this.species.filter(({ contentType }) => contentType === 'Core').map(({ name }) => ({
             title: name,
             icon: '',
             route: '/handbook/species/' + name

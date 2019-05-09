@@ -24,7 +24,7 @@
     get items () {
       const page = this.isInHandbook ? 'handbook' : 'reference'
       return _(this.archetypes)
-        .filter(({ contentType }) => !this.isInHandbook || contentType === 'Base')
+        .filter(({ contentType }) => !this.isInHandbook || contentType === 'Core')
         .map(archetype => ({
           ...archetype,
           to: `/${page}/archetypes/${archetype.name}`

@@ -44,7 +44,7 @@
             broadChoices.map(({ abilities, amount }) => `${abilities.join(' or ')} +${amount}`).join(', ')
           ).join('; '),
           filterFunction: (item: SpeciesType, filterValue: string[]) => {
-            let choices = _.flatten(item.abilitiesIncreased.map(broadChoices => 
+            let choices = _.flatten(item.abilitiesIncreased.map(broadChoices =>
              _.flatten(broadChoices.map(specificChoice => specificChoice.abilities))))
 
             if (_.difference(filterValue, choices).length === 0) {

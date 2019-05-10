@@ -5,6 +5,7 @@
   import VueMarkdown from 'vue-markdown'
   import LevelTable from '@/components/LevelTable.vue'
   import Loading from '@/components/Loading.vue'
+  import _ from 'lodash'
 
   const archetypeModule = namespace('archetypes')
 
@@ -28,6 +29,26 @@
     get archetype () {
       return this.archetypes.find(({ name }: ArchetypeType) => name === this.archetypeName)
     }
+
+    toOrdinalSuffix = (value: number) => {
+      const digits = [value % 10, value % 100]
+      const ordinals = ['st', 'nd', 'rd', 'th']
+      const oPattern = [1, 2, 3, 4]
+      const tPattern = [11, 12, 13, 14, 15, 16, 17, 18, 19]
+      return oPattern.includes(digits[0]) && !tPattern.includes(digits[1])
+        ? value + ordinals[digits[0] - 1]
+        : value + ordinals[3]
+    };
+
+    get correctedLevels () {
+      return this.archetype && _.mapValues(this.archetype.leveledTable, (fields, index) => ({
+        Level: this.toOrdinalSuffix(parseInt(index)),
+        ..._(fields)
+          .keyBy('key')
+          .mapValues('value')
+          .value()
+      }))
+    }
   }
 </script>
 
@@ -35,6 +56,6 @@
   div( v-if="archetype" ).text-xs-left
     h1 {{ archetype.name }}
     VueMarkdown(:source="archetype.text")
-    LevelTable(:title="archetype.name", :levels="archetype.leveledTable")
+    LevelTable(:title="archetype.name", :levels="correctedLevels")
   Loading(v-else)
 </template>

@@ -7,7 +7,6 @@
     text: string
     value: string
     align: string
-    isFilterable: boolean
     filterChoices: string[]
     filterFunction: (item: { [key: string]: string }, filterValue: string | string[]) => boolean
   }

@@ -9,7 +9,7 @@
     align: string
     isFilterable: boolean
     filterChoices: string[]
-    filterFunction: (item: any, filterValue: any) => boolean
+    filterFunction: (item: { [key: string]: string }, filterValue: string | string[]) => boolean
   }
 
   @Component({
@@ -18,13 +18,13 @@
     }
   })
   export default class SearchTable extends Vue {
-    @Prop(Array) readonly items!: any[]
+    @Prop(Array) readonly items!: { [key: string]: string }[]
     @Prop(Array) readonly headers!: HeaderType[]
     @Prop(Boolean) readonly isExpandable!: boolean
 
     pagination = { rowsPerPage: 25 }
     search = ''
-    filter : any = {}
+    filterSelections: { [key: string]: any } = {}
 
     get alignedHeaders () {
       return this.headers.map(header => ({

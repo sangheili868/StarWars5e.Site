@@ -58,7 +58,7 @@
           value: 'size',
           isFilterable: true,
           filterChoices: ['Medium', 'Small'],
-          filterFunction: (item: SpeciesType, filterValue: string) => _.includes(item.size, filterValue)
+          filterFunction: ({ size }: SpeciesType, filterValue: string) => size === filterValue
         },
         {
           text: 'Source',
@@ -66,7 +66,7 @@
           render: _.startCase,
           isFilterable: true,
           filterChoices: ['Base', 'Expanded Content'],
-          filterFunction: (item: SpeciesType, filterValue: string) => _.includes(item.contentType, filterValue.replace(/\s/g, ''))
+          filterFunction: ({ contentType }: SpeciesType, filterValue: string) => _.startCase(contentType) === filterValue
         }
       ]
     }

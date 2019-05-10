@@ -171,13 +171,13 @@ export interface PowerType {
   prerequisite: string
 }
 
-export interface abilitiesIncreasedType {
+export interface AbilitiesIncreasedType {
   abilities: string[],
   amount: number
 }
 
 export interface SpeciesType {
-  abilitiesIncreased: abilitiesIncreasedType[][]
+  abilitiesIncreased: AbilitiesIncreasedType[][]
   contentType: string,
   colorScheme: string,
   distinctions: string,
@@ -196,7 +196,8 @@ export interface SpeciesType {
     name: string
   }[],
   weightAverage: string,
-  weightRollMod: string
+  weightRollMod: string,
+  size: string
 }
 
 export interface DeploymentType {

@@ -3,7 +3,6 @@
 
   @Component
   export default class AssetsPage extends Vue {
-
     get categories () {
       return [
         {

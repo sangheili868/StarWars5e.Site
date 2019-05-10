@@ -43,7 +43,6 @@
         {
           text: 'Ability Score Increase',
           value: 'abilitiesIncreased',
-          isFilterable: true,
           isMultiSelect: true,
           filterChoices: ['Strength', 'Dexterity', 'Constitution', 'Intelligence', 'Wisdom', 'Charisma'],
           render: (value: AbilitiesIncreasedType[][]) => value.map(broadChoices =>
@@ -62,7 +61,6 @@
         {
           text: 'Size',
           value: 'size',
-          isFilterable: true,
           filterChoices: ['Medium', 'Small'],
           filterFunction: ({ size }: SpeciesType, filterValue: string) => size === filterValue
         },
@@ -70,8 +68,7 @@
           text: 'Source',
           value: 'contentType',
           render: _.startCase,
-          isFilterable: true,
-          filterChoices: ['Base', 'Expanded Content'],
+          filterChoices: ['Core', 'Expanded Content'],
           filterFunction: ({ contentType }: SpeciesType, filterValue: string) => _.startCase(contentType) === filterValue
         }
       ]

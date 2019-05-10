@@ -17,6 +17,12 @@
     @speciesModule.Action fetchSpecies!: () => void
     @Prop({ type: Boolean, default: false }) readonly isInHandbook!: boolean
 
+    numWordMap: { [key: string]: number } = {
+      one: 1,
+      two: 2,
+      four: 4
+    }
+
     created () {
       this.fetchSpecies()
     }
@@ -28,7 +34,7 @@
         .map(species => ({
           ...species,
           to: `/${page}/species/${species.name}`
-        }))
+        })).value()
     }
 
     get headers () {
@@ -39,18 +45,18 @@
           value: 'abilitiesIncreased',
           isFilterable: true,
           isMultiSelect: true,
-          filterChoices: ['Strength', 'Dexterity', 'Constitution', 'Intelligence', 'Wisdom', 'Charisma', 'Any'],
-           render: (value: AbilitiesIncreasedType[][]) => value.map(broadChoices =>
+          filterChoices: ['Strength', 'Dexterity', 'Constitution', 'Intelligence', 'Wisdom', 'Charisma'],
+          render: (value: AbilitiesIncreasedType[][]) => value.map(broadChoices =>
             broadChoices.map(({ abilities, amount }) => `${abilities.join(' or ')} +${amount}`).join(', ')
           ).join('; '),
-          filterFunction: (item: SpeciesType, filterValue: string[]) => {
-            let choices = _.flatten(item.abilitiesIncreased.map(broadChoices =>
-             _.flatten(broadChoices.map(specificChoice => specificChoice.abilities))))
-
-            if (_.difference(filterValue, choices).length === 0) {
-              return true
-            }
-            return false
+          filterFunction: ({ abilitiesIncreased }: SpeciesType, filterValue: string[]) => {
+            return abilitiesIncreased.some(broadChoice => {
+              return filterValue.length <= _.reduce(broadChoice, (acc: number, value: AbilitiesIncreasedType) => {
+                const freeChoices = this.numWordMap[value.abilities[0].split(' ')[1]] || 0
+                const isMatch = Math.min(_.intersection(value.abilities, filterValue).length, 1)
+                return acc + freeChoices + isMatch
+              }, 0)
+            })
           }
         },
         {

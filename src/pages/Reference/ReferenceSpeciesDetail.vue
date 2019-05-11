@@ -85,7 +85,7 @@
               td {{ speciesData.language }}
 
       ImageWithLoading(:src="speciesData.imageUrls[0]", height="350", width="350", contain).ma-auto
-    VueMarkdown {{ speciesData.flavorText }}
+    VueMarkdown(:source="speciesData.flavorText")
 
     h3 {{ speciesData.name }} Traits
     p As a {{ speciesData.name }}, you have the following special traits.

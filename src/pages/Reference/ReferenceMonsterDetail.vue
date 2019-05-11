@@ -88,7 +88,7 @@
     hr
     p(v-for="{ name, description } in behaviors('Trait')", :key="name") #[strong {{ name }}] {{ description }}
     h3 Actions
-    VueMarkdown(v-for="{ name, description } in behaviors('Action')", :key="name") **{{ name }}** {{ description }}
+    VueMarkdown(v-for="{ name, description } in behaviors('Action')", :key="name", :source="'**' + name + '** '+ description")
   Loading(v-else)
 </template>
 

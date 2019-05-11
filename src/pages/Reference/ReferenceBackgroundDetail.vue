@@ -34,7 +34,7 @@
 <template lang="pug">
   div( v-if="background" ).text-xs-left
     h1 {{ background.name }}
-    VueMarkdown {{ background.flavorText }}
+    VueMarkdown(:source="background.flavorText")
     div #[strong Skill Proficiencies:] {{ background.skillProficiencies }}
     div(v-if="background.toolProficiencies") #[strong Tool Proficiencies:] {{ background.toolProficiencies }}
     div(v-if="background.languages") #[strong Languages:] {{ background.languages }}
@@ -43,7 +43,7 @@
     h4 {{ background.flavorName }}
     RollTable(:title="background.flavorName", :items="background.flavorOptions").mb-2
     h3 Feature: {{ background.featureName }}
-    VueMarkdown {{ background.featureText }}
+    VueMarkdown(:source="background.featureText")
 
     h3 Background Feat
     p As a further embodiment of the experience and training of your background, you can choose from the following feats:

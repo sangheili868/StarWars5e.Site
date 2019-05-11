@@ -20,7 +20,7 @@
     @Prop(Array) readonly items!: { [key: string]: string }[]
     @Prop(Array) readonly headers!: HeaderType[]
     @Prop(Boolean) readonly isExpandable!: boolean
-
+    
     pagination = { rowsPerPage: 25 }
     search = ''
     filterSelections: { [key: string]: any } = {}

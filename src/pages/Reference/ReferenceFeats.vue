@@ -35,14 +35,28 @@
 
     get headers () {
       return [
-        { text: 'Name', value: 'name' },
-        { text: 'Prerequisite', value: 'prerequisite' },
+        {
+          text: 'Name',
+          value: 'name'
+        },
         {
           text: 'Ability Score Increase',
           value: 'attributesIncreased',
-          render: (value: any) => _.upperFirst(value ? value.join('; ') : '-')
+          render: (value: string[]) => _.upperFirst(value ? value.join(' or ') : '-'),
+          filterChoices: ['Strength', 'Dexterity', 'Constitution', 'Intelligence', 'Wisdom', 'Charisma'],
+          filterFunction: ({ attributesIncreased }: FeatType, filterValue: string) => _.includes(attributesIncreased, filterValue)
         },
-        { text: 'Source', value: 'contentType', render: _.startCase }
+        {
+          text: 'Prerequisite',
+          value: 'prerequisite'
+        },
+        {
+          text: 'Source',
+          value: 'contentType',
+          render: _.startCase,
+          filterChoices: ['Core', 'Expanded Content'],
+          filterFunction: ({ contentType }: FeatType, filterValue: string) => _.startCase(contentType) === filterValue
+        }
       ]
     }
   }

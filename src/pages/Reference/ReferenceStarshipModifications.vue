@@ -32,8 +32,14 @@
 
     get headers () {
       return [
-        { text: 'Type', value: 'type' },
         { text: 'Name', value: 'name' },
+        {
+          text: 'Type',
+          value: 'type',
+          filterChoices: ['Engineering', 'Operation', 'Suite', 'Universal'],
+          isMultiSelect: true,
+          filterFunction: ({ type }: StarshipModificationType, filterValue: string[]) => _.some(filterValue, (filter: string) => filter === type)
+        },
         {
           text: 'Prerequisites',
           value: 'prerequisites',

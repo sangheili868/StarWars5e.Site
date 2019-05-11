@@ -32,8 +32,27 @@
 
     get headers () {
       return [
-        { text: 'Name', value: 'name' }
+        { text: 'Name', value: 'name' },
+        {
+          text: 'Category',
+          value: 'weaponCategory',
+          isMultiSelect: true,
+          filterChoices: ['Primary', 'Secondary', 'Tertiary', 'Quaternary'],
+          filterFunction: ({ weaponCategory }: StarshipWeaponType, filterValue: string[]) =>
+            _.some(filterValue, (filter: string) => _.includes(weaponCategory, filter))
+        },
+        { text: 'Cost', value: 'cost' },
+        { text: 'Damage', value: 'damageNumberOfDice', render: this.weaponDamage },
+        { text: 'Attack Bonus', value: 'attackBonus' },
+        { text: 'Attacks per Round', value: 'attacksPerRound' }
       ]
+    }
+
+    weaponDamage (field: string, fields: StarshipWeaponType) {
+      let modifier = ''
+      if (fields.damageDieModifier && fields.damageDieModifier > 0) modifier = `+${fields.damageDieModifier}`
+      if (fields.damageDieModifier && fields.damageDieModifier < 0) modifier = fields.damageDieModifier.toString()
+      return fields.damageNumberOfDice ? `${fields.damageNumberOfDice}d${fields.damageDieType}${modifier} ${fields.damageType}` : 'Special'
     }
   }
 </script>

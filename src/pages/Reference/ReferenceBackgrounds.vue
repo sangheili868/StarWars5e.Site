@@ -33,9 +33,23 @@
 
     get headers () {
       return [
-        { text: 'Name', value: 'name' },
-        { text: 'Feature', value: 'featureName' },
-        { text: 'Source', value: 'contentType', render: _.startCase }
+        {
+          text: 'Name',
+          value: 'name'
+        },
+        {
+          text: 'Feature',
+          value: 'skillProficiencies',
+          filterChoices: ['Deception', 'Lore'],
+          filterFunction: ({ skillProficiencies }: BackgroundType, filterValue: string) => _.includes(skillProficiencies, filterValue)
+        },
+        {
+          text: 'Source',
+          value: 'contentType',
+          render: _.startCase,
+          filterChoices: ['Core', 'Expanded Content'],
+          filterFunction: ({ contentType }: BackgroundType, filterValue: string) => _.startCase(contentType) === filterValue
+        }
       ]
     }
   }

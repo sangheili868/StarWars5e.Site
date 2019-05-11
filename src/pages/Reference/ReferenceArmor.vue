@@ -32,8 +32,13 @@
 
     get headers () {
       return [
-        { text: 'Type', value: 'armorClassification' },
         { text: 'Name', value: 'name', render: _.startCase },
+        {
+          text: 'Type',
+          value: 'armorClassification',
+          filterChoices: ['Light', 'Medium', 'Heavy', 'Shield'],
+          filterFunction: ({ armorClassification }: ArmorType, filterValue: string) => armorClassification === filterValue
+        },
         { text: 'Cost', value: 'cost' },
         { text: 'Weight', value: 'weight' },
         { text: 'AC', value: 'ac' },

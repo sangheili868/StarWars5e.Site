@@ -56,5 +56,5 @@
     br
     SearchTable(v-bind="{ headers, items }", isExpandable)
       template(v-slot:default="props")
-        VueMarkdown {{ props.item.description }}
+        VueMarkdown(:source="props.item.description")
 </template>

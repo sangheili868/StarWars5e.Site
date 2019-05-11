@@ -65,6 +65,6 @@
             p.ma-0 #[strong Dexterity at Tier 0:] {{ card.dexterity }}
             p.ma-0 #[strong Constitution at Tier 0:] {{ card.constitution }}
 
-    VueMarkdown(v-if="variant").text-xs-left {{spaceStation}}
+    VueMarkdown(v-if="variant" :source="spaceStation").text-xs-left
     VueMarkdown(:source="variant.replace(/\ufffd/g, ' - ')").text-xs-left
 </template>

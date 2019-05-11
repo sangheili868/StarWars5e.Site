@@ -66,7 +66,7 @@
     SearchTable(v-bind="{ headers, items }", isExpandable)
       template(v-slot:default="props")
         div #[strong Properties:] {{ props.item.properties.join(', ') }}
-        VueMarkdown {{ props.item.description }}
+        VueMarkdown(:source="props.item.description")
         div(v-for="(mode, index) in props.item.modes", :key="index").
           #[strong {{ mode.name }}:] {{ weaponDamage('', mode) }}, {{ mode.properties.join(', ') }}
 </template>

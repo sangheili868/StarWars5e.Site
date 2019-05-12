@@ -33,9 +33,23 @@
 
     get headers () {
       return [
-        { text: 'Class', value: 'className' },
-        { text: 'Name', value: 'name' },
-        { text: 'Source', value: 'contentType', render: _.startCase }
+        {
+          text: 'Name',
+          value: 'name'
+        },
+        {
+          text: 'Class',
+          value: 'className',
+          filterChoices: ['Berserker', 'Consular', 'Engineer', 'Fighter', 'Guardian', 'Monk', 'Operative', 'Scholar', 'Scout', 'Sentinel'],
+          filterFunction: ({ className }: ArchetypeType, filterValue: string) => className === filterValue
+        },
+        {
+          text: 'Source',
+          value: 'contentType',
+          render: _.startCase,
+          filterChoices: ['Core', 'Expanded Content'],
+          filterFunction: ({ contentType }: ArchetypeType, filterValue: string) => _.startCase(contentType) === filterValue
+        }
       ]
     }
   }

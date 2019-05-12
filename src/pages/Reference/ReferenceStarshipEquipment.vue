@@ -32,8 +32,14 @@
 
     get headers () {
       return [
-        { text: 'Type', value: 'type' },
-        { text: 'Name', value: 'name' }
+        { text: 'Name', value: 'name' },
+        {
+          text: 'Type',
+          value: 'type',
+          filterChoices: ['Ammunition', 'Armor', 'Hyperdrive', 'Navcomputer', 'Shield'],
+          isMultiSelect: true,
+          filterFunction: ({ type }: StarshipEquipmentType, filterValue: string[]) => _.some(filterValue, (filter: string) => filter === type)
+        }
       ]
     }
   }

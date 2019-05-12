@@ -32,12 +32,24 @@
 
     get headers () {
       return [
-        { text: 'Type', value: 'weaponClassification', render: _.startCase },
         { text: 'Name', value: 'name' },
+        {
+          text: 'Type',
+          value: 'weaponClassification',
+          render: _.startCase,
+          filterChoices: ['Simple Blaster', 'Martial Blaster', 'Simple Lightweapon', 'Martial Lightweapon', 'Simple Vibroweapon', 'Martial Vibroweapon'],
+          filterFunction: ({ weaponClassification }: WeaponType, filterValue: string) => _.startCase(weaponClassification) === filterValue
+        },
         { text: 'Cost', value: 'cost' },
         { text: 'Weight', value: 'weight' },
         { text: 'Damage', value: 'damageNumberOfDice', render: this.weaponDamage },
-        { text: 'Source', value: 'contentType', render: _.startCase }
+        {
+          text: 'Source',
+          value: 'contentType',
+          render: _.startCase,
+          filterChoices: ['Core', 'Expanded Content'],
+          filterFunction: ({ contentType }: WeaponType, filterValue: string) => _.startCase(contentType) === filterValue
+        }
       ]
     }
 

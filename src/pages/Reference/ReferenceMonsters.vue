@@ -34,11 +34,30 @@
     get headers () {
       return [
         { text: 'Name', value: 'name' },
-        { text: 'Size', value: 'size' },
-        { text: 'Types', value: 'types', render: (types: string[]) => types.map(_.upperFirst).join(', ') },
-        { text: 'Alignment', value: 'alignment', render: _.startCase },
-        { text: 'CR', value: 'challengeRating' },
-        { text: 'Source', value: 'contentType' }
+        {
+          text: 'Size',
+          value: 'size',
+          filterChoices: ['Tiny', 'Small', 'Medium', 'Large', 'Huge', 'Gargantuan'],
+          isMultiSelect: true,
+          filterFunction: ({ size }: MonsterType, filterValue: string[]) => _.some(filterValue, (filter: string) => filter === size)
+        },
+        {
+          text: 'Type',
+          value: 'types',
+          render: (types: string[]) => types.map(_.upperFirst).join(', '),
+          filterChoices: ['Beast', 'Construct', 'Droid', 'Force-wielder', 'Humanoid', 'Swarm'],
+          isMultiSelect: true,
+          filterFunction: ({ types }: MonsterType, filterValue: string[]) => _.some(filterValue, (filter: string) =>
+            _.some(types.map(_.upperFirst), (type: string) => _.includes(type, filter)))
+        },
+        {
+          text: 'CR',
+          value: 'challengeRating',
+          filterChoices: ['0', '1/8', '1/4', '1/2', '1', '2', '3', '4', '5', '6', '7', '8', '9', '10',
+          '11', '12', '13', '14', '15', '16', '17', '18', '19'],
+          isMultiSelect: true,
+          filterFunction: ({ challengeRating }: MonsterType, filterValue: string[]) => _.some(filterValue, (filter: string) => filter === challengeRating.toString())
+        }
       ]
     }
   }

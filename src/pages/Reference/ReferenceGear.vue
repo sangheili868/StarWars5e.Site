@@ -32,11 +32,23 @@
 
     get headers () {
       return [
-        { text: 'Category', value: 'equipmentCategory', render: _.startCase },
+        {
+          text: 'Category',
+          value: 'equipmentCategory',
+          render: _.startCase,
+          filterChoices: ['Ammunition', 'Clothing', 'Communications', 'Data Recording And Storage', 'Explosive', 'Gaming Set',
+          'Life Support', 'Medical', 'Musical Instrument', 'Storage', 'Tool'],
+          filterFunction: ({ equipmentCategory }: GearType, filterValue: string) => _.startCase(equipmentCategory) === filterValue
+        },
         { text: 'Name', value: 'name' },
         { text: 'Cost', value: 'cost' },
         { text: 'Weight', value: 'weight' },
-        { text: 'Source', value: 'contentType', render: _.startCase }
+        {
+          text: 'Source',
+          value: 'contentType',
+          render: _.startCase,
+          filterChoices: ['Core', 'Expanded Content'],
+          filterFunction: ({ contentType }: GearType, filterValue: string) => _.startCase(contentType) === filterValue }
       ]
     }
   }

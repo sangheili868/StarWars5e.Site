@@ -33,6 +33,7 @@
     get headers () {
       return [
         { text: 'Name', value: 'name' },
+        { text: 'Cost', value: 'cost' },
         {
           text: 'Type',
           value: 'type',

@@ -36,7 +36,7 @@
         {
           text: 'Type',
           value: 'type',
-          filterChoices: ['Engineering', 'Operation', 'Suite', 'Universal'],
+          filterChoices: ['Engineering', 'Operation', 'Suite', 'Universal', 'Weapon'],
           isMultiSelect: true,
           filterFunction: ({ type }: StarshipModificationType, filterValue: string[]) => _.some(filterValue, (filter: string) => filter === type)
         },

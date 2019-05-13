@@ -17,7 +17,8 @@
         th.px-2.py-1 d{{ items.length }}
         th(:class="{ 'text-xs-left': isLeftAlign }").px-2.py-1 {{ title }}
     tbody
-      tr(v-for="{name, roll} in items", :key="roll").rows
+      tr(v-for="{name, roll, description} in items", :key="roll").rows
         td.px-2.py-1 {{ roll }}
-        td(:class="{ 'text-xs-left': isLeftAlign }").px-2.py-1 {{ name }}
+        td(:class="{ 'text-xs-left': isLeftAlign }", v-if="name").px-2.py-1 {{ name }}. {{ description }}
+        td(:class="{ 'text-xs-left': isLeftAlign }", v-if="!name").px-2.py-1 {{ description }}
 </template>

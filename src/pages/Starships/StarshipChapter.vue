@@ -29,6 +29,7 @@
       abilityScores: 'Using Ability Scores',
       adventuring: 'Adventuring',
       combat: 'Combat',
+      generatingEncounters: 'Generating Encounters',
       conditions: 'Appendix A: Conditions'
     }
 

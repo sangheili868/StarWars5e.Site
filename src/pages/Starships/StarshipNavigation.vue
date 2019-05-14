@@ -113,6 +113,11 @@
         route: '/starships/combat'
       },
       {
+        title: 'Generating Encounters',
+        icon: 'fa-dna',
+        route: '/starships/generatingEncounters'
+      },
+      {
         title: 'Conditions',
         icon: 'fa-biohazard',
         route: '/starships/conditions'

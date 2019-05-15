@@ -17,7 +17,7 @@
               title: 'Monster Manual'
             },
             {
-              href: 'https://drive.google.com/file/d/1nAwrdwLu89lNnna6cnVUSg0soGxCvB4l/view?usp=sharing',
+              href: 'https://drive.google.com/file/d/1zWAarhkSaQVT3NCYF_y1UYJnavP8aw3s/view?usp=sharing',
               title: 'Starships of the Galaxy'
             }
           ]

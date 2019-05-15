@@ -82,8 +82,8 @@
     div(v-if="hasParsedOrOther('damageResistances')") #[strong Damage Resistances:] {{ joinParsedAndOther('damageResistances') }}
     div(v-if="hasParsedOrOther('damageImmunities')") #[strong Damage Immunities:] {{ joinParsedAndOther('damageImmunities') }}
     div(v-if="hasParsedOrOther('conditionImmunities')") #[strong Condition Immunities:] {{ joinParsedAndOther('conditionImmunities') }}
-    div #[strong Senses:] {{ monster.senses.join(', ') }}
-    div #[strong Languages:] {{ monster.languages.join(', ') }}
+    div(v-if="monster.senses && monster.senses.length") #[strong Senses:] {{ monster.senses.join(', ') }}
+    div(v-if="monster.languages && monster.languages.length") #[strong Languages:] {{ monster.languages.join(', ') }}
     div #[strong Challenge:] {{ monster.challengeRating }} ({{ monster.experiencePoints.toLocaleString() }} XP)
     hr
     p(v-for="{ name, description } in behaviors('Trait')", :key="name") #[strong {{ name }}] {{ description }}

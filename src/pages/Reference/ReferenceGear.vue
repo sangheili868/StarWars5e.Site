@@ -37,7 +37,7 @@
           value: 'equipmentCategory',
           render: _.startCase,
           filterChoices: ['Ammunition', 'Clothing', 'Communications', 'Data Recording And Storage', 'Explosive', 'Gaming Set',
-          'Life Support', 'Medical', 'Musical Instrument', 'Storage', 'Tool'],
+          'Kit', 'Life Support', 'Medical', 'Musical Instrument', 'Storage', 'Tool'],
           filterFunction: ({ equipmentCategory }: GearType, filterValue: string) => _.startCase(equipmentCategory) === filterValue
         },
         { text: 'Name', value: 'name' },

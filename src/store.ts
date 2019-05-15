@@ -19,6 +19,7 @@ import starshipWeapons from './modules/starshipWeapons'
 import ui from './modules/ui'
 import ventures from './modules/ventures'
 import weapons from './modules/weapons'
+import weaponProperties from './modules/weaponProperties'
 
 Vue.use(Vuex)
 
@@ -42,6 +43,7 @@ export default new Vuex.Store({
     starshipWeapons,
     ui,
     ventures,
-    weapons
+    weapons,
+    weaponProperties
   }
 })

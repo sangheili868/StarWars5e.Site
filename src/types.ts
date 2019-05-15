@@ -294,3 +294,9 @@ export interface VariantRuleBlobType {
   chapterName: string,
   contentMarkdown: string
 }
+
+export interface WeaponPropertyType {
+  content: string,
+  contentType: string,
+  name: string
+}

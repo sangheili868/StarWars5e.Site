@@ -2,24 +2,30 @@
   import { Component, Prop, Vue } from 'vue-property-decorator'
   import { namespace } from 'vuex-class'
   import SearchTable from '@/components/SearchTable.vue'
-  import { WeaponType } from '@/types'
+  import LinkModal from '@/components/LinkModal.vue'
+  import { WeaponType, WeaponPropertyType } from '@/types'
   import _ from 'lodash'
   import VueMarkdown from 'vue-markdown'
 
   const weaponsModule = namespace('weapons')
+  const weaponPropertiesModule = namespace('weaponProperties')
 
   @Component({
     components: {
       SearchTable,
-      VueMarkdown
+      VueMarkdown,
+      LinkModal
     }
   })
   export default class ReferenceWeapons extends Vue {
     @weaponsModule.State weapons!: WeaponType[]
     @weaponsModule.Action fetchWeapons!: () => void
+    @weaponPropertiesModule.State weaponProperties!: WeaponPropertyType[]
+    @weaponPropertiesModule.Action fetchWeaponProperties!: () => void
 
     created () {
       this.fetchWeapons()
+      this.fetchWeaponProperties()
     }
 
     get items () {
@@ -56,6 +62,15 @@
     weaponDamage (field: string, fields: WeaponType) {
       return fields.damageNumberOfDice ? `${fields.damageNumberOfDice}d${fields.damageDieType} ${fields.damageType}` : 'Special'
     }
+
+    weaponText (properties: string[]) {
+      return properties.map((propertyString, index) => {
+        const propertyName = _.upperCase(propertyString.split(' ')[0])
+        const text = (index > 0 ? ', ' : ' ') + propertyString
+        const propertyInfo = this.weaponProperties.find(({ name }) => _.upperCase(name) === propertyName)
+        return { ...propertyInfo, text }
+      })
+    }
   }
 </script>
 
@@ -65,8 +80,14 @@
     br
     SearchTable(v-bind="{ headers, items }", isExpandable)
       template(v-slot:default="props")
-        div #[strong Properties:] {{ props.item.properties.join(', ') }}
-        VueMarkdown(:source="props.item.description")
+        strong Properties:
+        LinkModal(
+          v-for="({ name, content, text }) in weaponText(props.item.properties)",
+          :key="name",
+          :link="text"
+        )
+          VueMarkdown(:source="content")
+        VueMarkdown(v-if="props.item.description", :source="props.item.description")
         div(v-for="(mode, index) in props.item.modes", :key="index").
           #[strong {{ mode.name }}:] {{ weaponDamage('', mode) }}, {{ mode.properties.join(', ') }}
 </template>

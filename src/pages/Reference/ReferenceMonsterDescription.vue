@@ -52,7 +52,7 @@
 <template lang="pug">
   div( v-if="monster" ).text-xs-left
     h1 {{ monster.name }}
-      v-btn(v-if="!isAtDetail", flat, icon, :to="`/reference/monsters/${monster.name}`")
+      v-btn(v-if="!isAtDetail", flat, icon, :to="`/reference/monsters/${monster.name}`", color="secondary")
         v-icon fa-external-link-alt
     i {{ monster.size }} {{ monster.types.join(', ')}}, {{ monster.alignment }}
     hr.mt-2

@@ -4,12 +4,14 @@
   import SearchTable from '@/components/SearchTable.vue'
   import { MonsterType } from '@/types'
   import _ from 'lodash'
+  import ReferenceMonsterDescription from './ReferenceMonsterDescription.vue'
 
   const monsterModule = namespace('monsters')
 
   @Component({
     components: {
-      SearchTable
+      SearchTable,
+      ReferenceMonsterDescription
     }
   })
   export default class ReferenceMonsters extends Vue {
@@ -27,7 +29,7 @@
         .filter(({ contentType }) => !this.isInHandbook || contentType === 'Core')
         .map(monster => ({
           ...monster,
-          to: `/${page}/monsters/${monster.name}`
+          id: monster.name
         })).value()
     }
 
@@ -67,5 +69,7 @@
   div
     h1(v-if="!isInHandbook") Monsters
     br
-    SearchTable(v-bind="{ headers, items }")
+    SearchTable(v-bind="{ headers, items }", isExpandable)
+      template(v-slot:default="{ item }")
+        ReferenceMonsterDescription(:monster="item")
 </template>

@@ -12,28 +12,28 @@ export interface ArchetypeType {
   text2: string,
 }
 
-export interface RollTableRowType {
+export interface BackgroundTableRowType {
   name: string,
   roll: number,
   description: string
 }
 
 export interface BackgroundType {
-  bondOptions: RollTableRowType[],
+  bondOptions: BackgroundTableRowType[],
   contentType: string,
   equipment: string,
-  featOptions: RollTableRowType[],
+  featOptions: BackgroundTableRowType[],
   featureName: string,
   featureText: string,
   flavorDescription: string,
   flavorName: string,
-  flavorOptions: RollTableRowType[],
+  flavorOptions: BackgroundTableRowType[],
   flavorText: string,
-  flawOptions: RollTableRowType[],
-  idealOptions: RollTableRowType[],
+  flawOptions: BackgroundTableRowType[],
+  idealOptions: BackgroundTableRowType[],
   languages: string,
   name: string,
-  personalityTraitOptions: RollTableRowType[],
+  personalityTraitOptions: BackgroundTableRowType[],
   skillProficiencies: string,
   suggestedCharacteristics: string,
   toolProficiencies: string

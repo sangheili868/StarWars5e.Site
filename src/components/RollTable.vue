@@ -1,10 +1,16 @@
 <script lang="ts">
   import { Component, Prop, Vue } from 'vue-property-decorator'
-  import { RollTableRowType } from '@/types'
+  import LinkModal from '@/components/LinkModal.vue'
+  import VueMarkdown from 'vue-markdown'
 
-  @Component
+  @Component({
+    components: {
+      LinkModal,
+      VueMarkdown
+    }
+  })
   export default class RollTable extends Vue {
-    @Prop(Array) readonly items!: RollTableRowType[]
+    @Prop(Array) readonly items!: { text: string, roll: number, modalContent?: string }[]
     @Prop(String) readonly title!: string
     @Prop(Boolean) readonly isLeftAlign!: boolean
   }
@@ -17,8 +23,10 @@
         th.px-2.py-1 d{{ items.length }}
         th(:class="{ 'text-xs-left': isLeftAlign }").px-2.py-1 {{ title }}
     tbody
-      tr(v-for="{name, roll, description} in items", :key="roll").rows
+      tr(v-for="{ text, roll, modalContent } in items", :key="roll").rows
         td.px-2.py-1 {{ roll }}
-        td(:class="{ 'text-xs-left': isLeftAlign }", v-if="name").px-2.py-1 {{ name }}. {{ description }}
-        td(:class="{ 'text-xs-left': isLeftAlign }", v-if="!name").px-2.py-1 {{ description }}
+        td(:class="{ 'text-xs-left': isLeftAlign }").px-2.py-1
+          LinkModal(v-if="modalContent", :title="text", :link="text")
+            VueMarkdown(:source="modalContent")
+          template(v-else) {{ text }}
 </template>

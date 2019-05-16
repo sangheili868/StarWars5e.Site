@@ -22,7 +22,3 @@
         v-spacer
         v-btn(color="primary", flat, @click="isOpen = false") Close
 </template>
-
-<style module lang="scss">
-
-</style>

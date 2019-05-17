@@ -10,6 +10,10 @@
   const weaponsModule = namespace('weapons')
   const weaponPropertiesModule = namespace('weaponProperties')
 
+  interface WeaponPropertyModal extends WeaponPropertyType {
+    text: string
+  }
+
   @Component({
     components: {
       SearchTable,
@@ -32,7 +36,8 @@
       return _(this.weapons)
         .map(weapons => ({
           ...weapons,
-          id: weapons.name
+          id: weapons.name,
+          isExpandable: true
         })).value()
     }
 
@@ -68,8 +73,8 @@
         const propertyName = _.upperCase(propertyString.split(' ')[0])
         const text = (index > 0 ? ', ' : ' ') + propertyString
         const propertyInfo = this.weaponProperties.find(({ name }) => _.upperCase(name) === propertyName)
-        return { ...propertyInfo, text }
-      })
+        return { ...propertyInfo, text } as WeaponPropertyModal
+      }).filter(({ content }) => content)
     }
   }
 </script>
@@ -78,7 +83,7 @@
   div
     h1 Weapons
     br
-    SearchTable(v-bind="{ headers, items }", isExpandable)
+    SearchTable(v-bind="{ headers, items }")
       template(v-slot:default="props")
         strong Properties:
         LinkModal(
@@ -87,6 +92,7 @@
           :link="text"
         )
           VueMarkdown(:source="content")
+        span(v-if="weaponText(props.item.properties).length === 0")  None
         VueMarkdown(v-if="props.item.description", :source="props.item.description")
         div(v-for="(mode, index) in props.item.modes", :key="index").
           #[strong {{ mode.name }}:] {{ weaponDamage('', mode) }}, {{ mode.properties.join(', ') }}

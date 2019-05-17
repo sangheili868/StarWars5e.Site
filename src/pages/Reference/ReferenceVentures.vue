@@ -24,9 +24,10 @@
 
     get items () {
       return _(this.ventures)
-        .map(ventures => ({
-          ...ventures,
-          id: ventures.name
+        .map(venture => ({
+          ...venture,
+          id: venture.name,
+          isExpandable: venture.content
         })).value()
     }
 
@@ -47,7 +48,7 @@
   div
     h1 Ventures
     br
-    SearchTable(v-bind="{ headers, items }", isExpandable)
+    SearchTable(v-bind="{ headers, items }")
       template(v-slot:default="props")
         VueMarkdown(:source="props.item.content")
 </template>

@@ -26,7 +26,8 @@
       return _(this.starshipEquipment)
         .map(starshipEquipment => ({
           ...starshipEquipment,
-          id: starshipEquipment.name
+          id: starshipEquipment.name,
+          isExpandable: false
         })).value()
     }
 
@@ -50,7 +51,7 @@
   div
     h1 Starship Equipment
     br
-    SearchTable(v-bind="{ headers, items }", isExpandable)
+    SearchTable(v-bind="{ headers, items }")
       template(v-slot:default="props")
         VueMarkdown(:source="props.item.description")
 </template>

@@ -19,7 +19,6 @@
   export default class SearchTable extends Vue {
     @Prop(Array) readonly items!: { [key: string]: string }[]
     @Prop(Array) readonly headers!: HeaderType[]
-    @Prop(Boolean) readonly isExpandable!: boolean
 
     pagination = { rowsPerPage: 25 }
     search = ''
@@ -69,9 +68,11 @@
         ).ma-2
     v-data-table(:headers="alignedHeaders", :items="filteredItems", v-bind="{ search }", :pagination.sync="pagination")
       template(v-slot:items="props")
-        tr(v-if="isExpandable", :class="$style.row", @click="props.expanded = !props.expanded")
+        tr(v-if="props.item.isExpandable", :class="$style.clickableRow", @click="props.expanded = !props.expanded")
           td(v-for="{ value, render } in alignedHeaders", :to="props.item.to") {{ render(props.item[value], props.item) }}
-        router-link(tag="tr", v-else, :class="$style.row", :to="props.item.to")
+        router-link(v-else-if="props.item.to", tag="tr", :class="$style.clickableRow", :to="props.item.to")
+          td(v-for="{ value, render } in alignedHeaders", :to="props.item.to") {{ render(props.item[value], props.item) }}
+        tr(v-else)
           td(v-for="{ value, render } in alignedHeaders", :to="props.item.to") {{ render(props.item[value], props.item) }}
       template(v-slot:expand="props")
         v-card(flat)
@@ -81,7 +82,7 @@
 </template>
 
 <style module lang="scss">
-  .row {
+  .clickableRow {
     cursor: pointer;
   }
 </style>

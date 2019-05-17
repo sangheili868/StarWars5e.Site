@@ -26,7 +26,8 @@
       return _(this.gear)
         .map(gear => ({
           ...gear,
-          id: gear.name
+          id: gear.name,
+          isExpandable: gear.description
         })).value()
     }
 
@@ -58,7 +59,7 @@
   div
     h1 Gear
     br
-    SearchTable(v-bind="{ headers, items }", isExpandable)
+    SearchTable(v-bind="{ headers, items }")
       template(v-slot:default="props")
         VueMarkdown(:source="props.item.description")
 </template>

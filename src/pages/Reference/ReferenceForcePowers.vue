@@ -27,7 +27,8 @@
         .filter(({ powerType }) => powerType === 'Force')
         .map(powers => ({
           ...powers,
-          id: powers.name
+          id: powers.name,
+          isExpandable: powers.description
         })).value()
     }
 
@@ -90,7 +91,7 @@
   div
     h1 Force Powers
     br
-    SearchTable(v-bind="{ headers, items }", isExpandable)
+    SearchTable(v-bind="{ headers, items }")
       template(v-slot:default="props")
         VueMarkdown(:source="props.item.description")
 </template>

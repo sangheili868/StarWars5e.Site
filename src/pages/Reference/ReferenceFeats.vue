@@ -29,7 +29,8 @@
         .filter(({ contentType }) => !this.isInHandbook || contentType === 'Core')
         .map(feat => ({
           ...feat,
-          id: feat.name
+          id: feat.name,
+          isExpandable: feat.text
         })).value()
     }
 
@@ -66,7 +67,7 @@
   div
     h1(v-if="!isInHandbook") Feats
     br
-    SearchTable(v-bind="{ headers, items }", isExpandable)
+    SearchTable(v-bind="{ headers, items }")
       template(v-slot:default="props")
         VueMarkdown(:source="props.item.text")
 </template>

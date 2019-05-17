@@ -29,7 +29,8 @@
         .filter(({ contentType }) => !this.isInHandbook || contentType === 'Core')
         .map(monster => ({
           ...monster,
-          id: monster.name
+          id: monster.name,
+          isExpandable: true
         })).value()
     }
 
@@ -69,7 +70,7 @@
   div
     h1(v-if="!isInHandbook") Monsters
     br
-    SearchTable(v-bind="{ headers, items }", isExpandable)
+    SearchTable(v-bind="{ headers, items }")
       template(v-slot:default="{ item }")
         ReferenceMonsterDescription(:monster="item")
 </template>

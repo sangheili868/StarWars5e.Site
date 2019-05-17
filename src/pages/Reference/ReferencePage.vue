@@ -51,8 +51,8 @@
               title: 'Weapons'
             },
             {
-              to: '/reference/gear',
-              title: 'Gear'
+              to: '/reference/adventuringGear',
+              title: 'Adventuring Gear'
             }
           ]
         },

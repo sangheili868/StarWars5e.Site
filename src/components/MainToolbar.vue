@@ -33,7 +33,7 @@
             { to: '/feats', title: 'Feats' },
             { to: '/armor', title: 'Armor' },
             { to: '/weapons', title: 'Weapons' },
-            { to: '/gear', title: 'Gear' },
+            { to: '/adventuringGear', title: 'Adventuring Gear' },
             { to: '/forcePowers', title: 'Force Powers' },
             { to: '/techPowers', title: 'Tech Powers' },
             { to: '/monsters', title: 'Monsters' },

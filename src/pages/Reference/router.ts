@@ -63,7 +63,7 @@ export default [
     component: ReferenceWeapons
   },
   {
-    path: '/reference/gear',
+    path: '/reference/adventuringGear',
     component: ReferenceGear
   },
   {

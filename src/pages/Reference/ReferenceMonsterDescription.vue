@@ -77,9 +77,31 @@
     div(v-if="monster.languages && monster.languages.length") #[strong Languages:] {{ monster.languages.join(', ').replace(/\ufffd/g, '-') }}
     div #[strong Challenge:] {{ monster.challengeRating }} ({{ monster.experiencePoints.toLocaleString() }} XP)
     hr
-    p(v-for="{ name, description } in behaviors('Trait')", :key="name") #[strong {{ name }}] {{ description }}
-    h3 Actions
-    VueMarkdown(v-for="{ name, description } in behaviors('Action')", :key="name", :source="'**' + name + '** '+ description")
+    div(v-if="behaviors('Trait').length")
+      h3 Traits
+      p(v-for="{ name, description, restrictions } in behaviors('Trait')", :key="name")
+        strong {{ name }}
+        span(v-if="restrictions")  ({{ restrictions }})
+        span . {{ description }}
+    div(v-if="behaviors('Action').length")
+      h3 Actions
+      p(v-for="{ name, description, restrictions } in behaviors('Action')", :key="name")
+        strong {{ name }}
+        span(v-if="restrictions")  ({{ restrictions }})
+        span . {{ description }}
+    div(v-if="behaviors('Reaction').length")
+      h3 Reactions
+      p(v-for="{ name, description, restrictions } in behaviors('Reaction')", :key="name")
+        strong {{ name }}
+        span(v-if="restrictions")  ({{ restrictions }})
+        span . {{ description }}
+    div(v-if="behaviors('Legendary').length")
+      h3 Legendary Actions
+      p The {{ monster.name }} can take 3 legendary actions, choosing from the options below. Only one legendary action option can be used at a time and only at the end of another creature's turn. The {{ monster.name }} regains spent legendary actions at the start of their turn.
+      p(v-for="{name, description, restrictions} in behaviors('Legendary')", :key="name")
+        strong {{name}}
+        span(v-if="restrictions")  ({{ restrictions }})
+        span . {{ description }}
   Loading(v-else)
 </template>
 

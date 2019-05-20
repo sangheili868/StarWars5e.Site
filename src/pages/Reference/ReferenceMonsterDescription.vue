@@ -3,6 +3,7 @@
   import { MonsterType } from '@/types.ts'
   import VueMarkdown from 'vue-markdown'
   import Loading from '@/components/Loading.vue'
+  import _ from 'lodash'
 
   @Component({
     components: {
@@ -33,16 +34,16 @@
       return value >= 0 ? '+' + value : value.toString()
     }
 
-    hasParsedOrOther (field: string) {
+    hasListOrOther (field: string) {
       return this.monster && (
-        (this.monster as any)[field + 'Parsed'] ||
+        (this.monster as any)[field].length ||
         (this.monster as any)[field + 'Other']
       )
     }
 
-    joinParsedAndOther (field: string) {
+    joinWithOther (field: string) {
       return [
-        ...(this.monster && (this.monster as any)[field + 'Parsed']) || [],
+        ...(this.monster && (this.monster as any)[field]) || [],
         ...(this.monster && (this.monster as any)[field + 'Other']) || []
       ].join(', ')
     }
@@ -68,10 +69,10 @@
     hr
     div(v-if="monster.savingThrows") #[strong Saving Throws:] {{ monster.savingThrows.join(', ') }}
     div(v-if="monster.skills") #[strong Skills:] {{ monster.skills.join(', ') }}
-    div(v-if="hasParsedOrOther('damageVulnerabilities')") #[strong Damage Vulnerabilities:] {{ joinParsedAndOther('damageVulnerabilities') }}
-    div(v-if="hasParsedOrOther('damageResistances')") #[strong Damage Resistances:] {{ joinParsedAndOther('damageResistances') }}
-    div(v-if="hasParsedOrOther('damageImmunities')") #[strong Damage Immunities:] {{ joinParsedAndOther('damageImmunities') }}
-    div(v-if="hasParsedOrOther('conditionImmunities')") #[strong Condition Immunities:] {{ joinParsedAndOther('conditionImmunities') }}
+    div(v-if="hasListOrOther('damageVulnerabilities')") #[strong Damage Vulnerabilities:] {{ joinWithOther('damageVulnerabilities') }}
+    div(v-if="hasListOrOther('damageResistances')") #[strong Damage Resistances:] {{ joinWithOther('damageResistances') }}
+    div(v-if="hasListOrOther('damageImmunities')") #[strong Damage Immunities:] {{ joinWithOther('damageImmunities') }}
+    div(v-if="hasListOrOther('conditionImmunities')") #[strong Condition Immunities:] {{ joinWithOther('conditionImmunities') }}
     div(v-if="monster.senses && monster.senses.length") #[strong Senses:] {{ monster.senses.join(', ').replace(/\ufffd/g, '-') }}
     div(v-if="monster.languages && monster.languages.length") #[strong Languages:] {{ monster.languages.join(', ').replace(/\ufffd/g, '-') }}
     div #[strong Challenge:] {{ monster.challengeRating }} ({{ monster.experiencePoints.toLocaleString() }} XP)

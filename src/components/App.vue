@@ -3,12 +3,14 @@
   import MainToolbar from '@/components/MainToolbar.vue'
   import HandbookNavigation from '@/pages/Handbook/HandbookNavigation.vue'
   import StarshipNavigation from '@/pages/Starships/StarshipNavigation.vue'
+  import FragmentModal from '@/components/FragmentModal.vue'
 
   @Component({
     components: {
       MainToolbar,
       HandbookNavigation,
-      StarshipNavigation
+      StarshipNavigation,
+      FragmentModal
     }
   })
   export default class App extends Vue {
@@ -19,6 +21,7 @@
   v-app
     MainToolbar
     router-view(name="navigation")
+    FragmentModal
     v-content(:class="$style.content")
       v-container(fluid)
         router-view

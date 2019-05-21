@@ -300,3 +300,9 @@ export interface WeaponPropertyType {
   contentType: string,
   name: string
 }
+
+export interface ReferenceTableType {
+  content: string,
+  contentType: string,
+  name: string
+}

@@ -1,7 +1,7 @@
 <script lang="ts">
   import { Component, Prop, Vue } from 'vue-property-decorator'
   import { namespace } from 'vuex-class'
-  import VueMarkdown from 'vue-markdown'
+  import VueMarkdownModalLinks from '@/components/VueMarkdownModalLinks.vue'
   import { StarshipSizeType } from '@/types.ts'
   import CardSet from '@/components/CardSet.vue'
   import Loading from '@/components/Loading.vue'
@@ -11,7 +11,7 @@
 
   @Component({
     components: {
-      VueMarkdown,
+      VueMarkdownModalLinks,
       Loading,
       CardSet
     }
@@ -52,7 +52,7 @@
 
 <template lang="pug">
   div
-    VueMarkdown(:source="mainBlob").text-xs-left
+    VueMarkdownModalLinks(:source="mainBlob").text-xs-left
     Loading(v-if="!mainBlob || !starshipSizes.length")
 
     CardSet(:cards="starshipSizesWithLinks")
@@ -65,6 +65,6 @@
             p.ma-0 #[strong Dexterity at Tier 0:] {{ card.dexterity }}
             p.ma-0 #[strong Constitution at Tier 0:] {{ card.constitution }}
 
-    VueMarkdown(v-if="variant" :source="spaceStation").text-xs-left
-    VueMarkdown(:source="variant.replace(/\ufffd/g, ' - ')").text-xs-left
+    VueMarkdownModalLinks(v-if="variant" :source="spaceStation").text-xs-left
+    VueMarkdownModalLinks(:source="variant.replace(/\ufffd/g, ' - ')").text-xs-left
 </template>

@@ -29,9 +29,10 @@
       return data && data.content
     }
 
-    handleClose () {
-      this.$router.push({
+    get route () {
+      return ({
         ...this.$route,
+        matched: [],
         hash: ''
       })
     }
@@ -47,7 +48,7 @@
       v-divider
       v-card-actions
         v-spacer
-        v-btn(color="primary", flat, @click="handleClose") Close
+        v-btn(color="primary", flat, :to="route") Close
 </template>
 
 <style module lang="scss">

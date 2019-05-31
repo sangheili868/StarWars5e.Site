@@ -19,6 +19,7 @@
   export default class SearchTable extends Vue {
     @Prop(Array) readonly items!: { [key: string]: string }[]
     @Prop(Array) readonly headers!: HeaderType[]
+    @Prop(Function) readonly customSort!: Function
 
     pagination = { rowsPerPage: 25 }
     search = ''
@@ -66,7 +67,7 @@
           hide-details,
           :multiple="header.isMultiSelect"
         ).ma-2
-    v-data-table(:headers="alignedHeaders", :items="filteredItems", v-bind="{ search }", :pagination.sync="pagination")
+    v-data-table(:headers="alignedHeaders", :items="filteredItems", v-bind="{ search }", :pagination.sync="pagination", :custom-sort="customSort")
       template(v-slot:items="props")
         tr(v-if="props.item.isExpandable", :class="$style.clickableRow", @click="props.expanded = !props.expanded")
           td(v-for="{ value, render } in alignedHeaders", :to="props.item.to") {{ render(props.item[value], props.item) }}

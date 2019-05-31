@@ -5,6 +5,7 @@
   import { MonsterType } from '@/types'
   import _ from 'lodash'
   import ReferenceMonsterDescription from './ReferenceMonsterDescription.vue'
+  import math from 'mathjs'
 
   const monsterModule = namespace('monsters')
 
@@ -21,6 +22,25 @@
 
     created () {
       this.fetchMonsters()
+    }
+
+    customSort (items: any[], index: string, isDescending: boolean) {
+      items.sort((a, b) => {
+        if (index === 'challengeRating') {
+          if (!isDescending) {
+            return math.eval(a[index]) < math.eval(b[index]) ? -1 : 1
+          } else {
+            return math.eval(b[index]) < math.eval(a[index]) ? -1 : 1
+          }
+        } else {
+          if (!isDescending) {
+            return a[index] < b[index] ? -1 : 1
+          } else {
+            return b[index] < a[index] ? -1 : 1
+          }
+        }
+      })
+      return items
     }
 
     get items () {
@@ -70,7 +90,7 @@
   div
     h1(v-if="!isInHandbook") Monsters
     br
-    SearchTable(v-bind="{ headers, items }")
+    SearchTable(v-bind="{ headers, items, customSort }")
       template(v-slot:default="{ item }")
         ReferenceMonsterDescription(:monster="item")
 </template>

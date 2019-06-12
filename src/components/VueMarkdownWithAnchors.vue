@@ -7,15 +7,11 @@
       VueMarkdown
     }
   })
-  export default class VueMarkdownModalLinks extends Vue {
+  export default class VueMarkdownWithAnchors extends Vue {
     @Prop(String) readonly source!: string
-
-    get linkified () {
-      return this.source.replace(/\]\(/g, `](#${this.$route.path}`)
-    }
   }
 </script>
 
 <template lang="pug">
-  VueMarkdown(:source="linkified")
+  VueMarkdown(:source="source", toc=true, toc-anchor-link-symbol="")
 </template>

@@ -4,14 +4,14 @@
   import SearchTable from '@/components/SearchTable.vue'
   import { StarshipModificationType } from '@/types'
   import _ from 'lodash'
-  import VueMarkdownModalLinks from '@/components/VueMarkdownModalLinks.vue'
+  import VueMarkdownWithAnchors from '@/components/VueMarkdownWithAnchors.vue'
 
   const starshipModificationsModule = namespace('starshipModifications')
 
   @Component({
     components: {
       SearchTable,
-      VueMarkdownModalLinks
+      VueMarkdownWithAnchors
     }
   })
   export default class ReferenceStarshipModifications extends Vue {
@@ -57,5 +57,5 @@
     br
     SearchTable(v-bind="{ headers, items }")
       template(v-slot:default="props")
-        VueMarkdownModalLinks(:source="props.item.content")
+        VueMarkdownWithAnchors(:source="props.item.content")
 </template>

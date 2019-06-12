@@ -27,6 +27,7 @@ export default new Router({
       component: AssetsPage
     }
   ],
+  mode: 'history',
   scrollBehavior (to, from, savedPosition) {
     if (savedPosition || to.hash || from.hash) {
       return savedPosition

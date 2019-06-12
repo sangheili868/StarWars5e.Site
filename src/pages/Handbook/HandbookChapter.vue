@@ -1,14 +1,14 @@
 <script lang="ts">
   import { Component, Prop, Vue, Watch } from 'vue-property-decorator'
   import { namespace } from 'vuex-class'
-  import VueMarkdownModalLinks from '@/components/VueMarkdownModalLinks.vue'
+  import VueMarkdownWithAnchors from '@/components/VueMarkdownWithAnchors.vue'
   import Loading from '@/components/Loading.vue'
 
   const blobsModule = namespace('blobs')
 
   @Component({
     components: {
-      VueMarkdownModalLinks,
+      VueMarkdownWithAnchors,
       Loading
     }
   })
@@ -57,7 +57,7 @@
 
 <template lang="pug">
   div(v-if="blob")
-    VueMarkdownModalLinks(:source="blob").text-xs-left
+    VueMarkdownWithAnchors(:source="blob").text-xs-left
     slot
   Loading(v-else)
 </template>

@@ -30,7 +30,8 @@
       adventuring: 'Adventuring',
       combat: 'Combat',
       generatingEncounters: 'Generating Encounters',
-      conditions: 'Appendix A: Conditions'
+      conditions: 'Appendix A: Conditions',
+      changelog: 'Changelog'
     }
 
     created () {

@@ -166,13 +166,9 @@
           route: '/handbook/variantRules'
         },
         {
-          title: 'Other Variations',
-          icon: 'fa-check-double',
-          route: '/handbook/otherVariantRules',
-          items: this.variantRuleBlobs.map(({ chapterName }) => ({
-            title: chapterName,
-            route: `/handbook/otherVariantRules/${chapterName}`
-          }))
+          title: 'Changelog',
+          icon: 'fa-list',
+          route: '/handbook/changelog'
         }
       ]
     }

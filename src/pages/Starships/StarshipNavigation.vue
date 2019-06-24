@@ -121,6 +121,11 @@
         title: 'Conditions',
         icon: 'fa-biohazard',
         route: '/starships/conditions'
+      },
+      {
+        title: 'Changelog',
+        icon: 'fa-list',
+        route: '/starships/changelog'
       }
     ]
   }

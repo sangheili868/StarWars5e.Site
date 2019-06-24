@@ -23,7 +23,7 @@
     get variantRuleBlobsWithLinks () {
       return this.variantRuleBlobs.map(variantRuleBlob => ({
         ...variantRuleBlob,
-        to: `otherVariantRules/${variantRuleBlob.chapterName}`
+        to: `additionalVariantRules/${variantRuleBlob.chapterName}`
       }))
     }
   }

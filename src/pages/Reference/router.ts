@@ -17,6 +17,8 @@ import ReferenceStarshipEquipment from './ReferenceStarshipEquipment.vue'
 import ReferenceStarshipModifications from './ReferenceStarshipModifications.vue'
 import ReferenceStarshipWeapons from './ReferenceStarshipWeapons.vue'
 import ReferenceVentures from './ReferenceVentures.vue'
+import VariantRules from './VariantRules.vue'
+import VariantRulesDetail from './VariantRulesDetail.vue'
 
 export default [
   {
@@ -98,5 +100,14 @@ export default [
   {
     path: '/reference/ventures',
     component: ReferenceVentures
+  },
+  {
+    path: '/reference/additionalVariantRules',
+    component: VariantRules
+  },
+  {
+    path: '/reference/additionalVariantRules/:variantRuleName',
+    component: VariantRulesDetail,
+    props: true
   }
 ]

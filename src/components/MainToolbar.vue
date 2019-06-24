@@ -36,11 +36,12 @@
             { to: '/feats', title: 'Feats' },
             { to: '/forcePowers', title: 'Force Powers' },
             { to: '/techPowers', title: 'Tech Powers' },
-            { to: '/monsters', title: 'Monsters' },
-            { to: '/starshipEquipment', title: 'Starship Equipment' },
             { to: '/starshipModifications', title: 'Starship Modifications' },
+            { to: '/starshipEquipment', title: 'Starship Equipment' },
             { to: '/starshipWeapons', title: 'Starship Weapons' },
-            { to: '/ventures', title: 'Ventures' }
+            { to: '/ventures', title: 'Ventures' },
+            { to: '/monsters', title: 'Monsters' },
+            { to: '/additionalVariantRules', title: 'Additional Variant Rules' }
           ]
         },
         {

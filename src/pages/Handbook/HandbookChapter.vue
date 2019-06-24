@@ -32,7 +32,8 @@
       combat: 'Combat',
       casting: 'Force- and Tech-casting',
       conditions: 'Appendix A: Conditions',
-      variantRules: 'Appendix B: Recommended Variant Rules'
+      variantRules: 'Appendix B: Recommended Variant Rules',
+      changelog: 'Changelog'
     }
 
     created () {

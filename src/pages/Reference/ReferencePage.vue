@@ -60,8 +60,8 @@
           category: 'Dungeon Master',
           routes: [
             {
-              to: '/reference/monsters',
-              title: 'Monsters'
+              to: '/reference/additionalVariantRules',
+              title: 'Additional Variant Rules'
             }
           ]
         },
@@ -69,12 +69,12 @@
           category: 'Starships',
           routes: [
             {
-              to: '/reference/starshipEquipment',
-              title: 'Starship Equipment'
-            },
-            {
               to: '/reference/starshipModifications',
               title: 'Starship Modifications'
+            },
+            {
+              to: '/reference/starshipEquipment',
+              title: 'Starship Equipment'
             },
             {
               to: '/reference/starshipWeapons',

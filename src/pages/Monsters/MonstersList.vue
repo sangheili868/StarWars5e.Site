@@ -4,7 +4,7 @@
   import SearchTable from '@/components/SearchTable.vue'
   import { MonsterType } from '@/types'
   import _ from 'lodash'
-  import ReferenceMonsterDescription from './ReferenceMonsterDescription.vue'
+  import MonsterDescription from './MonsterDescription.vue'
   import math from 'mathjs'
 
   const monsterModule = namespace('monsters')
@@ -12,10 +12,10 @@
   @Component({
     components: {
       SearchTable,
-      ReferenceMonsterDescription
+      MonsterDescription
     }
   })
-  export default class ReferenceMonsters extends Vue {
+  export default class MonstersList extends Vue {
     @monsterModule.State monsters!: MonsterType[]
     @monsterModule.Action fetchMonsters!: () => void
     @Prop({ type: Boolean, default: false }) readonly isInHandbook!: boolean
@@ -92,5 +92,5 @@
     br
     SearchTable(v-bind="{ headers, items, customSort }")
       template(v-slot:default="{ item }")
-        ReferenceMonsterDescription(:monster="item")
+        MonsterDescription(:monster="item")
 </template>

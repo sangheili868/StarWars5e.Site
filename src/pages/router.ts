@@ -6,6 +6,7 @@ import AssetsPage from './AssetsPage.vue'
 import handbookRoute from './Handbook/router'
 import starshipRoutes from './Starships/router'
 import referenceRoutes from './Reference/router'
+import monsterRoutes from './Monsters/router'
 
 Vue.use(Router)
 
@@ -17,6 +18,7 @@ export default new Router({
     },
     handbookRoute,
     starshipRoutes,
+    monsterRoutes,
     ...referenceRoutes,
     {
       path: '/credits',

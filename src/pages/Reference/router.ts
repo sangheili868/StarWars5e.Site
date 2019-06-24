@@ -11,8 +11,6 @@ import ReferenceWeapons from './ReferenceWeapons.vue'
 import ReferenceGear from './ReferenceGear.vue'
 import ReferenceForcePowers from './ReferenceForcePowers.vue'
 import ReferenceTechPowers from './ReferenceTechPowers.vue'
-import ReferenceMonsters from './ReferenceMonsters.vue'
-import ReferenceMonsterDetail from './ReferenceMonsterDetail.vue'
 import ReferenceStarshipEquipment from './ReferenceStarshipEquipment.vue'
 import ReferenceStarshipModifications from './ReferenceStarshipModifications.vue'
 import ReferenceStarshipWeapons from './ReferenceStarshipWeapons.vue'
@@ -67,15 +65,6 @@ export default [
   {
     path: '/reference/adventuringGear',
     component: ReferenceGear
-  },
-  {
-    path: '/reference/monsters',
-    component: ReferenceMonsters
-  },
-  {
-    path: '/reference/monsters/:monsterName',
-    component: ReferenceMonsterDetail,
-    props: true
   },
   {
     path: '/reference/forcePowers',

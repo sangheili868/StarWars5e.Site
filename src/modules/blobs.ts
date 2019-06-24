@@ -8,6 +8,7 @@ export default class Blobs extends VuexModule {
   handbookBlobs: { [blob: string]: string } = {}
   starshipBlobs: { [blob: string]: string } = {}
   variantRuleBlobs: VariantRuleBlobType[] = []
+  monsterBlobs: { [blob: string]: string } = {}
 
   @MutationAction({ mutate: ['handbookBlobs'] })
   async fetchHandbookBlobs () {
@@ -46,6 +47,17 @@ export default class Blobs extends VuexModule {
       variantRuleBlobs: results.data.map((variantRuleBlob: VariantRuleBlobType) =>
         _.pick(variantRuleBlob, ['chapterName', 'contentMarkdown'])
       )
+    }
+  }
+
+  @MutationAction({ mutate: ['monsterBlobs'] })
+  async fetchMonsterBlobs (chapter: string) {
+    const results = await axios.get(`${process.env.VUE_APP_sw5eapiurl}/api/MonsterChapters/${chapter}.json`)
+    return {
+      monsterBlobs: {
+        ...this.state && (this.state as any).monsterBlobs,
+        [results.data.chapterName]: results.data.contentMarkdown
+      }
     }
   }
 }

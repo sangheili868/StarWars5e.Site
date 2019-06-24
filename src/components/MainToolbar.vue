@@ -20,6 +20,10 @@
           title: 'Handbook'
         },
         {
+          to: '/monsters',
+          title: 'Monsters'
+        },
+        {
           to: '/starships',
           title: 'Starships'
         },
@@ -40,7 +44,6 @@
             { to: '/starshipEquipment', title: 'Starship Equipment' },
             { to: '/starshipWeapons', title: 'Starship Weapons' },
             { to: '/ventures', title: 'Ventures' },
-            { to: '/monsters', title: 'Monsters' },
             { to: '/additionalVariantRules', title: 'Additional Variant Rules' }
           ]
         },

@@ -2,16 +2,16 @@
   import { Component, Prop, Vue } from 'vue-property-decorator'
   import { namespace } from 'vuex-class'
   import { MonsterType } from '@/types.ts'
-  import ReferenceMonsterDescription from './ReferenceMonsterDescription.vue'
+  import MonsterDescription from './MonsterDescription.vue'
 
   const monsterModule = namespace('monsters')
 
   @Component({
     components: {
-      ReferenceMonsterDescription
+      MonsterDescription
     }
   })
-  export default class ReferenceMonstersDetail extends Vue {
+  export default class MonsterDetail extends Vue {
     @monsterModule.State monsters!: MonsterType[]
     @monsterModule.Action fetchMonsters!: () => void
 
@@ -28,5 +28,5 @@
 </script>
 
 <template lang="pug">
-  ReferenceMonsterDescription(v-bind="{ monster }", isAtDetail)
+  MonsterDescription(v-bind="{ monster }", isAtDetail)
 </template>

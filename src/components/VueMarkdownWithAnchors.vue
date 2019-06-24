@@ -13,7 +13,10 @@
     jumpToHash () {
       this.$nextTick(() => {
         const element = document.getElementById(this.$route.hash.slice(1))
-        if (element) element.scrollIntoView()
+        if (element) {
+          element.scrollIntoView()
+          if (window.scrollY > 75) window.scroll(0, window.scrollY - 75)
+        }
       })
     }
   }

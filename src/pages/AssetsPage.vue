@@ -9,15 +9,15 @@
           category: 'Source Books',
           routes: [
             {
-              href: 'https://drive.google.com/file/d/1bVVk719__eeJC388VXV6KXqwRjUOQJ0m/view?usp=sharing',
+              href: 'https://drive.google.com/file/d/1eFTWbzZEYnpizz13wjNU_9uXuJ3f9hki/view?usp=sharing',
               title: 'Player\'s Handbook'
             },
             {
-              href: 'https://drive.google.com/file/d/1isFATl_y8hVuL2VRLpBdXhXqTAwT8mZI/view?usp=sharing',
+              href: 'https://drive.google.com/file/d/18NDEJLTtfkVt4kqqj204KJpub0l7A9MX/view?usp=sharing',
               title: 'Monster Manual'
             },
             {
-              href: 'https://drive.google.com/file/d/1zWAarhkSaQVT3NCYF_y1UYJnavP8aw3s/view?usp=sharing',
+              href: 'https://drive.google.com/file/d/1XXE50huqr93gT-sujqjcQ-Eq8OE7-HfD/view?usp=sharing',
               title: 'Starships of the Galaxy'
             }
           ]
@@ -26,35 +26,23 @@
           category: 'Expanded Content',
           routes: [
             {
-              href: 'https://drive.google.com/file/d/10g8huNKMRKwBY5ihGjw5s2K7T7mr8yRK/view?usp=sharing',
+              href: 'https://drive.google.com/file/d/1rh3-yHcKwQh9iDGsl3VwWsdFoEmlqTQM/view?usp=sharing',
               title: 'Species'
             },
             {
-              href: 'https://drive.google.com/file/d/1wGpbFNVNangoWlN5EChhNog6885htYZ5/view?usp=sharing',
+              href: 'https://drive.google.com/file/d/1b5srpCjqHV9ZICSHnXbfTUcmhsIg6OGo/view?usp=sharing',
               title: 'Archetypes'
             },
             {
-              href: 'https://drive.google.com/file/d/1hBUbBLU29oSW9ZsdmflpCVVK1jfz_zYv/view?usp=sharing',
+              href: 'https://drive.google.com/file/d/11gtMu3mxVVcA29hHP3NKT8N3L2lpCp2W/view?usp=sharing',
               title: 'Backgrounds'
             },
             {
-              href: 'https://drive.google.com/file/d/1jYrER55Y06RXm_5r6cmpx2_fLG7jOhjZ/view?usp=sharing',
-              title: 'Equipment'
-            },
-            {
-              href: 'https://drive.google.com/file/d/1LKOMeXQRskz_G_vkVM-wLKy40aZ9rKI-/view?usp=sharing',
+              href: 'https://drive.google.com/file/d/1G4SR2xvx6_F3OSsDh-MGsHanorM3V-Ia/view?usp=sharing',
               title: 'Customization Options'
             },
             {
-              href: 'https://drive.google.com/file/d/13BZPw6SCBU3vDcSASfwMQqUei3Z6gPaT/view?usp=sharing',
-              title: 'Force Powers'
-            },
-            {
-              href: 'https://drive.google.com/file/d/1opuktmH66l4hcH8CWrdlkOBV7XBZ_0LC/view?usp=sharing',
-              title: 'Tech Powers'
-            },
-            {
-              href: 'https://drive.google.com/file/d/105oCEYihrqQGDZ8iSDOkdX-rXrpmg_qd/view?usp=sharing',
+              href: 'https://drive.google.com/file/d/1k5bKKD65mEgxkLnGI7_F7X1fOlXNU3IV/view?usp=sharing',
               title: 'Variant Rules'
             }
           ]
@@ -84,11 +72,11 @@
           category: 'Character Sheets',
           routes: [
             {
-              href: 'https://drive.google.com/file/d/1vPDWtEOV9GwwY4kCp6VZ9IaFVt5vTtIw/view?usp=sharing',
+              href: 'https://drive.google.com/file/d/16b0luhTq6xBuQUUf8jm6vnLAImnmjuAF/view?usp=sharing',
               title: 'Character Sheet'
             },
             {
-              href: 'https://drive.google.com/file/d/1EOmgTd4olVKqsnFJI8yQRB9DLvscCjOc/view?usp=sharing',
+              href: 'https://drive.google.com/file/d/17mCKw43pbeATDFWraKAOmSgyI8vcUCtK/view?usp=sharing',
               title: 'Character Sheet: Form Fillable'
             },
             {
@@ -109,16 +97,16 @@
           category: 'Deployment and Starship Sheets',
           routes: [
             {
-              href: 'https://drive.google.com/file/d/10zEr8Xag9HtoqoFpS-nrjEa24xXxqs-g/view?usp=sharing',
+              href: 'https://drive.google.com/file/d/11zxAf6O7FHrXMP5kZQgBuAyY_6Sgck6f/view?usp=sharing',
               title: 'Deployment Sheet',
               author: '/u/speedreeder',
-              authorLink: 'https://www.reddit.com/u/papasmurf008'
+              authorLink: 'https://www.reddit.com/u/speedreeder'
             },
             {
-              href: 'https://drive.google.com/file/d/1mJ4ynIKUxcophRf-D578XGAhsXpS1cIa/view?usp=sharing',
+              href: 'https://drive.google.com/file/d/1cPleUQKg-F1S1s142R9XB1LYht5w_UUQ/view?usp=sharing',
               title: 'Starship Sheet',
               author: '/u/speedreeder',
-              authorLink: 'https://www.reddit.com/u/papasmurf008'
+              authorLink: 'https://www.reddit.com/u/speedreeder'
             }
           ]
         }

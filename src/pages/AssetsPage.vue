@@ -48,27 +48,6 @@
           ]
         },
         {
-          category: 'Special Equipment',
-          routes: [
-            {
-              href: 'https://drive.google.com/file/d/1CZL0cX7P0gODBlg7WegWL2rGdtZOyjiZ/view?usp=sharing',
-              title: 'Enhanced Items'
-            },
-            {
-              href: 'https://drive.google.com/file/d/17bPkE-_JVNR4VvO6BpAxvQlJGG1wFKCN/view?usp=sharing',
-              title: 'Cybernetic Augmentations'
-            },
-            {
-              href: 'https://drive.google.com/file/d/1NDHDOMeFerAqCAbElQSg-CJYsSDhSPqz/view?usp=sharing',
-              title: 'Droid Customization'
-            },
-            {
-              href: 'https://drive.google.com/file/d/1yQ8NhlrZOVQ9defw4B3_--CwREicNFuG/view?usp=sharing',
-              title: 'Modifiable Items'
-            }
-          ]
-        },
-        {
           category: 'Character Sheets',
           routes: [
             {

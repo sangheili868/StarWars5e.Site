@@ -306,3 +306,9 @@ export interface ReferenceTableType {
   contentType: string,
   name: string
 }
+
+export interface GlobalSearchResult {
+  name: string,
+  path: string,
+  fullName: string
+}

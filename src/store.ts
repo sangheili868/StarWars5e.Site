@@ -21,6 +21,7 @@ import ui from './modules/ui'
 import ventures from './modules/ventures'
 import weapons from './modules/weapons'
 import weaponProperties from './modules/weaponProperties'
+import search from './modules/search'
 
 Vue.use(Vuex)
 
@@ -46,6 +47,7 @@ export default new Vuex.Store({
     ui,
     ventures,
     weapons,
-    weaponProperties
+    weaponProperties,
+    search
   }
 })

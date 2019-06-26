@@ -1,13 +1,19 @@
 <script lang="ts">
   import { Component, Prop, Vue } from 'vue-property-decorator'
   import { namespace } from 'vuex-class'
+  import { GlobalSearchResult } from '@/types'
 
   const uiModule = namespace('ui')
+  const searchModule = namespace('search')
 
   @Component
   export default class MainToolbar extends Vue {
     @uiModule.State isSideBarOpen!: boolean
     @uiModule.Action updateSideBar!: (value: boolean) => void
+    @searchModule.State searchResults!: GlobalSearchResult[]
+    @searchModule.Action fetchSearchResults!: (searchText: string) => void
+
+    searchText: string = ''
 
     get routes () {
       return [
@@ -79,6 +85,10 @@
     handleSideIconClick () {
       this.updateSideBar(true)
     }
+
+    runSearch () {
+      this.fetchSearchResults(this.searchText)
+    }
   }
 </script>
 
@@ -98,6 +108,7 @@
           v-list-tile(:to="to + nestedRoute.to")
             v-list-tile-title {{ nestedRoute.title }}
         template(v-if="!nested || !nested.length") {{ title }}
+      v-text-field(v-model="searchText", append-icon="fa-search", flat, @click:append="runSearch")
     v-toolbar-items.hidden-md-and-up
       v-menu(bottom, left, offset-y, attach)
         template(v-slot:activator="{ on }")

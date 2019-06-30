@@ -44,7 +44,7 @@
           image: 'phb_cover'
         },
         {
-          to: 'reference/monsters',
+          to: 'monsters',
           title: 'Monster Manual',
           image: 'mm_cover'
         },
@@ -65,7 +65,7 @@
       template(v-slot="{ card }")
         v-img(:src="require(`@/assets/${card.image}.jpg`)", :class="$style.image")
     p
-      | What is Star Wars 5e? It's a full conversion for Dungeons and Dragon Fifth Edition to the Star Wars Universe.
+      | What is Star Wars 5e? It's a full conversion for Dungeons and Dragon Fifth Edition to the Star Wars universe.
       | Here you can find rules on creating a lightsaber-swinging jedi sentinel, a devil-may-care smuggler operative, or
       | a droid-hacking engineer. There's also a full collection of Star Wars monsters, NPCs, and constructs to fight
       | against. Ready to take to the stars? All the rules on piloting and customizing your very own spaceship are here

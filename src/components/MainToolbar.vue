@@ -59,7 +59,7 @@
     }
 
     get isPageWithNavigation () {
-      return ['handbook', 'starships'].some(page => this.$route.path.includes(page))
+      return ['handbook', 'starships', 'monsters'].some(page => this.$route.path.includes(page))
     }
 
     buildComponentProps (to: string, nested: { to: string, title: string }[]) {

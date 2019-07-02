@@ -7,7 +7,7 @@ import MonsterDetail from './MonsterDetail.vue'
 export default {
   path: '/monsters',
   components: {
-    default: MonstersList,
+    default: MonsterPage,
     navigation: MonsterNavigation
   },
   children: [
@@ -17,16 +17,17 @@ export default {
       props: true
     },
     {
+      path: 'monsters',
+      component: MonstersList
+    },
+    {
       path: ':chapter',
       component: MonsterChapter,
       props: true
     },
     {
       path: '',
-      component: MonsterChapter,
-      props: {
-        chapter: 'introduction'
-      }
+      component: MonstersList
     }
   ]
 }

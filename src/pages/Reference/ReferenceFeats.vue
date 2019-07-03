@@ -18,9 +18,11 @@
     @archetypeModule.State feats!: FeatType[]
     @archetypeModule.Action fetchFeats!: () => void
     @Prop({ type: Boolean, default: false }) readonly isInHandbook!: boolean
+    search: string | (string | null)[] = ''
 
     created () {
       this.fetchFeats()
+      this.search = this.$route.query.search
     }
 
     get items () {
@@ -67,7 +69,7 @@
   div
     h1(v-if="!isInHandbook") Feats
     br
-    SearchTable(v-bind="{ headers, items }")
+    SearchTable(v-bind="{ headers, items, search }")
       template(v-slot:default="props")
         VueMarkdown(:source="props.item.text")
 </template>

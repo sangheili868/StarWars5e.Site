@@ -17,9 +17,11 @@
   export default class ReferenceArmor extends Vue {
     @armorModule.State armor!: ArmorType[]
     @armorModule.Action fetchArmor!: () => void
+    search: string | (string | null)[] = ''
 
     created () {
       this.fetchArmor()
+      this.search = this.$route.query.search
     }
 
     get items () {
@@ -55,7 +57,7 @@
   div
     h1 Armor
     br
-    SearchTable(v-bind="{ headers, items }")
+    SearchTable(v-bind="{ headers, items, search }")
       template(v-slot:default="props")
         VueMarkdown(:source="props.item.description")
 </template>

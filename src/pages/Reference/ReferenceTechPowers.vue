@@ -17,9 +17,11 @@
   export default class ReferenceForcePowers extends Vue {
     @powersModule.State powers!: PowerType[]
     @powersModule.Action fetchPowers!: () => void
+    search: string | (string | null)[] = ''
 
     created () {
       this.fetchPowers()
+      this.search = this.$route.query.search
     }
 
     get items () {
@@ -79,7 +81,7 @@
   div
     h1 Tech Powers
     br
-    SearchTable(v-bind="{ headers, items }")
+    SearchTable(v-bind="{ headers, items, search }")
       template(v-slot:default="props")
         VueMarkdown(:source="props.item.description")
 </template>

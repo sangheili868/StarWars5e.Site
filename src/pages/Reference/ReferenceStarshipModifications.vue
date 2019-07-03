@@ -17,9 +17,11 @@
   export default class ReferenceStarshipModifications extends Vue {
     @starshipModificationsModule.State starshipModifications!: StarshipModificationType[]
     @starshipModificationsModule.Action fetchStarshipModifications!: () => void
+    search: string | (string | null)[] = ''
 
     created () {
       this.fetchStarshipModifications()
+      this.search = this.$route.query.search
     }
 
     get items () {
@@ -55,7 +57,7 @@
   div
     h1 Starship Modifications
     br
-    SearchTable(v-bind="{ headers, items }")
+    SearchTable(v-bind="{ headers, items, search }")
       template(v-slot:default="props")
         VueMarkdownWithAnchors(:source="props.item.content")
 </template>

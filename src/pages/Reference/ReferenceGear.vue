@@ -17,9 +17,11 @@
   export default class ReferenceGear extends Vue {
     @gearModule.State gear!: GearType[]
     @gearModule.Action fetchGear!: () => void
+    search: string | (string | null)[] = ''
 
     created () {
       this.fetchGear()
+      this.search = this.$route.query.search
     }
 
     get items () {
@@ -33,6 +35,7 @@
 
     get headers () {
       return [
+        { text: 'Name', value: 'name' },
         {
           text: 'Category',
           value: 'equipmentCategory',
@@ -41,7 +44,6 @@
           'Kit', 'Life Support', 'Medical', 'Musical Instrument', 'Storage', 'Tool'],
           filterFunction: ({ equipmentCategory }: GearType, filterValue: string) => _.startCase(equipmentCategory) === filterValue
         },
-        { text: 'Name', value: 'name' },
         { text: 'Cost', value: 'cost' },
         { text: 'Weight', value: 'weight' },
         {
@@ -59,7 +61,7 @@
   div
     h1 Gear
     br
-    SearchTable(v-bind="{ headers, items }")
+    SearchTable(v-bind="{ headers, items, search }")
       template(v-slot:default="props")
         VueMarkdown(:source="props.item.description")
 </template>

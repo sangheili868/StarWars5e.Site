@@ -14,6 +14,7 @@
     "@types/node": "^11.13.4",
     "@types/pluralize": "^0.0.29",
     "@types/vue-markdown": "^2.2.1",
+    "axios": "0.18.1",
     "core-js": "^2.6.5",
     "material-design-icons-iconfont": "^4.0.5",
     "mathjs": "^5.10.3",

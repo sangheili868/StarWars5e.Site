@@ -13,6 +13,7 @@ import monsters from './modules/monsters'
 import powers from './modules/powers'
 import species from './modules/species'
 import referenceTables from './modules/referenceTable'
+import searchResults from './modules/searchResults'
 import starshipEquipment from './modules/starshipEquipment'
 import starshipModifications from './modules/starshipModifications'
 import starshipSizes from './modules/starshipSizes'
@@ -39,6 +40,7 @@ export default new Vuex.Store({
     powers,
     species,
     referenceTables,
+    searchResults,
     starshipEquipment,
     starshipModifications,
     starshipSizes,

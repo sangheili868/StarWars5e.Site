@@ -7,6 +7,7 @@ import handbookRoute from './Handbook/router'
 import starshipRoutes from './Starships/router'
 import referenceRoutes from './Reference/router'
 import monsterRoutes from './Monsters/router'
+import SearchResultsPage from './SearchResultsPage.vue'
 
 Vue.use(Router)
 
@@ -27,6 +28,11 @@ export default new Router({
     {
       path: '/assets',
       component: AssetsPage
+    },
+    {
+      path: '/searchResults',
+      component: SearchResultsPage,
+      props: ({ query }) => query
     }
   ],
   mode: 'history',

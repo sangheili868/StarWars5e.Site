@@ -1,10 +1,15 @@
 <script lang="ts">
   import { Component, Prop, Vue } from 'vue-property-decorator'
   import { namespace } from 'vuex-class'
+  import SearchBox from '@/components/SearchBox.vue'
 
   const uiModule = namespace('ui')
 
-  @Component
+  @Component({
+    components: {
+      SearchBox
+    }
+  })
   export default class MainToolbar extends Vue {
     @uiModule.State isSideBarOpen!: boolean
     @uiModule.Action updateSideBar!: (value: boolean) => void
@@ -98,6 +103,7 @@
           v-list-tile(:to="to + nestedRoute.to")
             v-list-tile-title {{ nestedRoute.title }}
         template(v-if="!nested || !nested.length") {{ title }}
+      SearchBox
     v-toolbar-items.hidden-md-and-up
       v-menu(bottom, left, offset-y, attach)
         template(v-slot:activator="{ on }")
@@ -106,4 +112,7 @@
         v-list
           v-list-tile(v-for="{to, title} in routes", :key="title", :to="to")
             v-list-tile-title {{ title }}
+          v-list-tile(to="/searchResults")
+            v-icon.pr-2 fa-search
+            v-list-tile-title Search
 </template>

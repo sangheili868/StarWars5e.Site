@@ -58,24 +58,24 @@
           v-icon fa-external-link-alt
     i {{ monster.size }} {{ monster.types.join(', ')}}, {{ monster.alignment }}
     hr.mt-2
-    div #[strong Armor Class:] {{ monster.armorClass }} ({{ monster.armorType }})
-    div #[strong Hit Points:] {{ monster.hitPoints }} ({{ monster.hitPointRoll }})
-    div #[strong Speed:] {{ monster.speed }} ft.
+    div #[strong Armor Class] {{ monster.armorClass }} ({{ monster.armorType }})
+    div #[strong Hit Points] {{ monster.hitPoints }} ({{ monster.hitPointRoll }})
+    div #[strong Speed] {{ monster.speed }} ft.
     hr
     div(:class="$style.abilityScores").text-xs-center
       div(v-for="{ score, value, modifier } in abilityScores", :key="score").ma-2
         strong {{ score }}
         div {{ value }} ({{ modifier }})
     hr
-    div(v-if="monster.savingThrows") #[strong Saving Throws:] {{ monster.savingThrows.join(', ') }}
-    div(v-if="monster.skills") #[strong Skills:] {{ monster.skills.join(', ') }}
-    div(v-if="hasListOrOther('damageVulnerabilities')") #[strong Damage Vulnerabilities:] {{ joinWithOther('damageVulnerabilities') }}
-    div(v-if="hasListOrOther('damageResistances')") #[strong Damage Resistances:] {{ joinWithOther('damageResistances') }}
-    div(v-if="hasListOrOther('damageImmunities')") #[strong Damage Immunities:] {{ joinWithOther('damageImmunities') }}
-    div(v-if="hasListOrOther('conditionImmunities')") #[strong Condition Immunities:] {{ joinWithOther('conditionImmunities') }}
-    div(v-if="monster.senses && monster.senses.length") #[strong Senses:] {{ monster.senses.join(', ').replace(/\ufffd/g, '-') }}
-    div(v-if="monster.languages && monster.languages.length") #[strong Languages:] {{ monster.languages.join(', ').replace(/\ufffd/g, '-') }}
-    div #[strong Challenge:] {{ monster.challengeRating }} ({{ monster.experiencePoints.toLocaleString() }} XP)
+    div(v-if="monster.savingThrows") #[strong Saving Throws] {{ monster.savingThrows.join(', ') }}
+    div(v-if="monster.skills") #[strong Skills] {{ monster.skills.join(', ') }}
+    div(v-if="hasListOrOther('damageVulnerabilities')") #[strong Damage Vulnerabilities] {{ joinWithOther('damageVulnerabilities') }}
+    div(v-if="hasListOrOther('damageResistances')") #[strong Damage Resistances] {{ joinWithOther('damageResistances') }}
+    div(v-if="hasListOrOther('damageImmunities')") #[strong Damage Immunities] {{ joinWithOther('damageImmunities') }}
+    div(v-if="hasListOrOther('conditionImmunities')") #[strong Condition Immunities] {{ joinWithOther('conditionImmunities') }}
+    div(v-if="monster.senses && monster.senses.length") #[strong Senses] {{ monster.senses.join(', ').replace(/\ufffd/g, '-') }}
+    div(v-if="monster.languages && monster.languages.length") #[strong Languages] {{ monster.languages.join(', ').replace(/\ufffd/g, '-') }}
+    div #[strong Challenge] {{ monster.challengeRating }} ({{ monster.experiencePoints.toLocaleString() }} XP)
     hr
     div(v-if="behaviors('Trait').length")
       h3 Traits

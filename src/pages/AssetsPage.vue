@@ -88,6 +88,15 @@
               authorLink: 'https://www.reddit.com/u/speedreeder'
             }
           ]
+        },
+        {
+          category: 'Other',
+          routes: [
+            {
+              href: 'https://www.reddit.com/r/sw5e/comments/cb1i87/printing_a_star_wars_5e_story/',
+              title: 'Printing Instructions For The Player\'s Handbook'
+            }
+          ]
         }
       ]
     }

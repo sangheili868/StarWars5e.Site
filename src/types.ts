@@ -149,6 +149,7 @@ export interface MonsterType {
   size: string,
   skills: string[],
   speed: number,
+  speeds: string,
   strength: number,
   strengthModifier: number,
   types: string[],

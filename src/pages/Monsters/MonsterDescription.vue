@@ -60,7 +60,7 @@
     hr.mt-2
     div #[strong Armor Class] {{ monster.armorClass }} ({{ monster.armorType }})
     div #[strong Hit Points] {{ monster.hitPoints }} ({{ monster.hitPointRoll }})
-    div #[strong Speed] {{ monster.speed }} ft.
+    div #[strong Speed] {{ monster.speeds }}
     hr
     div(:class="$style.abilityScores").text-xs-center
       div(v-for="{ score, value, modifier } in abilityScores", :key="score").ma-2

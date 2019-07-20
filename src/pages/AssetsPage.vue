@@ -57,18 +57,6 @@
             {
               href: 'https://drive.google.com/file/d/17mCKw43pbeATDFWraKAOmSgyI8vcUCtK/view?usp=sharing',
               title: 'Character Sheet: Form Fillable'
-            },
-            {
-              href: 'https://www.reddit.com/r/sw5e/comments/9v487b/10_pregenerated_level_1_player_characters_1_for/',
-              title: 'Pre-generated Characters',
-              author: '/u/papasmurf008',
-              authorLink: 'https://www.reddit.com/u/papasmurf008'
-            },
-            {
-              href: 'https://drive.google.com/drive/folders/1TsJZYSlY_wwTKPxv1a34fGxJNZJWE0a2',
-              title: 'More Pre-generated Characters (level 5)',
-              author: '/u/cpthogie',
-              authorLink: 'https://www.reddit.com/u/papasmurf008'
             }
           ]
         },
@@ -82,10 +70,18 @@
               authorLink: 'https://www.reddit.com/u/speedreeder'
             },
             {
+              href: 'https://drive.google.com/file/d/1Oh9v-kWR7Vd0YNFZE5ESKt1VutzQQSl-/view?usp=sharing',
+              title: 'Deployment Sheet: Form Fillable',
+            },
+            {
               href: 'https://drive.google.com/file/d/1cPleUQKg-F1S1s142R9XB1LYht5w_UUQ/view?usp=sharing',
               title: 'Starship Sheet',
               author: '/u/speedreeder',
               authorLink: 'https://www.reddit.com/u/speedreeder'
+            },
+            {
+              href: 'https://drive.google.com/file/d/1viykv2MazM26WRMJZ4fNAixhoeYWLR7N/view?usp=sharing',
+              title: 'Starship Sheet: Form Fillable',
             }
           ]
         },
@@ -95,6 +91,18 @@
             {
               href: 'https://www.reddit.com/r/sw5e/comments/cb1i87/printing_a_star_wars_5e_story/',
               title: 'Printing Instructions For The Player\'s Handbook'
+            },
+            {
+              href: 'https://www.reddit.com/r/sw5e/comments/9v487b/10_pregenerated_level_1_player_characters_1_for/',
+              title: 'Pre-generated Characters',
+              author: '/u/papasmurf008',
+              authorLink: 'https://www.reddit.com/u/papasmurf008'
+            },
+            {
+              href: 'https://drive.google.com/drive/folders/1TsJZYSlY_wwTKPxv1a34fGxJNZJWE0a2',
+              title: 'More Pre-generated Characters (level 5)',
+              author: '/u/cpthogie',
+              authorLink: 'https://www.reddit.com/u/papasmurf008'
             }
           ]
         }

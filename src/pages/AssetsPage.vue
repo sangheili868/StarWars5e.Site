@@ -71,7 +71,7 @@
             },
             {
               href: 'https://drive.google.com/file/d/1Oh9v-kWR7Vd0YNFZE5ESKt1VutzQQSl-/view?usp=sharing',
-              title: 'Deployment Sheet: Form Fillable',
+              title: 'Deployment Sheet: Form Fillable'
             },
             {
               href: 'https://drive.google.com/file/d/1cPleUQKg-F1S1s142R9XB1LYht5w_UUQ/view?usp=sharing',
@@ -81,7 +81,7 @@
             },
             {
               href: 'https://drive.google.com/file/d/1viykv2MazM26WRMJZ4fNAixhoeYWLR7N/view?usp=sharing',
-              title: 'Starship Sheet: Form Fillable',
+              title: 'Starship Sheet: Form Fillable'
             }
           ]
         },

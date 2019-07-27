@@ -8,7 +8,7 @@ export default class Monsters extends VuexModule {
 
   @MutationAction({ mutate: ['monsters'] })
   async fetchMonsters () {
-    const results = await axios.get(`${process.env.VUE_APP_sw5eapiurl}/api/Monster`)
+    const results = await axios.get(`${process.env.VUE_APP_sw5eapiurl}/api/Monster`, { withCredentials: true })
     return {
       monsters: results.data
     }

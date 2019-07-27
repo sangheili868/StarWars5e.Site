@@ -8,6 +8,7 @@ import starshipRoutes from './Starships/router'
 import referenceRoutes from './Reference/router'
 import monsterRoutes from './Monsters/router'
 import SearchResultsPage from './SearchResultsPage.vue'
+import LoginPage from './LoginPage.vue'
 
 Vue.use(Router)
 
@@ -33,6 +34,10 @@ export default new Router({
       path: '/searchResults',
       component: SearchResultsPage,
       props: ({ query }) => query
+    },
+    {
+      path: '/login',
+      component: LoginPage
     }
   ],
   mode: 'history',

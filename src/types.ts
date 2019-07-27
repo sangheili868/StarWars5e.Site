@@ -315,3 +315,10 @@ export interface SearchResultType {
   searchText: string,
   rowKey: string
 }
+
+export interface AuthType {
+  accessToken: string,
+  accessTokenExpiration: number,
+  refreshToken: string,
+  acessTokenExpirationDate: Date
+}

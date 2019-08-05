@@ -317,8 +317,7 @@ export interface SearchResultType {
 }
 
 export interface AuthType {
-  accessToken: string,
+  userName: string,
   accessTokenExpiration: number,
-  refreshToken: string,
   acessTokenExpirationDate: Date
 }

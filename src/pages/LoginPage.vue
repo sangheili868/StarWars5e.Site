@@ -4,6 +4,7 @@
   import Loading from '@/components/Loading.vue'
   import axios from 'axios'
   import { AuthType } from '../types'
+  import Cookies from 'js-cookie'
 
   const authModule = namespace('auth')
 
@@ -14,13 +15,6 @@
   })
   export default class LoginPage extends Vue {
     @authModule.Action storeAuth!: (auth: AuthType) => void
-
-    async handleLogin (stuff: any) {
-      let x = stuff.authResponse.accessToken
-      var response = await axios.post<AuthType>(`${process.env.VUE_APP_sw5eapiurl}/api/ExternalAuth/facebook`, { 'AccessToken': x })
-      console.log(response.data)
-      await this.storeAuth(response.data)
-    }
 
     async auth (provider: string) {
       // this.$auth.logout()

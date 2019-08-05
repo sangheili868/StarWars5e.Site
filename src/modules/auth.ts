@@ -1,13 +1,13 @@
 import axios from 'axios'
 import { Module, VuexModule, MutationAction } from 'vuex-module-decorators'
 import { AuthType } from '@/types'
+import Cookies from 'js-cookie'
 
 @Module({ namespaced: true, name: 'auth' })
 export default class Auth extends VuexModule {
   auth: AuthType = {
-    accessToken: '',
+    userName: '',
     accessTokenExpiration: 0,
-    refreshToken: '',
     acessTokenExpirationDate: new Date()
   }
 

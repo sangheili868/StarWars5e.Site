@@ -1,7 +1,8 @@
 import Vue from 'vue'
-import VueAxios from 'vue-axios'
+import Vuex from 'vuex'
 import VueAuthenticate from 'vue-authenticate'
 import axios from 'axios'
+import VueAxios from 'vue-axios'
 import App from './components/App.vue'
 import router from './pages/router'
 import store from './store'
@@ -17,10 +18,37 @@ Vue.use(Vuetify, {
   iconfont: 'fa'
 })
 
-Vue.use(VueAxios, axios)
+axios.defaults.withCredentials = true
+
+const axiosInstance = axios.create({
+  withCredentials: true,
+  baseURL: 'https://localhost:44341/'
+})
+
+axiosInstance.interceptors.response.use((response: any) => {
+  return response
+}, (error: any) => {
+  if (error.response && 'token-expired' in error.response.headers && !error.response.isRetryRequest) {
+    error.config.isRetryRequest = true
+    return axiosInstance.get(`${process.env.VUE_APP_sw5eapiurl}/api/Auth/refresh`).then((response) => {
+      store.dispatch('auth/storeAuth', response.data)
+      return axiosInstance(error.config)
+    }, error => {
+      return Promise.reject(error);
+    })
+  }
+
+  return Promise.reject(error);
+})
+
+Vue.prototype.$http = axiosInstance
+
+Vue.use(VueAxios, axiosInstance)
 Vue.use(VueAuthenticate, {
-  storageType: 'cookieStorage',
-  tokenPath: 'accessToken',
+  // storageType: 'cookieStorage',
+  withCredentials: true,
+  tokenPath: 'userName',
+  tokenName: 'userName',
   tokenPrefix: 'sw5e',
   baseUrl: process.env.VUE_APP_sw5eapiurl,
   providers: {
@@ -34,23 +62,6 @@ Vue.use(VueAuthenticate, {
       redirectUri: 'http://localhost:8080/login',
       url: '/api/ExternalAuth/facebook'
     },
-    // reddit: {
-    //   name: 'reddit',
-    //   clientId: 'b6vD9Du6JJHEkA',
-    //   redirectUri: 'http://localhost:8080/login',
-    //   url: "/api/ExternalAuth/reddit",
-    //   authorizationEndpoint: 'https://www.reddit.com/api/v1/authorize",
-    //   scope: ["identity"],
-    //   scopeDelimiter: ' ',
-    //   responseParams: {
-    //     code: 'code'
-    //   },
-    //   state: 'test',
-    //   duration: 'temporary',
-    //   oauthType: '2.0',
-    //   responseType: 'code',
-    //   defaultUrlParams: ['response_type', 'client_id', 'redirect_uri', 'duration', 'scope', 'state'],
-    // },
     discord: {
       name: 'discord',
       clientId: '604454073957089301',

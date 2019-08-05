@@ -1,5 +1,7 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
+import createPersistedState from 'vuex-persistedstate'
+import Cookies from 'js-cookie'
 import archetypes from './modules/archetypes'
 import armor from './modules/armor'
 import auth from './modules/auth'
@@ -27,6 +29,19 @@ import weaponProperties from './modules/weaponProperties'
 Vue.use(Vuex)
 
 export default new Vuex.Store({
+  plugins: [createPersistedState(
+    // {
+      // storage: {
+      //   getItem: key => {
+      //     Cookies.getJSON(key)
+      //   },
+      //   setItem: (key, value) => {
+      //     Cookies.set(key, 'test', { expires: 7, path: '', secure: false })
+      //   },
+      //   removeItem: key => Cookies.remove(key)
+      // }
+    // }
+  )],
   modules: {
     archetypes,
     armor,

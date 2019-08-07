@@ -1,5 +1,7 @@
 import PageNester from '@/components/PageNester.vue'
 import CharactersPage from './CharactersPage.vue'
+import CharactersClasses from './CharactersClasses.vue'
+import CharactersClassDetail from './CharactersClassDetail.vue'
 import CharactersSpecies from './CharactersSpecies.vue'
 import CharactersSpeciesDetail from '@/pages/Characters/CharactersSpeciesDetail.vue'
 import CharactersForcePowers from '@/pages/Characters/CharactersForcePowers.vue'
@@ -27,6 +29,15 @@ export default {
     {
       path: '/characters/species/:speciesName',
       component: CharactersSpeciesDetail,
+      props: true
+    },
+    {
+      path: '/characters/classes',
+      component: CharactersClasses
+    },
+    {
+      path: '/characters/classes/:className',
+      component: CharactersClassDetail,
       props: true
     },
     {

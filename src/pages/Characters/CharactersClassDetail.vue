@@ -11,7 +11,7 @@
       ClassDetail
     }
   })
-  export default class HandbookClassesDetail extends Vue {
+  export default class CharacterClassDetail extends Vue {
     @classesModule.State classes!: ClassType[]
     @classesModule.Action fetchClasses!: () => void
 

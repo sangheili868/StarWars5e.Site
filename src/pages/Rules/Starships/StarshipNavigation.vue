@@ -12,125 +12,125 @@
       {
         title: 'Introduction',
         icon: 'fa-journal-whills',
-        route: '/starships'
+        route: '/rules/starships'
       },
       {
         title: 'Step-By-Step Starships',
         icon: 'fa-pencil-ruler',
-        route: '/starships/stepByStep'
+        route: '/rules/starships/stepByStep'
       },
       {
         title: 'Deployments',
         icon: 'fa-user-friends',
-        route: '/starships/deployments',
+        route: '/rules/starships/deployments',
         items: [
           {
             title: 'Coordinator',
             icon: 'fa-headset',
-            route: '/starships/deployments/Coordinator'
+            route: '/rules/starships/deployments/Coordinator'
           },
           {
             title: 'Gunner',
             icon: 'fa-fighter-jet',
-            route: '/starships/deployments/Gunner'
+            route: '/rules/starships/deployments/Gunner'
           },
           {
             title: 'Mechanic',
             icon: 'fa-wrench',
-            route: '/starships/deployments/Mechanic'
+            route: '/rules/starships/deployments/Mechanic'
           },
           {
             title: 'Operator',
             icon: 'fa-eye',
-            route: '/starships/deployments/Operator'
+            route: '/rules/starships/deployments/Operator'
           },
           {
             title: 'Pilot',
             icon: 'fa-helicopter',
-            route: '/starships/deployments/Pilot'
+            route: '/rules/starships/deployments/Pilot'
           }
         ]
       },
       {
         title: 'Starships',
         icon: 'fa-rocket',
-        route: '/starships/starshipSizes',
+        route: '/rules/starships/starshipSizes',
         items: [
           {
             title: 'Tiny',
-            route: '/starships/starshipSizes/Tiny'
+            route: '/rules/starships/starshipSizes/Tiny'
           },
           {
             title: 'Small',
-            route: '/starships/starshipSizes/Small'
+            route: '/rules/starships/starshipSizes/Small'
           },
           {
             title: 'Medium',
-            route: '/starships/starshipSizes/Medium'
+            route: '/rules/starships/starshipSizes/Medium'
           },
           {
             title: 'Large',
-            route: '/starships/starshipSizes/Large'
+            route: '/rules/starships/starshipSizes/Large'
           },
           {
             title: 'Huge',
-            route: '/starships/starshipSizes/Huge'
+            route: '/rules/starships/starshipSizes/Huge'
           },
           {
             title: 'Gargantuan',
-            route: '/starships/starshipSizes/Gargantuan'
+            route: '/rules/starships/starshipSizes/Gargantuan'
           }
         ]
       },
       {
         title: 'Modifications',
         icon: 'fa-hammer',
-        route: '/starships/modifications'
+        route: '/rules/starships/modifications'
       },
       {
         title: 'Equipment',
         icon: 'fa-tools',
-        route: '/starships/equipment'
+        route: '/rules/starships/equipment'
       },
       {
         title: 'Customization Options',
         icon: 'fa-edit',
-        route: '/starships/customization'
+        route: '/rules/starships/customization'
       },
       {
         title: 'Using Ability Scores',
         icon: 'fa-dice-d20',
-        route: '/starships/abilityScores'
+        route: '/rules/starships/abilityScores'
       },
       {
         title: 'Adventuring',
         icon: 'fa-plane',
-        route: '/starships/adventuring'
+        route: '/rules/starships/adventuring'
       },
       {
         title: 'Combat',
         icon: 'fa-meteor',
-        route: '/starships/combat'
+        route: '/rules/starships/combat'
       },
       {
         title: 'Generating Encounters',
         icon: 'fa-dna',
-        route: '/starships/generatingEncounters'
+        route: '/rules/starships/generatingEncounters'
       },
       {
         title: 'Conditions',
         icon: 'fa-biohazard',
-        route: '/starships/conditions'
+        route: '/rules/starships/conditions'
       },
       {
         title: 'Changelog',
         icon: 'fa-list',
-        route: '/starships/changelog'
+        route: '/rules/starships/changelog'
       }
     ]
   }
 </script>
 
 <template lang="pug">
-  NavigationDrawer(:items="items", baseRoute="/starships")
+  NavigationDrawer(:items="items", baseRoute="/rules/starships")
 </template>

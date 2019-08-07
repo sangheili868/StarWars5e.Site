@@ -7,23 +7,18 @@
       NavigationDrawer
     }
   })
-  export default class MonsterNavigation extends Vue {
+  export default class CitiesNavigation extends Vue {
     items = [
       // {
       //   title: 'Introduction',
       //   icon: 'fa-journal-whills',
-      //   route: '/monsters'
+      //   route: '/cities'
       // },
       // {
       //   title: 'Creating Encounters',
       //   icon: 'fa-pencil-ruler',
-      //   route: '/monsters/creatingEncounters'
+      //   route: '/cities/creatingEncounters'
       // },
-      {
-        title: 'Monsters',
-        icon: 'fa-paw',
-        route: '/rules/monsters'
-      },
       {
         title: 'More coming soon...',
         icon: 'fa-toolbox'
@@ -31,12 +26,12 @@
       // {
       //   title: 'Changelog',
       //   icon: 'fa-list',
-      //   route: '/monsters/changelog'
+      //   route: '/cities/changelog'
       // }
     ]
   }
 </script>
 
 <template lang="pug">
-  NavigationDrawer(:items="items", baseRoute="/rules/monsters")
+  NavigationDrawer(:items="items", baseRoute="/rules/cities")
 </template>

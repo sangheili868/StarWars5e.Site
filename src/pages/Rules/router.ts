@@ -3,6 +3,7 @@ import PageNester from '@/components/PageNester.vue'
 import handbookRoutes from './Handbook/router'
 import starshipRoutes from './Starships/router'
 import monsterRoutes from './Monsters/router'
+import citiesRoutes from './Cities/router'
 
 export default {
   path: '/rules',
@@ -19,6 +20,7 @@ export default {
   children: [
     handbookRoutes,
     starshipRoutes,
-    monsterRoutes
+    monsterRoutes,
+    citiesRoutes
   ]
 }

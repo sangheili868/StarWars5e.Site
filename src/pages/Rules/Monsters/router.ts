@@ -5,7 +5,7 @@ import MonstersList from './MonstersList.vue'
 import MonsterDetail from './MonsterDetail.vue'
 
 export default {
-  path: '/monsters',
+  path: 'monsters',
   components: {
     default: PageNester,
     navigation: MonsterNavigation

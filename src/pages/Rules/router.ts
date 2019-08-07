@@ -4,6 +4,7 @@ import handbookRoutes from './Handbook/router'
 import starshipRoutes from './Starships/router'
 import monsterRoutes from './Monsters/router'
 import citiesRoutes from './Cities/router'
+import RulesPage from './RulesPage.vue'
 
 export default {
   path: '/rules',
@@ -18,6 +19,10 @@ export default {
     }
   },
   children: [
+    {
+      path: '',
+      component: RulesPage
+    },
     handbookRoutes,
     starshipRoutes,
     monsterRoutes,

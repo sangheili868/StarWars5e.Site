@@ -1,4 +1,4 @@
-import HandbookPage from './HandbookPage.vue'
+import PageNester from '@/components/PageNester.vue'
 import HandbookNavigation from './HandbookNavigation.vue'
 import HandbookChapter from './HandbookChapter.vue'
 import HandbookSpecies from './HandbookSpecies.vue'
@@ -12,9 +12,9 @@ import HandbookBackgrounds from './HandbookBackgrounds.vue'
 import HandbookCustomizationOptions from './HandbookCustomizationOptions.vue'
 
 export default {
-  path: '/handbook',
+  path: 'handbook',
   components: {
-    default: HandbookPage,
+    default: PageNester,
     navigation: HandbookNavigation
   },
   children: [

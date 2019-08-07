@@ -1,4 +1,4 @@
-import StarshipPage from './StarshipPage.vue'
+import PageNester from '@/components/PageNester.vue'
 import StarshipNavigation from './StarshipNavigation.vue'
 import StarshipChapter from './StarshipChapter.vue'
 import StarshipDeployments from './StarshipDeployments.vue'
@@ -11,7 +11,7 @@ import StarshipCustomization from './StarshipCustomization.vue'
 export default {
   path: '/starships',
   components: {
-    default: StarshipPage,
+    default: PageNester,
     navigation: StarshipNavigation
   },
   children: [

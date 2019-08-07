@@ -36,7 +36,15 @@
 </script>
 
 <template lang="pug">
-  v-navigation-drawer(:value="isSideBarOpen", :permanent="$vuetify.breakpoint.mdAndUp", fixed, app, clipped @input="updateSideBar")
+  v-navigation-drawer(
+    :value="isSideBarOpen",
+    :permanent="$vuetify.breakpoint.mdAndUp",
+    fixed,
+    app,
+    clipped,
+    :class="$style.drawer",
+    @input="updateSideBar"
+  )
     v-list.dense
       component(v-for="(item, index) in items", :key="index", v-bind="buildComponentProps(item)")
         template(v-if="hasSubItems(item)" v-slot:activator)
@@ -56,8 +64,12 @@
 </template>
 
 <style module lang="scss">
-  .icon {
-    text-align: center;
-    width: 30px;
+  .drawer {
+    z-index: auto !important;
+
+    .icon {
+      text-align: center;
+      width: 30px;
+    }
   }
 </style>

@@ -21,35 +21,48 @@
           title: 'Home'
         },
         {
-          to: '/handbook',
-          title: 'Handbook'
-        },
-        {
-          to: '/monsters',
-          title: 'Monsters'
-        },
-        {
-          to: '/starships',
-          title: 'Starships'
-        },
-        {
-          to: '/reference',
-          title: 'Reference',
+          to: '/rules',
+          title: 'Rules',
           nested: [
+            { to: '/handbook', title: 'Player\' Handbook' },
+            { to: '/monsters', title: 'Scum and Villainy' },
+            { to: '/starships', title: 'Starships of the Galaxy' },
+            { to: '/cities', title: 'Wretched Hives' }
+           ]
+        },
+        {
+          to: '/characters',
+          title: 'Characters',
+          nested: [
+            { to: '/classes', title: 'Classes' },
             { to: '/species', title: 'Species' },
             { to: '/archetypes', title: 'Archetypes' },
             { to: '/backgrounds', title: 'Backgrounds' },
-            { to: '/armor', title: 'Armor' },
-            { to: '/weapons', title: 'Weapons' },
-            { to: '/adventuringGear', title: 'Adventuring Gear' },
             { to: '/feats', title: 'Feats' },
             { to: '/forcePowers', title: 'Force Powers' },
             { to: '/techPowers', title: 'Tech Powers' },
+            { to: '/additionalVariantRules', title: 'Additional Variant Rules' }
+          ]
+        },
+        {
+          to: '/loot',
+          title: 'Loot',
+          nested: [
+            { to: '/armor', title: 'Armor' },
+            { to: '/weapons', title: 'Weapons' },
+            { to: '/adventuringGear', title: 'Adventuring Gear' },
+            { to: '/enhancedItems', title: 'Enhanced Items' }
+          ]
+        },
+        {
+          to: '/starships',
+          title: 'Starships',
+          nested: [
+            { to: '/deployments', title: 'Deployments' },
+            { to: '/ventures', title: 'Ventures' },
             { to: '/starshipModifications', title: 'Starship Modifications' },
             { to: '/starshipEquipment', title: 'Starship Equipment' },
-            { to: '/starshipWeapons', title: 'Starship Weapons' },
-            { to: '/ventures', title: 'Ventures' },
-            { to: '/additionalVariantRules', title: 'Additional Variant Rules' }
+            { to: '/starshipWeapons', title: 'Starship Weapons' }
           ]
         },
         {

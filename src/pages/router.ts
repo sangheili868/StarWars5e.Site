@@ -3,23 +3,19 @@ import Router from 'vue-router'
 import HomePage from './HomePage.vue'
 import CreditsPage from './CreditsPage.vue'
 import AssetsPage from './AssetsPage.vue'
-import handbookRoute from './Handbook/router'
-import starshipRoutes from './Starships/router'
 import referenceRoutes from './Reference/router'
-import monsterRoutes from './Monsters/router'
 import SearchResultsPage from './SearchResultsPage.vue'
+import rulesRoutes from './Rules/router'
 
 Vue.use(Router)
-
+console.log(rulesRoutes)
 export default new Router({
   routes: [
     {
       path: '/',
       component: HomePage
     },
-    handbookRoute,
-    starshipRoutes,
-    monsterRoutes,
+    rulesRoutes,
     ...referenceRoutes,
     {
       path: '/credits',

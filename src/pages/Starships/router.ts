@@ -1,4 +1,6 @@
 import PageNester from '@/components/PageNester.vue'
+import StarshipsDeployments from './StarshipsDeployments.vue'
+import StarshipsDeploymentDetails from './StarshipsDeploymentDetails.vue'
 import StarshipsPage from './StarshipsPage.vue'
 import StarshipsEquipment from './StarshipsEquipment.vue'
 import StarshipsModifications from './StarshipsModifications.vue'
@@ -12,6 +14,15 @@ export default {
     {
       path: '/starships',
       component: StarshipsPage
+    },
+    {
+      path: '/starships/deployments',
+      component: StarshipsDeployments
+    },
+    {
+      path: '/starships/deployments/:deploymentName',
+      component: StarshipsDeploymentDetails,
+      props: true
     },
     {
       path: '/starships/equipment',

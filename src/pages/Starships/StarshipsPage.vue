@@ -13,10 +13,11 @@
         {
           category: '',
           routes: [
-            { to: '/starships/armor', title: 'Armor' },
-            { to: '/starships/weapons', title: 'Weapons' },
-            { to: '/starships/adventuringGear', title: 'Adventuring Gear' },
-            { to: '/starships/enhancedItems', title: 'Enhanced Items' }
+            { to: '/starships/deployments', title: 'Deployments' },
+            { to: '/starships/ventures', title: 'Ventures' },
+            { to: '/starships/modifications', title: 'Modifications' },
+            { to: '/starships/equipment', title: 'Equipment' },
+            { to: '/starships/weapons', title: 'Weapons' }
           ]
         }
       ]

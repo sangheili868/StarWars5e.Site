@@ -107,7 +107,7 @@
       router-link(to="/")
         v-img(:src="require('@/assets/sw5e-logo.png')", width="100px")
     v-spacer
-    v-toolbar-items.hidden-sm-and-down
+    v-toolbar-items.hidden-md-and-down
       component(v-for="({ to, title, nested}) in routes", :key="title", v-bind="buildComponentProps(to, nested)")
         template(v-if="nested && nested.length", v-slot:activator="{ on }")
           v-btn(flat, color="primary", v-on="on" :to="to") {{ title }}
@@ -117,7 +117,7 @@
             v-list-tile-title {{ nestedRoute.title }}
         template(v-if="!nested || !nested.length") {{ title }}
       SearchBox
-    v-toolbar-items.hidden-md-and-up
+    v-toolbar-items.hidden-lg-and-up
       v-menu(bottom, left, offset-y, attach)
         template(v-slot:activator="{ on }")
           v-btn(icon, v-on="on")

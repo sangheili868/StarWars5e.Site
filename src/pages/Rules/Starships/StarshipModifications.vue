@@ -1,12 +1,12 @@
 <script lang="ts">
   import { Component, Prop, Vue } from 'vue-property-decorator'
   import StarshipChapter from './StarshipChapter.vue'
-  import ReferenceStarshipModifications from '@/pages/Reference/ReferenceStarshipModifications.vue'
+  import StarshipsModifications from '@/pages/Starships/StarshipsModifications.vue'
 
   @Component({
     components: {
       StarshipChapter,
-      ReferenceStarshipModifications
+      StarshipsModifications
     }
   })
   export default class StarshipModifications extends Vue {
@@ -17,5 +17,5 @@
 <template lang="pug">
   div
     StarshipChapter(chapter='modifications')
-      ReferenceStarshipModifications
+      StarshipsModifications
 </template>

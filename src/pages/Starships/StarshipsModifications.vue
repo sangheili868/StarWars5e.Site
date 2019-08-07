@@ -14,7 +14,7 @@
       VueMarkdownWithAnchors
     }
   })
-  export default class ReferenceStarshipModifications extends Vue {
+  export default class StarshipsModifications extends Vue {
     @starshipModificationsModule.State starshipModifications!: StarshipModificationType[]
     @starshipModificationsModule.Action fetchStarshipModifications!: () => void
     search: string | (string | null)[] = ''

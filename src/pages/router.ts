@@ -7,6 +7,7 @@ import SearchResultsPage from './SearchResultsPage.vue'
 import rulesRoutes from './Rules/router'
 import charactersRoutes from './Characters/router'
 import lootRoutes from './Loot/router'
+import starshipsRoutes from './Starships/router'
 
 Vue.use(Router)
 console.log(rulesRoutes)
@@ -19,6 +20,7 @@ export default new Router({
     rulesRoutes,
     charactersRoutes,
     lootRoutes,
+    starshipsRoutes,
     {
       path: '/credits',
       component: CreditsPage

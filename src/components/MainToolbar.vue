@@ -60,9 +60,9 @@
           nested: [
             { to: '/deployments', title: 'Deployments' },
             { to: '/ventures', title: 'Ventures' },
-            { to: '/starshipModifications', title: 'Starship Modifications' },
-            { to: '/starshipEquipment', title: 'Starship Equipment' },
-            { to: '/starshipWeapons', title: 'Starship Weapons' }
+            { to: '/modifications', title: 'Modifications' },
+            { to: '/equipment', title: 'Equipment' },
+            { to: '/weapons', title: 'Weapons' }
           ]
         },
         {

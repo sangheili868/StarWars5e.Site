@@ -14,7 +14,7 @@
       VueMarkdown
     }
   })
-  export default class ReferenceVentures extends Vue {
+  export default class StarshipsVentures extends Vue {
     @venturesModule.State ventures!: VentureType[]
     @venturesModule.Action fetchVentures!: () => void
     search: string | (string | null)[] = ''

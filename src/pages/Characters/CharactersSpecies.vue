@@ -12,7 +12,7 @@
       SearchTable
     }
   })
-  export default class ReferenceSpecies extends Vue {
+  export default class CharactersSpecies extends Vue {
     @speciesModule.State species!: SpeciesType[]
     @speciesModule.Action fetchSpecies!: () => void
     @Prop({ type: Boolean, default: false }) readonly isInHandbook!: boolean
@@ -28,7 +28,7 @@
     }
 
     get items () {
-      const page = this.isInHandbook ? 'handbook' : 'reference'
+      const page = this.isInHandbook ? 'handbook' : 'characters'
       return _(this.species)
         .filter(({ contentType }) => !this.isInHandbook || contentType === 'Core')
         .map(species => ({

@@ -12,7 +12,7 @@
       SearchTable
     }
   })
-  export default class ReferenceBackgrounds extends Vue {
+  export default class CharactersBackgrounds extends Vue {
     @backgroundModule.State backgrounds!: BackgroundType[]
     @backgroundModule.Action fetchBackgrounds!: () => void
     @Prop({ type: Boolean, default: false }) readonly isInHandbook!: boolean
@@ -22,7 +22,7 @@
     }
 
     get items () {
-      const page = this.isInHandbook ? 'handbook' : 'reference'
+      const page = this.isInHandbook ? 'handbook' : 'characters'
       return _(this.backgrounds)
         .filter(({ contentType }) => !this.isInHandbook || contentType === 'Core')
         .map(background => ({

@@ -15,7 +15,7 @@
       ImageWithLoading
     }
   })
-  export default class ReferenceSpeciesDetail extends Vue {
+  export default class CharactersSpeciesDetail extends Vue {
     @speciesModule.State species!: SpeciesType[]
     @speciesModule.Action fetchSpecies!: () => void
 

@@ -14,7 +14,7 @@
       VueMarkdown
     }
   })
-  export default class ReferenceFeats extends Vue {
+  export default class CharactersFeats extends Vue {
     @archetypeModule.State feats!: FeatType[]
     @archetypeModule.Action fetchFeats!: () => void
     @Prop({ type: Boolean, default: false }) readonly isInHandbook!: boolean
@@ -26,7 +26,7 @@
     }
 
     get items () {
-      const page = this.isInHandbook ? 'handbook' : 'reference'
+      const page = this.isInHandbook ? 'handbook' : 'characters'
       return _(this.feats)
         .filter(({ contentType }) => !this.isInHandbook || contentType === 'Core')
         .map(feat => ({

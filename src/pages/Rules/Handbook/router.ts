@@ -2,9 +2,9 @@ import PageNester from '@/components/PageNester.vue'
 import HandbookNavigation from './HandbookNavigation.vue'
 import HandbookChapter from './HandbookChapter.vue'
 import HandbookSpecies from './HandbookSpecies.vue'
-import ReferenceSpeciesDetail from '@/pages/Reference/ReferenceSpeciesDetail.vue'
-import ReferenceForcePowers from '@/pages/Reference/ReferenceForcePowers.vue'
-import ReferenceTechPowers from '@/pages/Reference/ReferenceTechPowers.vue'
+import CharactersSpeciesDetail from '@/pages/Characters/CharactersSpeciesDetail.vue'
+import CharactersForcePowers from '@/pages/Characters/CharactersForcePowers.vue'
+import CharactersTechPowers from '@/pages/Characters/CharactersTechPowers.vue'
 import HandbookClasses from './HandbookClasses.vue'
 import HandbookClassesDetail from './HandbookClassesDetail.vue'
 import HandbookCasting from './HandbookCasting.vue'
@@ -24,7 +24,7 @@ export default {
     },
     {
       path: 'species/:speciesName',
-      component: ReferenceSpeciesDetail,
+      component: CharactersSpeciesDetail,
       props: true
     },
     {
@@ -37,11 +37,11 @@ export default {
     },
     {
       path: 'forcePowers',
-      component: ReferenceForcePowers
+      component: CharactersForcePowers
     },
     {
       path: 'techPowers',
-      component: ReferenceTechPowers
+      component: CharactersTechPowers
     },
     {
       path: 'backgrounds',

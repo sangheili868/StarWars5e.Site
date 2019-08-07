@@ -3,7 +3,7 @@ import Router from 'vue-router'
 import HomePage from './HomePage.vue'
 import CreditsPage from './CreditsPage.vue'
 import AssetsPage from './AssetsPage.vue'
-import referenceRoutes from './Reference/router'
+import charactersRoutes from './Characters/router'
 import SearchResultsPage from './SearchResultsPage.vue'
 import rulesRoutes from './Rules/router'
 
@@ -16,7 +16,7 @@ export default new Router({
       component: HomePage
     },
     rulesRoutes,
-    ...referenceRoutes,
+    charactersRoutes,
     {
       path: '/credits',
       component: CreditsPage

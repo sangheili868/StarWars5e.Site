@@ -12,7 +12,7 @@
       SearchTable
     }
   })
-  export default class ReferenceArchetypes extends Vue {
+  export default class CharactersArchetypes extends Vue {
     @archetypeModule.State archetypes!: ArchetypeType[]
     @archetypeModule.Action fetchArchetypes!: () => void
     @Prop({ type: Boolean, default: false }) readonly isInHandbook!: boolean
@@ -22,7 +22,7 @@
     }
 
     get items () {
-      const page = this.isInHandbook ? 'handbook' : 'reference'
+      const page = this.isInHandbook ? 'handbook' : 'characters'
       return _(this.archetypes)
         .filter(({ contentType }) => !this.isInHandbook || contentType === 'Core')
         .map(archetype => ({

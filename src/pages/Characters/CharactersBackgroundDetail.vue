@@ -16,7 +16,7 @@
       Loading
     }
   })
-  export default class ReferenceBackgroundsDetail extends Vue {
+  export default class CharactersBackgroundsDetail extends Vue {
     @backgroundModule.State backgrounds!: BackgroundType[]
     @backgroundModule.Action fetchBackgrounds!: () => void
     @featModule.State feats!: FeatType[]

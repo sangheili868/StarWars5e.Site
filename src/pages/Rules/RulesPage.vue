@@ -7,7 +7,7 @@
       RoutesList
     }
   })
-  export default class ReferencePage extends Vue {
+  export default class Rules extends Vue {
     get categories () {
       return [
         {

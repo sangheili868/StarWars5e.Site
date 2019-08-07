@@ -16,7 +16,7 @@
       Loading
     }
   })
-  export default class ReferenceArchetypesDetail extends Vue {
+  export default class CharactersArchetypesDetail extends Vue {
     @archetypeModule.State archetypes!: ArchetypeType[]
     @archetypeModule.Action fetchArchetypes!: () => void
 

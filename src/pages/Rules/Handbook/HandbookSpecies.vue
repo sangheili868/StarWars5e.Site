@@ -1,12 +1,12 @@
 <script lang="ts">
   import { Component, Prop, Vue } from 'vue-property-decorator'
   import HandbookChapter from './HandbookChapter.vue'
-  import ReferenceSpecies from '@/pages/Reference/ReferenceSpecies.vue'
+  import CharactersSpecies from '@/pages/Characters/CharactersSpecies.vue'
 
   @Component({
     components: {
       HandbookChapter,
-      ReferenceSpecies
+      CharactersSpecies
     }
   })
   export default class HandbookSpecies extends Vue {
@@ -17,5 +17,5 @@
 <template lang="pug">
   div
     HandbookChapter(chapter='species')
-      ReferenceSpecies(isInHandbook)
+      CharactersSpecies(isInHandbook)
 </template>

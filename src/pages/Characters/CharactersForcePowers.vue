@@ -14,7 +14,7 @@
       VueMarkdown
     }
   })
-  export default class ReferenceForcePowers extends Vue {
+  export default class CharactersForcePowers extends Vue {
     @powersModule.State powers!: PowerType[]
     @powersModule.Action fetchPowers!: () => void
     search: string | (string | null)[] = ''

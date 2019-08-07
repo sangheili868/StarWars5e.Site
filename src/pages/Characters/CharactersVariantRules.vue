@@ -12,7 +12,7 @@
       CardSet
     }
   })
-  export default class VariantRules extends Vue {
+  export default class CharactersVariantRules extends Vue {
     @blobsModule.State variantRuleBlobs!: any[]
     @blobsModule.Action fetchVariantRuleBlobs!: () => void
 

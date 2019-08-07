@@ -21,7 +21,7 @@
       LinkModal
     }
   })
-  export default class ReferenceWeapons extends Vue {
+  export default class LootWeapons extends Vue {
     @weaponsModule.State weapons!: WeaponType[]
     @weaponsModule.Action fetchWeapons!: () => void
     @weaponPropertiesModule.State weaponProperties!: WeaponPropertyType[]

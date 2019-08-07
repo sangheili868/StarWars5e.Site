@@ -14,7 +14,7 @@
       VueMarkdown
     }
   })
-  export default class ReferenceArmor extends Vue {
+  export default class LootArmor extends Vue {
     @armorModule.State armor!: ArmorType[]
     @armorModule.Action fetchArmor!: () => void
     search: string | (string | null)[] = ''

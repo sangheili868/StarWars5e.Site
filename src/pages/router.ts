@@ -3,9 +3,10 @@ import Router from 'vue-router'
 import HomePage from './HomePage.vue'
 import CreditsPage from './CreditsPage.vue'
 import AssetsPage from './AssetsPage.vue'
-import charactersRoutes from './Characters/router'
 import SearchResultsPage from './SearchResultsPage.vue'
 import rulesRoutes from './Rules/router'
+import charactersRoutes from './Characters/router'
+import lootRoutes from './Loot/router'
 
 Vue.use(Router)
 console.log(rulesRoutes)
@@ -17,6 +18,7 @@ export default new Router({
     },
     rulesRoutes,
     charactersRoutes,
+    lootRoutes,
     {
       path: '/credits',
       component: CreditsPage

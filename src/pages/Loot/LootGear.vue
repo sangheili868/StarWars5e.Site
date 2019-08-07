@@ -14,7 +14,7 @@
       VueMarkdown
     }
   })
-  export default class ReferenceGear extends Vue {
+  export default class LootGear extends Vue {
     @gearModule.State gear!: GearType[]
     @gearModule.Action fetchGear!: () => void
     search: string | (string | null)[] = ''

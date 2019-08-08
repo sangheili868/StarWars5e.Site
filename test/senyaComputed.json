@@ -80,97 +80,200 @@
       "skills": [
         {
           "name": "Investigation",
-          "modifier": ,
-          "proficiency": ""
+          "modifier": 7,
+          "proficiency": "proficient"
         },
         {
-          "name": "",
-          "modifier": ,
-          "proficiency": ""
+          "name": "Lore",
+          "modifier": 4,
+          "proficiency": "none"
         },
         {
-          "name": "",
-          "modifier": ,
-          "proficiency": ""
+          "name": "Nature",
+          "modifier": 4,
+          "proficiency": "none"
         },
         {
-          "name": "",
-          "modifier": ,
-          "proficiency": ""
+          "name": "Piloting",
+          "modifier": 7,
+          "proficiency": "proficient"
         },
         {
-          "name": "",
-          "modifier": ,
-          "proficiency": ""
+          "name": "Technology",
+          "modifier": 4,
+          "proficiency": "none"
         }
       ]
     },
     "wisdom": {
-      "value": ,
-      "modifier": ,
+      "value": 8,
+      "modifier": -1,
       "savingThrow": {
-        "modifier": ,
+        "modifier": -1,
         "proficiency": "none"
       },
       "skills": [
         {
-          "name": "",
-          "modifier": ,
-          "proficiency": ""
+          "name": "Animal Handling",
+          "modifier": 2,
+          "proficiency": "proficient"
         },
         {
-          "name": "",
-          "modifier": ,
-          "proficiency": ""
+          "name": "Insight",
+          "modifier": -1,
+          "proficiency": "none"
         },
         {
-          "name": "",
-          "modifier": ,
-          "proficiency": ""
+          "name": "Medicine",
+          "modifier": 2,
+          "proficiency": "proficient"
         },
         {
-          "name": "",
-          "modifier": ,
-          "proficiency": ""
+          "name": "Perception",
+          "modifier": -1,
+          "proficiency": "none"
         },
         {
-          "name": "",
-          "modifier": ,
-          "proficiency": ""
+          "name": "Survival",
+          "modifier": 2,
+          "proficiency": "proficient"
         }
       ]
     },
     "charisma": {
-      "value": ,
-      "modifier": ,
+      "value": 10,
+      "modifier": 0,
       "savingThrow": {
-        "modifier": ,
+        "modifier": 0,
         "proficiency": "none"
       },
       "skills": [
         {
-          "name": "",
-          "modifier": ,
-          "proficiency": ""
+          "name": "Deception",
+          "modifier": 0,
+          "proficiency": "none"
         },
         {
-          "name": "",
-          "modifier": ,
-          "proficiency": ""
+          "name": "Intimidation",
+          "modifier": 0,
+          "proficiency": "none"
         },
         {
-          "name": "",
-          "modifier": ,
-          "proficiency": ""
+          "name": "Performance",
+          "modifier": 0,
+          "proficiency": "none"
         },
         {
-          "name": "",
-          "modifier": ,
-          "proficiency": ""
+          "name": "Persuasion",
+          "modifier": 10,
+          "proficiency": "expertise"
         }
       ]
     }
-  }
+  },
+  "proficiencyBonus": 3,
+  "initiative": 1,
+  "armorClass": {
+    "value": 19,
+    "sources": [
+      "Durasteel Armor",
+      "Heavy Shield"
+    ]
+  },
+  "hitPoints": {
+    "maximum": 0,
+    "current": 0,
+    "temporary": 0,
+    "hitDice": {
+      "d8s": {
+        "current": 3,
+        "maximum": 3
+      },
+      "d10s": {
+        "current": 4,
+        "maximum": 4
+      }
+    },
+    "deathSaves": {
+      "successes": 0,
+      "failures": 0
+    }
+  },
+  "bonuses": {
+    "advantages": [],
+    "resistances": [],
+    "immunities": []
+  },
+  "weapons": [
+    {
+      "name": "Techaxe",
+      "attackBonus": 6,
+      "damage": "1d6 + 6 kinetic",
+      "range": "20/60",
+      "weight": 2,
+      "notes": [
+        "Light",
+        "Thrown"
+      ]
+    },
+    {
+      "name": "Hold-out",
+      "attackBonus": 4,
+      "damage": "1d4 + 1 energy",
+      "range": "30/120",
+      "weight": "1",
+      "notes": [
+        "Ammunition",
+        "Hidden",
+        "Light",
+        "Reload 6"
+      ]
+    }
+  ],
+  "passivePerception": 9,
+  "inspiration": false,
+  "combatFeatures": [
+    {
+      "name": "Ranger's Quarry",
+      "action": "none",
+      "recharge": "short",
+      "numberUsed": 0,
+      "totalUses": 4
+    },
+    {
+      "name": "Shielding Fighting Style",
+      "action": "reaction",
+      "recharge": "none",
+      "numberUsed": 0,
+      "totalUses": 0
+    }
+  ],
+  "vision": "normal",
+  "speed": {
+    "base": "30ft",
+    "hour": "3 miles",
+    "day": "24 miles",
+    "special": ""
+  },
+  "proficiencies": [
+    "Light Armor",
+    "Simple Vibroweapons",
+    "Techblades",
+    "Simple Blasters",
+    "Mason's Tools",
+    "Medium Armor",
+    "All Blasters",
+    "All kinetic weapons",
+    "Biochemist's Kit",
+    "Lightsaber",
+    "Carpenter's Kit"
+
+  ],
+  "languages": [
+    "Galactic Basic",
+    "Kel Dorian",
+    "Nautila"
+  ]
   "species": {
     "name": "human",
     "abilityScoreImprovement": {

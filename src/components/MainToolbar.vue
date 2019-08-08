@@ -34,8 +34,8 @@
           to: '/characters',
           title: 'Characters',
           nested: [
-            { to: '/classes', title: 'Classes' },
             { to: '/species', title: 'Species' },
+            { to: '/classes', title: 'Classes' },
             { to: '/archetypes', title: 'Archetypes' },
             { to: '/backgrounds', title: 'Backgrounds' },
             { to: '/feats', title: 'Feats' },

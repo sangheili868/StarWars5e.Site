@@ -13,8 +13,8 @@
         {
           category: '',
           routes: [
-            { to: '/characters/classes', title: 'Classes' },
             { to: '/characters/species', title: 'Species' },
+            { to: '/characters/classes', title: 'Classes' },
             { to: '/characters/archetypes', title: 'Archetypes' },
             { to: '/characters/backgrounds', title: 'Backgrounds' },
             { to: '/characters/feats', title: 'Feats' },

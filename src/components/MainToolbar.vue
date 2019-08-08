@@ -24,7 +24,7 @@
           to: '/rules',
           title: 'Rules',
           nested: [
-            { to: '/handbook', title: 'Player\' Handbook' },
+            { to: '/handbook', title: 'Player\'s Handbook' },
             { to: '/monsters', title: 'Scum and Villainy' },
             { to: '/starships', title: 'Starships of the Galaxy' },
             { to: '/cities', title: 'Wretched Hives' }

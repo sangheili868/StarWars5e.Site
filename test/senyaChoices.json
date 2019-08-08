@@ -48,7 +48,7 @@
       "archetype": {
         "name": "politician",
         "silverTongue": {
-          "language": "Nautila",
+          "language": "Huttese",
           "intSkillBonus": "persuasion"
         }
       }
@@ -78,7 +78,7 @@
       },
       "abilityScoreImprovements": {
         "feat": {
-          "name": "heavyArmorMaster"
+          "name": "heavilyArmored"
         }
       }
     }
@@ -98,7 +98,7 @@
       "animalHandling"
     ],
     "toolProficiency": "carpentersKit",
-    "language": "",
+    "language": "Nautila",
     "feat": {
       "name": "healer",
       "abilityScoreImprovements": {
@@ -107,6 +107,7 @@
     }
   },
   "characteristics": {
+    "placeOfBirth": "Rasynda",
     "alignment": "lawfulLight",
     "personalityTraits": "I am always calm, no matter the situation. Noting is more satisfying that a hard day of good work.",
     "ideal": "People. Devotion to the Force brings far too much war and chaos, and commoners like me should not have to pay for it.",

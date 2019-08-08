@@ -172,7 +172,7 @@
     }
   },
   "proficiencyBonus": 3,
-  "initiative": 1,
+  "initiative": 4,
   "armorClass": {
     "value": 19,
     "sources": [
@@ -232,22 +232,6 @@
   ],
   "passivePerception": 9,
   "inspiration": false,
-  "combatFeatures": [
-    {
-      "name": "Ranger's Quarry",
-      "action": "none",
-      "recharge": "short",
-      "numberUsed": 0,
-      "totalUses": 4
-    },
-    {
-      "name": "Shielding Fighting Style",
-      "action": "reaction",
-      "recharge": "none",
-      "numberUsed": 0,
-      "totalUses": 0
-    }
-  ],
   "vision": "normal",
   "speed": {
     "base": "30ft",
@@ -266,122 +250,17 @@
     "All kinetic weapons",
     "Biochemist's Kit",
     "Lightsaber",
-    "Carpenter's Kit"
-
+    "Carpenter's Kit",
+    "Heavy Armor"
   ],
   "languages": [
     "Galactic Basic",
     "Kel Dorian",
-    "Nautila"
-  ]
-  "species": {
-    "name": "human",
-    "abilityScoreImprovement": {
-      "intelligence": 2,
-      "strength": 1,
-      "dexterity": 1
-    },
-    "toolProficiency": "biochemistsKit",
-    "skillProficiency": "persuasion",
-    "weaponProficiency": "lightsaber",
-    "language": "Kel Dorian"
-  },
-  "classes": [
-    {
-      "isStartingClass": true,
-      "class": "scholar",
-      "levels": 3,
-      "hitPoints": [ 5, 5 ],
-      "toolProficiency": "masonsTools",
-      "skills": [
-        "investigation",
-        "medicine",
-        "survival"
-      ],
-      "maneuvers": [
-        "headsUp",
-        "oneStepAhead",
-        "callTheGuards",
-        "targetedStrike"
-      ],
-      "discoveries": [
-        {
-          "name": "resolute"
-        },
-        {
-          "name": "charmingFeint"
-        }
-      ],
-      "expertice": [
-        "athletics",
-        "persuasion"
-      ],
-      "archetype": {
-        "name": "politician",
-        "silverTongue": {
-          "language": "Nautila",
-          "intSkillBonus": "persuasion"
-        }
-      }
-    },
-    {
-      "isStartingClass": false,
-      "class": "scout",
-      "levels": 4,
-      "hitPoints": [ 6, 6, 6, 6 ],
-      "skills": [
-        "piloting"
-      ],
-      "fightingStyle": "shielding",
-      "techPowers": [
-        "electroshock",
-        "encryptedMessage",
-        "alarm",
-        "stackTheDeck",
-        "tracerBolt"
-      ],
-      "archetype": {
-        "name": "inquisitor",
-        "forcePowers": [
-          "denounce",
-          "senseForce"
-        ]
-      },
-      "abilityScoreImprovements": {
-        "feat": {
-          "name": "heavyArmorMaster"
-        }
-      }
-    }
+    "Nautila",
+    "Huttese"
   ],
-  "baseAbilityScores": {
-    "strength": 15,
-    "dexterity": 11,
-    "constitution": 12,
-    "intelligence": 15,
-    "wisdom": 8,
-    "charisma": 10
-  },
-  "background": {
-    "name": "folkHero",
-    "skills": [
-      "athletics",
-      "animalHandling"
-    ],
-    "toolProficiency": "carpentersKit",
-    "language": "",
-    "feat": {
-      "name": "healer",
-      "abilityScoreImprovements": {
-        "intelligence": 1
-      }
-    }
-  },
   "characteristics": {
-    "personalityTraits": "I am always calm, no matter the situation. Noting is more satisfying that a hard day of good work.",
-    "ideal": "People. Devotion to the Force brings far too much war and chaos, and commoners like me should not have to pay for it.",
-    "bond": "The lost people of Rasynda are spread across the galaxy, and I was once their governess.",
-    "flaw": "I'm always right. If you disagree with me, you don't have the full picture.",
+    "placeOfBirth": "Rasynda",
     "age": "47",
     "gender": "female",
     "height": "",
@@ -390,28 +269,139 @@
     "eyes": "brown",
     "skin": "brown",
     "appearance": "",
+    "personalityTraits": "I am always calm, no matter the situation. Noting is more satisfying that a hard day of good work.",
+    "ideal": "People. Devotion to the Force brings far too much war and chaos, and commoners like me should not have to pay for it.",
+    "bond": "The lost people of Rasynda are spread across the galaxy, and I was once their governess.",
+    "flaw": "I'm always right. If you disagree with me, you don't have the full picture.",
+    "backgroundFeature": {
+      "name": "Rustic Hospitality",
+      "description": "Since you are of the common folk, you fit in among them with ease. You can find a place to hide, rest, or recuperate among other commoners, unless you have shown yourself to be a danger to them. They will shield you from the law or anyone else searching for you, though they will not risk their lives for you."
+    },
     "backstory": "Rasynda, to most people, is the uninhabited first planet of the star Durga 7 in one quadrant of the Outer Rim. It is relatively unimportant to historians, known only for its thick, foggy atmosphere, large oceans, and the arlestaas, a cow-like creature with decently profitable meat and fur. There was once small colony of livestock farmers here, but they all moved off-planet as the resources dwindled. The only notable event was when the Jedi Daro Jissard fled here after he freed dozens of slaves from a Sith stronghold in the nearby Astan system. He programmed his ship to fly past Rasynda, but took an escape pod to the planet himself so that the Sith would follow him there, allowing the escapees to reach a Jedi safehouse in the next quadrant over. The thick fog and vast oceans make landing a ship on Rasynda nearly impossible, so he was incredibly fortunate to make a safe landing near a small village. After news of slave’s freedom reached the Jedi Council, they quickly dispatched reinforcements to retrieve Daro. They found him before the Sith did and brought him back to civilization.\nWhat the history books won’t tell you is that Rasynda was my home. On this planet, I was born, grew up, got married, had three kids, and got elected as our small colony’s mayor. All of my memories, besides my off-world schooling as a teenager, came from Rasynda. Life there was perfect. Raising and farming arlestaas was tough work, but it was rewarding. You could tell a person’s worth by the effort they showed and the bounty they produced. Everyone knew everyone else. We treated each other fairly because we knew that you would have to live with any enemies you made for the rest of your life. I’d do anything to get back to a life like that, but I know I can’t. I lost all that when that damn Jedi came.\nDaro Jissard arrived at my home in the dead of night. The older man was exhausted, and his cloak was torn, but he had frenetic energy about him. As with any extraterrestrial guest, we treated him well. He had food and water and a comfortable place to sleep. In this time, he began telling the townspeople about the wonders of the Force, and how it had guided him through his whole life. He began to teach people how to wield it, and they began to slack off on their duties. Everyone wanted to “learn the magics from the great wizard.” The fact that he also shared terrifying stories of the atrocities committed by the Sith didn’t help.  Everyone thought that they would come any day hunting for him, so we all had to be prepared for a fight. I know as well as anyone the importance of being able to protect the community. We learned from him how to identify force users, resist their abilities, and fight against a lightsaber.\nAs time passed, most people began to doubt the Sith were actually coming. But Daro’s fear only seemed to intensify. You could see the terror in his face when he spoke of the Sith and their evil ways. Eventually, the devotion to the Force that he had been spreading turned to zealotry. His lessons turned into rants and his meditations into tantrums. This began to drive people away from him. Suddenly, arlestaas began dying off at an alarming rate, and our other crops were consistently failing. Daro then told the village that when he was at the Sith stronghold, he found that they had been developing a new bioweapon. They had unleashed it against our planet in an effort to kill Daro. As quickly as they turned away, people began turning back to him for guidance and training.\nOne day, he announced that a Sith was living in this very community, and began a witch hunt. I tried to put a stop to it. I said that he had wasted too much of our people’s time with his training. Our food supplies were the lowest they had ever been, and winter was on its way. We didn’t have the time or resources to do a thorough investigation of every person in the community. If he wanted to take care of it himself, however, he could do so. I regret that decision more than anything else.\nFirst, it was the mechanic’s daughter. Then the pilot who had retired here a few years ago. Five others disappeared over the next few days. We sent out search parties and scouted the area, but there was no sign of them. Once my son vanished, I made the connection. These were all people who had never trained with Daro. I gathered the militia and went to his homestead. There I found the Jedi, with nearly two dozen apprentices. Daro claimed that I had been working with the Sith, and anyone not with him was against him. He had found and killed several so-called Sith, but they had said that there were others during his interrogations. In fact, he claimed I was the one who planted the bioweapon, and I was the reason we had no food. I laughed at this absurdity, for I had never even met a Sith. But he pressed on, announcing that he knew the location of the bioweapon, and it was in my home. We all went there, and somehow, there was a strange device in a cupboard in my room. As far as I can tell, he did find this bioweapon in the Sith stronghold but used it himself for attention and planted it in my home. He had ruined our entire lifestyle!\nBefore I could react, however, he drew his lightsaber and ordered his followers to kill me for these “evil deeds.” I had no choice but to strike down several of my oldest friends that day. When Daro saw the battle going against him, he fled, abandoning those who had sacrificed everything for him. I chased him for days. When I caught up to him, I saw him stepping onto a Jedi starship. It seems his friends had finally arrived to take him home. I knew I couldn’t give up yet. I returned to our community, kissed my children goodbye, and took a starship up to the space station. I knew that even though Daro was so vile, the Jedi were a righteous and organized group of people who would punish him accordingly. Right? That’s what they told us as kids, right? Wrong. I spent years trying to give Daro the punishment he deserved. I appealed to the Jedi Council, to various planetary governances, and other powerful individuals. No one listed to the farm girl from the outer rim. No one cared. Daro is a Jedi, and Jedi are always right. He didn’t do all these things you say he did. You probably just misunderstood him. Jedi are so much smarter and wiser than you. Go back to your farming and planting. Besides, even if I did get someone to listen, he had the whole council on his side. Who could fight against that?\nMuch later, I was drinking my sorrows away at a shady bar. I had just spent all of the money earned over the last year to get a hearing, but then it was canceled because of another Sith attack. All these deaths, all this suffering, because of the power-hungry force wielders. Sith or Jedi, all they care about is being stronger than the other. I don’t know much about the Force, but I don’t understand how people can trust such a chaotic, unpredictable power. As I finished my next drink, I saw him walk in. Daro Jissard. My adrenaline began to pump as I formed a plan. I offered to buy him a drink and struck up a friendly conversation with him. He had no idea who I was or where I was from. I kept the drinks coming until he was hammered. As it got late, I said that I could give him a lift home. The next thing I knew, I had killed my first Jedi. I don’t know why, but I grabbed his lightsaber before running away. I booked passage off the planet and headed back to Rasynda as quickly as possible.\nThis man deserved this! He was a perversion of everything everyone believed about the Jedi. He should not have been trusted with such power, especially if I was able to assassinate him so easily. There really needs to be more oversight over the Jedi. If they are using the powers of the Force with reckless abandon, someone needs to stop that. But not me. I can finally go home to Rasynda. Justice has been served, and now my people can be at peace.\nHowever, things only got worse. The bioweapon that Daro released in Rasynda had ravaged the planet. All plants and animals, as well as my family, had died off in the few years I had been gone, and the last remaining people had moved off-planet, scattered amongst the stars. Without a community to return to, I had no place to go and no work to do. I began to pick up odd jobs to make ends meet. I finally fell in with a group of smugglers at one of the lowest points in my life. Eventually, I began to hear people grumble about other Jedi using and abusing their power for their own gains. I decided to set out and help people deal with these problems. I believe the Force to be far too powerful and chaotic for normal people to have access too. The Republic needs to do something to stop the endless wars between the Jedi and the Sith, and I hope one day to work with the government to make positive change. Only then will I feel that all of my kinsmen who died from Daro’s mistake will be at peace."
   },
-  "equipment": [
+  "items": [
     {
-      "name": "lightBattleArmor",
-      "quantity": 1
+      "name": "Techaxe",
+      "quantity": 1,
+      "totalWeight": 2
     },
     {
-      "name": "mediumShield",
-      "quantity": 1
-    },
-    {
-      "name": "techaxe",
-      "quantity": 1
-    },
-    {
-      "name": "holdout",
-      "quantity": 1
-    },
-    {
-      "name": "credits",
-      "quantity": 150
+      "name": "Medkit",
+      "quantity": 2,
+      "totalWeight": 6
     }
-  ]
+  ],
+  "credits": 100,
+  "carryingCapacity": {
+    "encumbered": 80,
+    "heavilyEncumbered": 160,
+    "maxCapacity": 240,
+    "pushDragLift": 480
+  },
+  "techCasting": {
+    "currentPoints": 8,
+    "maxPoints": 8,
+    "attackModifier": 7,
+    "saveDC": 15,
+    "powersKnown": [
+      {
+        "name": "Electroshock",
+        "powerType": "Tech",
+        "prerequisite": null,
+        "level": 0,
+        "castingPeriod": "Action",
+        "castingPeriodText": "1 action",
+        "range": "Touch",
+        "duration": "Instantaneous",
+        "concentration": false,
+        "forceAlignment": "None",
+        "description": "Lightning springs from you to deliver a shock to a creature you try to touch. Make a melee tech attack against the target. You have advantage on the attack roll if the target is wearing armor made of metal. On a hit, the target takes 1d8 lightning damage, and it can't take reactions until the start of its next turn.\r\n\r\nThis power's damage increases by 1d8 when you reach 5th level (2d8), 11th level (3d8), and 17th level (4d8).",
+        "higherLevelDescription": null
+      },
+      {
+        "name": "Encrypted Message",
+        "powerType": "Tech",
+        "prerequisite": null,
+        "level": 0,
+        "castingPeriod": "Action",
+        "castingPeriodText": "1 action",
+        "range": "120 feet",
+        "duration": "1 round",
+        "concentration": false,
+        "forceAlignment": "None",
+        "description": "You point your finger toward a creature within range that possesses a commlink and whisper a message. The target (and only the target) hears the message and can send an encrypted reply that only you can hear. These messages cannot be intercepted or decrypted by unenhanced means.\r\n\r\nYou can cast this power through solid objects if you are familiar with the target and know it is beyond the barrier. 1 foot of stone, 1 inch of common metal, a thin sheet of lead, or 3 feet of wood blocks the power. The power doesn't have to follow a straight line and can travel freely around corners or through openings.",
+        "higherLevelDescription": null
+      },
+      {
+        "name": "Alarm",
+        "powerType": "Tech",
+        "prerequisite": null,
+        "level": 1,
+        "castingPeriod": "Minute",
+        "castingPeriodText": "1 minute",
+        "range": "30 feet",
+        "duration": "8 hours",
+        "concentration": false,
+        "forceAlignment": "None",
+        "description": "You set an alarm against unwanted intrusion. Choose a door, a window, or an area within range that is no larger than a 20-foot cube. Until the power ends, an alarm alerts you whenever a Tiny or larger creature touches or enters the warded area. When you cast the power, you can designate creatures that won't set off the alarm. You also choose whether the alarm is mental or audible. \r\n\r\nA silent alarm alerts you with a ping in your mind if you are within 1 mile of the warded area. This ping awakens you if you are sleeping.\r\n\r\nAn audible alarm produces the sound of a hand bell for 10 seconds within 60 feet.",
+        "higherLevelDescription": null
+      },
+      {
+        "name": "Stack the Deck",
+        "powerType": "Tech",
+        "prerequisite": null,
+        "level": 1,
+        "castingPeriod": "Action",
+        "castingPeriodText": "1 action",
+        "range": "30 feet",
+        "duration": "up to 1 minute",
+        "concentration": true,
+        "forceAlignment": "None",
+        "description": "You boost up to three creatures of your choice within range. Whenever a target makes an attack roll or a saving throw before the power ends, the target can roll a d4 and add the number rolled to the attack roll or saving throw.\r\n\r\n***Overcharge Tech.*** When you cast this power using a tech slot of 2nd level or higher, you can target one additional creature for each slot level above 1st.",
+        "higherLevelDescription": null
+      },
+      {
+        "name": "Tracer Bolt",
+        "powerType": "Tech",
+        "prerequisite": null,
+        "level": 1,
+        "castingPeriod": "Action",
+        "castingPeriodText": "1 action",
+        "range": "120 feet",
+        "duration": "1 round",
+        "concentration": false,
+        "forceAlignment": "None",
+        "description": "A flash of light streaks toward a creature of your choice within range. Make a ranged tech attack against the target. On a hit, the target takes 4d6 energy damage, and the next attack roll made against this target before the end of your next turn has advantage. \r\n\r\n***Overcharge Tech.*** When you cast this power using a tech slot of 2nd level or higher, the damage increases by 1d6 for each slot level above 1st.",
+        "higherLevelDescription": null
+      },
+      {
+        "name": "Denounce",
+        "powerType": "Force",
+        "prerequisite": null,
+        "level": 0,
+        "castingPeriod": "Action",
+        "castingPeriodText": "1 action",
+        "range": "30 feet",
+        "duration": "up to 1 minute",
+        "concentration": true,
+        "forceAlignment": "Dark",
+        "description": "A target of your choice within range must make a Charisma saving throw. On a failed save, when the target makes their next attack roll or saving throw they must roll a d4 and subtract the number from it. The power then ends.",
+        "higherLevelDescription": null
+      },
+      {
+        "name": "Sense Force",
+        "powerType": "Force",
+        "prerequisite": null,
+        "level": 1,
+        "castingPeriod": "Action",
+        "castingPeriodText": "1 action",
+        "range": "Self",
+        "duration": "up to 10 minutes",
+        "concentration": true,
+        "forceAlignment": "Universal",
+        "description": "For the duration, you sense the use of the Force, or its presence in an inanimate object within 30 feet of you. If you sense the Force in this way, you can use your action to determine the direction from which it originates and, if it's in line of sight, you see a faint aura around the person or object from which the Force emanates.\r\n\r\n***Force Potency.*** When you cast this power using a 3rd-level force slot, the range increases to 60 feet. When you use a 5th-level force slot, the range increases to 500 feet. When you use a 7th-level force slot, the range increases to 1 mile. When you use a 9th-level force slot, the range increases to 10 miles.",
+        "higherLevelDescription": null
+      }
+    ]
+  }
 }

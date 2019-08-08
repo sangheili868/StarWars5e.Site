@@ -1,57 +1,44 @@
-import StarshipPage from './StarshipPage.vue'
-import StarshipNavigation from './StarshipNavigation.vue'
-import StarshipChapter from './StarshipChapter.vue'
-import StarshipDeployments from './StarshipDeployments.vue'
-import StarshipDeploymentDetails from './StarshipDeploymentDetails.vue'
-import StarshipSizes from './StarshipSizes.vue'
-import StarshipSizeDetails from './StarshipSizeDetails.vue'
-import StarshipModifications from './StarshipModifications.vue'
-import StarshipCustomization from './StarshipCustomization.vue'
+import PageNester from '@/components/PageNester.vue'
+import StarshipsDeployments from './StarshipsDeployments.vue'
+import StarshipsDeploymentDetails from './StarshipsDeploymentDetails.vue'
+import StarshipsPage from './StarshipsPage.vue'
+import StarshipsEquipment from './StarshipsEquipment.vue'
+import StarshipsModifications from './StarshipsModifications.vue'
+import StarshipsWeapons from './StarshipsWeapons.vue'
+import StarshipsVentures from './StarshipsVentures.vue'
 
 export default {
   path: '/starships',
-  components: {
-    default: StarshipPage,
-    navigation: StarshipNavigation
-  },
+  component: PageNester,
   children: [
     {
-      path: 'starshipSizes/:sizeName',
-      component: StarshipSizeDetails,
+      path: '/starships',
+      component: StarshipsPage
+    },
+    {
+      path: '/starships/deployments',
+      component: StarshipsDeployments
+    },
+    {
+      path: '/starships/deployments/:deploymentName',
+      component: StarshipsDeploymentDetails,
       props: true
     },
     {
-      path: 'starshipSizes',
-      component: StarshipSizes
+      path: '/starships/equipment',
+      component: StarshipsEquipment
     },
     {
-      path: 'deployments/:deploymentName',
-      component: StarshipDeploymentDetails,
-      props: true
+      path: '/starships/modifications',
+      component: StarshipsModifications
     },
     {
-      path: 'deployments',
-      component: StarshipDeployments
+      path: '/starships/weapons',
+      component: StarshipsWeapons
     },
     {
-      path: 'modifications',
-      component: StarshipModifications
-    },
-    {
-      path: 'customization',
-      component: StarshipCustomization
-    },
-    {
-      path: ':chapter',
-      component: StarshipChapter,
-      props: true
-    },
-    {
-      path: '',
-      component: StarshipChapter,
-      props: {
-        chapter: 'introduction'
-      }
+      path: '/starships/ventures',
+      component: StarshipsVentures
     }
   ]
 }

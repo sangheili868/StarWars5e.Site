@@ -39,17 +39,17 @@
     get books () {
       return [
         {
-          to: 'handbook',
+          to: 'rules/handbook',
           title: 'Player\' Handbook',
           image: 'phb_cover'
         },
         {
-          to: 'monsters',
+          to: 'rules/monsters',
           title: 'Monster Manual',
           image: 'mm_cover'
         },
         {
-          to: 'starships',
+          to: 'rules/starships',
           title: 'Starships of the Galaxy',
           image: 'sotg_cover'
         }

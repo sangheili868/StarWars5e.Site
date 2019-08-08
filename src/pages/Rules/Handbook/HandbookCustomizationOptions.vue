@@ -15,5 +15,5 @@
 <template lang="pug">
   div
     HandbookChapter(chapter="customization")
-      v-btn(to="/reference/feats", color="primary") Feats List
+      v-btn(to="/characters/feats", color="primary") Feats List
 </template>

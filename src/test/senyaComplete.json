@@ -1,6 +1,6 @@
 {
   "name": "Senya Halcyon",
-  "image": "https://drive.google.com/file/d/1DwIz-WlxPwQn54StakrBOr_JacfNoS-d/view?usp=sharing",
+  "image": "https://drive.google.com/uc?export=view&id=1DwIz-WlxPwQn54StakrBOr_JacfNoS-d",
   "user": "tyrzaphir",
   "classes": [
     {
@@ -9,7 +9,7 @@
       "archetype": "Politician"
     },
     {
-      "class": "Scout",
+      "name": "Scout",
       "levels": 4,
       "archetype": "Inquisitor"
     }
@@ -18,6 +18,7 @@
   "species": "Human",
   "background": "Folk Hero",
   "experiencePoints": {
+    "previousLevel": 23000,
     "current": 23225,
     "nextLevel": 34000
   },
@@ -175,8 +176,8 @@
   "initiative": 4,
   "armorClass": 19,
   "hitPoints": {
-    "maximum": 0,
-    "current": 0,
+    "maximum": 42,
+    "current": 34,
     "temporary": 0,
     "hitDice": {
       "d8s": {

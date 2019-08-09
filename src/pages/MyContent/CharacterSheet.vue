@@ -1,15 +1,22 @@
 <script lang="ts">
   import { Component, Prop, Vue } from 'vue-property-decorator'
   import characterJson from '@/test/senyaComplete'
+  import CharacterSheetTop from './CharacterSheetTop.vue'
 
-  @Component
+  @Component({
+    components: {
+      CharacterSheetTop
+    }
+  })
   export default class CharacterSheet extends Vue {
-    characterJson = characterJson
+    completeCharacter = characterJson
   }
 </script>
 
 <template lang="pug">
-  pre.text-xs-left {{ JSON.stringify(characterJson, null, 2) }}
+  div
+    CharacterSheetTop(v-bind="{ completeCharacter }")
+    pre.pt-5.text-xs-left {{ JSON.stringify(completeCharacter, null, 2) }}
 </template>
 
 <style module lang="scss">
@@ -21,6 +28,7 @@ Segments:
     Image
     species class (archetype) level
     Experience Points
+  Health:
     Hit Points
     Hit Dice
     Death Saves

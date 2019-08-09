@@ -174,11 +174,7 @@
   "proficiencyBonus": 3,
   "initiative": 4,
   "armorClass": {
-    "value": 19,
-    "sources": [
-      "Durasteel Armor",
-      "Heavy Shield"
-    ]
+    "value": 19
   },
   "hitPoints": {
     "maximum": 0,
@@ -199,21 +195,6 @@
       "failures": 0
     }
   },
-  "weapons": [
-    {
-      "name": "Hold-out",
-      "attackBonus": 4,
-      "damage": "1d4 + 1 energy",
-      "range": "30/120",
-      "weight": "1",
-      "notes": [
-        "Ammunition",
-        "Hidden",
-        "Light",
-        "Reload 6"
-      ]
-    }
-  ],
   "passivePerception": 9,
   "inspiration": false,
   "vision": "normal",
@@ -288,7 +269,7 @@
       "armorClassification": "Shield",
       "ac": "+3",
       "strengthRequirement": "Str 17",
-      "stealthDisadvantage": true,
+      "stealthDisadvantage": true
     },
     {
       "name": "Blaster rifle",
@@ -346,70 +327,116 @@
       "equipmentCategory": "Medical"
     },
     {
-      "name": "credits",
-      "quantity": 260
-    },
-    {
-      "name": "biochemistsKit",
-      "quantity": 1
-    },
-{"name":"Biochemist's kit","description":"This kit includes all of the necessary components to create and house standard adrenals, medpacs, and stimpacs. Proficiency with this kit lets you add your proficiency bonus to any ability checks you make to identify adrenals, medpacs, and stimpacs. Also, proficiency with this kit is required to create adrenals, medpacs, and stimpacs.","cost":500,"weight":8,"equipmentCategoryEnum":21,"equipmentCategory":"Kit"},
-    {
-      "name": "commonClothes",
-      "quantity": 1
-    },
-{"name":"Clothes, common","description":null,"cost":5,"weight":3,"equipmentCategoryEnum":20,"equipmentCategory":"Clothing"},
-    {
-      "name": "backpack",
+      "name": "Biochemist's kit",
+      "description": "This kit includes all of the necessary components to create and house standard adrenals, medpacs, and stimpacs. Proficiency with this kit lets you add your proficiency bonus to any ability checks you make to identify adrenals, medpacs, and stimpacs. Also, proficiency with this kit is required to create adrenals, medpacs, and stimpacs.",
+      "cost": 500,
+      "weight": 8,
+      "equipmentCategory": "Kit",
       "quantity": 1
     },
     {
-      "name": "glowRod",
+      "name": "Clothes, common",
+      "description": null,
+      "cost": 5,
+      "weight": 3,
+      "equipmentCategory": "Clothing",
+      "quantity": 1
+    },
+    {
+      "name": "Backpack",
+      "description": null,
+      "cost": 50,
+      "weight": 5,
+      "equipmentCategory": "Storage",
+      "quantity": 1
+    },
+    {
+      "name": "Glowrod",
+      "description": "Glowrods create a beam of light illuminating the area around you in bright light for a 20-foot radius and dim light for an additional 20 feet. The glowrod lasts for 10 hours and can be recharged by connecting to a power source or by replacing the power cell. ",
+      "cost": 10,
+      "weight": 2,
+      "equipmentCategory": "Utility",
       "quantity": 5
     },
     {
-      "name": "fusionCutter",
+      "name": "Fusion cutter",
+      "description": "A fusion cutter is a handheld cutting tool popular among technicians. It cut through almost any reinforced material, given enough time. The internal power cell supplies an hour's worth of continuous operation.",
+      "cost": 25,
+      "weight": 2,
+      "equipmentCategory": "Utility",
       "quantity": 1
     },
     {
-      "name": "chronometer",
+      "name": "Chronometer",
+      "description": "A chronometer is a device that measures and keeps linear time.",
+      "cost": 100,
+      "weight": 1,
+      "equipmentCategory": "Utility",
       "quantity": 1
     },
     {
-      "name": "grapplingHook",
+      "name": "Grappling hook",
+      "description": "A grappling hook allows a user to climb or ascend large objects. It can be mounted to a blaster, belt, or elsewhere. It has a 50-foot length.",
+      "cost": 50,
+      "weight": 4,
+      "equipmentCategory": "Utility",
       "quantity": 1
     },
     {
-      "name": "rations",
+      "name": "Field rations (one day's)",
+      "description": null,
+      "cost": 5,
+      "weight": 1,
+      "equipmentCategory": "Utility",
       "quantity": 10
     },
     {
-      "name": "canteen",
+      "name": "Canteen",
+      "description": null,
+      "cost": 10,
+      "weight": 3,
+      "equipmentCategory": "Utility",
       "quantity": 1
     },
     {
-      "name": "50ft fibercord cable",
+      "name": "Fibercord cable, 50 ft (rolled)",
+      "description": null,
+      "cost": 20,
+      "weight": 2,
+      "equipmentCategory": "Utility",
+      "quantity": 1
+    },
+    {
+      "name": "Commlink",
+      "description": "Commlinks are standard handheld communication devices, fitted with microphones and receivers. A standard, personal commlinks have a range of up to 30 miles, but are reduced in dense, urban areas or areas of high level interference.",
+      "cost": 50,
+      "weight": 1,
+      "equipmentCategory": "Communications",
+      "quantity": 4
+    },
+    {
+      "name": "Medium shield generator",
+      "description": "A personal shield generator was a defensive technology that projected a field of energy that protected the user from blaster fire, the elements, or other hazards. Most were designed to be held much like a traditional physical shield. The medium shield generator is used in conjunction with any one-handed weapon.",
+      "cost": 100,
+      "weight": 14,
+      "equipmentCategory": "Armor",
+      "quantity": 1
+    },
+    {
+      "name": "Light battle armor",
+      "description": "Providing solid protection for a minimal cost, light battle armor is considered excellent protection for entrenched troops or guards. However, this protection comes at a cost of mobility, limiting its uses by rapidly advancing infantry. Still, it provides more mobility than full battle armor.",
+      "cost": 500,
+      "weight": 20,
+      "equipmentCategory": "Armor",
       "quantity": 1
     },
     {
       "name": "custom",
       "notes": "Damage Powered Durasteel Armor",
       "quantity": 1
-    },
-    {
-      "name": "commlink",
-      "quantity": 4
-    },
-    {
-      "name": "mediumShield",
-      "quantity": 1
-    },
-    {
-      "name": "lightBattleArmor",
-      "quantity": 1
     }
   ],
-  "credits": 100,
+  "credits": 260,
   "carryingCapacity": {
     "encumbered": 80,
     "heavilyEncumbered": 160,

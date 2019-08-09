@@ -33,27 +33,35 @@
 </script>
 
 <template lang="pug">
-  div(:class="$style.topItems").white.d-flex.px-3.py-2
+  div(:class="$style.topItems").d-flex.px-3.py-2.elevation-3
     v-img(:src="completeCharacter.image", contain, max-height="90", max-width="90", min-width="100")
     div.text-xs-left
       h1 {{ completeCharacter.name }}
-      div {{ classText }}
+      h5 {{ classText }}
       div(:class="$style.xpBar").d-flex
-        v-chip(small, color="secondary", text-color="white").mr-2.ml-0 {{ currentLevel }}
+        v-chip(small, color="secondary", text-color="white").mr-2.ml-0
+          h5 {{ currentLevel }}
         v-progress-linear(
           :value="percentExperience",
           rounded,
           color="secondary",
           height="20"
-        ).text-xs-center.ma-0 {{ experienceText }}
-        v-chip(small, color="secondary", text-color="white", :class="$style.rightChip").ml-2.mr-0 {{ currentLevel + 1 }}
+        ).text-xs-center.ma-0
+          h5 {{ experienceText }}
+        v-chip(small, color="secondary", text-color="white", :class="$style.rightChip").ml-2.mr-0
+          h5 {{ currentLevel + 1 }}
     CharacterSheetHealth(:hitPoints="completeCharacter.hitPoints")
 </template>
 
 <style module lang="scss">
+  @import '@/assets/styles/colors.scss';
+
   .topItems {
     flex-wrap: wrap;
     justify-content: center;
+    border-radius: 5px;
+    border: 1px solid $primary;
+    background-color: white;
 
     .xpBar {
       align-items: center;

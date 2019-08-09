@@ -173,9 +173,7 @@
   },
   "proficiencyBonus": 3,
   "initiative": 4,
-  "armorClass": {
-    "value": 19
-  },
+  "armorClass": 19,
   "hitPoints": {
     "maximum": 0,
     "current": 0,

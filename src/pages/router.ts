@@ -8,6 +8,7 @@ import rulesRoutes from './Rules/router'
 import charactersRoutes from './Characters/router'
 import lootRoutes from './Loot/router'
 import starshipsRoutes from './Starships/router'
+import CharacterSheet from './MyContent/CharacterSheet.vue'
 
 Vue.use(Router)
 export default new Router({
@@ -20,6 +21,10 @@ export default new Router({
     charactersRoutes,
     lootRoutes,
     starshipsRoutes,
+    {
+      path: '/characterSheetTest',
+      component: CharacterSheet
+    },
     {
       path: '/credits',
       component: CreditsPage

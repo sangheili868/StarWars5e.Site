@@ -17,11 +17,11 @@
   export default class CharactersForcePowers extends Vue {
     @powersModule.State powers!: PowerType[]
     @powersModule.Action fetchPowers!: () => void
-    search: string | (string | null)[] = ''
+    initialSearch: string | (string | null)[] = ''
 
     created () {
       this.fetchPowers()
-      this.search = this.$route.query.search
+      this.initialSearch = this.$route.query.search
     }
 
     get items () {
@@ -93,7 +93,7 @@
   div
     h1 Force Powers
     br
-    SearchTable(v-bind="{ headers, items, search }")
+    SearchTable(v-bind="{ headers, items, initialSearch }")
       template(v-slot:default="props")
         VueMarkdown(:source="props.item.description")
 </template>

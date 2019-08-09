@@ -10,7 +10,7 @@ import lootRoutes from './Loot/router'
 import starshipsRoutes from './Starships/router'
 
 Vue.use(Router)
-console.log(rulesRoutes)
+
 export default new Router({
   routes: [
     {

@@ -26,12 +26,12 @@
     @weaponsModule.Action fetchWeapons!: () => void
     @weaponPropertiesModule.State weaponProperties!: WeaponPropertyType[]
     @weaponPropertiesModule.Action fetchWeaponProperties!: () => void
-    search: string | (string | null)[] = ''
+    initialSearch: string | (string | null)[] = ''
 
     created () {
       this.fetchWeapons()
       this.fetchWeaponProperties()
-      this.search = this.$route.query.search
+      this.initialSearch = this.$route.query.search
     }
 
     get items () {
@@ -85,7 +85,7 @@
   div
     h1 Weapons
     br
-    SearchTable(v-bind="{ headers, items, search }")
+    SearchTable(v-bind="{ headers, items, initialSearch }")
       template(v-slot:default="props")
         strong Properties:
         LinkModal(

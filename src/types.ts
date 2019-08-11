@@ -315,3 +315,16 @@ export interface SearchResultType {
   searchText: string,
   rowKey: string
 }
+
+export interface EnhancedItemType {
+  contentType: string,
+  name: string,
+  type: string,
+  rarityOptions: string[],
+  searchableRarity: string,
+  requiresAttunement: boolean,
+  valueOptions: string[],
+  valueText: string,
+  text: string,
+  subtype: string
+}

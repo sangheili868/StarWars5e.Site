@@ -1,22 +1,22 @@
 import PageNester from '@/components/PageNester.vue'
-import CitiesNavigation from './CitiesNavigation.vue'
-import CitiesChapter from './CitiesChapter.vue'
+import HivesNavigation from './HivesNavigation.vue'
+import HivesChapter from './HivesChapter.vue'
 
 export default {
-  path: 'cities',
+  path: 'hives',
   components: {
     default: PageNester,
-    navigation: CitiesNavigation
+    navigation: HivesNavigation
   },
   children: [
     {
       path: ':chapter',
-      component: CitiesChapter,
+      component: HivesChapter,
       props: true
     },
     {
       path: '',
-      component: CitiesChapter
+      component: HivesChapter
     }
   ]
 }

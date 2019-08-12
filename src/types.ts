@@ -335,11 +335,10 @@ export interface HitPointsType {
   current: number,
   temporary: number,
   hitDice: {
-    [diceSize: string]: {
-      current: number,
-      maximum: number
-    }[]
-  }
+    size: string,
+    current: number,
+    maximum: number
+  }[]
 }
 
 export interface CastingType {

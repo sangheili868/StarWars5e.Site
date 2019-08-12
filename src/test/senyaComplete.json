@@ -179,16 +179,18 @@
     "maximum": 42,
     "current": 34,
     "temporary": 0,
-    "hitDice": {
-      "d8s": {
+    "hitDice": [
+      {
+        "size": "d8",
         "current": 3,
         "maximum": 3
       },
-      "d10s": {
+      {
+        "size": "d10",
         "current": 4,
         "maximum": 4
       }
-    },
+    ],
     "deathSaves": {
       "successes": 0,
       "failures": 0

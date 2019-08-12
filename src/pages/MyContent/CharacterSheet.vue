@@ -2,10 +2,12 @@
   import { Component, Prop, Vue } from 'vue-property-decorator'
   import characterJson from '@/test/senyaComplete'
   import CharacterSheetTop from './CharacterSheetTop.vue'
+  import CharacterSheetAbilities from './CharacterSheetAbilities.vue'
 
   @Component({
     components: {
-      CharacterSheetTop
+      CharacterSheetTop,
+      CharacterSheetAbilities
     }
   })
   export default class CharacterSheet extends Vue {
@@ -16,6 +18,10 @@
 <template lang="pug">
   div
     CharacterSheetTop(v-bind="{ completeCharacter }")
+    v-container(grid-list-md).pa-0
+      v-layout
+        v-flex(sm4 xs12)
+          CharacterSheetAbilities(:abilityScores="completeCharacter.abilityScores")
     pre.pt-5.text-xs-left {{ JSON.stringify(completeCharacter, null, 2) }}
 </template>
 
@@ -23,17 +29,9 @@
 /*
 Segment size: 350px
 Segments:
-  Top:
-    name
-    Image
-    species class (archetype) level
-    Experience Points
   Health:
-    Hit Points
-    Hit Dice
     Death Saves
     Inspiration
-  Ability Scores, Saves, Skills
   Senses & Speed:
     Passive Perception
     Vision

@@ -18,7 +18,6 @@
   .section {
     max-width: 350px;
     border-radius: 5px;
-    border: 1px solid $primary;
     background-color: white;
   }
 </style>

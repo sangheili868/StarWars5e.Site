@@ -63,7 +63,6 @@
     justify-content: space-around;
     align-items: center;
     border-radius: 5px;
-    border: 1px solid $primary;
     background-color: white;
 
     .xpBar {

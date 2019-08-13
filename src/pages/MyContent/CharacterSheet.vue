@@ -3,11 +3,13 @@
   import characterJson from '@/test/senyaComplete'
   import CharacterSheetTop from './CharacterSheetTop.vue'
   import CharacterSheetAbilities from './CharacterSheetAbilities.vue'
+  import CharacterSheetCombat from './CharacterSheetCombat.vue'
 
   @Component({
     components: {
       CharacterSheetTop,
-      CharacterSheetAbilities
+      CharacterSheetAbilities,
+      CharacterSheetCombat
     }
   })
   export default class CharacterSheet extends Vue {
@@ -22,6 +24,8 @@
       v-layout
         v-flex(sm4 xs12)
           CharacterSheetAbilities(:abilityScores="completeCharacter.abilityScores")
+        v-flex(sm4 xs12)
+          CharacterSheetCombat(v-bind="completeCharacter", :speed="completeCharacter.speed.base")
     pre.pt-5.text-xs-left {{ JSON.stringify(completeCharacter, null, 2) }}
 </template>
 
@@ -32,10 +36,9 @@ Segments:
   Health:
     Death Saves
     Inspiration
-  Senses & Speed:
+  Senses
     Passive Perception
     Vision
-    Speed
   Combat:
     Speed
     Prof. Bonus

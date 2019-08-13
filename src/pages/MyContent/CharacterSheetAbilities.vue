@@ -39,13 +39,3 @@
             v-bind="{ proficiency }"
           ) {{ addPlus(modifier) }} {{ name }}
 </template>
-
-<style module lang="scss">
-  .ability {
-    display: flex;
-
-    .values {
-      min-width: 20px;
-    }
-  }
-</style>

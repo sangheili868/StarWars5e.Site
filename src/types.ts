@@ -349,6 +349,10 @@ export interface CastingType {
   powersKnown: PowerType[]
 }
 
+export interface EquipmentType {
+
+}
+
 export interface CompleteCharacterType {
   name: string,
   image: string | null,
@@ -409,7 +413,7 @@ export interface CompleteCharacterType {
     },
     backstory: string
   },
-  items: (GearType | WeaponType | ArmorType)[],
+  items: ((GearType | WeaponType | ArmorType) & { equipped: boolean })[],
   credits: number,
   carryingCapacity: {
     encumbered: number,

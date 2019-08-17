@@ -36,13 +36,17 @@
         hash: ''
       })
     }
+
+    get isDark () {
+      return this.$vuetify.dark
+    }
   }
 </script>
 
 <template lang="pug">
   v-dialog(:value="hash && content", width="500")
-    v-card(:class="$style.modal")
-      v-card-title(primary-title).primary--text.headline.grey.lighten-2 {{ hash }}
+    v-card(:class="[ $style.modal, { [$style.darkSide]: isDark } ]")
+      v-card-title(primary-title, :class="{ ['darken-1']: isDark, ['lighten-2']: !isDark }").primary--text.headline.grey {{ hash }}
       v-card-text
         VueMarkdown(:source="content")
       v-divider
@@ -56,5 +60,9 @@
 
   .modal {
     background: $backgroundGradient;
+
+    &.darkSide {
+      background: $darkSideGradient;
+    }
   }
 </style>

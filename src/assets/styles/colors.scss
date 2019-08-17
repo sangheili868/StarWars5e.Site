@@ -1,7 +1,12 @@
 $primary: #c40f0f;
+$darkSidePrimary: #ff0000;
 $secondary: #0d99cc;
 $background: #afc6d6;
-$backgroundGradient: linear-gradient(to right, #afc6d6 0%,#d6d6d6 30%,#d6d6d6 70%,#afc6d6 100%);
+$darkBackground: #333333;
+$backgroundGradient: linear-gradient(to right, #afc6d6 0%, #d6d6d6 30%,#d6d6d6 70%,#afc6d6 100%);
+$darkSideGradient: linear-gradient(to right, #484848 0%,#333333 30%,#333333 70%, #484848 100%);
 $lightGrey: #c9d6db;
+$darkSideLightGrey: #777777;
 $darkGrey: #bdc8cc;
+$darkSideDarkGrey: #555555;
 $black: black;

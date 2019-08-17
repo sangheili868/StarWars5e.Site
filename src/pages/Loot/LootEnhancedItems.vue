@@ -47,9 +47,9 @@
         {
           text: 'Subtype',
           value: 'subtype',
-          render: _.startCase,
+          render: _.startCase
         },
-        { 
+        {
           text: 'Rarity',
           value: 'rarityText',
           filterChoices: ['Standard', 'Premium', 'Prototype', 'Advanced', 'Legendary',

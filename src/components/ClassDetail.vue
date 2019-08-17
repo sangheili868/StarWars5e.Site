@@ -14,6 +14,10 @@
   })
   export default class ClassDetail extends Vue {
     @Prop(Object) readonly classData!: ClassType
+
+    get isDark () {
+      return this.$vuetify.dark
+    }
   }
 </script>
 
@@ -57,7 +61,7 @@
       div.d-flex
         strong Class
         strong.text-xs-right Funds
-      div(:class="$style.funds").d-flex
+      div(:class="[ $style.funds, { [$style.darkSide]: isDark } ]").d-flex
         div {{ classData.name }}
         div.text-xs-right {{ classData.startingWealthVariant }}
     br
@@ -80,5 +84,9 @@
 
   .funds {
     background: $lightGrey;
+
+    &.darkSide {
+      background: $darkSideLightGrey;
+    }
   }
 </style>

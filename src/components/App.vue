@@ -2,6 +2,9 @@
   import { Component, Prop, Vue } from 'vue-property-decorator'
   import MainToolbar from '@/components/MainToolbar.vue'
   import FragmentModal from '@/components/FragmentModal.vue'
+  import { namespace } from 'vuex-class'
+
+  const uiModule = namespace('ui')
 
   @Component({
     components: {
@@ -10,14 +13,15 @@
     }
   })
   export default class App extends Vue {
+    @uiModule.State isDarkSide!: boolean
   }
 </script>
 
 <template lang="pug">
-  v-app
+  v-app(:dark="isDarkSide")
     MainToolbar
     FragmentModal
-    v-content(:class="$style.content")
+    v-content(:class="[ $style.content, { [$style.darkSide]: isDarkSide } ]")
       v-container(fluid)
         router-view
     router-view(name="navigation")
@@ -30,5 +34,9 @@
     text-align: center;
     background: $backgroundGradient;
     font-family: 'Open Sans', sans-serif;
+
+    &.darkSide {
+      background: $darkSideGradient;
+    }
   }
 </style>

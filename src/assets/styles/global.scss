@@ -122,3 +122,48 @@ blockquote {
 table.v-table {
   max-width: none;
 }
+
+.theme--dark {
+  h1, h2, h3, h4 {
+    color: $darkSidePrimary
+  }
+
+  blockquote {
+    background-color: $darkBackground;
+    border-color: $primary;
+    box-shadow: 0px 0px 20px rgba($primary, 0.5);
+
+    hr {
+      background-color: $primary;
+    }
+  }
+
+  .block {
+    background-color: $darkSideDarkGrey;
+    border-color: $primary;
+    box-shadow: 0 0 1.5em rgba($primary, 0.5);
+
+    hr {
+      background-color: $primary;
+    }
+  }
+
+  h3 {
+    border-bottom: 2px solid $primary;
+  }
+
+  .table tbody tr {
+    &:nth-child(odd) {
+      background-color: $darkSideLightGrey;
+    }
+
+    &:nth-child(even) {
+      background-color: $darkSideDarkGrey;
+    }
+  }
+
+  .v-table, .v-card {
+    background-color: $darkSideDarkGrey;
+    border-color: $darkSideDarkGrey;
+  }
+}

@@ -6,6 +6,10 @@
     @Prop(String) readonly title!: string
     @Prop(String) readonly link!: string
     isOpen = false
+
+    get isDark () {
+      return this.$vuetify.dark
+    }
   }
 </script>
 
@@ -14,7 +18,11 @@
     template(v-slot:activator="{ on }")
       a(v-on="on") {{ link }}
     v-card
-      v-card-title(v-if="title", class="headline grey lighten-2", primary-title) {{ title }}
+      v-card-title(
+        v-if="title",
+        :class="{ ['darken-1']: isDark, ['lighten-2']: !isDark }",
+        primary-title
+      ).headline.grey {{ title }}
       v-card-text
         slot
       v-divider

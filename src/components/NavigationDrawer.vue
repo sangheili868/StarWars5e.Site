@@ -42,7 +42,7 @@
     fixed,
     app,
     clipped,
-    :class="$style.drawer",
+    :class="$vuetify.breakpoint.mdAndUp && $style.drawer",
     @input="updateSideBar"
   )
     v-list.dense

@@ -28,11 +28,11 @@
 </template>
 
 <style lang="scss">
-  .searchInput.v-text-field--solo.theme--light {
+  .searchInput.v-text-field--solo {
     align-self: center;
 
     .v-input__control .v-input__slot {
-      border-radius: 100px;
+      border-radius: 100px !important;
       margin-bottom: 0;
     }
   }

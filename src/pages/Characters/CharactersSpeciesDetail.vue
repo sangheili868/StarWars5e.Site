@@ -5,11 +5,13 @@
   import VueMarkdown from 'vue-markdown'
   import Loading from '@/components/Loading.vue'
   import ImageWithLoading from '@/components/ImageWithLoading.vue'
+  import CharactersSpeciesDetailHalfHuman from './CharactersSpeciesDetailHalfHuman.vue'
 
   const speciesModule = namespace('species')
 
   @Component({
     components: {
+      CharactersSpeciesDetailHalfHuman,
       VueMarkdown,
       Loading,
       ImageWithLoading
@@ -32,7 +34,8 @@
 </script>
 
 <template lang="pug">
-  div( v-if="speciesData").text-xs-left
+  CharactersSpeciesDetailHalfHuman(v-if="speciesName === 'Half-Human'", v-bind="{ speciesData }")
+  div(v-else-if="speciesData").text-xs-left
     div(:class="$style.topSection")
       div(:class="$style.bioBlock").block
         h2 {{ speciesData.name }}

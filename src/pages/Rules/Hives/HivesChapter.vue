@@ -12,32 +12,37 @@
       Loading
     }
   })
-  export default class CitiesChapter extends Vue {
-    // @blobsModule.State citiesBlobs!: { [key: string]: string }
-    // @blobsModule.Action fetchCitiesBlob!: (chapter: string) => void
+  export default class HivesChapter extends Vue {
+    @blobsModule.State hivesBlobs!: { [key: string]: string }
+    @blobsModule.Action fetchHivesBlob!: (chapter: string) => void
 
     @Prop(String) readonly chapter!: string
 
     chapterMap: { [key: string]: string } = {
-      introduction: 'Introduction'
+      downtime: 'Downtime',
+      factionsAndMembership: 'Factions and Membership',
+      enhancedItems: 'Enhanced Items',
+      modifiableItems: 'Modifiable Items',
+      cyberneticAugmentations: 'Cybernetic Augmentations',
+      droidCustomizations: 'Droid Customizations',
+      toolProficiencies: 'Tool Proficiencies'
     }
 
     created () {
-      // this.fetchCitiesBlob(this.blobName)
+      this.fetchHivesBlob(this.blobName)
     }
 
     @Watch('$route')
     fetchData () {
-      // this.fetchCitiesBlob(this.blobName)
+      this.fetchHivesBlob(this.blobName)
     }
 
     get blobName () {
-      return this.chapterMap[this.chapter] || 'Introduction'
+      return this.chapterMap[this.chapter] || 'Downtime'
     }
 
     get blob () {
-      // const blob = this.citiesBlobs[this.blobName]
-      const blob = '# Coming soon...'
+      const blob = this.hivesBlobs[this.blobName]
       return blob && blob.replace(/\ufffd/g, ' - ')
     }
   }

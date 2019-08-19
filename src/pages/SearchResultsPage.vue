@@ -46,7 +46,7 @@
 <template lang="pug">
   div
     h1.pb-3 Search
-    SearchBox.pb-3.hidden-md-and-up
+    SearchBox.pb-3.hidden-lg-and-up
     template(v-if="searchText && !isSearching")
       h5.pb-3 {{ resultCount }} for {{ searchText }}
       v-list(v-if="searchResults.length")

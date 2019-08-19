@@ -17,11 +17,11 @@
   export default class StarshipsEquipment extends Vue {
     @starshipEquipmentModule.State starshipEquipment!: StarshipEquipmentType[]
     @starshipEquipmentModule.Action fetchStarshipEquipment!: () => void
-    search: string | (string | null)[] = ''
+    initialSearch: string | (string | null)[] = ''
 
     created () {
       this.fetchStarshipEquipment()
-      this.search = this.$route.query.search
+      this.initialSearch = this.$route.query.search
     }
 
     get items () {
@@ -53,7 +53,7 @@
   div
     h1 Starship Equipment
     br
-    SearchTable(v-bind="{ headers, items, search }")
+    SearchTable(v-bind="{ headers, items, initialSearch }")
       template(v-slot:default="props")
         VueMarkdown(:source="props.item.description")
 </template>

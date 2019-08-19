@@ -11,6 +11,7 @@ import starshipsRoutes from './Starships/router'
 import CharacterSheet from './MyContent/CharacterSheet.vue'
 
 Vue.use(Router)
+
 export default new Router({
   routes: [
     {

@@ -15,5 +15,5 @@
 <template lang="pug">
   div
     HandbookChapter(chapter="backgrounds")
-      v-btn(to="/reference/backgrounds", color="primary") Backgrounds List
+      v-btn(to="/characters/backgrounds", color="primary") Backgrounds List
 </template>

@@ -17,11 +17,11 @@
   export default class StarshipsVentures extends Vue {
     @venturesModule.State ventures!: VentureType[]
     @venturesModule.Action fetchVentures!: () => void
-    search: string | (string | null)[] = ''
+    initialSearch: string | (string | null)[] = ''
 
     created () {
       this.fetchVentures()
-      this.search = this.$route.query.search
+      this.initialSearch = this.$route.query.search
     }
 
     get items () {
@@ -50,7 +50,7 @@
   div
     h1 Ventures
     br
-    SearchTable(v-bind="{ headers, items, search }")
+    SearchTable(v-bind="{ headers, items, initialSearch }")
       template(v-slot:default="props")
         VueMarkdown(:source="props.item.content")
 </template>

@@ -19,11 +19,11 @@
   export default class LootWeapons extends Vue {
     @weaponsModule.State weapons!: WeaponType[]
     @weaponsModule.Action fetchWeapons!: () => void
-    search: string | (string | null)[] = ''
+    initialSearch: string | (string | null)[] = ''
 
     created () {
       this.fetchWeapons()
-      this.search = this.$route.query.search
+      this.initialSearch = this.$route.query.search
     }
 
     get items () {
@@ -68,7 +68,7 @@
   div
     h1 Weapons
     br
-    SearchTable(v-bind="{ headers, items, search }")
+    SearchTable(v-bind="{ headers, items, initialSearch }")
       template(v-slot:default="props")
         strong Properties:
         LootWeaponsProperties(:propertyList="props.item.properties")

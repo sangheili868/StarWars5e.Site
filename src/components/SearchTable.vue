@@ -20,10 +20,15 @@
     @Prop(Array) readonly items!: { [key: string]: string }[]
     @Prop(Array) readonly headers!: HeaderType[]
     @Prop(Function) readonly customSort!: Function
-    @Prop(String) search: string | undefined
+    @Prop(String) initialSearch: string | undefined
 
     pagination = { rowsPerPage: 25 }
     filterSelections: { [key: string]: any } = {}
+    search: string | undefined = ''
+
+    created () {
+      this.search = this.initialSearch
+    }
 
     get alignedHeaders () {
       return this.headers.map(header => ({

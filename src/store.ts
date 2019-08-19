@@ -7,6 +7,7 @@ import blobs from './modules/blobs'
 import classes from './modules/classes'
 import credits from './modules/credits'
 import deployments from './modules/deployments'
+import enhancedItems from './modules/enhancedItems'
 import feats from './modules/feats'
 import gear from './modules/gear'
 import monsters from './modules/monsters'
@@ -22,10 +23,12 @@ import ui from './modules/ui'
 import ventures from './modules/ventures'
 import weapons from './modules/weapons'
 import weaponProperties from './modules/weaponProperties'
+import createPersistedState from 'vuex-persistedstate'
 
 Vue.use(Vuex)
 
 export default new Vuex.Store({
+  plugins: [createPersistedState()],
   modules: {
     archetypes,
     armor,
@@ -34,6 +37,7 @@ export default new Vuex.Store({
     classes,
     credits,
     deployments,
+    enhancedItems,
     feats,
     gear,
     monsters,

@@ -1,8 +1,11 @@
 <script lang="ts">
-  import { Component, Prop, Vue } from 'vue-property-decorator'
-  import { State, Action } from 'vuex-class'
+  import { Component, Prop, Vue, Watch } from 'vue-property-decorator'
+  import { namespace } from 'vuex-class'
   import RoutesList from '@/components/RoutesList.vue'
   import CardSet from '@/components/CardSet.vue'
+  import { omit } from 'lodash'
+
+  const uiModule = namespace('ui')
 
   @Component({
     components: {
@@ -11,6 +14,17 @@
     }
   })
   export default class HomePage extends Vue {
+    @uiModule.State isDarkSide!: boolean
+    @uiModule.Action toggleDarkSide!: (value: boolean) => Promise<void>
+
+    get darkSideModel () {
+      return this.isDarkSide
+    }
+
+    set darkSideModel (value: boolean) {
+      this.toggleDarkSide(value)
+    }
+
     get socialLinks () {
       return [
         {
@@ -72,9 +86,15 @@
       | too. If you want to help contribute to this conversion, join one of the active communities at the links below!
     div(:class="$style.routes").mb-5
       a(v-for="{ href, icon, title, author } in socialLinks", :key="title", :href="href", target="_blank")
-        v-btn
+        v-btn(light)
           v-icon(:color="title").mr-3 {{ icon }}
           | {{ title }}
+    v-switch(
+      label="Join the Dark Side",
+      color="red darken-3",
+      :class="$style.darkSideSwitch",
+      v-model="darkSideModel"
+    )
 </template>
 
 <style module lang="scss">
@@ -87,6 +107,10 @@
   .routes {
     display: flex;
     flex-wrap: wrap;
+    justify-content: center;
+  }
+
+  .darkSideSwitch {
     justify-content: center;
   }
 </style>

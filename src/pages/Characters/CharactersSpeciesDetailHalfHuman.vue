@@ -28,13 +28,17 @@
       const chunkSize = Math.ceil(entriesArray.length / numChunks)
       return chunk(entriesArray, chunkSize)
     }
+
+    get correctedText () {
+      return this.speciesData.flavorText.replace('Half-Human table above', 'Half-Human table below')
+    }
   }
 </script>
 
 <template lang="pug">
   div( v-if="speciesData").text-xs-left
     h2 Half-Human
-    VueMarkdown(:source="speciesData.flavorText")
+    VueMarkdown(:source="correctedText")
     h3 {{ speciesData.name }} Traits
     p As a {{ speciesData.name }}, you have the following special traits.
     div(v-for="trait in speciesData.traits", :key="trait.name")

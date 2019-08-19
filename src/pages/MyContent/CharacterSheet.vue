@@ -39,12 +39,6 @@ Segments:
   Senses
     Passive Perception
     Vision
-  Combat:
-    Speed
-    Prof. Bonus
-    Initiative
-    AC & Sources
-    Weapons
   Description:
     Alignment
     Background

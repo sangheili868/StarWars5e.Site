@@ -7,19 +7,24 @@
     @Prop(Number) readonly modifier!: number
     @Prop(Number) readonly value!: number
     @Prop(String) readonly label!: string
+    @Prop(Boolean) readonly isFlatNumber!: boolean
+
     addPlus = addPlus
+
+    get modifierToShow () {
+      return this.isFlatNumber ? this.modifier : addPlus(this.modifier)
+    }
   }
 </script>
 
 <template lang="pug">
   div( :class="$style.ability").mb-2
     div(:class="$style.values").mr-3
-      h2(v-if="modifier") {{ addPlus(modifier) }}
+      h2 {{ modifierToShow }}
       h5 {{ value }}
     div.text-xs-left
       h3 {{ label }}
       slot
-
 </template>
 
 <style module lang="scss">

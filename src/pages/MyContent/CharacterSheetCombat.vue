@@ -26,6 +26,8 @@
 
     get armor () {
       return this.items.filter(({ equipped, equipmentCategory }) => equipped && equipmentCategory === 'Armor')
+        .map(({ name }) => name)
+        .join(', ')
     }
   }
 </script>
@@ -34,8 +36,9 @@
   CharacterSheetSection
     CharacterSheetModifier(:modifier="proficiencyBonus", label="Proficiency")
     CharacterSheetModifier(:modifier="initiative", label="Initiative")
-    CharacterSheetModifier(:value="armorClass", label="Armor Class")
-    CharacterSheetModifier(:value="parseInt(speed)", label="Speed")
+    CharacterSheetModifier(:modifier="armorClass", label="Armor Class", isFlatNumber)
+      div.caption {{ armor }}
+    CharacterSheetModifier(:modifier="parseInt(speed)", label="Speed", isFlatNumber)
     h3 Weapons
     CharacterSheetWeapon(
       v-for="weapon in weapons",

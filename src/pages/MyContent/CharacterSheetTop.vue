@@ -33,7 +33,7 @@
 </script>
 
 <template lang="pug">
-  div(:class="$style.topItems").px-3.elevation-3
+  v-card(:class="$style.topItems").px-3
     div.d-flex
       v-img(:src="completeCharacter.image", contain, max-height="90", max-width="90", min-width="100")
       div.text-xs-left
@@ -63,7 +63,6 @@
     justify-content: space-around;
     align-items: center;
     border-radius: 5px;
-    background-color: white;
 
     .xpBar {
       align-items: center;

@@ -8,7 +8,7 @@
 </script>
 
 <template lang="pug">
-  div(:class="$style.section").px-3.py-1.my-3.elevation-3
+  v-card(:class="$style.section").px-3.py-1.my-3
     slot
 </template>
 
@@ -18,6 +18,5 @@
   .section {
     max-width: 350px;
     border-radius: 5px;
-    background-color: white;
   }
 </style>

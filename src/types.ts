@@ -185,6 +185,7 @@ export interface SpeciesType {
   eyeColorOptions: string,
   flavorText: string,
   hairColorOptions: string,
+  halfHumanTableEntries: { [species: string]: string },
   heightAverage: string,
   heightRollMod: string,
   homeworld: string,

@@ -161,4 +161,9 @@ table.v-table {
       background-color: $darkSideDarkGrey;
     }
   }
+
+  .v-table, .v-card {
+    background-color: $darkSideDarkGrey;
+    border-color: $darkSideDarkGrey;
+  }
 }

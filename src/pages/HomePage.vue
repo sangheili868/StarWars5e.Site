@@ -17,32 +17,12 @@
     @uiModule.State isDarkSide!: boolean
     @uiModule.Action toggleDarkSide!: (value: boolean) => Promise<void>
 
-    @Prop(String) readonly isDark!: string
-
-    created () {
-      this.setDarkSideQuery()
-    }
-
-    @Watch('$route')
-    setDarkSideQuery () {
-      // isDark is whether the url has isDark=true (for bookmarking).
-      // isDarkSide is whether the vuex state has isDarkSide=true (for other pages)
-      if (this.isDark) {
-        this.toggleDarkSide(true).then(() => {
-          if (this.isDarkSide) this.$router.push({ query: { isDark: 'true' } })
-        })
-      } else if (this.isDarkSide) this.$router.push({ query: { isDark: 'true' } })
-    }
-
     get darkSideModel () {
       return this.isDarkSide
     }
 
     set darkSideModel (value: boolean) {
-      this.toggleDarkSide(value).then(() => {
-        if (value) this.$router.push({ query: { isDark: 'true' } })
-        else this.$router.replace(omit(this.$route.query, 'isDark'))
-      })
+      this.toggleDarkSide(value)
     }
 
     get socialLinks () {

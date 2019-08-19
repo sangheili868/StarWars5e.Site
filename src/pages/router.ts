@@ -15,8 +15,7 @@ export default new Router({
   routes: [
     {
       path: '/',
-      component: HomePage,
-      props: ({ query }) => query
+      component: HomePage
     },
     rulesRoutes,
     charactersRoutes,

@@ -5,10 +5,12 @@
   import addPlus from '@/utilities/addPlus'
   import { startCase, upperCase } from 'lodash'
   import ProficiencyDots from '@/components/ProficiencyDots.vue'
+  import CharacterSheetModifier from './CharacterSheetModifier.vue'
 
   @Component({
     components: {
       CharacterSheetSection,
+      CharacterSheetModifier,
       ProficiencyDots
     }
   })
@@ -21,21 +23,17 @@
 
 <template lang="pug">
   CharacterSheetSection
-    div(
+    CharacterSheetModifier(
       v-for="({ value, modifier, savingThrow, skills }, ability) in abilityScores",
       :key="ability",
-      :class="$style.ability"
-    ).mb-2
-      div(:class="$style.values").mr-3
-        h2 {{ addPlus(modifier) }}
-        h5 {{ value }}
-      div.text-xs-left
-        h3 {{ ability }}
-        div
-          ProficiencyDots(:proficiency="savingThrow.proficiency") {{ addPlus(savingThrow.modifier) }} Saving Throw
-          ProficiencyDots(
-            v-for="{ name, proficiency, modifier } in skills",
-            :key="name",
-            v-bind="{ proficiency }"
-          ) {{ addPlus(modifier) }} {{ name }}
+      v-bind="{ modifier, value }",
+      :label="ability"
+    )
+      div
+        ProficiencyDots(:proficiency="savingThrow.proficiency") {{ addPlus(savingThrow.modifier) }} Saving Throw
+        ProficiencyDots(
+          v-for="{ name, proficiency, modifier } in skills",
+          :key="name",
+          v-bind="{ proficiency }"
+        ) {{ addPlus(modifier) }} {{ name }}
 </template>

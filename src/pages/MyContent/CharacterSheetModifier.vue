@@ -7,13 +7,14 @@
     @Prop(Number) readonly modifier!: number
     @Prop(Number) readonly value!: number
     @Prop(String) readonly label!: string
+    addPlus = addPlus
   }
 </script>
 
 <template lang="pug">
   div( :class="$style.ability").mb-2
     div(:class="$style.values").mr-3
-      h2 {{ addPlus(modifier) }}
+      h2(v-if="modifier") {{ addPlus(modifier) }}
       h5 {{ value }}
     div.text-xs-left
       h3 {{ label }}

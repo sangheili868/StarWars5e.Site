@@ -349,8 +349,10 @@ export interface CastingType {
   powersKnown: PowerType[]
 }
 
-export interface EquipmentType {
-
+export interface EquipmentType extends GearType, WeaponType, ArmorType {
+  equipped: boolean,
+  attackBonus: number,
+  damageBonus: number
 }
 
 export interface CompleteCharacterType {

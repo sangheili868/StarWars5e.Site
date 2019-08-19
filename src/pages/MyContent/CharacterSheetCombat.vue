@@ -3,10 +3,14 @@
   import CharacterSheetSection from './CharacterSheetSection.vue'
   import addPlus from '@/utilities/addPlus'
   import { GearType, WeaponType, ArmorType } from '@/types'
+  import CharacterSheetModifier from './CharacterSheetModifier.vue'
+  import CharacterSheetWeapon from './CharacterSheetWeapon.vue'
 
   @Component({
     components: {
-      CharacterSheetSection
+      CharacterSheetSection,
+      CharacterSheetModifier,
+      CharacterSheetWeapon
     }
   })
   export default class CharacterSheetCombat extends Vue {
@@ -28,10 +32,14 @@
 
 <template lang="pug">
   CharacterSheetSection
-    div Prof: {{ proficiencyBonus }}
-    div Init: {{ initiative }}
-    div AC: {{ armorClass }}
-    div Armor: {{ armor }}
-    div Speed: {{ speed }}
-    div Weapons: {{ weapons }}
+    CharacterSheetModifier(:modifier="proficiencyBonus", label="Proficiency")
+    CharacterSheetModifier(:modifier="initiative", label="Initiative")
+    CharacterSheetModifier(:value="armorClass", label="Armor Class")
+    CharacterSheetModifier(:value="parseInt(speed)", label="Speed")
+    h3 Weapons
+    CharacterSheetWeapon(
+      v-for="weapon in weapons",
+      :key="weapon.name"
+      v-bind="{ weapon }"
+    )
 </template>

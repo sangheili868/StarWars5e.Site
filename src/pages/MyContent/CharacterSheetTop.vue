@@ -60,7 +60,7 @@
   .topItems {
     display: flex;
     flex-wrap: wrap;
-    justify-content: space-between;
+    justify-content: space-around;
     align-items: center;
     border-radius: 5px;
     background-color: white;

@@ -274,6 +274,9 @@
     },
     {
       "name": "Blaster rifle",
+      "equipped": true,
+      "attackBonus": 4,
+      "damageBonus": 1,
       "quantity": 1,
       "cost": 400,
       "weight": 11,
@@ -298,6 +301,8 @@
       "name": "Hold-out",
       "quantity": 1,
       "equipped": true,
+      "attackBonus": 4,
+      "damageBonus": 1,
       "cost": 250,
       "weight": 1,
       "equipmentCategory": "Weapon",

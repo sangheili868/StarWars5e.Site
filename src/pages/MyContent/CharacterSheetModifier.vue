@@ -8,6 +8,7 @@
     @Prop(Number) readonly value!: number
     @Prop(String) readonly label!: string
     @Prop(Boolean) readonly isFlatNumber!: boolean
+    @Prop(Boolean) readonly small!: boolean
 
     addPlus = addPlus
 
@@ -18,12 +19,12 @@
 </script>
 
 <template lang="pug">
-  div( :class="$style.ability").mb-2
+  div(:class="[$style.ability, { ['mb-2']: !small } ]")
     div(:class="$style.values").mr-3
-      h2 {{ modifierToShow }}
+      component(:is="small ? 'h5' : 'h2'") {{ modifierToShow }}
       h5 {{ value }}
     div.text-xs-left
-      h3 {{ label }}
+      component(:is="small ? 'h4' : 'h3'") {{ label }}
       slot
 </template>
 

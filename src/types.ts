@@ -356,6 +356,22 @@ export interface EquipmentType extends GearType, WeaponType, ArmorType {
   damageBonus: number
 }
 
+export interface CharacteristicsType {
+  placeOfBirth: string,
+  age: string,
+  gender: string,
+  height: string,
+  weight: string,
+  hair: string,
+  eyes: string,
+  skin: string,
+  appearance: string,
+  personalityTraits: string,
+  ideal: string,
+  bond: string,
+  flaw: string
+}
+
 export interface CompleteCharacterType {
   name: string,
   image: string | null,
@@ -396,25 +412,11 @@ export interface CompleteCharacterType {
   },
   proficiencies: string[],
   languages: string[],
-  characteristics: {
-    placeOfBirth: string,
-    age: string,
-    gender: string,
-    height: string,
-    weight: string,
-    hair: string,
-    eyes: string,
-    skin: string,
-    appearance: string,
-    personalityTraits: string,
-    ideal: string,
-    bond: string,
-    flaw: string,
-    backgroundFeature: {
-      name: string,
-      description: string
-    },
-    backstory: string
+  characteristics: CharacteristicsType,
+  backstory: string,
+  backgroundFeature: {
+    name: string,
+    description: string
   },
   items: ((GearType | WeaponType | ArmorType) & { equipped: boolean })[],
   credits: number,

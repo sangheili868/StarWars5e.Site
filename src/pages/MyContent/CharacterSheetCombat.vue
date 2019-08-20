@@ -18,14 +18,15 @@
     @Prop(Number) readonly initiative!: number
     @Prop(Number) readonly armorClass!: number
     @Prop(String) readonly speed!: string
-    @Prop(Array) readonly items!: ((GearType | WeaponType | ArmorType) & { equipped: boolean })[]
+    @Prop(Array) readonly equipment!: ((GearType | WeaponType | ArmorType) & { equipped: boolean })[]
+    @Prop(Number) readonly passivePerception!: number
 
     get weapons () {
-      return this.items.filter(({ equipped, equipmentCategory }) => equipped && equipmentCategory === 'Weapon')
+      return this.equipment.filter(({ equipped, equipmentCategory }) => equipped && equipmentCategory === 'Weapon')
     }
 
     get armor () {
-      return this.items.filter(({ equipped, equipmentCategory }) => equipped && equipmentCategory === 'Armor')
+      return this.equipment.filter(({ equipped, equipmentCategory }) => equipped && equipmentCategory === 'Armor')
         .map(({ name }) => name)
         .join(', ')
     }
@@ -34,11 +35,12 @@
 
 <template lang="pug">
   CharacterSheetSection
-    CharacterSheetModifier(:modifier="proficiencyBonus", label="Proficiency")
-    CharacterSheetModifier(:modifier="initiative", label="Initiative")
-    CharacterSheetModifier(:modifier="armorClass", label="Armor Class", isFlatNumber)
+    CharacterSheetModifier(:modifier="proficiencyBonus", label="Proficiency", small)
+    CharacterSheetModifier(:modifier="initiative", label="Initiative", small)
+    CharacterSheetModifier(:modifier="armorClass", label="Armor Class", isFlatNumber, small)
       div.caption {{ armor }}
-    CharacterSheetModifier(:modifier="parseInt(speed)", label="Speed", isFlatNumber)
+    CharacterSheetModifier(:modifier="parseInt(speed)", label="Speed", isFlatNumber, small)
+    CharacterSheetModifier(:modifier="passivePerception", label="Passive Perception", isFlatNumber, small)
     h3 Weapons
     CharacterSheetWeapon(
       v-for="weapon in weapons",

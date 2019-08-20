@@ -4,12 +4,18 @@
   import CharacterSheetTop from './CharacterSheetTop.vue'
   import CharacterSheetAbilities from './CharacterSheetAbilities.vue'
   import CharacterSheetCombat from './CharacterSheetCombat.vue'
+  import CharacterSheetCasting from './CharacterSheetCasting.vue'
+  import CharacterSheetEquipment from './CharacterSheetEquipment.vue'
+  import CharacterSheetDescription from './CharacterSheetDescription.vue'
 
   @Component({
     components: {
       CharacterSheetTop,
       CharacterSheetAbilities,
-      CharacterSheetCombat
+      CharacterSheetCombat,
+      CharacterSheetCasting,
+      CharacterSheetEquipment,
+      CharacterSheetDescription
     }
   })
   export default class CharacterSheet extends Vue {
@@ -21,37 +27,15 @@
   div
     CharacterSheetTop(v-bind="{ completeCharacter }")
     v-container(grid-list-md).pa-0
-      v-layout
+      v-layout(wrap, justify-center)
         v-flex(sm4 xs12)
           CharacterSheetAbilities(:abilityScores="completeCharacter.abilityScores")
         v-flex(sm4 xs12)
           CharacterSheetCombat(v-bind="completeCharacter", :speed="completeCharacter.speed.base")
-    pre.pt-5.text-xs-left {{ JSON.stringify(completeCharacter, null, 2) }}
+        v-flex(sm4 xs12)
+          CharacterSheetCasting(v-bind="completeCharacter")
+        v-flex(sm4 xs12)
+          CharacterSheetEquipment(v-bind="completeCharacter")
+        v-flex(sm4 xs12)
+          CharacterSheetDescription(v-bind="completeCharacter")
 </template>
-
-<style module lang="scss">
-/*
-Segment size: 350px
-Segments:
-  Health:
-    Death Saves
-    Inspiration
-  Senses
-    Passive Perception
-    Vision
-  Description:
-    Alignment
-    Background
-    Proficiencies
-    Languages
-    Characteristics
-  Equipment
-    Items
-    Credits
-    Capacity
-  Casting
-    Points
-    Attack/DC
-    Powers
-*/
-</style>

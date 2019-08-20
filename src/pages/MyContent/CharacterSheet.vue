@@ -2,20 +2,12 @@
   import { Component, Prop, Vue } from 'vue-property-decorator'
   import characterJson from '@/test/senyaComplete'
   import CharacterSheetTop from './CharacterSheetTop.vue'
-  import CharacterSheetAbilities from './CharacterSheetAbilities.vue'
-  import CharacterSheetCombat from './CharacterSheetCombat.vue'
-  import CharacterSheetCasting from './CharacterSheetCasting.vue'
-  import CharacterSheetEquipment from './CharacterSheetEquipment.vue'
-  import CharacterSheetDescription from './CharacterSheetDescription.vue'
+  import CharacterSheetSection from './CharacterSheetSection.vue'
 
   @Component({
     components: {
       CharacterSheetTop,
-      CharacterSheetAbilities,
-      CharacterSheetCombat,
-      CharacterSheetCasting,
-      CharacterSheetEquipment,
-      CharacterSheetDescription
+      CharacterSheetSection
     }
   })
   export default class CharacterSheet extends Vue {
@@ -25,17 +17,12 @@
 
 <template lang="pug">
   div
-    CharacterSheetTop(v-bind="{ completeCharacter }")
-    v-container(grid-list-md).pa-0
-      v-layout(wrap, justify-center)
-        v-flex(sm4 xs12)
-          CharacterSheetAbilities(:abilityScores="completeCharacter.abilityScores")
-        v-flex(sm4 xs12)
-          CharacterSheetCombat(v-bind="completeCharacter", :speed="completeCharacter.speed.base")
-        v-flex(sm4 xs12)
-          CharacterSheetCasting(v-bind="completeCharacter")
-        v-flex(sm4 xs12)
-          CharacterSheetEquipment(v-bind="completeCharacter")
-        v-flex(sm4 xs12)
-          CharacterSheetDescription(v-bind="completeCharacter")
+    CharacterSheetTop(v-bind="{ completeCharacter }").mx-2
+    v-layout(justify-space-around)
+      v-flex(sm-4)
+        CharacterSheetSection(v-bind="{ completeCharacter }")
+      v-flex(sm-4)
+        CharacterSheetSection(v-bind="{ completeCharacter }")
+      v-flex(sm-4)
+        CharacterSheetSection(v-bind="{ completeCharacter }")
 </template>

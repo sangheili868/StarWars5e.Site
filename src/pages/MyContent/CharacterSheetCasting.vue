@@ -1,7 +1,6 @@
 <script lang="ts">
   import { Component, Prop, Vue } from 'vue-property-decorator'
   import { CastingType } from '@/types'
-  import CharacterSheetSection from './CharacterSheetSection.vue'
   import CharacterSheetModifier from './CharacterSheetModifier.vue'
   import CharacterSheetCastingPower from './CharacterSheetCastingPower.vue'
   import { groupBy } from 'lodash'
@@ -9,7 +8,6 @@
 
   @Component({
     components: {
-      CharacterSheetSection,
       CharacterSheetModifier,
       CharacterSheetCastingPower,
       CharacterSheetTicker
@@ -27,7 +25,7 @@
 </script>
 
 <template lang="pug">
-  CharacterSheetSection
+  div
     h3 Tech Casting
     CharacterSheetTicker(:current="techCasting.currentPoints", :max="techCasting.maxPoints") Tech Points
     CharacterSheetModifier(:modifier="techCasting.attackModifier", label="Tech Attack Modifier", small)

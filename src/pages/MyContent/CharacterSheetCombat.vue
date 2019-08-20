@@ -1,6 +1,5 @@
 <script lang="ts">
   import { Component, Prop, Vue } from 'vue-property-decorator'
-  import CharacterSheetSection from './CharacterSheetSection.vue'
   import addPlus from '@/utilities/addPlus'
   import { GearType, WeaponType, ArmorType } from '@/types'
   import CharacterSheetModifier from './CharacterSheetModifier.vue'
@@ -8,7 +7,6 @@
 
   @Component({
     components: {
-      CharacterSheetSection,
       CharacterSheetModifier,
       CharacterSheetWeapon
     }
@@ -17,7 +15,7 @@
     @Prop(Number) readonly proficiencyBonus!: number
     @Prop(Number) readonly initiative!: number
     @Prop(Number) readonly armorClass!: number
-    @Prop(String) readonly speed!: string
+    @Prop(Object) readonly speed!: { base: string }
     @Prop(Array) readonly equipment!: ((GearType | WeaponType | ArmorType) & { equipped: boolean })[]
     @Prop(Number) readonly passivePerception!: number
 
@@ -34,12 +32,12 @@
 </script>
 
 <template lang="pug">
-  CharacterSheetSection
+  div
     CharacterSheetModifier(:modifier="proficiencyBonus", label="Proficiency", small)
     CharacterSheetModifier(:modifier="initiative", label="Initiative", small)
     CharacterSheetModifier(:modifier="armorClass", label="Armor Class", isFlatNumber, small)
       div.caption {{ armor }}
-    CharacterSheetModifier(:modifier="parseInt(speed)", label="Speed", isFlatNumber, small)
+    CharacterSheetModifier(:modifier="parseInt(speed.base)", label="Speed", isFlatNumber, small)
     CharacterSheetModifier(:modifier="passivePerception", label="Passive Perception", isFlatNumber, small)
     h3 Weapons
     CharacterSheetWeapon(

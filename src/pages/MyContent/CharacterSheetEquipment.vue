@@ -2,12 +2,10 @@
 <script lang="ts">
   import { Component, Prop, Vue } from 'vue-property-decorator'
   import { EquipmentType } from '@/types'
-  import CharacterSheetSection from './CharacterSheetSection.vue'
   import CharacterSheetModifier from './CharacterSheetModifier.vue'
 
   @Component({
     components: {
-      CharacterSheetSection,
       CharacterSheetModifier
     }
   })
@@ -18,8 +16,7 @@
 </script>
 
 <template lang="pug">
-  CharacterSheetSection
-    h5 {{ credits }} Credits
+  div
     h3 Equipment
     v-expansion-panel
       v-expansion-panel-content(
@@ -34,6 +31,7 @@
           div Weight: {{ item.weight}}
           br
           div {{ item.description }}
+    h5 Credits: {{ credits }}
 </template>
 
 <style lang="scss">

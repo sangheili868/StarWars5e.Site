@@ -4,7 +4,7 @@
   import { startCase } from 'lodash'
 
   @Component
-  export default class CharacterSheetDescription extends Vue {
+  export default class CharacterSheetwProficienciesescription extends Vue {
     @Prop(String) readonly alignment!: string
     @Prop(String) readonly background!: string
     @Prop(Array) readonly proficiencies!: string[]
@@ -16,11 +16,8 @@
 
 <template lang="pug">
   div.text-xs-left
-    h3 Description
-    div #[strong Alignment]: {{ alignment }}
-    div #[strong Background]: {{ background }}
-    div(
-      v-for="(value, characteristic) in characteristics",
-      :key="characteristic"
-    ).caption #[strong {{ startCase(characteristic) }}]: {{ value}}
+    h3 Proficiencies
+    div(v-for="proficiency in proficiencies", :key="proficiency").caption {{ proficiency }}
+    h3 Langauges
+    div(v-for="language in languages", :key="language").caption {{ language }}
 </template>

@@ -1,6 +1,5 @@
 <script lang="ts">
   import { Component, Prop, Vue } from 'vue-property-decorator'
-  import CharacterSheetSection from './CharacterSheetSection.vue'
   import { AbilityScoreType } from '@/types'
   import addPlus from '@/utilities/addPlus'
   import { startCase, upperCase } from 'lodash'
@@ -9,7 +8,6 @@
 
   @Component({
     components: {
-      CharacterSheetSection,
       CharacterSheetModifier,
       ProficiencyDots
     }
@@ -22,7 +20,7 @@
 </script>
 
 <template lang="pug">
-  CharacterSheetSection
+  div
     CharacterSheetModifier(
       v-for="({ value, modifier, savingThrow, skills }, ability) in abilityScores",
       :key="ability",

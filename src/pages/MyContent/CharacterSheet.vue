@@ -3,6 +3,7 @@
   import characterJson from '@/test/senyaComplete'
   import CharacterSheetTop from './CharacterSheetTop.vue'
   import CharacterSheetSection from './CharacterSheetSection.vue'
+  import { range } from 'lodash'
 
   @Component({
     components: {
@@ -12,6 +13,17 @@
   })
   export default class CharacterSheet extends Vue {
     completeCharacter = characterJson
+    range = range
+
+    get numSections () {
+      return ({
+        xs: 1,
+        sm: 2,
+        md: 3,
+        lg: 3,
+        xl: 3
+      } as { [ breakpoint: string ] : number })[this.$vuetify.breakpoint.name]
+    }
   }
 </script>
 
@@ -19,10 +31,6 @@
   div
     CharacterSheetTop(v-bind="{ completeCharacter }").mx-2
     v-layout(justify-space-around)
-      v-flex(sm-4)
-        CharacterSheetSection(v-bind="{ completeCharacter }")
-      v-flex(sm-4)
-        CharacterSheetSection(v-bind="{ completeCharacter }")
-      v-flex(sm-4)
+      v-flex(v-for="count in range(numSections)")
         CharacterSheetSection(v-bind="{ completeCharacter }")
 </template>

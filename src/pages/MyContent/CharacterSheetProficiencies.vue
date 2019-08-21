@@ -16,8 +16,8 @@
 
 <template lang="pug">
   div.text-xs-left
-    h3 Proficiencies
-    div(v-for="proficiency in proficiencies", :key="proficiency").caption {{ proficiency }}
     h3 Langauges
     div(v-for="language in languages", :key="language").caption {{ language }}
+    h3 Proficiencies
+    div(v-for="proficiency in proficiencies", :key="proficiency").caption {{ proficiency }}
 </template>

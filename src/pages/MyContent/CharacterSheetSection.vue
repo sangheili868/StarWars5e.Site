@@ -41,7 +41,7 @@
         },
         {
           component: 'CharacterSheetProficiencies',
-          icon: 'fa-rocket'
+          icon: 'fa-globe'
         },
         {
           component: 'CharacterSheetDescription',
@@ -54,7 +54,7 @@
 
 <template lang="pug">
   v-card(:class="$style.section").px-3.py-1.ma-2
-    v-tabs
+    v-tabs(grow)
       v-tab(v-for="({ icon }) in sections", :key="icon")
         v-icon {{ icon }}
       v-tab-item(v-for="({ component }) in sections", :key="component")
@@ -65,7 +65,6 @@
   @import '@/assets/styles/colors.scss';
 
   .section {
-    min-width: 300px;
     border-radius: 5px;
   }
 </style>

@@ -20,6 +20,7 @@
   })
   export default class CharacterSheetSection extends Vue {
     @Prop(Object) readonly completeCharacter!: CompleteCharacterType
+    @Prop(Number) readonly currentTab!: number
 
     get sections () {
       return [
@@ -54,7 +55,7 @@
 
 <template lang="pug">
   v-card(:class="$style.section").px-3.py-1.ma-2
-    v-tabs(grow)
+    v-tabs(grow, :value="currentTab")
       v-tab(v-for="({ icon }) in sections", :key="icon")
         v-icon {{ icon }}
       v-tab-item(v-for="({ component }) in sections", :key="component")

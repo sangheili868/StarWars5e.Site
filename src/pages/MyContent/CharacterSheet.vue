@@ -14,6 +14,7 @@
   export default class CharacterSheet extends Vue {
     completeCharacter = characterJson
     range = range
+    openTabs: number[] = [0, 1, 2]
 
     get numSections () {
       return ({
@@ -31,6 +32,6 @@
   div
     CharacterSheetTop(v-bind="{ completeCharacter }").mx-2
     v-layout(justify-space-around)
-      v-flex(v-for="count in range(numSections)")
-        CharacterSheetSection(v-bind="{ completeCharacter }")
+      v-flex(v-for="section in range(numSections)", md4, sm6, xs12)
+        CharacterSheetSection(v-bind="{ completeCharacter }", :currentTab="openTabs[section]")
 </template>

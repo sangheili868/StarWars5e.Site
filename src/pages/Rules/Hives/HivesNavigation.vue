@@ -10,14 +10,24 @@
   export default class HivesNavigation extends Vue {
     items = [
       {
-        title: 'Downtime',
+        title: 'Step-By-Step Factions',
         icon: 'fa-beer',
         route: '/rules/hives'
+      },
+      {
+        title: 'Entertainment and Downtime',
+        icon: 'fa-pencil-ruler',
+        route: '/rules/hives/downtime'
       },
       {
         title: 'Factions and Membership',
         icon: 'fa-globe',
         route: '/rules/hives/factionsAndMembership'
+      },
+      {
+        title: 'Using Ability Scores',
+        icon: 'fa-dice-d20',
+        route: '/rules/hives/abilityScores'
       },
       {
         title: 'Enhanced Items',

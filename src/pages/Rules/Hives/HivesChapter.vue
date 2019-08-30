@@ -40,7 +40,7 @@
     }
 
     get blobName () {
-      return this.chapterMap[this.chapter] || 'Downtime'
+      return this.chapterMap[this.chapter] || 'Step-By-Step Factions'
     }
 
     get blob () {

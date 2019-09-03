@@ -25,47 +25,77 @@ export default {
     {
       path: 'species/:speciesName',
       component: CharactersSpeciesDetail,
-      props: true
+      props: true,
+      meta: {
+        title: 'Handbook Species'
+      }
     },
     {
       path: 'classes',
-      component: HandbookClasses
+      component: HandbookClasses,
+      meta: {
+        title: 'Handbook Classes'
+      }
     },
     {
       path: 'casting',
-      component: HandbookCasting
+      component: HandbookCasting,
+      meta: {
+        title: 'Handbook Casting'
+      }
     },
     {
       path: 'forcePowers',
-      component: CharactersForcePowers
+      component: CharactersForcePowers,
+      meta: {
+        title: 'Force Powers'
+      }
     },
     {
       path: 'techPowers',
-      component: CharactersTechPowers
+      component: CharactersTechPowers,
+      meta: {
+        title: 'Tech Powers'
+      }
     },
     {
       path: 'backgrounds',
-      component: HandbookBackgrounds
+      component: HandbookBackgrounds,
+      meta: {
+        title: 'Handbook Backgrounds'
+      }
     },
     {
       path: 'customization',
-      component: HandbookCustomizationOptions
+      component: HandbookCustomizationOptions,
+      meta: {
+        title: 'Handbook Customization'
+      }
     },
     {
       path: 'classes/:className',
       component: HandbookClassesDetail,
-      props: true
+      props: true,
+      meta: {
+        title: 'Handbook Classes'
+      }
     },
     {
       path: ':chapter',
       component: HandbookChapter,
-      props: true
+      props: true,
+      meta: {
+        title: 'Handbook Classes'
+      }
     },
     {
       path: '',
       component: HandbookChapter,
       props: {
         chapter: 'introduction'
+      },
+      meta: {
+        title: 'Handbook Introduction'
       }
     }
   ]

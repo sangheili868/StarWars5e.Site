@@ -19,6 +19,7 @@
     @monsterModule.State monsters!: MonsterType[]
     @monsterModule.Action fetchMonsters!: () => void
     @Prop({ type: Boolean, default: false }) readonly isInHandbook!: boolean
+    tableType: string = 'Monsters'
 
     created () {
       this.fetchMonsters()
@@ -89,7 +90,7 @@
   div
     h1(v-if="!isInHandbook") Monsters
     br
-    SearchTable(v-bind="{ headers, items, customSort }")
+    SearchTable(v-bind="{ headers, items, customSort, tableType }")
       template(v-slot:default="{ item }")
         MonsterDescription(:monster="item")
 </template>

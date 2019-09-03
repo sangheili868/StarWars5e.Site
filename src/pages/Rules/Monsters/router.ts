@@ -18,7 +18,10 @@ export default {
     },
     {
       path: 'monsters',
-      component: MonstersList
+      component: MonstersList,
+      meta: {
+        title: 'Monsters'
+      }
     },
     {
       path: ':chapter',

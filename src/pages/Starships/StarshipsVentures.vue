@@ -18,6 +18,7 @@
     @venturesModule.State ventures!: VentureType[]
     @venturesModule.Action fetchVentures!: () => void
     initialSearch: string | (string | null)[] = ''
+    tableType: string = 'Starship Ventures'
 
     created () {
       this.fetchVentures()
@@ -50,7 +51,7 @@
   div
     h1 Ventures
     br
-    SearchTable(v-bind="{ headers, items, initialSearch }")
+    SearchTable(v-bind="{ headers, items, initialSearch, tableType }")
       template(v-slot:default="props")
         VueMarkdown(:source="props.item.content")
 </template>

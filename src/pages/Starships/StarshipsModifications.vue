@@ -18,6 +18,7 @@
     @starshipModificationsModule.State starshipModifications!: StarshipModificationType[]
     @starshipModificationsModule.Action fetchStarshipModifications!: () => void
     initialSearch: string | (string | null)[] = ''
+    tableType: string = 'Starship Modifications'
 
     created () {
       this.fetchStarshipModifications()
@@ -57,7 +58,7 @@
   div
     h1 Starship Modifications
     br
-    SearchTable(v-bind="{ headers, items, initialSearch }")
+    SearchTable(v-bind="{ headers, items, initialSearch, tableType }")
       template(v-slot:default="props")
         VueMarkdownWithAnchors(:source="props.item.content")
 </template>

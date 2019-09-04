@@ -1,14 +1,16 @@
 <script lang="ts">
   import { Component, Prop, Vue } from 'vue-property-decorator'
   import addPlus from '@/utilities/addPlus'
-  import { GearType, WeaponType, ArmorType } from '@/types'
+  import { GearType, WeaponType, ArmorType, SuperiorityType } from '@/types'
   import CharacterSheetModifier from './CharacterSheetModifier.vue'
   import CharacterSheetWeapon from './CharacterSheetWeapon.vue'
+  import CharacterSheetSuperiority from './CharacterSheetSuperiority.vue'
 
   @Component({
     components: {
       CharacterSheetModifier,
-      CharacterSheetWeapon
+      CharacterSheetWeapon,
+      CharacterSheetSuperiority
     }
   })
   export default class CharacterSheetCombat extends Vue {
@@ -18,6 +20,7 @@
     @Prop(Object) readonly speed!: { base: string }
     @Prop(Array) readonly equipment!: ((GearType | WeaponType | ArmorType) & { equipped: boolean })[]
     @Prop(Number) readonly passivePerception!: number
+    @Prop(Object) readonly superiority!: SuperiorityType
 
     get weapons () {
       return this.equipment.filter(({ equipped, equipmentCategory }) => equipped && equipmentCategory === 'Weapon')
@@ -45,4 +48,5 @@
       :key="weapon.name"
       v-bind="{ weapon }"
     )
+    CharacterSheetSuperiority(:superiority="superiority")
 </template>

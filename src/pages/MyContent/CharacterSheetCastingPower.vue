@@ -18,10 +18,10 @@
     template(v-slot:header)
       h4 {{ power.name }}
     div.ma-2.caption
-      div Casting Time: {{ power.castingPeriodText }}
-      div Range: {{ power.range }}
-      div Duration: {{ power.duration }} {{ power.concentration && '(Concentration)' }}
-      br
+      div(v-if="power.castingPeriodText") Casting Time: {{ power.castingPeriodText }}
+      div(v-if="power.range") Range: {{ power.range }}
+      div(v-if="power.duration") Duration: {{ power.duration }} {{ power.concentration && '(Concentration)' }}
+      br(v-if="power.castingPeriodText || power.range || power.duration")
       VueMarkdown {{ power.description }}
 </template>
 

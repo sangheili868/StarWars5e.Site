@@ -372,6 +372,17 @@ export interface CharacteristicsType {
   flaw: string
 }
 
+export interface SuperiorityType {
+  currentDice: number,
+  maxDice: number,
+  diceSize: string,
+  maneuverSaveDC: number,
+  maneuvers: {
+    name: string,
+    description: string
+  }[]
+}
+
 export interface CompleteCharacterType {
   name: string,
   image: string | null,
@@ -426,6 +437,7 @@ export interface CompleteCharacterType {
     maxCapacity: number,
     pushDragLift: number
   },
+  superiority: SuperiorityType,
   techCasting: CastingType,
   forceCasting: CastingType
 }

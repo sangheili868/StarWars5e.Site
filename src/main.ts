@@ -19,7 +19,9 @@ Vue.use(Vuetify, {
 })
 
 router.beforeEach((to, from, next) => {
-  document.title = to.meta.title + Vue.prototype.$titleSuffix
+  document.title = to.meta.title
+    ? to.meta.title + Vue.prototype.$titleSuffix
+    : 'SW5E'
   next()
 })
 

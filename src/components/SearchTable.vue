@@ -21,18 +21,20 @@
     @Prop(Array) readonly headers!: HeaderType[]
     @Prop(Function) readonly customSort!: Function
     @Prop(String) initialSearch: string | undefined
-    @Prop(String) tableType: string | undefined = ''
+    @Prop(String) tableType: string | undefined
 
     pagination = { rowsPerPage: 25 }
     filterSelections: { [key: string]: any } = {}
     search: string | undefined = ''
+    tabTitle: string | undefined = ''
 
     created () {
       this.search = this.initialSearch
+      this.tabTitle = this.tableType
     }
 
     get title () {
-        let titleString = this.tableType + Vue.prototype.$titleSuffix
+        let titleString = this.tabTitle + Vue.prototype.$titleSuffix
         if (this.search) {
              return this.search + ' | ' + titleString
         }

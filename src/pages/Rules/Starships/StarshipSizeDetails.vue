@@ -23,6 +23,10 @@
       this.fetchStarshipSizes()
     }
 
+    get title () {
+        return this.sizeName + ' | Starships' + Vue.prototype.$titleSuffix
+    }
+
     get starshipSizeData () {
       return this.starshipSizes.find(({ name }) => name === this.sizeName)
     }
@@ -30,8 +34,10 @@
 </script>
 
 <template lang="pug">
-  div( v-if="starshipSizeData" ).text-xs-left
-    h1 {{ starshipSizeData.name }} Ships
-    VueMarkdown(:source="starshipSizeData.fullText.replace(/\ufffd/g, '-')")
-  Loading(v-else)
+  div
+    vue-headful(:title="title")
+    div( v-if="starshipSizeData" ).text-xs-left
+      h1 {{ starshipSizeData.name }} Ships
+      VueMarkdown(:source="starshipSizeData.fullText.replace(/\ufffd/g, '-')")
+    Loading(v-else)
 </template>

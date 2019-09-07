@@ -17,8 +17,9 @@
   export default class StarshipsVentures extends Vue {
     @venturesModule.State ventures!: VentureType[]
     @venturesModule.Action fetchVentures!: () => void
+    @Prop({ type: Boolean, default: false }) readonly isInBook!: boolean
     initialSearch: string | (string | null)[] = ''
-    tableType: string = 'Starship Ventures'
+    tableType: string = this.isInBook ? 'Customization Options | Starships' : 'Starship Ventures'
 
     created () {
       this.fetchVentures()

@@ -10,7 +10,7 @@ import '@fortawesome/fontawesome-free/css/all.css'
 import vueHeadful from 'vue-headful'
 
 Vue.component('vue-headful', vueHeadful)
-Vue.prototype.$searchSuffix = ' | SW5E'
+Vue.prototype.$titleSuffix = ' | SW5E'
 
 Vue.config.productionTip = false
 Vue.use(Vuetify, {

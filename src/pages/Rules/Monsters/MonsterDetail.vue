@@ -21,6 +21,10 @@
       this.fetchMonsters()
     }
 
+    get title () {
+        return this.monsterName + Vue.prototype.$titleSuffix
+    }
+
     get monster () {
       return this.monsters.find(({ name }: MonsterType) => name === this.monsterName)
     }
@@ -28,5 +32,7 @@
 </script>
 
 <template lang="pug">
-  MonsterDescription(v-bind="{ monster }", isAtDetail)
+  div
+    vue-headful(:title="title")
+    MonsterDescription(v-bind="{ monster }", isAtDetail)
 </template>

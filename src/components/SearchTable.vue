@@ -21,7 +21,7 @@
     @Prop(Array) readonly headers!: HeaderType[]
     @Prop(Function) readonly customSort!: Function
     @Prop(String) initialSearch: string | undefined
-    @Prop(String) tableType: string | undefined = 'Resource'
+    @Prop(String) tableType: string | undefined = ''
 
     pagination = { rowsPerPage: 25 }
     filterSelections: { [key: string]: any } = {}
@@ -32,7 +32,7 @@
     }
 
     get title () {
-        let titleString = this.tableType + Vue.prototype.$searchSuffix
+        let titleString = this.tableType + Vue.prototype.$titleSuffix
         if (this.search) {
              return this.search + ' | ' + titleString
         }

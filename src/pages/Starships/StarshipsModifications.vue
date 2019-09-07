@@ -17,8 +17,9 @@
   export default class StarshipsModifications extends Vue {
     @starshipModificationsModule.State starshipModifications!: StarshipModificationType[]
     @starshipModificationsModule.Action fetchStarshipModifications!: () => void
+    @Prop({ type: Boolean, default: false }) readonly isInBook!: boolean
     initialSearch: string | (string | null)[] = ''
-    tableType: string = 'Starship Modifications'
+    tableType: string = this.isInBook ? 'Modifications | Starships' : 'Starship Modifications'
 
     created () {
       this.fetchStarshipModifications()

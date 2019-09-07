@@ -16,6 +16,8 @@
     @speciesModule.State species!: SpeciesType[]
     @speciesModule.Action fetchSpecies!: () => void
     @Prop({ type: Boolean, default: false }) readonly isInHandbook!: boolean
+    initialSearch: string | (string | null)[] = ''
+    tableType: string = this.isInHandbook ? 'Species | Handbook' : 'Species'
 
     numWordMap: { [key: string]: number } = {
       one: 1,
@@ -25,6 +27,7 @@
 
     created () {
       this.fetchSpecies()
+      this.initialSearch = this.$route.query.search
     }
 
     get items () {
@@ -80,5 +83,5 @@
   div
     h1(v-if="!isInHandbook") Species
     br
-    SearchTable(v-bind="{ headers, items }")
+    SearchTable(v-bind="{ headers, items, initialSearch, tableType }")
 </template>

@@ -13,7 +13,10 @@ export default {
   children: [
     {
       path: '/starships',
-      component: StarshipsPage
+      component: StarshipsPage,
+      meta: {
+        title: 'Starships'
+      }
     },
     {
       path: '/starships/deployments',

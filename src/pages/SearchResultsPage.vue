@@ -22,7 +22,7 @@
     isSearching = false
 
     get title () {
-        let titleString = 'Search Results' + Vue.prototype.$searchSuffix
+        let titleString = 'Search Results' + Vue.prototype.$titleSuffix
         if (this.searchText) {
              return this.searchText + ' | ' + titleString
         }

@@ -20,7 +20,10 @@ export default {
   children: [
     {
       path: '/characters',
-      component: CharactersPage
+      component: CharactersPage,
+      meta: {
+        title: 'Character Resources'
+      }
     },
     {
       path: '/characters/species',

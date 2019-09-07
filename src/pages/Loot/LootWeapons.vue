@@ -27,6 +27,7 @@
     @weaponPropertiesModule.State weaponProperties!: WeaponPropertyType[]
     @weaponPropertiesModule.Action fetchWeaponProperties!: () => void
     initialSearch: string | (string | null)[] = ''
+    tableType: string = 'Weapons'
 
     created () {
       this.fetchWeapons()
@@ -85,7 +86,7 @@
   div
     h1 Weapons
     br
-    SearchTable(v-bind="{ headers, items, initialSearch }")
+    SearchTable(v-bind="{ headers, items, initialSearch, tableType }")
       template(v-slot:default="props")
         strong Properties:
         LinkModal(

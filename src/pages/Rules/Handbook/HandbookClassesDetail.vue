@@ -21,6 +21,10 @@
       this.fetchClasses()
     }
 
+    get title () {
+        return this.className + ' | Handbook' + Vue.prototype.$titleSuffix
+    }
+
     get classData () {
       return this.classes.find(({ name }) => name === this.className)
     }
@@ -28,5 +32,7 @@
 </script>
 
 <template lang="pug">
-  ClassDetail(v-bind="{ classData }")
+  div
+    vue-headful(:title="title")
+    ClassDetail(v-bind="{ classData }")
 </template>

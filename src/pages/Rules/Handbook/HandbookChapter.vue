@@ -45,6 +45,10 @@
       this.fetchHandbookBlob(this.blobName)
     }
 
+    get title () {
+        return this.chapterMap[this.chapter] + ' | Handbook' + Vue.prototype.$titleSuffix
+    }
+
     get blobName () {
       return this.chapterMap[this.chapter]
     }
@@ -57,8 +61,10 @@
 </script>
 
 <template lang="pug">
-  div(v-if="blob")
-    VueMarkdownWithAnchors(:source="blob").text-xs-left
-    slot
-  Loading(v-else)
+  div
+    vue-headful(:title="title")
+    div(v-if="blob")
+      VueMarkdownWithAnchors(:source="blob").text-xs-left
+      slot
+    Loading(v-else)
 </template>

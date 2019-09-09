@@ -35,13 +35,29 @@
         })).value()
     }
 
+    get allPrerequisites () {
+      return _.chain(this.ventures)
+        .flatMap(({ prerequisites }) => prerequisites)
+        .sortBy(prerequisite => {
+          const splitPrerequisite = prerequisite.split(' ')
+          return splitPrerequisite[splitPrerequisite.length - 1]
+        })
+        .concat(['None'])
+        .value()
+    }
+
     get headers () {
       return [
         { text: 'Name', value: 'name' },
         {
           text: 'Prerequisites',
           value: 'prerequisites',
-          render: (prerequisites: string[]) => _.upperFirst(prerequisites.join(', ') || '-')
+          render: (prerequisites: string[]) => _.upperFirst(prerequisites.join(', ') || '-'),
+          isMultiSelect: true,
+          filterChoices: this.allPrerequisites,
+          filterFunction: ({ prerequisites }: VentureType, filterValue: string[]) =>
+            _.some(filterValue, (filter: string) => _.includes(prerequisites, filter)) ||
+            (_.includes(filterValue, 'None') && prerequisites.length === 0)
         }
       ]
     }

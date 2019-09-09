@@ -66,6 +66,15 @@
           ]
         },
         {
+          to: '/myContent',
+          title: 'My Content',
+          nested: [
+            { to: '/characterBuilder', title: 'Character Builder' },
+            { to: '/characterEditor', title: 'CharacterEditor' },
+            { to: '/characterSheet', title: 'CharacterSheet' }
+          ]
+        },
+        {
           to: '/assets',
           title: 'Assets'
         },

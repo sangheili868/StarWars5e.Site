@@ -2,7 +2,7 @@ import PageNester from '@/components/PageNester.vue'
 import MyContentPage from './MyContentPage.vue'
 import CharacterBuilder from './CharacterBuilder.vue'
 import CharacterEditor from './CharacterEditor.vue'
-import CharacterSheet from './CharacterSheet.vue'
+import CharacterSheet from './CharacterSheet/CharacterSheet.vue'
 
 export default {
   path: '/myContent',

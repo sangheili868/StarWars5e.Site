@@ -1,11 +1,11 @@
 <script lang="ts">
   import { Component, Prop, Vue } from 'vue-property-decorator'
   import { HitPointsType } from '@/types'
-  import CheckList from '@/components/CheckList.vue'
+  import CharacterSheetRest from './CharacterSheetRest.vue'
 
   @Component({
     components: {
-      CheckList
+      CharacterSheetRest
     }
   })
   export default class CharacterSheetHealth extends Vue {
@@ -35,20 +35,8 @@
         h2 {{ hitPoints.maximum }}
       v-dialog(v-model="isRestOpen", width="500")
         template(v-slot:activator="{ on }")
-          v-btn(small, v-on="on", color="secondary") Hit Dice
-        v-card(:class="$style.modal")
-          v-card-title(primary-title).primary--text.headline.grey.lighten-2 Hit Dice
-          v-card-text
-            CheckList(
-              v-for="{ size, current, maximum} in hitPoints.hitDice",
-              :key="size",
-              v-bind="{ current, maximum }"
-              :title="size + 's'"
-            )
-          v-divider
-          v-card-actions
-            v-spacer
-            v-btn(color="primary", flat, @click="isRestOpen=false") Close
+          v-btn(small, v-on="on", color="secondary") Rest
+        CharacterSheetRest(v-bind="{ hitPoints }")
     div(:class="$style.controlDiv").d-flex.mr-4
       v-btn(color="green accent-3", small, @click="resetHealthMod").white--text Heal
       v-text-field(outline, single-line, hide-details, type="number", v-model="healthMod")
@@ -56,8 +44,6 @@
 </template>
 
 <style module lang="scss">
-  @import '@/assets/styles/colors.scss';
-
   .outerDiv {
     display: flex;
     align-items: center;
@@ -70,10 +56,6 @@
 
       .divider {
         visibility: visible;
-      }
-
-      .modal {
-        background: $backgroundGradient;
       }
     }
   }

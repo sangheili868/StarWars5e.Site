@@ -18,6 +18,7 @@
     @armorModule.State armor!: ArmorType[]
     @armorModule.Action fetchArmor!: () => void
     initialSearch: string | (string | null)[] = ''
+    tableType: string = 'Armor'
 
     created () {
       this.fetchArmor()
@@ -57,7 +58,7 @@
   div
     h1 Armor
     br
-    SearchTable(v-bind="{ headers, items, initialSearch }")
+    SearchTable(v-bind="{ headers, items, initialSearch, tableType }")
       template(v-slot:default="props")
         VueMarkdown(:source="props.item.description")
 </template>

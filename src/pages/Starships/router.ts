@@ -13,32 +13,53 @@ export default {
   children: [
     {
       path: '/starships',
-      component: StarshipsPage
+      component: StarshipsPage,
+      meta: {
+        title: 'Starships'
+      }
     },
     {
       path: '/starships/deployments',
-      component: StarshipsDeployments
+      component: StarshipsDeployments,
+      meta: {
+        title: 'Starship Deployments'
+      }
     },
     {
       path: '/starships/deployments/:deploymentName',
       component: StarshipsDeploymentDetails,
-      props: true
+      props: true,
+      meta: {
+        title: 'Starship Deployments'
+      }
     },
     {
       path: '/starships/equipment',
-      component: StarshipsEquipment
+      component: StarshipsEquipment,
+      meta: {
+        title: 'Starship Equipment'
+      }
     },
     {
       path: '/starships/modifications',
-      component: StarshipsModifications
+      component: StarshipsModifications,
+      meta: {
+        title: 'Starhip Modifications'
+      }
     },
     {
       path: '/starships/weapons',
-      component: StarshipsWeapons
+      component: StarshipsWeapons,
+      meta: {
+        title: 'Starship Weapons'
+      }
     },
     {
       path: '/starships/ventures',
-      component: StarshipsVentures
+      component: StarshipsVentures,
+      meta: {
+        title: 'Starship Ventures'
+      }
     }
   ]
 }

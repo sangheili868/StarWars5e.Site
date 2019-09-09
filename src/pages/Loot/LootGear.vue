@@ -18,6 +18,7 @@
     @gearModule.State gear!: GearType[]
     @gearModule.Action fetchGear!: () => void
     initialSearch: string | (string | null)[] = ''
+    tableType: string = 'Adventuring Gear'
 
     created () {
       this.fetchGear()
@@ -61,7 +62,7 @@
   div
     h1 Gear
     br
-    SearchTable(v-bind="{ headers, items, initialSearch }")
+    SearchTable(v-bind="{ headers, items, initialSearch, tableType }")
       template(v-slot:default="props")
         VueMarkdown(:source="props.item.description")
 </template>

@@ -14,11 +14,14 @@
   export default class CharacterClassDetail extends Vue {
     @classesModule.State classes!: ClassType[]
     @classesModule.Action fetchClasses!: () => void
-
     @Prop(String) readonly className!: string
 
     created () {
       this.fetchClasses()
+    }
+
+    get title () {
+        return this.className + Vue.prototype.$titleSuffix
     }
 
     get classData () {
@@ -28,5 +31,7 @@
 </script>
 
 <template lang="pug">
-  ClassDetail(v-bind="{ classData }")
+  div
+    vue-headful(:title="title")
+    ClassDetail(v-bind="{ classData }")
 </template>

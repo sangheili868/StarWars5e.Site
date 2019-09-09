@@ -17,5 +17,5 @@
 <template lang="pug">
   div
     StarshipChapter(chapter='customization')
-      StarshipsVentures
+      StarshipsVentures(isInBook)
 </template>

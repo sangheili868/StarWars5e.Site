@@ -16,9 +16,12 @@
     @backgroundModule.State backgrounds!: BackgroundType[]
     @backgroundModule.Action fetchBackgrounds!: () => void
     @Prop({ type: Boolean, default: false }) readonly isInHandbook!: boolean
+    initialSearch: string | (string | null)[] = ''
+    tableType: string = 'Backgrounds'
 
     created () {
       this.fetchBackgrounds()
+      this.initialSearch = this.$route.query.search
     }
 
     get items () {
@@ -59,5 +62,5 @@
   div
     h1(v-if="!isInHandbook") Backgrounds
     br
-    SearchTable(v-bind="{ headers, items }")
+    SearchTable(v-bind="{ headers, items, initialSearch, tableType }")
 </template>

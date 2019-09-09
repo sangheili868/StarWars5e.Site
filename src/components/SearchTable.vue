@@ -21,13 +21,24 @@
     @Prop(Array) readonly headers!: HeaderType[]
     @Prop(Function) readonly customSort!: Function
     @Prop(String) initialSearch: string | undefined
+    @Prop(String) tableType: string | undefined
 
     pagination = { rowsPerPage: 25 }
     filterSelections: { [key: string]: any } = {}
     search: string | undefined = ''
+    tabTitle: string | undefined = ''
 
     created () {
       this.search = this.initialSearch
+      this.tabTitle = this.tableType
+    }
+
+    get title () {
+        let titleString = this.tabTitle + Vue.prototype.$titleSuffix
+        if (this.search) {
+             return this.search + ' | ' + titleString
+        }
+        return titleString
     }
 
     get alignedHeaders () {
@@ -58,6 +69,7 @@
 
 <template lang="pug">
   div(v-if="filteredItems")
+    vue-headful(:title="title")
     v-card
       v-card-title
         v-text-field(v-model="search", append-icon="fa-search", label="Search", single-line, hide-details).ma-2

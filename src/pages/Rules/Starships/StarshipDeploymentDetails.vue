@@ -23,6 +23,10 @@
       this.fetchDeployments()
     }
 
+    get title () {
+        return this.deploymentName + ' | Starships' + Vue.prototype.$titleSuffix
+    }
+
     get deploymentData () {
       return this.deployments.find(({ name }) => name === this.deploymentName)
     }
@@ -30,9 +34,11 @@
 </script>
 
 <template lang="pug">
-  div( v-if="deploymentData" ).text-xs-left
-    h1 {{ deploymentData.name }}
-    VueMarkdown(:source="deploymentData.flavorText")
-    VueMarkdown(:source="deploymentData.featureText")
-  Loading(v-else)
+  div
+    vue-headful(:title="title")
+    div( v-if="deploymentData" ).text-xs-left
+      h1 {{ deploymentData.name }}
+      VueMarkdown(:source="deploymentData.flavorText")
+      VueMarkdown(:source="deploymentData.featureText")
+    Loading(v-else)
 </template>

@@ -15,12 +15,13 @@
   export default class HivesChapter extends Vue {
     @blobsModule.State hivesBlobs!: { [key: string]: string }
     @blobsModule.Action fetchHivesBlob!: (chapter: string) => void
-
     @Prop(String) readonly chapter!: string
 
     chapterMap: { [key: string]: string } = {
-      downtime: 'Downtime',
+      stepByStep: 'Step-By-Step Factions',
+      downtime: 'Entertainment and Downtime',
       factionsAndMembership: 'Factions and Membership',
+      abilityScores: 'Using Ability Scores',
       enhancedItems: 'Enhanced Items',
       modifiableItems: 'Modifiable Items',
       cyberneticAugmentations: 'Cybernetic Augmentations',
@@ -37,8 +38,12 @@
       this.fetchHivesBlob(this.blobName)
     }
 
+    get title () {
+        return (this.chapterMap[this.chapter] || 'Step-By-Step Factions') + ' | Hives' + Vue.prototype.$titleSuffix
+    }
+
     get blobName () {
-      return this.chapterMap[this.chapter] || 'Downtime'
+      return this.chapterMap[this.chapter] || 'Step-By-Step Factions'
     }
 
     get blob () {
@@ -49,8 +54,10 @@
 </script>
 
 <template lang="pug">
-  div(v-if="blob")
-    VueMarkdownWithAnchors(:source="blob").text-xs-left
-    slot
-  Loading(v-else)
+  div
+    vue-headful(:title="title")
+    div(v-if="blob")
+      VueMarkdownWithAnchors(:source="blob").text-xs-left
+      slot
+    Loading(v-else)
 </template>

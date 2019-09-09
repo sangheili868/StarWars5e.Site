@@ -20,64 +20,106 @@ export default {
   children: [
     {
       path: '/characters',
-      component: CharactersPage
+      component: CharactersPage,
+      meta: {
+        title: 'Character Resources'
+      }
     },
     {
       path: '/characters/species',
-      component: CharactersSpecies
+      component: CharactersSpecies,
+      meta: {
+        title: 'Species'
+      }
     },
     {
       path: '/characters/species/:speciesName',
       component: CharactersSpeciesDetail,
-      props: true
+      props: true,
+      meta: {
+        title: 'Species'
+      }
     },
     {
       path: '/characters/classes',
-      component: CharactersClasses
+      component: CharactersClasses,
+      meta: {
+        title: 'Classes'
+      }
     },
     {
       path: '/characters/classes/:className',
       component: CharactersClassDetail,
-      props: true
+      props: true,
+      meta: {
+        title: 'Classes'
+      }
     },
     {
       path: '/characters/archetypes',
-      component: CharactersArchetypes
+      component: CharactersArchetypes,
+      meta: {
+        title: 'Archetypes'
+      }
     },
     {
       path: '/characters/archetypes/:archetypeName',
       component: CharactersArchetypeDetail,
-      props: true
+      props: true,
+      meta: {
+        title: 'Archetype'
+      }
     },
     {
       path: '/characters/backgrounds',
-      component: CharactersBackgrounds
+      component: CharactersBackgrounds,
+      meta: {
+        title: 'Backgrounds'
+      }
     },
     {
       path: '/characters/backgrounds/:backgroundName',
       component: CharactersBackgroundDetail,
-      props: true
+      props: true,
+      meta: {
+        title: 'Backgrounds'
+      }
     },
     {
       path: '/characters/feats',
-      component: CharactersFeats
+      component: CharactersFeats,
+      meta: {
+        title: 'Feats'
+      }
     },
     {
       path: '/characters/forcePowers',
-      component: CharactersForcePowers
+      component: CharactersForcePowers,
+      meta: {
+        title: 'Force Powers'
+      }
     },
     {
       path: '/characters/techPowers',
-      component: CharactersTechPowers
+      component: CharactersTechPowers,
+      meta: {
+        title: 'Tech Powers'
+      }
     },
     {
       path: '/characters/additionalVariantRules',
-      component: CharactersVariantRules
+      component: CharactersVariantRules,
+      meta: {
+        title: 'Variant Rules'
+      }
     },
     {
       path: '/characters/additionalVariantRules/:variantRuleName',
       component: CharactersVariantRulesDetail,
-      props: true
+      props: true,
+      meta: {
+        title: 'Variant Rules'
+      }
     }
   ]
 }

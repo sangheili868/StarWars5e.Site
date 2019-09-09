@@ -17,7 +17,9 @@
   export default class StarshipsModifications extends Vue {
     @starshipModificationsModule.State starshipModifications!: StarshipModificationType[]
     @starshipModificationsModule.Action fetchStarshipModifications!: () => void
+    @Prop({ type: Boolean, default: false }) readonly isInBook!: boolean
     initialSearch: string | (string | null)[] = ''
+    tableType: string = this.isInBook ? 'Modifications | Starships' : 'Starship Modifications'
 
     created () {
       this.fetchStarshipModifications()
@@ -57,7 +59,7 @@
   div
     h1 Starship Modifications
     br
-    SearchTable(v-bind="{ headers, items, initialSearch }")
+    SearchTable(v-bind="{ headers, items, initialSearch, tableType }")
       template(v-slot:default="props")
         VueMarkdownWithAnchors(:source="props.item.content")
 </template>

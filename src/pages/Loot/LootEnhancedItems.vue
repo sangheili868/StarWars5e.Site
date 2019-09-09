@@ -18,6 +18,7 @@
     @enhancedItemsModule.State enhancedItems!: EnhancedItemType[]
     @enhancedItemsModule.Action fetchEnhancedItems!: () => void
     initialSearch: string | (string | null)[] = ''
+    tableType: string = 'Enhanced Items'
 
     created () {
       this.fetchEnhancedItems()
@@ -74,7 +75,7 @@
   div
     h1 Enhanced Items
     br
-    SearchTable(v-bind="{ headers, items, initialSearch }")
+    SearchTable(v-bind="{ headers, items, initialSearch, tableType }")
       template(v-slot:default="props")
         VueMarkdown(:source="props.item.text")
 </template>

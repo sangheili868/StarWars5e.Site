@@ -17,7 +17,9 @@
   export default class StarshipsVentures extends Vue {
     @venturesModule.State ventures!: VentureType[]
     @venturesModule.Action fetchVentures!: () => void
+    @Prop({ type: Boolean, default: false }) readonly isInBook!: boolean
     initialSearch: string | (string | null)[] = ''
+    tableType: string = this.isInBook ? 'Customization Options | Starships' : 'Starship Ventures'
 
     created () {
       this.fetchVentures()
@@ -33,13 +35,29 @@
         })).value()
     }
 
+    get allPrerequisites () {
+      return _.chain(this.ventures)
+        .flatMap(({ prerequisites }) => prerequisites)
+        .sortBy(prerequisite => {
+          const splitPrerequisite = prerequisite.split(' ')
+          return splitPrerequisite[splitPrerequisite.length - 1]
+        })
+        .concat(['None'])
+        .value()
+    }
+
     get headers () {
       return [
         { text: 'Name', value: 'name' },
         {
           text: 'Prerequisites',
           value: 'prerequisites',
-          render: (prerequisites: string[]) => _.upperFirst(prerequisites.join(', ') || '-')
+          render: (prerequisites: string[]) => _.upperFirst(prerequisites.join(', ') || '-'),
+          isMultiSelect: true,
+          filterChoices: this.allPrerequisites,
+          filterFunction: ({ prerequisites }: VentureType, filterValue: string[]) =>
+            _.some(filterValue, (filter: string) => _.includes(prerequisites, filter)) ||
+            (_.includes(filterValue, 'None') && prerequisites.length === 0)
         }
       ]
     }
@@ -50,7 +68,7 @@
   div
     h1 Ventures
     br
-    SearchTable(v-bind="{ headers, items, initialSearch }")
+    SearchTable(v-bind="{ headers, items, initialSearch, tableType }")
       template(v-slot:default="props")
         VueMarkdown(:source="props.item.content")
 </template>

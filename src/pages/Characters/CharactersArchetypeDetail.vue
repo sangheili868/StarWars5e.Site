@@ -26,6 +26,10 @@
       this.fetchArchetypes()
     }
 
+    get title () {
+        return this.archetypeName + Vue.prototype.$titleSuffix
+    }
+
     get archetype () {
       return this.archetypes.find(({ name }: ArchetypeType) => name === this.archetypeName)
     }
@@ -53,9 +57,11 @@
 </script>
 
 <template lang="pug">
-  div( v-if="archetype" ).text-xs-left
-    h1 {{ archetype.name }}
-    VueMarkdown(:source="archetype.text")
-    LevelTable(:title="archetype.name", :levels="correctedLevels")
-  Loading(v-else)
+  div
+    vue-headful(:title="title")
+    div( v-if="archetype" ).text-xs-left
+      h1 {{ archetype.name }}
+      VueMarkdown(:source="archetype.text")
+      LevelTable(:title="archetype.name", :levels="correctedLevels")
+    Loading(v-else)
 </template>

@@ -21,6 +21,14 @@
 
     isSearching = false
 
+    get title () {
+        let titleString = 'Search Results' + Vue.prototype.$titleSuffix
+        if (this.searchText) {
+             return this.searchText + ' | ' + titleString
+        }
+        return titleString
+    }
+
     created () {
       this.fetchResults()
     }
@@ -45,6 +53,7 @@
 
 <template lang="pug">
   div
+    vue-headful(:title="title")
     h1.pb-3 Search
     SearchBox.pb-3.hidden-lg-and-up
     template(v-if="searchText && !isSearching")

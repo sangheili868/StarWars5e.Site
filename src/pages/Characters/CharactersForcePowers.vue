@@ -18,6 +18,7 @@
     @powersModule.State powers!: PowerType[]
     @powersModule.Action fetchPowers!: () => void
     initialSearch: string | (string | null)[] = ''
+    tableType: string = 'Force Powers'
 
     created () {
       this.fetchPowers()
@@ -93,7 +94,7 @@
   div
     h1 Force Powers
     br
-    SearchTable(v-bind="{ headers, items, initialSearch }")
+    SearchTable(v-bind="{ headers, items, initialSearch, tableType }")
       template(v-slot:default="props")
         VueMarkdown(:source="props.item.description")
 </template>

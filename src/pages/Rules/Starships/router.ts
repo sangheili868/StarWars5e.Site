@@ -22,7 +22,10 @@ export default {
     },
     {
       path: 'starshipSizes',
-      component: StarshipSizes
+      component: StarshipSizes,
+      meta: {
+        title: 'Sizes | Starships'
+      }
     },
     {
       path: 'deployments/:deploymentName',
@@ -31,15 +34,24 @@ export default {
     },
     {
       path: 'deployments',
-      component: StarshipDeployments
+      component: StarshipDeployments,
+      meta: {
+        title: 'Deployments | Starships'
+      }
     },
     {
       path: 'modifications',
-      component: StarshipModifications
+      component: StarshipModifications,
+      meta: {
+        title: 'Modifications | Starships'
+      }
     },
     {
       path: 'customization',
-      component: StarshipCustomization
+      component: StarshipCustomization,
+      meta: {
+        title: 'Customization | Starships'
+      }
     },
     {
       path: ':chapter',
@@ -51,6 +63,9 @@ export default {
       component: StarshipChapter,
       props: {
         chapter: 'introduction'
+      },
+      meta: {
+        title: 'Introduction | Starships'
       }
     }
   ]

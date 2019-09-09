@@ -11,23 +11,38 @@ export default {
   children: [
     {
       path: '/loot',
-      component: LootPage
+      component: LootPage,
+      meta: {
+        title: 'Loot'
+      }
     },
     {
       path: '/loot/armor',
-      component: LootArmor
+      component: LootArmor,
+      meta: {
+        title: 'Armor'
+      }
     },
     {
       path: '/loot/adventuringGear',
-      component: LootGear
+      component: LootGear,
+      meta: {
+        title: 'Adventuring Gear'
+      }
     },
     {
       path: '/loot/weapons',
-      component: LootWeapons
+      component: LootWeapons,
+      meta: {
+        title: 'Weapons'
+      }
     },
     {
       path: '/loot/enhancedItems',
-      component: LootEnhancedItems
+      component: LootEnhancedItems,
+      meta: {
+        title: 'Enhanced Items'
+      }
     }
   ]
 }

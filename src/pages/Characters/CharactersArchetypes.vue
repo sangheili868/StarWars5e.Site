@@ -16,9 +16,12 @@
     @archetypeModule.State archetypes!: ArchetypeType[]
     @archetypeModule.Action fetchArchetypes!: () => void
     @Prop({ type: Boolean, default: false }) readonly isInHandbook!: boolean
+    initialSearch: string | (string | null)[] = ''
+    tableType: string = 'Archetypes'
 
     created () {
       this.fetchArchetypes()
+      this.initialSearch = this.$route.query.search
     }
 
     get items () {
@@ -59,5 +62,5 @@
   div
     h1(v-if="!isInHandbook") Archetypes
     br
-    SearchTable(v-bind="{ headers, items }")
+    SearchTable(v-bind="{ headers, items, initialSearch, tableType }")
 </template>

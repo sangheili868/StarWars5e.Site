@@ -16,7 +16,10 @@ export default new Router({
   routes: [
     {
       path: '/',
-      component: HomePage
+      component: HomePage,
+      meta: {
+        title: 'Home'
+      }
     },
     rulesRoutes,
     charactersRoutes,
@@ -28,16 +31,25 @@ export default new Router({
     },
     {
       path: '/credits',
-      component: CreditsPage
+      component: CreditsPage,
+      meta: {
+          title: 'Credits'
+      }
     },
     {
       path: '/assets',
-      component: AssetsPage
+      component: AssetsPage,
+      meta: {
+        title: 'Assets'
+      }
     },
     {
       path: '/searchResults',
       component: SearchResultsPage,
-      props: ({ query }) => query
+      props: ({ query }) => query,
+      meta: {
+        title: 'Search'
+      }
     }
   ],
   mode: 'history',

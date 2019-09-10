@@ -383,6 +383,17 @@ export interface SuperiorityType {
   }[]
 }
 
+export interface FeatureType {
+  name: string,
+  text: string,
+  usage: string,
+  recharge: string,
+  uses: {
+    current: number,
+    maximum: number
+  }
+}
+
 export interface CompleteCharacterType {
   name: string,
   image: string | null,
@@ -439,7 +450,9 @@ export interface CompleteCharacterType {
   },
   superiority: SuperiorityType,
   techCasting: CastingType,
-  forceCasting: CastingType
+  forceCasting: CastingType,
+  combatFeatures: FeatureType[],
+  otherFeatures: FeatureType[]
 }
 
 export interface EnhancedItemType {

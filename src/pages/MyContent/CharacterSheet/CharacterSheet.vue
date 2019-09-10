@@ -1,8 +1,9 @@
 <script lang="ts">
   import { Component, Prop, Vue } from 'vue-property-decorator'
-  import characterJson from '@/test/senyaComplete'
   import CharacterSheetTop from './CharacterSheetTop.vue'
   import CharacterSheetSection from './CharacterSheetSection.vue'
+  import rawCharacter from '@/test/senyaRaw.json'
+  import generateCharacter from '../CharacterEngine/generateCharacter'
   import { range } from 'lodash'
 
   @Component({
@@ -12,7 +13,6 @@
     }
   })
   export default class CharacterSheet extends Vue {
-    completeCharacter = characterJson
     range = range
     openTabs: number[] = [0, 1, 2]
 
@@ -24,6 +24,10 @@
         lg: 3,
         xl: 3
       } as { [ breakpoint: string ] : number })[this.$vuetify.breakpoint.name]
+    }
+
+    get completeCharacter () {
+      return generateCharacter(rawCharacter)
     }
   }
 </script>

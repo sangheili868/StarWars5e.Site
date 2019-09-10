@@ -27,14 +27,13 @@
   v-card(:class="$style.modal")
     v-card-title(primary-title).primary--text.headline.grey.lighten-2 Rest
     v-card-text
-      v-layout(wrap)
-        CheckList(
-          v-for="{ size, current, maximum} in hitPoints.hitDice",
-          :key="size",
-          v-bind="{ current, maximum }"
-          :title="size + 's'"
-          @changeSelected="numSelected => setCount(size, numSelected)"
-        ).ma-2
+      CheckList(
+        v-for="{ size, current, maximum} in hitPoints.hitDice",
+        :key="size",
+        v-bind="{ current, maximum }"
+        :title="size + 's'"
+        @changeSelected="numSelected => setCount(size, numSelected)"
+      ).ma-2
     v-card-actions
       v-btn(color="primary", @click="$emit('triggerShortRest', diceCounts)") Short Rest
         template(v-if="totalCount > 0")  (Use {{ totalCount }} hit {{ totalCount > 1 ? 'dice' : 'die' }})

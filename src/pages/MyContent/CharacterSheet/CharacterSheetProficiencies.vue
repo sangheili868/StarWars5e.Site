@@ -1,21 +1,29 @@
 <script lang="ts">
   import { Component, Prop, Vue } from 'vue-property-decorator'
-  import { CharacteristicsType } from '@/types'
+  import { CharacteristicsType, FeatureType } from '@/types'
   import { startCase } from 'lodash'
+  import CharacterSheetFeatures from './CharacterSheetFeatures.vue'
 
-  @Component
-  export default class CharacterSheetwProficienciesescription extends Vue {
+  @Component({
+    components: {
+      CharacterSheetFeatures
+    }
+  })
+  export default class CharacterSheetProficiencies extends Vue {
     @Prop(String) readonly alignment!: string
     @Prop(String) readonly background!: string
     @Prop(Array) readonly proficiencies!: string[]
     @Prop(Array) readonly languages!: string[]
     @Prop(Object) readonly characteristics!: CharacteristicsType
+    @Prop(Array) readonly otherFeatures!: FeatureType[]
     startCase = startCase
   }
 </script>
 
 <template lang="pug">
-  div.text-xs-left
+  div
+    h3 Non-combat Features
+    CharacterSheetFeatures(:features="otherFeatures")
     h3 Langauges
     div(v-for="language in languages", :key="language").caption {{ language }}
     h3 Proficiencies

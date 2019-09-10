@@ -31,7 +31,7 @@
     CharacterSheetModifier(:modifier="techCasting.attackModifier", label="Tech Attack Modifier", small)
     CharacterSheetModifier(:modifier="techCasting.saveDC", label="Tech Save DC", isFlatNumber, small)
     div(v-for="(powers, level) in groupBy(techCasting.powersKnown, 'level')", :key="level")
-      h3 {{ techLevelText(level) }}
+      h3.mt-2 {{ techLevelText(level) }}
       v-expansion-panel
         CharacterSheetCastingPower(
           v-for="power in powers"

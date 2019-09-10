@@ -1,13 +1,13 @@
 <script lang="ts">
   import { Component, Prop, Vue } from 'vue-property-decorator'
   import { SuperiorityType } from '@/types'
-  import CharacterSheetTicker from './CharacterSheetTicker.vue'
+  import CheckList from '@/components/CheckList.vue'
   import CharacterSheetModifier from './CharacterSheetModifier.vue'
   import CharacterSheetCastingPower from './CharacterSheetCastingPower.vue'
 
   @Component({
     components: {
-      CharacterSheetTicker,
+      CheckList,
       CharacterSheetModifier,
       CharacterSheetCastingPower
     }
@@ -19,8 +19,8 @@
 
 <template lang="pug">
   div
-    h3 Maneuvers
-    CharacterSheetTicker(:current="superiority.currentDice", :max="superiority.maxDice") Superiority Dice ({{ superiority.diceSize }})
+    h3.mt-2 Maneuvers
+    CheckList(:current="superiority.currentDice", :maximum="superiority.maxDice", :title="superiority.diceSize + 's'")
     CharacterSheetModifier(:modifier="superiority.maneuverSaveDC", label="Maneuver Save DC", isFlatNumber, small)
     v-expansion-panel
       CharacterSheetCastingPower(

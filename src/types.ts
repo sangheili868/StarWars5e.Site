@@ -385,7 +385,7 @@ export interface SuperiorityType {
 
 export interface FeatureType {
   name: string,
-  text: string,
+  description: string,
   usage: string,
   recharge: string,
   uses: {

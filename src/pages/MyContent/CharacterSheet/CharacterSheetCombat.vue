@@ -1,16 +1,18 @@
 <script lang="ts">
   import { Component, Prop, Vue } from 'vue-property-decorator'
   import addPlus from '@/utilities/addPlus'
-  import { GearType, WeaponType, ArmorType, SuperiorityType } from '@/types'
+  import { GearType, WeaponType, ArmorType, SuperiorityType, FeatureType } from '@/types'
   import CharacterSheetModifier from './CharacterSheetModifier.vue'
   import CharacterSheetWeapon from './CharacterSheetWeapon.vue'
   import CharacterSheetSuperiority from './CharacterSheetSuperiority.vue'
+  import CharacterSheetFeatures from './CharacterSheetFeatures.vue'
 
   @Component({
     components: {
       CharacterSheetModifier,
       CharacterSheetWeapon,
-      CharacterSheetSuperiority
+      CharacterSheetSuperiority,
+      CharacterSheetFeatures
     }
   })
   export default class CharacterSheetCombat extends Vue {
@@ -21,6 +23,7 @@
     @Prop(Array) readonly equipment!: ((GearType | WeaponType | ArmorType) & { equipped: boolean })[]
     @Prop(Number) readonly passivePerception!: number
     @Prop(Object) readonly superiority!: SuperiorityType
+    @Prop(Array) readonly combatFeatures!: FeatureType[]
 
     get weapons () {
       return this.equipment.filter(({ equipped, equipmentCategory }) => equipped && equipmentCategory === 'Weapon')
@@ -42,11 +45,13 @@
       div.caption {{ armor }}
     CharacterSheetModifier(:modifier="parseInt(speed.base)", label="Speed", isFlatNumber, small)
     CharacterSheetModifier(:modifier="passivePerception", label="Passive Perception", isFlatNumber, small)
-    h3 Weapons
+    h3.mt-2 Weapons
     CharacterSheetWeapon(
       v-for="weapon in weapons",
       :key="weapon.name"
       v-bind="{ weapon }"
     )
     CharacterSheetSuperiority(:superiority="superiority")
+    h3 Combat Features
+    CharacterSheetFeatures(:features="combatFeatures")
 </template>

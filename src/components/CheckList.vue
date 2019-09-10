@@ -19,8 +19,8 @@
 </script>
 
 <template lang="pug">
-  div
-    h3 {{ title }}
+  v-layout(align-center)
+    h4.mr-2 {{ title }}
     v-layout(justify-start, wrap)
       v-checkbox(
         v-for="index in range(maximum)",
@@ -38,5 +38,6 @@
 <style lang="scss" module>
   .checkbox {
     flex: none !important;
+    margin-top: 0 !important;
   }
 </style>

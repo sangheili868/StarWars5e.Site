@@ -59,7 +59,7 @@
       v-tab(v-for="({ icon }) in sections", :key="icon")
         v-icon {{ icon }}
       v-tab-item(v-for="({ component }) in sections", :key="component")
-        component(:is="component", v-bind="completeCharacter")
+        component(:is="component", v-bind="completeCharacter").text-xs-left
 </template>
 
 <style module lang="scss">

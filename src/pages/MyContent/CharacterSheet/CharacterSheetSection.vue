@@ -23,6 +23,7 @@
     @Prop(Number) readonly currentTab!: number
 
     get sections () {
+      const hasPowers = this.completeCharacter.techCasting || this.completeCharacter.forceCasting
       return [
         {
           component: 'CharacterSheetAbilities',
@@ -31,11 +32,11 @@
         {
           component: 'CharacterSheetCombat',
           icon: 'fa-fist-raised'
-        },
-        {
-          component: 'CharacterSheetCasting',
-          icon: 'fa-bolt'
-        },
+        }
+      ].concat(hasPowers ? [ {
+        component: 'CharacterSheetCasting',
+        icon: 'fa-bolt'
+      }] : []).concat([
         {
           component: 'CharacterSheetEquipment',
           icon: 'fa-tools'
@@ -48,7 +49,7 @@
           component: 'CharacterSheetDescription',
           icon: 'fa-briefcase'
         }
-      ]
+      ])
     }
   }
 </script>

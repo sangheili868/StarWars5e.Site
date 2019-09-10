@@ -1,11 +1,11 @@
 <script lang="ts">
   import { Component, Prop, Vue } from 'vue-property-decorator'
   import { FeatureType } from '@/types.ts'
-  import CharacterSheetCastingPower from './CharacterSheetCastingPower.vue'
+  import CharacterSheetExpansionFeature from './CharacterSheetExpansionFeature.vue'
 
   @Component({
     components: {
-      CharacterSheetCastingPower
+      CharacterSheetExpansionFeature
     }
   })
   export default class CharacterSheetFeatures extends Vue {
@@ -15,10 +15,10 @@
 
 <template lang="pug">
   v-expansion-panel
-    CharacterSheetCastingPower(
+    CharacterSheetExpansionFeature(
       v-for="feature in features",
       :key="feature.name",
-      :power="feature"
+      v-bind="{ feature }"
     )
 </template>
 

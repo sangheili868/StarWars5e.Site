@@ -2,14 +2,16 @@
   import { Component, Prop, Vue } from 'vue-property-decorator'
   import { CastingType } from '@/types'
   import CharacterSheetModifier from './CharacterSheetModifier.vue'
-  import CharacterSheetCastingPower from './CharacterSheetCastingPower.vue'
+  import CharacterSheetExpansionFeature from './CharacterSheetExpansionFeature.vue'
   import { groupBy } from 'lodash'
   import CharacterSheetTicker from './CharacterSheetTicker.vue'
+  import CheckList from '@/components/CheckList.vue'
 
   @Component({
     components: {
+      CheckList,
       CharacterSheetModifier,
-      CharacterSheetCastingPower,
+      CharacterSheetExpansionFeature,
       CharacterSheetTicker
     }
   })
@@ -27,15 +29,20 @@
 <template lang="pug">
   div
     h3 Tech Casting
-    CharacterSheetTicker(:current="techCasting.currentPoints", :max="techCasting.maxPoints") Tech Points
+    CharacterSheetTicker(
+      v-if="techCasting.maxPoints > 10",
+      :current="techCasting.currentPoints",
+      :max="techCasting.maxPoints"
+    ) Tech Points
+    CheckList(v-else, :current="techCasting.currentPoints", :maximum="techCasting.maxPoints", title="Tech Points")
     CharacterSheetModifier(:modifier="techCasting.attackModifier", label="Tech Attack Modifier", small)
     CharacterSheetModifier(:modifier="techCasting.saveDC", label="Tech Save DC", isFlatNumber, small)
     div(v-for="(powers, level) in groupBy(techCasting.powersKnown, 'level')", :key="level")
       h3.mt-2 {{ techLevelText(level) }}
       v-expansion-panel
-        CharacterSheetCastingPower(
-          v-for="power in powers"
-          :key="power.name"
-          v-bind="{ power }"
+        CharacterSheetExpansionFeature(
+          v-for="power in powers",
+          :key="power.name",
+          :feature="power"
         )
 </template>

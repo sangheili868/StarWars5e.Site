@@ -36,6 +36,6 @@
   div
     CharacterSheetTop(v-bind="{ completeCharacter }").mx-2
     v-layout(justify-space-around)
-      v-flex(v-for="section in range(numSections)", md4, sm6, xs12)
+      v-flex(v-for="section in range(numSections)", :key="section", md4, sm6, xs12)
         CharacterSheetSection(v-bind="{ completeCharacter }", :currentTab="openTabs[section]")
 </template>

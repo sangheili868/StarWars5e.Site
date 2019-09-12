@@ -2,7 +2,7 @@
   import { Component, Prop, Vue } from 'vue-property-decorator'
   import { namespace } from 'vuex-class'
   import VueMarkdownWithAnchors from '@/components/VueMarkdownWithAnchors.vue'
-  import { StarshipSizeType } from '@/types.ts'
+  import { StarshipSizeType } from '@/types/starshipTypes.ts'
   import CardSet from '@/components/CardSet.vue'
   import Loading from '@/components/Loading.vue'
 

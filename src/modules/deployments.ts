@@ -1,6 +1,6 @@
 import axios from 'axios'
 import { Module, VuexModule, MutationAction } from 'vuex-module-decorators'
-import { DeploymentType } from '@/types.ts'
+import { DeploymentType } from '@/types/starshipTypes.ts'
 
 @Module({ namespaced: true, name: 'deployments' })
 export default class Deployments extends VuexModule {

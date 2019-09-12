@@ -1,7 +1,7 @@
 <script lang="ts">
   import { Component, Prop, Vue } from 'vue-property-decorator'
   import { namespace } from 'vuex-class'
-  import { StarshipSizeType } from '@/types.ts'
+  import { StarshipSizeType } from '@/types/starshipTypes.ts'
   import VueMarkdown from 'vue-markdown'
   import Loading from '@/components/Loading.vue'
 

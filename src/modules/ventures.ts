@@ -1,6 +1,6 @@
 import axios from 'axios'
 import { Module, VuexModule, MutationAction } from 'vuex-module-decorators'
-import { VentureType } from '@/types'
+import { VentureType } from '@/types/starshipTypes'
 
 @Module({ namespaced: true, name: 'venture' })
 export default class Ventures extends VuexModule {

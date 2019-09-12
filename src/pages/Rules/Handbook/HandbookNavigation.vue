@@ -3,7 +3,8 @@
   import { namespace } from 'vuex-class'
   import NavigationDrawer from '@/components/NavigationDrawer.vue'
   import _ from 'lodash'
-  import { VariantRuleBlobType, SpeciesType } from '@/types'
+  import { SpeciesType } from '@/types/characterTypes'
+  import { VariantRuleBlobType } from '@/types/referenceTypes'
 
   const blobsModule = namespace('blobs')
   const speciesModule = namespace('species')

@@ -2,7 +2,7 @@
   import { Component, Prop, Vue } from 'vue-property-decorator'
   import { namespace } from 'vuex-class'
   import SearchTable from '@/components/SearchTable.vue'
-  import { WeaponType, WeaponPropertyType } from '@/types'
+  import { WeaponType } from '@/types/lootTypes'
   import _ from 'lodash'
   import VueMarkdown from 'vue-markdown'
   import LootWeaponsProperties from './LootWeaponsProperties.vue'

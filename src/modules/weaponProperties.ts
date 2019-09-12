@@ -1,6 +1,6 @@
 import axios from 'axios'
 import { Module, VuexModule, MutationAction } from 'vuex-module-decorators'
-import { WeaponPropertyType } from '@/types'
+import { WeaponPropertyType } from '@/types/lootTypes'
 import _ from 'lodash'
 
 @Module({ namespaced: true, name: 'weaponProperties' })

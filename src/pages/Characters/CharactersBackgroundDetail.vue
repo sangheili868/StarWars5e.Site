@@ -1,7 +1,8 @@
 <script lang="ts">
   import { Component, Prop, Vue } from 'vue-property-decorator'
   import { namespace } from 'vuex-class'
-  import { BackgroundType, FeatType } from '@/types.ts'
+  import { FeatType } from '@/types/characterTypes.ts'
+  import { BackgroundType } from '@/types/characterTypes'
   import VueMarkdown from 'vue-markdown'
   import RollTable from '@/components/RollTable.vue'
   import Loading from '@/components/Loading.vue'

@@ -2,7 +2,7 @@
   import { Component, Prop, Vue } from 'vue-property-decorator'
   import { namespace } from 'vuex-class'
   import SearchTable from '@/components/SearchTable.vue'
-  import { SpeciesType, AbilitiesIncreasedType } from '@/types'
+  import { SpeciesType, AbilitiesIncreasedType } from '@/types/characterTypes'
   import _ from 'lodash'
 
   const speciesModule = namespace('species')

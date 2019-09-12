@@ -2,7 +2,7 @@
   import { Component, Prop, Vue } from 'vue-property-decorator'
   import { namespace } from 'vuex-class'
   import VueMarkdown from 'vue-markdown'
-  import { DeploymentType } from '@/types.ts'
+  import { DeploymentType } from '@/types/starshipTypes.ts'
   import CardSet from '@/components/CardSet.vue'
   import Loading from '@/components/Loading.vue'
 

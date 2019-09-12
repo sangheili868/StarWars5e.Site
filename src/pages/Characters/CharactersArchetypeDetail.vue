@@ -1,7 +1,7 @@
 <script lang="ts">
   import { Component, Prop, Vue } from 'vue-property-decorator'
   import { namespace } from 'vuex-class'
-  import { ArchetypeType } from '@/types.ts'
+  import { ArchetypeType } from '@/types/characterTypes.ts'
   import VueMarkdown from 'vue-markdown'
   import LevelTable from '@/components/LevelTable.vue'
   import Loading from '@/components/Loading.vue'

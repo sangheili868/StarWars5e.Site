@@ -2,7 +2,7 @@
   import { Component, Prop, Vue } from 'vue-property-decorator'
   import { namespace } from 'vuex-class'
   import SearchTable from '@/components/SearchTable.vue'
-  import { PowerType } from '@/types'
+  import { PowerType } from '@/types/characterTypes'
   import _ from 'lodash'
   import VueMarkdown from 'vue-markdown'
 

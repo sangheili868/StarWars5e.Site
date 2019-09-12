@@ -1,7 +1,7 @@
 <script lang="ts">
   import { Component, Prop, Vue } from 'vue-property-decorator'
   import { namespace } from 'vuex-class'
-  import { MonsterType } from '@/types.ts'
+  import { MonsterType } from '@/types/referenceTypes.ts'
   import MonsterDescription from './MonsterDescription.vue'
 
   const monsterModule = namespace('monsters')

@@ -1,6 +1,6 @@
 <script lang="ts">
   import { Component, Prop, Vue } from 'vue-property-decorator'
-  import { SpeciesType } from '@/types.ts'
+  import { SpeciesType } from '@/types/characterTypes.ts'
   import VueMarkdown from 'vue-markdown'
   import Loading from '@/components/Loading.vue'
   import ImageWithLoading from '@/components/ImageWithLoading.vue'

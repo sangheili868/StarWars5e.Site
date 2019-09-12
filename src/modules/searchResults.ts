@@ -1,6 +1,6 @@
 import axios from 'axios'
 import _ from 'lodash'
-import { SearchResultType } from '@/types'
+import { SearchResultType } from '@/types/utilityTypes'
 import { Module, VuexModule, MutationAction } from 'vuex-module-decorators'
 
 @Module({ namespaced: true, name: 'searchResults' })

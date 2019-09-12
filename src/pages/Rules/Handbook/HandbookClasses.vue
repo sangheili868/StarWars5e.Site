@@ -4,7 +4,7 @@
   import VueMarkdown from 'vue-markdown'
   import CardSet from '@/components/CardSet.vue'
   import Loading from '@/components/Loading.vue'
-  import { ClassType } from '@/types'
+  import { ClassType } from '@/types/characterTypes'
 
   const classesModule = namespace('classes')
   const blobsModule = namespace('blobs')

@@ -1,6 +1,6 @@
 import axios from 'axios'
 import { Module, VuexModule, MutationAction } from 'vuex-module-decorators'
-import { SpeciesType } from '@/types.ts'
+import { SpeciesType } from '@/types/characterTypes.ts'
 
 @Module({ namespaced: true, name: 'species' })
 export default class Species extends VuexModule {

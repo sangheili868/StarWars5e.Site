@@ -1,6 +1,6 @@
 import axios from 'axios'
 import { Module, VuexModule, MutationAction } from 'vuex-module-decorators'
-import { MonsterType } from '@/types'
+import { MonsterType } from '@/types/referenceTypes'
 
 @Module({ namespaced: true, name: 'monster' })
 export default class Monsters extends VuexModule {

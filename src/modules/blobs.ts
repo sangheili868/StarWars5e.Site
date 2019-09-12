@@ -1,7 +1,7 @@
 import axios from 'axios'
 import _ from 'lodash'
 import { Module, VuexModule, MutationAction } from 'vuex-module-decorators'
-import { VariantRuleBlobType } from '@/types'
+import { VariantRuleBlobType } from '@/types/referenceTypes'
 
 @Module({ namespaced: true, name: 'blobs' })
 export default class Blobs extends VuexModule {

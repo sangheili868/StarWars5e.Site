@@ -1,6 +1,6 @@
 import axios from 'axios'
 import { Module, VuexModule, MutationAction } from 'vuex-module-decorators'
-import { ReferenceTableType } from '@/types'
+import { ReferenceTableType } from '@/types/utilityTypes'
 
 @Module({ namespaced: true, name: 'referenceTable' })
 export default class ReferenceTables extends VuexModule {

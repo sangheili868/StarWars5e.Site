@@ -2,7 +2,7 @@
   import { Component, Prop, Vue } from 'vue-property-decorator'
   import { namespace } from 'vuex-class'
   import SearchTable from '@/components/SearchTable.vue'
-  import { MonsterType } from '@/types'
+  import { MonsterType } from '@/types/referenceTypes'
   import _ from 'lodash'
   import MonsterDescription from './MonsterDescription.vue'
   import math from 'mathjs'

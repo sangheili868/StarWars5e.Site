@@ -2,7 +2,7 @@
   import { Component, Prop, Vue } from 'vue-property-decorator'
   import { namespace } from 'vuex-class'
   import SearchTable from '@/components/SearchTable.vue'
-  import { BackgroundType } from '@/types'
+  import { BackgroundType } from '@/types/characterTypes'
   import _ from 'lodash'
 
   const backgroundModule = namespace('backgrounds')

@@ -1,6 +1,6 @@
 import axios from 'axios'
 import { Module, VuexModule, MutationAction } from 'vuex-module-decorators'
-import { StarshipWeaponType, StarshipEquipmentType } from '@/types'
+import { StarshipWeaponType, StarshipEquipmentType } from '@/types/starshipTypes'
 
 @Module({ namespaced: true, name: 'starshipWeapon' })
 export default class StarshipWeapons extends VuexModule {

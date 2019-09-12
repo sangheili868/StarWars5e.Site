@@ -1,6 +1,6 @@
 import axios from 'axios'
 import { Module, VuexModule, MutationAction } from 'vuex-module-decorators'
-import { StarshipSizeType } from '@/types'
+import { StarshipSizeType } from '@/types/starshipTypes'
 
 @Module({ namespaced: true, name: 'starshipSizes' })
 export default class StarshipSizes extends VuexModule {

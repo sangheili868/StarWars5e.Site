@@ -1,7 +1,8 @@
 <script lang="ts">
   import { Component, Prop, Vue } from 'vue-property-decorator'
   import addPlus from '@/utilities/addPlus'
-  import { GearType, WeaponType, ArmorType, SuperiorityType, FeatureType } from '@/types'
+  import { EquipmentType } from '@/types/lootTypes'
+  import { SuperiorityType, FeatureType } from '@/types/completeCharacterTypes'
   import CharacterSheetModifier from './CharacterSheetModifier.vue'
   import CharacterSheetWeapon from './CharacterSheetWeapon.vue'
   import CharacterSheetSuperiority from './CharacterSheetSuperiority.vue'
@@ -20,7 +21,7 @@
     @Prop(Number) readonly initiative!: number
     @Prop(Number) readonly armorClass!: number
     @Prop(Object) readonly speed!: { base: string }
-    @Prop(Array) readonly equipment!: ((GearType | WeaponType | ArmorType) & { equipped: boolean })[]
+    @Prop(Array) readonly equipment!: EquipmentType[]
     @Prop(Number) readonly passivePerception!: number
     @Prop(Object) readonly superiority!: SuperiorityType
     @Prop(Array) readonly combatFeatures!: FeatureType[]

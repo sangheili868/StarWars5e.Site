@@ -1,7 +1,7 @@
 
 <script lang="ts">
   import { Component, Prop, Vue } from 'vue-property-decorator'
-  import { EquipmentType } from '@/types'
+  import { EquipmentType } from '@/types/lootTypes'
   import CharacterSheetModifier from './CharacterSheetModifier.vue'
 
   @Component({

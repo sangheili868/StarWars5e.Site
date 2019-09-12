@@ -1,6 +1,6 @@
 <script lang="ts">
   import { Component, Prop, Vue } from 'vue-property-decorator'
-  import { HitPointsType } from '@/types'
+  import { HitPointsType } from '@/types/completeCharacterTypes'
   import CharacterSheetRest from './CharacterSheetRest.vue'
 
   @Component({

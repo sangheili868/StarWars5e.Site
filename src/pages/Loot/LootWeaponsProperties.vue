@@ -2,7 +2,7 @@
   import { Component, Prop, Vue } from 'vue-property-decorator'
   import { namespace } from 'vuex-class'
   import { upperCase } from 'lodash'
-  import { WeaponPropertyType } from '@/types'
+  import { WeaponPropertyType } from '@/types/lootTypes'
   import LinkModal from '@/components/LinkModal.vue'
   import VueMarkdown from 'vue-markdown'
 

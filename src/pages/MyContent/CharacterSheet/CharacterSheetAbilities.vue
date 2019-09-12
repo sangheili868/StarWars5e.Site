@@ -1,6 +1,6 @@
 <script lang="ts">
   import { Component, Prop, Vue } from 'vue-property-decorator'
-  import { AbilityScoreType } from '@/types'
+  import { AbilityScoreType } from '@/types/completeCharacterTypes'
   import addPlus from '@/utilities/addPlus'
   import { startCase, upperCase } from 'lodash'
   import ProficiencyDots from '@/components/ProficiencyDots.vue'

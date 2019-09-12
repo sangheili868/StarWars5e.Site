@@ -1,6 +1,6 @@
 <script lang="ts">
   import { Component, Prop, Vue } from 'vue-property-decorator'
-  import { CompleteCharacterType } from '@/types'
+  import { CompleteCharacterType } from '@/types/completeCharacterTypes'
   import CharacterSheetHealth from './CharacterSheetHealth.vue'
 
   @Component({

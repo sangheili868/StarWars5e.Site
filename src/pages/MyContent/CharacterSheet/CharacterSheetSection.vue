@@ -6,7 +6,7 @@
   import CharacterSheetEquipment from './CharacterSheetEquipment.vue'
   import CharacterSheetDescription from './CharacterSheetDescription.vue'
   import CharacterSheetProficiencies from './CharacterSheetProficiencies.vue'
-  import { CompleteCharacterType } from '@/types'
+  import { CompleteCharacterType } from '@/types/completeCharacterTypes'
 
   @Component({
     components: {

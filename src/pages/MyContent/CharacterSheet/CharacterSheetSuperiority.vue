@@ -1,6 +1,6 @@
 <script lang="ts">
   import { Component, Prop, Vue } from 'vue-property-decorator'
-  import { SuperiorityType } from '@/types'
+  import { SuperiorityType } from '@/types/completeCharacterTypes'
   import CheckList from '@/components/CheckList.vue'
   import CharacterSheetModifier from './CharacterSheetModifier.vue'
   import CharacterSheetExpansionFeature from './CharacterSheetExpansionFeature.vue'

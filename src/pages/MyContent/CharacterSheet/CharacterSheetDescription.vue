@@ -1,6 +1,6 @@
 <script lang="ts">
   import { Component, Prop, Vue } from 'vue-property-decorator'
-  import { CharacteristicsType } from '@/types'
+  import { CharacteristicsType } from '@/types/completeCharacterTypes'
   import { startCase } from 'lodash'
 
   @Component

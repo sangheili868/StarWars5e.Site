@@ -42,6 +42,12 @@ export interface GearType {
   weight: number
 }
 
+export interface EquipmentType extends GearType, WeaponType, ArmorType {
+  equipped: boolean,
+  attackBonus: number,
+  damageBonus: number
+}
+
 export interface EnhancedItemType {
   contentType: string,
   name: string,

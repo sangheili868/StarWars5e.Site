@@ -1,6 +1,6 @@
 <script lang="ts">
   import { Component, Prop, Vue } from 'vue-property-decorator'
-  import { EquipmentType } from '@/types'
+  import { EquipmentType } from '@/types/lootTypes'
   import addPlus from '@/utilities/addPlus'
   import LootWeaponsProperties from '@/pages/Loot/LootWeaponsProperties.vue'
 

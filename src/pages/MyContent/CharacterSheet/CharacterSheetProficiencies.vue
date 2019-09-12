@@ -1,6 +1,6 @@
 <script lang="ts">
   import { Component, Prop, Vue } from 'vue-property-decorator'
-  import { CharacteristicsType, FeatureType } from '@/types'
+  import { CharacteristicsType, FeatureType } from '@/types/completeCharacterTypes'
   import { startCase } from 'lodash'
   import CharacterSheetFeatures from './CharacterSheetFeatures.vue'
 

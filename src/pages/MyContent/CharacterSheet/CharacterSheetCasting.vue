@@ -1,6 +1,6 @@
 <script lang="ts">
   import { Component, Prop, Vue } from 'vue-property-decorator'
-  import { CastingType } from '@/types'
+  import { CastingType } from '@/types/completeCharacterTypes'
   import CharacterSheetModifier from './CharacterSheetModifier.vue'
   import CharacterSheetExpansionFeature from './CharacterSheetExpansionFeature.vue'
   import { groupBy } from 'lodash'

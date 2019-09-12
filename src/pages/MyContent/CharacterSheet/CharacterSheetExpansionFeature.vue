@@ -1,6 +1,7 @@
 <script lang="ts">
   import { Component, Prop, Vue } from 'vue-property-decorator'
-  import { FeatureType, PowerType } from '@/types'
+  import { FeatureType } from '@/types/completeCharacterTypes'
+  import { PowerType } from '@/types/characterTypes'
   import VueMarkdown from 'vue-markdown'
   import CheckList from '@/components/CheckList.vue'
 

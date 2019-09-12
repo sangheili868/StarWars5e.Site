@@ -2,7 +2,7 @@
   import { Component, Prop, Vue } from 'vue-property-decorator'
   import { namespace } from 'vuex-class'
   import SearchTable from '@/components/SearchTable.vue'
-  import { StarshipModificationType } from '@/types'
+  import { StarshipModificationType } from '@/types/starshipTypes'
   import _ from 'lodash'
   import VueMarkdownWithAnchors from '@/components/VueMarkdownWithAnchors.vue'
 

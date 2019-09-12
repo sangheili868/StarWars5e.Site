@@ -2,7 +2,7 @@
   import { Component, Prop, Vue, Watch } from 'vue-property-decorator'
   import { namespace } from 'vuex-class'
   import Loading from '@/components/Loading.vue'
-  import { SearchResultType } from '../types'
+  import { SearchResultType } from '@/types/utilityTypes'
   import pluralize from 'pluralize'
   import SearchBox from '@/components/SearchBox.vue'
 
@@ -22,11 +22,11 @@
     isSearching = false
 
     get title () {
-        let titleString = 'Search Results' + Vue.prototype.$titleSuffix
-        if (this.searchText) {
-             return this.searchText + ' | ' + titleString
-        }
-        return titleString
+      let titleString = 'Search Results' + Vue.prototype.$titleSuffix
+      if (this.searchText) {
+        return this.searchText + ' | ' + titleString
+      }
+      return titleString
     }
 
     created () {

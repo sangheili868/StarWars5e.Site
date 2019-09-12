@@ -1,6 +1,6 @@
 import axios from 'axios'
 import { Module, VuexModule, MutationAction } from 'vuex-module-decorators'
-import { EnhancedItemType } from '@/types.ts'
+import { EnhancedItemType } from '@/types/lootTypes.ts'
 
 @Module({ namespaced: true, name: 'enhancedItems' })
 export default class EnhancedItems extends VuexModule {

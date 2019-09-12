@@ -3,7 +3,7 @@
   import { namespace } from 'vuex-class'
   import CardSet from '@/components/CardSet.vue'
   import Loading from '@/components/Loading.vue'
-  import { ClassType } from '@/types'
+  import { ClassType } from '@/types/characterTypes'
 
   const classesModule = namespace('classes')
 

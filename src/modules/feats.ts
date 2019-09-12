@@ -1,6 +1,6 @@
 import axios from 'axios'
 import { Module, VuexModule, MutationAction } from 'vuex-module-decorators'
-import { FeatType } from '@/types'
+import { FeatType } from '@/types/characterTypes'
 
 @Module({ namespaced: true, name: 'feat' })
 export default class Feats extends VuexModule {

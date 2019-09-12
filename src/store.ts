@@ -5,7 +5,6 @@ import armor from './modules/armor'
 import backgrounds from './modules/backgrounds'
 import blobs from './modules/blobs'
 import classes from './modules/classes'
-import credits from './modules/credits'
 import deployments from './modules/deployments'
 import enhancedItems from './modules/enhancedItems'
 import feats from './modules/feats'
@@ -35,7 +34,6 @@ export default new Vuex.Store({
     backgrounds,
     blobs,
     classes,
-    credits,
     deployments,
     enhancedItems,
     feats,

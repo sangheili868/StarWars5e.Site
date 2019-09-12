@@ -1,6 +1,6 @@
 import axios from 'axios'
 import { Module, VuexModule, MutationAction } from 'vuex-module-decorators'
-import { PowerType } from '@/types.ts'
+import { PowerType } from '@/types/characterTypes.ts'
 
 @Module({ namespaced: true, name: 'power' })
 export default class Power extends VuexModule {

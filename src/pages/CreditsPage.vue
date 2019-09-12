@@ -23,6 +23,6 @@
 </script>
 
 <template lang="pug">
-  VueMarkdown(v-if="creditsBlob", :source="creditsBlob")
+  VueMarkdown(v-if="creditsBlob", :source="creditsBlob").text-xs-left
   Loading(v-else)
 </template>

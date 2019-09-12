@@ -2,7 +2,7 @@
   import { Component, Prop, Vue, Watch } from 'vue-property-decorator'
   import VueMarkdown from 'vue-markdown'
   import { namespace } from 'vuex-class'
-  import { ReferenceTableType } from '@/types'
+  import { ReferenceTableType } from '@/types/utilityTypes'
 
   const referenceTableModules = namespace('referenceTables')
 

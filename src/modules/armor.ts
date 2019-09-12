@@ -1,6 +1,6 @@
 import axios from 'axios'
 import { Module, VuexModule, MutationAction } from 'vuex-module-decorators'
-import { ArmorType, GearType } from '@/types'
+import { ArmorType, GearType } from '@/types/lootTypes'
 
 @Module({ namespaced: true, name: 'armor' })
 export default class Armor extends VuexModule {

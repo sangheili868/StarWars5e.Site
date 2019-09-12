@@ -1,7 +1,7 @@
 <script lang="ts">
   import { Component, Prop, Vue } from 'vue-property-decorator'
   import { namespace } from 'vuex-class'
-  import { ClassType, DeploymentType } from '@/types.ts'
+  import { DeploymentType } from '@/types/starshipTypes.ts'
   import VueMarkdown from 'vue-markdown'
   import Loading from '@/components/Loading.vue'
 

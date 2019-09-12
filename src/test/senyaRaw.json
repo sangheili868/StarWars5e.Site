@@ -41,7 +41,7 @@
           "name": "charmingFeint"
         }
       ],
-      "expertice": [
+      "expertise": [
         "athletics",
         "persuasion"
       ],
@@ -76,11 +76,12 @@
           "senseForce"
         ]
       },
-      "abilityScoreImprovements": {
-        "feat": {
+      "abilityScoreImprovements": [
+        {
+          "type": "feat",
           "name": "heavilyArmored"
         }
-      }
+      ]
     }
   ],
   "baseAbilityScores": {

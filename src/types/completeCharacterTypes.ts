@@ -115,10 +115,6 @@ export interface CompleteCharacterType {
   languages: string[],
   characteristics: CharacteristicsType,
   backstory: string,
-  backgroundFeature: {
-    name: string,
-    description: string
-  },
   items: EquipmentType,
   credits: number,
   carryingCapacity: {

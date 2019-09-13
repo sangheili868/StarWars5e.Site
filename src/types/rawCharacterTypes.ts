@@ -9,9 +9,17 @@ export interface RawSpeciesType {
   language: string
 }
 
+export interface RawFeatType {
+  type: string,
+  name: string,
+  abilityScoreImprovements?: {
+    [ability: string]: number
+  }
+}
+
 export interface RawClassType {
-  isStartingClass: true,
-  class: string,
+  isStartingClass: boolean,
+  name: string,
   levels: number,
   hitPoints: number[],
   toolProficiency?: string,
@@ -25,22 +33,52 @@ export interface RawClassType {
   expertise?: string[],
   archetype: {
     name: string,
-    silverTongue: {
+    silverTongue?: {
       language: string,
       intSkillBonus: string
     },
     forcePowers?: string[]
   },
-  abilityScoreImprovements: ({
-    type: string,
-    name: string
-  } | {
+  abilityScoreImprovements?: (RawFeatType | {
     type: string,
     abilitiesIncreased: {
       name: string,
       value: number
     }[]
   })[]
+}
+
+
+export interface RawBackgroundType {
+  name: string,
+  skills: string[],
+  toolProficiencies?: string[],
+  languages?: string[],
+  feat: RawFeatType
+}
+
+export interface RawCharacteristicsType {
+  placeOfBirth: string,
+  alignment: string,
+  personalityTraits: string,
+  ideal: string,
+  bond: string,
+  flaw: string,
+  age: string,
+  gender: string,
+  height: string,
+  weight: string,
+  hair: string,
+  eyes: string,
+  skin: string,
+  appearance: string,
+  backstory: string
+}
+
+export interface RawEquipmentType {
+  name: string,
+  quantity: number,
+  equipped?: boolean
 }
 
 export interface RawCharacterType {
@@ -56,5 +94,8 @@ export interface RawCharacterType {
     intelligence: number,
     wisdom: number,
     charisma: number
-  }
+  },
+  background: RawBackgroundType,
+  characteristics: RawCharacteristicsType,
+  equipment: RawEquipmentType[]
 }

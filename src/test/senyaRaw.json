@@ -1,6 +1,6 @@
 {
   "name": "Senya Halcyon",
-  "image": "https://drive.google.com/file/d/1DwIz-WlxPwQn54StakrBOr_JacfNoS-d/view?usp=sharing",
+  "image": "https://drive.google.com/uc?export=view&id=1DwIz-WlxPwQn54StakrBOr_JacfNoS-d",
   "user": "tyrzaphir",
   "experiencePoints": 23225,
   "species": {
@@ -18,7 +18,7 @@
   "classes": [
     {
       "isStartingClass": true,
-      "class": "scholar",
+      "name": "scholar",
       "levels": 3,
       "hitPoints": [ 5, 5 ],
       "toolProficiency": "masonsTools",
@@ -55,7 +55,7 @@
     },
     {
       "isStartingClass": false,
-      "class": "scout",
+      "name": "scout",
       "levels": 4,
       "hitPoints": [ 6, 6, 6, 6 ],
       "skills": [
@@ -98,9 +98,10 @@
       "athletics",
       "animalHandling"
     ],
-    "toolProficiency": "carpentersKit",
-    "language": "Nautila",
+    "toolProficiencies": [ "carpentersKit" ],
+    "languages": [ "Nautila" ],
     "feat": {
+      "type": "feat",
       "name": "healer",
       "abilityScoreImprovements": {
         "intelligence": 1

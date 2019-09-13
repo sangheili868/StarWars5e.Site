@@ -15,7 +15,7 @@
     @Prop(Array) readonly proficiencies!: string[]
     @Prop(Array) readonly languages!: string[]
     @Prop(Object) readonly characteristics!: CharacteristicsType
-    @Prop(Array) readonly otherFeatures!: FeatureType[]
+    @Prop(Array) readonly nonCombatFeatures!: FeatureType[]
     startCase = startCase
   }
 </script>
@@ -23,7 +23,7 @@
 <template lang="pug">
   div
     h3 Non-combat Features
-    CharacterSheetFeatures(:features="otherFeatures")
+    CharacterSheetFeatures(:features="nonCombatFeatures")
     h3 Langauges
     div(v-for="language in languages", :key="language").caption {{ language }}
     h3 Proficiencies

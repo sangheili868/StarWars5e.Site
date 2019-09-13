@@ -1,6 +1,8 @@
 import { RawCharacterType } from '@/types/rawCharacterTypes'
 
 export default function generateSuperiority (rawCharacter: RawCharacterType) {
+  // Requires class details and maneuvers from database
+  // Requires STR and Dex from generateABilityScores.ts
   return {
     'currentDice': 4,
     'maxDice': 4,

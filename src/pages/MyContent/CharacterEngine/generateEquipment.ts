@@ -1,6 +1,7 @@
 import { RawCharacterType } from '@/types/rawCharacterTypes'
 
 export default function generateEquipment (rawCharacter: RawCharacterType) {
+  // Requires item details from databse
   return [
     {
       'name': 'Durasteel armor',

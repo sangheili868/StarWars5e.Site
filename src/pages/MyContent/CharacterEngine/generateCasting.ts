@@ -1,6 +1,8 @@
 import { RawCharacterType } from '@/types/rawCharacterTypes'
 
 export default function generateCasting (rawCharacter: RawCharacterType) {
+  // Requires WIS and/or INT from generateAbilityScores.ts
+  // Requires powers details from database
   return {
     'techCasting': {
       'currentPoints': 8,

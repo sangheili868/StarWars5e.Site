@@ -1,6 +1,8 @@
 import { RawCharacterType } from '@/types/rawCharacterTypes'
 
 export default function generateCombatStats (rawCharacter: RawCharacterType) {
+  // Requires dex and perception from generateAbilityScores.ts
+  // Requires AC and bonuses of equipped items from generateEquipment.ts
   return {
     proficiencyBonus: 3,
     initiative: 4,

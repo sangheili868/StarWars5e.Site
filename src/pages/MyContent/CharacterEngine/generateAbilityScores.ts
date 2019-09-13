@@ -1,6 +1,7 @@
 import { RawCharacterType } from '@/types/rawCharacterTypes'
 
 export default function generateAbilityScores (rawCharacter: RawCharacterType) {
+  // Needs class details from databse (saving throw proficiences)
   return {
     'strength': {
       'value': 16,

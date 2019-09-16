@@ -1,6 +1,7 @@
 import { RawCharacterType } from '@/types/rawCharacterTypes'
 import { pick, compact } from 'lodash'
-import { ClassType } from '@/types/characterTypes'
+import { ClassType, PowerType } from '@/types/characterTypes'
+import { EquipmentType } from '@/types/lootTypes'
 import generateExperience from './generateExperience'
 import generateAbilityScores from './generateAbilityScores'
 import generateCombatStats from './generateCombatStats'
@@ -16,12 +17,16 @@ import generateNonCombatFeatures from './generateNonCombatFeatures'
 
 export default function generateCharacter (
   rawCharacter: RawCharacterType,
-  classes: ClassType[]
+  classes: ClassType[],
+  equipment: EquipmentType[],
+  powers: PowerType[]
 ) {
   const credits = rawCharacter.equipment.find(({ name }) => name === 'credits')
   const myClasses = rawCharacter.classes.map(({ name }) => classes.find(myClass => name === myClass.name))
   if (myClasses.includes(undefined)) console.error('Class not found from ' + rawCharacter.classes.map(({ name }) => name))
-  const abilityScores = generateAbilityScores(rawCharacter, compact(myClasses))
+  const myFoundClasses = compact(myClasses)
+  const abilityScores = generateAbilityScores(rawCharacter, myFoundClasses)
+  const myEquipment = generateEquipment(rawCharacter, equipment)
 
   const completeCharacter = {
     ...pick(rawCharacter, [
@@ -36,17 +41,17 @@ export default function generateCharacter (
     background: rawCharacter.background.name,
     experiencePoints: generateExperience(rawCharacter),
     abilityScores,
-    ...generateCombatStats(rawCharacter, abilityScores),
-    hitPoints: generateHitPoints(rawCharacter),
-    proficiencies: generateProficiencies(rawCharacter),
+    ...generateCombatStats(rawCharacter, abilityScores, myEquipment),
+    hitPoints: generateHitPoints(rawCharacter, abilityScores, myFoundClasses),
+    proficiencies: generateProficiencies(rawCharacter, myFoundClasses),
     languages: generateLanguages(rawCharacter),
-    equipment: generateEquipment(rawCharacter),
+    equipment: myEquipment,
     credits: credits && credits.quantity,
-    carryingCapacity: generateCarryingCapacity(rawCharacter),
-    superiority: generateSuperiorty(rawCharacter),
-    ...generateCasting(rawCharacter),
-    combatFeatures: generateCombatFeatures(rawCharacter),
-    nonCombatFeatures: generateNonCombatFeatures(rawCharacter)
+    carryingCapacity: generateCarryingCapacity(rawCharacter, abilityScores),
+    superiority: generateSuperiorty(rawCharacter, abilityScores, myFoundClasses),
+    ...generateCasting(rawCharacter, abilityScores, powers),
+    combatFeatures: generateCombatFeatures(rawCharacter, myFoundClasses),
+    nonCombatFeatures: generateNonCombatFeatures(rawCharacter, myFoundClasses)
   }
   console.log(completeCharacter)
   // return completeCharacter

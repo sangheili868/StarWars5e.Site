@@ -1,7 +1,7 @@
 import { RawCharacterType } from '@/types/rawCharacterTypes'
+import { EquipmentType } from '@/types/lootTypes'
 
-export default function generateEquipment (rawCharacter: RawCharacterType) {
-  // Requires item details from database
+export default function generateEquipment (rawCharacter: RawCharacterType, equipment: EquipmentType[]): EquipmentType[] {
   return [
     {
       'name': 'Durasteel armor',
@@ -12,9 +12,17 @@ export default function generateEquipment (rawCharacter: RawCharacterType) {
       'weight': 55,
       'equipmentCategory': 'Armor',
       'armorClassification': 'Heavy',
-      'ac': '16',
+      'ac': 16,
       'strengthRequirement': 'Str 13',
-      'stealthDisadvantage': true
+      'stealthDisadvantage': true,
+      'contentType': 'Core',
+      'modes': [],
+      damageDieModifier: 0,
+      damageDieType: 0,
+      damageNumberOfDice: 0,
+      damageType: 'Unknown',
+      properties: null,
+      weaponClassification: 'Unknown'
     },
     {
       'name': 'Heavy shield',
@@ -25,9 +33,17 @@ export default function generateEquipment (rawCharacter: RawCharacterType) {
       'weight': 28,
       'equipmentCategory': 'Armor',
       'armorClassification': 'Shield',
-      'ac': '+3',
+      'ac': 3,
       'strengthRequirement': 'Str 17',
-      'stealthDisadvantage': true
+      'stealthDisadvantage': true,
+      'contentType': 'Core',
+      'modes': [],
+      damageDieModifier: 0,
+      damageDieType: 0,
+      damageNumberOfDice: 0,
+      damageType: 'Unknown',
+      properties: null,
+      weaponClassification: 'Unknown'
     },
     {
       'name': 'Blaster rifle',
@@ -48,11 +64,13 @@ export default function generateEquipment (rawCharacter: RawCharacterType) {
         'reload 12',
         'two-handed'
       ],
-      'propertiesMap': {
-        'Ammunition': 'Ammunition (range 100/400)',
-        'Reload': 'reload 12',
-        'Two-Handed': 'two-handed'
-      }
+      'contentType': 'Core',
+      'modes': [],
+      ac: null,
+      armorClassification: 'Unknown',
+      stealthDisadvantage: false,
+      strengthRequirement: null,
+      description: null
     },
     {
       'name': 'Hold-out',
@@ -68,18 +86,14 @@ export default function generateEquipment (rawCharacter: RawCharacterType) {
       'damageDieModifier': 0,
       'weaponClassification': 'SimpleBlaster',
       'damageDieType': 4,
-      'properties': [
-        'Ammunition (range 30/120)',
-        'hidden',
-        'light',
-        'reload 6'
-      ],
-      'propertiesMap': {
-        'Ammunition': 'Ammunition (range 30/120)',
-        'Hidden': 'hidden',
-        'Light': 'light',
-        'Reload': 'reload 6'
-      }
+      'contentType': 'Core',
+      'modes': [],
+      properties: null,
+      ac: null,
+      armorClassification: 'Unknown',
+      stealthDisadvantage: false,
+      strengthRequirement: null,
+      description: null
     },
     {
       'name': 'Medkit',
@@ -87,7 +101,19 @@ export default function generateEquipment (rawCharacter: RawCharacterType) {
       'description': 'A common medkit can be stocked with bacta packs, and contains spray-bandages, bone stabilizers, antiseptics, and other essentials for the treatment of wounds. As an action, you can expend a use of the kit to stabilize a creature that has 0 hit points, without needing to make a Wisdom (Medicine) check. A medkit can be used to stabilize 5 times before it must be restocked at its original cost.',
       'cost': 50,
       'weight': 3,
-      'equipmentCategory': 'Medical'
+      'equipmentCategory': 'Medical',
+      'contentType': 'Core',
+      'modes': [],
+      damageDieModifier: 0,
+      damageDieType: 0,
+      damageNumberOfDice: 0,
+      damageType: 'Unknown',
+      properties: null,
+      weaponClassification: 'Unknown',
+      ac: null,
+      armorClassification: 'Unknown',
+      stealthDisadvantage: false,
+      strengthRequirement: null
     },
     {
       'name': 'Biochemist\'s kit',
@@ -95,7 +121,19 @@ export default function generateEquipment (rawCharacter: RawCharacterType) {
       'cost': 500,
       'weight': 8,
       'equipmentCategory': 'Kit',
-      'quantity': 1
+      'quantity': 1,
+      'contentType': 'Core',
+      'modes': [],
+      damageDieModifier: 0,
+      damageDieType: 0,
+      damageNumberOfDice: 0,
+      damageType: 'Unknown',
+      properties: null,
+      weaponClassification: 'Unknown',
+      ac: null,
+      armorClassification: 'Unknown',
+      stealthDisadvantage: false,
+      strengthRequirement: null
     },
     {
       'name': 'Clothes, common',
@@ -103,7 +141,19 @@ export default function generateEquipment (rawCharacter: RawCharacterType) {
       'cost': 5,
       'weight': 3,
       'equipmentCategory': 'Clothing',
-      'quantity': 1
+      'quantity': 1,
+      'contentType': 'Core',
+      'modes': [],
+      damageDieModifier: 0,
+      damageDieType: 0,
+      damageNumberOfDice: 0,
+      damageType: 'Unknown',
+      properties: null,
+      weaponClassification: 'Unknown',
+      ac: null,
+      armorClassification: 'Unknown',
+      stealthDisadvantage: false,
+      strengthRequirement: null
     },
     {
       'name': 'Backpack',
@@ -111,7 +161,19 @@ export default function generateEquipment (rawCharacter: RawCharacterType) {
       'cost': 50,
       'weight': 5,
       'equipmentCategory': 'Storage',
-      'quantity': 1
+      'quantity': 1,
+      'contentType': 'Core',
+      'modes': [],
+      damageDieModifier: 0,
+      damageDieType: 0,
+      damageNumberOfDice: 0,
+      damageType: 'Unknown',
+      properties: null,
+      weaponClassification: 'Unknown',
+      ac: null,
+      armorClassification: 'Unknown',
+      stealthDisadvantage: false,
+      strengthRequirement: null
     },
     {
       'name': 'Glowrod',
@@ -119,7 +181,19 @@ export default function generateEquipment (rawCharacter: RawCharacterType) {
       'cost': 10,
       'weight': 2,
       'equipmentCategory': 'Utility',
-      'quantity': 5
+      'quantity': 5,
+      'contentType': 'Core',
+      'modes': [],
+      damageDieModifier: 0,
+      damageDieType: 0,
+      damageNumberOfDice: 0,
+      damageType: 'Unknown',
+      properties: null,
+      weaponClassification: 'Unknown',
+      ac: null,
+      armorClassification: 'Unknown',
+      stealthDisadvantage: false,
+      strengthRequirement: null
     },
     {
       'name': 'Fusion cutter',
@@ -127,7 +201,19 @@ export default function generateEquipment (rawCharacter: RawCharacterType) {
       'cost': 25,
       'weight': 2,
       'equipmentCategory': 'Utility',
-      'quantity': 1
+      'quantity': 1,
+      'contentType': 'Core',
+      'modes': [],
+      damageDieModifier: 0,
+      damageDieType: 0,
+      damageNumberOfDice: 0,
+      damageType: 'Unknown',
+      properties: null,
+      weaponClassification: 'Unknown',
+      ac: null,
+      armorClassification: 'Unknown',
+      stealthDisadvantage: false,
+      strengthRequirement: null
     },
     {
       'name': 'Chronometer',
@@ -135,7 +221,19 @@ export default function generateEquipment (rawCharacter: RawCharacterType) {
       'cost': 100,
       'weight': 1,
       'equipmentCategory': 'Utility',
-      'quantity': 1
+      'quantity': 1,
+      'contentType': 'Core',
+      'modes': [],
+      damageDieModifier: 0,
+      damageDieType: 0,
+      damageNumberOfDice: 0,
+      damageType: 'Unknown',
+      properties: null,
+      weaponClassification: 'Unknown',
+      ac: null,
+      armorClassification: 'Unknown',
+      stealthDisadvantage: false,
+      strengthRequirement: null
     },
     {
       'name': 'Grappling hook',
@@ -143,7 +241,19 @@ export default function generateEquipment (rawCharacter: RawCharacterType) {
       'cost': 50,
       'weight': 4,
       'equipmentCategory': 'Utility',
-      'quantity': 1
+      'quantity': 1,
+      'contentType': 'Core',
+      'modes': [],
+      damageDieModifier: 0,
+      damageDieType: 0,
+      damageNumberOfDice: 0,
+      damageType: 'Unknown',
+      properties: null,
+      weaponClassification: 'Unknown',
+      ac: null,
+      armorClassification: 'Unknown',
+      stealthDisadvantage: false,
+      strengthRequirement: null
     },
     {
       'name': 'Field rations (one day\'s)',
@@ -151,7 +261,19 @@ export default function generateEquipment (rawCharacter: RawCharacterType) {
       'cost': 5,
       'weight': 1,
       'equipmentCategory': 'Utility',
-      'quantity': 10
+      'quantity': 10,
+      'contentType': 'Core',
+      'modes': [],
+      damageDieModifier: 0,
+      damageDieType: 0,
+      damageNumberOfDice: 0,
+      damageType: 'Unknown',
+      properties: null,
+      weaponClassification: 'Unknown',
+      ac: null,
+      armorClassification: 'Unknown',
+      stealthDisadvantage: false,
+      strengthRequirement: null
     },
     {
       'name': 'Canteen',
@@ -159,7 +281,19 @@ export default function generateEquipment (rawCharacter: RawCharacterType) {
       'cost': 10,
       'weight': 3,
       'equipmentCategory': 'Utility',
-      'quantity': 1
+      'quantity': 1,
+      'contentType': 'Core',
+      'modes': [],
+      damageDieModifier: 0,
+      damageDieType: 0,
+      damageNumberOfDice: 0,
+      damageType: 'Unknown',
+      properties: null,
+      weaponClassification: 'Unknown',
+      ac: null,
+      armorClassification: 'Unknown',
+      stealthDisadvantage: false,
+      strengthRequirement: null
     },
     {
       'name': 'Fibercord cable, 50 ft (rolled)',
@@ -167,7 +301,19 @@ export default function generateEquipment (rawCharacter: RawCharacterType) {
       'cost': 20,
       'weight': 2,
       'equipmentCategory': 'Utility',
-      'quantity': 1
+      'quantity': 1,
+      'contentType': 'Core',
+      'modes': [],
+      damageDieModifier: 0,
+      damageDieType: 0,
+      damageNumberOfDice: 0,
+      damageType: 'Unknown',
+      properties: null,
+      weaponClassification: 'Unknown',
+      ac: null,
+      armorClassification: 'Unknown',
+      stealthDisadvantage: false,
+      strengthRequirement: null
     },
     {
       'name': 'Commlink',
@@ -175,7 +321,19 @@ export default function generateEquipment (rawCharacter: RawCharacterType) {
       'cost': 50,
       'weight': 1,
       'equipmentCategory': 'Communications',
-      'quantity': 4
+      'quantity': 4,
+      'contentType': 'Core',
+      'modes': [],
+      damageDieModifier: 0,
+      damageDieType: 0,
+      damageNumberOfDice: 0,
+      damageType: 'Unknown',
+      properties: null,
+      weaponClassification: 'Unknown',
+      ac: null,
+      armorClassification: 'Unknown',
+      stealthDisadvantage: false,
+      strengthRequirement: null
     },
     {
       'name': 'Medium shield generator',
@@ -183,7 +341,19 @@ export default function generateEquipment (rawCharacter: RawCharacterType) {
       'cost': 100,
       'weight': 14,
       'equipmentCategory': 'Armor',
-      'quantity': 1
+      'quantity': 1,
+      'contentType': 'Core',
+      'modes': [],
+      damageDieModifier: 0,
+      damageDieType: 0,
+      damageNumberOfDice: 0,
+      damageType: 'Unknown',
+      properties: null,
+      weaponClassification: 'Unknown',
+      ac: null,
+      armorClassification: 'Unknown',
+      stealthDisadvantage: false,
+      strengthRequirement: null
     },
     {
       'name': 'Light battle armor',
@@ -191,12 +361,19 @@ export default function generateEquipment (rawCharacter: RawCharacterType) {
       'cost': 500,
       'weight': 20,
       'equipmentCategory': 'Armor',
-      'quantity': 1
-    },
-    {
-      'name': 'custom',
-      'notes': 'Damage Powered Durasteel Armor',
-      'quantity': 1
+      'quantity': 1,
+      'contentType': 'Core',
+      'modes': [],
+      damageDieModifier: 0,
+      damageDieType: 0,
+      damageNumberOfDice: 0,
+      damageType: 'Unknown',
+      properties: null,
+      weaponClassification: 'Unknown',
+      ac: null,
+      armorClassification: 'Unknown',
+      stealthDisadvantage: false,
+      strengthRequirement: null
     }
   ]
 }

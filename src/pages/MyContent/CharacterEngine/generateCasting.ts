@@ -1,8 +1,12 @@
 import { RawCharacterType } from '@/types/rawCharacterTypes'
+import { AbilityScoresType } from '@/types/completeCharacterTypes'
+import { PowerType } from '@/types/characterTypes'
 
-export default function generateCasting (rawCharacter: RawCharacterType) {
-  // Requires WIS and/or INT from generateAbilityScores.ts
-  // Requires powers details from database
+export default function generateCasting (
+  rawCharacter: RawCharacterType,
+  abilityScores: AbilityScoresType,
+  powers: PowerType[]
+) {
   return {
     'techCasting': {
       'currentPoints': 8,

@@ -5,11 +5,11 @@ export interface WeaponType {
   damageDieType: number,
   damageNumberOfDice: number,
   damageType: string,
-  description: string
+  description: string | null,
   equipmentCategory: string,
   modes: WeaponType[],
   name: string,
-  properties: string[],
+  properties: string[] | null,
   weaponClassification: string,
   weight: number
 }
@@ -21,31 +21,32 @@ export interface WeaponPropertyType {
 }
 
 export interface ArmorType {
-  ac: number,
+  ac: number | null,
   armorClassification: string,
   contentType: string,
   cost: number,
-  description: string,
+  description: string | null,
   equipmentCategory: string,
   name: string,
   stealthDisadvantage: boolean,
-  strengthRequirement: string,
+  strengthRequirement: string | null,
   weight: number
 }
 
 export interface GearType {
   contentType: string,
   cost: number,
-  description: string,
+  description: string | null,
   equipmentCategory: string,
   name: string,
   weight: number
 }
 
 export interface EquipmentType extends GearType, WeaponType, ArmorType {
-  equipped: boolean,
-  attackBonus: number,
-  damageBonus: number
+  equipped?: boolean,
+  quantity: number,
+  attackBonus?: number,
+  damageBonus?: number
 }
 
 export interface EnhancedItemType {

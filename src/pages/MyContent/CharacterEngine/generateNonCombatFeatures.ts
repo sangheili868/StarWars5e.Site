@@ -1,7 +1,7 @@
 import { RawCharacterType } from '@/types/rawCharacterTypes'
+import { ClassType } from '@/types/characterTypes'
 
-export default function generateNonCombatFeatures (rawCharacter: RawCharacterType) {
-  // Requires class and background features from database
+export default function generateNonCombatFeatures (rawCharacter: RawCharacterType, classes: ClassType[]) {
   return [
     {
       'name': 'Sage Advice',

@@ -1,7 +1,7 @@
 import { RawCharacterType } from '@/types/rawCharacterTypes'
+import { ClassType } from '@/types/characterTypes'
 
-export default function generateCombatFeatures (rawCharacter: RawCharacterType) {
-  // Requires class features from database
+export default function generateCombatFeatures (rawCharacter: RawCharacterType, classes: ClassType[]) {
   return [
     {
       'name': 'Critical Analysis',

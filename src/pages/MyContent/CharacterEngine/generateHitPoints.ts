@@ -1,8 +1,12 @@
 import { RawCharacterType } from '@/types/rawCharacterTypes'
+import { AbilityScoresType } from '@/types/completeCharacterTypes'
+import { ClassType } from '@/types/characterTypes'
 
-export default function generateHitPoints (rawCharacter: RawCharacterType) {
-  // Requires constitution modifier from generateAbilityScores.ts
-  // Requires hit dice from class details in database
+export default function generateHitPoints (
+  rawCharacter: RawCharacterType,
+  abilityScores: AbilityScoresType,
+  classes: ClassType[]
+) {
   return {
     'maximum': 42,
     'current': 34,

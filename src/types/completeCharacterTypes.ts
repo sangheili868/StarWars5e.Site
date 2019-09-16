@@ -117,7 +117,7 @@ export interface CompleteCharacterType {
   languages: string[],
   characteristics: CharacteristicsType,
   backstory: string,
-  items: EquipmentType,
+  items: EquipmentType[],
   credits: number,
   carryingCapacity: {
     encumbered: number,

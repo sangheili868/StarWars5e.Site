@@ -1,8 +1,12 @@
 import { RawCharacterType } from '@/types/rawCharacterTypes'
+import { AbilityScoresType } from '@/types/completeCharacterTypes'
+import { ClassType } from '@/types/characterTypes'
 
-export default function generateSuperiority (rawCharacter: RawCharacterType) {
-  // Requires class details and maneuvers from database
-  // Requires STR and Dex from generateABilityScores.ts
+export default function generateSuperiority (
+  rawCharacter: RawCharacterType,
+  abilityScores: AbilityScoresType,
+  classes: ClassType[]
+) {
   return {
     'currentDice': 4,
     'maxDice': 4,

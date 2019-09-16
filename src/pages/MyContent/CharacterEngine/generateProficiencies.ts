@@ -1,7 +1,7 @@
 import { RawCharacterType } from '@/types/rawCharacterTypes'
+import { ClassType } from '@/types/characterTypes'
 
-export default function generateProficiencies (rawCharacter: RawCharacterType) {
-  // Requires class details from databse
+export default function generateProficiencies (rawCharacter: RawCharacterType, classes: ClassType[]) {
   return [
     'Light Armor',
     'Simple Vibroweapons',

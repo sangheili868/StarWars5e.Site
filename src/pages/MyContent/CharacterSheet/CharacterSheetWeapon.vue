@@ -16,7 +16,7 @@
     get damage () {
       return this.weapon.damageNumberOfDice +
         'd' + this.weapon.damageDieType +
-        addPlus(this.weapon.damageBonus + this.weapon.damageDieModifier) +
+        addPlus(this.weapon.damageBonus || 0 + this.weapon.damageDieModifier) +
         ' ' + this.weapon.damageType
     }
   }

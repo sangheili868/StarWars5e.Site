@@ -28,7 +28,7 @@
     }
 
     get propertyData () {
-      return this.propertyList.map((propertyString, index) => {
+      return this.propertyList && this.propertyList.map((propertyString, index) => {
         const propertyName = upperCase(propertyString.split(' ')[0])
         const text = (index > 0 ? ', ' : ' ') + propertyString
         const propertyInfo = this.weaponProperties.find(({ name }) => upperCase(name) === propertyName)

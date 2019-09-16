@@ -1,7 +1,7 @@
 import { RawCharacterType } from '@/types/rawCharacterTypes'
+import { ClassType } from '@/types/characterTypes'
 
-export default function generateAbilityScores (rawCharacter: RawCharacterType) {
-  // Needs class details from databse (saving throw proficiences)
+export default function generateAbilityScores (rawCharacter: RawCharacterType, myClasses: ClassType[]) {
   return {
     'strength': {
       'value': 16,
@@ -49,7 +49,8 @@ export default function generateAbilityScores (rawCharacter: RawCharacterType) {
       'savingThrow': {
         'modifier': 1,
         'proficiency': 'none'
-      }
+      },
+      'skills': []
     },
     'intelligence': {
       'value': 18,

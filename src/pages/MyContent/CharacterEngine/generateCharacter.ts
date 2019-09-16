@@ -1,5 +1,6 @@
 import { RawCharacterType } from '@/types/rawCharacterTypes'
-import { pick } from 'lodash'
+import { pick, compact } from 'lodash'
+import { ClassType } from '@/types/characterTypes'
 import generateExperience from './generateExperience'
 import generateAbilityScores from './generateAbilityScores'
 import generateCombatStats from './generateCombatStats'
@@ -13,8 +14,15 @@ import generateCasting from './generateCasting'
 import generateCombatFeatures from './generateCombatFeatures'
 import generateNonCombatFeatures from './generateNonCombatFeatures'
 
-export default function generateCharacter (rawCharacter: RawCharacterType) {
+export default function generateCharacter (
+  rawCharacter: RawCharacterType,
+  classes: ClassType[]
+) {
   const credits = rawCharacter.equipment.find(({ name }) => name === 'credits')
+  const myClasses = rawCharacter.classes.map(({ name }) => classes.find(myClass => name === myClass.name))
+  if (myClasses.includes(undefined)) console.error('Class not found from ' + rawCharacter.classes.map(({ name }) => name))
+  const abilityScores = generateAbilityScores(rawCharacter, compact(myClasses))
+
   const completeCharacter = {
     ...pick(rawCharacter, [
       'name',
@@ -27,8 +35,8 @@ export default function generateCharacter (rawCharacter: RawCharacterType) {
     species: rawCharacter.species.name,
     background: rawCharacter.background.name,
     experiencePoints: generateExperience(rawCharacter),
-    abilityScores: generateAbilityScores(rawCharacter),
-    ...generateCombatStats(rawCharacter),
+    abilityScores,
+    ...generateCombatStats(rawCharacter, abilityScores),
     hitPoints: generateHitPoints(rawCharacter),
     proficiencies: generateProficiencies(rawCharacter),
     languages: generateLanguages(rawCharacter),

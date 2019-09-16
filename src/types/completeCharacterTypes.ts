@@ -73,6 +73,15 @@ export interface FeatureType {
   }
 }
 
+export interface AbilityScoresType {
+  strength: AbilityScoreType,
+  dexterity: AbilityScoreType,
+  constitution: AbilityScoreType,
+  intelligence: AbilityScoreType,
+  wisdom: AbilityScoreType,
+  charisma: AbilityScoreType
+}
+
 export interface CompleteCharacterType {
   name: string,
   image: string | null,
@@ -90,14 +99,7 @@ export interface CompleteCharacterType {
     current: number,
     nextLevel: number
   },
-  abilityScores: {
-    strength: AbilityScoreType,
-    dexterity: AbilityScoreType,
-    constitution: AbilityScoreType,
-    intelligence: AbilityScoreType,
-    wisdom: AbilityScoreType,
-    charisma: AbilityScoreType
-  },
+  abilityScores: AbilityScoresType,
   proficiencyBonus: number,
   initiative: number,
   armorClass: number,

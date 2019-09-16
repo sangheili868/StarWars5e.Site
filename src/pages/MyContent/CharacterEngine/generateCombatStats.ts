@@ -1,7 +1,7 @@
 import { RawCharacterType } from '@/types/rawCharacterTypes'
+import { AbilityScoresType } from '@/types/completeCharacterTypes'
 
-export default function generateCombatStats (rawCharacter: RawCharacterType) {
-  // Requires dex and perception from generateAbilityScores.ts
+export default function generateCombatStats (rawCharacter: RawCharacterType, abilityScores: AbilityScoresType) {
   // Requires AC and bonuses of equipped items from generateEquipment.ts
   return {
     proficiencyBonus: 3,

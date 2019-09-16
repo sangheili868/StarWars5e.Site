@@ -18,7 +18,7 @@
   "classes": [
     {
       "isStartingClass": true,
-      "name": "scholar",
+      "name": "Scholar",
       "levels": 3,
       "hitPoints": [ 5, 5 ],
       "toolProficiency": "masonsTools",
@@ -55,7 +55,7 @@
     },
     {
       "isStartingClass": false,
-      "name": "scout",
+      "name": "Scout",
       "levels": 4,
       "hitPoints": [ 6, 6, 6, 6 ],
       "skills": [

@@ -1,12 +1,52 @@
-import { RawCharacterType } from '@/types/rawCharacterTypes'
+import { RawCharacterType, RawClassType } from '@/types/rawCharacterTypes'
 import { AbilityScoresType } from '@/types/completeCharacterTypes'
-import { PowerType } from '@/types/characterTypes'
+import { PowerType, ClassType } from '@/types/characterTypes'
+
+interface MultiplierMapType {
+  [myClass: string]: {
+     [archetype: string]: number
+  }
+}
+
+const techCastingMap = {
+  Engineer: { base: 1 },
+  Scout: { base: 1 / 2 },
+  Fighter: { 'Shield Specialist': 1 / 3 },
+  Operative: { 'Saboteur Practice': 1 / 3 }
+}
+
+const forceCastingMap = {
+    Berserker: { 'Marauder Approach': 1 / 3 },
+    Consular: { base: 1 },
+    Fighter: { 'Adept Specialist': 1 / 3 },
+    Guardian: { base: 1 / 2 },
+    Monk: { 'Ang-Tii': 1 / 3 },
+    Operative: { 'Beguiler Practice': 1 / 3 },
+    Sentinel: { base: 2 / 3 }
+}
+
+function getMaxPowerLevel (classes: RawClassType[], multiplierMap: MultiplierMapType) {
+  return classes.reduce((acc, { name, archetype, levels }) => {
+    const multiplierFromClass = (multiplierMap[name] && multiplierMap[name].base)
+    const multiplierFromArchetype = (multiplierMap[name] && multiplierMap[name][archetype.name])
+    return acc + levels * (multiplierFromClass || multiplierFromArchetype || 0)
+  }, 0)
+}
+
+function getPowerPoints (classes: RawClassType[], multiplierMap: MultiplierMapType) {
+
+}
 
 export default function generateCasting (
   rawCharacter: RawCharacterType,
+  classes: ClassType[],
   abilityScores: AbilityScoresType,
   powers: PowerType[]
 ) {
+  // console.log('Max Tech Level', getMaxPowerLevel(rawCharacter.classes, techCastingMap))
+  // console.log('Max Force Level', getMaxPowerLevel(rawCharacter.classes, forceCastingMap))
+  // console.log('Tech Points', getPowerPoints(rawCharacter.classes, techCastingMap))
+  // console.log('Force Points', getPowerPoints(rawCharacter.classes, forceCastingMap))
   // TO DO
   return {
     'techCasting': {

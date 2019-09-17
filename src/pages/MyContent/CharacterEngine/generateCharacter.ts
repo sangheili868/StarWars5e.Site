@@ -82,7 +82,7 @@ export default function generateCharacter (
     credits: credits && credits.quantity,
     carryingCapacity: generateCarryingCapacity(abilityScores),
     superiority: generateSuperiorty(rawCharacter, abilityScores, myFoundClasses),
-    ...generateCasting(rawCharacter, abilityScores, powers),
+    ...generateCasting(rawCharacter, myFoundClasses, abilityScores, powers),
     combatFeatures: generateCombatFeatures(rawCharacter, myFoundClasses),
     nonCombatFeatures: generateNonCombatFeatures(rawCharacter, myFoundClasses)
   }

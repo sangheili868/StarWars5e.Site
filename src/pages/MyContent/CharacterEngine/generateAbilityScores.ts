@@ -39,6 +39,7 @@ export default function generateAbilityScores(rawCharacter: RawCharacterType, my
     proficient: proficiencyBonus,
     none: 0
   }
+  // Todo: Handle Silver Tongue int skill bonus
 
   const proficientSkills:{ [ability: string]: { [skill: string]: string } } = mapValues(skillObj, skills => chain(skills)
   .keyBy()

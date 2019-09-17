@@ -127,26 +127,37 @@
   },
   "equipment": [
     {
-      "name": "durasteelArmor",
+      "name": "Durasteel armor",
       "quantity": 1,
       "equipped": true
     },
     {
-      "name": "heavyShield",
+      "name": "Heavy shield",
       "equipped": true,
       "quantity": 1
     },
     {
-      "name": "blasterRifle",
-      "quantity": 1
-    },
-    {
-      "name": "holdout",
+      "name": "Shotosaber",
       "quantity": 1,
       "equipped": true
     },
     {
-      "name": "medkit",
+      "name": "Lightsaber",
+      "quantity": 1,
+      "equipped": true
+    },
+    {
+      "name": "Hold-out",
+      "quantity": 1,
+      "equipped": true
+    },
+    {
+      "name": "Blaster rifle",
+      "quantity": 1,
+      "equipped": true
+    },
+    {
+      "name": "Medkit",
       "quantity": 2
     },
     {
@@ -154,43 +165,43 @@
       "quantity": 260
     },
     {
-      "name": "biochemistsKit",
+      "name": "Biochemist's kit",
       "quantity": 1
     },
     {
-      "name": "commonClothes",
+      "name": "Clothes, common",
       "quantity": 1
     },
     {
-      "name": "backpack",
+      "name": "Backpack",
       "quantity": 1
     },
     {
-      "name": "glowRod",
+      "name": "Glowrod",
       "quantity": 5
     },
     {
-      "name": "fusionCutter",
+      "name": "Fusion cutter",
       "quantity": 1
     },
     {
-      "name": "chronometer",
+      "name": "Chronometer",
       "quantity": 1
     },
     {
-      "name": "grapplingHook",
+      "name": "Grappling hook",
       "quantity": 1
     },
     {
-      "name": "rations",
+      "name": "Field rations (one day's)",
       "quantity": 10
     },
     {
-      "name": "canteen",
+      "name": "Canteen",
       "quantity": 1
     },
     {
-      "name": "50ft fibercord cable",
+      "name": "Fibercord cable, 50 ft (rolled)",
       "quantity": 1
     },
     {
@@ -199,15 +210,15 @@
       "quantity": 1
     },
     {
-      "name": "commlink",
+      "name": "Commlink",
       "quantity": 4
     },
     {
-      "name": "mediumShield",
+      "name": "Medium shield generator",
       "quantity": 1
     },
     {
-      "name": "lightBattleArmor",
+      "name": "Light battle armor",
       "quantity": 1
     }
   ]

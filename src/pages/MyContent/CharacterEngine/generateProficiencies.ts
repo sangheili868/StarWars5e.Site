@@ -10,7 +10,7 @@ export default function generateProficiencies (rawCharacter: RawCharacterType, c
     'Mason\'s Tools',
     'Medium Armor',
     'All Blasters',
-    'All kinetic weapons',
+    'All vibroweapons',
     'Biochemist\'s Kit',
     'Lightsaber',
     'Carpenter\'s Kit',

@@ -1,379 +1,67 @@
 import { RawCharacterType } from '@/types/rawCharacterTypes'
 import { EquipmentType } from '@/types/lootTypes'
+import { chain, isEmpty, intersection, camelCase } from 'lodash'
+import { AbilityScoresType } from '@/types/completeCharacterTypes'
 
-export default function generateEquipment (rawCharacter: RawCharacterType, equipment: EquipmentType[]): EquipmentType[] {
-  return [
-    {
-      'name': 'Durasteel armor',
-      'quantity': 1,
-      'equipped': true,
-      'description': 'Durasteel armor is an armor that reduced weight, but restricts movement. The armor is commony used by mercenaries, bounty hunters, soldiers, and civilians that live in dangerous areas.',
-      'cost': 750,
-      'weight': 55,
-      'equipmentCategory': 'Armor',
-      'armorClassification': 'Heavy',
-      'ac': 16,
-      'strengthRequirement': 'Str 13',
-      'stealthDisadvantage': true,
-      'contentType': 'Core',
-      'modes': [],
-      damageDieModifier: 0,
-      damageDieType: 0,
-      damageNumberOfDice: 0,
-      damageType: 'Unknown',
-      properties: null,
-      weaponClassification: 'Unknown'
-    },
-    {
-      'name': 'Heavy shield',
-      'quantity': 1,
-      'equipped': true,
-      'description': 'Rather than an energy shield, heavy shields are physical composites of metal or plastic. They are much larger and more cumbersome, but they offer more protection than their smaller counterparts. Its cumbersome size, however, makes it unwieldy, and requires the use of a one-handed weapon with the *light* property in the other hand.\r\n\r\nSmall creatures have disadvantage on attack rolls while wielding a heavy shield. A heavy shield\'s size and bulk make it too large for a Small creature to use effectively.',
-      'cost': 500,
-      'weight': 28,
-      'equipmentCategory': 'Armor',
-      'armorClassification': 'Shield',
-      'ac': 3,
-      'strengthRequirement': 'Str 17',
-      'stealthDisadvantage': true,
-      'contentType': 'Core',
-      'modes': [],
-      damageDieModifier: 0,
-      damageDieType: 0,
-      damageNumberOfDice: 0,
-      damageType: 'Unknown',
-      properties: null,
-      weaponClassification: 'Unknown'
-    },
-    {
-      'name': 'Blaster rifle',
-      'equipped': true,
-      'attackBonus': 4,
-      'damageBonus': 1,
-      'quantity': 1,
-      'cost': 400,
-      'weight': 11,
-      'equipmentCategory': 'Weapon',
-      'damageNumberOfDice': 1,
-      'damageType': 'Energy',
-      'damageDieModifier': 0,
-      'weaponClassification': 'MartialBlaster',
-      'damageDieType': 8,
-      'properties': [
-        'Ammunition (range 100/400)',
-        'reload 12',
-        'two-handed'
-      ],
-      'contentType': 'Core',
-      'modes': [],
-      ac: null,
-      armorClassification: 'Unknown',
-      stealthDisadvantage: false,
-      strengthRequirement: null,
-      description: null
-    },
-    {
-      'name': 'Hold-out',
-      'quantity': 1,
-      'equipped': true,
-      'attackBonus': 4,
-      'damageBonus': 1,
-      'cost': 250,
-      'weight': 1,
-      'equipmentCategory': 'Weapon',
-      'damageNumberOfDice': 1,
-      'damageType': 'Energy',
-      'damageDieModifier': 0,
-      'weaponClassification': 'SimpleBlaster',
-      'damageDieType': 4,
-      'contentType': 'Core',
-      'modes': [],
-      properties: null,
-      ac: null,
-      armorClassification: 'Unknown',
-      stealthDisadvantage: false,
-      strengthRequirement: null,
-      description: null
-    },
-    {
-      'name': 'Medkit',
-      'quantity': 2,
-      'description': 'A common medkit can be stocked with bacta packs, and contains spray-bandages, bone stabilizers, antiseptics, and other essentials for the treatment of wounds. As an action, you can expend a use of the kit to stabilize a creature that has 0 hit points, without needing to make a Wisdom (Medicine) check. A medkit can be used to stabilize 5 times before it must be restocked at its original cost.',
-      'cost': 50,
-      'weight': 3,
-      'equipmentCategory': 'Medical',
-      'contentType': 'Core',
-      'modes': [],
-      damageDieModifier: 0,
-      damageDieType: 0,
-      damageNumberOfDice: 0,
-      damageType: 'Unknown',
-      properties: null,
-      weaponClassification: 'Unknown',
-      ac: null,
-      armorClassification: 'Unknown',
-      stealthDisadvantage: false,
-      strengthRequirement: null
-    },
-    {
-      'name': 'Biochemist\'s kit',
-      'description': 'This kit includes all of the necessary components to create and house standard adrenals, medpacs, and stimpacs. Proficiency with this kit lets you add your proficiency bonus to any ability checks you make to identify adrenals, medpacs, and stimpacs. Also, proficiency with this kit is required to create adrenals, medpacs, and stimpacs.',
-      'cost': 500,
-      'weight': 8,
-      'equipmentCategory': 'Kit',
-      'quantity': 1,
-      'contentType': 'Core',
-      'modes': [],
-      damageDieModifier: 0,
-      damageDieType: 0,
-      damageNumberOfDice: 0,
-      damageType: 'Unknown',
-      properties: null,
-      weaponClassification: 'Unknown',
-      ac: null,
-      armorClassification: 'Unknown',
-      stealthDisadvantage: false,
-      strengthRequirement: null
-    },
-    {
-      'name': 'Clothes, common',
-      'description': null,
-      'cost': 5,
-      'weight': 3,
-      'equipmentCategory': 'Clothing',
-      'quantity': 1,
-      'contentType': 'Core',
-      'modes': [],
-      damageDieModifier: 0,
-      damageDieType: 0,
-      damageNumberOfDice: 0,
-      damageType: 'Unknown',
-      properties: null,
-      weaponClassification: 'Unknown',
-      ac: null,
-      armorClassification: 'Unknown',
-      stealthDisadvantage: false,
-      strengthRequirement: null
-    },
-    {
-      'name': 'Backpack',
-      'description': null,
-      'cost': 50,
-      'weight': 5,
-      'equipmentCategory': 'Storage',
-      'quantity': 1,
-      'contentType': 'Core',
-      'modes': [],
-      damageDieModifier: 0,
-      damageDieType: 0,
-      damageNumberOfDice: 0,
-      damageType: 'Unknown',
-      properties: null,
-      weaponClassification: 'Unknown',
-      ac: null,
-      armorClassification: 'Unknown',
-      stealthDisadvantage: false,
-      strengthRequirement: null
-    },
-    {
-      'name': 'Glowrod',
-      'description': 'Glowrods create a beam of light illuminating the area around you in bright light for a 20-foot radius and dim light for an additional 20 feet. The glowrod lasts for 10 hours and can be recharged by connecting to a power source or by replacing the power cell. ',
-      'cost': 10,
-      'weight': 2,
-      'equipmentCategory': 'Utility',
-      'quantity': 5,
-      'contentType': 'Core',
-      'modes': [],
-      damageDieModifier: 0,
-      damageDieType: 0,
-      damageNumberOfDice: 0,
-      damageType: 'Unknown',
-      properties: null,
-      weaponClassification: 'Unknown',
-      ac: null,
-      armorClassification: 'Unknown',
-      stealthDisadvantage: false,
-      strengthRequirement: null
-    },
-    {
-      'name': 'Fusion cutter',
-      'description': 'A fusion cutter is a handheld cutting tool popular among technicians. It cut through almost any reinforced material, given enough time. The internal power cell supplies an hour\'s worth of continuous operation.',
-      'cost': 25,
-      'weight': 2,
-      'equipmentCategory': 'Utility',
-      'quantity': 1,
-      'contentType': 'Core',
-      'modes': [],
-      damageDieModifier: 0,
-      damageDieType: 0,
-      damageNumberOfDice: 0,
-      damageType: 'Unknown',
-      properties: null,
-      weaponClassification: 'Unknown',
-      ac: null,
-      armorClassification: 'Unknown',
-      stealthDisadvantage: false,
-      strengthRequirement: null
-    },
-    {
-      'name': 'Chronometer',
-      'description': 'A chronometer is a device that measures and keeps linear time.',
-      'cost': 100,
-      'weight': 1,
-      'equipmentCategory': 'Utility',
-      'quantity': 1,
-      'contentType': 'Core',
-      'modes': [],
-      damageDieModifier: 0,
-      damageDieType: 0,
-      damageNumberOfDice: 0,
-      damageType: 'Unknown',
-      properties: null,
-      weaponClassification: 'Unknown',
-      ac: null,
-      armorClassification: 'Unknown',
-      stealthDisadvantage: false,
-      strengthRequirement: null
-    },
-    {
-      'name': 'Grappling hook',
-      'description': 'A grappling hook allows a user to climb or ascend large objects. It can be mounted to a blaster, belt, or elsewhere. It has a 50-foot length.',
-      'cost': 50,
-      'weight': 4,
-      'equipmentCategory': 'Utility',
-      'quantity': 1,
-      'contentType': 'Core',
-      'modes': [],
-      damageDieModifier: 0,
-      damageDieType: 0,
-      damageNumberOfDice: 0,
-      damageType: 'Unknown',
-      properties: null,
-      weaponClassification: 'Unknown',
-      ac: null,
-      armorClassification: 'Unknown',
-      stealthDisadvantage: false,
-      strengthRequirement: null
-    },
-    {
-      'name': 'Field rations (one day\'s)',
-      'description': null,
-      'cost': 5,
-      'weight': 1,
-      'equipmentCategory': 'Utility',
-      'quantity': 10,
-      'contentType': 'Core',
-      'modes': [],
-      damageDieModifier: 0,
-      damageDieType: 0,
-      damageNumberOfDice: 0,
-      damageType: 'Unknown',
-      properties: null,
-      weaponClassification: 'Unknown',
-      ac: null,
-      armorClassification: 'Unknown',
-      stealthDisadvantage: false,
-      strengthRequirement: null
-    },
-    {
-      'name': 'Canteen',
-      'description': null,
-      'cost': 10,
-      'weight': 3,
-      'equipmentCategory': 'Utility',
-      'quantity': 1,
-      'contentType': 'Core',
-      'modes': [],
-      damageDieModifier: 0,
-      damageDieType: 0,
-      damageNumberOfDice: 0,
-      damageType: 'Unknown',
-      properties: null,
-      weaponClassification: 'Unknown',
-      ac: null,
-      armorClassification: 'Unknown',
-      stealthDisadvantage: false,
-      strengthRequirement: null
-    },
-    {
-      'name': 'Fibercord cable, 50 ft (rolled)',
-      'description': null,
-      'cost': 20,
-      'weight': 2,
-      'equipmentCategory': 'Utility',
-      'quantity': 1,
-      'contentType': 'Core',
-      'modes': [],
-      damageDieModifier: 0,
-      damageDieType: 0,
-      damageNumberOfDice: 0,
-      damageType: 'Unknown',
-      properties: null,
-      weaponClassification: 'Unknown',
-      ac: null,
-      armorClassification: 'Unknown',
-      stealthDisadvantage: false,
-      strengthRequirement: null
-    },
-    {
-      'name': 'Commlink',
-      'description': 'Commlinks are standard handheld communication devices, fitted with microphones and receivers. A standard, personal commlinks have a range of up to 30 miles, but are reduced in dense, urban areas or areas of high level interference.',
-      'cost': 50,
-      'weight': 1,
-      'equipmentCategory': 'Communications',
-      'quantity': 4,
-      'contentType': 'Core',
-      'modes': [],
-      damageDieModifier: 0,
-      damageDieType: 0,
-      damageNumberOfDice: 0,
-      damageType: 'Unknown',
-      properties: null,
-      weaponClassification: 'Unknown',
-      ac: null,
-      armorClassification: 'Unknown',
-      stealthDisadvantage: false,
-      strengthRequirement: null
-    },
-    {
-      'name': 'Medium shield generator',
-      'description': 'A personal shield generator was a defensive technology that projected a field of energy that protected the user from blaster fire, the elements, or other hazards. Most were designed to be held much like a traditional physical shield. The medium shield generator is used in conjunction with any one-handed weapon.',
-      'cost': 100,
-      'weight': 14,
-      'equipmentCategory': 'Armor',
-      'quantity': 1,
-      'contentType': 'Core',
-      'modes': [],
-      damageDieModifier: 0,
-      damageDieType: 0,
-      damageNumberOfDice: 0,
-      damageType: 'Unknown',
-      properties: null,
-      weaponClassification: 'Unknown',
-      ac: null,
-      armorClassification: 'Unknown',
-      stealthDisadvantage: false,
-      strengthRequirement: null
-    },
-    {
-      'name': 'Light battle armor',
-      'description': 'Providing solid protection for a minimal cost, light battle armor is considered excellent protection for entrenched troops or guards. However, this protection comes at a cost of mobility, limiting its uses by rapidly advancing infantry. Still, it provides more mobility than full battle armor.',
-      'cost': 500,
-      'weight': 20,
-      'equipmentCategory': 'Armor',
-      'quantity': 1,
-      'contentType': 'Core',
-      'modes': [],
-      damageDieModifier: 0,
-      damageDieType: 0,
-      damageNumberOfDice: 0,
-      damageType: 'Unknown',
-      properties: null,
-      weaponClassification: 'Unknown',
-      ac: null,
-      armorClassification: 'Unknown',
-      stealthDisadvantage: false,
-      strengthRequirement: null
+function isProficientWithWeapon (weapon: EquipmentType, proficiencies: string[]) {
+  const completeProficiencies = proficiencies.map(proficiency => {
+    const split = proficiency.split(' ')
+    return split[0] === 'All' ? ['Simple ' + split[1], 'Martial ' + split[1]] : proficiency
+  }).flat()
+  return intersection(completeProficiencies.map(camelCase), [
+    weapon.name,
+    weapon.name + 's',
+    weapon.weaponClassification,
+    weapon.weaponClassification + 's'
+  ].map(camelCase)).length > 0
+}
+
+function getWeaponStats (
+  abilityScores: AbilityScoresType,
+  equipmentData: EquipmentType | undefined,
+  proficiencyBonus: number,
+  proficiencies: string[]
+) {
+  if (equipmentData && equipmentData.equipmentCategory === 'Weapon') {
+    const dexModifier = abilityScores['dexterity'].modifier
+    const strModifier = abilityScores['strength'].modifier
+    const isProficient = isProficientWithWeapon(equipmentData, proficiencies)
+
+    const isBlaster = ['SimpleBlaster', 'MartialBlaster'].includes(equipmentData.weaponClassification)
+    let weaponModifier = isBlaster ? dexModifier : strModifier
+
+    const isFinesse = equipmentData.properties && intersection(equipmentData.properties, ['finesse', 'Finesse']).length > 0
+    const betterFinesseAbility = dexModifier > strModifier ? dexModifier : strModifier
+    weaponModifier = isFinesse ? betterFinesseAbility : weaponModifier
+
+    return {
+      attackBonus: weaponModifier + (isProficient ? proficiencyBonus : 0),
+      damageBonus: weaponModifier + equipmentData.damageDieModifier
     }
-  ]
+  }
+}
+
+export default function generateEquipment (
+  rawCharacter: RawCharacterType,
+  equipment: EquipmentType[],
+  abilityScores: AbilityScoresType,
+  proficiencyBonus: number,
+  proficiencies: string[]
+) {
+  return chain(rawCharacter.equipment)
+    .filter(({ name }) => !(['credits', 'custom'].includes(name)))
+    .map(({ name, quantity, equipped }) => {
+      const equipmentData = equipment.find(equipment => name === equipment.name)
+      if (!equipmentData) console.error('Equipment Data Not Found:', name)
+      return {
+        name,
+        quantity,
+        equipped,
+        ...(equipmentData || {}),
+        ...getWeaponStats(abilityScores, equipmentData, proficiencyBonus, proficiencies),
+        isFound: !isEmpty(equipmentData)
+      }
+    })
+    .filter(({ isFound }) => isFound)
+    .value() as EquipmentType[]
 }

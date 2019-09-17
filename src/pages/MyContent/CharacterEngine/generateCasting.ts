@@ -7,6 +7,7 @@ export default function generateCasting (
   abilityScores: AbilityScoresType,
   powers: PowerType[]
 ) {
+  // TO DO
   return {
     'techCasting': {
       'currentPoints': 8,

@@ -49,7 +49,7 @@ export default function generateCharacter (
   const myFoundClasses = compact(myClasses)
 
   const currentLevel = rawCharacter.classes.reduce((acc, { levels }) => acc + levels, 0)
-  const proficiencyBonus = 1 + Math.ceil(currentLevel/4)
+  const proficiencyBonus = 1 + Math.ceil(currentLevel / 4)
   const experiencePoints = {
     previousLevel: experienceTable[currentLevel],
     current: rawCharacter.experiencePoints,
@@ -80,7 +80,7 @@ export default function generateCharacter (
     languages: generateLanguages(rawCharacter),
     equipment: myEquipment,
     credits: credits && credits.quantity,
-    carryingCapacity: generateCarryingCapacity(rawCharacter, abilityScores),
+    carryingCapacity: generateCarryingCapacity(abilityScores),
     superiority: generateSuperiorty(rawCharacter, abilityScores, myFoundClasses),
     ...generateCasting(rawCharacter, abilityScores, powers),
     combatFeatures: generateCombatFeatures(rawCharacter, myFoundClasses),

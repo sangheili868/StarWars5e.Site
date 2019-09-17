@@ -7,6 +7,7 @@ export default function generateCombatStats (
   abilityScores: AbilityScoresType,
   equipment: EquipmentType[]
 ) {
+  // TO DO
   return {
     proficiencyBonus: 3,
     initiative: 4,

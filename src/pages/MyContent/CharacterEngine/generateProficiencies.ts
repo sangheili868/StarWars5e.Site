@@ -2,6 +2,7 @@ import { RawCharacterType } from '@/types/rawCharacterTypes'
 import { ClassType } from '@/types/characterTypes'
 
 export default function generateProficiencies (rawCharacter: RawCharacterType, classes: ClassType[]) {
+  // TO DO
   return [
     'Light Armor',
     'Simple Vibroweapons',

@@ -2,6 +2,7 @@ import { RawCharacterType } from '@/types/rawCharacterTypes'
 import { ClassType } from '@/types/characterTypes'
 
 export default function generateNonCombatFeatures (rawCharacter: RawCharacterType, classes: ClassType[]) {
+  // TO DO
   return [
     {
       'name': 'Sage Advice',

@@ -2,6 +2,7 @@ import { RawCharacterType } from '@/types/rawCharacterTypes'
 import { ClassType } from '@/types/characterTypes'
 
 export default function generateAbilityScores (rawCharacter: RawCharacterType, myClasses: ClassType[]) {
+  // TO DO
   return {
     'strength': {
       'value': 16,

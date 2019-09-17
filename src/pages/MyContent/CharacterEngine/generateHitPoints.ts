@@ -7,6 +7,7 @@ export default function generateHitPoints (
   abilityScores: AbilityScoresType,
   classes: ClassType[]
 ) {
+  // TO DO
   return {
     'maximum': 42,
     'current': 34,

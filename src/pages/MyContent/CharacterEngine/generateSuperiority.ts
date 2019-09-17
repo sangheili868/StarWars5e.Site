@@ -7,6 +7,7 @@ export default function generateSuperiority (
   abilityScores: AbilityScoresType,
   classes: ClassType[]
 ) {
+  // TO DO
   return {
     'currentDice': 4,
     'maxDice': 4,

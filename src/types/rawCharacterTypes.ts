@@ -88,12 +88,7 @@ export interface RawCharacterType {
   species: RawSpeciesType,
   classes: RawClassType[],
   baseAbilityScores: {
-    strength: number,
-    dexterity: number,
-    constitution: number,
-    intelligence: number,
-    wisdom: number,
-    charisma: number
+    [ability: string]: number
   },
   background: RawBackgroundType,
   characteristics: RawCharacteristicsType,

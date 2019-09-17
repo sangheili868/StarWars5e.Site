@@ -11,7 +11,7 @@
       "dexterity": 1
     },
     "toolProficiency": "biochemistsKit",
-    "skillProficiency": "persuasion",
+    "skillProficiency": "Persuasion",
     "weaponProficiency": "lightsaber",
     "language": "Kel Dorian"
   },
@@ -23,9 +23,9 @@
       "hitPoints": [ 5, 5 ],
       "toolProficiency": "masonsTools",
       "skills": [
-        "investigation",
-        "medicine",
-        "survival"
+        "Investigation",
+        "Medicine",
+        "Survival"
       ],
       "maneuvers": [
         "headsUp",
@@ -42,14 +42,14 @@
         }
       ],
       "expertise": [
-        "athletics",
-        "persuasion"
+        "Athletics",
+        "Persuasion"
       ],
       "archetype": {
         "name": "politician",
         "silverTongue": {
           "language": "Huttese",
-          "intSkillBonus": "persuasion"
+          "intSkillBonus": "Persuasion"
         }
       }
     },
@@ -59,7 +59,7 @@
       "levels": 4,
       "hitPoints": [ 6, 6, 6, 6 ],
       "skills": [
-        "piloting"
+        "Piloting"
       ],
       "fightingStyle": "shielding",
       "techPowers": [
@@ -95,8 +95,8 @@
   "background": {
     "name": "folkHero",
     "skills": [
-      "athletics",
-      "animalHandling"
+      "Athletics",
+      "Animal Handling"
     ],
     "toolProficiencies": [ "carpentersKit" ],
     "languages": [ "Nautila" ],

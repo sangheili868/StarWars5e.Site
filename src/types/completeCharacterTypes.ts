@@ -74,12 +74,7 @@ export interface FeatureType {
 }
 
 export interface AbilityScoresType {
-  strength: AbilityScoreType,
-  dexterity: AbilityScoreType,
-  constitution: AbilityScoreType,
-  intelligence: AbilityScoreType,
-  wisdom: AbilityScoreType,
-  charisma: AbilityScoreType
+  [ability: string]: AbilityScoreType
 }
 
 export interface CompleteCharacterType {

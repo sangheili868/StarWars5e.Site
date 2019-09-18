@@ -6,9 +6,9 @@
   "species": {
     "name": "human",
     "abilityScoreImprovement": {
-      "intelligence": 2,
-      "strength": 1,
-      "dexterity": 1
+      "Intelligence": 2,
+      "Strength": 1,
+      "Dexterity": 1
     },
     "toolProficiency": "biochemistsKit",
     "skillProficiency": "Persuasion",
@@ -85,12 +85,12 @@
     }
   ],
   "baseAbilityScores": {
-    "strength": 15,
-    "dexterity": 11,
-    "constitution": 12,
-    "intelligence": 15,
-    "wisdom": 8,
-    "charisma": 10
+    "Strength": 15,
+    "Dexterity": 11,
+    "Constitution": 12,
+    "Intelligence": 15,
+    "Wisdom": 8,
+    "Charisma": 10
   },
   "background": {
     "name": "folkHero",
@@ -104,7 +104,7 @@
       "type": "feat",
       "name": "healer",
       "abilityScoreImprovements": {
-        "intelligence": 1
+        "Intelligence": 1
       }
     }
   },

@@ -1,7 +1,7 @@
 import { AbilityScoresType } from '@/types/completeCharacterTypes'
 
 export default function generateCarryingCapacity (abilityScores: AbilityScoresType) {
-  const encumbered = 5 * abilityScores.strength.value
+  const encumbered = 5 * abilityScores.Strength.value
   return {
     encumbered,
     heavilyEncumbered: 2 * encumbered,

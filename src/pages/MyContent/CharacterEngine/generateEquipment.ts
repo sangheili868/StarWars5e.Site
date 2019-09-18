@@ -23,8 +23,8 @@ function getWeaponStats (
   proficiencies: string[]
 ) {
   if (equipmentData && equipmentData.equipmentCategory === 'Weapon') {
-    const dexModifier = abilityScores['dexterity'].modifier
-    const strModifier = abilityScores['strength'].modifier
+    const dexModifier = abilityScores['Dexterity'].modifier
+    const strModifier = abilityScores['Strength'].modifier
     const isProficient = isProficientWithWeapon(equipmentData, proficiencies)
 
     const isBlaster = ['SimpleBlaster', 'MartialBlaster'].includes(equipmentData.weaponClassification)

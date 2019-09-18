@@ -96,7 +96,23 @@ export interface RawCharacterType {
   },
   background: RawBackgroundType,
   characteristics: RawCharacteristicsType,
-  techPoints: number,
-  forcePoints: number,
-  equipment: RawEquipmentType[]
+  equipment: RawEquipmentType[],
+  currentStats: {
+    hitPoints: number,
+    temporaryHitPoints: number,
+    techPoints: number,
+    forcePoints: number,
+    superiorityDice: number,
+    hitDice: {
+      d6?: number,
+      d8?: number,
+      d10?: number,
+      d12?: number
+    },
+    deathSaves: {
+      successes: number,
+      failures: number
+    },
+    hasInspiration: boolean
+  }
 }

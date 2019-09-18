@@ -60,7 +60,7 @@ export default function generateCharacter (
   const abilityScores = generateAbilityScores(rawCharacter, myFoundClasses, proficiencyBonus)
   const proficiencies = generateProficiencies(rawCharacter, myFoundClasses)
   const myEquipment = generateEquipment(rawCharacter, equipment, abilityScores, proficiencyBonus, proficiencies)
-  
+
   return {
     ...pick(rawCharacter, [
       'name',

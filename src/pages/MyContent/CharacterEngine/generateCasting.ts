@@ -93,7 +93,7 @@ export default function generateCasting (
   }
   return {
     techCasting: {
-      currentPoints: rawCharacter.techPoints,
+      currentPoints: rawCharacter.currentStats.techPoints,
       maxPoints: getPowerPoints(rawCharacter.classes, techCastingMap, techCastingBonus, 'tech'),
       attackModifier: techCastingBonus + proficiencyBonus,
       saveDC: 8 + techCastingBonus + proficiencyBonus,
@@ -101,7 +101,7 @@ export default function generateCasting (
       powersKnown: getPowersKnown(rawCharacter, powers, 'tech')
     },
     forceCasting: {
-      currentPoints: rawCharacter.forcePoints,
+      currentPoints: rawCharacter.currentStats.forcePoints,
       maxPoints: getPowerPoints(rawCharacter.classes, forceCastingMap, forceCastingBonus.universal, 'force'),
       lightAttackModifier: forceCastingBonus.light + proficiencyBonus,
       lightSaveDC: 8 + forceCastingBonus.light + proficiencyBonus,

@@ -31,6 +31,7 @@ export interface CastingType {
   maxPoints: number,
   attackModifier: number,
   saveDC: number,
+  maxPowerLevel: number,
   powersKnown: PowerType[]
 }
 

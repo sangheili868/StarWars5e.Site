@@ -18,6 +18,7 @@
     "core-js": "^2.6.5",
     "material-design-icons-iconfont": "^4.0.5",
     "mathjs": "^5.10.3",
+    "ordinal": "^1.0.3",
     "pluralize": "^8.0.0",
     "pug": "^2.0.3",
     "pug-plain-loader": "^1.0.0",

@@ -9,7 +9,6 @@ export default function generateCombatStats (
 ) {
   // TO DO
   return {
-    proficiencyBonus: 3,
     initiative: 4,
     armorClass: 19,
     passivePerception: 9,

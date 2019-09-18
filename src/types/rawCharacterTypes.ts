@@ -17,6 +17,16 @@ export interface RawFeatType {
   }
 }
 
+export interface RawArchetypeType {
+  name: string,
+  silverTongue?: {
+    language: string,
+    intSkillBonus: string
+  },
+  forcePowers?: string[]
+  techPowers?: string[]
+}
+
 export interface RawClassType {
   isStartingClass: boolean,
   name: string,
@@ -26,19 +36,13 @@ export interface RawClassType {
   skills: string[],
   fightingStyle?: string,
   techPowers?: string[],
+  forcePowers?: string[],
   maneuvers?: string[],
   discoveries?: {
     name: string
   }[],
   expertise?: string[],
-  archetype: {
-    name: string,
-    silverTongue?: {
-      language: string,
-      intSkillBonus: string
-    },
-    forcePowers?: string[]
-  },
+  archetype: RawArchetypeType,
   abilityScoreImprovements?: (RawFeatType | {
     type: string,
     abilitiesIncreased: {
@@ -92,5 +96,7 @@ export interface RawCharacterType {
   },
   background: RawBackgroundType,
   characteristics: RawCharacteristicsType,
+  techPoints: number,
+  forcePoints: number,
   equipment: RawEquipmentType[]
 }

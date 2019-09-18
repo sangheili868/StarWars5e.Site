@@ -1,6 +1,7 @@
 import { RawCharacterType, RawClassType } from '@/types/rawCharacterTypes'
 import { AbilityScoresType } from '@/types/completeCharacterTypes'
-import { PowerType, ClassType } from '@/types/characterTypes'
+import { PowerType } from '@/types/characterTypes'
+import { chain, concat } from 'lodash'
 
 interface MultiplierMapType {
   [myClass: string]: {
@@ -25,135 +26,91 @@ const forceCastingMap = {
     Sentinel: { base: 2 / 3 }
 }
 
-function getMaxPowerLevel (classes: RawClassType[], multiplierMap: MultiplierMapType) {
-  return classes.reduce((acc, { name, archetype, levels }) => {
-    const multiplierFromClass = (multiplierMap[name] && multiplierMap[name].base)
-    const multiplierFromArchetype = (multiplierMap[name] && multiplierMap[name][archetype.name])
-    return acc + levels * (multiplierFromClass || multiplierFromArchetype || 0)
-  }, 0)
+function getMultiplier (multiplierMap: MultiplierMapType, name: string, archetypeName: string) {
+  const multiplierFromClass = (multiplierMap[name] && multiplierMap[name].base)
+  const multiplierFromArchetype = (multiplierMap[name] && multiplierMap[name][archetypeName])
+  return multiplierFromClass || multiplierFromArchetype || 0
 }
 
-function getPowerPoints (classes: RawClassType[], multiplierMap: MultiplierMapType) {
+function getMaxPowerLevel (classes: RawClassType[], multiplierMap: MultiplierMapType) {
+  const castingLevel = classes.reduce(
+    (acc, { name, archetype, levels }) => acc + (levels * getMultiplier(multiplierMap, name, archetype.name)),
+    0
+  )
+  return Math.min(9, Math.ceil(castingLevel / 2))
+}
 
+function getPowerPoints (
+  classes: RawClassType[],
+  multiplierMap: MultiplierMapType,
+  abilityBonus: number,
+  castingType: string
+) {
+  return classes.reduce((acc, { name, archetype, levels }) => {
+    const isTech = castingType === 'tech'
+    switch (getMultiplier(multiplierMap, name, archetype.name)) {
+      case 1 / 3:
+        return acc + (isTech ? Math.ceil(levels / 2) : levels)
+      case 1 / 2:
+        return acc + levels * (isTech ? 1 : 2)
+      case 2 / 3:
+        return acc + levels * 3
+      case 1:
+        return acc + levels * (isTech ? 2 : 4)
+      default:
+        return acc
+    }
+  }, abilityBonus)
+}
+
+function getPowersKnown (rawCharacter: RawCharacterType, powers: PowerType[], castingType: string) {
+  return chain(rawCharacter.classes)
+    .map(myClass => {
+      const powerName = (castingType + 'Powers') as 'techPowers' | 'forcePowers'
+      const powerList = concat(myClass[powerName] as string[] || [], myClass.archetype[powerName] || [])
+      return powerList.map(techPower => {
+        const powerData = powers.find(({ name }) => name === techPower)
+        if (!powerData) console.error('Warning: Power not found: ' + techPower)
+        return powerData
+      })
+    })
+    .flatten()
+    .compact()
+    .value()
 }
 
 export default function generateCasting (
   rawCharacter: RawCharacterType,
-  classes: ClassType[],
   abilityScores: AbilityScoresType,
-  powers: PowerType[]
+  powers: PowerType[],
+  proficiencyBonus: number
 ) {
-  // console.log('Max Tech Level', getMaxPowerLevel(rawCharacter.classes, techCastingMap))
-  // console.log('Max Force Level', getMaxPowerLevel(rawCharacter.classes, forceCastingMap))
-  // console.log('Tech Points', getPowerPoints(rawCharacter.classes, techCastingMap))
-  // console.log('Force Points', getPowerPoints(rawCharacter.classes, forceCastingMap))
-  // TO DO
+  const techCastingBonus = abilityScores.Intelligence.modifier
+  const forceCastingBonus = {
+    light: abilityScores.Wisdom.modifier,
+    dark: abilityScores.Charisma.modifier,
+    universal: Math.max(abilityScores.Wisdom.modifier, abilityScores.Charisma.modifier)
+  }
   return {
-    'techCasting': {
-      'currentPoints': 8,
-      'maxPoints': 8,
-      'attackModifier': 7,
-      'saveDC': 15,
-      'powersKnown': [
-        {
-          'name': 'Electroshock',
-          'powerType': 'Tech',
-          'prerequisite': null,
-          'level': 0,
-          'castingPeriod': 'Action',
-          'castingPeriodText': '1 action',
-          'range': 'Touch',
-          'duration': 'Instantaneous',
-          'concentration': false,
-          'forceAlignment': 'None',
-          'description': 'Lightning springs from you to deliver a shock to a creature you try to touch. Make a melee tech attack against the target. You have advantage on the attack roll if the target is wearing armor made of metal. On a hit, the target takes 1d8 lightning damage, and it can\'t take reactions until the start of its next turn.\r\n\r\nThis power\'s damage increases by 1d8 when you reach 5th level (2d8), 11th level (3d8), and 17th level (4d8).',
-          'higherLevelDescription': null
-        },
-        {
-          'name': 'Encrypted Message',
-          'powerType': 'Tech',
-          'prerequisite': null,
-          'level': 0,
-          'castingPeriod': 'Action',
-          'castingPeriodText': '1 action',
-          'range': '120 feet',
-          'duration': '1 round',
-          'concentration': false,
-          'forceAlignment': 'None',
-          'description': 'You point your finger toward a creature within range that possesses a commlink and whisper a message. The target (and only the target) hears the message and can send an encrypted reply that only you can hear. These messages cannot be intercepted or decrypted by unenhanced means.\r\n\r\nYou can cast this power through solid objects if you are familiar with the target and know it is beyond the barrier. 1 foot of stone, 1 inch of common metal, a thin sheet of lead, or 3 feet of wood blocks the power. The power doesn\'t have to follow a straight line and can travel freely around corners or through openings.',
-          'higherLevelDescription': null
-        },
-        {
-          'name': 'Alarm',
-          'powerType': 'Tech',
-          'prerequisite': null,
-          'level': 1,
-          'castingPeriod': 'Minute',
-          'castingPeriodText': '1 minute',
-          'range': '30 feet',
-          'duration': '8 hours',
-          'concentration': false,
-          'forceAlignment': 'None',
-          'description': 'You set an alarm against unwanted intrusion. Choose a door, a window, or an area within range that is no larger than a 20-foot cube. Until the power ends, an alarm alerts you whenever a Tiny or larger creature touches or enters the warded area. When you cast the power, you can designate creatures that won\'t set off the alarm. You also choose whether the alarm is mental or audible. \r\n\r\nA silent alarm alerts you with a ping in your mind if you are within 1 mile of the warded area. This ping awakens you if you are sleeping.\r\n\r\nAn audible alarm produces the sound of a hand bell for 10 seconds within 60 feet.',
-          'higherLevelDescription': null
-        },
-        {
-          'name': 'Stack the Deck',
-          'powerType': 'Tech',
-          'prerequisite': null,
-          'level': 1,
-          'castingPeriod': 'Action',
-          'castingPeriodText': '1 action',
-          'range': '30 feet',
-          'duration': 'up to 1 minute',
-          'concentration': true,
-          'forceAlignment': 'None',
-          'description': 'You boost up to three creatures of your choice within range. Whenever a target makes an attack roll or a saving throw before the power ends, the target can roll a d4 and add the number rolled to the attack roll or saving throw.\r\n\r\n***Overcharge Tech.*** When you cast this power using a tech slot of 2nd level or higher, you can target one additional creature for each slot level above 1st.',
-          'higherLevelDescription': null
-        },
-        {
-          'name': 'Tracer Bolt',
-          'powerType': 'Tech',
-          'prerequisite': null,
-          'level': 1,
-          'castingPeriod': 'Action',
-          'castingPeriodText': '1 action',
-          'range': '120 feet',
-          'duration': '1 round',
-          'concentration': false,
-          'forceAlignment': 'None',
-          'description': 'A flash of light streaks toward a creature of your choice within range. Make a ranged tech attack against the target. On a hit, the target takes 4d6 energy damage, and the next attack roll made against this target before the end of your next turn has advantage. \r\n\r\n***Overcharge Tech.*** When you cast this power using a tech slot of 2nd level or higher, the damage increases by 1d6 for each slot level above 1st.',
-          'higherLevelDescription': null
-        },
-        {
-          'name': 'Denounce',
-          'powerType': 'Force',
-          'prerequisite': null,
-          'level': 0,
-          'castingPeriod': 'Action',
-          'castingPeriodText': '1 action',
-          'range': '30 feet',
-          'duration': 'up to 1 minute',
-          'concentration': true,
-          'forceAlignment': 'Dark',
-          'description': 'A target of your choice within range must make a Charisma saving throw. On a failed save, when the target makes their next attack roll or saving throw they must roll a d4 and subtract the number from it. The power then ends.',
-          'higherLevelDescription': null
-        },
-        {
-          'name': 'Sense Force',
-          'powerType': 'Force',
-          'prerequisite': null,
-          'level': 1,
-          'castingPeriod': 'Action',
-          'castingPeriodText': '1 action',
-          'range': 'Self',
-          'duration': 'up to 10 minutes',
-          'concentration': true,
-          'forceAlignment': 'Universal',
-          'description': 'For the duration, you sense the use of the Force, or its presence in an inanimate object within 30 feet of you. If you sense the Force in this way, you can use your action to determine the direction from which it originates and, if it\'s in line of sight, you see a faint aura around the person or object from which the Force emanates.\r\n\r\n***Force Potency.*** When you cast this power using a 3rd-level force slot, the range increases to 60 feet. When you use a 5th-level force slot, the range increases to 500 feet. When you use a 7th-level force slot, the range increases to 1 mile. When you use a 9th-level force slot, the range increases to 10 miles.',
-          'higherLevelDescription': null
-        }
-      ]
+    techCasting: {
+      currentPoints: rawCharacter.techPoints,
+      maxPoints: getPowerPoints(rawCharacter.classes, techCastingMap, techCastingBonus, 'tech'),
+      attackModifier: techCastingBonus + proficiencyBonus,
+      saveDC: 8 + techCastingBonus + proficiencyBonus,
+      maxPowerLevel: getMaxPowerLevel(rawCharacter.classes, techCastingMap),
+      powersKnown: getPowersKnown(rawCharacter, powers, 'tech')
+    },
+    forceCasting: {
+      currentPoints: rawCharacter.forcePoints,
+      maxPoints: getPowerPoints(rawCharacter.classes, forceCastingMap, forceCastingBonus.universal, 'force'),
+      lightAttackModifier: forceCastingBonus.light + proficiencyBonus,
+      lightSaveDC: 8 + forceCastingBonus.light + proficiencyBonus,
+      darkAttackModifier: forceCastingBonus.dark + proficiencyBonus,
+      darkSaveDC: 8 + forceCastingBonus.dark + proficiencyBonus,
+      universalAttackModifier: forceCastingBonus.universal + proficiencyBonus,
+      universalSaveDC: 8 + forceCastingBonus.universal + proficiencyBonus,
+      maxPowerLevel: getMaxPowerLevel(rawCharacter.classes, forceCastingMap),
+      powersKnown: getPowersKnown(rawCharacter, powers, 'force')
     }
   }
 }

@@ -60,7 +60,7 @@ export default function generateCharacter (
   const abilityScores = generateAbilityScores(rawCharacter, myFoundClasses, proficiencyBonus)
   const proficiencies = generateProficiencies(rawCharacter, myFoundClasses)
   const myEquipment = generateEquipment(rawCharacter, equipment, abilityScores, proficiencyBonus, proficiencies)
-
+  
   return {
     ...pick(rawCharacter, [
       'name',
@@ -74,6 +74,7 @@ export default function generateCharacter (
     background: rawCharacter.background.name,
     experiencePoints,
     abilityScores,
+    proficiencyBonus,
     ...generateCombatStats(rawCharacter, abilityScores, myEquipment),
     hitPoints: generateHitPoints(rawCharacter, abilityScores, myFoundClasses),
     proficiencies,
@@ -82,7 +83,7 @@ export default function generateCharacter (
     credits: credits && credits.quantity,
     carryingCapacity: generateCarryingCapacity(abilityScores),
     superiority: generateSuperiorty(rawCharacter, abilityScores, myFoundClasses),
-    ...generateCasting(rawCharacter, myFoundClasses, abilityScores, powers),
+    ...generateCasting(rawCharacter, abilityScores, powers, proficiencyBonus),
     combatFeatures: generateCombatFeatures(rawCharacter, myFoundClasses),
     nonCombatFeatures: generateNonCombatFeatures(rawCharacter, myFoundClasses)
   }

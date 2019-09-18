@@ -6,6 +6,7 @@
   import { groupBy } from 'lodash'
   import CharacterSheetTicker from './CharacterSheetTicker.vue'
   import CheckList from '@/components/CheckList.vue'
+  import ordinal from 'ordinal'
 
   @Component({
     components: {
@@ -19,6 +20,7 @@
     @Prop(Object) readonly techCasting!: CastingType
     @Prop(Object) readonly forceCasting!: CastingType
     groupBy = groupBy
+    ordinal = ordinal
 
     powerLevelText (level: number) {
       return level > 0 ? `Level ${level}` : 'At-will'
@@ -28,7 +30,7 @@
 
 <template lang="pug">
   div
-    div(v-if="techCasting")
+    div(v-if="techCasting.powersKnown.length")
       h3 Tech Casting
       CharacterSheetTicker(
         v-if="techCasting.maxPoints > 10",
@@ -38,6 +40,7 @@
       CheckList(v-else, :current="techCasting.currentPoints", :maximum="techCasting.maxPoints", title="Tech Points")
       CharacterSheetModifier(:modifier="techCasting.attackModifier", label="Tech Attack Modifier", small)
       CharacterSheetModifier(:modifier="techCasting.saveDC", label="Tech Save DC", isFlatNumber, small)
+      CharacterSheetModifier(:modifier="ordinal(techCasting.maxPowerLevel)", label="Max Power Level", isFlatNumber, small)
       div(v-for="(powers, level) in groupBy(techCasting.powersKnown, 'level')", :key="level")
         h3.mt-2 {{ powerLevelText(level) }}
         v-expansion-panel
@@ -46,7 +49,7 @@
             :key="power.name",
             :feature="power"
           )
-    div(v-if="forceCasting")
+    div(v-if="forceCasting.powersKnown.length")
       h3 Force Casting
       CharacterSheetTicker(
         v-if="forceCasting.maxPoints > 10",
@@ -54,8 +57,13 @@
         :max="forceCasting.maxPoints"
       ) Force Points
       CheckList(v-else, :current="forceCasting.currentPoints", :maximum="forceCasting.maxPoints", title="Force Points")
-      CharacterSheetModifier(:modifier="forceCasting.attackModifier", label="Force Attack Modifier", small)
-      CharacterSheetModifier(:modifier="forceCasting.saveDC", label="Force Save DC", isFlatNumber, small)
+      CharacterSheetModifier(:modifier="forceCasting.lightAttackModifier", label="Light Attack Modifier", small)
+      CharacterSheetModifier(:modifier="forceCasting.lightSaveDC", label="Light Save DC", isFlatNumber, small)
+      CharacterSheetModifier(:modifier="forceCasting.darkAttackModifier", label="Dark Attack Modifier", small)
+      CharacterSheetModifier(:modifier="forceCasting.darkSaveDC", label="Dark Save DC", isFlatNumber, small)
+      CharacterSheetModifier(:modifier="forceCasting.universalAttackModifier", label="Universal Attack Modifier", small)
+      CharacterSheetModifier(:modifier="forceCasting.universalSaveDC", label="Universal Save DC", isFlatNumber, small)
+      CharacterSheetModifier(:modifier="ordinal(forceCasting.maxPowerLevel)", label="Max Power Level", isFlatNumber, small)
       div(v-for="(powers, level) in groupBy(forceCasting.powersKnown, 'level')", :key="level")
         h3.mt-2 {{ powerLevelText(level) }}
         v-expansion-panel

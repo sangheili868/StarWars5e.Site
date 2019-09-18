@@ -4,7 +4,7 @@
 
   @Component
   export default class CharacterSheetModifier extends Vue {
-    @Prop(Number) readonly modifier!: number
+    @Prop([Number, String]) readonly modifier!: number | string
     @Prop(Number) readonly value!: number
     @Prop(String) readonly label!: string
     @Prop(Boolean) readonly isFlatNumber!: boolean
@@ -13,7 +13,7 @@
     addPlus = addPlus
 
     get modifierToShow () {
-      return this.isFlatNumber ? this.modifier : addPlus(this.modifier)
+      return this.isFlatNumber ? this.modifier : addPlus(Number(this.modifier))
     }
   }
 </script>

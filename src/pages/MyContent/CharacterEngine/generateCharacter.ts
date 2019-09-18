@@ -57,7 +57,7 @@ export default function generateCharacter (
   }
   const credits = rawCharacter.equipment.find(({ name }) => name === 'credits')
 
-  const abilityScores = generateAbilityScores(rawCharacter, myFoundClasses)
+  const abilityScores = generateAbilityScores(rawCharacter, myFoundClasses, proficiencyBonus)
   const proficiencies = generateProficiencies(rawCharacter, myFoundClasses)
   const myEquipment = generateEquipment(rawCharacter, equipment, abilityScores, proficiencyBonus, proficiencies)
 

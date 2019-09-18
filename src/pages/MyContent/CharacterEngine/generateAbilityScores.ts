@@ -31,21 +31,26 @@ function getProficientSkills (rawCharacter: RawCharacterType):{ [ability: string
     }).value())
 }
 
-export default function generateAbilityScores (rawCharacter: RawCharacterType, myClasses: ClassType[]) {
-  const currentLevel = rawCharacter.classes.reduce((acc, { levels }) => acc + levels, 0)
-  const proficiencyBonus = 1 + Math.ceil(currentLevel / 4)
+function getProficientSaves (rawCharacter: RawCharacterType, myClasses: ClassType[]) {
+  const startingClass = rawCharacter.classes.find(myClass => myClass.isStartingClass)
+  if (!startingClass) console.error('Warning: No starting class')
+  const startingClassData = startingClass && myClasses.find(({ name }) => name === startingClass.name)
+  return startingClassData && startingClassData.savingThrows
+}
+
+export default function generateAbilityScores (
+  rawCharacter: RawCharacterType,
+  myClasses: ClassType[],
+  proficiencyBonus: number
+) {
+  // Todo: Handle scholar politician Silver Tongue int skill bonus
   const proficiencyBonuses: { [proficiencyLevel: string]: number } = {
     expertise: 2 * proficiencyBonus,
     proficient: proficiencyBonus,
     none: 0
   }
-  // Todo: Handle Silver Tongue int skill bonus
-
   const proficientSkills = getProficientSkills(rawCharacter)
-  const startingClass = rawCharacter.classes.find(myClass => myClass.isStartingClass)
-  if (!startingClass) console.error('Warning: No starting class')
-  const startingClassData = startingClass && myClasses.find(({ name }) => name === startingClass.name)
-  const proficientSaves = startingClassData && startingClassData.savingThrows
+  const proficientSaves = getProficientSaves(rawCharacter, myClasses)
 
   return mapValues(skillObj, (skills, ability) => {
     const value = getAbilityScore(rawCharacter, ability)

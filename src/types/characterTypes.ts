@@ -57,7 +57,7 @@ export interface ClassType {
   creatingText: string
   equipmentLines: string[]
   flavorText: string
-  hitDiceDieType: Number
+  hitDiceDieType: number
   hitPointsAtFirstLevel: string
   hitPointsAtHigherLevels: string
   levelChangeHeadersJson: string

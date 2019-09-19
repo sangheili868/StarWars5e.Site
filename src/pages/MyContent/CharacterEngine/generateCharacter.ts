@@ -76,7 +76,7 @@ export default function generateCharacter (
     abilityScores,
     proficiencyBonus,
     ...generateCombatStats(rawCharacter, abilityScores, myEquipment),
-    hitPoints: generateHitPoints(rawCharacter, abilityScores, myFoundClasses),
+    hitPoints: generateHitPoints(rawCharacter, abilityScores, myFoundClasses, currentLevel),
     proficiencies,
     languages: generateLanguages(rawCharacter),
     equipment: myEquipment,

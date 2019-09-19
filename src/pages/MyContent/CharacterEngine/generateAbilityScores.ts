@@ -38,12 +38,15 @@ function getProficientSaves (rawCharacter: RawCharacterType, myClasses: ClassTyp
   return startingClassData && startingClassData.savingThrows
 }
 
+function getModifier (value: number) {
+  return Math.floor(value / 2) - 5
+}
+
 export default function generateAbilityScores (
   rawCharacter: RawCharacterType,
   myClasses: ClassType[],
   proficiencyBonus: number
 ) {
-  // Todo: Handle scholar politician Silver Tongue int skill bonus
   const proficiencyBonuses: { [proficiencyLevel: string]: number } = {
     expertise: 2 * proficiencyBonus,
     proficient: proficiencyBonus,
@@ -51,10 +54,13 @@ export default function generateAbilityScores (
   }
   const proficientSkills = getProficientSkills(rawCharacter)
   const proficientSaves = getProficientSaves(rawCharacter, myClasses)
+  const intBonus = getModifier(getAbilityScore(rawCharacter, 'Intelligence'))
+  const scholarData = rawCharacter.classes.find(({ name }) => name === 'Scholar')
+  const skillWithIntBonus = scholarData && scholarData.archetype.silverTongue && scholarData.archetype.silverTongue.intSkillBonus
 
   return mapValues(skillObj, (skills, ability) => {
     const value = getAbilityScore(rawCharacter, ability)
-    const modifier = Math.floor(value / 2) - 5
+    const modifier = getModifier(value)
     const isProficientInSave = proficientSaves && proficientSaves.includes(ability)
 
     return {
@@ -66,9 +72,10 @@ export default function generateAbilityScores (
       },
       skills: skills.map(name => {
         const proficiency = proficientSkills[ability][name] || 'none'
+        const silverTongueBonus = skillWithIntBonus === name ? intBonus : 0
         return {
           name,
-          modifier: modifier + proficiencyBonuses[proficiency],
+          modifier: modifier + proficiencyBonuses[proficiency] + silverTongueBonus,
           proficiency
         }
       })

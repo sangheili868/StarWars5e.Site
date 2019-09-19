@@ -1,11 +1,11 @@
 import { RawCharacterType } from '@/types/rawCharacterTypes'
+import { compact } from 'lodash'
 
 export default function generateLanguages (rawCharacter: RawCharacterType) {
-  // TO DO
-  return [
+  return compact([
     'Galactic Basic',
-    'Kel Dorian',
-    'Nautila',
-    'Huttese'
-  ]
+    rawCharacter.species.language,
+    ...(rawCharacter.background.languages || []),
+    ...rawCharacter.classes.map(({ archetype }) => archetype.silverTongue && archetype.silverTongue.language)
+  ])
 }

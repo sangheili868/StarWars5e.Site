@@ -10,9 +10,9 @@
       "Strength": 1,
       "Dexterity": 1
     },
-    "toolProficiency": "biochemistsKit",
+    "toolProficiency": "Biochemist's Kit",
     "skillProficiency": "Persuasion",
-    "weaponProficiency": "lightsaber",
+    "weaponProficiency": "Lightsaber",
     "language": "Kel Dorian"
   },
   "classes": [
@@ -21,7 +21,7 @@
       "name": "Scholar",
       "levels": 3,
       "hitPoints": [ 5, 5 ],
-      "toolProficiency": "masonsTools",
+      "toolProficiency": "Mason's Tools",
       "skills": [
         "Investigation",
         "Medicine",
@@ -79,7 +79,7 @@
       "abilityScoreImprovements": [
         {
           "type": "feat",
-          "name": "heavilyArmored"
+          "name": "Heavily Armored"
         }
       ]
     }
@@ -98,11 +98,11 @@
       "Athletics",
       "Animal Handling"
     ],
-    "toolProficiencies": [ "carpentersKit" ],
+    "toolProficiencies": [ "Carpenter's Kit" ],
     "languages": [ "Nautila" ],
     "feat": {
       "type": "feat",
-      "name": "healer",
+      "name": "Healer",
       "abilityScoreImprovements": {
         "Intelligence": 1
       }

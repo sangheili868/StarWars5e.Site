@@ -13,6 +13,7 @@ import generateSuperiorty from './generateSuperiority'
 import generateCasting from './generateCasting'
 import generateCombatFeatures from './generateCombatFeatures'
 import generateNonCombatFeatures from './generateNonCombatFeatures'
+import generateFeats from './generateFeats'
 
 const experienceTable = [
   0,
@@ -57,8 +58,9 @@ export default function generateCharacter (
   }
   const credits = rawCharacter.equipment.find(({ name }) => name === 'credits')
 
+  const feats = generateFeats(rawCharacter)
   const abilityScores = generateAbilityScores(rawCharacter, myFoundClasses, proficiencyBonus)
-  const proficiencies = generateProficiencies(rawCharacter, myFoundClasses)
+  const proficiencies = generateProficiencies(rawCharacter, myFoundClasses, feats)
   const myEquipment = generateEquipment(rawCharacter, equipment, abilityScores, proficiencyBonus, proficiencies)
 
   return {

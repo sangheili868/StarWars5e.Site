@@ -1,7 +1,7 @@
 <script lang="ts">
   import { Component, Prop, Vue } from 'vue-property-decorator'
   import { CharacteristicsType, FeatureType } from '@/types/completeCharacterTypes'
-  import { startCase } from 'lodash'
+  import { capitalize } from 'lodash'
   import CharacterSheetFeatures from './CharacterSheetFeatures.vue'
 
   @Component({
@@ -16,7 +16,11 @@
     @Prop(Array) readonly languages!: string[]
     @Prop(Object) readonly characteristics!: CharacteristicsType
     @Prop(Array) readonly nonCombatFeatures!: FeatureType[]
-    startCase = startCase
+
+    startCase (input: string) {
+      // Lodash's start case removes apostrophes, so we need a custom function to handle things like Biochemist's Kit
+      return input.replace(/\w+/g, capitalize).replace("'S", "'s")
+    }
   }
 </script>
 
@@ -27,5 +31,5 @@
     h3 Langauges
     div(v-for="language in languages", :key="language").caption {{ language }}
     h3 Proficiencies
-    div(v-for="proficiency in proficiencies", :key="proficiency").caption {{ proficiency }}
+    div(v-for="proficiency in proficiencies", :key="proficiency").caption {{ startCase(proficiency) }}
 </template>

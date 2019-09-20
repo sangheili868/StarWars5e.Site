@@ -1,6 +1,6 @@
 import { RawCharacterType, RawClassType } from '@/types/rawCharacterTypes'
 import { AbilityScoresType } from '@/types/completeCharacterTypes'
-import { chain, concat } from 'lodash'
+import { chain, concat, get } from 'lodash'
 import { ManeuverType } from '@/types/characterTypes'
 
 const superiorityCalculators: { [myClass: string]: {
@@ -38,12 +38,12 @@ const superiorityCalculators: { [myClass: string]: {
 function isSuperiorityClass (myClass: RawClassType) {
   return myClass.name === 'Fighter' ||
     myClass.name === 'Scholar' ||
-    myClass.archetype.name === 'Deadeye Technique'
+    !!(myClass.archetype && myClass.archetype.name === 'Deadeye Technique')
 }
 
 function getPrimarySuperiorityClass (rawCharacter: RawCharacterType) {
   const classData = rawCharacter.classes.find(isSuperiorityClass)
-  const className = classData && ((classData.archetype.name === 'Tactical Specialist') ? 'Tactical' : classData.name)
+  const className = classData && ((get(classData, 'archetype.name') === 'Tactical Specialist') ? 'Tactical' : classData.name)
   const superiorityCalculator = superiorityCalculators[className || 'None']
   return {
     ...classData,
@@ -64,7 +64,7 @@ function getMulticlassDiceBonus (rawCharacter: RawCharacterType) {
 function getManeuvers (rawCharacter: RawCharacterType, maneuvers: ManeuverType[]) {
   return chain(rawCharacter.classes)
     .map((myClass: RawClassType) =>
-      concat(myClass.maneuvers || [], myClass.archetype.maneuvers || []).map(maneuver => {
+      concat(myClass.maneuvers || [], (myClass.archetype && myClass.archetype.maneuvers) || []).map(maneuver => {
         const maneuverData = maneuvers.find(({ name }) => name === maneuver)
         if (!maneuverData) console.error('Warning: Maneuver not found: ' + maneuver)
         return maneuverData

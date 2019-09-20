@@ -1,6 +1,6 @@
 import { RawCharacterType } from '@/types/rawCharacterTypes'
 import { ClassType } from '@/types/characterTypes'
-import { chain, mapValues } from 'lodash'
+import { chain, mapValues, get } from 'lodash'
 import { SkillsType } from '@/types/referenceTypes'
 
 function getAbilityScore (rawCharacter: RawCharacterType, ability: string) {
@@ -49,7 +49,7 @@ export default function generateAbilityScores (
   const proficientSaves = getProficientSaves(rawCharacter, myClasses)
   const intBonus = getModifier(getAbilityScore(rawCharacter, 'Intelligence'))
   const scholarData = rawCharacter.classes.find(({ name }) => name === 'Scholar')
-  const skillWithIntBonus = scholarData && scholarData.archetype.silverTongue && scholarData.archetype.silverTongue.intSkillBonus
+  const skillWithIntBonus = get(scholarData, 'archetype.silverTongue.intSkillBonus')
 
   return mapValues(skillsList, (skills, ability) => {
     const value = getAbilityScore(rawCharacter, ability)

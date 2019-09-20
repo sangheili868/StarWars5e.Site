@@ -1,18 +1,18 @@
 import { RawCharacterType, RawClassType } from '@/types/rawCharacterTypes'
 import { AbilityScoresType } from '@/types/completeCharacterTypes'
 import { PowerType } from '@/types/characterTypes'
-import { chain, concat } from 'lodash'
+import { chain, concat, get } from 'lodash'
 import { CastingMapType } from '@/types/referenceTypes'
 
-function getMultiplier (multiplierMap: CastingMapType, name: string, archetypeName: string) {
+function getMultiplier (multiplierMap: CastingMapType, name: string, archetypeName: string | undefined) {
   const multiplierFromClass = (multiplierMap[name] && multiplierMap[name].base)
-  const multiplierFromArchetype = (multiplierMap[name] && multiplierMap[name][archetypeName])
+  const multiplierFromArchetype = (multiplierMap[name] && archetypeName && multiplierMap[name][archetypeName])
   return multiplierFromClass || multiplierFromArchetype || 0
 }
 
 function getMaxPowerLevel (classes: RawClassType[], multiplierMap: CastingMapType) {
   const castingLevel = classes.reduce(
-    (acc, { name, archetype, levels }) => acc + (levels * getMultiplier(multiplierMap, name, archetype.name)),
+    (acc, { name, archetype, levels }) => acc + (levels * getMultiplier(multiplierMap, name, archetype && archetype.name)),
     0
   )
   return Math.min(9, Math.ceil(castingLevel / 2))
@@ -26,7 +26,7 @@ function getPowerPoints (
 ) {
   return classes.reduce((acc, { name, archetype, levels }) => {
     const isTech = castingType === 'tech'
-    switch (getMultiplier(multiplierMap, name, archetype.name)) {
+    switch (getMultiplier(multiplierMap, name, archetype && archetype.name)) {
       case 1 / 3:
         return acc + (isTech ? Math.ceil(levels / 2) : levels)
       case 1 / 2:
@@ -45,7 +45,7 @@ function getPowersKnown (rawCharacter: RawCharacterType, powers: PowerType[], ca
   return chain(rawCharacter.classes)
     .map(myClass => {
       const powerName = (castingType + 'Powers') as 'techPowers' | 'forcePowers'
-      const powerList = concat(myClass[powerName] as string[] || [], myClass.archetype[powerName] || [])
+      const powerList = concat(myClass[powerName] as string[] || [], get(myClass, 'archetype.' + powerName) || [])
       return powerList.map(myPower => {
         const powerData = powers.find(({ name }) => name === myPower)
         if (!powerData) console.error('Warning: Power not found: ' + myPower)

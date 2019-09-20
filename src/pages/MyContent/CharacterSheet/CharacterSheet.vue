@@ -1,13 +1,14 @@
 <script lang="ts">
   import { Component, Prop, Vue } from 'vue-property-decorator'
   import { namespace } from 'vuex-class'
-  import { ClassType, PowerType } from '@/types/characterTypes'
+  import { ClassType, PowerType, FeatType, BackgroundType } from '@/types/characterTypes'
+  import { RawCharacterType } from '@/types/rawCharacterTypes'
   import { EquipmentType } from '@/types/lootTypes'
   import CharacterSheetTop from './CharacterSheetTop.vue'
   import CharacterSheetSection from './CharacterSheetSection.vue'
   import rawCharacter from '@/test/senyaRaw.json'
   import generateCharacter from '../CharacterEngine/generateCharacter'
-  import { range } from 'lodash'
+  import { range, isEmpty } from 'lodash'
 
   const classesModule = namespace('classes')
   const equipmentModule = namespace('equipment')
@@ -28,13 +29,14 @@
     @equipmentModule.Action fetchEquipment!: () => void
     @powersModule.State powers!: PowerType[]
     @powersModule.Action fetchPowers!: () => void
-    @featsModule.State feats!: PowerType[]
+    @featsModule.State feats!: FeatType[]
     @featsModule.Action fetchFeats!: () => void
-    @backgroundsModule.State backgrounds!: PowerType[]
+    @backgroundsModule.State backgrounds!: BackgroundType[]
     @backgroundsModule.Action fetchBackgrounds!: () => void
 
     range = range
     openTabs: number[] = [0, 1, 2]
+    character: RawCharacterType | {} = rawCharacter
 
     created () {
       this.fetchClasses()
@@ -54,16 +56,28 @@
       } as { [ breakpoint: string ] : number })[this.$vuetify.breakpoint.name]
     }
 
+    get isValidCharacter () {
+      return !isEmpty(this.character)
+    }
+
     get completeCharacter () {
-      return generateCharacter(rawCharacter, this.classes, this.equipment, this.powers, this.feats, this.backgrounds)
+      return this.isValidCharacter && generateCharacter(
+        this.character as RawCharacterType,
+        this.classes,
+        this.equipment,
+        this.powers,
+        this.feats,
+        this.backgrounds
+      )
     }
   }
 </script>
 
 <template lang="pug">
   div
-    CharacterSheetTop(v-bind="{ completeCharacter }").mx-2
-    v-layout(justify-space-around)
+    v-btn(color="primary") Load New Character
+    CharacterSheetTop(v-if="isValidCharacter", v-bind="{ completeCharacter }").mx-2
+    v-layout(v-if="isValidCharacter", justify-space-around)
       v-flex(v-for="section in range(numSections)", :key="section", md4, sm6, xs12)
         CharacterSheetSection(v-bind="{ completeCharacter }", :currentTab="openTabs[section]")
 </template>

@@ -2,7 +2,7 @@
   import { Component, Prop, Vue } from 'vue-property-decorator'
   import addPlus from '@/utilities/addPlus'
   import { EquipmentType } from '@/types/lootTypes'
-  import { SuperiorityType, FeatureType } from '@/types/completeCharacterTypes'
+  import { SuperiorityType, CompletedFeatureType } from '@/types/completeCharacterTypes'
   import CharacterSheetModifier from './CharacterSheetModifier.vue'
   import CharacterSheetWeapon from './CharacterSheetWeapon.vue'
   import CharacterSheetSuperiority from './CharacterSheetSuperiority.vue'
@@ -24,7 +24,7 @@
     @Prop(Array) readonly equipment!: EquipmentType[]
     @Prop(Number) readonly passivePerception!: number
     @Prop(Object) readonly superiority!: SuperiorityType
-    @Prop(Array) readonly combatFeatures!: FeatureType[]
+    @Prop(Array) readonly combatFeatures!: CompletedFeatureType[]
 
     get weapons () {
       return this.equipment.filter(({ equipped, equipmentCategory }) => equipped && equipmentCategory === 'Weapon')

@@ -1,6 +1,6 @@
 <script lang="ts">
   import { Component, Prop, Vue } from 'vue-property-decorator'
-  import { CharacteristicsType, FeatureType } from '@/types/completeCharacterTypes'
+  import { CharacteristicsType, CompletedFeatureType } from '@/types/completeCharacterTypes'
   import { capitalize } from 'lodash'
   import CharacterSheetFeatures from './CharacterSheetFeatures.vue'
 
@@ -15,7 +15,7 @@
     @Prop(Array) readonly proficiencies!: string[]
     @Prop(Array) readonly languages!: string[]
     @Prop(Object) readonly characteristics!: CharacteristicsType
-    @Prop(Array) readonly nonCombatFeatures!: FeatureType[]
+    @Prop(Array) readonly nonCombatFeatures!: CompletedFeatureType[]
 
     startCase (input: string) {
       // Lodash's start case removes apostrophes, so we need a custom function to handle things like Biochemist's Kit

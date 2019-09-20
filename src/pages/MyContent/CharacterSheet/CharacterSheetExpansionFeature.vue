@@ -1,6 +1,6 @@
 <script lang="ts">
   import { Component, Prop, Vue } from 'vue-property-decorator'
-  import { FeatureType } from '@/types/completeCharacterTypes'
+  import { CompletedFeatureType } from '@/types/completeCharacterTypes'
   import { PowerType } from '@/types/characterTypes'
   import VueMarkdown from 'vue-markdown'
   import CheckList from '@/components/CheckList.vue'
@@ -12,7 +12,7 @@
     }
   })
   export default class CharacterSheetExpansionFeature extends Vue {
-    @Prop(Object) readonly feature!: FeatureType | PowerType
+    @Prop(Object) readonly feature!: CompletedFeatureType | PowerType
   }
 </script>
 

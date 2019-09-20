@@ -1,6 +1,6 @@
 import { RawCharacterType } from '@/types/rawCharacterTypes'
 import { pick, compact } from 'lodash'
-import { ClassType, PowerType } from '@/types/characterTypes'
+import { ClassType, PowerType, FeatType, BackgroundType } from '@/types/characterTypes'
 import { EquipmentType } from '@/types/lootTypes'
 import generateAbilityScores from './generateAbilityScores'
 import generateCombatStats from './generateCombatStats'
@@ -11,8 +11,7 @@ import generateEquipment from './generateEquipment'
 import generateCarryingCapacity from './generateCarryingCapacity'
 import generateSuperiorty from './generateSuperiority'
 import generateCasting from './generateCasting'
-import generateCombatFeatures from './generateCombatFeatures'
-import generateNonCombatFeatures from './generateNonCombatFeatures'
+import generateFeatures from './generateFeatures'
 import generateFeats from './generateFeats'
 import {
   experienceTable,
@@ -31,7 +30,9 @@ export default function generateCharacter (
   rawCharacter: RawCharacterType,
   classes: ClassType[],
   equipment: EquipmentType[],
-  powers: PowerType[]
+  powers: PowerType[],
+  feats: FeatType[],
+  backgrounds: BackgroundType[]
 ) {
   const myClasses = rawCharacter.classes.map(({ name }) => classes.find(myClass => name === myClass.name))
   if (myClasses.includes(undefined)) console.error('Class not found from ' + rawCharacter.classes.map(({ name }) => name))
@@ -46,10 +47,16 @@ export default function generateCharacter (
   }
   const credits = rawCharacter.equipment.find(({ name }) => name === 'credits')
 
-  const feats = generateFeats(rawCharacter)
+  const myFeatsList = generateFeats(rawCharacter)
+  const myFeats = myFeatsList.map(name => feats.find(feat => name === feat.name))
+  if (myFeats.includes(undefined)) console.error('Feats not found from ' + myFeatsList)
+  const myFoundFeats = compact(myFeats)
+  const mygdFeats = myFeatsList.map(name => gdFeats.find(feat => name === feat.name))
+  const myFoundgdFeats = compact(mygdFeats)
   const abilityScores = generateAbilityScores(rawCharacter, myFoundClasses, proficiencyBonus, skills)
-  const proficiencies = generateProficiencies(rawCharacter, myFoundClasses, feats, multiClassProficiencies, gdFeats)
+  const proficiencies = generateProficiencies(rawCharacter, myFoundClasses, myFeatsList, multiClassProficiencies, gdFeats)
   const myEquipment = generateEquipment(rawCharacter, equipment, abilityScores, proficiencyBonus, proficiencies)
+  const myBackground = backgrounds.find(({ name }) => name === rawCharacter.background.name)
 
   return {
     ...pick(rawCharacter, [
@@ -58,7 +65,7 @@ export default function generateCharacter (
       'user',
       'characteristics'
     ]),
-    classes: rawCharacter.classes.map(({ name, levels, archetype }) => ({ name, levels, archetype: archetype.name })),
+    classes: rawCharacter.classes.map(({ name, levels, archetype }) => ({ name, levels, archetype: archetype && archetype.name })),
     alignment: rawCharacter.characteristics.alignment,
     species: rawCharacter.species.name,
     background: rawCharacter.background.name,
@@ -74,7 +81,6 @@ export default function generateCharacter (
     carryingCapacity: generateCarryingCapacity(abilityScores),
     superiority: generateSuperiorty(rawCharacter, abilityScores, proficiencyBonus, maneuvers),
     ...generateCasting(rawCharacter, abilityScores, powers, proficiencyBonus, techCastingMap, forceCastingMap),
-    combatFeatures: generateCombatFeatures(rawCharacter, myFoundClasses),
-    nonCombatFeatures: generateNonCombatFeatures(rawCharacter, myFoundClasses)
+    ...generateFeatures(rawCharacter, classFeatures, archetypeFeatures, fightingStyles, myFoundgdFeats, myBackground)
   }
 }

@@ -98,14 +98,14 @@
         "name": "Resolute",
         "level": 2,
         "combat": true,
-        "source": "Discovery",
+        "source": "discovery",
         "description": "When you make a saving throw to resist charm and fear effects, you may add your Intelligence modifier to the roll."
       },
       {
         "name": "Charming Feint",
         "level": 3,
         "combat": true,
-        "source": "Discovery",
+        "source": "discovery",
         "description": "Allies within range of your Motivating Diplomat feature also gain a bonus to their damage roll equal to half your Intelligence modifier (rounded down)."
       },
       {
@@ -144,7 +144,7 @@
       {
         "name": "Pathfinder",
         "level": 3,
-        "combat": true,
+        "combat": false,
         "source": "base",
         "description": "Beginning at 3rd level, you are skilled at navigating the untamed wilds. You gain the following benefits when traveling for an hour or more:\r\n- Difficult terrain doesn't slow your group's travel.\r\n- You can't become lost by unenhanced means.\r\n- Even when you are engaged in another activity while traveling (such as foraging, navigating, or tracking), you remain alert to danger.\r\n- If you are traveling alone, you can move stealthily at a normal pace.\r\n- When you forage, you find twice as much food as you normally would.\r\n- When you make a Wisdom (Survival) check, you gain a bonus to the check equal to your Intelligence modifier."
       }
@@ -175,14 +175,22 @@
   "feats": [
     {
       "name": "Heavily Armored",
+      "combat": true,
       "description": "You have trained to master the use of heavy armor, gaining the following benefits:\r\n- You gain proficiency with heavy armor. If you are already proficient with heavy armor, instead increase your Strength score by 1, to a maximum of 20.\r\n- While you are wearing heavy armor, kinetic and energy damage that you take from unenhanced weapons is reduced by an amount equal to your proficiency bonus.",
       "proficiencies": [ "Heavy armor" ]
+    },
+    {
+      "name": "Healer",
+      "combat": true,
+      "description": "You are an able medic, allowing you to mend wounds quickly and get your allies back in the fight. You gain the following benefits:\r\n- Increase your Intelligence or Wisdom score by 1, to a maximum of 20.\r\n- When you use a medkit to stabilize a dying creature, that creature also regains 1 hit point.\r\n- As an action, you can spend one use of a medkit to tend to a creature and restore 1d6 + 4 hit points to it, plus additional hit points equal to the creature's maximum number of Hit Dice. The creature can't regain hit points again in this way until it finishes a short or long rest.\r\n",
+      "proficiencies": []
     }
   ],
 
   "fightingStyles": [
     {
-      "name": "Shielding Fighting Style",
+      "name": "Shielding",
+      "combat": true,
       "description": "You are skilled at using your shield to defend your allies as well as yourself. While you are wielding a medium or heavy shield with which you are proficient, you gain the following benefits:\r\n- When a creature you can see attacks a target other than you that is within 5 feet of you, you can use your reaction to impose disadvantage on the attack roll.\r\n- If you are wielding a heavy shield, you are no longer required to wield a weapon with the *light* property in the other hand."
     }
   ]

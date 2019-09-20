@@ -43,7 +43,7 @@ export interface RawClassType {
     name: string
   }[],
   expertise?: string[],
-  archetype: RawArchetypeType,
+  archetype?: RawArchetypeType,
   abilityScoreImprovements?: (RawFeatType | {
     type: string,
     abilitiesIncreased: {
@@ -52,7 +52,6 @@ export interface RawClassType {
     }[]
   })[]
 }
-
 
 export interface RawBackgroundType {
   name: string,
@@ -114,6 +113,9 @@ export interface RawCharacterType {
       successes: number,
       failures: number
     },
-    hasInspiration: boolean
+    hasInspiration: boolean,
+    featureUses: {
+      [feature: string]: number
+    }
   }
 }

@@ -35,10 +35,10 @@
       ],
       "discoveries": [
         {
-          "name": "resolute"
+          "name": "Resolute"
         },
         {
-          "name": "charmingFeint"
+          "name": "Charming Feint"
         }
       ],
       "expertise": [
@@ -46,7 +46,7 @@
         "Persuasion"
       ],
       "archetype": {
-        "name": "politician",
+        "name": "Politician Pursuit",
         "silverTongue": {
           "language": "Huttese",
           "intSkillBonus": "Persuasion"
@@ -61,7 +61,7 @@
       "skills": [
         "Piloting"
       ],
-      "fightingStyle": "shielding",
+      "fightingStyle": "Shielding",
       "techPowers": [
         "Electroshock",
         "Encrypted Message",
@@ -70,7 +70,7 @@
         "Tracer Bolt"
       ],
       "archetype": {
-        "name": "inquisitor",
+        "name": "Inquisitor Technique",
         "techPowers": [
           "Denounce",
           "Sense Force"
@@ -93,7 +93,7 @@
     "Charisma": 10
   },
   "background": {
-    "name": "folkHero",
+    "name": "Folk Hero",
     "skills": [
       "Athletics",
       "Animal Handling"
@@ -236,6 +236,10 @@
       "successes": 0,
       "failures": 0
     },
-    "hasInspiration": false
+    "hasInspiration": false,
+    "featureUses": {
+      "Ranger's Quarry": 3,
+      "Sage Advice": 1
+    }
   }
 }

@@ -132,3 +132,20 @@ export interface FeatType {
   prerequisites: string,
   attributesIncreased: string[]
 }
+
+export interface FightingStyleType {
+  name: string,
+  description: string
+}
+
+export interface FeatureType {
+  name: string,
+  level: number,
+  combat: boolean,
+  source: string,
+  description: string
+}
+
+export interface FeaturesType {
+  [ myClass: string ]: FeatureType[]
+}

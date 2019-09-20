@@ -35,7 +35,6 @@ export interface CastingType {
   powersKnown: PowerType[]
 }
 
-
 export interface CharacteristicsType {
   placeOfBirth: string,
   age: string,
@@ -66,9 +65,8 @@ export interface SuperiorityType {
 export interface FeatureType {
   name: string,
   description: string,
-  usage: string,
-  recharge: string,
-  uses: {
+  usage: {
+    recharge: string,
     current: number,
     maximum: number
   }
@@ -125,5 +123,5 @@ export interface CompleteCharacterType {
   techCasting: CastingType,
   forceCasting: CastingType,
   combatFeatures: FeatureType[],
-  otherFeatures: FeatureType[]
+  nonCombatFeatures: FeatureType[]
 }

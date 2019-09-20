@@ -21,7 +21,7 @@
     template(v-slot:header)
       h4 {{ feature.name }}
     div.ma-2.caption
-      CheckList(v-if="feature.uses", :current="feature.uses.current", :maximum="feature.uses.maximum", title="Uses")
+      CheckList(v-if="feature.usage", v-bind="feature.usage", title="Uses")
       div(v-if="feature.castingPeriodText") #[strong Casting Time:] {{ feature.castingPeriodText }}
       div(v-if="feature.range") #[strong Range:] {{ feature.range }}
       div(v-if="feature.duration") #[strong Duration:] {{ feature.duration }} {{ feature.concentration && '(Concentration)' }}

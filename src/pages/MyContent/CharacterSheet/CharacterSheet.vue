@@ -12,6 +12,8 @@
   const classesModule = namespace('classes')
   const equipmentModule = namespace('equipment')
   const powersModule = namespace('powers')
+  const featsModule = namespace('feats')
+  const backgroundsModule = namespace('backgrounds')
 
   @Component({
     components: {
@@ -26,6 +28,10 @@
     @equipmentModule.Action fetchEquipment!: () => void
     @powersModule.State powers!: PowerType[]
     @powersModule.Action fetchPowers!: () => void
+    @featsModule.State feats!: PowerType[]
+    @featsModule.Action fetchFeats!: () => void
+    @backgroundsModule.State backgrounds!: PowerType[]
+    @backgroundsModule.Action fetchBackgrounds!: () => void
 
     range = range
     openTabs: number[] = [0, 1, 2]
@@ -34,6 +40,8 @@
       this.fetchClasses()
       this.fetchEquipment()
       this.fetchPowers()
+      this.fetchFeats()
+      this.fetchBackgrounds()
     }
 
     get numSections () {
@@ -47,7 +55,7 @@
     }
 
     get completeCharacter () {
-      return generateCharacter(rawCharacter, this.classes, this.equipment, this.powers)
+      return generateCharacter(rawCharacter, this.classes, this.equipment, this.powers, this.feats, this.backgrounds)
     }
   }
 </script>

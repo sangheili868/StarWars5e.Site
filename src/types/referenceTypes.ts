@@ -72,5 +72,5 @@ export interface MulticlassProficienciesType {
 export interface gdFeats {
   name: string,
   description: string,
-  proficiencies: string
+  proficiencies: string[]
 }

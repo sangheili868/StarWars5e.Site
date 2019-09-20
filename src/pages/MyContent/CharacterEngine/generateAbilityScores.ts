@@ -1,15 +1,7 @@
 import { RawCharacterType } from '@/types/rawCharacterTypes'
 import { ClassType } from '@/types/characterTypes'
 import { chain, mapValues } from 'lodash'
-
-const skillObj: { [ability: string]: string[] } = {
-  Strength: ['Athletics'],
-  Dexterity: ['Acrobatics', 'Sleight of Hand', 'Stealth'],
-  Constitution: [],
-  Intelligence: ['Investigation', 'Lore', 'Nature', 'Piloting', 'Technology'],
-  Wisdom: ['Animal Handling', 'Insight', 'Medicine', 'Perception', 'Survival'],
-  Charisma: ['Deception', 'Intimidation', 'Performance', 'Persuasion']
-}
+import { SkillsType } from '@/types/referenceTypes'
 
 function getAbilityScore (rawCharacter: RawCharacterType, ability: string) {
   const backgroundImprovements = rawCharacter.background.feat.abilityScoreImprovements
@@ -19,8 +11,8 @@ function getAbilityScore (rawCharacter: RawCharacterType, ability: string) {
     // Todo: Add class ability score improvements (and from feats)
 }
 
-function getProficientSkills (rawCharacter: RawCharacterType):{ [ability: string]: { [skill: string]: string } } {
-  return mapValues(skillObj, skills => chain(skills)
+function getProficientSkills (rawCharacter: RawCharacterType, skillsList: SkillsType):{ [ability: string]: { [skill: string]: string } } {
+  return mapValues(skillsList, skills => chain(skills)
     .keyBy()
     .mapValues(skill => {
       const isExpertise = rawCharacter.classes.some(myClass => Array.isArray(myClass.expertise) && myClass.expertise.includes(skill))
@@ -45,20 +37,21 @@ function getModifier (value: number) {
 export default function generateAbilityScores (
   rawCharacter: RawCharacterType,
   myClasses: ClassType[],
-  proficiencyBonus: number
+  proficiencyBonus: number,
+  skillsList: SkillsType
 ) {
   const proficiencyBonuses: { [proficiencyLevel: string]: number } = {
     expertise: 2 * proficiencyBonus,
     proficient: proficiencyBonus,
     none: 0
   }
-  const proficientSkills = getProficientSkills(rawCharacter)
+  const proficientSkills = getProficientSkills(rawCharacter, skillsList)
   const proficientSaves = getProficientSaves(rawCharacter, myClasses)
   const intBonus = getModifier(getAbilityScore(rawCharacter, 'Intelligence'))
   const scholarData = rawCharacter.classes.find(({ name }) => name === 'Scholar')
   const skillWithIntBonus = scholarData && scholarData.archetype.silverTongue && scholarData.archetype.silverTongue.intSkillBonus
 
-  return mapValues(skillObj, (skills, ability) => {
+  return mapValues(skillsList, (skills, ability) => {
     const value = getAbilityScore(rawCharacter, ability)
     const modifier = getModifier(value)
     const isProficientInSave = proficientSaves && proficientSaves.includes(ability)

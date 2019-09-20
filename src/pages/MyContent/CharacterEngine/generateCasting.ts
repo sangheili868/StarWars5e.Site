@@ -2,37 +2,15 @@ import { RawCharacterType, RawClassType } from '@/types/rawCharacterTypes'
 import { AbilityScoresType } from '@/types/completeCharacterTypes'
 import { PowerType } from '@/types/characterTypes'
 import { chain, concat } from 'lodash'
+import { CastingMapType } from '@/types/referenceTypes'
 
-interface MultiplierMapType {
-  [myClass: string]: {
-     [archetype: string]: number
-  }
-}
-
-const techCastingMap = {
-  Engineer: { base: 1 },
-  Scout: { base: 1 / 2 },
-  Fighter: { 'Shield Specialist': 1 / 3 },
-  Operative: { 'Saboteur Practice': 1 / 3 }
-}
-
-const forceCastingMap = {
-    Berserker: { 'Marauder Approach': 1 / 3 },
-    Consular: { base: 1 },
-    Fighter: { 'Adept Specialist': 1 / 3 },
-    Guardian: { base: 1 / 2 },
-    Monk: { 'Ang-Tii': 1 / 3 },
-    Operative: { 'Beguiler Practice': 1 / 3 },
-    Sentinel: { base: 2 / 3 }
-}
-
-function getMultiplier (multiplierMap: MultiplierMapType, name: string, archetypeName: string) {
+function getMultiplier (multiplierMap: CastingMapType, name: string, archetypeName: string) {
   const multiplierFromClass = (multiplierMap[name] && multiplierMap[name].base)
   const multiplierFromArchetype = (multiplierMap[name] && multiplierMap[name][archetypeName])
   return multiplierFromClass || multiplierFromArchetype || 0
 }
 
-function getMaxPowerLevel (classes: RawClassType[], multiplierMap: MultiplierMapType) {
+function getMaxPowerLevel (classes: RawClassType[], multiplierMap: CastingMapType) {
   const castingLevel = classes.reduce(
     (acc, { name, archetype, levels }) => acc + (levels * getMultiplier(multiplierMap, name, archetype.name)),
     0
@@ -42,7 +20,7 @@ function getMaxPowerLevel (classes: RawClassType[], multiplierMap: MultiplierMap
 
 function getPowerPoints (
   classes: RawClassType[],
-  multiplierMap: MultiplierMapType,
+  multiplierMap: CastingMapType,
   abilityBonus: number,
   castingType: string
 ) {
@@ -83,7 +61,9 @@ export default function generateCasting (
   rawCharacter: RawCharacterType,
   abilityScores: AbilityScoresType,
   powers: PowerType[],
-  proficiencyBonus: number
+  proficiencyBonus: number,
+  techCastingMap: CastingMapType,
+  forceCastingMap: CastingMapType
 ) {
   const techCastingBonus = abilityScores.Intelligence.modifier
   const forceCastingBonus = {

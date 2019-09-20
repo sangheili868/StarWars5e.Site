@@ -89,6 +89,12 @@ export interface PowerType {
   prerequisite: string
 }
 
+export interface ManeuverType {
+  name: string,
+  classes: string[],
+  description: string
+}
+
 export interface AbilitiesIncreasedType {
   abilities: string[],
   amount: number

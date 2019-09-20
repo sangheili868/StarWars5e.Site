@@ -14,30 +14,18 @@ import generateCasting from './generateCasting'
 import generateCombatFeatures from './generateCombatFeatures'
 import generateNonCombatFeatures from './generateNonCombatFeatures'
 import generateFeats from './generateFeats'
-
-const experienceTable = [
-  0,
-  0,
-  300,
-  900,
-  2700,
-  6500,
-  14000,
-  23000,
-  34000,
-  48000,
-  64000,
-  85000,
-  100000,
-  120000,
-  140000,
-  165000,
-  195000,
-  225000,
-  265000,
-  305000,
-  355000
-]
+import {
+  experienceTable,
+  skills,
+  techCastingMap,
+  forceCastingMap,
+  multiClassProficiencies,
+  maneuvers,
+  classFeatures,
+  archetypeFeatures,
+  feats as gdFeats,
+  fightingStyles
+} from '@/test/gameData.json'
 
 export default function generateCharacter (
   rawCharacter: RawCharacterType,
@@ -59,8 +47,8 @@ export default function generateCharacter (
   const credits = rawCharacter.equipment.find(({ name }) => name === 'credits')
 
   const feats = generateFeats(rawCharacter)
-  const abilityScores = generateAbilityScores(rawCharacter, myFoundClasses, proficiencyBonus)
-  const proficiencies = generateProficiencies(rawCharacter, myFoundClasses, feats)
+  const abilityScores = generateAbilityScores(rawCharacter, myFoundClasses, proficiencyBonus, skills)
+  const proficiencies = generateProficiencies(rawCharacter, myFoundClasses, feats, multiClassProficiencies, gdFeats)
   const myEquipment = generateEquipment(rawCharacter, equipment, abilityScores, proficiencyBonus, proficiencies)
 
   return {
@@ -84,8 +72,8 @@ export default function generateCharacter (
     equipment: myEquipment,
     credits: credits && credits.quantity,
     carryingCapacity: generateCarryingCapacity(abilityScores),
-    superiority: generateSuperiorty(rawCharacter, abilityScores, proficiencyBonus),
-    ...generateCasting(rawCharacter, abilityScores, powers, proficiencyBonus),
+    superiority: generateSuperiorty(rawCharacter, abilityScores, proficiencyBonus, maneuvers),
+    ...generateCasting(rawCharacter, abilityScores, powers, proficiencyBonus, techCastingMap, forceCastingMap),
     combatFeatures: generateCombatFeatures(rawCharacter, myFoundClasses),
     nonCombatFeatures: generateNonCombatFeatures(rawCharacter, myFoundClasses)
   }

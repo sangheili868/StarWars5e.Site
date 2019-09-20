@@ -1,25 +1,15 @@
 import { RawCharacterType } from '@/types/rawCharacterTypes'
 import { ClassType } from '@/types/characterTypes'
-import { compact, uniqBy, lowerCase } from 'lodash'
+import { compact, uniqBy, lowerCase, chain } from 'lodash'
+import { MulticlassProficienciesType, gdFeats } from '@/types/referenceTypes'
 
-const multiclassProficiencies: { [myClass: string]: string[] } = {
-  Berserker: [ 'Light armor', 'all vibroweapons' ],
-  Consular: [ 'Simple lightweapons' ],
-  Fighter: [ 'Light armor', 'medium armor', 'all blasters', 'all vibroweapons' ],
-  Engineer: [ 'Light armor' ],
-  Guardian: [ 'Light armor', 'medium armor', 'all lightweapons', 'all vibroweapons' ],
-  Operative: [ 'Light armor' ],
-  Monk: [ 'Simple vibroweapons', 'techblades' ],
-  Scout: [ 'Light armor', 'medium armor', 'all blasters', 'all vibroweapons' ],
-  Scholar: [ 'light armor' ],
-  Sentinel: [ 'light armor', 'simple lightweapons', 'simple vibroweapons' ]
-}
-
-const featProficiencies: { [feat: string]: string } = {
-  'Heavily Armored': 'Heavy armor'
-}
-
-export default function generateProficiencies (rawCharacter: RawCharacterType, classes: ClassType[], feats: string[]) {
+export default function generateProficiencies (
+  rawCharacter: RawCharacterType,
+  classes: ClassType[],
+  feats: string[],
+  multiclassProficiencies: MulticlassProficienciesType,
+  gdFeats: gdFeats[]
+) {
   const startingClass = rawCharacter.classes.find(({ isStartingClass }) => isStartingClass)
   const startingClassData = startingClass && classes.find(({ name }) => name === startingClass.name)
   const fromStartingClass = startingClassData && [
@@ -30,7 +20,14 @@ export default function generateProficiencies (rawCharacter: RawCharacterType, c
     .filter(({ isStartingClass }) => !isStartingClass)
     .map(({ name }) => multiclassProficiencies[name])
     .flat()
-  const fromFeats = compact(feats.map(featName => featProficiencies[featName]))
+  const fromFeats = chain(feats)
+    .map(featName => {
+      const featData = gdFeats.find(({ name }) => featName === name)
+      return featData && featData.proficiencies
+    })
+    .compact()
+    .flatten()
+    .value()
 
   return uniqBy([
     ...(fromStartingClass || []),

@@ -28,10 +28,10 @@
         "Survival"
       ],
       "maneuvers": [
-        "headsUp",
-        "oneStepAhead",
-        "callTheGuards",
-        "targetedStrike"
+        "Heads Up",
+        "One Step Ahead",
+        "Call the Guards",
+        "Targeted Strike"
       ],
       "discoveries": [
         {

@@ -68,9 +68,9 @@ function getPowersKnown (rawCharacter: RawCharacterType, powers: PowerType[], ca
     .map(myClass => {
       const powerName = (castingType + 'Powers') as 'techPowers' | 'forcePowers'
       const powerList = concat(myClass[powerName] as string[] || [], myClass.archetype[powerName] || [])
-      return powerList.map(techPower => {
-        const powerData = powers.find(({ name }) => name === techPower)
-        if (!powerData) console.error('Warning: Power not found: ' + techPower)
+      return powerList.map(myPower => {
+        const powerData = powers.find(({ name }) => name === myPower)
+        if (!powerData) console.error('Warning: Power not found: ' + myPower)
         return powerData
       })
     })

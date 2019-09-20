@@ -23,8 +23,9 @@ export interface RawArchetypeType {
     language: string,
     intSkillBonus: string
   },
-  forcePowers?: string[]
-  techPowers?: string[]
+  forcePowers?: string[],
+  techPowers?: string[],
+  maneuvers?: string[]
 }
 
 export interface RawClassType {

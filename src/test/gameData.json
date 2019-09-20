@@ -35,7 +35,7 @@
   "techCastingMap": {
     "Engineer": { "base": 1 },
     "Scout": { "base": 0.5 },
-    "Fighter": { "Shield Specialist": 0.33333 },
+    "Fighter": { "Shield Specialist": 0.3333333333333333 },
     "Operative": { "Saboteur Practice": 0.3333333333333333 }
   },
 
@@ -114,9 +114,8 @@
         "source": "base",
         "combat": false,
         "description": "When you reach 2nd level, you can spend 1 minute spreading your knowledge and experience, advising those around you. When you do so, choose a skill or tool you are proficient with and a number of friendly creatures up to your Intelligence modifier within 30 feet of you who can hear you and who can understand you. Once within the next hour, the next time each creature would make an ability check with the chosen skill or tool, they may add their proficiency bonus to the roll if they are not already proficient. A creature may only benefit from this feature once. If a creature is targeted by this feature again before using it, they can choose to retain the first benefit or replace it with the new skill or tool instead.\r\n\r\nOnce you've used this feature, you can't use it again until you finish a long rest. Starting at 13th level, you regain the ability to use it after you complete a short or long rest.",
-        "uses": {
+        "usage": {
           "recharge": "longRest",
-          "current": 1,
           "maximum": 1
         }
       }
@@ -135,10 +134,9 @@
         "combat": true,
         "source": "base",
         "description": "Also 1st level, you learn how to effectively read and track your prey. On your turn, you can choose a creature you can see within 90 feet and mark it as your quarry (no action required). For the next 10 minutes, you gain the following benefits:\r\n- Once per round, when you hit the target with a weapon attack, you can deal 1d4 additional damage to it of the same type as the weapon's damage. This die changes as you gain scout levels, as shown in the Ranger's Quarry Damage Die column of the scout class table.\r\n- You have advantage on any Wisdom (Perception) or Wisdom (Survival) check you make to find it while it's on the same planet as you. \r\n\r\nYou can use this feature a number of times equal to your Intelligence modifier. You regain all expended uses when you finish a short or long rest.",
-        "uses": {
+        "usage": {
           "recharge": "shortRest",
-          "current": 3,
-          "maximum": 4
+          "maximum": "Intelligence"
         }
       },
       {

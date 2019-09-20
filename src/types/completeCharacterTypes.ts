@@ -62,10 +62,11 @@ export interface SuperiorityType {
   }[]
 }
 
-export interface FeatureType {
+export interface CompletedFeatureType {
   name: string,
   description: string,
-  usage: {
+  combat: boolean,
+  usage?: {
     recharge: string,
     current: number,
     maximum: number
@@ -122,6 +123,6 @@ export interface CompleteCharacterType {
   superiority: SuperiorityType,
   techCasting: CastingType,
   forceCasting: CastingType,
-  combatFeatures: FeatureType[],
-  nonCombatFeatures: FeatureType[]
+  combatFeatures: CompletedFeatureType[],
+  nonCombatFeatures: CompletedFeatureType[]
 }

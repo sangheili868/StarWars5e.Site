@@ -1,6 +1,7 @@
 import { RawCharacterType } from '@/types/rawCharacterTypes'
 import { FightingStyleType, FeatureType, FeaturesType, BackgroundType } from '@/types/characterTypes'
-import { compact, groupBy } from 'lodash'
+import { compact } from 'lodash'
+import { CompletedFeatureType, AbilityScoresType } from '@/types/completeCharacterTypes'
 
 function getValidFeatures (
   features: FeatureType[],
@@ -17,15 +18,32 @@ function getValidFeatures (
   })
 }
 
+function calculateUsage (
+  rawCharacter: RawCharacterType,
+  abilityScores: AbilityScoresType,
+  feature: CompletedFeatureType
+) {
+  if (!feature.usage) return feature
+  const maximum = isNaN(feature.usage.maximum) ? abilityScores[feature.usage.maximum].modifier : feature.usage.maximum
+  return {
+    ...feature,
+    usage: {
+      recharge: feature.usage.recharge,
+      current: rawCharacter.currentStats.featureUses[feature.name],
+      maximum
+    }
+  }
+}
+
 export default function generateCombatFeatures (
   rawCharacter: RawCharacterType,
   classFeatures: FeaturesType,
   archetypeFeatures: FeaturesType,
   fightingStyles: FightingStyleType[],
   myFoundgdFeats: FeatureType[],
-  myBackground: BackgroundType
+  myBackground: BackgroundType,
+  abilityScores: AbilityScoresType
 ) {
-  // todo: usage
   const myClassFeatures = rawCharacter.classes.map(({ name: className, levels, discoveries }) =>
     getValidFeatures(classFeatures[className], levels, discoveries)
   ).flat()
@@ -45,7 +63,7 @@ export default function generateCombatFeatures (
       combat: false,
       description: myBackground.featureText
     }
-  ]
+  ].map(feature => calculateUsage(rawCharacter, abilityScores, feature))
 
   return {
     combatFeatures: myFeatures.filter(({ combat }) => combat),

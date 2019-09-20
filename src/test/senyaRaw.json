@@ -4,7 +4,7 @@
   "user": "tyrzaphir",
   "experiencePoints": 23225,
   "species": {
-    "name": "human",
+    "name": "Human",
     "abilityScoreImprovement": {
       "Intelligence": 2,
       "Strength": 1,
@@ -110,7 +110,7 @@
   },
   "characteristics": {
     "placeOfBirth": "Rasynda, first planet of the Durgal system",
-    "alignment": "lawfulLight",
+    "alignment": "Lawful Light",
     "personalityTraits": "I am always calm, no matter the situation. Noting is more satisfying that a hard day of good work.",
     "ideal": "People. Devotion to the Force brings far too much war and chaos, and commoners like me should not have to pay for it.",
     "bond": "The lost people of Rasynda are spread across the galaxy, and I was once their governess.",

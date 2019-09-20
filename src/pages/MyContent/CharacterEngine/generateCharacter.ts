@@ -81,6 +81,14 @@ export default function generateCharacter (
     carryingCapacity: generateCarryingCapacity(abilityScores),
     superiority: generateSuperiorty(rawCharacter, abilityScores, proficiencyBonus, maneuvers),
     ...generateCasting(rawCharacter, abilityScores, powers, proficiencyBonus, techCastingMap, forceCastingMap),
-    ...generateFeatures(rawCharacter, classFeatures, archetypeFeatures, fightingStyles, myFoundgdFeats, myBackground)
+    ...generateFeatures(
+      rawCharacter,
+      classFeatures,
+      archetypeFeatures,
+      fightingStyles,
+      myFoundgdFeats,
+      myBackground,
+      abilityScores
+    )
   }
 }

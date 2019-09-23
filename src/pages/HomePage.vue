@@ -17,14 +17,6 @@
     @uiModule.State isDarkSide!: boolean
     @uiModule.Action toggleDarkSide!: (value: boolean) => Promise<void>
 
-    get darkSideModel () {
-      return this.isDarkSide
-    }
-
-    set darkSideModel (value: boolean) {
-      this.toggleDarkSide(value)
-    }
-
     get socialLinks () {
       return [
         {
@@ -89,12 +81,10 @@
         v-btn(light)
           v-icon(:color="title").mr-3 {{ icon }}
           | {{ title }}
-    v-switch(
-      label="Join the Dark Side",
-      color="red darken-3",
-      :class="$style.darkSideSwitch",
-      v-model="darkSideModel"
-    )
+    v-btn(
+      :color=" isDarkSide ? 'secondary' : 'primary'"
+      @click="toggleDarkSide(!isDarkSide)"
+    ) Join the {{ isDarkSide ? 'Light' : 'Dark' }} Side
 </template>
 
 <style module lang="scss">

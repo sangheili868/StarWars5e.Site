@@ -38,7 +38,7 @@
     }
 
     get isDark () {
-      return this.$vuetify.dark
+      return this.$vuetify.theme.dark
     }
   }
 </script>

@@ -1,9 +1,18 @@
 <script lang="ts">
-  import { Component, Prop, Vue } from 'vue-property-decorator'
+  import { Component, Prop, Vue, Watch } from 'vue-property-decorator'
 
   @Component
   export default class SearchBox extends Vue {
     searchText = ''
+
+    created () {
+      this.setText()
+    }
+
+    @Watch('$route')
+    setText () {
+      this.searchText = this.$route.query.searchText as string
+    }
 
     handleSubmit () {
       if (this.searchText) this.$router.push({ path: '/searchResults', query: { searchText: this.searchText } })
@@ -23,6 +32,7 @@
     solo,
     clearable,
     hide-details,
+    autofocus,
     @click:append="handleSubmit"
     @keypress="handleInput"
   ).searchInput.ml-2

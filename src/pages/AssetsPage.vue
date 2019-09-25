@@ -90,7 +90,7 @@
           routes: [
             {
               href: 'https://www.reddit.com/r/sw5e/comments/cb1i87/printing_a_star_wars_5e_story/',
-              title: 'Printing Instructions For The Player\'s Handbook'
+              title: 'Printing Instructions'
             },
             {
               href: 'https://www.reddit.com/r/sw5e/comments/9v487b/10_pregenerated_level_1_player_characters_1_for/',

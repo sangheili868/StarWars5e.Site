@@ -14,6 +14,8 @@
     @uiModule.State isSideBarOpen!: boolean
     @uiModule.Action updateSideBar!: (value: boolean) => void
 
+    isSearchOpen = false
+
     get routes () {
       return [
         {
@@ -101,24 +103,29 @@
 </script>
 
 <template lang="pug">
-  v-app-bar(app, clipped-left, :color="$vuetify.theme.dark && 'black'")
+  v-app-bar(app, clipped-left, :color="$vuetify.theme.dark ? 'black' : undefined")
     v-app-bar-nav-icon(v-if="isPageWithNavigation", @click="handleSideIconClick").hidden-md-and-up
     v-toolbar-title
       router-link(to="/")
         v-img(:src="require('@/assets/sw5e-logo.png')", width="100px")
     v-spacer
-    v-toolbar-items.hidden-md-and-down
-      component(v-for="({ to, title, nested}) in routes", :key="title", v-bind="buildComponentProps(to, nested)")
-        template(v-if="nested && nested.length", v-slot:activator="{ on }")
-          v-btn(text, color="primary", v-on="on" :to="to") {{ title }}
-            v-icon.pl-2 fa-caret-down
-        v-list(v-for="nestedRoute in nested", :key="nestedRoute.title", dense)
-          v-list-item(:to="to + nestedRoute.to")
-            v-list-item-title {{ nestedRoute.title }}
-        template(v-if="!nested || !nested.length") {{ title }}
-      SearchBox
-    v-toolbar-items.hidden-lg-and-up
-      v-menu(bottom, left, offset-y, attach)
+    SearchBox(v-if="isSearchOpen")
+    v-toolbar-items.hidden-sm-and-down
+      template(v-if="!isSearchOpen")
+        component(v-for="({ to, title, nested }) in routes", :key="title", v-bind="buildComponentProps(to, nested)")
+          template(v-if="nested && nested.length", v-slot:activator="{ on }")
+            v-btn(text, color="primary", v-on="on" :to="to") {{ title }}
+              v-icon.pl-2 fa-caret-down
+          v-list(v-for="nestedRoute in nested", :key="nestedRoute.title", dense)
+            v-list-item(:to="to + nestedRoute.to")
+              v-list-item-title {{ nestedRoute.title }}
+          template(v-if="!nested || !nested.length") {{ title }}
+      v-btn(icon, @click="isSearchOpen = !isSearchOpen")
+        v-icon(color="primary") {{ isSearchOpen ? 'fa-times' : 'fa-search' }}
+    v-toolbar-items.hidden-md-and-up
+      v-btn(icon, @click="isSearchOpen = !isSearchOpen")
+        v-icon {{ isSearchOpen ? 'fa-times' : 'fa-search' }}
+      v-menu(v-if="!isSearchOpen", bottom, left, offset-y, attach)
         template(v-slot:activator="{ on }")
           v-btn(icon, v-on="on")
             v-icon fa-ellipsis-v

@@ -39,7 +39,7 @@
     h1 Classes
     CardSet(:cards="classesWithLinks")
       template(v-slot="{ card }")
-        v-card-text(primary-title)
+        v-card-text(primary-title).black--text
           h3 {{ card.name }}
           div.text-left
             p {{ card.summary }}

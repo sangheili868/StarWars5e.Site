@@ -35,8 +35,8 @@
   div
     vue-headful(:title="title")
     div(v-if="blob")
-      h1.text-xs-left {{blob.chapterName}}
-      VueMarkdown(:source="blob.contentMarkdown").text-xs-left
+      h1.text-left {{blob.chapterName}}
+      VueMarkdown(:source="blob.contentMarkdown").text-left
       slot
     Loading(v-else)
 </template>

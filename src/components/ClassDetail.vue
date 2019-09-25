@@ -22,7 +22,7 @@
 </script>
 
 <template lang="pug">
-  div(v-if="classData").text-xs-left
+  div(v-if="classData").text-left
     h1 {{ classData.name }}
     ImageWithLoading(:src="classData.imageUrls[0]", :class="$style.portrait", height="350", width="350", contain).ma-2
     VueMarkdown(:source="classData.flavorText")
@@ -60,10 +60,10 @@
     div(:class="$style.variantWealth")
       div.d-flex
         strong Class
-        strong.text-xs-right Funds
+        strong.text-right Funds
       div(:class="[ $style.funds, { [$style.darkSide]: isDark } ]").d-flex
         div {{ classData.name }}
-        div.text-xs-right {{ classData.startingWealthVariant }}
+        div.text-right {{ classData.startingWealthVariant }}
     br
     VueMarkdown(:source="classData.classFeatureText")
     VueMarkdown(v-if="classData.classFeatureText2", :source="classData.classFeatureText2")

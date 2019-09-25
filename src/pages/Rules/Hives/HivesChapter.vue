@@ -57,7 +57,7 @@
   div
     vue-headful(:title="title")
     div(v-if="blob")
-      VueMarkdownWithAnchors(:source="blob").text-xs-left
+      VueMarkdownWithAnchors(:source="blob").text-left
       slot
     Loading(v-else)
 </template>

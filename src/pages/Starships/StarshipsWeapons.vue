@@ -66,6 +66,4 @@
     h1 Starship Weapons
     br
     SearchTable(v-bind="{ headers, items, initialSearch, tableType }")
-      template(v-slot:default="props")
-        VueMarkdown(:source="props.item.description")
 </template>

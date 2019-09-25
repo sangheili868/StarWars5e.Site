@@ -42,12 +42,12 @@
 
 <template lang="pug">
   div
-    VueMarkdown(:source="blob").text-xs-left
+    VueMarkdown(:source="blob").text-left
     CardSet(:cards="deploymentsWithLinks")
       template(v-slot="{ card }")
-        v-card-text(primary-title)
+        v-card-text(primary-title).black--text
           h3 {{ card.name }}
-          div.text-xs-left
+          div.text-left
             p {{ card.description }}
     Loading(v-if="!blob || !deployments.length")
 </template>

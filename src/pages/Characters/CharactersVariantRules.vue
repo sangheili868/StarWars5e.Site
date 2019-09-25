@@ -31,8 +31,8 @@
 
 <template lang="pug">
   div(v-if="variantRuleBlobs.length")
-    h1.text-xs-left Other Variant Rules
-    p.text-xs-left
+    h1.text-left Other Variant Rules
+    p.text-left
       | These are various rules that change the game in interesting and significant ways. None are required in order to
       | play, but some or all can be used to add a new flavor to your table. Click on any of them to learn more.
     CardSet(:cards="variantRuleBlobsWithLinks")

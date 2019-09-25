@@ -118,7 +118,7 @@
       div(:class="$style.routes")
         div(v-for="{ href, title, author } in routes", :key="title" )
           a(:href="href", target="_blank")
-            v-btn(color="primary") {{ title }}
+            v-btn(color="primary").mx-2.mt-2 {{ title }}
           div(v-if="author") courtesy of #[a(:href="`https://www.reddit.com${author}`", target="_blank") {{ author }}]
 </template>
 

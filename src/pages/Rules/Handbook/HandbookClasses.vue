@@ -46,12 +46,12 @@
 
 <template lang="pug">
   div
-    VueMarkdown(:source="blob").text-xs-left
+    VueMarkdown(:source="blob").text-left
     CardSet(:cards="classesWithLinks")
       template(v-slot="{ card }")
-        v-card-text(primary-title)
+        v-card-text(primary-title).black--text
           h3 {{ card.name }}
-          div.text-xs-left
+          div.text-left
             p {{ card.summary }}
             p.ma-0 #[strong Hit Die:] 1d{{ card.hitDiceDieType }}
             p.ma-0 #[strong Primary Ability:] {{ card.primaryAbility }}

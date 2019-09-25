@@ -35,9 +35,9 @@
     h1 Starship Deployments
     CardSet(:cards="deploymentsWithLinks")
       template(v-slot="{ card }")
-        v-card-text(primary-title)
+        v-card-text(primary-title).black--text
           h3 {{ card.name }}
-          div.text-xs-left
+          div.text-left
             p {{ card.description }}
     Loading(v-if="!deployments.length")
 </template>

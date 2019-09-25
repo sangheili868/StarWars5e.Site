@@ -55,6 +55,7 @@
           value: 'rarityText',
           filterChoices: ['Standard', 'Premium', 'Prototype', 'Advanced', 'Legendary',
            'Artifact', 'Multiple' ],
+          render: _.startCase,
           filterFunction: ({ searchableRarity }: EnhancedItemType, filterValue: string) => searchableRarity === filterValue
         },
         { text: 'Value', value: 'valueText' },

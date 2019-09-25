@@ -51,10 +51,10 @@
 </script>
 
 <template lang="pug">
-  div( v-if="monster" ).text-xs-left
+  div( v-if="monster" ).text-left
     h1 {{ monster.name }}
       a(:href="`/rules/monsters/monsters/${monster.name}`", target="_blank")
-        v-btn(v-if="!isAtDetail", flat, icon, color="secondary")
+        v-btn(v-if="!isAtDetail", text, icon, color="secondary")
           v-icon fa-external-link-alt
     i {{ monster.size }} {{ monster.types.join(', ')}}, {{ monster.alignment }}
     hr.mt-2
@@ -62,7 +62,7 @@
     div #[strong Hit Points] {{ monster.hitPoints }} ({{ monster.hitPointRoll }})
     div #[strong Speed] {{ monster.speeds }}
     hr
-    div(:class="$style.abilityScores").text-xs-center
+    div(:class="$style.abilityScores").text-center
       div(v-for="{ score, value, modifier } in abilityScores", :key="score").ma-2
         strong {{ score }}
         div {{ value }} ({{ modifier }})

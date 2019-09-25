@@ -36,7 +36,7 @@
 </script>
 
 <template lang="pug">
-  div( v-if="speciesData").text-xs-left
+  div( v-if="speciesData").text-left
     h2 Half-Human
     VueMarkdown(:source="correctedText")
     h3 {{ speciesData.name }} Traits
@@ -45,7 +45,7 @@
       div #[strong #[em {{trait.name}}] ] {{ trait.description }}
     div.block
       h2 Half-Human
-      div.d-flex.text-xs-center
+      div.d-flex.text-center
         table(v-for="(chunk, index) in tableChunks", :key="index").table.ma-1
           tbody
             tr(

@@ -19,8 +19,8 @@
   div
     div(v-for="{category, routes} in categories", :key="category")
       h3.mt-3 {{ category }}
-      v-container(grid-list-lg, fluid)
-        v-layout(row, wrap, justify-center)
-          v-flex(v-for="{ to, title } in routes", :key="title", d-flex).xs12.sm6.md3
-            v-btn(color="primary", :to="to") {{ title }}
+      v-container(fluid)
+        v-row(justify="center")
+          v-col(v-for="{ to, title } in routes", :key="title", :cols="12", :sm="6", :md="3")
+            v-btn(color="primary", :to="to", block) {{ title }}
 </template>

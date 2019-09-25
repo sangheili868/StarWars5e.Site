@@ -61,7 +61,7 @@
 <template lang="pug">
   div
     vue-headful(:title="title")
-    div( v-if="background" ).text-xs-left
+    div( v-if="background" ).text-left
       h1 {{ background.name }}
       VueMarkdown(:source="background.flavorText.replace(/\ufffd/g, '-')")
       div #[strong Skill Proficiencies:] {{ background.skillProficiencies }}

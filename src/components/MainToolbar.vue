@@ -88,7 +88,7 @@
         attach: true
       } : {
         is: 'v-btn',
-        flat: true,
+        text: true,
         color: 'primary',
         to
       }
@@ -101,8 +101,8 @@
 </script>
 
 <template lang="pug">
-  v-toolbar(app, clipped-left)
-    v-toolbar-side-icon(v-if="isPageWithNavigation", @click="handleSideIconClick").hidden-md-and-up
+  v-app-bar(app, clipped-left, :color="$vuetify.theme.dark && 'black'")
+    v-app-bar-nav-icon(v-if="isPageWithNavigation", @click="handleSideIconClick").hidden-md-and-up
     v-toolbar-title
       router-link(to="/")
         v-img(:src="require('@/assets/sw5e-logo.png')", width="100px")
@@ -110,11 +110,11 @@
     v-toolbar-items.hidden-md-and-down
       component(v-for="({ to, title, nested}) in routes", :key="title", v-bind="buildComponentProps(to, nested)")
         template(v-if="nested && nested.length", v-slot:activator="{ on }")
-          v-btn(flat, color="primary", v-on="on" :to="to") {{ title }}
+          v-btn(text, color="primary", v-on="on" :to="to") {{ title }}
             v-icon.pl-2 fa-caret-down
         v-list(v-for="nestedRoute in nested", :key="nestedRoute.title", dense)
-          v-list-tile(:to="to + nestedRoute.to")
-            v-list-tile-title {{ nestedRoute.title }}
+          v-list-item(:to="to + nestedRoute.to")
+            v-list-item-title {{ nestedRoute.title }}
         template(v-if="!nested || !nested.length") {{ title }}
       SearchBox
     v-toolbar-items.hidden-lg-and-up
@@ -123,9 +123,9 @@
           v-btn(icon, v-on="on")
             v-icon fa-ellipsis-v
         v-list
-          v-list-tile(v-for="{to, title} in routes", :key="title", :to="to")
-            v-list-tile-title {{ title }}
-          v-list-tile(to="/searchResults")
+          v-list-item(v-for="{to, title} in routes", :key="title", :to="to")
+            v-list-item-title {{ title }}
+          v-list-item(to="/searchResults")
             v-icon.pr-2 fa-search
-            v-list-tile-title Search
+            v-list-item-title Search
 </template>

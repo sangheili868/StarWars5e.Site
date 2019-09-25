@@ -41,7 +41,7 @@
       template(v-slot="{ card }")
         v-card-text(primary-title)
           h3 {{ card.name }}
-          div.text-xs-left
+          div.text-left
             p {{ card.summary }}
             p.ma-0 #[strong Hit Die:] 1d{{ card.hitDiceDieType }}
             p.ma-0 #[strong Primary Ability:] {{ card.primaryAbility }}

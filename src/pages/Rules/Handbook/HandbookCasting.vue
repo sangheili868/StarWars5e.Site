@@ -15,6 +15,6 @@
 <template lang="pug">
   div
     HandbookChapter(chapter="casting")
-      v-btn(to="/rules/handbook/forcePowers", color="primary") Force Powers List
-      v-btn(to="/rules/handbook/techPowers", color="primary") Tech Powers List
+      v-btn(to="/rules/handbook/casting/forcePowers", color="primary").ma-2 Force Powers List
+      v-btn(to="/rules/handbook/casting/techPowers", color="primary").ma-2 Tech Powers List
 </template>

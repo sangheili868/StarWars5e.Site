@@ -22,18 +22,14 @@
     append-icon="fa-search",
     solo,
     clearable,
+    hide-details,
     @click:append="handleSubmit"
     @keypress="handleInput"
-  ).searchInput
+  ).searchInput.ml-2
 </template>
 
 <style lang="scss">
   .searchInput.v-text-field--solo {
     align-self: center;
-
-    .v-input__control .v-input__slot {
-      border-radius: 100px !important;
-      margin-bottom: 0;
-    }
   }
 </style>

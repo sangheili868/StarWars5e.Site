@@ -17,6 +17,11 @@
     @uiModule.State isDarkSide!: boolean
     @uiModule.Action toggleDarkSide!: (value: boolean) => Promise<void>
 
+    toggleDarkSideTheme () {
+      this.$vuetify.theme.dark = !this.isDarkSide
+      this.toggleDarkSide(!this.isDarkSide)
+    }
+
     get socialLinks () {
       return [
         {
@@ -77,13 +82,13 @@
       | against. Ready to take to the stars? All the rules on piloting and customizing your very own spaceship are here
       | too. If you want to help contribute to this conversion, join one of the active communities at the links below!
     div(:class="$style.routes").mb-5
-      a(v-for="{ href, icon, title, author } in socialLinks", :key="title", :href="href", target="_blank")
+      a(v-for="{ href, icon, title, author } in socialLinks", :key="title", :href="href", target="_blank").ma-2
         v-btn(light)
           v-icon(:color="title").mr-3 {{ icon }}
           | {{ title }}
     v-btn(
       :color=" isDarkSide ? 'secondary' : 'primary'"
-      @click="toggleDarkSide(!isDarkSide)"
+      @click="toggleDarkSideTheme"
     ) Join the {{ isDarkSide ? 'Light' : 'Dark' }} Side
 </template>
 

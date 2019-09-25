@@ -22,11 +22,11 @@
         v-if="title",
         :class="{ ['darken-1']: isDark, ['lighten-2']: !isDark }",
         primary-title
-      ).headline.grey {{ title }}
-      v-card-text
+      ).headline.grey.primary--text.mb-2 {{ title }}
+      v-card-text.black--text
         slot
       v-divider
       v-card-actions
         v-spacer
-        v-btn(color="primary", flat, @click="isOpen = false") Close
+        v-btn(color="primary", text, @click="isOpen = false") Close
 </template>

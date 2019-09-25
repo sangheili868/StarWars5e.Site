@@ -59,7 +59,7 @@
 <template lang="pug">
   div
     vue-headful(:title="title")
-    div( v-if="archetype" ).text-xs-left
+    div( v-if="archetype" ).text-left
       h1 {{ archetype.name }}
       VueMarkdown(:source="archetype.text")
       LevelTable(:title="archetype.name", :levels="correctedLevels")

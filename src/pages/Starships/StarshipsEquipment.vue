@@ -30,7 +30,7 @@
         .map(starshipEquipment => ({
           ...starshipEquipment,
           id: starshipEquipment.name,
-          isExpandable: false
+          isExpandable: starshipEquipment.description
         })).value()
     }
 

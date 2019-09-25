@@ -42,7 +42,7 @@
   div
     vue-headful(:title="title")
     CharactersSpeciesDetailHalfHuman(v-if="speciesName === 'Half-Human'", v-bind="{ speciesData }")
-    div(v-else-if="speciesData").text-xs-left
+    div(v-else-if="speciesData").text-left
       div(:class="$style.topSection")
         div(:class="$style.bioBlock").block
           h2 {{ speciesData.name }}

@@ -1,5 +1,4 @@
 
-@import '~vuetify-scss';
 @import './colors.scss';
 @import url('https://fonts.googleapis.com/css?family=Russo+One|Bungee+Inline');
 
@@ -46,6 +45,7 @@ hr {
 
 ul {
   margin-bottom: 1rem;
+  text-align: left;
 }
 
 blockquote {

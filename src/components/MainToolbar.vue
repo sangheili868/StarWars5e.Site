@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { Component, Prop, Vue } from 'vue-property-decorator'
+  import { Component, Prop, Vue, Watch } from 'vue-property-decorator'
   import { namespace } from 'vuex-class'
   import SearchBox from '@/components/SearchBox.vue'
 
@@ -15,6 +15,11 @@
     @uiModule.Action updateSideBar!: (value: boolean) => void
 
     isSearchOpen = false
+
+    @Watch('$route')
+    resetSearch () {
+      this.isSearchOpen = false
+    }
 
     get routes () {
       return [

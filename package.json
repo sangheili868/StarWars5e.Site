@@ -14,6 +14,7 @@
     "@types/node": "^11.13.4",
     "@types/pluralize": "^0.0.29",
     "@types/vue-markdown": "^2.2.1",
+    "@vue/cli": "^3.11.0",
     "axios": "0.18.1",
     "core-js": "^2.6.5",
     "material-design-icons-iconfont": "^4.0.5",
@@ -29,7 +30,7 @@
     "vue-markdown": "^2.2.4",
     "vue-property-decorator": "^8.1.0",
     "vue-router": "^3.0.3",
-    "vuetify": "^1.5.12",
+    "vuetify": "2.0.18",
     "vuetify-scss": "^1.4.0",
     "vuex": "^3.0.1",
     "vuex-class": "^0.3.2",
@@ -46,11 +47,15 @@
     "@vue/eslint-config-standard": "^4.0.0",
     "@vue/eslint-config-typescript": "^4.0.0",
     "babel-eslint": "^10.0.1",
+    "deepmerge": "^4.0.0",
     "eslint": "^5.16.0",
     "eslint-plugin-vue": "^5.0.0",
-    "sass": "^1.18.0",
+    "fibers": "^4.0.1",
+    "sass": "^1.22.12",
     "sass-loader": "^7.1.0",
     "typescript": "^3.4.3",
-    "vue-template-compiler": "^2.5.21"
+    "vue-cli-plugin-vuetify": "^0.6.3",
+    "vue-template-compiler": "^2.5.21",
+    "vuetify-loader": "^1.2.2"
   }
 }

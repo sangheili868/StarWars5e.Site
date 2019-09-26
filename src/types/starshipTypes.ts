@@ -62,7 +62,8 @@ export interface StarshipEquipmentType {
   hitPointsPerHitDie?: number, // armor
   name: string,
   starshipWeaponCategory?: string, // ammunition
-  type: string
+  type: string,
+  description?: string
 }
 
 export interface StarshipModificationType {

@@ -5,12 +5,14 @@
   import { PowerType } from '@/types/characterTypes'
   import _ from 'lodash'
   import VueMarkdown from 'vue-markdown'
+  import BackButton from '@/components/BackButton.vue'
 
   const powersModule = namespace('powers')
 
   @Component({
     components: {
       SearchTable,
+      BackButton,
       VueMarkdown
     }
   })
@@ -80,6 +82,7 @@
 
 <template lang="pug">
   div
+    BackButton
     h1 Tech Powers
     br
     SearchTable(v-bind="{ headers, items, initialSearch, tableType }")

@@ -6,6 +6,7 @@
   import _ from 'lodash'
   import VueMarkdown from 'vue-markdown'
   import LootWeaponsProperties from './LootWeaponsProperties.vue'
+  import BackButton from '@/components/BackButton.vue'
 
   const weaponsModule = namespace('weapons')
 
@@ -13,7 +14,8 @@
     components: {
       SearchTable,
       VueMarkdown,
-      LootWeaponsProperties
+      LootWeaponsProperties,
+      BackButton
     }
   })
   export default class LootWeapons extends Vue {
@@ -67,6 +69,7 @@
 
 <template lang="pug">
   div
+    BackButton
     h1 Weapons
     br
     SearchTable(v-bind="{ headers, items, initialSearch, tableType }")

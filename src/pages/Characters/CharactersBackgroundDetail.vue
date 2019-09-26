@@ -6,6 +6,7 @@
   import VueMarkdown from 'vue-markdown'
   import RollTable from '@/components/RollTable.vue'
   import Loading from '@/components/Loading.vue'
+  import BackButton from '@/components/BackButton.vue'
 
   const backgroundModule = namespace('backgrounds')
   const featModule = namespace('feats')
@@ -13,6 +14,7 @@
   @Component({
     components: {
       RollTable,
+      BackButton,
       VueMarkdown,
       Loading
     }
@@ -61,7 +63,8 @@
 <template lang="pug">
   div
     vue-headful(:title="title")
-    div( v-if="background" ).text-xs-left
+    BackButton
+    div( v-if="background" ).text-left
       h1 {{ background.name }}
       VueMarkdown(:source="background.flavorText.replace(/\ufffd/g, '-')")
       div #[strong Skill Proficiencies:] {{ background.skillProficiencies }}

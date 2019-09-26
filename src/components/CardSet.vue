@@ -8,9 +8,9 @@
 </script>
 
 <template lang="pug">
-    v-container(grid-list-lg, fluid)
-      v-layout(row, wrap, justify-center)
-        v-flex(v-for="(card, index) in cards", :key="card.name", d-flex).xs12.sm6.md4
-          v-card(:to="card.to", hover, exact)
+    v-container(fluid)
+      v-row(justify="center")
+        v-col(v-for="(card, index) in cards", :key="card.name", :cols="12", :sm="6", :md="4")
+          v-card(:to="card.to", hover, exact, height="100%")
             slot(:card="card")
 </template>

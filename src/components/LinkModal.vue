@@ -8,7 +8,7 @@
     isOpen = false
 
     get isDark () {
-      return this.$vuetify.dark
+      return this.$vuetify.theme.dark
     }
   }
 </script>
@@ -22,11 +22,11 @@
         v-if="title",
         :class="{ ['darken-1']: isDark, ['lighten-2']: !isDark }",
         primary-title
-      ).headline.grey {{ title }}
-      v-card-text
+      ).headline.grey.primary--text {{ title }}
+      v-card-text.pt-3
         slot
       v-divider
       v-card-actions
         v-spacer
-        v-btn(color="primary", flat, @click="isOpen = false") Close
+        v-btn(color="primary", text, @click="isOpen = false") Close
 </template>

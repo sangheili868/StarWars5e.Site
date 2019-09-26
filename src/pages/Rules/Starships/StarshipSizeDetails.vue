@@ -4,12 +4,14 @@
   import { StarshipSizeType } from '@/types/starshipTypes.ts'
   import VueMarkdown from 'vue-markdown'
   import Loading from '@/components/Loading.vue'
+  import BackButton from '@/components/BackButton.vue'
 
   const starshipSizeModule = namespace('starshipSizes')
 
   @Component({
     components: {
       VueMarkdown,
+      BackButton,
       Loading
     }
   })
@@ -36,7 +38,8 @@
 <template lang="pug">
   div
     vue-headful(:title="title")
-    div( v-if="starshipSizeData" ).text-xs-left
+    BackButton
+    div( v-if="starshipSizeData" ).text-left
       h1 {{ starshipSizeData.name }} Ships
       VueMarkdown(:source="starshipSizeData.fullText.replace(/\ufffd/g, '-')")
     Loading(v-else)

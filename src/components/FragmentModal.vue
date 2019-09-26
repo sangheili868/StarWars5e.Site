@@ -38,7 +38,7 @@
     }
 
     get isDark () {
-      return this.$vuetify.dark
+      return this.$vuetify.theme.dark
     }
   }
 </script>
@@ -52,7 +52,7 @@
       v-divider
       v-card-actions
         v-spacer
-        v-btn(color="primary", flat, :to="route") Close
+        v-btn(color="primary", text, :to="route") Close
 </template>
 
 <style module lang="scss">

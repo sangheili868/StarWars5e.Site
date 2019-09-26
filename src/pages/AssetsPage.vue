@@ -90,7 +90,7 @@
           routes: [
             {
               href: 'https://www.reddit.com/r/sw5e/comments/cb1i87/printing_a_star_wars_5e_story/',
-              title: 'Printing Instructions For The Player\'s Handbook'
+              title: 'Printing Instructions'
             },
             {
               href: 'https://www.reddit.com/r/sw5e/comments/9v487b/10_pregenerated_level_1_player_characters_1_for/',
@@ -118,7 +118,7 @@
       div(:class="$style.routes")
         div(v-for="{ href, title, author } in routes", :key="title" )
           a(:href="href", target="_blank")
-            v-btn(color="primary") {{ title }}
+            v-btn(color="primary").mx-2.mt-2 {{ title }}
           div(v-if="author") courtesy of #[a(:href="`https://www.reddit.com${author}`", target="_blank") {{ author }}]
 </template>
 

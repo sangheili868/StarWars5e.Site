@@ -6,6 +6,7 @@
   import Loading from '@/components/Loading.vue'
   import ImageWithLoading from '@/components/ImageWithLoading.vue'
   import CharactersSpeciesDetailHalfHuman from './CharactersSpeciesDetailHalfHuman.vue'
+  import BackButton from '@/components/BackButton.vue'
 
   const speciesModule = namespace('species')
 
@@ -14,6 +15,7 @@
       CharactersSpeciesDetailHalfHuman,
       VueMarkdown,
       Loading,
+      BackButton,
       ImageWithLoading
     }
   })
@@ -41,8 +43,9 @@
 <template lang="pug">
   div
     vue-headful(:title="title")
+    BackButton
     CharactersSpeciesDetailHalfHuman(v-if="speciesName === 'Half-Human'", v-bind="{ speciesData }")
-    div(v-else-if="speciesData").text-xs-left
+    div(v-else-if="speciesData").text-left
       div(:class="$style.topSection")
         div(:class="$style.bioBlock").block
           h2 {{ speciesData.name }}

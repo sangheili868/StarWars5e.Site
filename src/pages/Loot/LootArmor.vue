@@ -5,12 +5,14 @@
   import { ArmorType } from '@/types/lootTypes'
   import _ from 'lodash'
   import VueMarkdown from 'vue-markdown'
+  import BackButton from '@/components/BackButton.vue'
 
   const armorModule = namespace('armor')
 
   @Component({
     components: {
       SearchTable,
+      BackButton,
       VueMarkdown
     }
   })
@@ -56,6 +58,7 @@
 
 <template lang="pug">
   div
+    BackButton
     h1 Armor
     br
     SearchTable(v-bind="{ headers, items, initialSearch, tableType }")

@@ -140,19 +140,19 @@
           route: '/rules/handbook/combat'
         },
         {
-          title: 'Force- and Tech- Casting',
+          title: 'Casting',
           icon: 'fa-bolt',
           route: '/rules/handbook/casting',
           items: [
             {
               title: 'Force Powers',
               icon: 'fas fa-jedi',
-              route: '/rules/handbook/forcePowers'
+              route: '/rules/handbook/casting/forcePowers'
             },
             {
               title: 'Tech Powers',
               icon: 'fa-microchip',
-              route: '/rules/handbook/techPowers'
+              route: '/rules/handbook/casting/techPowers'
             }
           ]
         },
@@ -162,7 +162,7 @@
           route: '/rules/handbook/conditions'
         },
         {
-          title: 'Recommended Variant Rules',
+          title: 'Variant Rules',
           icon: 'fa-cogs',
           route: '/rules/handbook/variantRules'
         },

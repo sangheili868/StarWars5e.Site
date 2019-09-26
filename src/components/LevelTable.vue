@@ -21,13 +21,13 @@
 <template lang="pug">
   div(v-if="hasLevels").block.ma-0
     h2 The {{ title }}
-    table(:class="$style.levelTable").table.text-xs-center
+    table(:class="$style.levelTable").table.text-center
       thead
         tr
-          th(v-for="header in headers", :key="header", :class="{ 'text-xs-left': header === 'Features' }").px-2 {{ header }}
+          th(v-for="header in headers", :key="header", :class="{ 'text-left': header === 'Features' }").px-2 {{ header }}
       tbody
         tr(v-for="levelChanges, level in levels", :key="level").rows
-          td(v-for="header in headers", :key="header", :class="{ 'text-xs-left': header === 'Features' }").px-2
+          td(v-for="header in headers", :key="header", :class="{ 'text-left': header === 'Features' }").px-2
             | {{ levelChanges[header].replace(/\ufffd/g, '-') }}
 </template>
 

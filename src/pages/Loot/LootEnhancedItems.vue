@@ -5,12 +5,14 @@
   import { EnhancedItemType } from '@/types/lootTypes'
   import _ from 'lodash'
   import VueMarkdown from 'vue-markdown'
+  import BackButton from '@/components/BackButton.vue'
 
   const enhancedItemsModule = namespace('enhancedItems')
 
   @Component({
     components: {
       SearchTable,
+      BackButton,
       VueMarkdown
     }
   })
@@ -55,6 +57,7 @@
           value: 'rarityText',
           filterChoices: ['Standard', 'Premium', 'Prototype', 'Advanced', 'Legendary',
            'Artifact', 'Multiple' ],
+          render: _.startCase,
           filterFunction: ({ searchableRarity }: EnhancedItemType, filterValue: string) => searchableRarity === filterValue
         },
         { text: 'Value', value: 'valueText' },
@@ -73,6 +76,7 @@
 
 <template lang="pug">
   div
+    BackButton
     h1 Enhanced Items
     br
     SearchTable(v-bind="{ headers, items, initialSearch, tableType }")

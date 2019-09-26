@@ -39,14 +39,14 @@ export default {
       component: HandbookCasting
     },
     {
-      path: 'forcePowers',
+      path: 'casting/forcePowers',
       component: CharactersForcePowers,
       meta: {
         title: 'Force Powers | Handbook'
       }
     },
     {
-      path: 'techPowers',
+      path: 'casting/techPowers',
       component: CharactersTechPowers,
       meta: {
         title: 'Tech Powers | Handbook'

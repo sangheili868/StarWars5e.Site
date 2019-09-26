@@ -4,11 +4,13 @@
   import SearchTable from '@/components/SearchTable.vue'
   import { BackgroundType } from '@/types/characterTypes'
   import _ from 'lodash'
+  import BackButton from '@/components/BackButton.vue'
 
   const backgroundModule = namespace('backgrounds')
 
   @Component({
     components: {
+      BackButton,
       SearchTable
     }
   })
@@ -60,7 +62,9 @@
 
 <template lang="pug">
   div
-    h1(v-if="!isInHandbook") Backgrounds
+    template(v-if="!isInHandbook")
+      BackButton
+      h1 Backgrounds
     br
     SearchTable(v-bind="{ headers, items, initialSearch, tableType }")
 </template>

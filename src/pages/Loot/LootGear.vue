@@ -5,12 +5,14 @@
   import { GearType } from '@/types/lootTypes'
   import _ from 'lodash'
   import VueMarkdown from 'vue-markdown'
+  import BackButton from '@/components/BackButton.vue'
 
   const gearModule = namespace('gear')
 
   @Component({
     components: {
       SearchTable,
+      BackButton,
       VueMarkdown
     }
   })
@@ -60,6 +62,7 @@
 
 <template lang="pug">
   div
+    BackButton
     h1 Gear
     br
     SearchTable(v-bind="{ headers, items, initialSearch, tableType }")

@@ -23,7 +23,6 @@
     @Prop(String) initialSearch: string | undefined
     @Prop(String) tableType: string | undefined
 
-    pagination = { rowsPerPage: 25 }
     filterSelections: { [key: string]: any } = {}
     search: string | undefined = ''
     tabTitle: string | undefined = ''
@@ -36,7 +35,7 @@
     get title () {
         let titleString = this.tabTitle + Vue.prototype.$titleSuffix
         if (this.search) {
-             return this.search + ' | ' + titleString
+          return this.search + ' | ' + titleString
         }
         return titleString
     }
@@ -84,18 +83,24 @@
           hide-details,
           :multiple="header.isMultiSelect"
         ).ma-2
-    v-data-table(:headers="alignedHeaders", :items="filteredItems", v-bind="{ search }", :pagination.sync="pagination", :custom-sort="customSort")
-      template(v-slot:items="props")
-        tr(v-if="props.item.isExpandable", :class="$style.clickableRow", @click="props.expanded = !props.expanded")
-          td(v-for="{ value, render } in alignedHeaders", :to="props.item.to") {{ render(props.item[value], props.item) }}
-        router-link(v-else-if="props.item.to", tag="tr", :class="$style.clickableRow", :to="props.item.to")
-          td(v-for="{ value, render } in alignedHeaders", :to="props.item.to") {{ render(props.item[value], props.item) }}
-        tr(v-else)
-          td(v-for="{ value, render } in alignedHeaders", :to="props.item.to") {{ render(props.item[value], props.item) }}
-      template(v-slot:expand="props")
-        v-card(flat)
-          v-card-text
-            slot(:item="props.item")
+      v-data-table(
+        :headers="alignedHeaders",
+        :items="filteredItems",
+        v-bind="{ search }",
+        :items-per-page="25",
+        :custom-sort="customSort",
+        :footer-props="{ 'items-per-page-options': [10, 25, 50, -1] }"
+      )
+        template(v-slot:item="{ isExpanded, item, expand }")
+          tr(v-if="item.isExpandable", :class="$style.clickableRow", @click="expand(!isExpanded)")
+            td(v-for="{ value, render } in alignedHeaders", :to="item.to") {{ render(item[value], item) }}
+          router-link(v-else-if="item.to", tag="tr", :class="$style.clickableRow", :to="item.to")
+            td(v-for="{ value, render } in alignedHeaders", :to="item.to") {{ render(item[value], item) }}
+          tr(v-else)
+            td(v-for="{ value, render } in alignedHeaders", :to="item.to") {{ render(item[value], item) }}
+        template(v-slot:expanded-item="{ item, headers }")
+          td(:colspan="headers.length").pt-3
+            slot(:item="item")
   Loading(v-else)
 </template>
 

@@ -45,5 +45,5 @@
       :key="name",
       :link="text"
     )
-      VueMarkdown(:source="content")
+      VueMarkdown(:source="content.replace(/\ufffd/g, ' - ')")
 </template>

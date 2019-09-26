@@ -56,7 +56,7 @@
 
 <template lang="pug">
   v-card.px-3
-    v-tabs(show-arrows, :value="currentTab")
+    v-tabs(fixed-tabs, center-active, :value="currentTab")
       v-tab(v-for="({ icon }) in sections", :key="icon")
         v-icon {{ icon }}
       v-tab-item(v-for="({ component }) in sections", :key="component")

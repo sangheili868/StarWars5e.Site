@@ -76,7 +76,7 @@
 <template lang="pug">
   div
     v-btn(color="primary").mb-2 Load New Character
-    CharacterSheetTop(v-if="isValidCharacter", v-bind="{ completeCharacter }").mx-2
+    CharacterSheetTop(v-if="isValidCharacter", v-bind="{ completeCharacter }")
     v-row(v-if="isValidCharacter", justify-space-around).nx-2
       v-col(v-for="section in range(numSections)", :key="section", :md="4", :sm="6")
         CharacterSheetSection(v-bind="{ completeCharacter }", :currentTab="openTabs[section]")

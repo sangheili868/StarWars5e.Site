@@ -97,7 +97,7 @@
           :key="name",
           :link="text"
         )
-          VueMarkdown(:source="content")
+          VueMarkdown(:source="content.replace(/\ufffd/g, ' - ')")
         span(v-if="weaponText(props.item.properties).length === 0")  None
         VueMarkdown(v-if="props.item.description", :source="props.item.description")
         div(v-for="(mode, index) in props.item.modes", :key="index").

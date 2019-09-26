@@ -22,8 +22,8 @@
         v-if="title",
         :class="{ ['darken-1']: isDark, ['lighten-2']: !isDark }",
         primary-title
-      ).headline.grey.primary--text.mb-2 {{ title }}
-      v-card-text.black--text
+      ).headline.grey.primary--text {{ title }}
+      v-card-text.black--text.pt-3
         slot
       v-divider
       v-card-actions

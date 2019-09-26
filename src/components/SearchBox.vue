@@ -3,6 +3,8 @@
 
   @Component
   export default class SearchBox extends Vue {
+    @Prop({ type: Boolean, default: false }) readonly isClearable!: boolean
+
     searchText = ''
 
     created () {
@@ -30,7 +32,7 @@
     v-model="searchText",
     append-icon="fa-search",
     solo,
-    clearable,
+    :clearable="isClearable",
     hide-details,
     autofocus,
     @click:append="handleSubmit"

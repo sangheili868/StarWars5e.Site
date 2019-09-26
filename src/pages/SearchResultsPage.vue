@@ -55,7 +55,7 @@
   div
     vue-headful(:title="title")
     h1.pb-3 Search
-    SearchBox.pb-3
+    SearchBox(isClearable).pb-3
     template(v-if="searchText && !isSearching")
       h5.pb-3 {{ resultCount }} for {{ searchText }}
       v-list(v-if="searchResults.length")

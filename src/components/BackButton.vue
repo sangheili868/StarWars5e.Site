@@ -21,7 +21,7 @@
 
 <template lang="pug">
   div.text-left
-    v-btn(outlined, color="secondary", :to="parentRoute")
+    v-btn(text, color="secondary", :to="parentRoute")
       v-icon.mr-2 fa-angle-left
       | {{ parentRouteName }}
 </template>

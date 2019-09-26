@@ -4,12 +4,14 @@
   import { DeploymentType } from '@/types/starshipTypes.ts'
   import CardSet from '@/components/CardSet.vue'
   import Loading from '@/components/Loading.vue'
+  import BackButton from '@/components/BackButton.vue'
 
   const deploymentsModule = namespace('deployments')
 
   @Component({
     components: {
       Loading,
+      BackButton,
       CardSet
     }
   })
@@ -32,6 +34,7 @@
 
 <template lang="pug">
   div
+    BackButton
     h1 Starship Deployments
     CardSet(:cards="deploymentsWithLinks")
       template(v-slot="{ card }")

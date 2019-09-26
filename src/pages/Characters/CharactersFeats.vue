@@ -5,12 +5,14 @@
   import { FeatType } from '@/types/characterTypes'
   import _ from 'lodash'
   import VueMarkdown from 'vue-markdown'
+  import BackButton from '@/components/BackButton.vue'
 
   const archetypeModule = namespace('feats')
 
   @Component({
     components: {
       SearchTable,
+      BackButton,
       VueMarkdown
     }
   })
@@ -68,7 +70,9 @@
 
 <template lang="pug">
   div
-    h1(v-if="!isInHandbook") Feats
+    template(v-if="!isInHandbook")
+      BackButton
+      h1 Feats
     br
     SearchTable(v-bind="{ headers, items, initialSearch, tableType }")
       template(v-slot:default="props")

@@ -6,6 +6,7 @@
   import { WeaponType, WeaponPropertyType } from '@/types/lootTypes'
   import _ from 'lodash'
   import VueMarkdown from 'vue-markdown'
+  import BackButton from '@/components/BackButton.vue'
 
   const weaponsModule = namespace('weapons')
   const weaponPropertiesModule = namespace('weaponProperties')
@@ -18,6 +19,7 @@
     components: {
       SearchTable,
       VueMarkdown,
+      BackButton,
       LinkModal
     }
   })
@@ -84,6 +86,7 @@
 
 <template lang="pug">
   div
+    BackButton
     h1 Weapons
     br
     SearchTable(v-bind="{ headers, items, initialSearch, tableType }")

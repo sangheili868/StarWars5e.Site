@@ -6,6 +6,7 @@
   import LevelTable from '@/components/LevelTable.vue'
   import Loading from '@/components/Loading.vue'
   import _ from 'lodash'
+  import BackButton from '@/components/BackButton.vue'
 
   const archetypeModule = namespace('archetypes')
 
@@ -13,6 +14,7 @@
     components: {
       VueMarkdown,
       LevelTable,
+      BackButton,
       Loading
     }
   })
@@ -59,6 +61,7 @@
 <template lang="pug">
   div
     vue-headful(:title="title")
+    BackButton
     div( v-if="archetype" ).text-left
       h1 {{ archetype.name }}
       VueMarkdown(:source="archetype.text")

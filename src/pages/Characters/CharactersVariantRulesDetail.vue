@@ -3,12 +3,14 @@
   import { namespace } from 'vuex-class'
   import VueMarkdown from 'vue-markdown'
   import Loading from '@/components/Loading.vue'
+  import BackButton from '@/components/BackButton.vue'
 
   const blobsModule = namespace('blobs')
 
   @Component({
     components: {
       VueMarkdown,
+      BackButton,
       Loading
     }
   })
@@ -34,6 +36,7 @@
 <template lang="pug">
   div
     vue-headful(:title="title")
+    BackButton
     div(v-if="blob")
       h1.text-left {{blob.chapterName}}
       VueMarkdown(:source="blob.contentMarkdown").text-left

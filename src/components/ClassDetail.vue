@@ -4,11 +4,13 @@
   import VueMarkdown from 'vue-markdown'
   import LevelTable from '@/components/LevelTable.vue'
   import ImageWithLoading from '@/components/ImageWithLoading.vue'
+  import BackButton from '@/components/BackButton.vue'
 
   @Component({
     components: {
       VueMarkdown,
       LevelTable,
+      BackButton,
       ImageWithLoading
     }
   })
@@ -23,6 +25,7 @@
 
 <template lang="pug">
   div(v-if="classData").text-left
+    BackButton
     h1 {{ classData.name }}
     ImageWithLoading(:src="classData.imageUrls[0]", :class="$style.portrait", height="350", width="350", contain).ma-2
     VueMarkdown(:source="classData.flavorText")

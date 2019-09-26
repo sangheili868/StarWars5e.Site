@@ -4,12 +4,14 @@
   import SearchTable from '@/components/SearchTable.vue'
   import { ArchetypeType } from '@/types/characterTypes'
   import _ from 'lodash'
+  import BackButton from '@/components/BackButton.vue'
 
   const archetypeModule = namespace('archetypes')
 
   @Component({
     components: {
-      SearchTable
+      SearchTable,
+      BackButton
     }
   })
   export default class CharactersArchetypes extends Vue {
@@ -60,7 +62,9 @@
 
 <template lang="pug">
   div
-    h1(v-if="!isInHandbook") Archetypes
+    template(v-if="!isInHandbook")
+      BackButton
+      h1 Archetypes
     br
     SearchTable(v-bind="{ headers, items, initialSearch, tableType }")
 </template>

@@ -4,11 +4,13 @@
   import SearchTable from '@/components/SearchTable.vue'
   import { SpeciesType, AbilitiesIncreasedType } from '@/types/characterTypes'
   import _ from 'lodash'
+  import BackButton from '@/components/BackButton.vue'
 
   const speciesModule = namespace('species')
 
   @Component({
     components: {
+      BackButton,
       SearchTable
     }
   })
@@ -81,7 +83,9 @@
 
 <template lang="pug">
   div
-    h1(v-if="!isInHandbook") Species
+    template(v-if="!isInHandbook")
+      BackButton
+      h1 Species
     br
     SearchTable(v-bind="{ headers, items, initialSearch, tableType }")
 </template>

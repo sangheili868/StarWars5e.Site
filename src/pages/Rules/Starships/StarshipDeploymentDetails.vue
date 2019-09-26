@@ -4,12 +4,14 @@
   import { DeploymentType } from '@/types/starshipTypes.ts'
   import VueMarkdown from 'vue-markdown'
   import Loading from '@/components/Loading.vue'
+  import BackButton from '@/components/BackButton.vue'
 
   const deploymentsModule = namespace('deployments')
 
   @Component({
     components: {
       VueMarkdown,
+      BackButton,
       Loading
     }
   })
@@ -24,7 +26,7 @@
     }
 
     get title () {
-        return this.deploymentName + ' | Starships' + Vue.prototype.$titleSuffix
+      return this.deploymentName + ' | Starships' + Vue.prototype.$titleSuffix
     }
 
     get deploymentData () {
@@ -36,6 +38,7 @@
 <template lang="pug">
   div
     vue-headful(:title="title")
+    BackButton
     div( v-if="deploymentData" ).text-left
       h1 {{ deploymentData.name }}
       VueMarkdown(:source="deploymentData.flavorText")

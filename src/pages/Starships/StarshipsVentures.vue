@@ -5,12 +5,14 @@
   import { VentureType } from '@/types/starshipTypes'
   import _ from 'lodash'
   import VueMarkdown from 'vue-markdown'
+  import BackButton from '@/components/BackButton.vue'
 
   const venturesModule = namespace('ventures')
 
   @Component({
     components: {
       SearchTable,
+      BackButton,
       VueMarkdown
     }
   })
@@ -66,6 +68,7 @@
 
 <template lang="pug">
   div
+    BackButton
     h1 Ventures
     br
     SearchTable(v-bind="{ headers, items, initialSearch, tableType }")

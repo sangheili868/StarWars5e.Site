@@ -5,12 +5,14 @@
   import { StarshipWeaponType } from '@/types/starshipTypes'
   import _ from 'lodash'
   import VueMarkdown from 'vue-markdown'
+  import BackButton from '@/components/BackButton.vue'
 
   const starshipWeaponsModule = namespace('starshipWeapons')
 
   @Component({
     components: {
       SearchTable,
+      BackButton,
       VueMarkdown
     }
   })
@@ -63,6 +65,7 @@
 
 <template lang="pug">
   div
+    BackButton
     h1 Starship Weapons
     br
     SearchTable(v-bind="{ headers, items, initialSearch, tableType }")

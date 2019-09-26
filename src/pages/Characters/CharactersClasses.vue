@@ -4,12 +4,14 @@
   import CardSet from '@/components/CardSet.vue'
   import Loading from '@/components/Loading.vue'
   import { ClassType } from '@/types/characterTypes'
+  import BackButton from '@/components/BackButton.vue'
 
   const classesModule = namespace('classes')
 
   @Component({
     components: {
       Loading,
+      BackButton,
       CardSet
     }
   })
@@ -36,6 +38,7 @@
 
 <template lang="pug">
   div
+    BackButton
     h1 Classes
     CardSet(:cards="classesWithLinks")
       template(v-slot="{ card }")

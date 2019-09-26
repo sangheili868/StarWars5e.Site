@@ -3,13 +3,13 @@
   import { SuperiorityType } from '@/types/completeCharacterTypes'
   import CheckList from '@/components/CheckList.vue'
   import CharacterSheetModifier from './CharacterSheetModifier.vue'
-  import CharacterSheetExpansionFeature from './CharacterSheetExpansionFeature.vue'
+  import CharacterSheetExpansionFeatures from './CharacterSheetExpansionFeatures.vue'
 
   @Component({
     components: {
       CheckList,
       CharacterSheetModifier,
-      CharacterSheetExpansionFeature
+      CharacterSheetExpansionFeatures
     }
   })
   export default class CharacterSheetSuperiority extends Vue {
@@ -22,14 +22,5 @@
     h3.mt-2 Maneuvers
     CheckList(:current="superiority.currentDice", :maximum="superiority.maxDice", :title="superiority.diceSize + 's'")
     CharacterSheetModifier(:modifier="superiority.maneuverSaveDC", label="Maneuver Save DC", isFlatNumber, small)
-    v-expansion-panel
-      CharacterSheetExpansionFeature(
-        v-for="maneuver in superiority.maneuvers"
-        :key="maneuver.name"
-        :feature="maneuver"
-      )
+    CharacterSheetExpansionFeatures(:features="superiority.maneuvers")
 </template>
-
-<style module lang="scss">
-
-</style>

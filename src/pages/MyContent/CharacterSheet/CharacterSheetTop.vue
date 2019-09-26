@@ -33,13 +33,13 @@
 </script>
 
 <template lang="pug">
-  v-card(:class="$style.topItems").px-3
-    div.d-flex
+  v-card.px-3.d-flex.justify-space-around.flex-wrap.align-center
+    div.d-flex.align-center
       v-img(:src="completeCharacter.image", contain, max-height="90", max-width="90", min-width="100")
-      div.text-xs-left
+      div.text-left
         h1 {{ completeCharacter.name }}
         h5 {{ classText }}
-        div(:class="$style.xpBar").d-flex
+        div(:class="$style.xpBar").d-flex.align-center
           v-chip(small, color="secondary", text-color="white").mr-2.ml-0
             h5 {{ currentLevel }}
           v-progress-linear(
@@ -47,7 +47,7 @@
             rounded,
             color="secondary",
             height="20"
-          ).text-xs-center.ma-0
+          ).text-center.ma-0
             h5 {{ experienceText }}
           v-chip(small, color="secondary", text-color="white", :class="$style.rightChip").ml-2.mr-0
             h5 {{ currentLevel + 1 }}
@@ -56,21 +56,11 @@
 
 <style module lang="scss">
   @import '@/assets/styles/colors.scss';
+  .xpBar {
+    max-width: 300px;
 
-  .topItems {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: space-around;
-    align-items: center;
-    border-radius: 5px;
-
-    .xpBar {
-      align-items: center;
-      max-width: 300px;
-
-      .rightChip {
-        opacity: 0.3
-      }
+    .rightChip {
+      opacity: 0.3
     }
   }
 </style>

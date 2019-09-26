@@ -55,18 +55,10 @@
 </script>
 
 <template lang="pug">
-  v-card(:class="$style.section").px-3.py-1.ma-2
-    v-tabs(grow, :value="currentTab")
+  v-card.px-3
+    v-tabs(show-arrows, :value="currentTab")
       v-tab(v-for="({ icon }) in sections", :key="icon")
         v-icon {{ icon }}
       v-tab-item(v-for="({ component }) in sections", :key="component")
-        component(:is="component", v-bind="completeCharacter").text-xs-left
+        component(:is="component", v-bind="completeCharacter").text-left
 </template>
-
-<style module lang="scss">
-  @import '@/assets/styles/colors.scss';
-
-  .section {
-    border-radius: 5px;
-  }
-</style>

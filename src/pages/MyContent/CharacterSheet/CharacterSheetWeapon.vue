@@ -23,7 +23,7 @@
 </script>
 
 <template lang="pug">
-  div.text-xs-left
+  div.text-left
     div(:class="$style.name")
       h4 {{ weapon.name }}
       div {{ addPlus(weapon.attackBonus) }}

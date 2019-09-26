@@ -17,21 +17,20 @@
 
 <template lang="pug">
   div
+    h5 Credits: {{ credits }}
     h3 Equipment
-    v-expansion-panel
-      v-expansion-panel-content(
+    v-expansion-panels
+      v-expansion-panel(
         v-for="item in equipment",
         :key="item.name",
         class="equipmentPanel"
       )
-        template(v-slot:header)
-          div {{ item.name }} {{ item.quantity > 1 ? `(${item.quantity})` : '' }}
-        div.ma-2.caption
+        v-expansion-panel-header {{ item.name }} {{ item.quantity > 1 ? `(${item.quantity})` : '' }}
+        v-expansion-panel-content.ma-2.caption
           div Cost: {{ item.cost }}
           div Weight: {{ item.weight}}
           br
           div {{ item.description }}
-    h5 Credits: {{ credits }}
 </template>
 
 <style lang="scss">

@@ -23,7 +23,7 @@
     div(:class="$style.values").mr-3
       component(:is="small ? 'h5' : 'h2'", :class="{ [$style.small]: small }") {{ modifierToShow }}
       h5 {{ value }}
-    div.text-xs-left
+    div.text-left
       component(:is="small ? 'h4' : 'h3'") {{ label }}
       slot
 </template>

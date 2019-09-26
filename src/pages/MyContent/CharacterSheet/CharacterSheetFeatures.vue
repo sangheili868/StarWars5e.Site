@@ -1,11 +1,11 @@
 <script lang="ts">
   import { Component, Prop, Vue } from 'vue-property-decorator'
   import { CompletedFeatureType } from '@/types/completeCharacterTypes'
-  import CharacterSheetExpansionFeature from './CharacterSheetExpansionFeature.vue'
+  import CharacterSheetExpansionFeatures from './CharacterSheetExpansionFeatures.vue'
 
   @Component({
     components: {
-      CharacterSheetExpansionFeature
+      CharacterSheetExpansionFeatures
     }
   })
   export default class CharacterSheetFeatures extends Vue {
@@ -14,14 +14,5 @@
 </script>
 
 <template lang="pug">
-  v-expansion-panel
-    CharacterSheetExpansionFeature(
-      v-for="feature in features",
-      :key="feature.name",
-      v-bind="{ feature }"
-    )
+    CharacterSheetExpansionFeatures(v-bind="{ features }")
 </template>
-
-<style module lang="scss">
-
-</style>

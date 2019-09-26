@@ -15,7 +15,7 @@
 </script>
 
 <template lang="pug">
-  div.text-xs-left
+  div.text-left
     h3 Description
     div #[strong Alignment]: {{ alignment }}
     div #[strong Background]: {{ background }}

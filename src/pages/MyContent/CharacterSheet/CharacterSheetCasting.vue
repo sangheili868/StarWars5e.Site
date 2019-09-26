@@ -2,7 +2,7 @@
   import { Component, Prop, Vue } from 'vue-property-decorator'
   import { CastingType } from '@/types/completeCharacterTypes'
   import CharacterSheetModifier from './CharacterSheetModifier.vue'
-  import CharacterSheetExpansionFeature from './CharacterSheetExpansionFeature.vue'
+  import CharacterSheetExpansionFeatures from './CharacterSheetExpansionFeatures.vue'
   import { groupBy } from 'lodash'
   import CharacterSheetTicker from './CharacterSheetTicker.vue'
   import CheckList from '@/components/CheckList.vue'
@@ -12,7 +12,7 @@
     components: {
       CheckList,
       CharacterSheetModifier,
-      CharacterSheetExpansionFeature,
+      CharacterSheetExpansionFeatures,
       CharacterSheetTicker
     }
   })
@@ -43,12 +43,7 @@
       CharacterSheetModifier(:modifier="ordinal(techCasting.maxPowerLevel)", label="Max Power Level", isFlatNumber, small)
       div(v-for="(powers, level) in groupBy(techCasting.powersKnown, 'level')", :key="level")
         h3.mt-2 {{ powerLevelText(level) }}
-        v-expansion-panel
-          CharacterSheetExpansionFeature(
-            v-for="power in powers",
-            :key="power.name",
-            :feature="power"
-          )
+        CharacterSheetExpansionFeatures(:features="powers")
     div(v-if="forceCasting.powersKnown.length")
       h3 Force Casting
       CharacterSheetTicker(
@@ -66,10 +61,5 @@
       CharacterSheetModifier(:modifier="ordinal(forceCasting.maxPowerLevel)", label="Max Power Level", isFlatNumber, small)
       div(v-for="(powers, level) in groupBy(forceCasting.powersKnown, 'level')", :key="level")
         h3.mt-2 {{ powerLevelText(level) }}
-        v-expansion-panel
-          CharacterSheetExpansionFeature(
-            v-for="power in powers",
-            :key="power.name",
-            :feature="power"
-          )
+        CharacterSheetExpansionFeatures(:features="powers")
 </template>

@@ -21,8 +21,8 @@
 </script>
 
 <template lang="pug">
-  div(:class="$style.outerDiv").mx-3.my-1
-    div(:class="$style.controlDiv").d-flex.mx-4
+  div.d-flex.align-center.mx-3.my-1
+    div(:class="$style.controlDiv").d-flex.flex-column.align-center.mx-4
       v-progress-circular(
         :value="100 * hitPoints.current / hitPoints.maximum",
         color="red",
@@ -30,33 +30,26 @@
         rotate="270"
         width="10"
       )
-        h2 {{ hitPoints.current }}
-        v-divider(width="71", :class="$style.divider")
-        h2 {{ hitPoints.maximum }}
+        div
+          h2 {{ hitPoints.current }}
+          v-divider(width="71", :class="$style.divider")
+          h2 {{ hitPoints.maximum }}
       v-dialog(v-model="isRestOpen", width="500")
         template(v-slot:activator="{ on }")
-          v-btn(small, v-on="on", color="secondary") Rest
+          v-btn(small, v-on="on", color="secondary").ma-2 Rest
         CharacterSheetRest(v-bind="{ hitPoints }", @close="isRestOpen=false")
-    div(:class="$style.controlDiv").d-flex.mr-4
+    div(:class="$style.controlDiv").d-flex.flex-column.align-center.mr-4
       v-btn(color="green accent-3", small, @click="resetHealthMod").white--text Heal
-      v-text-field(outline, single-line, hide-details, type="number", v-model="healthMod")
+      v-text-field(outlined, single-line, hide-details, type="number", v-model="healthMod").my-2
       v-btn(color="red accent-3", small, @click="resetHealthMod").white--text Damage
 </template>
 
 <style module lang="scss">
-  .outerDiv {
-    display: flex;
-    align-items: center;
-    justify-content: flex-end;
+  .controlDiv {
+    max-width: 100px;
+  }
 
-    .controlDiv {
-      max-width: 100px;
-      flex-direction: column;
-      align-items: center;
-
-      .divider {
-        visibility: visible;
-      }
-    }
+  .divider {
+    visibility: visible;
   }
 </style>

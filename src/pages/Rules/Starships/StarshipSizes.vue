@@ -57,7 +57,7 @@
 
     CardSet(:cards="starshipSizesWithLinks")
       template(v-slot="{ card }")
-        v-card-text(primary-title).black--text
+        v-card-text(primary-title)
             h3 {{ card.name }}
             p.ma-0 #[strong Hit Die:] 1d{{ card.hitDiceDieType }}
             p.ma-0 #[strong Save Options:] {{ showSaves(card.savingThrowOptions) }}

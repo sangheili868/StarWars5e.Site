@@ -66,6 +66,10 @@
         }
       ]
     }
+
+    get themeToggleColor () {
+      return this.isDarkSide ? this.$vuetify.theme.themes.light.secondary : 'primary'
+    }
   }
 </script>
 
@@ -86,10 +90,7 @@
         v-btn(light)
           v-icon(:color="title").mr-3 {{ icon }}
           | {{ title }}
-    v-btn(
-      :color=" isDarkSide ? 'secondary' : 'primary'"
-      @click="toggleDarkSideTheme"
-    ) Join the {{ isDarkSide ? 'Light' : 'Dark' }} Side
+    v-btn(:color="themeToggleColor", @click="toggleDarkSideTheme") Join the {{ isDarkSide ? 'Light' : 'Dark' }} Side
 </template>
 
 <style module lang="scss">

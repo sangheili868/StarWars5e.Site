@@ -38,7 +38,7 @@
     h1 Starship Deployments
     CardSet(:cards="deploymentsWithLinks")
       template(v-slot="{ card }")
-        v-card-text(primary-title).black--text
+        v-card-text(primary-title)
           h3 {{ card.name }}
           div.text-left
             p {{ card.description }}

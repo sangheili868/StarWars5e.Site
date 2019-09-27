@@ -28,8 +28,8 @@
   div
     h3 Non-combat Features
     CharacterSheetFeatures(:features="nonCombatFeatures")
-    h3 Langauges
+    h3.mt-2 Langauges
     div(v-for="language in languages", :key="language").caption {{ language }}
-    h3 Proficiencies
+    h3.mt-2 Proficiencies
     div(v-for="proficiency in proficiencies", :key="proficiency").caption {{ startCase(proficiency) }}
 </template>

@@ -17,7 +17,7 @@
 </script>
 
 <template lang="pug">
-  v-expansion-panels(accordion, multiple).pb-2
+  v-expansion-panels(accordion, multiple)
     v-expansion-panel(v-for="feature in features", :key="feature.name").powerPanel
       v-expansion-panel-header.pa-3
         h4 {{ feature.name }}

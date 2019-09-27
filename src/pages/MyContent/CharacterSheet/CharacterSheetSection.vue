@@ -22,6 +22,8 @@
     @Prop(Object) readonly completeCharacter!: CompleteCharacterType
     @Prop(Number) readonly currentTab!: number
 
+    isFabOpen = false
+
     get sections () {
       const hasPowers = this.completeCharacter.techCasting || this.completeCharacter.forceCasting
       return [
@@ -39,15 +41,15 @@
       }] : []).concat([
         {
           component: 'CharacterSheetEquipment',
-          icon: 'fa-tools'
+          icon: 'fa-toolbox'
         },
         {
           component: 'CharacterSheetProficiencies',
-          icon: 'fa-globe'
+          icon: 'fa-atlas'
         },
         {
           component: 'CharacterSheetDescription',
-          icon: 'fa-briefcase'
+          icon: 'fa-user'
         }
       ])
     }
@@ -55,10 +57,37 @@
 </script>
 
 <template lang="pug">
-  v-card.px-3
-    v-tabs(fixed-tabs, center-active, :value="currentTab")
-      v-tab(v-for="({ icon }) in sections", :key="icon")
-        v-icon {{ icon }}
+  v-card.pa-3
+    div.d-flex.pb-2
+      div(
+        v-for="({ icon }, index) in sections",
+        :key="icon",
+        :class="index === currentTab ? $style.selectedTab : $style.tab"
+        @click="$emit('goToTab', index)"
+      ).flex-grow-1
+        v-btn(icon, :class="$style.tabButton")
+          v-icon(:color="index === currentTab ? 'primary' : ''") {{ icon }}
+    v-tabs(height="0", :value="currentTab")
       v-tab-item(v-for="({ component }) in sections", :key="component")
         component(:is="component", v-bind="completeCharacter").text-left
 </template>
+
+<style module lang="scss">
+  @import "src/assets/styles/colors.scss";
+
+  .tab:hover {
+    background-color: rgba($black, .04)
+  }
+
+  .selectedTab {
+    border-bottom: 2px solid $primary;
+
+    &:hover {
+      background-color: rgba($primary, .12);
+    }
+  }
+
+  .tabButton::before {
+    color: transparent !important;
+  }
+</style>

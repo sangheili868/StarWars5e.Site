@@ -70,6 +70,10 @@
         this.backgrounds
       )
     }
+
+    goToTab (newTab: number, section: number) {
+      Vue.set(this.openTabs, section, newTab)
+    }
   }
 </script>
 
@@ -79,5 +83,9 @@
     CharacterSheetTop(v-if="isValidCharacter", v-bind="{ completeCharacter }")
     v-row(v-if="isValidCharacter", justify-space-around).nx-2
       v-col(v-for="section in range(numSections)", :key="section", :md="4", :sm="6")
-        CharacterSheetSection(v-bind="{ completeCharacter }", :currentTab="openTabs[section]")
+        CharacterSheetSection(
+          v-bind="{ completeCharacter }",
+          :currentTab="openTabs[section]"
+          @goToTab="newTab => goToTab(newTab, section)"
+        )
 </template>

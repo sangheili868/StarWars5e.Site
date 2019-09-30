@@ -19,13 +19,12 @@
   div
     h5 Credits: {{ credits }}
     h3 Equipment
-    v-expansion-panels
+    v-expansion-panels(accordion, multiple)
       v-expansion-panel(
         v-for="item in equipment",
         :key="item.name",
-        class="equipmentPanel"
-      )
-        v-expansion-panel-header {{ item.name }} {{ item.quantity > 1 ? `(${item.quantity})` : '' }}
+      ).equipmentPanel
+        v-expansion-panel-header.pa-2 {{ item.name }} {{ item.quantity > 1 ? `(${item.quantity})` : '' }}
         v-expansion-panel-content.ma-2.caption
           div Cost: {{ item.cost }}
           div Weight: {{ item.weight}}
@@ -34,9 +33,7 @@
 </template>
 
 <style lang="scss">
-  .equipmentPanel .v-expansion-panel__header {
+  .equipmentPanel .v-expansion-panel-header {
     min-height: 0;
-    padding-top: 0;
-    padding-bottom: 0;
   }
 </style>

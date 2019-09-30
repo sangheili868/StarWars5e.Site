@@ -22,6 +22,7 @@ import {
   maneuvers,
   classFeatures,
   archetypeFeatures,
+  speciesFeatures,
   feats as gdFeats,
   fightingStyles
 } from '@/test/gameData.json'
@@ -85,6 +86,8 @@ export default function generateCharacter (
       rawCharacter,
       classFeatures,
       archetypeFeatures,
+      speciesFeatures,
+      currentLevel,
       fightingStyles,
       myFoundgdFeats,
       myBackground,

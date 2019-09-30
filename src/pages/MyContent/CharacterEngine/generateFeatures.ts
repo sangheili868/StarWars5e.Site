@@ -8,11 +8,11 @@ function getValidFeatures (
   levelsInClass: number,
   discoveries: { name: string }[] | undefined
 ) {
-  return features && features.filter(({ name: featureName, level, source }) => {
+  return features && features.filter(({ name: featureName, level, type }) => {
     const isRequiredLevel = level <= levelsInClass
-    const isBase = source === 'base'
+    const isBase = type === 'base'
     const isDiscovery = discoveries &&
-      (source === 'discovery') &&
+      (type === 'discovery') &&
       discoveries.some(({ name: discoveryName }) => discoveryName === featureName)
     return isRequiredLevel && (isBase || isDiscovery)
   })
@@ -35,15 +35,18 @@ function calculateUsage (
   }
 }
 
-export default function generateCombatFeatures (
+export default function generateFeatures (
   rawCharacter: RawCharacterType,
   classFeatures: FeaturesType,
   archetypeFeatures: FeaturesType,
+  speciesFeatures: FeaturesType,
+  currentLevel: number,
   fightingStyles: FightingStyleType[],
   myFoundgdFeats: FeatureType[],
   myBackground: BackgroundType,
   abilityScores: AbilityScoresType
 ) {
+  const mySpeciesFeatures = getValidFeatures(speciesFeatures[rawCharacter.species.name], currentLevel)
   const myClassFeatures = rawCharacter.classes.map(({ name: className, levels, discoveries }) =>
     getValidFeatures(classFeatures[className], levels, discoveries)
   ).flat()
@@ -58,6 +61,7 @@ export default function generateCombatFeatures (
     ...myArchetypeFeatures,
     ...myFoundgdFeats,
     ...myFightingStyles,
+    ...mySpeciesFeatures,
     {
       name: myBackground.featureName,
       combat: false,

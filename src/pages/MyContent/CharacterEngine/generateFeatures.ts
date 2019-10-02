@@ -6,7 +6,7 @@ import { CompletedFeatureType, AbilityScoresType } from '@/types/completeCharact
 function getValidFeatures (
   features: FeatureType[],
   levelsInClass: number,
-  discoveries: { name: string }[] | undefined
+  discoveries?: { name: string }[]
 ) {
   return features && features.filter(({ name: featureName, level, type }) => {
     const isRequiredLevel = level <= levelsInClass

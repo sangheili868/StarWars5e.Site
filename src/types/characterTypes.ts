@@ -142,7 +142,7 @@ export interface FeatureType {
   name: string,
   level: number,
   combat: boolean,
-  source: string,
+  type: string,
   description: string
 }
 

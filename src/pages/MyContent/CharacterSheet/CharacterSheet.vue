@@ -4,9 +4,9 @@
   import { ClassType, PowerType, FeatType, BackgroundType } from '@/types/characterTypes'
   import { RawCharacterType } from '@/types/rawCharacterTypes'
   import { EquipmentType } from '@/types/lootTypes'
+  import JSONReader from '@/components/JSONReader.vue'
   import CharacterSheetTop from './CharacterSheetTop.vue'
   import CharacterSheetSection from './CharacterSheetSection.vue'
-  import rawCharacter from '@/test/senyaRaw.json'
   import generateCharacter from '../CharacterEngine/generateCharacter'
   import { range, isEmpty } from 'lodash'
 
@@ -18,6 +18,7 @@
 
   @Component({
     components: {
+      JSONReader,
       CharacterSheetTop,
       CharacterSheetSection
     }
@@ -36,7 +37,8 @@
 
     range = range
     openTabs: number[] = [0, 1, 2]
-    character: RawCharacterType | {} = rawCharacter
+    character: RawCharacterType | {} = {}
+    isAlertOpen: boolean = true
 
     created () {
       this.fetchClasses()
@@ -57,7 +59,20 @@
     }
 
     get isValidCharacter () {
-      return !isEmpty(this.character)
+      return [
+        'name',
+        'species',
+        'classes',
+        'baseAbilityScores',
+        'background',
+        'characteristics',
+        'equipment',
+        'currentStats'
+      ].every((field: string) => field in this.character)
+    }
+
+    get hasValidCharacter () {
+      return !isEmpty(this.character) && this.isValidCharacter
     }
 
     get completeCharacter () {
@@ -79,7 +94,10 @@
 
 <template lang="pug">
   div
-    v-btn(color="primary").mb-2 Load New Character
+    v-alert(v-model="isAlertOpen", :dismissable="true", type="error", transition="scale-transition") Invalid Character
+    div.d-flex.align-center.justify-center
+      JSONReader(@input="newCharacter => character = newCharacter").ma-2
+      v-btn(@click="isAlertOpen = !isAlertOpen").ma-2 Save Character
     CharacterSheetTop(v-if="isValidCharacter", v-bind="{ completeCharacter }")
     v-row(v-if="isValidCharacter", justify-space-around).nx-2
       v-col(v-for="section in range(numSections)", :key="section", :md="4", :sm="6")

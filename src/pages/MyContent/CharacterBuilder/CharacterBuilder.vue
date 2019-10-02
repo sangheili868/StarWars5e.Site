@@ -54,7 +54,7 @@
               li * Tech Powers
               li * Force Powers
               li * Maneuvers
-              ii * Silver Tongue (Politician Pursuit)
+              li * Silver Tongue (Politician Pursuit)
               li * Cybernetic Enhancements (Augmented Approach)
               li * Modifications (Engineer)
               li * Droid Companion (Astrotech Engineer)

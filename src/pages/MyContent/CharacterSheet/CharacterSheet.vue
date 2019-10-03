@@ -9,7 +9,7 @@
   import CharacterSheetTop from './CharacterSheetTop.vue'
   import CharacterSheetSection from './CharacterSheetSection.vue'
   import generateCharacter from '../CharacterEngine/generateCharacter'
-  import { range, isEmpty } from 'lodash'
+  import { range, isEmpty, merge } from 'lodash'
 
   const classesModule = namespace('classes')
   const equipmentModule = namespace('equipment')
@@ -91,6 +91,10 @@
     goToTab (newTab: number, section: number) {
       Vue.set(this.openTabs, section, newTab)
     }
+
+    updateCharacter (newCharacter: RawCharacterType) {
+      merge(this.character, newCharacter)
+    }
   }
 </script>
 
@@ -100,7 +104,11 @@
     div.d-flex.align-center.justify-center
       JSONReader(label="Load New Character", @input="handleCharacterUpload").ma-2
       JSONWriter(:jsonData="character", v-bind="{ filename }").ma-2 Save Character
-    CharacterSheetTop(v-if="completeCharacter", v-bind="{ completeCharacter }")
+    CharacterSheetTop(
+      v-if="completeCharacter",
+      v-bind="{ completeCharacter }",
+      @updateCharacter="updateCharacter"
+    )
     v-row(v-if="completeCharacter", justify-space-around).nx-2
       v-col(v-for="section in range(numSections)", :key="section", :md="4", :sm="6")
         CharacterSheetSection(

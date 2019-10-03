@@ -14,7 +14,12 @@
     healthMod = 0
     isRestOpen = false
 
-    resetHealthMod () {
+    updateHitPoints (multiplier: number) {
+      const hitPoints = Math.max(0, Math.min(
+        this.hitPoints.maximum,
+        this.hitPoints.current + (multiplier * this.healthMod)
+      ))
+      this.$emit('updateCharacter', { currentStats: { hitPoints } })
       this.healthMod = 0
     }
   }
@@ -39,9 +44,9 @@
           v-btn(small, v-on="on", color="secondary").ma-2 Rest
         CharacterSheetRest(v-bind="{ hitPoints }", @close="isRestOpen=false")
     div(:class="$style.controlDiv").d-flex.flex-column.align-center.mr-4
-      v-btn(color="green accent-3", small, @click="resetHealthMod").white--text Heal
+      v-btn(:disabled="!healthMod", color="green accent-3", small, @click="updateHitPoints(1)").white--text Heal
       v-text-field(outlined, single-line, hide-details, type="number", v-model="healthMod").my-2
-      v-btn(color="red accent-3", small, @click="resetHealthMod").white--text Damage
+      v-btn(:disabled="!healthMod", color="red accent-3", small, @click="updateHitPoints(-1)").white--text Damage
 </template>
 
 <style module lang="scss">

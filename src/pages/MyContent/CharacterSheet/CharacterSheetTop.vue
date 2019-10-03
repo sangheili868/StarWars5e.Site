@@ -54,7 +54,10 @@
             h5 {{ experienceText }}
           v-chip(small, color="secondary", text-color="white", :class="$style.rightChip").ml-2.mr-0
             h5 {{ currentLevel + 1 }}
-    CharacterSheetHealth(:hitPoints="completeCharacter.hitPoints")
+    CharacterSheetHealth(
+      :hitPoints="completeCharacter.hitPoints",
+      @updateCharacter="newCharacter => $emit('updateCharacter', newCharacter)"
+    )
 </template>
 
 <style module lang="scss">

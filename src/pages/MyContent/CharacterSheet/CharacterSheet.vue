@@ -5,6 +5,7 @@
   import { RawCharacterType } from '@/types/rawCharacterTypes'
   import { EquipmentType } from '@/types/lootTypes'
   import JSONReader from '@/components/JSONReader.vue'
+  import JSONWriter from '@/components/JSONWriter.vue'
   import CharacterSheetTop from './CharacterSheetTop.vue'
   import CharacterSheetSection from './CharacterSheetSection.vue'
   import generateCharacter from '../CharacterEngine/generateCharacter'
@@ -19,6 +20,7 @@
   @Component({
     components: {
       JSONReader,
+      JSONWriter,
       CharacterSheetTop,
       CharacterSheetSection
     }
@@ -38,7 +40,7 @@
     range = range
     openTabs: number[] = [0, 1, 2]
     character: RawCharacterType | {} = {}
-    isAlertOpen: boolean = true
+    isAlertOpen = false
 
     created () {
       this.fetchClasses()
@@ -58,8 +60,19 @@
       } as { [ breakpoint: string ] : number })[this.$vuetify.breakpoint.name]
     }
 
-    get isValidCharacter () {
-      return [
+    get completeCharacter () {
+      return !isEmpty(this.character) && generateCharacter(
+        this.character as RawCharacterType,
+        this.classes,
+        this.equipment,
+        this.powers,
+        this.feats,
+        this.backgrounds
+      )
+    }
+
+    handleCharacterUpload (newCharacter: any) {
+      const isValid = newCharacter && [
         'name',
         'species',
         'classes',
@@ -68,22 +81,9 @@
         'characteristics',
         'equipment',
         'currentStats'
-      ].every((field: string) => field in this.character)
-    }
-
-    get hasValidCharacter () {
-      return !isEmpty(this.character) && this.isValidCharacter
-    }
-
-    get completeCharacter () {
-      return this.isValidCharacter && generateCharacter(
-        this.character as RawCharacterType,
-        this.classes,
-        this.equipment,
-        this.powers,
-        this.feats,
-        this.backgrounds
-      )
+      ].every((field: string) => field in newCharacter)
+      this.character = isValid ? newCharacter : {}
+      this.isAlertOpen = !isValid && newCharacter instanceof Object
     }
 
     goToTab (newTab: number, section: number) {
@@ -94,12 +94,12 @@
 
 <template lang="pug">
   div
-    v-alert(v-model="isAlertOpen", :dismissable="true", type="error", transition="scale-transition") Invalid Character
+    v-alert(v-model="isAlertOpen", dismissible, type="error") Invalid Character
     div.d-flex.align-center.justify-center
-      JSONReader(@input="newCharacter => character = newCharacter").ma-2
-      v-btn(@click="isAlertOpen = !isAlertOpen").ma-2 Save Character
-    CharacterSheetTop(v-if="isValidCharacter", v-bind="{ completeCharacter }")
-    v-row(v-if="isValidCharacter", justify-space-around).nx-2
+      JSONReader(label="Load New Character", @input="handleCharacterUpload").ma-2
+      JSONWriter.ma-2 Save Character
+    CharacterSheetTop(v-if="completeCharacter", v-bind="{ completeCharacter }")
+    v-row(v-if="completeCharacter", justify-space-around).nx-2
       v-col(v-for="section in range(numSections)", :key="section", :md="4", :sm="6")
         CharacterSheetSection(
           v-bind="{ completeCharacter }",

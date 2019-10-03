@@ -4,6 +4,7 @@
   @Component
   export default class JSONReader extends Vue {
     fileReader = new FileReader()
+    @Prop(String) readonly label!: string
 
     created () {
       this.fileReader.onload = (e: Event) => {
@@ -20,7 +21,7 @@
 
 <template lang="pug">
   v-file-input(
-    label="Load New Character",
+    v-bind="{ label }",
     accept=".json",
     filled,
     hide-details,

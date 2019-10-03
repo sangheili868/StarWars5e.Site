@@ -7,6 +7,7 @@
   import CharacterSheetDescription from './CharacterSheetDescription.vue'
   import CharacterSheetProficiencies from './CharacterSheetProficiencies.vue'
   import { CompleteCharacterType } from '@/types/completeCharacterTypes'
+  import { isEmpty } from 'lodash'
 
   @Component({
     components: {
@@ -25,7 +26,7 @@
     isFabOpen = false
 
     get sections () {
-      const hasPowers = this.completeCharacter.techCasting || this.completeCharacter.forceCasting
+      const hasPowers = !isEmpty(this.completeCharacter.techCasting) || !isEmpty(this.completeCharacter.forceCasting)
       return [
         {
           component: 'CharacterSheetAbilities',

@@ -78,7 +78,7 @@ export default function generateCharacter (
     proficiencies,
     languages: generateLanguages(rawCharacter),
     equipment: myEquipment,
-    credits: credits && credits.quantity,
+    credits: credits ? credits.quantity : 0,
     carryingCapacity: generateCarryingCapacity(abilityScores),
     superiority: generateSuperiorty(rawCharacter, abilityScores, proficiencyBonus, maneuvers),
     ...generateCasting(rawCharacter, abilityScores, powers, proficiencyBonus, techCastingMap, forceCastingMap),

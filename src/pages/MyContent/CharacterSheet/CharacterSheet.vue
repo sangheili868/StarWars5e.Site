@@ -73,7 +73,6 @@
     }
 
     handleCharacterUpload (newCharacter: any, filename: string) {
-      console.log(filename)
       const isValid = newCharacter && [
         'name',
         'species',

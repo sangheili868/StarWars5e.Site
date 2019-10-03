@@ -1,6 +1,6 @@
 import { RawCharacterType } from '@/types/rawCharacterTypes'
 import { FightingStyleType, FeatureType, FeaturesType, BackgroundType } from '@/types/characterTypes'
-import { compact } from 'lodash'
+import { chain, compact } from 'lodash'
 import { CompletedFeatureType, AbilityScoresType } from '@/types/completeCharacterTypes'
 
 function getValidFeatures (
@@ -50,9 +50,13 @@ export default function generateFeatures (
   const myClassFeatures = rawCharacter.classes.map(({ name: className, levels, discoveries }) =>
     getValidFeatures(classFeatures[className], levels, discoveries)
   ).flat()
-  const myArchetypeFeatures = rawCharacter.classes.map(({ archetype, levels, discoveries }) =>
-    archetype && getValidFeatures(archetypeFeatures[archetype.name], levels, discoveries)
-  ).flat()
+  const myArchetypeFeatures = chain(rawCharacter.classes)
+    .map(({ archetype, levels, discoveries }) =>
+      archetype && getValidFeatures(archetypeFeatures[archetype.name], levels, discoveries)
+    )
+    .compact()
+    .flatten()
+    .value()
   const myFightingStyles = compact(rawCharacter.classes
     .map(({ fightingStyle }) => fightingStyles.find(({ name }) => name === fightingStyle))
   )
@@ -67,7 +71,7 @@ export default function generateFeatures (
       combat: false,
       description: myBackground.featureText
     }
-  ].map(feature => calculateUsage(rawCharacter, abilityScores, feature))
+  ].map(feature => calculateUsage(rawCharacter, abilityScores, feature as CompletedFeatureType))
 
   return {
     combatFeatures: myFeatures.filter(({ combat }) => combat),

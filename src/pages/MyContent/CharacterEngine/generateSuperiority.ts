@@ -82,7 +82,7 @@ export default function generateSuperiority (
   maneuvers: ManeuverType[]
 ) {
   const primaryClass = getPrimarySuperiorityClass(rawCharacter)
-  return {
+  return primaryClass.diceSize === 0 ? {} : {
     currentDice: rawCharacter.currentStats.superiorityDice,
     maxDice: primaryClass.maxDice + getMulticlassDiceBonus(rawCharacter),
     diceSize: 'd' + primaryClass.diceSize,

@@ -52,7 +52,6 @@
       :key="weapon.name"
       v-bind="{ weapon }"
     )
-    h3.mt-2 Maneuvers
     CharacterSheetSuperiority(:superiority="superiority")
     h3.mt-2 Combat Features
     CharacterSheetFeatures(:features="combatFeatures")

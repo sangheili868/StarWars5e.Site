@@ -146,6 +146,15 @@
         "type": "base",
         "description": "Beginning at 3rd level, you are skilled at navigating the untamed wilds. You gain the following benefits when traveling for an hour or more:\r\n- Difficult terrain doesn't slow your group's travel.\r\n- You can't become lost by unenhanced means.\r\n- Even when you are engaged in another activity while traveling (such as foraging, navigating, or tracking), you remain alert to danger.\r\n- If you are traveling alone, you can move stealthily at a normal pace.\r\n- When you forage, you find twice as much food as you normally would.\r\n- When you make a Wisdom (Survival) check, you gain a bonus to the check equal to your Intelligence modifier."
       }
+    ],
+    "Operative": [
+      {
+        "name": "Sneak Attack",
+        "level": 1,
+        "combat": true,
+        "type": "base",
+        "description": "Beginning at 1st level, you know how to strike subtly and exploit a foe’s distraction. Once per turn, you can deal an extra 1d6 damage to one creature you hit with an attack if you have advantage on the attack roll. The attack must use a finesse or a ranged weapon.\r\nYou don’t need advantage on the attack roll if another enemy of the target is within 5 feet of it, that enemy isn’t incapacitated, and you don’t have disadvantage on the attack roll.\r\nThe amount of the extra damage increases as you gain levels in this class, as shown in the Sneak Attack column of the operative class table."
+      }
     ]
   },
 

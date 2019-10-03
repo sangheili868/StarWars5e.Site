@@ -13,7 +13,10 @@
 
     get classText () {
       return this.completeCharacter.species + ' ' + this.completeCharacter.classes
-        .map(({ name, levels, archetype }) => `${name} (${archetype}) ${levels}`)
+        .map(({ name, levels, archetype }) => {
+          const archetypeText = archetype ? ` (${archetype})` : ''
+          return `${name}${archetypeText} ${levels}`
+        })
         .join(', ')
     }
 
@@ -57,7 +60,7 @@
 <style module lang="scss">
   @import '@/assets/styles/colors.scss';
   .xpBar {
-    max-width: 300px;
+    width: 300px;
 
     .rightChip {
       opacity: 0.3

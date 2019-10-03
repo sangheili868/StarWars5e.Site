@@ -4,6 +4,7 @@
   import CheckList from '@/components/CheckList.vue'
   import CharacterSheetModifier from './CharacterSheetModifier.vue'
   import CharacterSheetExpansionFeatures from './CharacterSheetExpansionFeatures.vue'
+  import { isEmpty } from 'lodash'
 
   @Component({
     components: {
@@ -14,11 +15,13 @@
   })
   export default class CharacterSheetSuperiority extends Vue {
     @Prop(Object) readonly superiority!: SuperiorityType
+    isEmpty = isEmpty
   }
 </script>
 
 <template lang="pug">
-  div
+  div(v-if="!isEmpty(superiority)")
+    h3.mt-2 Maneuvers
     CheckList(:current="superiority.currentDice", :maximum="superiority.maxDice", :title="superiority.diceSize + 's'")
     CharacterSheetModifier(:modifier="superiority.maneuverSaveDC", label="Maneuver Save DC", isFlatNumber, small)
     CharacterSheetExpansionFeatures(:features="superiority.maneuvers")

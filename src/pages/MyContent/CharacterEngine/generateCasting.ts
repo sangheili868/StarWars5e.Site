@@ -71,16 +71,18 @@ export default function generateCasting (
     dark: abilityScores.Charisma.modifier,
     universal: Math.max(abilityScores.Wisdom.modifier, abilityScores.Charisma.modifier)
   }
+  const techPowers = getPowersKnown(rawCharacter, powers, 'tech')
+  const forcePowers = getPowersKnown(rawCharacter, powers, 'force')
   return {
-    techCasting: {
+    techCasting: techPowers.length ? {
       currentPoints: rawCharacter.currentStats.techPoints,
       maxPoints: getPowerPoints(rawCharacter.classes, techCastingMap, techCastingBonus, 'tech'),
       attackModifier: techCastingBonus + proficiencyBonus,
       saveDC: 8 + techCastingBonus + proficiencyBonus,
       maxPowerLevel: getMaxPowerLevel(rawCharacter.classes, techCastingMap),
-      powersKnown: getPowersKnown(rawCharacter, powers, 'tech')
-    },
-    forceCasting: {
+      powersKnown: techPowers
+    } : {},
+    forceCasting: forcePowers.length ? {
       currentPoints: rawCharacter.currentStats.forcePoints,
       maxPoints: getPowerPoints(rawCharacter.classes, forceCastingMap, forceCastingBonus.universal, 'force'),
       lightAttackModifier: forceCastingBonus.light + proficiencyBonus,
@@ -90,7 +92,7 @@ export default function generateCasting (
       universalAttackModifier: forceCastingBonus.universal + proficiencyBonus,
       universalSaveDC: 8 + forceCastingBonus.universal + proficiencyBonus,
       maxPowerLevel: getMaxPowerLevel(rawCharacter.classes, forceCastingMap),
-      powersKnown: getPowersKnown(rawCharacter, powers, 'force')
-    }
+      powersKnown: forcePowers
+    } : {}
   }
 }

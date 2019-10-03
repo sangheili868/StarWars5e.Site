@@ -40,6 +40,7 @@
     range = range
     openTabs: number[] = [0, 1, 2]
     character: RawCharacterType | {} = {}
+    filename = ''
     isAlertOpen = false
 
     created () {
@@ -71,7 +72,8 @@
       )
     }
 
-    handleCharacterUpload (newCharacter: any) {
+    handleCharacterUpload (newCharacter: any, filename: string) {
+      console.log(filename)
       const isValid = newCharacter && [
         'name',
         'species',
@@ -83,6 +85,7 @@
         'currentStats'
       ].every((field: string) => field in newCharacter)
       this.character = isValid ? newCharacter : {}
+      this.filename = isValid ? filename : ''
       this.isAlertOpen = !isValid && newCharacter instanceof Object
     }
 
@@ -97,7 +100,7 @@
     v-alert(v-model="isAlertOpen", dismissible, type="error") Invalid Character
     div.d-flex.align-center.justify-center
       JSONReader(label="Load New Character", @input="handleCharacterUpload").ma-2
-      JSONWriter.ma-2 Save Character
+      JSONWriter(:jsonData="character", v-bind="{ filename }").ma-2 Save Character
     CharacterSheetTop(v-if="completeCharacter", v-bind="{ completeCharacter }")
     v-row(v-if="completeCharacter", justify-space-around).nx-2
       v-col(v-for="section in range(numSections)", :key="section", :md="4", :sm="6")

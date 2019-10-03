@@ -9,6 +9,7 @@
   },
   "dependencies": {
     "@types/axios": "^0.14.0",
+    "@types/file-saver": "^2.0.1",
     "@types/lodash": "^4.14.123",
     "@types/mathjs": "^5.0.1",
     "@types/node": "^11.13.4",
@@ -17,6 +18,7 @@
     "@vue/cli": "^3.11.0",
     "axios": "0.18.1",
     "core-js": "^2.6.5",
+    "file-saver": "^2.0.2",
     "material-design-icons-iconfont": "^4.0.5",
     "mathjs": "^5.10.3",
     "ordinal": "^1.0.3",

@@ -6,15 +6,19 @@
     fileReader = new FileReader()
     @Prop(String) readonly label!: string
 
+    filename = ''
+
     created () {
       this.fileReader.onload = (e: Event) => {
-        this.$emit('input', JSON.parse(this.fileReader.result as string))
+        this.$emit('input', JSON.parse(this.fileReader.result as string), this.filename)
       }
     }
 
     handleUpload (newFile: File) {
-      if (newFile) this.fileReader.readAsText(newFile)
-      else this.$emit('input')
+      if (newFile) {
+        this.filename = newFile.name
+        this.fileReader.readAsText(newFile)
+      } else this.$emit('input')
     }
   }
 </script>

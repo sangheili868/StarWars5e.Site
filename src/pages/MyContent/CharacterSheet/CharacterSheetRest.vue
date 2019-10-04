@@ -39,7 +39,7 @@
         template(v-if="totalCount > 0")  (Use {{ totalCount }} hit {{ totalCount > 1 ? 'dice' : 'die' }})
       v-btn(color="primary", @click="$emit('triggerLongRest')") Long Rest
       v-spacer
-      v-btn(color="primary", flat, @click="$emit('close')") Close
+      v-btn(color="primary", text, @click="$emit('close')") Close
 </template>
 
 <style module lang="scss">

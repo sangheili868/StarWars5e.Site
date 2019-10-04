@@ -30,7 +30,7 @@
 
 <template lang="pug">
   div
-    div(v-if="techCasting.powersKnown.length")
+    div(v-if="techCasting.powersKnown && techCasting.powersKnown.length")
       h3 Tech Casting
       CharacterSheetTicker(
         v-if="techCasting.maxPoints > 10",
@@ -44,7 +44,7 @@
       div(v-for="(powers, level) in groupBy(techCasting.powersKnown, 'level')", :key="level")
         h3.mt-2 {{ powerLevelText(level) }}
         CharacterSheetExpansionFeatures(:features="powers")
-    div(v-if="forceCasting.powersKnown.length")
+    div(v-if="forceCasting.powersKnown && forceCasting.powersKnown.length")
       h3 Force Casting
       CharacterSheetTicker(
         v-if="forceCasting.maxPoints > 10",

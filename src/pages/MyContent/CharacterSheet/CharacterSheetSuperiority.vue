@@ -22,7 +22,12 @@
 <template lang="pug">
   div(v-if="!isEmpty(superiority)")
     h3.mt-2 Maneuvers
-    CheckList(:current="superiority.currentDice", :maximum="superiority.maxDice", :title="superiority.diceSize + 's'")
+    CheckList(
+      :current="superiority.currentDice",
+      :maximum="superiority.maxDice",
+      :title="superiority.diceSize + 's'"
+      @changeSelected="superiorityDice => $emit('updateCharacter', { currentStats: { superiorityDice } })"
+    )
     CharacterSheetModifier(:modifier="superiority.maneuverSaveDC", label="Maneuver Save DC", isFlatNumber, small)
     CharacterSheetExpansionFeatures(:features="superiority.maneuvers")
 </template>

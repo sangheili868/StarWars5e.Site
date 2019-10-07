@@ -35,9 +35,16 @@
       CharacterSheetTicker(
         v-if="techCasting.maxPoints > 10",
         :current="techCasting.currentPoints",
-        :max="techCasting.maxPoints"
+        :max="techCasting.maxPoints",
+        @changeCount="techPoints => $emit('updateCharacter', { currentStats: { techPoints } })"
       ) Tech Points
-      CheckList(v-else, :current="techCasting.currentPoints", :maximum="techCasting.maxPoints", title="Tech Points")
+      CheckList(
+        v-else,
+        :current="techCasting.currentPoints",
+        :maximum="techCasting.maxPoints",
+        title="Tech Points",
+        @changeSelected="techPoints => $emit('updateCharacter', { currentStats: { techPoints } })"
+      )
       CharacterSheetModifier(:modifier="techCasting.attackModifier", label="Tech Attack Modifier", small)
       CharacterSheetModifier(:modifier="techCasting.saveDC", label="Tech Save DC", isFlatNumber, small)
       CharacterSheetModifier(:modifier="ordinal(techCasting.maxPowerLevel)", label="Max Power Level", isFlatNumber, small)
@@ -49,9 +56,16 @@
       CharacterSheetTicker(
         v-if="forceCasting.maxPoints > 10",
         :current="forceCasting.currentPoints",
-        :max="forceCasting.maxPoints"
+        :max="forceCasting.maxPoints",
+        @changeCount="forcePoints => $emit('updateCharacter', { currentStats: { forcePoints } })"
       ) Force Points
-      CheckList(v-else, :current="forceCasting.currentPoints", :maximum="forceCasting.maxPoints", title="Force Points")
+      CheckList(
+        v-else,
+        :current="forceCasting.currentPoints",
+        :maximum="forceCasting.maxPoints",
+        title="Force Points",
+        @changeSelected="forcePoints => $emit('updateCharacter', { currentStats: { forcePoints } })"
+      )
       CharacterSheetModifier(:modifier="forceCasting.lightAttackModifier", label="Light Attack Modifier", small)
       CharacterSheetModifier(:modifier="forceCasting.lightSaveDC", label="Light Save DC", isFlatNumber, small)
       CharacterSheetModifier(:modifier="forceCasting.darkAttackModifier", label="Dark Attack Modifier", small)

@@ -52,7 +52,10 @@
       :key="weapon.name"
       v-bind="{ weapon }"
     )
-    CharacterSheetSuperiority(:superiority="superiority")
+    CharacterSheetSuperiority(
+      :superiority="superiority",
+      @updateCharacter="newCharacter => $emit('updateCharacter', newCharacter)"
+    )
     h3.mt-2 Combat Features
     CharacterSheetExpansionFeatures(
       :features="combatFeatures",

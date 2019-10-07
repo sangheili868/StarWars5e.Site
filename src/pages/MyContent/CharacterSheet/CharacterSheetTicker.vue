@@ -10,10 +10,10 @@
 
 <template lang="pug">
   div(:class="$style.ticker")
-    v-btn(icon, small, color="red accent-3").ml-0
+    v-btn(icon, small, elevation="4" color="primary", :disabled="current <= 0" @click="$emit('changeCount', current - 1)").ma-2
       v-icon fa-minus
     h5(:class="$style.count").title {{ current }} / {{ max }}
-    v-btn(icon, small, color="green accent-3")
+    v-btn(icon, small, elevation="4" color="primary", :disabled="current >= max" @click="$emit('changeCount', current + 1)").ma-2
       v-icon fa-plus
     h4
       slot

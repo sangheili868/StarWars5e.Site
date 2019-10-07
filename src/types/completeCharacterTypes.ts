@@ -68,7 +68,7 @@ export interface CompletedFeatureType {
   combat: boolean,
   usage?: {
     recharge: string,
-    current: number,
+    used: number,
     maximum: number
   }
 }

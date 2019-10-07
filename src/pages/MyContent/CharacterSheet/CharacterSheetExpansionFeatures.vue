@@ -22,7 +22,7 @@
       v-expansion-panel-header.pa-3
         h4 {{ feature.name }}
       v-expansion-panel-content.ma-2.caption
-        CheckList(v-if="feature.usage", v-bind="feature.usage", title="Uses")
+        CheckList(v-if="feature.usage", :current="feature.usage.used", :maximum="feature.usage.maximum", title="Uses")
         div(v-if="feature.castingPeriodText") #[strong Casting Time:] {{ feature.castingPeriodText }}
         div(v-if="feature.range") #[strong Range:] {{ feature.range }}
         div(v-if="feature.duration") #[strong Duration:] {{ feature.duration }} {{ feature.concentration && '(Concentration)' }}

@@ -114,7 +114,7 @@ export interface RawCharacterType {
       failures: number
     },
     hasInspiration: boolean,
-    featureUses: {
+    featuresTimesUsed: {
       [feature: string]: number
     }
   }

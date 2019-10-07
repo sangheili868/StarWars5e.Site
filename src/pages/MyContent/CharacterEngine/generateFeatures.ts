@@ -29,7 +29,7 @@ function calculateUsage (
     ...feature,
     usage: {
       recharge: feature.usage.recharge,
-      current: rawCharacter.currentStats.featureUses[feature.name],
+      used: rawCharacter.currentStats.featuresTimesUsed[feature.name],
       maximum
     }
   }

@@ -7,12 +7,18 @@
     @Prop(String) readonly title!: string
     @Prop(Number) readonly current!: number
     @Prop(Number) readonly maximum!: number
+    @Prop(Boolean) readonly isStateful!: boolean
+
     range = range
 
-    numSelected = 0
+    statefulNumSelected = 0
+
+    get numSelected () {
+      return this.isStateful ? this.statefulNumSelected : this.current
+    }
 
     increment (index: number, state: boolean) {
-      this.numSelected = state ? index + 1 : index
+      this.statefulNumSelected = state ? index + 1 : index
       this.$emit('changeSelected', this.numSelected)
     }
   }
@@ -28,7 +34,7 @@
         color="primary",
         hide-details,
         :class="$style.checkbox",
-        :indeterminate="current <= index",
+        :indeterminate="isStateful && current <= index",
         :readonly="current < index",
         :value="numSelected > index",
         @change="state => increment(index, state)"

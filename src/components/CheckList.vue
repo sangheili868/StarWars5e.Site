@@ -17,9 +17,9 @@
       return this.isStateful ? this.statefulNumSelected : this.current
     }
 
-    increment (index: number, state: boolean) {
-      this.statefulNumSelected = state ? index + 1 : index
-      this.$emit('changeSelected', state ? index + 1 : index)
+    increment (index: number, isChecked: boolean) {
+      this.statefulNumSelected = isChecked ? index + 1 : index
+      this.$emit('changeSelected', isChecked ? index + 1 : index)
     }
   }
 </script>
@@ -37,7 +37,7 @@
         :indeterminate="isStateful && current <= index",
         :readonly="isStateful"
         :input-value="numSelected > index",
-        @change="state => increment(index, state)"
+        @change="isChecked => increment(index, isChecked)"
       )
 </template>
 

@@ -2,11 +2,11 @@
 <script lang="ts">
   import { Component, Prop, Vue } from 'vue-property-decorator'
   import { EquipmentType } from '@/types/lootTypes'
-  import CharacterSheetModifier from './CharacterSheetModifier.vue'
+  import CharacterSheetEquipmentPanel from './CharacterSheetEquipmentPanel.vue'
 
   @Component({
     components: {
-      CharacterSheetModifier
+      CharacterSheetEquipmentPanel
     }
   })
   export default class CharacterSheetEquipment extends Vue {
@@ -20,20 +20,10 @@
     h5 Credits: {{ credits }}
     h3 Equipment
     v-expansion-panels(accordion, multiple)
-      v-expansion-panel(
-        v-for="item in equipment",
+      CharacterSheetEquipmentPanel(
+        v-for="(item, index) in equipment",
         :key="item.name",
-      ).equipmentPanel
-        v-expansion-panel-header.pa-2 {{ item.name }} {{ item.quantity > 1 ? `(${item.quantity})` : '' }}
-        v-expansion-panel-content.ma-2.caption
-          div Cost: {{ item.cost }}
-          div Weight: {{ item.weight}}
-          br
-          div {{ item.description }}
+        v-bind="{ item, index }",
+        @updateCharacter="newCharacter => $emit('updateCharacter', newCharacter)"
+      )
 </template>
-
-<style lang="scss">
-  .equipmentPanel .v-expansion-panel-header {
-    min-height: 0;
-  }
-</style>

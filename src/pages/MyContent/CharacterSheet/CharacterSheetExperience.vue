@@ -7,6 +7,7 @@
   @Component
   export default class CharacterSheetExperience extends Vue {
     @Prop(Object) readonly completeCharacter!: CompleteCharacterType
+
     isExperienceOpen = false
     newValue = 0
     startCase = startCase
@@ -28,11 +29,23 @@
       const addExperience = this.fixExperience(this.completeCharacter.experiencePoints.current + this.newValue)
       const setExperience = this.fixExperience(this.newValue)
       const setLevel = this.fixLevel(this.newValue)
-      return {
-        addExperience: { newExperience: addExperience, newLevel: this.calculateLevel(addExperience) },
-        setLevel: { newExperience: this.calculateExperience(setLevel), newLevel: setLevel },
-        setExperience: { newExperience: setExperience, newLevel: this.calculateLevel(setExperience) }
-      }
+      return [
+        {
+          name: 'addExperience',
+          newExperience: addExperience,
+          newLevel: this.calculateLevel(addExperience)
+        },
+        {
+          name: 'setLevel',
+          newExperience: experienceTable[setLevel],
+          newLevel: setLevel
+        },
+        {
+          name: 'setExperience',
+          newExperience: setExperience,
+          newLevel: this.calculateLevel(setExperience)
+        }
+      ]
     }
 
     fixExperience (experience: number) {
@@ -48,16 +61,9 @@
       return level < 0 ? 20 : level
     }
 
-    calculateExperience (level: number) {
-      return experienceTable[level]
-    }
-
-    resetExperience () {
-      this.newValue = 0
-    }
-
-    setExperience () {
-      // this.$emit('updateCharacter', { experiencePoints: this.newExperience })
+    updateExperience (newExperience: number, newLevel: number) {
+      const unspentLevels = newLevel - this.currentLevel
+      this.$emit('updateCharacter', { experiencePoints: newExperience, currentStats: { unspentLevels } })
       this.isExperienceOpen = false
     }
   }
@@ -66,7 +72,7 @@
 <template lang="pug">
   v-dialog(v-model="isExperienceOpen", width="500")
     template(v-slot:activator="{ on }")
-      v-btn(:class="$style.xpBar", v-on="on", @click="resetExperience").d-flex.align-center
+      v-btn(:class="$style.xpBar", v-on="on", @click="newValue=0").d-flex.align-center
         v-chip(small, color="secondary", text-color="white").mr-2.ml-0
           h5 {{ currentLevel }}
         v-progress-linear(
@@ -86,16 +92,16 @@
             v-col(cols="6")
               v-text-field(outlined, type="number", v-model.number="newValue", background-color="white")
             v-col(cols="6")
-              div Current Level: {{ currentLevel }}
-              div Current Experience: {{ completeCharacter.experiencePoints.current }}
-              div Next Level: {{ fixLevel(currentLevel + 1) }}
-              div Next Level Experience: {{ completeCharacter.experiencePoints.nextLevel }}
-          v-row(v-for="action in ['addExperience', 'setExperience', 'setLevel']", :key="action")
+              div #[strong Current Level:] {{ currentLevel }}
+              div #[strong Current Experience:] {{ completeCharacter.experiencePoints.current }}
+              div #[strong Next Level:] {{ fixLevel(currentLevel + 1) }}
+              div #[strong Next Level Experience:] {{ completeCharacter.experiencePoints.nextLevel }}
+          v-row(v-for="{ name, newExperience, newLevel } in experienceCalculations", :key="name")
             v-col(cols="6")
-              v-btn(color="primary", block) {{ startCase(action) }}
+              v-btn(color="primary", block, @click="updateExperience(newExperience, newLevel)") {{ startCase(name) }}
             v-col(cols="6")
-              div New Level: {{ experienceCalculations[action].newLevel }}
-              div New Experience: {{ experienceCalculations[action].newExperience }}
+              div #[strong New Level:] {{ newLevel }}
+              div #[strong New Experience:] {{ newExperience }}
       v-card-actions
         v-spacer
         v-btn(color="primary", text, @click="isExperienceOpen=false") Close

@@ -82,6 +82,7 @@
     }
   ],
   "currentStats": {
+    "unspentLevels": 0,
     "hitPoints": 9,
     "temporaryHitPoints": 0,
     "hitDice": {

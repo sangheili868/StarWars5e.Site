@@ -223,6 +223,7 @@
     }
   ],
   "currentStats": {
+    "unspentLevels": 0,
     "hitPoints": 34,
     "temporaryHitPoints": 0,
     "techPoints": 7,

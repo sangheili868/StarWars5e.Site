@@ -70,7 +70,11 @@
           v-icon(:color="index === currentTab ? 'primary' : ''") {{ icon }}
     v-tabs(height="0", :value="currentTab")
       v-tab-item(v-for="({ component }) in sections", :key="component")
-        component(:is="component", v-bind="completeCharacter").text-left
+        component(
+          :is="component",
+          v-bind="completeCharacter",
+          @updateCharacter="newCharacter => $emit('updateCharacter', newCharacter)"
+        ).text-left
 </template>
 
 <style module lang="scss">

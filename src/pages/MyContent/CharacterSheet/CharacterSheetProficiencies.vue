@@ -2,11 +2,11 @@
   import { Component, Prop, Vue } from 'vue-property-decorator'
   import { CharacteristicsType, CompletedFeatureType } from '@/types/completeCharacterTypes'
   import { capitalize } from 'lodash'
-  import CharacterSheetFeatures from './CharacterSheetFeatures.vue'
+  import CharacterSheetExpansionFeatures from './CharacterSheetExpansionFeatures.vue'
 
   @Component({
     components: {
-      CharacterSheetFeatures
+      CharacterSheetExpansionFeatures
     }
   })
   export default class CharacterSheetProficiencies extends Vue {
@@ -27,7 +27,10 @@
 <template lang="pug">
   div
     h3 Non-combat Features
-    CharacterSheetFeatures(:features="nonCombatFeatures")
+    CharacterSheetExpansionFeatures(
+      :features="nonCombatFeatures",
+      @updateCharacter="newCharacter => $emit('updateCharacter', newCharacter)"
+    )
     h3.mt-2 Langauges
     div(v-for="language in languages", :key="language").caption {{ language }}
     h3.mt-2 Proficiencies

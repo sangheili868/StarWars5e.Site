@@ -6,14 +6,14 @@
   import CharacterSheetModifier from './CharacterSheetModifier.vue'
   import CharacterSheetWeapon from './CharacterSheetWeapon.vue'
   import CharacterSheetSuperiority from './CharacterSheetSuperiority.vue'
-  import CharacterSheetFeatures from './CharacterSheetFeatures.vue'
+  import CharacterSheetExpansionFeatures from './CharacterSheetExpansionFeatures.vue'
 
   @Component({
     components: {
       CharacterSheetModifier,
       CharacterSheetWeapon,
       CharacterSheetSuperiority,
-      CharacterSheetFeatures
+      CharacterSheetExpansionFeatures
     }
   })
   export default class CharacterSheetCombat extends Vue {
@@ -54,5 +54,8 @@
     )
     CharacterSheetSuperiority(:superiority="superiority")
     h3.mt-2 Combat Features
-    CharacterSheetFeatures(:features="combatFeatures")
+    CharacterSheetExpansionFeatures(
+      :features="combatFeatures",
+      @updateCharacter="newCharacter => $emit('updateCharacter', newCharacter)"
+    )
 </template>

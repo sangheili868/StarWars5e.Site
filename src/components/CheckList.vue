@@ -19,7 +19,7 @@
 
     increment (index: number, state: boolean) {
       this.statefulNumSelected = state ? index + 1 : index
-      this.$emit('changeSelected', this.numSelected)
+      this.$emit('changeSelected', state ? index + 1 : index)
     }
   }
 </script>
@@ -35,8 +35,8 @@
         hide-details,
         :class="$style.checkbox",
         :indeterminate="isStateful && current <= index",
-        :readonly="current < index",
-        :value="numSelected > index",
+        :readonly="isStateful"
+        :input-value="numSelected > index",
         @change="state => increment(index, state)"
       )
 </template>

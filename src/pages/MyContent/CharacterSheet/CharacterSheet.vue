@@ -113,7 +113,8 @@
       v-col(v-for="section in range(numSections)", :key="section", :md="4", :sm="6")
         CharacterSheetSection(
           v-bind="{ completeCharacter }",
-          :currentTab="openTabs[section]"
+          :currentTab="openTabs[section]",
+          @updateCharacter="updateCharacter",
           @goToTab="newTab => goToTab(newTab, section)"
         )
 </template>

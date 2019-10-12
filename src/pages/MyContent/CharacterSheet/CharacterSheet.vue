@@ -107,7 +107,7 @@
 <template lang="pug">
   div
     v-alert(v-model="isAlertOpen", dismissible, type="error") Invalid Character
-    div.d-flex.align-center.justify-center
+    div.d-flex.align-center.justify-center.flex-wrap
       JSONReader(label="Load New Character", @input="handleCharacterUpload").ma-2
       JSONWriter(:jsonData="character", v-bind="{ filename }").ma-2 Save Character
     CharacterSheetTop(

@@ -72,7 +72,7 @@
 <template lang="pug">
   v-dialog(v-model="isExperienceOpen", width="500")
     template(v-slot:activator="{ on }")
-      v-btn(:class="$style.xpBar", v-on="on", @click="newValue=0").d-flex.align-center
+      v-btn(:class="$style.xpBar", v-on="on", @click="newValue=0").d-flex.align-center.my-2
         v-chip(small, color="secondary", text-color="white").mr-2.ml-0
           h5 {{ currentLevel }}
         v-progress-linear(

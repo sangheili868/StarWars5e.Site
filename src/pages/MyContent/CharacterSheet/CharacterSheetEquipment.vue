@@ -3,10 +3,12 @@
   import { Component, Prop, Vue } from 'vue-property-decorator'
   import { EquipmentType } from '@/types/lootTypes'
   import CharacterSheetEquipmentPanel from './CharacterSheetEquipmentPanel.vue'
+  import ValueEditor from '@/components/ValueEditor.vue'
 
   @Component({
     components: {
-      CharacterSheetEquipmentPanel
+      CharacterSheetEquipmentPanel,
+      ValueEditor
     }
   })
   export default class CharacterSheetEquipment extends Vue {
@@ -18,7 +20,7 @@
 <template lang="pug">
   div
     h3 Equipment
-    h5 Credits: {{ credits }}
+    ValueEditor(:value="credits") Credits: {{ credits }}
     v-expansion-panels(accordion, multiple)
       CharacterSheetEquipmentPanel(
         v-for="(item, index) in equipment",

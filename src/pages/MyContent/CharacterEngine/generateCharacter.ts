@@ -46,7 +46,6 @@ export default function generateCharacter (
     current: rawCharacter.experiencePoints,
     nextLevel: experienceTable[currentLevel + 1]
   }
-  const credits = rawCharacter.credits
 
   const myFeatsList = generateFeats(rawCharacter)
   const myFeats = myFeatsList.map(name => feats.find(feat => name === feat.name))
@@ -78,7 +77,7 @@ export default function generateCharacter (
     proficiencies,
     languages: generateLanguages(rawCharacter),
     equipment: myEquipment,
-    credits: credits ? credits.quantity : 0,
+    credits: Math.max(rawCharacter.credits, 0),
     carryingCapacity: generateCarryingCapacity(abilityScores),
     superiority: generateSuperiorty(rawCharacter, abilityScores, proficiencyBonus, maneuvers),
     ...generateCasting(rawCharacter, abilityScores, powers, proficiencyBonus, techCastingMap, forceCastingMap),

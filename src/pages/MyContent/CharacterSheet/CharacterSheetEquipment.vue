@@ -17,13 +17,14 @@
 
 <template lang="pug">
   div
-    h5 Credits: {{ credits }}
     h3 Equipment
+    h5 Credits: {{ credits }}
     v-expansion-panels(accordion, multiple)
       CharacterSheetEquipmentPanel(
         v-for="(item, index) in equipment",
         :key="item.name",
         v-bind="{ item, index }",
-        @updateCharacter="newCharacter => $emit('updateCharacter', newCharacter)"
+        @updateCharacter="newCharacter => $emit('updateCharacter', newCharacter)",
+        @deleteCharacterProperty="(path, index) => $emit('deleteCharacterProperty', path, index)"
       )
 </template>

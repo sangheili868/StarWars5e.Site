@@ -9,7 +9,7 @@
   import CharacterSheetTop from './CharacterSheetTop.vue'
   import CharacterSheetSection from './CharacterSheetSection.vue'
   import generateCharacter from '../CharacterEngine/generateCharacter'
-  import { range, isEmpty, merge } from 'lodash'
+  import { range, isEmpty, merge, get, set } from 'lodash'
 
   const classesModule = namespace('classes')
   const equipmentModule = namespace('equipment')
@@ -95,6 +95,12 @@
     updateCharacter (newCharacter: RawCharacterType) {
       merge(this.character, newCharacter)
     }
+
+    deleteCharacterProperty (path: string, index: number) {
+      const myList = get(this.character, path)
+      const updatedList = myList.filter((item: any, itemIndex: number) => itemIndex !== index)
+      set(this.character, path, updatedList)
+    }
   }
 </script>
 
@@ -115,6 +121,7 @@
           v-bind="{ completeCharacter }",
           :currentTab="openTabs[section]",
           @updateCharacter="updateCharacter",
+          @deleteCharacterProperty="deleteCharacterProperty",
           @goToTab="newTab => goToTab(newTab, section)"
         )
 </template>

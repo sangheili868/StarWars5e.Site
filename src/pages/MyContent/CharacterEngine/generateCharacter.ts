@@ -46,7 +46,7 @@ export default function generateCharacter (
     current: rawCharacter.experiencePoints,
     nextLevel: experienceTable[currentLevel + 1]
   }
-  const credits = rawCharacter.equipment.find(({ name }) => name === 'credits')
+  const credits = rawCharacter.credits
 
   const myFeatsList = generateFeats(rawCharacter)
   const myFeats = myFeatsList.map(name => feats.find(feat => name === feat.name))

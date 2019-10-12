@@ -96,6 +96,7 @@ export interface RawCharacterType {
   },
   background: RawBackgroundType,
   characteristics: RawCharacteristicsType,
+  credits: number,
   equipment: RawEquipmentType[],
   currentStats: {
     hitPoints: number,

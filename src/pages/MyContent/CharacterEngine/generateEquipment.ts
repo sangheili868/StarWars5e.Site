@@ -49,7 +49,7 @@ export default function generateEquipment (
   proficiencies: string[]
 ) {
   return chain(rawCharacter.equipment)
-    .filter(({ name }) => !(['credits', 'custom'].includes(name)))
+    .filter(({ name }) => name !== 'custom')
     .map(({ name, quantity, equipped }) => {
       const equipmentData = equipment.find(equipment => name === equipment.name)
       if (!equipmentData) console.error('Equipment Data Not Found:', name)

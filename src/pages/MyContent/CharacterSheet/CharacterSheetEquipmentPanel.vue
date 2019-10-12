@@ -10,6 +10,11 @@
     get isEquippable () {
       return ['Weapon', 'Armor'].includes(this.item.equipmentCategory)
     }
+
+    updateQuantity (newQuantity: number) {
+      const fixedQuantity = Math.max(0, newQuantity)
+      this.$emit('updateCharacter', { equipment: { [this.index]: { quantity: fixedQuantity } } })
+    }
   }
 </script>
 
@@ -19,10 +24,19 @@
     v-expansion-panel-content.ma-2.caption
       div #[strong Cost:] {{ item.cost }}
       div #[strong Weight:] {{ item.weight}}
-      div.d-flex
+      div.d-flex.align-center
         strong Quantity
+        v-text-field(
+          :class="$style.quantityInput",
+          outlined,
+          single-line,
+          hide-details,
+          type="number",
+          :value="item.quantity",
+          @input="updateQuantity"
+        ).mx-2
       div(v-if="isEquippable").d-flex.align-center
-        div #[strong Equipped]
+        strong Equipped
         v-checkbox(
           :input-value="item.equipped",
           hide-details,
@@ -45,5 +59,9 @@
   .checkbox {
     flex: none !important;
     margin-top: 0 !important;
+  }
+
+  .quantityInput {
+    max-width: 100px;
   }
 </style>

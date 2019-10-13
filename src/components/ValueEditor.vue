@@ -51,7 +51,7 @@
       slot(name="result", :newValue="newValue")
         div Result: {{ newValue }} {{ label }}
     template(#actions)
-        v-btn(color="primary", @click="applyChanges") Apply
+        v-btn(color="primary", :disabled="(value === newValue) || (modifierAmount === '')", @click="applyChanges") Apply
         v-spacer
         v-btn(color="primary", text, @click="isOpen=false") Close
 </template>

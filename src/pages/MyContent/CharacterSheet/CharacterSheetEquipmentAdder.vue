@@ -91,7 +91,7 @@
         br
         div {{ selectedEquipment.description }}
     template(#actions)
-      v-btn(color="primary", @click="addItem") Add
+      v-btn(color="primary", :disabled="!selected", @click="addItem") Add
       v-spacer
       v-btn(color="primary", text, @click="isOpen=false") Close
 </template>

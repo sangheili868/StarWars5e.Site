@@ -93,7 +93,7 @@
     }
 
     updateCharacter (newCharacter: RawCharacterType) {
-      merge(this.character, newCharacter)
+      this.character = merge({}, this.character, newCharacter)
     }
 
     deleteCharacterProperty (path: string, index: number) {

@@ -31,5 +31,8 @@
         @updateCharacter="newCharacter => $emit('updateCharacter', newCharacter)",
         @deleteCharacterProperty="(path, index) => $emit('deleteCharacterProperty', path, index)"
       )
-    CharacterSheetEquipmentAdder
+    CharacterSheetEquipmentAdder(
+      :position="equipment.length",
+      @updateCharacter="newCharacter => $emit('updateCharacter', newCharacter)"
+    )
 </template>

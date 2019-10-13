@@ -20,7 +20,7 @@
 <template lang="pug">
   div
     h3 Equipment
-    ValueEditor(:value="credits") Credits: {{ credits }}
+    ValueEditor(:value="credits", label="Credits", @input="credits => $emit('updateCharacter', { credits })")
     v-expansion-panels(accordion, multiple)
       CharacterSheetEquipmentPanel(
         v-for="(item, index) in equipment",

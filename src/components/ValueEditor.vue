@@ -1,7 +1,12 @@
 <script lang="ts">
   import { Component, Prop, Vue } from 'vue-property-decorator'
+  import MyDialog from '@/components/MyDialog.vue'
 
-  @Component
+  @Component({
+    components: {
+      MyDialog
+    }
+  })
   export default class ValueEditor extends Vue {
     @Prop(Number) readonly value!: number
     @Prop(String) readonly label!: string
@@ -31,30 +36,22 @@
 </script>
 
 <template lang="pug">
-  v-dialog(v-model="isOpen", width="500")
+  MyDialog(v-model="isOpen")
     template(v-slot:activator="{ on }")
       v-btn(v-on="on", @click="resetValues").d-flex.align-center.my-2
         slot
           div {{ label }}: {{ value }}
-    v-card(:class="$style.modal")
-      v-card-title(primary-title).primary--text.headline.grey.lighten-2 Adjust {{ label }}
-      v-card-text
-        div Current: {{ value }} {{ label }}
-        div.d-flex.align-center
-          v-autocomplete(:items="['Add', 'Subtract', 'Set']", v-model="modifierType")
-          v-text-field(outlined, autofocus, type="number", hide-details v-model.number="modifierAmount", background-color="white").mx-1
-          div {{ label }}
-        slot(name="result", :newValue="newValue")
-          div Result: {{ newValue }} {{ label }}
-      v-card-actions
+    template(#title) Adjust {{ label }}
+    template(#text)
+      div Current: {{ value }} {{ label }}
+      div.d-flex.align-center
+        v-autocomplete(:items="['Add', 'Subtract', 'Set']", v-model="modifierType")
+        v-text-field(outlined, autofocus, type="number", hide-details v-model.number="modifierAmount", background-color="white").mx-1
+        div {{ label }}
+      slot(name="result", :newValue="newValue")
+        div Result: {{ newValue }} {{ label }}
+    template(#actions)
         v-btn(color="primary", @click="applyChanges") Apply
         v-spacer
         v-btn(color="primary", text, @click="isOpen=false") Close
 </template>
-
-<style module lang="scss">
-  @import '@/assets/styles/colors.scss';
-  .modal {
-    background: $backgroundGradient;
-  }
-</style>

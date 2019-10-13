@@ -3,11 +3,13 @@
   import { Component, Prop, Vue } from 'vue-property-decorator'
   import { EquipmentType } from '@/types/lootTypes'
   import CharacterSheetEquipmentPanel from './CharacterSheetEquipmentPanel.vue'
+  import CharacterSheetEquipmentAdder from './CharacterSheetEquipmentAdder.vue'
   import ValueEditor from '@/components/ValueEditor.vue'
 
   @Component({
     components: {
       CharacterSheetEquipmentPanel,
+      CharacterSheetEquipmentAdder,
       ValueEditor
     }
   })
@@ -29,4 +31,5 @@
         @updateCharacter="newCharacter => $emit('updateCharacter', newCharacter)",
         @deleteCharacterProperty="(path, index) => $emit('deleteCharacterProperty', path, index)"
       )
+    CharacterSheetEquipmentAdder
 </template>

@@ -12,7 +12,6 @@
     @Prop(Object) readonly hitPoints!: HitPointsType
 
     healthMod = 0
-    isRestOpen = false
 
     updateHitPoints (multiplier: number) {
       const hitPoints = Math.max(0, Math.min(
@@ -39,10 +38,7 @@
           h2 {{ hitPoints.current }}
           v-divider(width="71", :class="$style.divider")
           h2 {{ hitPoints.maximum }}
-      v-dialog(v-model="isRestOpen", width="500")
-        template(v-slot:activator="{ on }")
-          v-btn(small, v-on="on", color="secondary").ma-2 Rest
-        CharacterSheetRest(v-bind="{ hitPoints }", @close="isRestOpen=false")
+      CharacterSheetRest(v-bind="{ hitPoints }")
     div(:class="$style.controlDiv").d-flex.flex-column.align-center.mr-4
       v-btn(:disabled="!healthMod", color="green accent-3", small, @click="updateHitPoints(1)").white--text Heal
       v-text-field(outlined, single-line, hide-details, type="number", v-model="healthMod").my-2

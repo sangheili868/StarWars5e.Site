@@ -57,6 +57,19 @@ export default function generateCharacter (
   const proficiencies = generateProficiencies(rawCharacter, myFoundClasses, myFeatsList, multiClassProficiencies, gdFeats)
   const myEquipment = generateEquipment(rawCharacter, equipment, abilityScores, proficiencyBonus, proficiencies)
   const myBackground = backgrounds.find(({ name }) => name === rawCharacter.background.name)
+  const casting = generateCasting(rawCharacter, abilityScores, powers, proficiencyBonus, techCastingMap, forceCastingMap)
+  const superiority = generateSuperiorty(rawCharacter, abilityScores, proficiencyBonus, maneuvers)
+  const features = generateFeatures(
+    rawCharacter,
+    classFeatures,
+    archetypeFeatures,
+    speciesFeatures,
+    currentLevel,
+    fightingStyles,
+    myFoundgdFeats,
+    myBackground,
+    abilityScores
+  )
 
   return {
     ...pick(rawCharacter, [
@@ -73,24 +86,14 @@ export default function generateCharacter (
     abilityScores,
     proficiencyBonus,
     ...generateCombatStats(rawCharacter, abilityScores, myEquipment),
-    hitPoints: generateHitPoints(rawCharacter, abilityScores, myFoundClasses, currentLevel),
+    hitPoints: generateHitPoints(rawCharacter, abilityScores, myFoundClasses, currentLevel, casting, superiority, features),
     proficiencies,
     languages: generateLanguages(rawCharacter),
     equipment: myEquipment,
     credits: Math.max(rawCharacter.credits, 0),
     carryingCapacity: generateCarryingCapacity(abilityScores),
-    superiority: generateSuperiorty(rawCharacter, abilityScores, proficiencyBonus, maneuvers),
-    ...generateCasting(rawCharacter, abilityScores, powers, proficiencyBonus, techCastingMap, forceCastingMap),
-    ...generateFeatures(
-      rawCharacter,
-      classFeatures,
-      archetypeFeatures,
-      speciesFeatures,
-      currentLevel,
-      fightingStyles,
-      myFoundgdFeats,
-      myBackground,
-      abilityScores
-    )
+    superiority,
+    ...casting,
+    ...features
   }
 }

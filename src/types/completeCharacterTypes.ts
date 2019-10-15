@@ -23,7 +23,20 @@ export interface HitPointsType {
     size: string,
     current: number,
     maximum: number
-  }[]
+  }[],
+  resting: {
+    hitDieBonus: number,
+    numHitDiceUsed: number,
+    hitDiceRestored: {
+      size: string,
+      numRestored: number
+    }[],
+    maxForcePoints: number,
+    maxTechPoints: number,
+    maxSuperiorityDice: number,
+    shortRestFeatures: string[],
+    longRestFeatures: string[]
+  }
 }
 
 export interface CastingType {

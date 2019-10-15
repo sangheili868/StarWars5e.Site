@@ -38,7 +38,10 @@
           h2 {{ hitPoints.current }}
           v-divider(width="71", :class="$style.divider")
           h2 {{ hitPoints.maximum }}
-      CharacterSheetRest(v-bind="{ hitPoints }")
+      CharacterSheetRest(
+        v-bind="{ hitPoints }",
+        @updateCharacter="newCharacter => $emit('updateCharacter', newCharacter)"
+      )
     div(:class="$style.controlDiv").d-flex.flex-column.align-center.mr-4
       v-btn(:disabled="!healthMod", color="green accent-3", small, @click="updateHitPoints(1)").white--text Heal
       v-text-field(outlined, single-line, hide-details, type="number", v-model="healthMod").my-2

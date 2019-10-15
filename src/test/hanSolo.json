@@ -86,8 +86,8 @@
     "unspentLevels": 0,
     "hitPoints": 9,
     "temporaryHitPoints": 0,
-    "hitDice": {
-      "d8": 1
+    "hitDiceUsed": {
+      "d8": 0
     },
     "deathSaves": {
       "successes": 0,
@@ -95,7 +95,7 @@
     },
     "hasInspiration": false,
     "featuresTimesUsed": {
-      "Defiant": 1
+      "Defiant": 0
     }
   }
 }

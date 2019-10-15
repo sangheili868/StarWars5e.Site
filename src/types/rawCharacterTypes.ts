@@ -104,7 +104,7 @@ export interface RawCharacterType {
     techPoints: number,
     forcePoints: number,
     superiorityDice: number,
-    hitDice: {
+    hitDiceUsed: {
       d6?: number,
       d8?: number,
       d10?: number,

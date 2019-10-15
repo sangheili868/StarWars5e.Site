@@ -221,9 +221,9 @@
     "techPoints": 7,
     "forcePoints": 0,
     "superiorityDice": 2,
-    "hitDice": {
+    "hitDiceUsed": {
       "d8": 1,
-      "d10": 4
+      "d10": 0
     },
     "deathSaves": {
       "successes": 0,
@@ -232,7 +232,8 @@
     "hasInspiration": false,
     "featuresTimesUsed": {
       "Ranger's Quarry": 3,
-      "Sage Advice": 1
+      "Sage Advice": 1,
+      "Defiant": 0
     }
   }
 }

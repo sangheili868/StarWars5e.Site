@@ -60,7 +60,11 @@
           render: _.startCase,
           filterFunction: ({ searchableRarity }: EnhancedItemType, filterValue: string) => searchableRarity === filterValue
         },
-        { text: 'Value', value: 'valueText' },
+        {
+          text: 'Value',
+          value: 'valueText',
+          sort: (a: string, b: string) => parseInt(a.replace(',', '')) - parseInt(b.replace(',', ''))
+        },
         {
           text: 'Attunement',
           value: 'requiresAttunement',

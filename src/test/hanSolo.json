@@ -96,6 +96,8 @@
     "hasInspiration": false,
     "featuresTimesUsed": {
       "Defiant": 0
-    }
+    },
+    "conditions": [],
+    "exhaustion": 0
   }
 }

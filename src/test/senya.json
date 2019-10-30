@@ -234,6 +234,8 @@
       "Ranger's Quarry": 3,
       "Sage Advice": 1,
       "Defiant": 0
-    }
+    },
+    "conditions": [],
+    "exhaustion": 0
   }
 }

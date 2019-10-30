@@ -90,6 +90,11 @@ export interface AbilityScoresType {
   [ability: string]: AbilityScoreType
 }
 
+export interface ConditionType {
+  name: string,
+  description: string
+}
+
 export interface CompleteCharacterType {
   name: string,
   image: string | null,
@@ -111,7 +116,9 @@ export interface CompleteCharacterType {
   proficiencyBonus: number,
   initiative: number,
   armorClass: number,
-  hitPoints: HitPointsType
+  hitPoints: HitPointsType,
+  conditions: ConditionType[],
+  exhaustion: number,
   passivePerception: number,
   inspiration: boolean,
   vision: string,

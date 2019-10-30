@@ -8,16 +8,20 @@
     get isDark () {
       return this.$vuetify.theme.dark
     }
+
+    get hasTitle () {
+      return !!this.$slots.title || !!this.$scopedSlots.title
+    }
   }
 </script>
 
 <template lang="pug">
-  v-dialog(:value="value", width="500" @input="input => $emit('input', input)")
+  v-dialog(:value="value", width="500", @input="input => $emit('input', input)")
     template(v-slot:activator="{ on }")
       slot(name="activator", :on="on")
     v-card(:class="[ $style.modal, { [$style.darkSide]: isDark } ]")
       v-card-title(
-        v-if="$slots.title"
+        v-if="hasTitle"
         primary-title,
         :class="{ ['darken-1']: isDark, ['lighten-2']: !isDark }"
       ).primary--text.headline.grey

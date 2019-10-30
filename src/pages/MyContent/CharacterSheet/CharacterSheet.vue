@@ -101,6 +101,10 @@
       const updatedList = myList.filter((item: any, itemIndex: number) => itemIndex !== index)
       set(this.character, path, updatedList)
     }
+
+    replaceCharacterList (path: string, list: any[]) {
+      set(this.character, path, list)
+    }
   }
 </script>
 
@@ -113,7 +117,8 @@
     CharacterSheetTop(
       v-if="completeCharacter",
       v-bind="{ completeCharacter }",
-      @updateCharacter="updateCharacter"
+      @updateCharacter="updateCharacter",
+      @replaceCharacterList="replaceCharacterList"
     )
     v-row(v-if="completeCharacter", justify-space-around).nx-2
       v-col(v-for="section in range(numSections)", :key="section", :md="4", :sm="6")

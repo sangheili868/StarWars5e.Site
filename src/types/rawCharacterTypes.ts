@@ -117,6 +117,8 @@ export interface RawCharacterType {
     hasInspiration: boolean,
     featuresTimesUsed: {
       [feature: string]: number
-    }
+    },
+    conditions: string[],
+    exhaustion: number
   }
 }

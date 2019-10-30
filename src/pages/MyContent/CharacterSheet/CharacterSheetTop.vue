@@ -3,11 +3,13 @@
   import { CompleteCharacterType } from '@/types/completeCharacterTypes'
   import CharacterSheetHealth from './CharacterSheetHealth.vue'
   import CharacterSheetExperience from './CharacterSheetExperience.vue'
+  import CharacterSheetConditions from './CharacterSheetConditions.vue'
 
   @Component({
     components: {
       CharacterSheetHealth,
-      CharacterSheetExperience
+      CharacterSheetExperience,
+      CharacterSheetConditions
     }
   })
   export default class CharacterSheetTop extends Vue {
@@ -37,5 +39,11 @@
     CharacterSheetHealth(
       :hitPoints="completeCharacter.hitPoints",
       @updateCharacter="newCharacter => $emit('updateCharacter', newCharacter)"
+    )
+    CharacterSheetConditions(
+      :conditions="completeCharacter.conditions",
+      :exhaustion="completeCharacter.exhaustion",
+      @updateCharacter="newCharacter => $emit('updateCharacter', newCharacter)",
+      @replaceCharacterList="(path, list) => $emit('replaceCharacterList', path, list)"
     )
 </template>

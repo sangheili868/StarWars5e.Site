@@ -15,6 +15,7 @@ import generateFeatures from './generateFeatures'
 import generateFeats from './generateFeats'
 import {
   experienceTable,
+  conditions,
   skills,
   techCastingMap,
   forceCastingMap,
@@ -54,6 +55,10 @@ export default function generateCharacter (
   const mygdFeats = myFeatsList.map(name => gdFeats.find(feat => name === feat.name))
   const myFoundgdFeats = compact(mygdFeats)
   const abilityScores = generateAbilityScores(rawCharacter, myFoundClasses, proficiencyBonus, skills)
+  const myConditions = rawCharacter.currentStats.conditions.map(condition => ({
+    name: condition,
+    description: (conditions as { [key: string]: string })[condition]
+  }))
   const proficiencies = generateProficiencies(rawCharacter, myFoundClasses, myFeatsList, multiClassProficiencies, gdFeats)
   const myEquipment = generateEquipment(rawCharacter, equipment, abilityScores, proficiencyBonus, proficiencies)
   const myBackground = backgrounds.find(({ name }) => name === rawCharacter.background.name)
@@ -87,6 +92,8 @@ export default function generateCharacter (
     proficiencyBonus,
     ...generateCombatStats(rawCharacter, abilityScores, myEquipment),
     hitPoints: generateHitPoints(rawCharacter, abilityScores, myFoundClasses, currentLevel, casting, superiority, features),
+    conditions: myConditions,
+    exhaustion: rawCharacter.currentStats.exhaustion,
     proficiencies,
     languages: generateLanguages(rawCharacter),
     equipment: myEquipment,

@@ -87,6 +87,10 @@
       return ['handbook', 'starships', 'monsters', 'hives'].some(page => this.$route.path.includes(page))
     }
 
+    get darkColor () {
+      return this.$vuetify.theme.dark ? '' : 'primary'
+    }
+
     buildComponentProps (to: string, nested: { to: string, title: string }[]) {
       return nested && nested.length ? {
         is: 'v-menu',
@@ -96,7 +100,7 @@
       } : {
         is: 'v-btn',
         text: true,
-        color: 'primary',
+        color: this.darkColor,
         to
       }
     }
@@ -119,14 +123,14 @@
       template(v-if="!isSearchOpen")
         component(v-for="({ to, title, nested }) in routes", :key="title", v-bind="buildComponentProps(to, nested)")
           template(v-if="nested && nested.length", v-slot:activator="{ on }")
-            v-btn(text, color="primary", v-on="on" :to="to") {{ title }}
+            v-btn(text, :color="darkColor", v-on="on" :to="to") {{ title }}
               v-icon.pl-2 fa-caret-down
           v-list(v-for="nestedRoute in nested", :key="nestedRoute.title", dense)
             v-list-item(:to="to + nestedRoute.to")
               v-list-item-title {{ nestedRoute.title }}
           template(v-if="!nested || !nested.length") {{ title }}
       v-btn(icon, @click="isSearchOpen = !isSearchOpen")
-        v-icon(color="primary") {{ isSearchOpen ? 'fa-times' : 'fa-search' }}
+        v-icon(:color="darkColor") {{ isSearchOpen ? 'fa-times' : 'fa-search' }}
     v-toolbar-items.hidden-md-and-up
       v-btn(icon, @click="isSearchOpen = !isSearchOpen")
         v-icon {{ isSearchOpen ? 'fa-times' : 'fa-search' }}

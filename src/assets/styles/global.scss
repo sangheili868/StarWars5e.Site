@@ -123,8 +123,8 @@ table.v-table {
   max-width: none;
 }
 
-.theme--dark {
-  h1, h2, h3, h4 {
+.v-application.theme--dark {
+  h1, h2, h3, h4, a:not(.v-btn):not(.v-list-item) {
     color: $darkSidePrimary
   }
 

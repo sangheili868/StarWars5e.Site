@@ -55,7 +55,7 @@
           @change="updateConditions"
         )
         div(v-for="({ name, description }) in conditions", :key="name")
-          h3 {{name }}
+          h3 {{ name }}
           VueMarkdown(:source="description")
       template(#actions)
         v-spacer

@@ -9,7 +9,7 @@ export default function generateCombatStats (
 ) {
   // TO DO
   return {
-    initiative: 4,
+    initiative: abilityScores.Dexterity.modifier,
     armorClass: 19,
     passivePerception: 9,
     inspiration: false,

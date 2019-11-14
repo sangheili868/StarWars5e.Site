@@ -19,6 +19,13 @@
     @Prop(Array) readonly items!: NavItem[]
     @Prop(String) readonly baseRoute!: string
 
+    get darkSideItemColors () {
+      return this.$vuetify.theme.dark ? {} : {
+        'active-class': 'primary--text',
+        ripple: { 'class': 'primary--text' }
+      }
+    }
+
     hasSubItems ({ items }: NavItem) {
       return items && items.length
     }
@@ -26,15 +33,14 @@
     buildComponentProps (item: NavItem) {
       return this.hasSubItems(item) ? {
         is: 'v-list-group',
-        color: 'primary',
+        color: this.$vuetify.theme.dark ? '' : 'primary',
         class: 'listGroupHeader',
         ripple: false
       } : {
         is: 'v-list-item',
         exact: item.route === this.baseRoute,
         to: item.route,
-        'active-class': 'primary--text',
-        ripple: { 'class': 'primary--text' }
+        ...this.darkSideItemColors
       }
     }
   }
@@ -53,11 +59,7 @@
     v-list(dense, nav).dense
       component(v-for="(item, index) in items", :key="index", v-bind="buildComponentProps(item)")
         template(v-if="hasSubItems(item)" v-slot:activator)
-          v-list-item(
-            :to="item.route",
-            active-class="primary--text",
-            :ripple="{ class: 'primary--text' }"
-          ).mb-0
+          v-list-item(:to="item.route", v-bind="darkSideItemColors").mb-0
             v-list-item-icon
               v-icon(:class="$style.icon") {{ item.icon }}
             v-list-item-title {{ item.title }}
@@ -66,8 +68,7 @@
             v-for="(subitem, index) in item.items",
             :key="index",
             :to="subitem.route",
-            active-class="primary--text",
-            :ripple="{ class: 'primary--text' }"
+            v-bind="darkSideItemColors"
           ).ml-5
             v-list-item-icon(v-if="subitem.icon")
               v-icon {{ subitem.icon }}

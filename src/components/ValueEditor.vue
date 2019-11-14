@@ -46,7 +46,7 @@
       div Current: {{ value }} {{ label }}
       div.d-flex.align-center
         v-autocomplete(:items="['Add', 'Subtract', 'Set']", v-model="modifierType")
-        v-text-field(outlined, autofocus, type="number", hide-details v-model.number="modifierAmount", background-color="white").mx-1
+        v-text-field(outlined, autofocus, type="number", hide-details v-model.number="modifierAmount").mx-1
         div {{ label }}
       slot(name="result", :newValue="newValue")
         div Result: {{ newValue }} {{ label }}

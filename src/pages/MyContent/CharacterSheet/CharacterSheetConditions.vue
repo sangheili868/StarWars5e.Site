@@ -43,7 +43,7 @@
   div
     MyDialog(v-model="isOpen")
       template(v-slot:activator="{ on }")
-        v-btn(v-on="on", :color="conditions.length ? 'primary' : ''") Conditions ({{ conditions.length }})
+        v-btn(v-on="on", :color="conditions.length ? 'primary' : ''").mb-2 Conditions ({{ conditions.length }})
       template(#title) Active Conditions
       template(#text)
         v-autocomplete(

@@ -4,7 +4,9 @@
   "image": "",
   "user": "",
   "experiencePoints": 0,
-  "species": { },
+  "species": {
+    "name": ""
+  },
   "classes": [ ],
   "baseAbilityScores": {
     "Strength": 0,
@@ -14,23 +16,44 @@
     "Wisdom": 0,
     "Charisma": 0
   },
-  "background": { },
+  "background": {
+    "name": "",
+    "skills": [],
+    "feat": {
+      "name": "",
+      "type": ""
+    }
+  },
   "characteristics": {
     "alignment": "",
     "personalityTraits": "",
     "ideal": "",
     "bond": "",
     "flaw": "",
-    "gender": ""
+    "gender": "",
+    "placeOfBirth": "",
+    "age": "",
+    "height": "",
+    "weight": "",
+    "hair": "",
+    "eyes": "",
+    "skin": "",
+    "appearance": "",
+    "backstory": ""
   },
   "credits": 0,
   "equipment": [ ],
   "currentStats": {
-    "unspentLevels": 0,
     "hitPoints": 0,
     "temporaryHitPoints": 0,
+    "techPoints": 0,
+    "forcePoints": 0,
+    "superiorityDice": 0,
     "hitDiceUsed": { },
-    "deathSaves": { },
+    "deathSaves": {
+      "successes": 0,
+      "failures": 0
+    },
     "hasInspiration": false,
     "featuresTimesUsed": { },
     "conditions": [],

@@ -13,7 +13,8 @@
     ul.text-left
       li Username
       li Fixed or Roll hit points
-      li Ability Score Method (Manual, Standard Set, Point Buy)
+      li Milestone or XP advancement
+      li Encumberance
       li Variant Rules
 </template>
 

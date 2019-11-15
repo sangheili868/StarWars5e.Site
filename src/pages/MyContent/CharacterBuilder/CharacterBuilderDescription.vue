@@ -10,7 +10,6 @@
 <template lang="pug">
   div
     h1 Describe Your Character
-    div Coming Soon!
     ul.text-left
       li Name
       li Image

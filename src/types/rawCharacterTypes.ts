@@ -1,12 +1,12 @@
 export interface RawSpeciesType {
   name: string,
-  abilityScoreImprovement: {
+  abilityScoreImprovement?: {
     [abilityScore: string]: number
   },
-  toolProficiency: string,
-  skillProficiency: string,
-  weaponProficiency: string,
-  language: string
+  toolProficiency?: string,
+  skillProficiency?: string,
+  weaponProficiency?: string,
+  language?: string
 }
 
 export interface RawFeatType {

@@ -10,7 +10,9 @@
 <template lang="pug">
   div
     h1 Determine Ability Scores
-    div Coming Soon!
+    ul.text-left
+      li Ability Score Method (Manual, Standard Set, Point Buy)
+      li Ability Scores
 </template>
 
 <style module lang="scss">

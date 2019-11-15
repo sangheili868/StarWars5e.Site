@@ -54,7 +54,7 @@
         v-stepper-content(v-for="n in numSteps" :key="`${n}-content`" :step="n")
           component(:is="steps[n].component")
           v-btn(v-if="currentStep < numSteps", color="primary", @click="currentStep++") Continue
-          v-btn(v-if="currentStep === numSteps", color="primary", @click="0") View My Character
+          v-btn(v-if="currentStep === numSteps", color="primary", @click="() => {}") Save and View My Character
           v-btn(v-if="currentStep > 1", text, @click="currentStep--") Back
 </template>
 

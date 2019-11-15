@@ -1,0 +1,39 @@
+
+{
+  "name": "",
+  "image": "",
+  "user": "",
+  "experiencePoints": 0,
+  "species": { },
+  "classes": [ ],
+  "baseAbilityScores": {
+    "Strength": 0,
+    "Dexterity": 0,
+    "Constitution": 0,
+    "Intelligence": 0,
+    "Wisdom": 0,
+    "Charisma": 0
+  },
+  "background": { },
+  "characteristics": {
+    "alignment": "",
+    "personalityTraits": "",
+    "ideal": "",
+    "bond": "",
+    "flaw": "",
+    "gender": ""
+  },
+  "credits": 0,
+  "equipment": [ ],
+  "currentStats": {
+    "unspentLevels": 0,
+    "hitPoints": 0,
+    "temporaryHitPoints": 0,
+    "hitDiceUsed": { },
+    "deathSaves": { },
+    "hasInspiration": false,
+    "featuresTimesUsed": { },
+    "conditions": [],
+    "exhaustion": 0
+  }
+}

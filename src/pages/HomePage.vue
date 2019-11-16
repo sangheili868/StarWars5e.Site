@@ -57,7 +57,7 @@
         {
           to: 'rules/monsters',
           title: 'Monster Manual',
-          image: 'mm_cover'
+          image: 'sav_cover'
         },
         {
           to: 'rules/starships',

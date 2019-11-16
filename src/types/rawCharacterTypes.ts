@@ -1,6 +1,6 @@
 export interface RawSpeciesType {
   name: string,
-  abilityScoreImprovement?: {
+  abilityScoreImprovement: {
     [abilityScore: string]: number
   },
   toolProficiency?: string,

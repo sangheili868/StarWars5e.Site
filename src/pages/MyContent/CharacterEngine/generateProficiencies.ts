@@ -29,12 +29,16 @@ export default function generateProficiencies (
     .flatten()
     .value()
 
+  const fromSpecies = compact([
+    rawCharacter.species.toolProficiency,
+    rawCharacter.species.weaponProficiency
+  ])
+
   return uniqBy([
     ...(fromStartingClass || []),
     ...fromOtherClasses,
     ...compact(rawCharacter.classes.map(({ toolProficiency }) => toolProficiency)),
-    rawCharacter.species.toolProficiency,
-    rawCharacter.species.weaponProficiency,
+    ...fromSpecies,
     ...(rawCharacter.background.toolProficiencies || []),
     ...fromFeats
   ], lowerCase)

@@ -5,7 +5,8 @@
   "user": "",
   "experiencePoints": 0,
   "species": {
-    "name": ""
+    "name": "",
+    "abilityScoreImprovement": {}
   },
   "classes": [ ],
   "baseAbilityScores": {

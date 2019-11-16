@@ -1,6 +1,5 @@
 <script lang="ts">
   import { Component, Prop, Vue } from 'vue-property-decorator'
-  import CharacterBuilderSettings from './CharacterBuilderSettings.vue'
   import CharacterBuilderSpecies from './CharacterBuilderSpecies.vue'
   import CharacterBuilderClass from './CharacterBuilderClass.vue'
   import CharacterBuilderAbilityScores from './CharacterBuilderAbilityScores.vue'
@@ -9,7 +8,6 @@
 
 @Component({
   components: {
-      CharacterBuilderSettings,
       CharacterBuilderSpecies,
       CharacterBuilderClass,
       CharacterBuilderAbilityScores,
@@ -20,7 +18,6 @@
   export default class CharacterBuilder extends Vue {
     currentStep = 1
     steps = [ {},
-      { name: 'Settings', component: 'CharacterBuilderSettings' },
       { name: 'Species', component: 'CharacterBuilderSpecies' },
       { name: 'Class', component: 'CharacterBuilderClass' },
       { name: 'Ability Scores', component: 'CharacterBuilderAbilityScores' },

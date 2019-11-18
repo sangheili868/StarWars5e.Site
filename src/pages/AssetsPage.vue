@@ -36,14 +36,6 @@
             {
               href: 'https://drive.google.com/file/d/11gtMu3mxVVcA29hHP3NKT8N3L2lpCp2W/view?usp=sharing',
               title: 'Backgrounds'
-            },
-            {
-              href: 'https://drive.google.com/file/d/1G4SR2xvx6_F3OSsDh-MGsHanorM3V-Ia/view?usp=sharing',
-              title: 'Customization Options'
-            },
-            {
-              href: 'https://drive.google.com/file/d/1k5bKKD65mEgxkLnGI7_F7X1fOlXNU3IV/view?usp=sharing',
-              title: 'Variant Rules'
             }
           ]
         },

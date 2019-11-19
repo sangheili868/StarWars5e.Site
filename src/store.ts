@@ -23,6 +23,7 @@ import ui from './modules/ui'
 import ventures from './modules/ventures'
 import weapons from './modules/weapons'
 import weaponProperties from './modules/weaponProperties'
+import character from './modules/character'
 import createPersistedState from 'vuex-persistedstate'
 
 Vue.use(Vuex)
@@ -34,6 +35,7 @@ export default new Vuex.Store({
     armor,
     backgrounds,
     blobs,
+    character,
     classes,
     deployments,
     enhancedItems,

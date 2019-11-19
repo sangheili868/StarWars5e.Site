@@ -1,10 +1,20 @@
 <script lang="ts">
   import { Component, Prop, Vue } from 'vue-property-decorator'
+  import { namespace } from 'vuex-class'
   import CharacterBuilderSpecies from './CharacterBuilderSpecies.vue'
   import CharacterBuilderClass from './CharacterBuilderClass.vue'
   import CharacterBuilderAbilityScores from './CharacterBuilderAbilityScores.vue'
   import CharacterBuilderDescription from './CharacterBuilderDescription.vue'
   import CharacterBuilderEquipment from './CharacterBuilderEquipment.vue'
+  import { RawCharacterType } from '@/types/rawCharacterTypes'
+  import { CompleteCharacterType } from '@/types/completeCharacterTypes'
+
+  const characterModule = namespace('character')
+  const classesModule = namespace('classes')
+  const equipmentModule = namespace('equipment')
+  const powersModule = namespace('powers')
+  const featsModule = namespace('feats')
+  const backgroundsModule = namespace('backgrounds')
 
 @Component({
   components: {
@@ -16,6 +26,15 @@
     }
   })
   export default class CharacterBuilder extends Vue {
+    @characterModule.State character!: RawCharacterType
+    @characterModule.Action createCharacter!: () => void
+    @characterModule.Getter completeCharacter!: CompleteCharacterType
+    @classesModule.Action fetchClasses!: () => void
+    @equipmentModule.Action fetchEquipment!: () => void
+    @powersModule.Action fetchPowers!: () => void
+    @featsModule.Action fetchFeats!: () => void
+    @backgroundsModule.Action fetchBackgrounds!: () => void
+
     currentStep = 1
     steps = [ {},
       { name: 'Species', component: 'CharacterBuilderSpecies' },
@@ -24,6 +43,16 @@
       { name: 'Description', component: 'CharacterBuilderDescription' },
       { name: 'Equipment', component: 'CharacterBuilderEquipment' }
     ]
+
+    created () {
+      Promise.all([
+        this.fetchClasses,
+        this.fetchEquipment,
+        this.fetchPowers,
+        this.fetchFeats,
+        this.fetchBackgrounds
+      ]).then(() => this.createCharacter)
+    }
 
     get numSteps () {
       return this.steps.length - 1

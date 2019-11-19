@@ -8,7 +8,7 @@
   import JSONWriter from '@/components/JSONWriter.vue'
   import CharacterSheetTop from './CharacterSheetTop.vue'
   import CharacterSheetSection from './CharacterSheetSection.vue'
-  import generateCharacter from '../CharacterEngine/generateCharacter'
+  import generateCharacter from '@/modules/CharacterEngine/generateCharacter'
   import { range, isEmpty, merge, get, set } from 'lodash'
 
   const classesModule = namespace('classes')

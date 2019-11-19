@@ -9,23 +9,32 @@ import powersModule from './powers'
 import featsModule from './feats'
 import backgroundsModule from './backgrounds'
 
+function stateOf (context: any) {
+  // Vuex-module-decorator changes 'this' when it converts into a module.
+  return (context as {
+    state: {
+      character: RawCharacterType
+    }
+  }).state
+}
+
 @Module({ namespaced: true, name: 'character' })
 export default class Character extends VuexModule {
-  character: RawCharacterType = baseCharacter
+  public character: RawCharacterType = baseCharacter
 
   get isValidCharacter () {
-    return
-      this.character.name &&
-      this.character.species.name &&
-      this.character.classes.length > 0 &&
-      this.character.classes[0].name &&
-      Object.values(this.character.baseAbilityScores).every(score => score> 0)
+    const myCharacter = stateOf(this).character
+    return !isEmpty(myCharacter) && myCharacter.name &&
+      myCharacter.species.name &&
+      myCharacter.classes.length > 0 &&
+      myCharacter.classes[0].name &&
+      Object.values(myCharacter.baseAbilityScores).every(score => score > 0) &&
+      myCharacter.background.name
   }
 
   get completeCharacter () {
-    console.log(this.character)
-    return !isEmpty(this.character) && generateCharacter(
-      this.character as RawCharacterType,
+    return this.isValidCharacter && generateCharacter(
+      stateOf(this).character,
       classesModule.state.classes,
       equipmentModule.state.equipment,
       powersModule.state.powers,
@@ -49,16 +58,16 @@ export default class Character extends VuexModule {
   }
 
   @MutationAction({ mutate: ['character'] })
-  async updateCharacter (newCharacter: RawCharacterType) {
+  async updateCharacter (newCharacter: RawCharacterType, x: any, y: any, z: any) {
     return {
-      character: merge({}, this.character, newCharacter)
+      character: merge({}, stateOf(this).character, newCharacter)
     }
   }
 
   @MutationAction({ mutate: ['character'] })
   async deleteCharacterProperty (path: string, index: number) {
-    const updatedList = get(this.character, path).filter((item: any, itemIndex: number) => itemIndex !== index)
-    let characterCopy = merge({}, this.character)
+    const updatedList = get(stateOf(this).character, path).filter((item: any, itemIndex: number) => itemIndex !== index)
+    let characterCopy = merge({}, stateOf(this).character)
     set(characterCopy, path, updatedList)
     return {
       character: characterCopy
@@ -67,7 +76,7 @@ export default class Character extends VuexModule {
 
   @MutationAction({ mutate: ['character'] })
   async replaceCharacterProperty (path: string, list: any[]) {
-    let characterCopy = merge({}, this.character)
+    let characterCopy = merge({}, stateOf(this).character)
     set(characterCopy, path, list)
     return {
       character: characterCopy

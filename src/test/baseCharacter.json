@@ -1,0 +1,68 @@
+
+{
+  "name": "Tom",
+  "image": "",
+  "user": "",
+  "experiencePoints": 0,
+  "species": {
+    "name": "Bith",
+    "abilityScoreImprovement": {}
+  },
+  "classes": [ {
+    "name": "Fighter",
+    "isStartingClass": true,
+    "levels": 1,
+    "hitPoints": [ 10 ]
+  } ],
+  "baseAbilityScores": {
+    "Strength": 10,
+    "Dexterity": 10,
+    "Constitution": 10,
+    "Intelligence": 10,
+    "Wisdom": 10,
+    "Charisma": 10
+  },
+  "background": {
+    "name": "Agent",
+    "skills": [],
+    "feat": {
+      "name": "Silver-Tongued",
+      "type": ""
+    }
+  },
+  "characteristics": {
+    "alignment": "",
+    "personalityTraits": "",
+    "ideal": "",
+    "bond": "",
+    "flaw": "",
+    "gender": "",
+    "placeOfBirth": "",
+    "age": "",
+    "height": "",
+    "weight": "",
+    "hair": "",
+    "eyes": "",
+    "skin": "",
+    "appearance": "",
+    "backstory": ""
+  },
+  "credits": 0,
+  "equipment": [ ],
+  "currentStats": {
+    "hitPoints": 0,
+    "temporaryHitPoints": 0,
+    "techPoints": 0,
+    "forcePoints": 0,
+    "superiorityDice": 0,
+    "hitDiceUsed": { },
+    "deathSaves": {
+      "successes": 0,
+      "failures": 0
+    },
+    "hasInspiration": false,
+    "featuresTimesUsed": { },
+    "conditions": [],
+    "exhaustion": 0
+  }
+}

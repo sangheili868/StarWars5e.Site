@@ -1,7 +1,7 @@
 import { Module, VuexModule, MutationAction } from 'vuex-module-decorators'
 import { RawCharacterType } from '@/types/rawCharacterTypes'
 import baseCharacter from './CharacterEngine/baseCharacter.json'
-import { isEmpty, merge, get, set } from 'lodash'
+import { isEmpty, merge, get, set, isEqual } from 'lodash'
 import generateCharacter from './CharacterEngine/generateCharacter'
 import classesModule from './classes'
 import equipmentModule from './equipment'
@@ -18,29 +18,62 @@ function stateOf (context: any) {
   }).state
 }
 
+const abilityScores = [
+  'Strength',
+  'Dexterity',
+  'Constitution',
+  'Intelligence',
+  'Wisdom',
+  'Charisma'
+]
+
 @Module({ namespaced: true, name: 'character' })
 export default class Character extends VuexModule {
   public character: RawCharacterType = baseCharacter
 
-  get isValidCharacter () {
-    const myCharacter = stateOf(this).character
-    return !isEmpty(myCharacter) && myCharacter.name &&
-      myCharacter.species.name &&
-      myCharacter.classes.length > 0 &&
-      myCharacter.classes[0].name &&
-      Object.values(myCharacter.baseAbilityScores).every(score => score > 0) &&
-      myCharacter.background.name
+  get characterValidation () {
+    const myCharacter = stateOf(this.context).character
+    return [
+      { message: 'Character is empty', isValid: !isEmpty(myCharacter) },
+      { message: 'Character has no name', isValid: myCharacter.name },
+      { message: 'Character has no species', isValid: myCharacter.species && myCharacter.species.name },
+      { message: 'Character has no classes', isValid: myCharacter.classes && myCharacter.classes.length > 0 },
+      { message: 'Class has no name', isValid: myCharacter.classes && myCharacter.classes.every(myClass => !!myClass.name) },
+      {
+        message: 'Class is missing hit points',
+        isValid: myCharacter.classes && myCharacter.classes.every(myClass =>
+          myClass.hitPoints && myClass.hitPoints.length === myClass.levels
+      ) },
+      {
+        message: 'Ability Score is missing',
+        isValid: myCharacter.baseAbilityScores &&
+          isEqual(Object.keys(myCharacter.baseAbilityScores).sort(), abilityScores.sort())
+      },
+      {
+        message: 'Ability Score is not positive',
+        isValid: myCharacter.baseAbilityScores && Object.values(myCharacter.baseAbilityScores).every(score => score > 0)
+      },
+      { message: 'Background has no name', isValid: myCharacter.background && myCharacter.background.name },
+      {
+        message: 'Background feat has no name',
+        isValid: myCharacter.background && myCharacter.background.feat && myCharacter.background.feat.name
+      }
+    ].find(({ isValid }) => !isValid) || { isValid: true, message: 'All checks passed' }
   }
 
   get completeCharacter () {
-    return this.isValidCharacter && generateCharacter(
-      stateOf(this).character,
-      classesModule.state.classes,
-      equipmentModule.state.equipment,
-      powersModule.state.powers,
-      featsModule.state.feats,
-      backgroundsModule.state.backgrounds
-    )
+    if (this.characterValidation.isValid) {
+      return generateCharacter(
+        stateOf(this.context).character,
+        classesModule.state.classes,
+        equipmentModule.state.equipment,
+        powersModule.state.powers,
+        featsModule.state.feats,
+        backgroundsModule.state.backgrounds
+      )
+    } else {
+      console.error(this.characterValidation.message)
+    }
   }
 
   @MutationAction({ mutate: ['character'] })

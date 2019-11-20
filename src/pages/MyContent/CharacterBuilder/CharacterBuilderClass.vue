@@ -1,15 +1,46 @@
 <script lang="ts">
   import { Component, Prop, Vue } from 'vue-property-decorator'
+  import { chain } from 'lodash'
+  import { ClassType } from '@/types/characterTypes'
 
   @Component
   export default class CharacterBuilderClass extends Vue {
+    @Prop(Array) readonly classes!: ClassType[]
+    @Prop(Array) readonly currentClasses!: ClassType[]
 
+    chosenClass = this.currentClasses[0] ? this.currentClasses[0].name : ''
+
+    get classChoices () {
+      return this.classes.map(({ name }) => name)
+    }
+
+    handleChangeClass (newClass: string) {
+      const position = this.currentClasses.length
+      const newClassData = this.classes.find(({ name }) => name === newClass)
+      if (newClassData) {
+        const hitPoints = newClassData.hitDiceDieType
+        this.$emit('updateCharacter', { classes: { 0: {
+          name: newClass,
+          isStartingClass: true,
+          levels: 1,
+          hitPoints: [ hitPoints ]
+        } } })
+      } else {
+        console.error('Class not found: ', newClass)
+      }
+    }
   }
 </script>
 
 <template lang="pug">
   div
     h1 Choose a Class
+    v-autocomplete(
+      v-model="chosenClass",
+      :items="classChoices",
+      label="Choose a class",
+      @change="handleChangeClass"
+    )
     ul.text-left
       li is starting class
       li Levels

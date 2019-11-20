@@ -8,7 +8,8 @@
   import CharacterBuilderEquipment from './CharacterBuilderEquipment.vue'
   import { RawCharacterType } from '@/types/rawCharacterTypes'
   import { CompleteCharacterType } from '@/types/completeCharacterTypes'
-  import { SpeciesType } from '@/types/characterTypes'
+  import { SpeciesType, ClassType, PowerType, FeatType, BackgroundType } from '@/types/characterTypes'
+  import { EquipmentType } from '@/types/lootTypes'
 
   const speciesModule = namespace('species')
   const characterModule = namespace('character')
@@ -32,10 +33,15 @@
     @characterModule.Action createCharacter!: () => void
     @characterModule.Getter completeCharacter!: CompleteCharacterType
     @characterModule.Action updateCharacter!: (newCharacter: RawCharacterType) => void
-    @classesModule.Action fetchClasses!: any
+    @classesModule.State classes!: ClassType[]
+    @classesModule.Action fetchClasses!: () => void
+    @equipmentModule.State equipment!: EquipmentType[]
     @equipmentModule.Action fetchEquipment!: () => void
+    @powersModule.State powers!: PowerType[]
     @powersModule.Action fetchPowers!: () => void
+    @featsModule.State feats!: FeatType[]
     @featsModule.Action fetchFeats!: () => void
+    @backgroundsModule.State backgrounds!: BackgroundType[]
     @backgroundsModule.Action fetchBackgrounds!: () => void
     @speciesModule.State species!: SpeciesType[]
     @speciesModule.Action fetchSpecies!: () => void
@@ -56,9 +62,29 @@
     get steps () {
       return [ {},
         { name: 'Species', component: 'CharacterBuilderSpecies', props: { species: this.species } },
-        { name: 'Class', component: 'CharacterBuilderClass' },
-        { name: 'Ability Scores', component: 'CharacterBuilderAbilityScores' },
-        { name: 'Description', component: 'CharacterBuilderDescription' },
+        {
+          name: 'Class',
+          component: 'CharacterBuilderClass',
+          props: {
+            classes: this.classes,
+            currentClasses: this.character.classes
+          }
+        },
+        {
+          name: 'Ability Scores',
+          component: 'CharacterBuilderAbilityScores',
+          props: {
+            currentScores: this.character.baseAbilityScores
+          }
+        },
+        {
+          name: 'Description',
+          component: 'CharacterBuilderDescription',
+          props: {
+            currentBackground: this.character.background,
+            backgrounds: this.backgrounds
+          }
+        },
         { name: 'Equipment', component: 'CharacterBuilderEquipment' }
       ]
     }
@@ -94,7 +120,7 @@
             v-on="{ updateCharacter }"
           )
           v-btn(v-if="currentStep < numSteps", color="primary", @click="currentStep++") Continue
-          v-btn(v-if="currentStep === numSteps", color="primary", @click="() => {}") Save and View My Character
+          v-btn(v-if="currentStep === numSteps", color="primary", to="characterSheet") Save and View My Character
           v-btn(v-if="currentStep > 1", text, @click="currentStep--") Back
 </template>
 

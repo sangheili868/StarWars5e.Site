@@ -8,14 +8,14 @@ function getValidFeatures (
   levelsInClass: number,
   discoveries?: { name: string }[]
 ) {
-  return features && features.filter(({ name: featureName, level, type }) => {
+  return features ? features.filter(({ name: featureName, level, type }) => {
     const isRequiredLevel = level <= levelsInClass
     const isBase = type === 'base'
     const isDiscovery = discoveries &&
       (type === 'discovery') &&
       discoveries.some(({ name: discoveryName }) => discoveryName === featureName)
     return isRequiredLevel && (isBase || isDiscovery)
-  })
+  }) : []
 }
 
 function calculateUsage (
@@ -47,6 +47,9 @@ export default function generateFeatures (
   abilityScores: AbilityScoresType
 ) {
   const mySpeciesFeatures = getValidFeatures(speciesFeatures[rawCharacter.species.name], currentLevel)
+  if (!mySpeciesFeatures.length) {
+    console.error('Species not found:', rawCharacter.species.name)
+  }
   const myClassFeatures = rawCharacter.classes.map(({ name: className, levels, discoveries }) =>
     getValidFeatures(classFeatures[className], levels, discoveries)
   ).flat()

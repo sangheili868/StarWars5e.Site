@@ -10,7 +10,10 @@
   import CharacterSheetSection from './CharacterSheetSection.vue'
   import generateCharacter from '@/modules/CharacterEngine/generateCharacter'
   import { range, isEmpty, merge, get, set } from 'lodash'
+  import { CompleteCharacterType } from '@/types/completeCharacterTypes'
+  import Loading from '@/components/Loading.vue'
 
+  const characterModule = namespace('character')
   const classesModule = namespace('classes')
   const equipmentModule = namespace('equipment')
   const powersModule = namespace('powers')
@@ -22,10 +25,16 @@
       JSONReader,
       JSONWriter,
       CharacterSheetTop,
-      CharacterSheetSection
+      CharacterSheetSection,
+      Loading
     }
   })
   export default class CharacterSheet extends Vue {
+    @characterModule.State character!: RawCharacterType
+    @characterModule.Getter characterValidation!: { isValid: boolean, message: string }
+    @characterModule.Getter completeCharacter!: CompleteCharacterType
+    @characterModule.Action setCharacter!: (newCharacter: RawCharacterType) => void
+    @characterModule.Action updateCharacter!: (newCharacter: RawCharacterType) => void
     @classesModule.State classes!: ClassType[]
     @classesModule.Action fetchClasses!: () => void
     @equipmentModule.State equipment!: EquipmentType[]
@@ -39,16 +48,18 @@
 
     range = range
     openTabs: number[] = [0, 1, 2]
-    character: RawCharacterType | {} = {}
     filename = ''
     isAlertOpen = false
+    hasFetchedData = false
 
     created () {
-      this.fetchClasses()
-      this.fetchEquipment()
-      this.fetchPowers()
-      this.fetchFeats()
-      this.fetchBackgrounds()
+      Promise.all([
+        this.fetchClasses(),
+        this.fetchEquipment(),
+        this.fetchPowers(),
+        this.fetchFeats(),
+        this.fetchBackgrounds()
+      ]).then(() => { this.hasFetchedData = true })
     }
 
     get numSections () {
@@ -59,17 +70,6 @@
         lg: 3,
         xl: 3
       } as { [ breakpoint: string ] : number })[this.$vuetify.breakpoint.name]
-    }
-
-    get completeCharacter () {
-      return !isEmpty(this.character) && generateCharacter(
-        this.character as RawCharacterType,
-        this.classes,
-        this.equipment,
-        this.powers,
-        this.feats,
-        this.backgrounds
-      )
     }
 
     handleCharacterUpload (newCharacter: any, filename: string) {
@@ -83,17 +83,13 @@
         'equipment',
         'currentStats'
       ].every((field: string) => field in newCharacter)
-      this.character = isValid ? newCharacter : {}
+      this.setCharacter(isValid ? newCharacter : {})
       this.filename = isValid ? filename : ''
       this.isAlertOpen = !isValid && newCharacter instanceof Object
     }
 
     goToTab (newTab: number, section: number) {
       Vue.set(this.openTabs, section, newTab)
-    }
-
-    updateCharacter (newCharacter: RawCharacterType) {
-      this.character = merge({}, this.character, newCharacter)
     }
 
     deleteCharacterProperty (path: string, index: number) {
@@ -109,7 +105,9 @@
 </script>
 
 <template lang="pug">
-  div
+  div(v-if="hasFetchedData")
+    div {{ characterValidation.message }}
+    div {{ character }}
     v-alert(v-model="isAlertOpen", dismissible, type="error") Invalid Character
     div.d-flex.align-center.justify-center.flex-wrap
       JSONReader(label="Load New Character", @input="handleCharacterUpload").ma-2
@@ -129,4 +127,5 @@
           @deleteCharacterProperty="deleteCharacterProperty",
           @goToTab="newTab => goToTab(newTab, section)"
         )
+  Loading(v-else)
 </template>

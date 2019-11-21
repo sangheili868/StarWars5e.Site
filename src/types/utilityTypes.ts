@@ -12,8 +12,6 @@ export interface SearchResultType {
   rowKey: string
 }
 
-export type queryInputType = string | string[] | { field: string, direction: string }
-
 export interface tableQueryType {
-  [field: string]: queryInputType
+  [field: string]: string | string[]
 }

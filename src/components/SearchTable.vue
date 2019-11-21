@@ -3,7 +3,7 @@
   import { namespace } from 'vuex-class'
   import Loading from '@/components/Loading.vue'
   import _ from 'lodash'
-  import { queryInputType, tableQueryType } from '@/types/utilityTypes'
+  import { tableQueryType } from '@/types/utilityTypes'
 
   const tableQueriesModule = namespace('tableQueries')
 
@@ -32,7 +32,7 @@
     @tableQueriesModule.Action updateQuery!: ({ tableName, field, input }: {
       tableName: string,
       field: string,
-      input: queryInputType
+      input: string | string[]
     }) => void
 
     filterSelections: { [key: string]: any } = {}
@@ -79,7 +79,7 @@
       return this.tableQueries.find(({ tableName }) => tableName === this.name)
     }
 
-    handleFilterChange (field: string, input: queryInputType) {
+    handleFilterChange (field: string, input: string | string[]) {
       this.updateQuery({ tableName: this.name, field, input })
     }
   }
@@ -116,7 +116,11 @@
         v-bind="{ search }",
         :items-per-page="25",
         :custom-sort="customSort",
-        :footer-props="{ 'items-per-page-options': [10, 25, 50, -1] }"
+        :sort-by="storedQuery && storedQuery.sortBy",
+        :sort-desc="storedQuery && storedQuery.sortDesc",
+        :footer-props="{ 'items-per-page-options': [10, 25, 50, -1] }",
+        @update:sort-by="newValue => handleFilterChange('sortBy', newValue)",
+        @update:sort-desc="newValue => handleFilterChange('sortDesc', newValue)",
       )
         template(v-slot:item="{ isExpanded, item, expand }")
           tr(v-if="item.isExpandable", :class="$style.clickableRow", @click="expand(!isExpanded)")

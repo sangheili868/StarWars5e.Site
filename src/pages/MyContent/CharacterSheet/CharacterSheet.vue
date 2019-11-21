@@ -9,7 +9,7 @@
   import CharacterSheetTop from './CharacterSheetTop.vue'
   import CharacterSheetSection from './CharacterSheetSection.vue'
   import generateCharacter from '@/modules/CharacterEngine/generateCharacter'
-  import { range, isEmpty, merge, get, set } from 'lodash'
+  import { range, isEmpty, merge, get, set, camelCase } from 'lodash'
   import { CompleteCharacterType } from '@/types/completeCharacterTypes'
   import Loading from '@/components/Loading.vue'
 
@@ -35,8 +35,8 @@
     @characterModule.Getter completeCharacter!: CompleteCharacterType
     @characterModule.Action setCharacter!: (newCharacter: RawCharacterType) => void
     @characterModule.Action updateCharacter!: (newCharacter: RawCharacterType) => void
-    @characterModule.Action deleteCharacterProperty!: (path: string, index: number) => void
-    @characterModule.Action replaceCharacterProperty!: (path: string, list: any[]) => void
+    @characterModule.Action deleteCharacterProperty!: ({ path, index }: { path: string, index: number }) => void
+    @characterModule.Action replaceCharacterProperty!: ({ path, list }: { path: string, list: any[] }) => void
     @classesModule.State classes!: ClassType[]
     @classesModule.Action fetchClasses!: () => void
     @equipmentModule.State equipment!: EquipmentType[]
@@ -61,7 +61,10 @@
         this.fetchPowers(),
         this.fetchFeats(),
         this.fetchBackgrounds()
-      ]).then(() => { this.hasFetchedData = true })
+      ]).then(() => {
+        this.hasFetchedData = true
+        if (this.character && this.character.name) this.filename = camelCase(this.character.name) + '.json'
+      })
     }
 
     get numSections () {
@@ -90,6 +93,14 @@
       this.isAlertOpen = !isValid && newCharacter instanceof Object
     }
 
+    handleDeleteCharacterProperty (path: string, index: number) {
+      this.deleteCharacterProperty({ path, index })
+    }
+
+    handleReplaceCharacterProperty (path: string, list: any[]) {
+      this.replaceCharacterProperty({ path, list })
+    }
+
     goToTab (newTab: number, section: number) {
       Vue.set(this.openTabs, section, newTab)
     }
@@ -102,13 +113,14 @@
     div {{ character }}
     v-alert(v-model="isAlertOpen", dismissible, type="error") Invalid Character
     div.d-flex.align-center.justify-center.flex-wrap
-      JSONReader(label="Load New Character", @input="handleCharacterUpload").ma-2
+      v-btn(to="characterBuilder", color="primary") Create New Character
+      JSONReader(label="Load Character From File", @input="handleCharacterUpload").ma-2
       JSONWriter(:jsonData="character", v-bind="{ filename }").ma-2 Save Character
     CharacterSheetTop(
       v-if="completeCharacter",
       v-bind="{ completeCharacter }",
       @updateCharacter="updateCharacter",
-      @replaceCharacterProperty="replaceCharacterProperty"
+      @replaceCharacterProperty="handleReplaceCharacterProperty"
     )
     v-row(v-if="completeCharacter", justify-space-around).nx-2
       v-col(v-for="section in range(numSections)", :key="section", :md="4", :sm="6")
@@ -116,7 +128,7 @@
           v-bind="{ completeCharacter }",
           :currentTab="openTabs[section]",
           @updateCharacter="updateCharacter",
-          @deleteCharacterProperty="deleteCharacterProperty",
+          @deleteCharacterProperty="handleDeleteCharacterProperty",
           @goToTab="newTab => goToTab(newTab, section)"
         )
   Loading(v-else)

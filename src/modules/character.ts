@@ -92,14 +92,14 @@ export default class Character extends VuexModule {
   }
 
   @MutationAction({ mutate: ['character'] })
-  async updateCharacter (newCharacter: RawCharacterType, x: any, y: any, z: any) {
+  async updateCharacter (newCharacter: RawCharacterType) {
     return {
       character: merge({}, stateOf(this).character, newCharacter)
     }
   }
 
   @MutationAction({ mutate: ['character'] })
-  async deleteCharacterProperty (path: string, index: number) {
+  async deleteCharacterProperty ({ path, index }: { path: string, index: number }) {
     const updatedList = get(stateOf(this).character, path).filter((item: any, itemIndex: number) => itemIndex !== index)
     let characterCopy = merge({}, stateOf(this).character)
     set(characterCopy, path, updatedList)
@@ -109,7 +109,7 @@ export default class Character extends VuexModule {
   }
 
   @MutationAction({ mutate: ['character'] })
-  async replaceCharacterProperty (path: string, list: any[]) {
+  async replaceCharacterProperty ({ path, list }: { path: string, list: any[] }) {
     let characterCopy = merge({}, stateOf(this).character)
     set(characterCopy, path, list)
     return {

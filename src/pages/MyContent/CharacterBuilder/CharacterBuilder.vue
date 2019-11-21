@@ -10,6 +10,7 @@
   import { CompleteCharacterType } from '@/types/completeCharacterTypes'
   import { SpeciesType, ClassType, PowerType, FeatType, BackgroundType } from '@/types/characterTypes'
   import { EquipmentType } from '@/types/lootTypes'
+  import Loading from '@/components/Loading.vue'
 
   const speciesModule = namespace('species')
   const characterModule = namespace('character')
@@ -25,7 +26,8 @@
       CharacterBuilderClass,
       CharacterBuilderAbilityScores,
       CharacterBuilderDescription,
-      CharacterBuilderEquipment
+      CharacterBuilderEquipment,
+      Loading
     }
   })
   export default class CharacterBuilder extends Vue {
@@ -47,6 +49,7 @@
     @speciesModule.Action fetchSpecies!: () => void
 
     currentStep = 1
+    isReady = false
 
     created () {
       Promise.all([
@@ -56,12 +59,21 @@
         this.fetchFeats(),
         this.fetchBackgrounds(),
         this.fetchSpecies()
-      ]).then(this.createCharacter)
+      ])
+        .then(this.createCharacter)
+        .then(() => { this.isReady = true })
     }
 
     get steps () {
       return [ {},
-        { name: 'Species', component: 'CharacterBuilderSpecies', props: { species: this.species } },
+        {
+          name: 'Species',
+          component: 'CharacterBuilderSpecies',
+          props: {
+            species: this.species,
+            currentSpecies: this.character.species
+          }
+        },
         {
           name: 'Class',
           component: 'CharacterBuilderClass',
@@ -95,10 +107,12 @@
 
     nextStep () {
       this.currentStep = Math.min(this.numSteps, this.currentStep + 1)
+      window.scrollTo(0, 0)
     }
 
     prevStep () {
-      this.currentStep = Math.max(this.numSteps, 1)
+      this.currentStep = Math.max(this.currentStep - 1, 1)
+      window.scrollTo(0, 0)
     }
   }
 </script>
@@ -106,7 +120,7 @@
 <template lang="pug">
   div
     h1.pb-3 Character Builder
-    v-stepper(v-model="currentStep", alt-labels)
+    v-stepper(v-if="isReady", v-model="currentStep", alt-labels)
       v-stepper-header
         template(v-for="n in numSteps")
           v-stepper-step(:key="`${n}-step`", :complete="currentStep > n", :step="n", editable) {{ steps[n].name }}
@@ -118,10 +132,12 @@
             v-bind="steps[n].props",
             v-on="{ updateCharacter }"
           )
-          v-btn(v-if="currentStep < numSteps", color="primary", @click="currentStep++") Continue
+          v-btn(v-if="currentStep < numSteps", color="primary", @click="nextStep") Continue
           v-btn(v-if="currentStep === numSteps", color="primary", to="characterSheet") Save and View My Character
-          v-btn(v-if="currentStep > 1", text, @click="currentStep--") Back
+          v-btn(v-if="currentStep > 1", text, @click="prevStep") Back
+    Loading(v-else)
     div.mt-5 {{ character }}
+
 </template>
 
 <style module lang="scss">

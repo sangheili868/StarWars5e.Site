@@ -2,9 +2,14 @@
   import { Component, Prop, Vue } from 'vue-property-decorator'
   import { BackgroundType } from '@/types/characterTypes'
   import { RawBackgroundType } from '@/types/rawCharacterTypes'
+  import CharactersBackgroundDetail from '@/pages/Characters/CharactersBackgroundDetail.vue'
   import { chain } from 'lodash'
 
-  @Component
+  @Component({
+    components: {
+      CharactersBackgroundDetail
+    }
+  })
   export default class CharacterBuilderDescription extends Vue {
     @Prop(Array) readonly backgrounds!: BackgroundType[]
     @Prop(Object) readonly currentBackground!: RawBackgroundType
@@ -55,8 +60,9 @@
       label="Choose a feat",
       @change="handleChangeBackgroundFeat"
     )
+    CharactersBackgroundDetail(v-if="currentBackground.name", :backgroundName="currentBackground.name", isHidingBack)
+    h2.text-left.mt-5 TODO:
     ul.text-left
-      li Name
       li Image
       li Alignment
       li Background
@@ -64,7 +70,6 @@
           li Skills
           li * Tool Proficiencies
           li * Languages
-          li * Feat
       li Characteristics
 </template>
 

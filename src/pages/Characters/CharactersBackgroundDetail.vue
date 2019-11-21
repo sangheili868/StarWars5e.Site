@@ -26,6 +26,7 @@
     @featModule.Action fetchFeats!: () => void
 
     @Prop(String) readonly backgroundName!: string
+    @Prop(Boolean) readonly isHidingBack!: boolean
 
     created () {
       this.fetchBackgrounds()
@@ -63,7 +64,7 @@
 <template lang="pug">
   div
     vue-headful(:title="title")
-    BackButton
+    BackButton(v-if="!isHidingBack")
     div( v-if="background" ).text-left
       h1 {{ background.name }}
       VueMarkdown(:source="background.flavorText.replace(/\ufffd/g, '-')")

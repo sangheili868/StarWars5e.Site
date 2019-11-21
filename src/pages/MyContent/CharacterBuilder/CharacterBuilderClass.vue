@@ -2,16 +2,27 @@
   import { Component, Prop, Vue } from 'vue-property-decorator'
   import { chain } from 'lodash'
   import { ClassType } from '@/types/characterTypes'
+  import ClassDetail from '@/components/ClassDetail.vue'
 
-  @Component
+  @Component({
+    components: {
+      ClassDetail
+    }
+  })
   export default class CharacterBuilderClass extends Vue {
     @Prop(Array) readonly classes!: ClassType[]
     @Prop(Array) readonly currentClasses!: ClassType[]
 
-    chosenClass = this.currentClasses[0] ? this.currentClasses[0].name : ''
-
     get classChoices () {
       return this.classes.map(({ name }) => name)
+    }
+
+    get currentClassName () {
+      return this.currentClasses[0] ? this.currentClasses[0].name : ''
+    }
+
+    get currentClassData () {
+      return this.classes.find(({ name }) => this.currentClassName === name)
     }
 
     handleChangeClass (newClass: string) {
@@ -36,11 +47,13 @@
   div
     h1 Choose a Class
     v-autocomplete(
-      v-model="chosenClass",
+      :Value="currentClassName"
       :items="classChoices",
       label="Choose a class",
       @change="handleChangeClass"
     )
+    ClassDetail(v-if="currentClassData !== -1", :classData="currentClassData", isHidingBack)
+    h2.text-left.mt-5 TODO:
     ul.text-left
       li is starting class
       li Levels

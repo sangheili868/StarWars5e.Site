@@ -24,7 +24,7 @@
     div.d-flex
       div(v-for="(value, ability) in currentScores", :key="ability").pa-2
         v-text-field(
-          :value="value",
+          :value="value || undefined",
           outlined,
           type="number",
           :label="ability",

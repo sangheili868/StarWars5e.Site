@@ -18,7 +18,7 @@
   MyDialog(v-model="isOpen")
     template(v-slot:activator="{ on }")
       a(v-on="on") {{ link }}
-    template(#title, v-if="title") {{ title }} me
+    template(#title, v-if="title") {{ title }}
     template(#text)
       div.pt-4
         slot

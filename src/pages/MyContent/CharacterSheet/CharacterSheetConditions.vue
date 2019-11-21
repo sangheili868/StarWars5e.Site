@@ -30,7 +30,7 @@
     updateConditions (newConditions: string[]) {
       if (newConditions.includes('Exhaustion') && !this.exhaustion) this.updateExhaustion(1)
       if (!newConditions.includes('Exhaustion')) this.updateExhaustion(0)
-      this.$emit('replaceCharacterList', 'currentStats.conditions', newConditions)
+      this.$emit('replaceCharacterProperty', 'currentStats.conditions', newConditions)
     }
 
     updateExhaustion (newExhaustion: number) {

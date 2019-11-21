@@ -12,7 +12,7 @@
     }
 
     handleChangeAbilityScore (ability: string, score: number) {
-      this.$emit('updateCharacter', { baseAbilityScores: { [ability]: score } })
+      this.$emit('updateCharacter', { baseAbilityScores: { [ability]: score || 0 } })
     }
   }
 </script>
@@ -29,7 +29,7 @@
           type="number",
           :label="ability",
           :rules="[checkAbilityScore]"
-          @change="newScore => handleChangeAbilityScore(ability, newScore)"
+          @change="newScore => handleChangeAbilityScore(ability, parseInt(newScore))"
         )
 </template>
 

@@ -44,6 +44,6 @@
       :conditions="completeCharacter.conditions",
       :exhaustion="completeCharacter.exhaustion",
       @updateCharacter="newCharacter => $emit('updateCharacter', newCharacter)",
-      @replaceCharacterList="(path, list) => $emit('replaceCharacterList', path, list)"
+      @replaceCharacterProperty="(path, list) => $emit('replaceCharacterProperty', path, list)"
     )
 </template>

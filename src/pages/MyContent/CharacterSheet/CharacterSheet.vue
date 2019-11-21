@@ -35,6 +35,8 @@
     @characterModule.Getter completeCharacter!: CompleteCharacterType
     @characterModule.Action setCharacter!: (newCharacter: RawCharacterType) => void
     @characterModule.Action updateCharacter!: (newCharacter: RawCharacterType) => void
+    @characterModule.Action deleteCharacterProperty!: (path: string, index: number) => void
+    @characterModule.Action replaceCharacterProperty!: (path: string, list: any[]) => void
     @classesModule.State classes!: ClassType[]
     @classesModule.Action fetchClasses!: () => void
     @equipmentModule.State equipment!: EquipmentType[]
@@ -91,16 +93,6 @@
     goToTab (newTab: number, section: number) {
       Vue.set(this.openTabs, section, newTab)
     }
-
-    deleteCharacterProperty (path: string, index: number) {
-      const myList = get(this.character, path)
-      const updatedList = myList.filter((item: any, itemIndex: number) => itemIndex !== index)
-      set(this.character, path, updatedList)
-    }
-
-    replaceCharacterList (path: string, list: any[]) {
-      set(this.character, path, list)
-    }
   }
 </script>
 
@@ -116,7 +108,7 @@
       v-if="completeCharacter",
       v-bind="{ completeCharacter }",
       @updateCharacter="updateCharacter",
-      @replaceCharacterList="replaceCharacterList"
+      @replaceCharacterProperty="replaceCharacterProperty"
     )
     v-row(v-if="completeCharacter", justify-space-around).nx-2
       v-col(v-for="section in range(numSections)", :key="section", :md="4", :sm="6")

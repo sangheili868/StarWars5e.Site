@@ -42,7 +42,7 @@ export default class Character extends VuexModule {
       {
         message: 'Class is missing hit points',
         isValid: myCharacter.classes && myCharacter.classes.every(myClass =>
-          myClass.hitPoints && myClass.hitPoints.length === myClass.levels
+          myClass.hitPoints && myClass.hitPoints.length === myClass.levels - (myClass.isStartingClass ? 1 : 0)
       ) },
       {
         message: 'Ability Score is missing',
@@ -63,13 +63,14 @@ export default class Character extends VuexModule {
 
   get completeCharacter () {
     if (this.characterValidation.isValid) {
+      const rootState = this.context.rootState
       return generateCharacter(
         stateOf(this.context).character,
-        classesModule.state.classes,
-        equipmentModule.state.equipment,
-        powersModule.state.powers,
-        featsModule.state.feats,
-        backgroundsModule.state.backgrounds
+        rootState.classes.classes,
+        rootState.equipment.equipment,
+        rootState.powers.powers,
+        rootState.feats.feats,
+        rootState.backgrounds.backgrounds
       )
     } else {
       console.error(this.characterValidation.message)

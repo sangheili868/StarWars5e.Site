@@ -52,7 +52,7 @@
       :key="weapon.name"
       v-bind="{ weapon }"
     )
-    div(v-if="!weapons.length").small Equip weapons by selecting them in the Equipment section
+    div(v-if="!weapons.length").caption Equip weapons by selecting them in the Equipment section
     CharacterSheetSuperiority(
       :superiority="superiority",
       @updateCharacter="newCharacter => $emit('updateCharacter', newCharacter)"

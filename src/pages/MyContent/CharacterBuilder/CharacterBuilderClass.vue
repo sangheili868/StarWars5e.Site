@@ -23,7 +23,7 @@
           name: newClass,
           isStartingClass: true,
           levels: 1,
-          hitPoints: [ hitPoints ]
+          hitPoints: [ ]
         } } })
       } else {
         console.error('Class not found: ', newClass)

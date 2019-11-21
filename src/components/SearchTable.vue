@@ -29,6 +29,7 @@
     @Prop(String) readonly name!: string
 
     @tableQueriesModule.State tableQueries!: tableQueryType[]
+    @tableQueriesModule.Action initQuery!: (tableName: string) => Promise<void>
     @tableQueriesModule.Action updateQuery!: ({ tableName, field, input }: {
       tableName: string,
       field: string,
@@ -40,9 +41,11 @@
     tabTitle: string | undefined = ''
 
     created () {
-      this.search = this.initialSearch || (this.storedQuery ? this.storedQuery.Search as string : '')
-      this.filterSelections = this.storedQuery || {}
-      this.tabTitle = this.tableType
+      this.initQuery(this.name).then(() => {
+        this.search = this.initialSearch || (this.storedQuery ? this.storedQuery.Search as string : '')
+        this.filterSelections = this.storedQuery || {}
+        this.tabTitle = this.tableType
+      })
     }
 
     get title () {

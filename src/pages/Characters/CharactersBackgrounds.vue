@@ -8,6 +8,27 @@
 
   const backgroundModule = namespace('backgrounds')
 
+  const skills = [
+    'Athletics',
+    'Acrobatics',
+    'Sleight of Hand',
+    'Stealth',
+    'Investigation',
+    'Lore',
+    'Nature',
+    'Piloting',
+    'Technology',
+    'Animal Handling',
+    'Insight',
+    'Medicine',
+    'Perception',
+    'Survival',
+    'Deception',
+    'Intimidation',
+    'Performance',
+    'Persuasion'
+  ]
+
   @Component({
     components: {
       BackButton,
@@ -43,10 +64,12 @@
           value: 'name'
         },
         {
-          text: 'Feature',
+          text: 'Skill Proficiency',
           value: 'skillProficiencies',
-          filterChoices: ['Deception', 'Lore'],
-          filterFunction: ({ skillProficiencies }: BackgroundType, filterValue: string) => _.includes(skillProficiencies, filterValue)
+          isMultiSelect: true,
+          filterChoices: skills,
+          filterFunction: ({ skillProficiencies }: BackgroundType, filterValue: string[]) =>
+            filterValue.every(skill => skillProficiencies.includes(skill))
         },
         {
           text: 'Source',
@@ -66,5 +89,5 @@
       BackButton
       h1 Backgrounds
     br
-    SearchTable(v-bind="{ headers, items, initialSearch, tableType }")
+    SearchTable(name="Backgrounds", v-bind="{ headers, items, initialSearch, tableType }")
 </template>

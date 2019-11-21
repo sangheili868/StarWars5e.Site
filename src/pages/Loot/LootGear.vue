@@ -65,7 +65,7 @@
     BackButton
     h1 Gear
     br
-    SearchTable(v-bind="{ headers, items, initialSearch, tableType }")
+    SearchTable(name="Gear", v-bind="{ headers, items, initialSearch, tableType }")
       template(v-slot:default="props")
         VueMarkdown(:source="props.item.description")
 </template>

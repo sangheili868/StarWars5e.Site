@@ -1,7 +1,11 @@
 <script lang="ts">
   import { Component, Prop, Vue } from 'vue-property-decorator'
+  import { namespace } from 'vuex-class'
   import Loading from '@/components/Loading.vue'
   import _ from 'lodash'
+  import { tableQueryType } from '@/types/utilityTypes'
+
+  const tableQueriesModule = namespace('tableQueries')
 
   interface HeaderType {
     text: string
@@ -20,24 +24,33 @@
     @Prop(Array) readonly items!: { [key: string]: string }[]
     @Prop(Array) readonly headers!: HeaderType[]
     @Prop(Function) readonly customSort!: Function
-    @Prop(String) initialSearch: string | undefined
-    @Prop(String) tableType: string | undefined
+    @Prop(String) readonly initialSearch: string | undefined
+    @Prop(String) readonly tableType: string | undefined
+    @Prop(String) readonly name!: string
+
+    @tableQueriesModule.State tableQueries!: tableQueryType[]
+    @tableQueriesModule.Action initQuery!: (tableName: string) => Promise<void>
+    @tableQueriesModule.Action updateQuery!: ({ tableName, field, input }: {
+      tableName: string,
+      field: string,
+      input: string | string[]
+    }) => void
 
     filterSelections: { [key: string]: any } = {}
     search: string | undefined = ''
     tabTitle: string | undefined = ''
 
     created () {
-      this.search = this.initialSearch
-      this.tabTitle = this.tableType
+      this.initQuery(this.name).then(() => {
+        this.search = this.initialSearch || (this.storedQuery ? this.storedQuery.Search as string : '')
+        this.filterSelections = this.storedQuery || {}
+        this.tabTitle = this.tableType
+      })
     }
 
     get title () {
-        let titleString = this.tabTitle + Vue.prototype.$titleSuffix
-        if (this.search) {
-          return this.search + ' | ' + titleString
-        }
-        return titleString
+      const titleString = this.tabTitle + Vue.prototype.$titleSuffix
+      return (this.search ? this.search + ' | ' + titleString : titleString)
     }
 
     get alignedHeaders () {
@@ -55,13 +68,22 @@
     }
 
     get filteredItems () {
-      return this.items.filter(item => _.every(this.validFilterSelections, (selection, filterField) =>
-        this.headers.find(({ text }) => text === filterField)!.filterFunction(item, selection)
-      ))
+      return this.items.filter(item => _.every(this.validFilterSelections, (selection, filterField) => {
+        const filterHeader = this.headers.find(({ text }) => text === filterField)
+        return filterHeader ? filterHeader.filterFunction(item, selection) : true
+      }))
     }
 
     get headersWithFilters () {
       return this.headers.filter(({ filterFunction }) => filterFunction)
+    }
+
+    get storedQuery () {
+      return this.tableQueries.find(({ tableName }) => tableName === this.name)
+    }
+
+    handleFilterChange (field: string, input: string | string[]) {
+      this.updateQuery({ tableName: this.name, field, input })
     }
   }
 </script>
@@ -71,7 +93,14 @@
     vue-headful(:title="title")
     v-card
       v-card-title
-        v-text-field(v-model="search", append-icon="fa-search", label="Search", single-line, hide-details).ma-2
+        v-text-field(
+          v-model="search",
+          append-icon="fa-search",
+          label="Search",
+          single-line,
+          hide-details,
+          @input="newValue => handleFilterChange('Search', newValue)"
+        ).ma-2
         v-select(
           v-for="header in headersWithFilters",
           :key="header.text",
@@ -82,6 +111,7 @@
           single-line,
           hide-details,
           :multiple="header.isMultiSelect"
+          @input="newValue => handleFilterChange(header.text, newValue)"
         ).ma-2
       v-data-table(
         :headers="alignedHeaders",
@@ -89,7 +119,11 @@
         v-bind="{ search }",
         :items-per-page="25",
         :custom-sort="customSort",
-        :footer-props="{ 'items-per-page-options': [10, 25, 50, -1] }"
+        :sort-by="storedQuery && storedQuery.sortBy",
+        :sort-desc="storedQuery && storedQuery.sortDesc",
+        :footer-props="{ 'items-per-page-options': [10, 25, 50, -1] }",
+        @update:sort-by="newValue => handleFilterChange('sortBy', newValue)",
+        @update:sort-desc="newValue => handleFilterChange('sortDesc', newValue)",
       )
         template(v-slot:item="{ isExpanded, item, expand }")
           tr(v-if="item.isExpandable", :class="$style.clickableRow", @click="expand(!isExpanded)")

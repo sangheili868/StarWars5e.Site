@@ -68,5 +68,5 @@
     BackButton
     h1 Starship Weapons
     br
-    SearchTable(v-bind="{ headers, items, initialSearch, tableType }")
+    SearchTable(name="StarshipWeapons", v-bind="{ headers, items, initialSearch, tableType }")
 </template>

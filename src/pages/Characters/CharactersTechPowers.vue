@@ -85,7 +85,7 @@
     BackButton
     h1 Tech Powers
     br
-    SearchTable(v-bind="{ headers, items, initialSearch, tableType }")
+    SearchTable(name="TechPowers", v-bind="{ headers, items, initialSearch, tableType }")
       template(v-slot:default="props")
         VueMarkdown(:source="props.item.description")
 </template>

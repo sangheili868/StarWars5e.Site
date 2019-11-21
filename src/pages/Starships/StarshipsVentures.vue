@@ -71,7 +71,7 @@
     BackButton
     h1 Ventures
     br
-    SearchTable(v-bind="{ headers, items, initialSearch, tableType }")
+    SearchTable(name="StarshipsVentures", v-bind="{ headers, items, initialSearch, tableType }")
       template(v-slot:default="props")
         VueMarkdown(:source="props.item.content")
 </template>

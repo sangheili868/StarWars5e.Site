@@ -109,8 +109,7 @@
 
 <template lang="pug">
   div(v-if="hasFetchedData")
-    div {{ characterValidation.message }}
-    div {{ character }}
+    div {{ characterValidation.isValid ? '' : characterValidation.message }}
     v-alert(v-model="isAlertOpen", dismissible, type="error") Invalid Character
     div.d-flex.align-center.justify-center.flex-wrap
       v-btn(to="characterBuilder", color="primary") Create New Character

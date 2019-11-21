@@ -72,8 +72,6 @@ export default class Character extends VuexModule {
         rootState.feats.feats,
         rootState.backgrounds.backgrounds
       )
-    } else {
-      console.error(this.characterValidation.message)
     }
   }
 

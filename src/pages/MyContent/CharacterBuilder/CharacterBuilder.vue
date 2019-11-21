@@ -106,7 +106,6 @@
 <template lang="pug">
   div
     h1.pb-3 Character Builder
-    div {{ character }}
     v-stepper(v-model="currentStep", alt-labels)
       v-stepper-header
         template(v-for="n in numSteps")
@@ -122,6 +121,7 @@
           v-btn(v-if="currentStep < numSteps", color="primary", @click="currentStep++") Continue
           v-btn(v-if="currentStep === numSteps", color="primary", to="characterSheet") Save and View My Character
           v-btn(v-if="currentStep > 1", text, @click="currentStep--") Back
+    div.mt-5 {{ character }}
 </template>
 
 <style module lang="scss">

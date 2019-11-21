@@ -61,7 +61,7 @@
     BackButton
     h1 Armor
     br
-    SearchTable(v-bind="{ headers, items, initialSearch, tableType }")
+    SearchTable(name="Armor", v-bind="{ headers, items, initialSearch, tableType }")
       template(v-slot:default="props")
         VueMarkdown(:source="props.item.description")
 </template>

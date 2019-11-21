@@ -74,7 +74,7 @@
       BackButton
       h1 Feats
     br
-    SearchTable(v-bind="{ headers, items, initialSearch, tableType }")
+    SearchTable(name="Feats", v-bind="{ headers, items, initialSearch, tableType }")
       template(v-slot:default="props")
         VueMarkdown(:source="props.item.text")
 </template>

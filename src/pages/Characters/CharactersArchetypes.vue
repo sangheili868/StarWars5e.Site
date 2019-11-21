@@ -66,5 +66,5 @@
       BackButton
       h1 Archetypes
     br
-    SearchTable(v-bind="{ headers, items, initialSearch, tableType }")
+    SearchTable(name="Archetypes", v-bind="{ headers, items, initialSearch, tableType }")
 </template>

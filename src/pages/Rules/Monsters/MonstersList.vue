@@ -91,7 +91,7 @@
   div
     h1(v-if="!isInHandbook") Monsters
     br
-    SearchTable(v-bind="{ headers, items, customSort, initialSearch, tableType }")
+    SearchTable(name="Monsters", v-bind="{ headers, items, customSort, initialSearch, tableType }")
       template(v-slot:default="{ item }")
         MonsterDescription(:monster="item")
 </template>

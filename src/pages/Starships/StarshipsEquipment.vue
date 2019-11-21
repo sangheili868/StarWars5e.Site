@@ -57,7 +57,7 @@
     BackButton
     h1 Starship Equipment
     br
-    SearchTable(v-bind="{ headers, items, initialSearch, tableType }")
+    SearchTable(name="starshipEquipment", v-bind="{ headers, items, initialSearch, tableType }")
       template(v-slot:default="props")
         VueMarkdown(:source="props.item.description")
 </template>

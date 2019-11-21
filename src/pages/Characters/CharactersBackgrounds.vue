@@ -89,5 +89,5 @@
       BackButton
       h1 Backgrounds
     br
-    SearchTable(v-bind="{ headers, items, initialSearch, tableType }")
+    SearchTable(name="Backgrounds", v-bind="{ headers, items, initialSearch, tableType }")
 </template>

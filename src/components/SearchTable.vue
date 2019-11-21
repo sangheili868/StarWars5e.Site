@@ -1,7 +1,11 @@
 <script lang="ts">
   import { Component, Prop, Vue } from 'vue-property-decorator'
+  import { namespace } from 'vuex-class'
   import Loading from '@/components/Loading.vue'
   import _ from 'lodash'
+  import { queryInputType, tableQueryType } from '@/types/utilityTypes'
+
+  const tableQueriesModule = namespace('tableQueries')
 
   interface HeaderType {
     text: string
@@ -20,24 +24,30 @@
     @Prop(Array) readonly items!: { [key: string]: string }[]
     @Prop(Array) readonly headers!: HeaderType[]
     @Prop(Function) readonly customSort!: Function
-    @Prop(String) initialSearch: string | undefined
-    @Prop(String) tableType: string | undefined
+    @Prop(String) readonly initialSearch: string | undefined
+    @Prop(String) readonly tableType: string | undefined
+    @Prop(String) readonly name!: string
+
+    @tableQueriesModule.State tableQueries!: tableQueryType[]
+    @tableQueriesModule.Action updateQuery!: ({ tableName, field, input }: {
+      tableName: string,
+      field: string,
+      input: queryInputType
+    }) => void
 
     filterSelections: { [key: string]: any } = {}
     search: string | undefined = ''
     tabTitle: string | undefined = ''
 
     created () {
-      this.search = this.initialSearch
+      this.search = this.initialSearch || (this.storedQuery ? this.storedQuery.Search as string : '')
+      this.filterSelections = this.storedQuery || {}
       this.tabTitle = this.tableType
     }
 
     get title () {
-        let titleString = this.tabTitle + Vue.prototype.$titleSuffix
-        if (this.search) {
-          return this.search + ' | ' + titleString
-        }
-        return titleString
+      const titleString = this.tabTitle + Vue.prototype.$titleSuffix
+      return (this.search ? this.search + ' | ' + titleString : titleString)
     }
 
     get alignedHeaders () {
@@ -55,13 +65,22 @@
     }
 
     get filteredItems () {
-      return this.items.filter(item => _.every(this.validFilterSelections, (selection, filterField) =>
-        this.headers.find(({ text }) => text === filterField)!.filterFunction(item, selection)
-      ))
+      return this.items.filter(item => _.every(this.validFilterSelections, (selection, filterField) => {
+        const filterHeader = this.headers.find(({ text }) => text === filterField)
+        return filterHeader ? filterHeader.filterFunction(item, selection) : true
+      }))
     }
 
     get headersWithFilters () {
       return this.headers.filter(({ filterFunction }) => filterFunction)
+    }
+
+    get storedQuery () {
+      return this.tableQueries.find(({ tableName }) => tableName === this.name)
+    }
+
+    handleFilterChange (field: string, input: queryInputType) {
+      this.updateQuery({ tableName: this.name, field, input })
     }
   }
 </script>
@@ -71,7 +90,14 @@
     vue-headful(:title="title")
     v-card
       v-card-title
-        v-text-field(v-model="search", append-icon="fa-search", label="Search", single-line, hide-details).ma-2
+        v-text-field(
+          v-model="search",
+          append-icon="fa-search",
+          label="Search",
+          single-line,
+          hide-details,
+          @input="newValue => handleFilterChange('Search', newValue)"
+        ).ma-2
         v-select(
           v-for="header in headersWithFilters",
           :key="header.text",
@@ -82,6 +108,7 @@
           single-line,
           hide-details,
           :multiple="header.isMultiSelect"
+          @input="newValue => handleFilterChange(header.text, newValue)"
         ).ma-2
       v-data-table(
         :headers="alignedHeaders",

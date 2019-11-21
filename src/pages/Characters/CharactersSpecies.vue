@@ -87,5 +87,5 @@
       BackButton
       h1 Species
     br
-    SearchTable(v-bind="{ headers, items, initialSearch, tableType }")
+    SearchTable(name="Species", v-bind="{ headers, items, initialSearch, tableType }")
 </template>

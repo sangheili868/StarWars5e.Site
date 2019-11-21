@@ -1,0 +1,26 @@
+import { Module, VuexModule, MutationAction } from 'vuex-module-decorators'
+import { queryInputType, tableQueryType } from '@/types/utilityTypes'
+
+function stateOf (context: any) {
+  // Vuex-module-decorator changes 'this' when it converts into a module.
+  return (context as { state: TableQueries }).state
+}
+
+@Module({ namespaced: true, name: 'tableQueries' })
+export default class TableQueries extends VuexModule {
+  tableQueries: tableQueryType[] = []
+
+  @MutationAction({ mutate: ['tableQueries'] })
+  async updateQuery ({ tableName, field, input }: { tableName: string, field: string, input: queryInputType }) {
+    const newTableQueries = [...stateOf(this).tableQueries]
+    const index = newTableQueries.findIndex(({ tableName: myTableName }) => tableName === myTableName)
+    if (index < 0) {
+      newTableQueries.push({ tableName: tableName, [field]: input })
+    } else {
+      newTableQueries[index][field] = input
+    }
+    return {
+      tableQueries: newTableQueries
+    }
+  }
+}

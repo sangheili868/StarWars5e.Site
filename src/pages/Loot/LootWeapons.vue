@@ -89,7 +89,7 @@
     BackButton
     h1 Weapons
     br
-    SearchTable(v-bind="{ headers, items, initialSearch, tableType }")
+    SearchTable(name="Weapons", v-bind="{ headers, items, initialSearch, tableType }")
       template(v-slot:default="props")
         strong Properties:
         LinkModal(

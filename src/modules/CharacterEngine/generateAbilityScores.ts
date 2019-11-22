@@ -1,12 +1,15 @@
 import { RawCharacterType } from '@/types/rawCharacterTypes'
-import { ClassType } from '@/types/characterTypes'
+import { ClassType, SpeciesType } from '@/types/characterTypes'
 import { chain, mapValues, get } from 'lodash'
 import { SkillsType } from '@/types/referenceTypes'
 
-function getAbilityScore (rawCharacter: RawCharacterType, ability: string) {
+function getAbilityScore (rawCharacter: RawCharacterType, ability: string, mySpecies: SpeciesType | undefined) {
   const backgroundImprovements = rawCharacter.background.feat.abilityScoreImprovements
+  const fixedSpeciesImprovement = mySpecies && mySpecies.abilitiesIncreased[0]
+    .find(({ abilities }) => abilities.includes(ability))
   return rawCharacter.baseAbilityScores[ability] +
     (rawCharacter.species.abilityScoreImprovement[ability] || 0) +
+    (fixedSpeciesImprovement ? fixedSpeciesImprovement.amount : 0) +
     ((backgroundImprovements && backgroundImprovements[ability]) || 0)
     // Todo: Add class ability score improvements (and from feats)
 }
@@ -37,6 +40,7 @@ function getModifier (value: number) {
 export default function generateAbilityScores (
   rawCharacter: RawCharacterType,
   myClasses: ClassType[],
+  mySpecies: SpeciesType | undefined,
   proficiencyBonus: number,
   skillsList: SkillsType
 ) {
@@ -47,12 +51,12 @@ export default function generateAbilityScores (
   }
   const proficientSkills = getProficientSkills(rawCharacter, skillsList)
   const proficientSaves = getProficientSaves(rawCharacter, myClasses)
-  const intBonus = getModifier(getAbilityScore(rawCharacter, 'Intelligence'))
+  const intBonus = getModifier(getAbilityScore(rawCharacter, 'Intelligence', mySpecies))
   const scholarData = rawCharacter.classes.find(({ name }) => name === 'Scholar')
   const skillWithIntBonus = get(scholarData, 'archetype.silverTongue.intSkillBonus')
 
   return mapValues(skillsList, (skills, ability) => {
-    const value = getAbilityScore(rawCharacter, ability)
+    const value = getAbilityScore(rawCharacter, ability, mySpecies)
     const modifier = getModifier(value)
     const isProficientInSave = proficientSaves && proficientSaves.includes(ability)
 

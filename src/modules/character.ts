@@ -3,11 +3,6 @@ import { RawCharacterType } from '@/types/rawCharacterTypes'
 import baseCharacter from './CharacterEngine/baseCharacter.json'
 import { isEmpty, merge, get, set, isEqual } from 'lodash'
 import generateCharacter from './CharacterEngine/generateCharacter'
-import classesModule from './classes'
-import equipmentModule from './equipment'
-import powersModule from './powers'
-import featsModule from './feats'
-import backgroundsModule from './backgrounds'
 
 function stateOf (context: any) {
   // Vuex-module-decorator changes 'this' when it converts into a module.
@@ -67,6 +62,7 @@ export default class Character extends VuexModule {
       return generateCharacter(
         stateOf(this.context).character,
         rootState.classes.classes,
+        rootState.species.species,
         rootState.equipment.equipment,
         rootState.powers.powers,
         rootState.feats.feats,

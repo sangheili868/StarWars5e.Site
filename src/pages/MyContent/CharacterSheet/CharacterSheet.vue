@@ -1,7 +1,7 @@
 <script lang="ts">
   import { Component, Prop, Vue } from 'vue-property-decorator'
   import { namespace } from 'vuex-class'
-  import { ClassType, PowerType, FeatType, BackgroundType } from '@/types/characterTypes'
+  import { ClassType, PowerType, FeatType, BackgroundType, SpeciesType } from '@/types/characterTypes'
   import { RawCharacterType } from '@/types/rawCharacterTypes'
   import { EquipmentType } from '@/types/lootTypes'
   import JSONReader from '@/components/JSONReader.vue'
@@ -15,6 +15,7 @@
 
   const characterModule = namespace('character')
   const classesModule = namespace('classes')
+  const speciesModule = namespace('species')
   const equipmentModule = namespace('equipment')
   const powersModule = namespace('powers')
   const featsModule = namespace('feats')
@@ -37,8 +38,11 @@
     @characterModule.Action updateCharacter!: (newCharacter: RawCharacterType) => void
     @characterModule.Action deleteCharacterProperty!: ({ path, index }: { path: string, index: number }) => void
     @characterModule.Action replaceCharacterProperty!: ({ path, property }: { path: string, property: any[] }) => void
+
     @classesModule.State classes!: ClassType[]
     @classesModule.Action fetchClasses!: () => void
+    @speciesModule.State species!: SpeciesType[]
+    @speciesModule.Action fetchSpecies!: () => void
     @equipmentModule.State equipment!: EquipmentType[]
     @equipmentModule.Action fetchEquipment!: () => void
     @powersModule.State powers!: PowerType[]

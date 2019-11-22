@@ -1,6 +1,6 @@
 import { RawCharacterType } from '@/types/rawCharacterTypes'
 import { pick, compact } from 'lodash'
-import { ClassType, PowerType, FeatType, BackgroundType } from '@/types/characterTypes'
+import { ClassType, PowerType, FeatType, BackgroundType, SpeciesType } from '@/types/characterTypes'
 import { EquipmentType } from '@/types/lootTypes'
 import generateAbilityScores from './generateAbilityScores'
 import generateCombatStats from './generateCombatStats'
@@ -31,6 +31,7 @@ import {
 export default function generateCharacter (
   rawCharacter: RawCharacterType,
   classes: ClassType[],
+  species: SpeciesType[],
   equipment: EquipmentType[],
   powers: PowerType[],
   feats: FeatType[],
@@ -39,6 +40,9 @@ export default function generateCharacter (
   const myClasses = rawCharacter.classes.map(({ name }) => classes.find(myClass => name === myClass.name))
   if (myClasses.includes(undefined)) console.error('Class not found from ' + rawCharacter.classes.map(({ name }) => name))
   const myFoundClasses = compact(myClasses)
+
+  const mySpecies = species.find(({ name }) => name === rawCharacter.species.name)
+  if (!mySpecies) console.error('Species not found: ', rawCharacter.species.name)
 
   const currentLevel = rawCharacter.classes.reduce((acc, { levels }) => acc + levels, 0)
   const proficiencyBonus = 1 + Math.ceil(currentLevel / 4)
@@ -54,7 +58,7 @@ export default function generateCharacter (
   const myFoundFeats = compact(myFeats)
   const mygdFeats = myFeatsList.map(name => gdFeats.find(feat => name === feat.name))
   const myFoundgdFeats = compact(mygdFeats)
-  const abilityScores = generateAbilityScores(rawCharacter, myFoundClasses, proficiencyBonus, skills)
+  const abilityScores = generateAbilityScores(rawCharacter, myFoundClasses, mySpecies, proficiencyBonus, skills)
   const myConditions = rawCharacter.currentStats.conditions.map(condition => ({
     name: condition,
     description: (conditions as { [key: string]: string })[condition]

@@ -21,7 +21,7 @@ export interface WeaponPropertyType {
 }
 
 export interface ArmorType {
-  ac: number | null,
+  ac: number | string | null,
   armorClassification: string,
   contentType: string,
   cost: number,

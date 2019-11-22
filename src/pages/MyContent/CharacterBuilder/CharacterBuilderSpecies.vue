@@ -3,11 +3,13 @@
   import { SpeciesType } from '@/types/characterTypes'
   import { chain } from 'lodash'
   import CharactersSpeciesDetail from '@/pages/Characters/CharactersSpeciesDetail.vue'
+  import CharacterBuilderSpeciesAbilities from './CharacterBuilderSpeciesAbilities.vue'
   import { RawSpeciesType } from '@/types/rawCharacterTypes'
 
   @Component({
     components: {
-      CharactersSpeciesDetail
+      CharactersSpeciesDetail,
+      CharacterBuilderSpeciesAbilities
     }
   })
   export default class CharacterBuilderSpecies extends Vue {
@@ -21,8 +23,19 @@
         .value()
     }
 
+    get currentSpeciesData () {
+      return this.species.find(({ name }) => name === this.currentSpecies.name)
+    }
+
     handleChangeSpecies (newSpecies: string) {
-      this.$emit('updateCharacter', { species: { name: newSpecies } })
+      this.$emit('replaceCharacterProperty', {
+        path: 'species',
+        property: {
+          name: newSpecies,
+          abilityScoreImprovementSelectedOption: 0,
+          abilityScoreImprovement: {}
+        }
+      })
     }
   }
 </script>
@@ -36,7 +49,14 @@
       label="Choose a species",
       @change="handleChangeSpecies"
     )
-    CharactersSpeciesDetail(v-if="currentSpecies.name", :speciesName="currentSpecies.name", isHidingBack)
+    div(v-if="currentSpecies.name && currentSpeciesData")
+      CharacterBuilderSpeciesAbilities(
+        :abilitiesIncreased="currentSpeciesData.abilitiesIncreased",
+        :currentSpecies="currentSpecies",
+        @updateCharacter="newCharacter => $emit('updateCharacter', newCharacter)"
+        @replaceCharacterProperty="payload => $emit('replaceCharacterProperty', payload)"
+      )
+      CharactersSpeciesDetail(:speciesName="currentSpecies.name", isHidingBack)
     h2.text-left.mt-5 TODO:
     ul.text-left
       li Choose Ability score improvements (if available)

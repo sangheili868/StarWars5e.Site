@@ -5,6 +5,7 @@
   "experiencePoints": 0,
   "species": {
     "name": "Human",
+    "abilityScoreImprovementSelectedOption": 0,
     "abilityScoreImprovement": {
       "Intelligence": 1,
       "Charisma": 1,

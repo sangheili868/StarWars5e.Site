@@ -107,9 +107,9 @@ export default class Character extends VuexModule {
   }
 
   @MutationAction({ mutate: ['character'] })
-  async replaceCharacterProperty ({ path, list }: { path: string, list: any[] }) {
+  async replaceCharacterProperty ({ path, property }: { path: string, property: any }) {
     let characterCopy = merge({}, stateOf(this).character)
-    set(characterCopy, path, list)
+    set(characterCopy, path, property)
     return {
       character: characterCopy
     }

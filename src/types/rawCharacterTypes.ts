@@ -1,5 +1,6 @@
 export interface RawSpeciesType {
   name: string,
+  abilityScoreImprovementSelectedOption: number,
   abilityScoreImprovement: {
     [abilityScore: string]: number
   },

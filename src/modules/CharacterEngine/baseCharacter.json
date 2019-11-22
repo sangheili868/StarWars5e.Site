@@ -6,6 +6,7 @@
   "experiencePoints": 0,
   "species": {
     "name": "",
+    "abilityScoreImprovementSelectedOption": 0,
     "abilityScoreImprovement": {}
   },
   "classes": [ ],

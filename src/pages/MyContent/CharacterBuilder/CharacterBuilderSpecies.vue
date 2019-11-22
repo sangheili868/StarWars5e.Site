@@ -59,7 +59,6 @@
       CharactersSpeciesDetail(:speciesName="currentSpecies.name", isHidingBack)
     h2.text-left.mt-5 TODO:
     ul.text-left
-      li Choose Ability score improvements (if available)
       li Choose Tool proficiency (if available)
       li Choose Musical Instrument proficiency (if available)
       li Choose Skill proficiency (if available)

@@ -86,6 +86,18 @@ export interface RawEquipmentType {
   equipped?: boolean
 }
 
+export interface TweakType {
+  override?: number,
+  bonus?: number
+}
+
+export interface CastingTweakType {
+  maxPoints?: TweakType,
+  attackModifier?: TweakType,
+  saveDC?: TweakType,
+  maxPowerLevel?: TweakType
+}
+
 export interface RawCharacterType {
   name: string,
   image: string,
@@ -121,5 +133,35 @@ export interface RawCharacterType {
     },
     conditions: string[],
     exhaustion: number
+  },
+  tweaks: {
+    abilityScores?: {
+      [ability: string]: {
+        value?: TweakType,
+        savingThrowModifier?: TweakType,
+        skills?: {
+          [name: string]: TweakType
+        }
+      }
+    },
+    initiative?: TweakType,
+    armorClass?: TweakType,
+    hitPoints?: {
+      maximum?: TweakType,
+      hitDice?: {
+        [size: string]: TweakType
+      }
+    },
+    passivePerception?: TweakType,
+    vision?: TweakType,
+    speed?: {
+      base?: TweakType
+    },
+    techCasting?: CastingTweakType,
+    forceCasting?: CastingTweakType,
+    superiority?: {
+      maxDice?: TweakType,
+      maneuverSaveDC?: TweakType
+    }
   }
 }

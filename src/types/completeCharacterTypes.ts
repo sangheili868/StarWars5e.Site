@@ -1,5 +1,6 @@
 import { PowerType } from '@/types/characterTypes'
 import { EquipmentType } from '@/types/lootTypes'
+import { TweaksType } from './rawCharacterTypes'
 
 export interface AbilityScoreType {
   value: number,
@@ -144,5 +145,6 @@ export interface CompleteCharacterType {
   techCasting: CastingType,
   forceCasting: CastingType,
   combatFeatures: CompletedFeatureType[],
-  nonCombatFeatures: CompletedFeatureType[]
+  nonCombatFeatures: CompletedFeatureType[],
+  tweaks: TweaksType
 }

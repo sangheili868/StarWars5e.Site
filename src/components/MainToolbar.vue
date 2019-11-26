@@ -35,7 +35,7 @@
             { to: '/monsters', title: 'Scum and Villainy' },
             { to: '/starships', title: 'Starships of the Galaxy' },
             { to: '/hives', title: 'Wretched Hives' }
-           ]
+          ]
         },
         {
           to: '/characters',

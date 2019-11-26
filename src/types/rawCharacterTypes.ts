@@ -98,6 +98,42 @@ export interface CastingTweakType {
   maxPowerLevel?: TweakType
 }
 
+export interface TweaksType {
+  abilityScores?: {
+    [ability: string]: {
+      value?: TweakType,
+      savingThrowModifier?: TweakType,
+      skills?: {
+        [name: string]: TweakType
+      }
+    }
+  },
+  initiative?: TweakType,
+  proficiencyBonus?: TweakType,
+  armorClass?: TweakType,
+  weapon?: {
+    toHit?: TweakType,
+    damage?: TweakType
+  }
+  hitPoints?: {
+    maximum?: TweakType,
+    hitDice?: {
+      [size: string]: TweakType
+    }
+  },
+  passivePerception?: TweakType,
+  vision?: TweakType,
+  speed?: {
+    base?: TweakType
+  },
+  techCasting?: CastingTweakType,
+  forceCasting?: CastingTweakType,
+  superiority?: {
+    maxDice?: TweakType,
+    maneuverSaveDC?: TweakType
+  }
+}
+
 export interface RawCharacterType {
   name: string,
   image: string,
@@ -134,34 +170,5 @@ export interface RawCharacterType {
     conditions: string[],
     exhaustion: number
   },
-  tweaks: {
-    abilityScores?: {
-      [ability: string]: {
-        value?: TweakType,
-        savingThrowModifier?: TweakType,
-        skills?: {
-          [name: string]: TweakType
-        }
-      }
-    },
-    initiative?: TweakType,
-    armorClass?: TweakType,
-    hitPoints?: {
-      maximum?: TweakType,
-      hitDice?: {
-        [size: string]: TweakType
-      }
-    },
-    passivePerception?: TweakType,
-    vision?: TweakType,
-    speed?: {
-      base?: TweakType
-    },
-    techCasting?: CastingTweakType,
-    forceCasting?: CastingTweakType,
-    superiority?: {
-      maxDice?: TweakType,
-      maneuverSaveDC?: TweakType
-    }
-  }
+  tweaks: TweaksType
 }

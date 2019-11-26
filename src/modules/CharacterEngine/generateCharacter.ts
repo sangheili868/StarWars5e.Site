@@ -105,6 +105,7 @@ export default function generateCharacter (
     carryingCapacity: generateCarryingCapacity(abilityScores),
     superiority,
     ...casting,
-    ...features
+    ...features,
+    tweaks: rawCharacter.tweaks
   }
 }

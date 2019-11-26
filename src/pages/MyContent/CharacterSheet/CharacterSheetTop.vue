@@ -4,12 +4,14 @@
   import CharacterSheetHealth from './CharacterSheetHealth.vue'
   import CharacterSheetExperience from './CharacterSheetExperience.vue'
   import CharacterSheetConditions from './CharacterSheetConditions.vue'
+  import CharacterSheetSettings from './CharacterSheetSettings.vue'
 
   @Component({
     components: {
       CharacterSheetHealth,
       CharacterSheetExperience,
-      CharacterSheetConditions
+      CharacterSheetConditions,
+      CharacterSheetSettings
     }
   })
   export default class CharacterSheetTop extends Vue {
@@ -40,10 +42,12 @@
       :hitPoints="completeCharacter.hitPoints",
       @updateCharacter="newCharacter => $emit('updateCharacter', newCharacter)"
     )
-    CharacterSheetConditions(
-      :conditions="completeCharacter.conditions",
-      :exhaustion="completeCharacter.exhaustion",
-      @updateCharacter="newCharacter => $emit('updateCharacter', newCharacter)",
-      @replaceCharacterProperty="payload => $emit('replaceCharacterProperty', payload)"
-    )
+    div
+      CharacterSheetSettings(:completeCharacter="completeCharacter")
+      CharacterSheetConditions(
+        :conditions="completeCharacter.conditions",
+        :exhaustion="completeCharacter.exhaustion",
+        @updateCharacter="newCharacter => $emit('updateCharacter', newCharacter)",
+        @replaceCharacterProperty="payload => $emit('replaceCharacterProperty', payload)"
+      )
 </template>

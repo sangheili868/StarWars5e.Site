@@ -101,7 +101,7 @@ export interface CastingTweakType {
 export interface TweaksType {
   abilityScores?: {
     [ability: string]: {
-      value?: TweakType,
+      score?: TweakType,
       savingThrowModifier?: TweakType,
       skills?: {
         [name: string]: TweakType

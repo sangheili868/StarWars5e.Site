@@ -22,7 +22,10 @@
       v-btn(block, v-on="on").mb-3 Settings
     template(#title) Settings
     template(#text)
-      CharacterSheetSettingsTweaks(:tweaks="completeCharacter.tweaks")
+      CharacterSheetSettingsTweaks(
+        :tweaks="completeCharacter.tweaks",
+        @replaceCharacterProperty="payload => $emit('replaceCharacterProperty', payload)"
+      )
     template(#actions)
       v-spacer
       v-btn(color="primary", text, @click="isOpen=false") Close

@@ -43,7 +43,10 @@
       @updateCharacter="newCharacter => $emit('updateCharacter', newCharacter)"
     )
     div
-      CharacterSheetSettings(:completeCharacter="completeCharacter")
+      CharacterSheetSettings(
+        :completeCharacter="completeCharacter",
+        @replaceCharacterProperty="payload => $emit('replaceCharacterProperty', payload)"
+      )
       CharacterSheetConditions(
         :conditions="completeCharacter.conditions",
         :exhaustion="completeCharacter.exhaustion",

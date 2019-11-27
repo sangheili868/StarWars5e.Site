@@ -1,41 +1,92 @@
 <script lang="ts">
   import { Component, Prop, Vue } from 'vue-property-decorator'
   import { TweaksType } from '@/types/rawCharacterTypes'
+  import { skills } from '@/test/gameData.json'
+  import { map, startCase, set, get } from 'lodash'
 
   @Component
   export default class CharacterSheetSettingsTweaks extends Vue {
     @Prop(Object) readonly tweaks!: TweaksType
 
+    get = get
     baseTweaks = [
       {
-        name: 'Initiative Modifier',
-        path: 'initiative'
-      },
-      {
-        name: 'Proficiency Bonus',
-        path: 'proficiencyBonus'
-      },
-      {
-        name: 'Armor Class',
-        path: 'armorClass'
-      },
-      {
-        name: 'Weapons',
+        category: 'General Stats',
         subtweaks: [
-          {
-            name: 'To Hit',
-            path: 'weapon.toHit'
-          },
-          {
-            name: 'Damage Bonus',
-            path: 'weapon.damage'
-          }
+          { name: 'Initiative Modifier', path: 'initiative' },
+          { name: 'Proficiency Bonus', path: 'proficiencyBonus' },
+          { name: 'Armor Class', path: 'armorClass' },
+          { name: 'Hit Point Maximum', path: 'hitPoints.maximum' },
+          { name: 'Passive Perception', path: 'passivePerception' },
+          { name: 'Vision', path: 'vision' },
+          { name: 'Speed', path: 'speed.base' }
+        ]
+      },
+      {
+        category: 'Weapons',
+        subtweaks: [
+          { name: 'To Hit', path: 'weapon.toHit' },
+          { name: 'Damage Bonus', path: 'weapon.damage' }
         ]
       }
     ]
 
+    get abilityScoreTweaks () {
+      return map(skills, (skillList: string[], ability) => {
+        const basePath = `abilityScores.${ability}`
+        return {
+          category: ability,
+          subtweaks: [
+            { name: 'Ability Score', path: `${basePath}.score` },
+            { name: 'Saving Throw Modifier', path: `${basePath}.savingThrowModifier` },
+            ...skillList.map(skill => ({
+              name: skill,
+              path: `${basePath}.skills.${skill}`
+            }))
+          ]
+        }
+      })
+    }
+
+    get castingTweaks () {
+      return ['tech', 'force'].map(castingType => ({
+        category: startCase(castingType) + ' Casting',
+        subtweaks: [
+          { name: 'Max Points', path: castingType + 'Casting.maxPoints' },
+          { name: 'Attack Modifier', path: castingType + 'Casting.attackModifier' },
+          { name: 'Save DC', path: castingType + 'Casting.saveDC' },
+          { name: 'Max Power Level', path: castingType + 'Casting.maxPowerLevel' }
+        ]
+      }))
+    }
+
     get tweaksList () {
-      return this.baseTweaks
+      const hitDice = {
+        category: 'Hit Dice Maximum',
+        subtweaks: ['d6', 'd8', 'd10', 'd12'].map(hitDie => ({
+          name: `${hitDie}s`,
+          path: `hitPoints.hitDie.${hitDie}`
+        }))
+      }
+      return [
+        ...this.abilityScoreTweaks,
+        ...this.baseTweaks,
+        hitDice,
+        ...this.castingTweaks,
+        {
+          category: 'Superiority',
+          subtweaks: [
+            { name: 'Max Dice', path: 'superiority.maxDice' },
+            { name: 'Maneuver Save DC', path: 'superiority.maneuverSaveDC' }
+          ]
+        }
+      ]
+    }
+
+    updateTweak (newValue: string, tweakType: string, path: string) {
+      let tweaks = { ...this.tweaks }
+      set(tweaks, `${path}.${tweakType}`, parseInt(newValue))
+      this.$emit('replaceCharacterProperty', { path: 'tweaks', property: tweaks })
     }
   }
 </script>
@@ -44,24 +95,32 @@
   div.pt-5
     h2 Tweak Numbers
     div {{ tweaks }}
-    v-container
-      v-row(v-for="({ name, path, subtweaks }) in tweaksList", :key="name")
-        v-col(v-if="subtweaks", cols="12").pa-0
-          h3 {{ name }}
-          div(v-for="({ name: subname, path }) in subtweaks", :key="name + subname").d-flex
-            v-col(cols="4").pa-0.d-flex.align-center
-              h5 {{ subname }}
-            v-col(cols="4").pa-0
-              v-text-field(outlined, type="number", hide-details, clearable, label="Bonus").pa-1
-            v-col(cols="4").pa-0
-              v-text-field(outlined, type="number", hide-details, clearable, label="Override").pa-1
-        template(v-else)
+    div(v-for="({ category, subtweaks }) in tweaksList", :key="category")
+      h3 {{ category }}
+      v-container
+        v-row(v-for="({ name, path }) in subtweaks", :key="category + name").d-flex
           v-col(cols="4").pa-0.d-flex.align-center
             h5 {{ name }}
           v-col(cols="4").pa-0
-            v-text-field(outlined, type="number", hide-details, clearable, label="Bonus").pa-1
+            v-text-field(
+              :value="get(tweaks, path + '.bonus')"
+              outlined,
+              type="number",
+              hide-details,
+              clearable,
+              label="Bonus",
+              @input="newValue => updateTweak(newValue, 'bonus', path)"
+            ).pa-1
           v-col(cols="4").pa-0
-            v-text-field(outlined, type="number", hide-details, clearable, label="Override").pa-1
+            v-text-field(
+              :value="get(tweaks, path + '.override')"
+              outlined,
+              type="number",
+              hide-details,
+              clearable,
+              label="Override",
+              @input="newValue => updateTweak(newValue, 'override', path)"
+            ).pa-1
 </template>
 
 <style module lang="scss">

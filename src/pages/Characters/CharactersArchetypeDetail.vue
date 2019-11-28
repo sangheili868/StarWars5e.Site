@@ -62,8 +62,8 @@
   div
     vue-headful(:title="title")
     BackButton
-    div( v-if="archetype" ).text-left
-      h1 {{ archetype.name }}
+    div(v-if="archetype").text-left
+      h1 {{ archetype.name.replace(/\ufffd/g, '-') }}
       VueMarkdown(:source="archetype.text")
       LevelTable(:title="archetype.name", :levels="correctedLevels")
     Loading(v-else)

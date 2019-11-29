@@ -40,7 +40,8 @@
       return [
         {
           text: 'Name',
-          value: 'name'
+          value: 'name',
+          render: (name: string) => name.replace(/\ufffd/g, '-')
         },
         {
           text: 'Class',

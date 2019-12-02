@@ -146,5 +146,9 @@ export interface CompleteCharacterType {
   forceCasting: CastingType,
   combatFeatures: CompletedFeatureType[],
   nonCombatFeatures: CompletedFeatureType[],
-  tweaks: TweaksType
+  tweaks: TweaksType,
+  customFeatures: {
+    name: string,
+    content: string
+  }[]
 }

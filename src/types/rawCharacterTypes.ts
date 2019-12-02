@@ -170,5 +170,9 @@ export interface RawCharacterType {
     conditions: string[],
     exhaustion: number
   },
-  tweaks: TweaksType
+  tweaks: TweaksType,
+  customFeatures: {
+    name: string,
+    content: string
+  }[]
 }

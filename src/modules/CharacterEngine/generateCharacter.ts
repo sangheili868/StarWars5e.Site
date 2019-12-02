@@ -107,6 +107,7 @@ export default function generateCharacter (
     superiority,
     ...casting,
     ...features,
-    tweaks: rawCharacter.tweaks
+    tweaks: rawCharacter.tweaks,
+    customFeatures: rawCharacter.customFeatures
   }
 }

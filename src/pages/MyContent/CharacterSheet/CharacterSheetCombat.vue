@@ -7,13 +7,15 @@
   import CharacterSheetWeapon from './CharacterSheetWeapon.vue'
   import CharacterSheetSuperiority from './CharacterSheetSuperiority.vue'
   import CharacterSheetExpansionFeatures from './CharacterSheetExpansionFeatures.vue'
+  import CharacterSheetCustomFeatures from './CharacterSheetCustomFeatures.vue'
 
   @Component({
     components: {
       CharacterSheetModifier,
       CharacterSheetWeapon,
       CharacterSheetSuperiority,
-      CharacterSheetExpansionFeatures
+      CharacterSheetExpansionFeatures,
+      CharacterSheetCustomFeatures
     }
   })
   export default class CharacterSheetCombat extends Vue {
@@ -25,6 +27,7 @@
     @Prop(Number) readonly passivePerception!: number
     @Prop(Object) readonly superiority!: SuperiorityType
     @Prop(Array) readonly combatFeatures!: CompletedFeatureType[]
+    @Prop(Array) readonly customFeatures!: { name: string, content: string }[]
 
     get weapons () {
       return this.equipment.filter(({ equipped, equipmentCategory }) => equipped && equipmentCategory === 'Weapon')
@@ -57,9 +60,14 @@
       :superiority="superiority",
       @updateCharacter="newCharacter => $emit('updateCharacter', newCharacter)"
     )
-    h3.mt-2 Combat Features
+    h3(v-if="combatFeatures.length").mt-2 Combat Features
     CharacterSheetExpansionFeatures(
       :features="combatFeatures",
       @updateCharacter="newCharacter => $emit('updateCharacter', newCharacter)"
+    )
+    CharacterSheetCustomFeatures(
+      :features="customFeatures",
+      @updateCharacter="newCharacter => $emit('updateCharacter', newCharacter)",
+      @deleteCharacterProperty="(path, index) => $emit('deleteCharacterProperty', path, index)"
     )
 </template>

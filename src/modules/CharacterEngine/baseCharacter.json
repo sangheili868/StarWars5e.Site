@@ -61,5 +61,6 @@
     "conditions": [],
     "exhaustion": 0
   },
-  "tweaks":{ }
+  "tweaks": {},
+  "customFeatures": []
 }

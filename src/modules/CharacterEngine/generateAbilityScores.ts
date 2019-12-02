@@ -2,16 +2,18 @@ import { RawCharacterType } from '@/types/rawCharacterTypes'
 import { ClassType, SpeciesType } from '@/types/characterTypes'
 import { chain, mapValues, get } from 'lodash'
 import { SkillsType } from '@/types/referenceTypes'
+import applyTweak from '@/utilities/applyTweak'
 
 function getAbilityScore (rawCharacter: RawCharacterType, ability: string, mySpecies: SpeciesType | undefined) {
   const backgroundImprovements = rawCharacter.background.feat.abilityScoreImprovements
   const fixedSpeciesImprovement = mySpecies && mySpecies.abilitiesIncreased[0]
     .find(({ abilities }) => abilities.includes(ability))
-  return rawCharacter.baseAbilityScores[ability] +
+  const calculatedScore = rawCharacter.baseAbilityScores[ability] +
     (rawCharacter.species.abilityScoreImprovement[ability] || 0) +
     (fixedSpeciesImprovement ? fixedSpeciesImprovement.amount : 0) +
     ((backgroundImprovements && backgroundImprovements[ability]) || 0)
     // Todo: Add class ability score improvements (and from feats)
+  return applyTweak(rawCharacter, `abilityScores.${ability}.score`, calculatedScore)
 }
 
 function getProficientSkills (rawCharacter: RawCharacterType, skillsList: SkillsType):{ [ability: string]: { [skill: string]: string } } {

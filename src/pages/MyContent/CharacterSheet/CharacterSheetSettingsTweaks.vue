@@ -2,7 +2,7 @@
   import { Component, Prop, Vue } from 'vue-property-decorator'
   import { TweaksType } from '@/types/rawCharacterTypes'
   import { skills } from '@/test/gameData.json'
-  import { map, startCase, set, get } from 'lodash'
+  import { map, startCase, set, get, parseInt as _parseInt } from 'lodash'
 
   @Component
   export default class CharacterSheetSettingsTweaks extends Vue {
@@ -85,7 +85,9 @@
 
     updateTweak (newValue: string, tweakType: string, path: string) {
       let tweaks = { ...this.tweaks }
-      set(tweaks, `${path}.${tweakType}`, parseInt(newValue))
+      let sanitizedValue: number | null = _parseInt(newValue)
+      if (isNaN(sanitizedValue)) sanitizedValue = null
+      set(tweaks, `${path}.${tweakType}`, sanitizedValue)
       this.$emit('replaceCharacterProperty', { path: 'tweaks', property: tweaks })
     }
   }
@@ -93,7 +95,7 @@
 
 <template lang="pug">
   div.pt-5
-    h2 Tweak Numbers
+    h2 Tweak Values
     div {{ tweaks }}
     div(v-for="({ category, subtweaks }) in tweaksList", :key="category")
       h3 {{ category }}

@@ -2,6 +2,7 @@ import { RawCharacterType } from '@/types/rawCharacterTypes'
 import { EquipmentType } from '@/types/lootTypes'
 import { chain, isEmpty, intersection, camelCase } from 'lodash'
 import { AbilityScoresType } from '@/types/completeCharacterTypes'
+import applyTweak from '@/utilities/applyTweak'
 
 function isProficientWithWeapon (weapon: EquipmentType, proficiencies: string[]) {
   const completeProficiencies = proficiencies.map(proficiency => {
@@ -17,6 +18,7 @@ function isProficientWithWeapon (weapon: EquipmentType, proficiencies: string[])
 }
 
 function getWeaponStats (
+  rawCharacter: RawCharacterType,
   abilityScores: AbilityScoresType,
   equipmentData: EquipmentType | undefined,
   proficiencyBonus: number,
@@ -35,8 +37,8 @@ function getWeaponStats (
     weaponModifier = isFinesse ? betterFinesseAbility : weaponModifier
 
     return {
-      attackBonus: weaponModifier + (isProficient ? proficiencyBonus : 0),
-      damageBonus: weaponModifier + equipmentData.damageDieModifier
+      attackBonus: applyTweak(rawCharacter, 'weapon.toHit', weaponModifier + (isProficient ? proficiencyBonus : 0)),
+      damageBonus: applyTweak(rawCharacter, 'weapon.damage', weaponModifier + equipmentData.damageDieModifier)
     }
   }
 }
@@ -58,7 +60,7 @@ export default function generateEquipment (
         quantity,
         equipped,
         ...(equipmentData || {}),
-        ...getWeaponStats(abilityScores, equipmentData, proficiencyBonus, proficiencies),
+        ...getWeaponStats(rawCharacter, abilityScores, equipmentData, proficiencyBonus, proficiencies),
         isFound: !isEmpty(equipmentData)
       }
     })

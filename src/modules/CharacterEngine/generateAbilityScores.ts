@@ -61,20 +61,22 @@ export default function generateAbilityScores (
     const value = getAbilityScore(rawCharacter, ability, mySpecies)
     const modifier = getModifier(value)
     const isProficientInSave = proficientSaves && proficientSaves.includes(ability)
+    const savingThrowModifier = modifier + (isProficientInSave ? proficiencyBonus : 0)
 
     return {
       value,
       modifier,
       savingThrow: {
-        modifier: modifier + (isProficientInSave ? proficiencyBonus : 0),
+        modifier: applyTweak(rawCharacter, `abilityScores.${ability}.savingThrowModifier`, savingThrowModifier),
         proficiency: isProficientInSave ? 'proficient' : 'none'
       },
       skills: skills.map(name => {
         const proficiency = proficientSkills[ability][name] || 'none'
         const silverTongueBonus = skillWithIntBonus === name ? intBonus : 0
+        const skillModifer = modifier + proficiencyBonuses[proficiency] + silverTongueBonus
         return {
           name,
-          modifier: modifier + proficiencyBonuses[proficiency] + silverTongueBonus,
+          modifier: applyTweak(rawCharacter, `abilityScores.${ability}.skills.${name}`, skillModifer),
           proficiency
         }
       })

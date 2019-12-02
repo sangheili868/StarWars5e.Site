@@ -2,6 +2,7 @@ import { RawCharacterType } from '@/types/rawCharacterTypes'
 import { AbilityScoresType, CastingType, SuperiorityType, CompletedFeatureType } from '@/types/completeCharacterTypes'
 import { ClassType } from '@/types/characterTypes'
 import { chain, isEmpty } from 'lodash'
+import applyTweak from '@/utilities/applyTweak'
 
 export default function generateHitPoints (
   rawCharacter: RawCharacterType,
@@ -16,7 +17,8 @@ export default function generateHitPoints (
   const startingClassData = startingClass && classes.find(({ name }) => name === startingClass.name)
   const hpFromFirstLevel = (startingClassData && startingClassData.hitDiceDieType) || 0
   const hpFromLaterLevels = rawCharacter.classes.reduce((acc, myClass) => acc + myClass.hitPoints.reduce((hpAcc, value) => hpAcc + value, 0), 0)
-  const maximum = hpFromFirstLevel + hpFromLaterLevels + (currentLevel * abilityScores.Constitution.modifier)
+  const baseMaximum = hpFromFirstLevel + hpFromLaterLevels + (currentLevel * abilityScores.Constitution.modifier)
+  const maximum = applyTweak(rawCharacter, 'hitPoints.maximum', baseMaximum)
   const featuresWithUsage = [ ...features.combatFeatures, ...features.nonCombatFeatures ].filter(({ usage }) => !isEmpty(usage))
 
   const hitDice = chain(rawCharacter.classes)

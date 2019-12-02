@@ -18,7 +18,6 @@
           { name: 'Armor Class', path: 'armorClass' },
           { name: 'Hit Point Maximum', path: 'hitPoints.maximum' },
           { name: 'Passive Perception', path: 'passivePerception' },
-          { name: 'Vision', path: 'vision' },
           { name: 'Speed', path: 'speed.base' }
         ]
       },
@@ -61,17 +60,9 @@
     }
 
     get tweaksList () {
-      const hitDice = {
-        category: 'Hit Dice Maximum',
-        subtweaks: ['d6', 'd8', 'd10', 'd12'].map(hitDie => ({
-          name: `${hitDie}s`,
-          path: `hitPoints.hitDie.${hitDie}`
-        }))
-      }
       return [
         ...this.abilityScoreTweaks,
         ...this.baseTweaks,
-        hitDice,
         ...this.castingTweaks,
         {
           category: 'Superiority',

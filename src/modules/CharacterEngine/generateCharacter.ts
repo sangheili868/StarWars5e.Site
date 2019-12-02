@@ -27,6 +27,7 @@ import {
   feats as gdFeats,
   fightingStyles
 } from '@/test/gameData.json'
+import applyTweak from '@/utilities/applyTweak'
 
 export default function generateCharacter (
   rawCharacter: RawCharacterType,
@@ -45,7 +46,7 @@ export default function generateCharacter (
   if (!mySpecies) console.error('Species not found: ', rawCharacter.species.name)
 
   const currentLevel = rawCharacter.classes.reduce((acc, { levels }) => acc + levels, 0)
-  const proficiencyBonus = 1 + Math.ceil(currentLevel / 4)
+  const proficiencyBonus = applyTweak(rawCharacter, 'proficiencyBonus', 1 + Math.ceil(currentLevel / 4))
   const experiencePoints = {
     previousLevel: experienceTable[currentLevel],
     current: rawCharacter.experiencePoints,

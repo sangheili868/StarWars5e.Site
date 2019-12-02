@@ -1,8 +1,9 @@
 import { RawCharacterType } from '@/types/rawCharacterTypes'
 import { AbilityScoresType } from '@/types/completeCharacterTypes'
 import { EquipmentType } from '@/types/lootTypes'
+import applyTweak from '@/utilities/applyTweak'
 
-function generateArmorClass (abilityScores: AbilityScoresType, equipment: EquipmentType[]) {
+function generateArmorClass (rawCharacter: RawCharacterType, abilityScores: AbilityScoresType, equipment: EquipmentType[]) {
   const equippedArmor = equipment.filter(({ equipmentCategory, equipped }) => equipmentCategory === 'Armor' && equipped)
   const baseAc = 10 + abilityScores.Dexterity.modifier
   const bodyAc = Math.max(baseAc, ...equippedArmor.map(({ armorClassification, ac }) => {
@@ -22,7 +23,7 @@ function generateArmorClass (abilityScores: AbilityScoresType, equipment: Equipm
     .filter(({ armorClassification }) => armorClassification === 'Shield')
     .map(({ ac }) => parseInt((ac || 0).toString()))
   )
-  return bodyAc + shieldAc
+  return applyTweak(rawCharacter, 'armorClass', bodyAc + shieldAc)
 }
 
 export default function generateCombatStats (
@@ -33,14 +34,17 @@ export default function generateCombatStats (
 ) {
   const perceptionModifier = abilityScores.Wisdom.skills.find(({ name }) => name === 'Perception')
   const isScout = rawCharacter.classes.find(({ name }) => name === 'Scout')
+  const initiative = abilityScores.Dexterity.modifier + (isScout ? proficiencyBonus : 0)
+  const passivePerception = 10 + (perceptionModifier ? perceptionModifier.modifier : 0)
+
   return {
-    initiative: abilityScores.Dexterity.modifier + (isScout ? proficiencyBonus : 0),
-    armorClass: generateArmorClass(abilityScores, equipment),
-    passivePerception: 10 + (perceptionModifier ? perceptionModifier.modifier : 0),
+    initiative: applyTweak(rawCharacter, 'initiative', initiative),
+    armorClass: generateArmorClass(rawCharacter, abilityScores, equipment),
+    passivePerception: applyTweak(rawCharacter, 'passivePerception', passivePerception),
     inspiration: rawCharacter.currentStats.hasInspiration,
     vision: 'normal',
     speed: {
-      base: '30ft',
+      base: applyTweak(rawCharacter, 'speed.base', 30) + 'ft',
       hour: '3 miles',
       day: '24 miles',
       special: ''

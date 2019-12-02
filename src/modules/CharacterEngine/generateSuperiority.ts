@@ -2,6 +2,7 @@ import { RawCharacterType, RawClassType } from '@/types/rawCharacterTypes'
 import { AbilityScoresType } from '@/types/completeCharacterTypes'
 import { chain, concat, get } from 'lodash'
 import { ManeuverType } from '@/types/characterTypes'
+import applyTweak from '@/utilities/applyTweak'
 
 const superiorityCalculators: { [myClass: string]: {
   getMaxDice: (level: number) => number,
@@ -53,8 +54,14 @@ function getPrimarySuperiorityClass (rawCharacter: RawCharacterType) {
   }
 }
 
-function getSaveDC (proficiencyBonus: number, abilityScores: AbilityScoresType, saveDcAbilities: string[]) {
-  return 8 + proficiencyBonus + Math.max(...saveDcAbilities.map(saveDcAbility => abilityScores[saveDcAbility].modifier))
+function getSaveDC (
+  rawCharacter: RawCharacterType,
+  proficiencyBonus: number,
+  abilityScores: AbilityScoresType,
+  saveDcAbilities: string[]
+) {
+  const maxModifier = Math.max(...saveDcAbilities.map(saveDcAbility => abilityScores[saveDcAbility].modifier))
+  return applyTweak(rawCharacter, 'superiority.maneuverSaveDC', 8 + proficiencyBonus + maxModifier)
 }
 
 function getMulticlassDiceBonus (rawCharacter: RawCharacterType) {
@@ -84,9 +91,9 @@ export default function generateSuperiority (
   const primaryClass = getPrimarySuperiorityClass(rawCharacter)
   return primaryClass.diceSize === 0 ? {} : {
     currentDice: rawCharacter.currentStats.superiorityDice,
-    maxDice: primaryClass.maxDice + getMulticlassDiceBonus(rawCharacter),
+    maxDice: applyTweak(rawCharacter, 'superiority.maxDice', primaryClass.maxDice + getMulticlassDiceBonus(rawCharacter)),
     diceSize: 'd' + primaryClass.diceSize,
-    maneuverSaveDC: getSaveDC(proficiencyBonus, abilityScores, primaryClass.saveDcAbilities),
+    maneuverSaveDC: getSaveDC(rawCharacter, proficiencyBonus, abilityScores, primaryClass.saveDcAbilities),
     maneuvers: getManeuvers(rawCharacter, maneuvers)
   }
 }

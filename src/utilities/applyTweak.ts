@@ -3,12 +3,11 @@ import { get, isFinite } from 'lodash'
 
 export default function (rawCharacter: RawCharacterType, tweakPath: string, calculatedValue: number) {
   const tweak: TweakType = get(rawCharacter.tweaks, tweakPath) || {}
-  return isFinite(tweak.override) ? tweak.override : calculatedValue + (tweak.bonus || 0)
+  return isFinite(tweak.override) ? tweak.override as number : calculatedValue + (tweak.bonus || 0)
 }
 
 /*
 Possible Tweaks:
-[
   "abilityScores.Strength.score",
   "abilityScores.Strength.savingThrowModifier",
   "abilityScores.Strength.skills.Athletics",
@@ -44,14 +43,9 @@ Possible Tweaks:
   "armorClass",
   "hitPoints.maximum",
   "passivePerception",
-  "vision",
   "speed.base",
   "weapon.toHit",
   "weapon.damage",
-  "hitPoints.hitDie.d6",
-  "hitPoints.hitDie.d8",
-  "hitPoints.hitDie.d10",
-  "hitPoints.hitDie.d12",
   "techCasting.maxPoints",
   "techCasting.attackModifier",
   "techCasting.saveDC",
@@ -62,5 +56,4 @@ Possible Tweaks:
   "forceCasting.maxPowerLevel",
   "superiority.maxDice",
   "superiority.maneuverSaveDC"
-]
 */

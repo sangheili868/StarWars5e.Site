@@ -30,7 +30,6 @@ export interface RawArchetypeType {
 }
 
 export interface RawClassType {
-  isStartingClass: boolean,
   name: string,
   levels: number,
   hitPoints: number[],

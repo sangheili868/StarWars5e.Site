@@ -29,7 +29,7 @@ function getProficientSkills (rawCharacter: RawCharacterType, skillsList: Skills
 }
 
 function getProficientSaves (rawCharacter: RawCharacterType, myClasses: ClassType[]) {
-  const startingClass = rawCharacter.classes.find(myClass => myClass.isStartingClass)
+  const startingClass = rawCharacter.classes[0]
   if (!startingClass) console.error('Warning: No starting class')
   const startingClassData = startingClass && myClasses.find(({ name }) => name === startingClass.name)
   return startingClassData && startingClassData.savingThrows

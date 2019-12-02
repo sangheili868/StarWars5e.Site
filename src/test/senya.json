@@ -18,7 +18,6 @@
   },
   "classes": [
     {
-      "isStartingClass": true,
       "name": "Scholar",
       "levels": 3,
       "hitPoints": [ 5, 5 ],
@@ -55,7 +54,6 @@
       }
     },
     {
-      "isStartingClass": false,
       "name": "Scout",
       "levels": 4,
       "hitPoints": [ 6, 6, 6, 6 ],

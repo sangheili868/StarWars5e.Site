@@ -13,7 +13,7 @@ export default function generateHitPoints (
   superiority: SuperiorityType | {},
   features: { combatFeatures: CompletedFeatureType[], nonCombatFeatures: CompletedFeatureType[]}
 ) {
-  const startingClass = rawCharacter.classes.find(({ isStartingClass }) => isStartingClass)
+  const startingClass = rawCharacter.classes[0]
   const startingClassData = startingClass && classes.find(({ name }) => name === startingClass.name)
   const hpFromFirstLevel = (startingClassData && startingClassData.hitDiceDieType) || 0
   const hpFromLaterLevels = rawCharacter.classes.reduce((acc, myClass) => acc + myClass.hitPoints.reduce((hpAcc, value) => hpAcc + value, 0), 0)

@@ -35,7 +35,8 @@
     @characterModule.Action createCharacter!: () => void
     @characterModule.Getter completeCharacter!: CompleteCharacterType
     @characterModule.Action updateCharacter!: (newCharacter: RawCharacterType) => void
-    @characterModule.Action replaceCharacterProperty!: (path: string, property: any) => void
+    @characterModule.Action replaceCharacterProperty!: ({ path, property }: { path: string, property: any }) => void
+    @characterModule.Action deleteCharacterProperty!: ({ path, index }: { path: string, index: number }) => void
 
     @classesModule.State classes!: ClassType[]
     @classesModule.Action fetchClasses!: () => void
@@ -150,7 +151,7 @@
           component(
             :is="steps[n].component",
             v-bind="steps[n].props",
-            v-on="{ updateCharacter, replaceCharacterProperty }"
+            v-on="{ updateCharacter, replaceCharacterProperty, deleteCharacterProperty }"
           )
           v-btn(v-if="currentStep < numSteps", color="primary", @click="nextStep") Continue
           v-btn(v-if="currentStep === numSteps", color="primary", to="characterSheet") Save and View My Character

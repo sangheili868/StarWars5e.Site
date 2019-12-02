@@ -36,8 +36,8 @@ export default class Character extends VuexModule {
       { message: 'Class has no name', isValid: myCharacter.classes && myCharacter.classes.every(myClass => !!myClass.name) },
       {
         message: 'Class is missing hit points',
-        isValid: myCharacter.classes && myCharacter.classes.every(myClass =>
-          myClass.hitPoints && myClass.hitPoints.length === myClass.levels - (myClass.isStartingClass ? 1 : 0)
+        isValid: myCharacter.classes && myCharacter.classes.every((myClass, index) =>
+          myClass.hitPoints && myClass.hitPoints.length === myClass.levels - (!index ? 1 : 0)
       ) },
       {
         message: 'Ability Score is missing',

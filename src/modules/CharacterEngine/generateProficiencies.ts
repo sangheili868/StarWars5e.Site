@@ -10,14 +10,13 @@ export default function generateProficiencies (
   multiclassProficiencies: MulticlassProficienciesType,
   gdFeats: gdFeats[]
 ) {
-  const startingClass = rawCharacter.classes.find(({ isStartingClass }) => isStartingClass)
+  const startingClass = rawCharacter.classes[0]
   const startingClassData = startingClass && classes.find(({ name }) => name === startingClass.name)
   const fromStartingClass = startingClassData && [
     startingClassData.weaponProficiencies,
     startingClassData.armorProficiencies
   ].flat()
-  const fromOtherClasses = rawCharacter.classes
-    .filter(({ isStartingClass }) => !isStartingClass)
+  const fromOtherClasses = rawCharacter.classes.slice(1)
     .map(({ name }) => multiclassProficiencies[name])
     .flat()
   const fromFeats = chain(feats)

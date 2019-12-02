@@ -10,7 +10,6 @@
   },
   "classes": [ {
     "name": "Fighter",
-    "isStartingClass": true,
     "levels": 1,
     "hitPoints": [ 10 ]
   } ],

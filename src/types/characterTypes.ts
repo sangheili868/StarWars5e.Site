@@ -59,7 +59,9 @@ export interface ClassType {
   flavorText: string
   hitDiceDieType: number
   hitPointsAtFirstLevel: string
+  hitPointsAtFirstLevelNumber: number,
   hitPointsAtHigherLevels: string
+  hitPointsAtHigherLevelsNumber: number,
   levelChangeHeadersJson: string
   levelChanges: any
   name: string

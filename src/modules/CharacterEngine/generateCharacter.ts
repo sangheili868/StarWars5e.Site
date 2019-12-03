@@ -88,6 +88,7 @@ export default function generateCharacter (
       'user',
       'characteristics'
     ]),
+    currentLevel,
     classes: rawCharacter.classes.map(({ name, levels, archetype }) => ({ name, levels, archetype: archetype && archetype.name })),
     alignment: rawCharacter.characteristics.alignment,
     species: rawCharacter.species.name,

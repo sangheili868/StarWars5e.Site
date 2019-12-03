@@ -100,6 +100,7 @@ export interface CompleteCharacterType {
   name: string,
   image: string | null,
   user: string,
+  currentLevel: number,
   classes: {
     name: string,
     levels: number,

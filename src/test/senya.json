@@ -16,6 +16,7 @@
     "weaponProficiency": "Lightsaber",
     "language": "Kel Dorian"
   },
+  "isFixedHitPoints": true,
   "classes": [
     {
       "name": "Scholar",

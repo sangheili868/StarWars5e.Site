@@ -1,38 +1,63 @@
 <script lang="ts">
   import { Component, Prop, Vue } from 'vue-property-decorator'
-  import { chain, range } from 'lodash'
+  import { chain, range, merge } from 'lodash'
   import { ClassType } from '@/types/characterTypes'
   import { RawClassType } from '@/types/rawCharacterTypes'
   import ClassDetail from '@/components/ClassDetail.vue'
   import CharacterBuilderClassNew from './CharacterBuilderClassNew.vue'
   import ConfirmDelete from '@/components/ConfirmDelete.vue'
+  import CharacterBuilderClassHitPoints from './CharacterBuilderClassHitPoints.vue'
 
   @Component({
     components: {
       ClassDetail,
       CharacterBuilderClassNew,
+      CharacterBuilderClassHitPoints,
       ConfirmDelete
     }
   })
   export default class CharacterBuilderClass extends Vue {
     @Prop(Array) readonly classes!: ClassType[]
     @Prop(Array) readonly currentClasses!: RawClassType[]
+    @Prop(Boolean) readonly isFixedHitPoints!: boolean
 
     range = range
 
-    handleAddClass ({ name, levels }: { name: string, levels: number }) {
-      const position = this.currentClasses.length
-      const newClassData = this.classes.find(({ name: newName }) => name === newName)
+    get currentLevel () {
+      return this.currentClasses.reduce((acc, { levels }) => acc + levels, 0)
+    }
+
+    getFixedHPArray (index: number, className: string, levels: number) {
+      const newClassData = this.classes.find(({ name }) => name === className)
       if (newClassData) {
-        const hitPoints = newClassData.hitDiceDieType
-        this.$emit('updateCharacter', { classes: { [position]: {
-          name,
-          levels,
-          hitPoints: [ ]
-        } } })
+        return Array(index === 0 ? levels - 1 : levels).fill(newClassData.hitPointsAtHigherLevelsNumber)
       } else {
         console.error('Class not found: ', name)
+        return []
       }
+    }
+
+    handleAddClass ({ name, levels }: { name: string, levels: number }) {
+      const position = this.currentClasses.length
+      this.$emit('updateCharacter', { classes: { [position]: {
+        name,
+        levels,
+        hitPoints: this.getFixedHPArray(this.currentClasses.length, name, levels)
+      } } })
+    }
+
+    handleUpdateLevels (index: number, levels: number) {
+      const currentClass = this.currentClasses[index]
+      const newFixedHP = this.getFixedHPArray(index, currentClass.name, levels)
+      const hitPoints = merge([], newFixedHP, currentClass.hitPoints).slice(0, newFixedHP.length)
+      this.$emit('replaceCharacterProperty', {
+        path: 'classes.' + index,
+        property: {
+          ...currentClass,
+          levels,
+          hitPoints
+        }
+      })
     }
 
     handleDeleteClass (index: number) {
@@ -44,6 +69,7 @@
 <template lang="pug">
   div
     h1 Choose a Class
+    div Current Level: {{ currentLevel }}
     v-expansion-panels(accordian)
       v-expansion-panel(v-for="(myClass, index) in currentClasses", :key="myClass.name")
         v-expansion-panel-header
@@ -57,10 +83,14 @@
               :value="myClass.levels",
               :items="range(1,21)",
               label="Number of levels in this class",
-              @change="levels => $emit('updateCharacter', { classes: { [index]: { levels } } }) "
+              @change="levels => handleUpdateLevels(index, levels)"
             ).mr-3
             ConfirmDelete(label="Class", :item="myClass.name", @delete="handleDeleteClass(index)")
     CharacterBuilderClassNew(v-bind="{ classes, currentClasses }", @add="handleAddClass")
+    CharacterBuilderClassHitPoints(
+      v-bind="{ classes, currentClasses, isFixedHitPoints }",
+      @updateCharacter="newCharacter => $emit('updateCharacter', newCharacter)"
+    )
 
     h2.text-left.mt-5 TODO:
     ul.text-left

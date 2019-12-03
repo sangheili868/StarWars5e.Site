@@ -138,6 +138,7 @@ export interface RawCharacterType {
   image: string,
   experiencePoints: number,
   species: RawSpeciesType,
+  isFixedHitPoints: boolean,
   classes: RawClassType[],
   baseAbilityScores: {
     [ability: string]: number

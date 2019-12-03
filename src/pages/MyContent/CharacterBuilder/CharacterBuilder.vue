@@ -82,7 +82,8 @@
           component: 'CharacterBuilderClass',
           props: {
             classes: this.classes,
-            currentClasses: this.character.classes
+            currentClasses: this.character.classes,
+            isFixedHitPoints: this.character.isFixedHitPoints
           }
         },
         {
@@ -123,24 +124,39 @@
 <template lang="pug">
   div
     h1.pb-3 Character Builder (BETA)
-    div(v-if="currentStep === 0")
-      div This character builder is in #[span.primary--text beta]. We are still working on lots of cool options and features!
-      div The next big step is letting you create an account to store characters on our servers.
-      div.
-        Until then, you will have to save your character to a
-        #[span.primary--text file on your computer],
-        and upload it to this site whenever you want to view it
-      div #[span.primary--text Nothing is saved] unless you download the file, including hit points, force points, etc.
-      div.
-        Please report any bugs you find, or features you want to see, at the
-        #[span.primary--text #website-character-builder]
-        channel in our discord server.
-      div.mt-5.d-flex.flex-wrap.justify-space-around
-        a(href="https://discord.gg/zYcPYTu", target="_blank").mb-5
-          v-btn(light)
-            v-icon(color="Discord").mr-3 fab fa-discord
-            | Go to Discord Server
-        v-btn(color="primary", @click="currentStep = 1") Go to character builder
+    div(v-if="currentStep === 0").d-flex.justify-center
+      div(:class="$style.pageZero").text-left
+        div This character builder is still in #[span.primary--text beta].
+        | We are still working on lots of cool options and updates!
+        | Here's a few things to be aware of:
+        h2.mt-5 Features
+        div.
+          We have not yet implemented translating #[span.primary--text character features, species, features, feats, etc.]
+          into code that the character sheet can use. Until that is done, you can enter them as
+          #[span.primary--text custom features] by copying the text into your character sheet,
+          and make any adjustments to numbers as #[span.primary--text tweaks in the Settings screen.]
+        div.
+          For example, it does not yet recognize that level 1 operatives gain expertise, so you cannot choose expertise
+          skills or see the calculated values. However, in the settings page, you can give yourself a +2 bonus to skills
+          you choose. Then you can add a custom feature for Sneak Attack, copying the description from the operative page
+          on this site.
+        h2.mt-5 Local Storage
+        div The next big step is letting you create an account to store characters on our servers.
+        div.
+          Until then, you will have to save your character to a
+          #[span.primary--text file on your computer],
+          and upload it to this site whenever you want to view it.
+        div #[span.primary--text Nothing is saved] unless you download the file, including tracking hit points, force points, etc.
+        div.mt-5.
+          Please report any bugs you find, or features you want to see, at the
+          #[span.primary--text #website-character-builder]
+          channel in our Discord server.
+        div.mt-5.d-flex.flex-wrap.justify-space-around
+          a(href="https://discord.gg/zYcPYTu", target="_blank").mb-5
+            v-btn(light)
+              v-icon(color="Discord").mr-3 fab fa-discord
+              | Go to Discord Server
+          v-btn(color="primary", @click="currentStep = 1") Go to character builder
     v-stepper(v-else-if="isReady", v-model="currentStep", alt-labels)
       v-stepper-header
         template(v-for="n in numSteps")
@@ -164,6 +180,10 @@
 <style module lang="scss">
   .divider {
     visibility: visible;
+  }
+
+  .pageZero {
+    max-width: 700px;
   }
 </style>
 

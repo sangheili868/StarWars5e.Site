@@ -26,17 +26,13 @@
       return `${this.completeCharacter.experiencePoints.current} / ${this.completeCharacter.experiencePoints.nextLevel}`
     }
 
-    get currentLevel () {
-      return this.completeCharacter.classes.reduce((acc, { levels }) => acc + levels, 0)
-    }
-
     calculateLevel (experience: number) {
       const level = experienceTable.findIndex(threshold => threshold > experience) - 1
       return level < 0 ? 20 : level
     }
 
     updateExperience (newExperience: number) {
-      const unspentLevels = this.calculateLevel(newExperience) - this.currentLevel
+      const unspentLevels = this.calculateLevel(newExperience) - this.completeCharacter.currentLevel
       this.$emit('updateCharacter', { experiencePoints: newExperience, currentStats: { unspentLevels } })
       this.isExperienceOpen = false
     }
@@ -47,7 +43,7 @@
   ValueEditor(:value="completeCharacter.experiencePoints.current", label="Experience", @input="updateExperience")
     div(:class="$style.xpBar").d-flex.align-center
       v-chip(small, color="secondary", text-color="white").mr-2.ml-0
-        h5 {{ currentLevel }}
+        h5 {{ completeCharacter.currentLevel }}
       v-progress-linear(
         :value="percentExperience",
         rounded,
@@ -56,7 +52,7 @@
       ).text-center.ma-0
         h5 {{ experienceText }}
       v-chip(small, color="secondary", text-color="white", :class="$style.rightChip").ml-2.mr-0
-        h5 {{ currentLevel + 1 }}
+        h5 {{ completeCharacter.currentLevel + 1 }}
     template(v-slot:result="{ newValue }")
       div New Experience: {{ newValue }}
       div New Level: {{ calculateLevel(newValue) }}

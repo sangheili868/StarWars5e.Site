@@ -9,6 +9,7 @@
     "abilityScoreImprovementSelectedOption": 0,
     "abilityScoreImprovement": {}
   },
+  "isFixedHitPoints": true,
   "classes": [ ],
   "baseAbilityScores": {
     "Strength": 0,

@@ -44,7 +44,7 @@ export default {
       path: '/starships/modifications',
       component: StarshipsModifications,
       meta: {
-        title: 'Starhip Modifications'
+        title: 'Starship Modifications'
       }
     },
     {

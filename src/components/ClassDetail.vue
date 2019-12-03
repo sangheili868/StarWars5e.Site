@@ -62,10 +62,10 @@
       you do so, you receive no equipment from your class and background, and instead roll for your starting wealth
       using the criteria below:
     div(:class="$style.variantWealth")
-      div.d-flex
+      div.d-flex.justify-space-between
         strong Class
         strong.text-right Funds
-      div(:class="[ $style.funds, { [$style.darkSide]: isDark } ]").d-flex
+      div(:class="[ $style.funds, { [$style.darkSide]: isDark } ]").d-flex.justify-space-between
         div {{ classData.name }}
         div.text-right {{ classData.startingWealthVariant }}
     br

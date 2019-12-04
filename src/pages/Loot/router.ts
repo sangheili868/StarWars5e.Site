@@ -4,6 +4,7 @@ import LootArmor from './LootArmor.vue'
 import LootGear from './LootGear.vue'
 import LootWeapons from './LootWeapons.vue'
 import LootEnhancedItems from './LootEnhancedItems.vue'
+import LootGenerator from './LootGenerator.vue'
 
 export default {
   path: '/loot',
@@ -42,6 +43,13 @@ export default {
       component: LootEnhancedItems,
       meta: {
         title: 'Enhanced Items'
+      }
+    },
+    {
+      path: '/loot/generator',
+      component: LootGenerator,
+      meta: {
+        title: 'Loot Generator'
       }
     }
   ]

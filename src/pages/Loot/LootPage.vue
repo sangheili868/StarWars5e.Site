@@ -21,6 +21,16 @@
         }
       ]
     }
+    get generators () {
+      return [
+        {
+          category: '',
+          routes: [
+            { to: '/loot/generator', title: 'Loot Generator' }
+          ]
+        }
+      ]
+    }
   }
 </script>
 
@@ -28,4 +38,6 @@
   div
     h1 Loot
     RoutesList(:categories="categories")
+    h1 Generators
+    RoutesList(:categories="generators")
 </template>

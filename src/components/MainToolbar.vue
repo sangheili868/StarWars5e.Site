@@ -58,7 +58,8 @@
             { to: '/armor', title: 'Armor' },
             { to: '/weapons', title: 'Weapons' },
             { to: '/adventuringGear', title: 'Adventuring Gear' },
-            { to: '/enhancedItems', title: 'Enhanced Items' }
+            { to: '/enhancedItems', title: 'Enhanced Items' },
+            { to: '/generator', title: 'Loot Generator' }
           ]
         },
         {

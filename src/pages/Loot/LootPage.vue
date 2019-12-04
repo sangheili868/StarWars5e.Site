@@ -11,20 +11,16 @@
     get categories () {
       return [
         {
-          category: '',
+          category: 'Loot',
           routes: [
             { to: '/loot/armor', title: 'Armor' },
             { to: '/loot/weapons', title: 'Weapons' },
             { to: '/loot/adventuringGear', title: 'Adventuring Gear' },
             { to: '/loot/enhancedItems', title: 'Enhanced Items' }
           ]
-        }
-      ]
-    }
-    get generators () {
-      return [
+        },
         {
-          category: '',
+          category: 'Generators',
           routes: [
             { to: '/loot/generator', title: 'Loot Generator' }
           ]
@@ -35,9 +31,5 @@
 </script>
 
 <template lang="pug">
-  div
-    h1 Loot
-    RoutesList(:categories="categories")
-    h1 Generators
-    RoutesList(:categories="generators")
+  RoutesList(:categories="categories")
 </template>

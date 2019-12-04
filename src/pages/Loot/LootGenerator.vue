@@ -1,4 +1,3 @@
-
 <script lang="ts">
   import { Component, Prop, Vue } from 'vue-property-decorator'
   import VueFriendlyIframe from 'vue-friendly-iframe'
@@ -16,7 +15,7 @@
 </script>
 
 <template lang="pug">
-  div(style="height:100%")
+  div
     BackButton
     h1 Loot Generator
     VueFriendlyIframe(src="https://perchance.org/dc9k0z3gop", :className="$style.iframeContainer", frameborder="0")

@@ -26,6 +26,9 @@ import weaponProperties from './modules/weaponProperties'
 import character from './modules/character'
 import tableQueries from './modules/tableQueries'
 import createPersistedState from 'vuex-persistedstate'
+import characterAdvancements from './modules/characterAdvancements'
+import conditions from './modules/conditions'
+import skills from './modules/skills'
 
 Vue.use(Vuex)
 
@@ -37,7 +40,9 @@ export default new Vuex.Store({
     backgrounds,
     blobs,
     character,
+    characterAdvancements,
     classes,
+    conditions,
     deployments,
     enhancedItems,
     feats,
@@ -48,6 +53,7 @@ export default new Vuex.Store({
     species,
     referenceTables,
     searchResults,
+    skills,
     starshipEquipment,
     starshipModifications,
     starshipSizes,

@@ -1,5 +1,5 @@
 import { RawCharacterType } from '@/types/rawCharacterTypes'
-import { pick, compact } from 'lodash'
+import { pick, compact, chain } from 'lodash'
 import { ClassType, PowerType, FeatType, BackgroundType, SpeciesType } from '@/types/characterTypes'
 import { EquipmentType } from '@/types/lootTypes'
 import generateAbilityScores from './generateAbilityScores'
@@ -14,9 +14,6 @@ import generateCasting from './generateCasting'
 import generateFeatures from './generateFeatures'
 import generateFeats from './generateFeats'
 import {
-  experienceTable,
-  conditions,
-  skills,
   techCastingMap,
   forceCastingMap,
   multiClassProficiencies,
@@ -28,6 +25,8 @@ import {
   fightingStyles
 } from '@/test/gameData.json'
 import applyTweak from '@/utilities/applyTweak'
+import { CharacterAdvancementType, SkillType } from '@/types/lookupTypes'
+import { ConditionType } from '@/types/completeCharacterTypes'
 
 export default function generateCharacter (
   rawCharacter: RawCharacterType,
@@ -36,12 +35,21 @@ export default function generateCharacter (
   equipment: EquipmentType[],
   powers: PowerType[],
   feats: FeatType[],
-  backgrounds: BackgroundType[]
+  backgrounds: BackgroundType[],
+  characterAdvancements: CharacterAdvancementType[],
+  skills: SkillType[],
+  conditions: ConditionType[]
 ) {
   const myClasses = rawCharacter.classes.map(({ name }) => classes.find(myClass => name === myClass.name))
   if (myClasses.includes(undefined)) console.error('Class not found from ' + rawCharacter.classes.map(({ name }) => name))
   const myFoundClasses = compact(myClasses)
-
+  const experienceTable = chain(characterAdvancements).keyBy('level').mapValues('experiencePoints').value()
+  let skillsMap = chain(skills).groupBy('baseAttribute').mapValues(skills => skills.map(({ name }) => name)).value()
+  skillsMap.Constitution = []
+  const conditionsMap = chain(conditions)
+    .keyBy('name')
+    .mapValues(({ description }) => description.replace(/\\r\\n/g,'\n'))
+    .value()
   const mySpecies = species.find(({ name }) => name === rawCharacter.species.name)
   if (!mySpecies) console.error('Species not found: ', rawCharacter.species.name)
 
@@ -59,10 +67,10 @@ export default function generateCharacter (
   const myFoundFeats = compact(myFeats)
   const mygdFeats = myFeatsList.map(name => gdFeats.find(feat => name === feat.name))
   const myFoundgdFeats = compact(mygdFeats)
-  const abilityScores = generateAbilityScores(rawCharacter, myFoundClasses, mySpecies, proficiencyBonus, skills)
+  const abilityScores = generateAbilityScores(rawCharacter, myFoundClasses, mySpecies, proficiencyBonus, skillsMap)
   const myConditions = rawCharacter.currentStats.conditions.map(condition => ({
     name: condition,
-    description: (conditions as { [key: string]: string })[condition]
+    description: (conditionsMap as { [key: string]: string })[condition]
   }))
   const proficiencies = generateProficiencies(rawCharacter, myFoundClasses, myFeatsList, multiClassProficiencies, gdFeats)
   const myEquipment = generateEquipment(rawCharacter, equipment, abilityScores, proficiencyBonus, proficiencies)

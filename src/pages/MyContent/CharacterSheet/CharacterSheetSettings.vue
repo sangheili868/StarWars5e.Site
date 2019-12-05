@@ -19,7 +19,7 @@
 <template lang="pug">
   MyDialog(v-model="isOpen")
     template(v-slot:activator="{ on }")
-      v-btn(block, v-on="on").mb-3 Settings
+      v-btn(block, v-on="on").my-3 Settings
     template(#title) Settings
     template(#text)
       CharacterSheetSettingsTweaks(
@@ -30,7 +30,3 @@
       v-spacer
       v-btn(color="primary", text, @click="isOpen=false") Close
 </template>
-
-<style module lang="scss">
-
-</style>

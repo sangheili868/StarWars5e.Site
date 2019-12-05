@@ -43,7 +43,7 @@
   div
     MyDialog(v-model="isOpen")
       template(v-slot:activator="{ on }")
-        v-btn(v-on="on", :color="conditions.length ? 'primary' : ''").mb-2 Conditions ({{ conditions.length }})
+        v-btn(v-on="on", block, :color="conditions.length ? 'primary' : ''").mb-2 Conditions ({{ conditions.length }})
       template(#title) Active Conditions
       template(#text)
         v-autocomplete(
@@ -66,8 +66,9 @@
         :class="$style.exhaustion",
         :value="exhaustion",
         :items="range(0,6)",
+        hide-details,
         :change="updateExhaustion"
-      ).pr-2
+      ).px-2.pb-2.mt-0
 </template>
 
 <style module lang="scss">

@@ -19,6 +19,9 @@
   const powersModule = namespace('powers')
   const featsModule = namespace('feats')
   const backgroundsModule = namespace('backgrounds')
+  const characterAdvancementsModule = namespace('characterAdvancements')
+  const skillsModule = namespace('skills')
+  const conditionsModule = namespace('conditions')
 
 @Component({
   components: {
@@ -50,6 +53,9 @@
     @backgroundsModule.Action fetchBackgrounds!: () => void
     @speciesModule.State species!: SpeciesType[]
     @speciesModule.Action fetchSpecies!: () => void
+    @characterAdvancementsModule.Action fetchCharacterAdvancements!: () => void
+    @skillsModule.Action fetchSkills!: () => void
+    @conditionsModule.Action fetchConditions!: () => void
 
     currentStep = 0
     isReady = false
@@ -61,7 +67,10 @@
         this.fetchPowers(),
         this.fetchFeats(),
         this.fetchBackgrounds(),
-        this.fetchSpecies()
+        this.fetchSpecies(),
+        this.fetchCharacterAdvancements(),
+        this.fetchSkills(),
+        this.fetchConditions()
       ])
         .then(this.createCharacter)
         .then(() => { this.isReady = true })

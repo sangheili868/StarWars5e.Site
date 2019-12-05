@@ -8,7 +8,6 @@
   import JSONWriter from '@/components/JSONWriter.vue'
   import CharacterSheetTop from './CharacterSheetTop.vue'
   import CharacterSheetSection from './CharacterSheetSection.vue'
-  import generateCharacter from '@/modules/CharacterEngine/generateCharacter'
   import { range, isEmpty, merge, get, set, camelCase } from 'lodash'
   import { CompleteCharacterType } from '@/types/completeCharacterTypes'
   import Loading from '@/components/Loading.vue'
@@ -20,6 +19,9 @@
   const powersModule = namespace('powers')
   const featsModule = namespace('feats')
   const backgroundsModule = namespace('backgrounds')
+  const characterAdvancementsModule = namespace('characterAdvancements')
+  const skillsModule = namespace('skills')
+  const conditionsModule = namespace('conditions')
 
   @Component({
     components: {
@@ -51,6 +53,9 @@
     @featsModule.Action fetchFeats!: () => void
     @backgroundsModule.State backgrounds!: BackgroundType[]
     @backgroundsModule.Action fetchBackgrounds!: () => void
+    @characterAdvancementsModule.Action fetchCharacterAdvancements!: () => void
+    @skillsModule.Action fetchSkills!: () => void
+    @conditionsModule.Action fetchConditions!: () => void
 
     range = range
     openTabs: number[] = [0, 1, 2]
@@ -64,7 +69,11 @@
         this.fetchEquipment(),
         this.fetchPowers(),
         this.fetchFeats(),
-        this.fetchBackgrounds()
+        this.fetchBackgrounds(),
+        this.fetchSpecies(),
+        this.fetchCharacterAdvancements(),
+        this.fetchSkills(),
+        this.fetchConditions()
       ]).then(() => {
         this.hasFetchedData = true
         if (this.character && this.character.name) this.filename = camelCase(this.character.name) + '.json'

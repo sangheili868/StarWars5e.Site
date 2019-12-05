@@ -57,7 +57,7 @@
             ConfirmDelete(
               label="Feature",
               :item="name",
-              @delete="$emit('deleteCharacterProperty', 'customFeatures', index)"
+              @delete="$emit('deleteCharacterProperty', { path: 'customFeatures', index })"
             )
     MyDialog(v-model="isOpen")
       template(v-slot:activator="{ on }")

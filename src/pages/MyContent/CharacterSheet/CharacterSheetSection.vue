@@ -74,7 +74,7 @@
           :is="component",
           v-bind="completeCharacter",
           @updateCharacter="newCharacter => $emit('updateCharacter', newCharacter)",
-          @deleteCharacterProperty="(path, index) => $emit('deleteCharacterProperty', path, index)"
+          @deleteCharacterProperty="payload => $emit('deleteCharacterProperty', payload)"
         ).text-left
 </template>
 

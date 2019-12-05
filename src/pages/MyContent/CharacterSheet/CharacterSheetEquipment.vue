@@ -29,7 +29,7 @@
         :key="item.name",
         v-bind="{ item, index }",
         @updateCharacter="newCharacter => $emit('updateCharacter', newCharacter)",
-        @deleteCharacterProperty="(path, index) => $emit('deleteCharacterProperty', path, index)"
+        @deleteCharacterProperty="payload => $emit('deleteCharacterProperty', payload)"
       )
     CharacterSheetEquipmentAdder(
       :position="equipment.length",

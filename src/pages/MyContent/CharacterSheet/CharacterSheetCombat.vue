@@ -68,6 +68,6 @@
     CharacterSheetCustomFeatures(
       :features="customFeatures",
       @updateCharacter="newCharacter => $emit('updateCharacter', newCharacter)",
-      @deleteCharacterProperty="(path, index) => $emit('deleteCharacterProperty', path, index)"
+      @deleteCharacterProperty="payload => $emit('deleteCharacterProperty', payload)"
     )
 </template>

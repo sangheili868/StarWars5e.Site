@@ -110,10 +110,6 @@
       this.isAlertOpen = !isValid && newCharacter instanceof Object
     }
 
-    handleDeleteCharacterProperty (path: string, index: number) {
-      this.deleteCharacterProperty({ path, index })
-    }
-
     goToTab (newTab: number, section: number) {
       Vue.set(this.openTabs, section, newTab)
     }
@@ -140,7 +136,7 @@
           v-bind="{ completeCharacter }",
           :currentTab="openTabs[section]",
           @updateCharacter="updateCharacter",
-          @deleteCharacterProperty="handleDeleteCharacterProperty",
+          @deleteCharacterProperty="deleteCharacterProperty",
           @goToTab="newTab => goToTab(newTab, section)"
         )
   Loading(v-else)

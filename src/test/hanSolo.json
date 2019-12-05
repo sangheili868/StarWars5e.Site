@@ -11,9 +11,6 @@
       "Charisma": 1,
       "Dexterity": 2
     },
-    "toolProficiency": "Slicer's Kit",
-    "skillProficiency": "Piloting",
-    "weaponProficiency": "",
     "language": "Shyriiwook"
   },
   "isFixedHitPoints": true,
@@ -21,7 +18,7 @@
     {
       "name": "Operative",
       "levels": 1,
-      "hitPoints": [ ],
+      "hitPoints": [],
       "toolProficiency": "Security Kit",
       "skills": [
         "Investigation",
@@ -48,7 +45,10 @@
       "Deception",
       "Sleight of Hand"
     ],
-    "toolProficiencies": [ "Disguise Kit", "Forgery Kit" ],
+    "toolProficiencies": [
+      "Disguise Kit",
+      "Forgery Kit"
+    ],
     "feat": {
       "type": "feat",
       "name": "Silver-Tongued",
@@ -102,5 +102,9 @@
     "exhaustion": 0
   },
   "tweaks": {},
+  "customProficiencies": [
+    "Slicer’s Kit",
+    "Piloting"
+  ],
   "customFeatures": []
 }

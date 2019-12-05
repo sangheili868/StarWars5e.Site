@@ -144,6 +144,7 @@ export interface CompleteCharacterType {
   combatFeatures: CompletedFeatureType[],
   nonCombatFeatures: CompletedFeatureType[],
   tweaks: TweaksType,
+  customProficiencies: string[],
   customFeatures: {
     name: string,
     content: string

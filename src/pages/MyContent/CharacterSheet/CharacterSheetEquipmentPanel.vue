@@ -26,7 +26,7 @@
         div
           div #[strong Cost:] {{ item.cost }}
           div #[strong Weight:] {{ item.weight}}
-        v-btn(icon, @click="$emit('deleteCharacterProperty', 'equipment', index)")
+        v-btn(icon, @click="$emit('deleteCharacterProperty', { path: 'equipment', index })")
           v-icon fa-trash
       v-row
         v-col.d-flex.align-center

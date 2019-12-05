@@ -87,7 +87,10 @@ export default function generateCharacter (
       'name',
       'image',
       'user',
-      'characteristics'
+      'characteristics',
+      'tweaks',
+      'customProficiencies',
+      'customFeatures'
     ]),
     currentLevel,
     classes: rawCharacter.classes.map(({ name, levels, archetype }) => ({ name, levels, archetype: archetype && archetype.name })),
@@ -108,8 +111,6 @@ export default function generateCharacter (
     carryingCapacity: generateCarryingCapacity(abilityScores),
     superiority,
     ...casting,
-    ...features,
-    tweaks: rawCharacter.tweaks,
-    customFeatures: rawCharacter.customFeatures
+    ...features
   }
 }

@@ -23,7 +23,8 @@ function getProficientSkills (rawCharacter: RawCharacterType, skillsList: Skills
       const isExpertise = rawCharacter.classes.some(myClass => Array.isArray(myClass.expertise) && myClass.expertise.includes(skill))
       const isProficient = rawCharacter.classes.some(myClass => myClass.skills && myClass.skills.includes(skill)) ||
         rawCharacter.background.skills.includes(skill) ||
-        rawCharacter.species.skillProficiency === 'skill'
+        rawCharacter.species.skillProficiency === skill ||
+        rawCharacter.customProficiencies.includes(skill)
       return (isExpertise && 'expertise') || (isProficient && 'proficient') || 'none'
     }).value())
 }
@@ -32,7 +33,10 @@ function getProficientSaves (rawCharacter: RawCharacterType, myClasses: ClassTyp
   const startingClass = rawCharacter.classes[0]
   if (!startingClass) console.error('Warning: No starting class')
   const startingClassData = startingClass && myClasses.find(({ name }) => name === startingClass.name)
-  return startingClassData && startingClassData.savingThrows
+  const customSaves = rawCharacter.customProficiencies
+    .filter(proficiency => proficiency.includes('Saving Throws'))
+    .map(proficiency => proficiency.split(' ')[0])
+  return [ ...(startingClassData ? startingClassData.savingThrows : []), ...customSaves ]
 }
 
 function getModifier (value: number) {
@@ -60,7 +64,7 @@ export default function generateAbilityScores (
   return mapValues(skillsList, (skills, ability) => {
     const value = getAbilityScore(rawCharacter, ability, mySpecies)
     const modifier = getModifier(value)
-    const isProficientInSave = proficientSaves && proficientSaves.includes(ability)
+    const isProficientInSave = proficientSaves.includes(ability)
     const savingThrowModifier = modifier + (isProficientInSave ? proficiencyBonus : 0)
 
     return {

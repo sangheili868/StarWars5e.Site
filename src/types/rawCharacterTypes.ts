@@ -171,6 +171,7 @@ export interface RawCharacterType {
     exhaustion: number
   },
   tweaks: TweaksType,
+  customProficiencies: string[],
   customFeatures: {
     name: string,
     content: string

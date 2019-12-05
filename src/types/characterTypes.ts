@@ -147,9 +147,8 @@ export interface FightingStyleType {
 
 export interface FeatureType {
   name: string,
-  level: number,
-  combat: boolean,
-  type: string,
+  level?: number,
+  type?: string,
   description: string
 }
 

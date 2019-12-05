@@ -1,6 +1,7 @@
 import { PowerType } from '@/types/characterTypes'
 import { EquipmentType } from '@/types/lootTypes'
 import { TweaksType } from './rawCharacterTypes'
+import { ConditionType } from './lookupTypes'
 
 export interface AbilityScoreType {
   value: number,
@@ -89,11 +90,6 @@ export interface CompletedFeatureType {
 
 export interface AbilityScoresType {
   [ability: string]: AbilityScoreType
-}
-
-export interface ConditionType {
-  name: string,
-  description: string
 }
 
 export interface CompleteCharacterType {

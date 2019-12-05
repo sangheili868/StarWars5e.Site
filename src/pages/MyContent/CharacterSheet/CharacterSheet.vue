@@ -1,7 +1,7 @@
 <script lang="ts">
   import { Component, Prop, Vue } from 'vue-property-decorator'
   import { namespace } from 'vuex-class'
-  import { ClassType, PowerType, FeatType, BackgroundType, SpeciesType } from '@/types/characterTypes'
+  import { ClassType, ArchetypeType, PowerType, FeatType, BackgroundType, SpeciesType } from '@/types/characterTypes'
   import { RawCharacterType } from '@/types/rawCharacterTypes'
   import { EquipmentType } from '@/types/lootTypes'
   import JSONReader from '@/components/JSONReader.vue'
@@ -14,6 +14,7 @@
 
   const characterModule = namespace('character')
   const classesModule = namespace('classes')
+  const archetypesModule = namespace('archetypes')
   const speciesModule = namespace('species')
   const equipmentModule = namespace('equipment')
   const powersModule = namespace('powers')
@@ -43,6 +44,8 @@
 
     @classesModule.State classes!: ClassType[]
     @classesModule.Action fetchClasses!: () => void
+    @archetypesModule.State archetypes!: ArchetypeType[]
+    @archetypesModule.Action fetchArchetypes!: () => void
     @speciesModule.State species!: SpeciesType[]
     @speciesModule.Action fetchSpecies!: () => void
     @equipmentModule.State equipment!: EquipmentType[]
@@ -66,6 +69,7 @@
     created () {
       Promise.all([
         this.fetchClasses(),
+        this.fetchArchetypes(),
         this.fetchEquipment(),
         this.fetchPowers(),
         this.fetchFeats(),

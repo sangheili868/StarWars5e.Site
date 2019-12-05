@@ -1,6 +1,6 @@
 import { RawCharacterType } from '@/types/rawCharacterTypes'
 import { pick, compact, chain } from 'lodash'
-import { ClassType, PowerType, FeatType, BackgroundType, SpeciesType } from '@/types/characterTypes'
+import { ClassType, PowerType, FeatType, BackgroundType, SpeciesType, ArchetypeType, ManeuverType, FeaturesType, FightingStyleType } from '@/types/characterTypes'
 import { EquipmentType } from '@/types/lootTypes'
 import generateAbilityScores from './generateAbilityScores'
 import generateCombatStats from './generateCombatStats'
@@ -13,24 +13,13 @@ import generateSuperiorty from './generateSuperiority'
 import generateCasting from './generateCasting'
 import generateFeatures from './generateFeatures'
 import generateFeats from './generateFeats'
-import {
-  techCastingMap,
-  forceCastingMap,
-  multiClassProficiencies,
-  maneuvers,
-  classFeatures,
-  archetypeFeatures,
-  speciesFeatures,
-  feats as gdFeats,
-  fightingStyles
-} from '@/test/gameData.json'
 import applyTweak from '@/utilities/applyTweak'
-import { CharacterAdvancementType, SkillType } from '@/types/lookupTypes'
-import { ConditionType } from '@/types/completeCharacterTypes'
+import { CharacterAdvancementType, SkillType, ConditionType } from '@/types/lookupTypes'
 
 export default function generateCharacter (
   rawCharacter: RawCharacterType,
   classes: ClassType[],
+  archetypes: ArchetypeType[],
   species: SpeciesType[],
   equipment: EquipmentType[],
   powers: PowerType[],
@@ -40,15 +29,23 @@ export default function generateCharacter (
   skills: SkillType[],
   conditions: ConditionType[]
 ) {
+  // To Do
+  const maneuvers = [] as ManeuverType[]
+  const classFeatures = {} as FeaturesType
+  const archetypeFeatures = {} as FeaturesType
+  const speciesFeatures = {} as FeaturesType
+  const fightingStyles = [] as FightingStyleType[]
+
   const myClasses = rawCharacter.classes.map(({ name }) => classes.find(myClass => name === myClass.name))
   if (myClasses.includes(undefined)) console.error('Class not found from ' + rawCharacter.classes.map(({ name }) => name))
   const myFoundClasses = compact(myClasses)
+  const myArchetypes = compact(rawCharacter.classes.map(({ archetype }) => archetype && archetypes.find(myArchetype => archetype.name === myArchetype.name)))
   const experienceTable = chain(characterAdvancements).keyBy('level').mapValues('experiencePoints').value()
   let skillsMap = chain(skills).groupBy('baseAttribute').mapValues(skills => skills.map(({ name }) => name)).value()
   skillsMap.Constitution = []
   const conditionsMap = chain(conditions)
     .keyBy('name')
-    .mapValues(({ description }) => description.replace(/\\r\\n/g,'\n'))
+    .mapValues(({ description }) => description.replace(/\\r\\n/g, '\n'))
     .value()
   const mySpecies = species.find(({ name }) => name === rawCharacter.species.name)
   if (!mySpecies) console.error('Species not found: ', rawCharacter.species.name)
@@ -61,21 +58,17 @@ export default function generateCharacter (
     nextLevel: experienceTable[currentLevel + 1]
   }
 
-  const myFeatsList = generateFeats(rawCharacter)
-  const myFeats = myFeatsList.map(name => feats.find(feat => name === feat.name))
-  if (myFeats.includes(undefined)) console.error('Feats not found from ' + myFeatsList)
-  const myFoundFeats = compact(myFeats)
-  const mygdFeats = myFeatsList.map(name => gdFeats.find(feat => name === feat.name))
-  const myFoundgdFeats = compact(mygdFeats)
+  const myFeats = generateFeats(rawCharacter, feats)
   const abilityScores = generateAbilityScores(rawCharacter, myFoundClasses, mySpecies, proficiencyBonus, skillsMap)
   const myConditions = rawCharacter.currentStats.conditions.map(condition => ({
     name: condition,
     description: (conditionsMap as { [key: string]: string })[condition]
   }))
-  const proficiencies = generateProficiencies(rawCharacter, myFoundClasses, myFeatsList, multiClassProficiencies, gdFeats)
+  const proficiencies = generateProficiencies(rawCharacter, myFoundClasses, myFeats)
   const myEquipment = generateEquipment(rawCharacter, equipment, abilityScores, proficiencyBonus, proficiencies)
   const myBackground = backgrounds.find(({ name }) => name === rawCharacter.background.name)
-  const casting = generateCasting(rawCharacter, abilityScores, powers, proficiencyBonus, techCastingMap, forceCastingMap)
+  if (!myBackground) console.error('Background not found: ', rawCharacter.background.name)
+  const casting = generateCasting(rawCharacter, abilityScores, powers, proficiencyBonus, myFoundClasses, myArchetypes)
   const superiority = generateSuperiorty(rawCharacter, abilityScores, proficiencyBonus, maneuvers)
   const features = generateFeatures(
     rawCharacter,
@@ -84,8 +77,8 @@ export default function generateCharacter (
     speciesFeatures,
     currentLevel,
     fightingStyles,
-    myFoundgdFeats,
-    myBackground,
+    myFeats,
+    myBackground as BackgroundType,
     abilityScores
   )
 

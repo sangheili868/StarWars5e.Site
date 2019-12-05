@@ -8,13 +8,14 @@
   import CharacterBuilderEquipment from './CharacterBuilderEquipment.vue'
   import { RawCharacterType } from '@/types/rawCharacterTypes'
   import { CompleteCharacterType } from '@/types/completeCharacterTypes'
-  import { SpeciesType, ClassType, PowerType, FeatType, BackgroundType } from '@/types/characterTypes'
+  import { SpeciesType, ClassType, PowerType, FeatType, BackgroundType, ArchetypeType } from '@/types/characterTypes'
   import { EquipmentType } from '@/types/lootTypes'
   import Loading from '@/components/Loading.vue'
 
-  const speciesModule = namespace('species')
   const characterModule = namespace('character')
   const classesModule = namespace('classes')
+  const archetypesModule = namespace('archetypes')
+  const speciesModule = namespace('species')
   const equipmentModule = namespace('equipment')
   const powersModule = namespace('powers')
   const featsModule = namespace('feats')
@@ -43,6 +44,8 @@
 
     @classesModule.State classes!: ClassType[]
     @classesModule.Action fetchClasses!: () => void
+    @archetypesModule.State archetypes!: ArchetypeType[]
+    @archetypesModule.Action fetchArchetypes!: () => void
     @equipmentModule.State equipment!: EquipmentType[]
     @equipmentModule.Action fetchEquipment!: () => void
     @powersModule.State powers!: PowerType[]
@@ -63,6 +66,7 @@
     created () {
       Promise.all([
         this.fetchClasses(),
+        this.fetchArchetypes(),
         this.fetchEquipment(),
         this.fetchPowers(),
         this.fetchFeats(),

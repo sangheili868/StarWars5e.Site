@@ -1,14 +1,11 @@
 import { RawCharacterType } from '@/types/rawCharacterTypes'
-import { ClassType } from '@/types/characterTypes'
+import { ClassType, FeatType } from '@/types/characterTypes'
 import { compact, uniqBy, lowerCase, chain } from 'lodash'
-import { MulticlassProficienciesType, gdFeats } from '@/types/referenceTypes'
 
 export default function generateProficiencies (
   rawCharacter: RawCharacterType,
   classes: ClassType[],
-  feats: string[],
-  multiclassProficiencies: MulticlassProficienciesType,
-  gdFeats: gdFeats[]
+  feats: FeatType[]
 ) {
   const startingClass = rawCharacter.classes[0]
   const startingClassData = startingClass && classes.find(({ name }) => name === startingClass.name)
@@ -17,16 +14,12 @@ export default function generateProficiencies (
     startingClassData.armorProficiencies
   ].flat()
   const fromOtherClasses = rawCharacter.classes.slice(1)
-    .map(({ name }) => multiclassProficiencies[name])
-    .flat()
-  const fromFeats = chain(feats)
-    .map(featName => {
-      const featData = gdFeats.find(({ name }) => featName === name)
-      return featData && featData.proficiencies
+    .map(({ name }) => {
+      const myClass = classes.find(({ name: className }) => className === name)
+      return myClass ? myClass.multiClassProficiencies : []
     })
-    .compact()
-    .flatten()
-    .value()
+    .flat()
+  const fromFeats = [] as string[] // Until feats have proficiencies
 
   const fromSpecies = compact([
     rawCharacter.species.toolProficiency,

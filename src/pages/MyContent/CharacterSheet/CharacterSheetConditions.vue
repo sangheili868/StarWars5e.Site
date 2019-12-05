@@ -1,10 +1,12 @@
 <script lang="ts">
   import { Component, Prop, Vue } from 'vue-property-decorator'
-  import { ConditionType } from '@/types/completeCharacterTypes'
-  import { conditions as gdConditions } from '@/test/gameData.json'
+  import { namespace } from 'vuex-class'
+  import { ConditionType } from '@/types/lookupTypes'
   import MyDialog from '@/components/MyDialog.vue'
   import VueMarkdown from 'vue-markdown'
   import { range } from 'lodash'
+
+  const conditionsModule = namespace('conditions')
 
   @Component({
     components: ({
@@ -13,18 +15,24 @@
     })
   })
   export default class CharacterSheetConditions extends Vue {
-    @Prop(Array) readonly conditions!: ConditionType[]
+    @Prop(Array) readonly myConditions!: ConditionType[]
     @Prop(Number) readonly exhaustion!: number
+    @conditionsModule.State conditions!: ConditionType[]
+    @conditionsModule.Action fetchConditions!: () => void
 
     isOpen = false
     range = range
 
+    created () {
+      this.fetchConditions()
+    }
+
     get items () {
-      return Object.keys(gdConditions)
+      return this.conditions.map(({ name }) => name)
     }
 
     get hasExhaustion () {
-      return this.conditions.some(({ name }) => name === 'Exhaustion')
+      return this.myConditions.some(({ name }) => name === 'Exhaustion')
     }
 
     updateConditions (newConditions: string[]) {
@@ -43,18 +51,18 @@
   div
     MyDialog(v-model="isOpen")
       template(v-slot:activator="{ on }")
-        v-btn(v-on="on", block, :color="conditions.length ? 'primary' : ''").mb-2 Conditions ({{ conditions.length }})
+        v-btn(v-on="on", block, :color="myConditions.length ? 'primary' : ''").mb-2 Conditions ({{ myConditions.length }})
       template(#title) Active Conditions
       template(#text)
         v-autocomplete(
-          :value="conditions.map(({ name }) => name)",
+          :value="myConditions.map(({ name }) => name)",
           v-bind="{ items }",
           placeholder="Choose a condition",
           multiple,
           clearable,
           @change="updateConditions"
         )
-        div(v-for="({ name, description }) in conditions", :key="name")
+        div(v-for="({ name, description }) in myConditions", :key="name")
           h3 {{ name }}
           VueMarkdown(:source="description")
       template(#actions)

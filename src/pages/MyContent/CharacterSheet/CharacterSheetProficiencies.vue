@@ -26,7 +26,7 @@
 
 <template lang="pug">
   div
-    h3 Non-combat Features
+    h3 Background Feature
     CharacterSheetExpansionFeatures(
       :features="nonCombatFeatures",
       @updateCharacter="newCharacter => $emit('updateCharacter', newCharacter)"

@@ -59,16 +59,6 @@ export interface SkillsType {
   [ ability: string ]: string[]
 }
 
-export interface CastingMapType {
-  [ myClass: string ]: {
-    [ archetypeOrBase: string ]: number
-  }
-}
-
-export interface MulticlassProficienciesType {
-  [ myClass: string ]: string[]
-}
-
 export interface gdFeats {
   name: string,
   description: string,

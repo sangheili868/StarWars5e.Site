@@ -48,7 +48,7 @@
         @replaceCharacterProperty="payload => $emit('replaceCharacterProperty', payload)"
       )
       CharacterSheetConditions(
-        :conditions="completeCharacter.conditions",
+        :myConditions="completeCharacter.conditions",
         :exhaustion="completeCharacter.exhaustion",
         @updateCharacter="newCharacter => $emit('updateCharacter', newCharacter)",
         @replaceCharacterProperty="payload => $emit('replaceCharacterProperty', payload)"

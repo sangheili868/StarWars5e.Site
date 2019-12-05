@@ -60,7 +60,7 @@
       :superiority="superiority",
       @updateCharacter="newCharacter => $emit('updateCharacter', newCharacter)"
     )
-    h3(v-if="combatFeatures.length").mt-2 Combat Features
+    h3(v-if="combatFeatures.length").mt-2 Feats
     CharacterSheetExpansionFeatures(
       :features="combatFeatures",
       @updateCharacter="newCharacter => $emit('updateCharacter', newCharacter)"

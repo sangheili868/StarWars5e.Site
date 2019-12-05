@@ -1,5 +1,5 @@
 import { RawCharacterType } from '@/types/rawCharacterTypes'
-import { FightingStyleType, FeatureType, FeaturesType, BackgroundType } from '@/types/characterTypes'
+import { FightingStyleType, FeatType, FeatureType, FeaturesType, BackgroundType } from '@/types/characterTypes'
 import { chain, compact } from 'lodash'
 import { CompletedFeatureType, AbilityScoresType } from '@/types/completeCharacterTypes'
 
@@ -9,7 +9,7 @@ function getValidFeatures (
   discoveries?: { name: string }[]
 ) {
   return features ? features.filter(({ name: featureName, level, type }) => {
-    const isRequiredLevel = level <= levelsInClass
+    const isRequiredLevel = level && level <= levelsInClass
     const isBase = type === 'base'
     const isDiscovery = discoveries &&
       (type === 'discovery') &&
@@ -42,14 +42,11 @@ export default function generateFeatures (
   speciesFeatures: FeaturesType,
   currentLevel: number,
   fightingStyles: FightingStyleType[],
-  myFoundgdFeats: FeatureType[],
+  myFeats: FeatType[],
   myBackground: BackgroundType,
   abilityScores: AbilityScoresType
 ) {
   const mySpeciesFeatures = getValidFeatures(speciesFeatures[rawCharacter.species.name], currentLevel)
-  if (!mySpeciesFeatures.length) {
-    console.error('Species not found:', rawCharacter.species.name)
-  }
   const myClassFeatures = rawCharacter.classes.map(({ name: className, levels, discoveries }) =>
     getValidFeatures(classFeatures[className], levels, discoveries)
   ).flat()
@@ -66,7 +63,7 @@ export default function generateFeatures (
   const myFeatures = [
     ...myClassFeatures,
     ...myArchetypeFeatures,
-    ...myFoundgdFeats,
+    ...myFeats.map(feat => ({ ...feat, combat: true, description: feat.text })),
     ...myFightingStyles,
     ...mySpeciesFeatures,
     {

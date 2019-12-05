@@ -1,12 +1,18 @@
 <script lang="ts">
   import { Component, Prop, Vue } from 'vue-property-decorator'
+  import { namespace } from 'vuex-class'
   import { TweaksType } from '@/types/rawCharacterTypes'
-  import { skills } from '@/test/gameData.json'
-  import { map, startCase, set, get, parseInt as _parseInt, isEmpty } from 'lodash'
+  import { map, startCase, set, get, parseInt as _parseInt, isEmpty, chain } from 'lodash'
+  import { SkillsType } from '@/types/referenceTypes'
+
+  const skillsModule = namespace('skills')
 
   @Component
   export default class CharacterSheetSettingsTweaks extends Vue {
     @Prop(Object) readonly tweaks!: TweaksType
+
+    @skillsModule.State skills!: SkillsType[]
+    @skillsModule.Action fetchSkills!: () => void
 
     get = get
     isEmpty = isEmpty
@@ -32,7 +38,12 @@
     ]
 
     get abilityScoreTweaks () {
-      return map(skills, (skillList: string[], ability) => {
+      let skillsMap = chain(this.skills)
+        .groupBy('baseAttribute')
+        .mapValues(skills => skills.map(({ name }) => name))
+        .value()
+      skillsMap.Constitution = []
+      return map(skillsMap, (skillList: string[], ability) => {
         const basePath = `abilityScores.${ability}`
         return {
           category: ability,

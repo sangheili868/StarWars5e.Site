@@ -62,6 +62,7 @@ export default class Character extends VuexModule {
       return generateCharacter(
         stateOf(this.context).character,
         rootState.classes.classes,
+        rootState.archetypes.archetypes,
         rootState.species.species,
         rootState.equipment.equipment,
         rootState.powers.powers,

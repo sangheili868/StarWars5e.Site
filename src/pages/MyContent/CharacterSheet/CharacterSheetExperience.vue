@@ -1,9 +1,12 @@
 <script lang="ts">
   import { Component, Prop, Vue } from 'vue-property-decorator'
+  import { namespace } from 'vuex-class'
   import { CompleteCharacterType } from '@/types/completeCharacterTypes'
-  import { experienceTable } from '@/test/gameData.json'
-  import { startCase } from 'lodash'
+  import { startCase, chain } from 'lodash'
   import ValueEditor from '@/components/ValueEditor.vue'
+  import { CharacterAdvancementType } from '@/types/lookupTypes'
+
+  const characterAdvancementsModule = namespace('characterAdvancements')
 
   @Component({
     components: {
@@ -12,10 +15,16 @@
   })
   export default class CharacterSheetExperience extends Vue {
     @Prop(Object) readonly completeCharacter!: CompleteCharacterType
+    @characterAdvancementsModule.State characterAdvancements!: CharacterAdvancementType[]
+    @characterAdvancementsModule.Action fetchCharacterAdvancements!: () => void
 
     isExperienceOpen = false
     newValue = 0
     startCase = startCase
+
+    created () {
+      this.fetchCharacterAdvancements()
+    }
 
     get percentExperience () {
       const xp = this.completeCharacter.experiencePoints
@@ -27,7 +36,10 @@
     }
 
     calculateLevel (experience: number) {
-      const level = experienceTable.findIndex(threshold => threshold > experience) - 1
+      const level = chain(this.characterAdvancements)
+        .sortBy('experiencePoints')
+        .findIndex(({ experiencePoints }) => experiencePoints > experience)
+        .value()
       return level < 0 ? 20 : level
     }
 

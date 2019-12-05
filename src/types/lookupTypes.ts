@@ -6,7 +6,7 @@ export interface CharacterAdvancementType {
 
 export interface ConditionType {
   name: string,
-  description: 
+  description: string
 }
 
 export interface SkillType {

@@ -41,8 +41,11 @@ export default function generateCharacter (
   const myFoundClasses = compact(myClasses)
   const myArchetypes = compact(rawCharacter.classes.map(({ archetype }) => archetype && archetypes.find(myArchetype => archetype.name === myArchetype.name)))
   const experienceTable = chain(characterAdvancements).keyBy('level').mapValues('experiencePoints').value()
-  let skillsMap = chain(skills).groupBy('baseAttribute').mapValues(skills => skills.map(({ name }) => name)).value()
-  skillsMap.Constitution = []
+  const skillsMap = chain(['Strength', 'Dexterity', 'Constitution', 'Intelligence', 'Wisdom', 'Charisma'])
+    .keyBy()
+    .mapValues(ability => skills.filter(({ baseAttribute }) => ability === baseAttribute).map(({ name }) => name))
+    .value()
+
   const conditionsMap = chain(conditions)
     .keyBy('name')
     .mapValues(({ description }) => description.replace(/\\r\\n/g, '\n'))

@@ -127,6 +127,7 @@ export interface CompleteCharacterType {
     special: string
   },
   proficiencies: string[],
+  skillAndSaveProficiencies: string[],
   languages: string[],
   characteristics: CharacteristicsType,
   backstory: string,

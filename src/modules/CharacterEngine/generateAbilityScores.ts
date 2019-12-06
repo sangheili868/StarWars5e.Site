@@ -56,34 +56,40 @@ export default function generateAbilityScores (
     none: 0
   }
   const proficientSkills = getProficientSkills(rawCharacter, skillsList)
+  const proficientSkillsList = Object.values(proficientSkills)
+    .map(skillList => Object.keys(skillList).filter(skill => ['expertise', 'proficient'].includes(skillList[skill])))
+    .flat()
   const proficientSaves = getProficientSaves(rawCharacter, myClasses)
   const intBonus = getModifier(getAbilityScore(rawCharacter, 'Intelligence', mySpecies))
   const scholarData = rawCharacter.classes.find(({ name }) => name === 'Scholar')
   const skillWithIntBonus = get(scholarData, 'archetype.silverTongue.intSkillBonus')
 
-  return mapValues(skillsList, (skills, ability) => {
-    const value = getAbilityScore(rawCharacter, ability, mySpecies)
-    const modifier = getModifier(value)
-    const isProficientInSave = proficientSaves.includes(ability)
-    const savingThrowModifier = modifier + (isProficientInSave ? proficiencyBonus : 0)
+  return {
+    abilityScores: mapValues(skillsList, (skills, ability) => {
+      const value = getAbilityScore(rawCharacter, ability, mySpecies)
+      const modifier = getModifier(value)
+      const isProficientInSave = proficientSaves.includes(ability)
+      const savingThrowModifier = modifier + (isProficientInSave ? proficiencyBonus : 0)
 
-    return {
-      value,
-      modifier,
-      savingThrow: {
-        modifier: applyTweak(rawCharacter, `abilityScores.${ability}.savingThrowModifier`, savingThrowModifier),
-        proficiency: isProficientInSave ? 'proficient' : 'none'
-      },
-      skills: skills.map(name => {
-        const proficiency = proficientSkills[ability][name] || 'none'
-        const silverTongueBonus = skillWithIntBonus === name ? intBonus : 0
-        const skillModifer = modifier + proficiencyBonuses[proficiency] + silverTongueBonus
-        return {
-          name,
-          modifier: applyTweak(rawCharacter, `abilityScores.${ability}.skills.${name}`, skillModifer),
-          proficiency
-        }
-      })
-    }
-  })
+      return {
+        value,
+        modifier,
+        savingThrow: {
+          modifier: applyTweak(rawCharacter, `abilityScores.${ability}.savingThrowModifier`, savingThrowModifier),
+          proficiency: isProficientInSave ? 'proficient' : 'none'
+        },
+        skills: skills.map(name => {
+          const proficiency = proficientSkills[ability][name] || 'none'
+          const silverTongueBonus = skillWithIntBonus === name ? intBonus : 0
+          const skillModifer = modifier + proficiencyBonuses[proficiency] + silverTongueBonus
+          return {
+            name,
+            modifier: applyTweak(rawCharacter, `abilityScores.${ability}.skills.${name}`, skillModifer),
+            proficiency
+          }
+        })
+      }
+    }),
+    skillAndSaveProficiencies: [ ...proficientSkillsList, ...proficientSaves.map(save => save + ' Saving Throws') ]
+  }
 }

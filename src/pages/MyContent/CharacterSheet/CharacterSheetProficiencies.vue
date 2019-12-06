@@ -17,6 +17,7 @@
     @Prop(String) readonly alignment!: string
     @Prop(String) readonly background!: string
     @Prop(Array) readonly proficiencies!: string[]
+    @Prop(Array) readonly skillAndSaveProficiencies!: string[]
     @Prop(Array) readonly customProficiencies!: string[]
     @Prop(Array) readonly languages!: string[]
     @Prop(Object) readonly characteristics!: CharacteristicsType
@@ -28,10 +29,10 @@
     allProficiencies = {
       'Weapons': [
         'Simple Vibroweapons',
+        'All Vibroweapons',
         'Techblades',
         'Simple Blasters',
         'All Blasters',
-        'All Vibroweapons',
         'Simple Lightweapons',
         'All Lightweapons',
         'Lightsaber',
@@ -93,7 +94,7 @@
 
     get customProficiencyList () {
       return chain(this.allProficiencies).mapValues(proficiencyList => proficiencyList.filter(
-        proficiency => ![...this.proficiencies, ...this.customProficiencies]
+        proficiency => ![...this.proficiencies, ...this.customProficiencies, ...this.skillAndSaveProficiencies]
           .map(this.startCase)
           .includes(this.startCase(proficiency))
       )).omitBy(proficiencyList => proficiencyList.length <= 0).value()
@@ -101,6 +102,10 @@
 
     get proficiencyCategories () {
       return Object.keys(this.customProficiencyList)
+    }
+
+    get filteredList () {
+      return this.chosenCategory ? this.customProficiencyList[this.chosenCategory] : Object.values(this.customProficiencyList).flat()
     }
 
     resetValues () {
@@ -154,12 +159,7 @@
           label="Filter by Category",
           @change="newProficiency=''"
         )
-        v-autocomplete(
-          v-if="chosenCategory",
-          v-model="newProficiency",
-          :items="customProficiencyList[chosenCategory]",
-          label="Choose a Proficiency"
-        )
+        v-autocomplete(v-model="newProficiency", :items="filteredList", label="Select Proficiency")
       template(#actions)
         v-btn(color="primary", :disabled="newProficiency === ''", @click="handleAdd") Add
         v-spacer

@@ -59,7 +59,7 @@ export default function generateCharacter (
   }
 
   const myFeats = generateFeats(rawCharacter, feats)
-  const abilityScores = generateAbilityScores(rawCharacter, myFoundClasses, mySpecies, proficiencyBonus, skillsMap)
+  const { abilityScores, skillAndSaveProficiencies } = generateAbilityScores(rawCharacter, myFoundClasses, mySpecies, proficiencyBonus, skillsMap)
   const myConditions = rawCharacter.currentStats.conditions.map(condition => ({
     name: condition,
     description: (conditionsMap as { [key: string]: string })[condition]
@@ -105,6 +105,7 @@ export default function generateCharacter (
     conditions: myConditions,
     exhaustion: rawCharacter.currentStats.exhaustion,
     proficiencies,
+    skillAndSaveProficiencies,
     languages: generateLanguages(rawCharacter),
     equipment: myEquipment,
     credits: Math.max(rawCharacter.credits, 0),

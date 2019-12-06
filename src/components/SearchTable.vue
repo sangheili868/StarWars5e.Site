@@ -1,11 +1,7 @@
 <script lang="ts">
   import { Component, Prop, Vue } from 'vue-property-decorator'
-  import { namespace } from 'vuex-class'
   import Loading from '@/components/Loading.vue'
-  import _ from 'lodash'
-  import { tableQueryType } from '@/types/utilityTypes'
-
-  const tableQueriesModule = namespace('tableQueries')
+  import { pickBy, every, merge } from 'lodash'
 
   interface HeaderType {
     text: string
@@ -13,6 +9,13 @@
     align: string
     filterChoices: string[]
     filterFunction: (item: { [key: string]: string }, filterValue: string | string[]) => boolean
+  }
+
+  interface SessionType {
+    $session: {
+      get: (key: string) => { [tableName: string]: { [field: string]: string | string[] } },
+      set: (key: string, value: { [tableName: string]: { [field: string]: string | string[] } }) => void
+    }
   }
 
   @Component({
@@ -28,24 +31,21 @@
     @Prop(String) readonly tableType: string | undefined
     @Prop(String) readonly name!: string
 
-    @tableQueriesModule.State tableQueries!: tableQueryType[]
-    @tableQueriesModule.Action initQuery!: (tableName: string) => Promise<void>
-    @tableQueriesModule.Action updateQuery!: ({ tableName, field, input }: {
-      tableName: string,
-      field: string,
-      input: string | string[]
-    }) => void
-
     filterSelections: { [key: string]: any } = {}
     search: string | undefined = ''
     tabTitle: string | undefined = ''
 
     created () {
-      this.initQuery(this.name).then(() => {
-        this.search = this.initialSearch || (this.storedQuery ? this.storedQuery.Search as string : '')
-        this.filterSelections = this.storedQuery || {}
-        this.tabTitle = this.tableType
-      })
+      const session = (this as unknown as SessionType).$session
+      const tableQueries = session.get('sw5eTableQueries') || {}
+      if (!tableQueries[this.name]) session.set('sw5eTableQueries', { ...tableQueries, [this.name]: {} })
+      this.search = this.initialSearch || (this.storedQuery ? this.storedQuery.Search as string : '')
+      this.filterSelections = this.storedQuery || {}
+      this.tabTitle = this.tableType
+    }
+
+    get storedQuery () {
+      return (this as unknown as SessionType).$session.get('sw5eTableQueries')[this.name]
     }
 
     get title () {
@@ -62,13 +62,13 @@
     }
 
     get validFilterSelections () {
-      return _.pickBy(this.filterSelections, (filterSelection: any) =>
+      return pickBy(this.filterSelections, (filterSelection: any) =>
         Array.isArray(filterSelection) ? filterSelection.length > 0 : filterSelection
       )
     }
 
     get filteredItems () {
-      return this.items.filter(item => _.every(this.validFilterSelections, (selection, filterField) => {
+      return this.items.filter(item => every(this.validFilterSelections, (selection, filterField) => {
         const filterHeader = this.headers.find(({ text }) => text === filterField)
         return filterHeader ? filterHeader.filterFunction(item, selection) : true
       }))
@@ -78,12 +78,10 @@
       return this.headers.filter(({ filterFunction }) => filterFunction)
     }
 
-    get storedQuery () {
-      return this.tableQueries.find(({ tableName }) => tableName === this.name)
-    }
-
     handleFilterChange (field: string, input: string | string[]) {
-      this.updateQuery({ tableName: this.name, field, input })
+      const session = (this as unknown as SessionType).$session
+      const tableQueries = session.get('sw5eTableQueries')
+      session.set('sw5eTableQueries', merge(tableQueries, { [this.name]: { [field]: input } }))
     }
   }
 </script>

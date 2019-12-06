@@ -5,3 +5,4 @@ declare module '*.vue' {
 
 declare module 'vue-friendly-iframe'
 declare module 'vue-headful'
+declare module 'vue-sessionstorage'

@@ -15,6 +15,8 @@ export interface ArchetypeType {
   },
   leveledTableHeaders: string[]
   name: string,
+  casterType: string, // None, Force
+  casterRatio: number, // 0, 0.33333333
   text: string,
   text2: string,
 }
@@ -61,7 +63,10 @@ export interface ClassType {
   hitPointsAtFirstLevel: string
   hitPointsAtHigherLevels: string
   levelChangeHeadersJson: string
-  levelChanges: any
+  levelChanges: any,
+  multiClassProficiencies: string[]
+  casterType: string, // None, Force, Tech
+  casterRatio: number, // 0, 0.33333333, 0.5, 0.6666666667, 1
   name: string
   primaryAbility: string
   quickBuildText: string

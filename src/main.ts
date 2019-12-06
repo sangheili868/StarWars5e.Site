@@ -7,6 +7,9 @@ import './registerServiceWorker'
 import '@/assets/styles/global.scss'
 import '@fortawesome/fontawesome-free/css/all.css'
 import vueHeadful from 'vue-headful'
+import VueSessionStorage from 'vue-sessionstorage'
+
+Vue.use(VueSessionStorage)
 
 Vue.component('vue-headful', vueHeadful)
 Vue.prototype.$titleSuffix = ' | SW5E'

@@ -30,6 +30,7 @@
     "vue-markdown": "^2.2.4",
     "vue-property-decorator": "^8.1.0",
     "vue-router": "^3.0.3",
+    "vue-sessionstorage": "^1.0.0",
     "vuetify": "2.0.18",
     "vuetify-scss": "^1.4.0",
     "vuex": "^3.0.1",

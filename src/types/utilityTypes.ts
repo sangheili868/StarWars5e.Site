@@ -11,7 +11,3 @@ export interface SearchResultType {
   searchText: string,
   rowKey: string
 }
-
-export interface tableQueryType {
-  [field: string]: string | string[]
-}

@@ -23,8 +23,6 @@
     @Prop(Object) readonly completeCharacter!: CompleteCharacterType
     @Prop(Number) readonly currentTab!: number
 
-    isFabOpen = false
-
     get sections () {
       const hasPowers = !isEmpty(this.completeCharacter.techCasting) || !isEmpty(this.completeCharacter.forceCasting)
       return [

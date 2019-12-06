@@ -102,10 +102,7 @@
     "exhaustion": 0
   },
   "tweaks": {},
-  "customProficiencies": [
-    "Slicer’s Kit",
-    "Piloting"
-  ],
+  "customProficiencies": [ ],
   "customLanguages": [],
   "customFeatures": []
 }

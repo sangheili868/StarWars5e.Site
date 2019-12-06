@@ -50,6 +50,7 @@ export default function generateEquipment (
   proficiencyBonus: number,
   proficiencies: string[]
 ) {
+  const allProficiencies = [...proficiencies, ...rawCharacter.customProficiencies.map(({ name }) => name)]
   return chain(rawCharacter.equipment)
     .filter(({ name }) => name !== 'custom')
     .map(({ name, quantity, equipped }) => {
@@ -60,7 +61,7 @@ export default function generateEquipment (
         quantity,
         equipped,
         ...(equipmentData || {}),
-        ...getWeaponStats(rawCharacter, abilityScores, equipmentData, proficiencyBonus, proficiencies),
+        ...getWeaponStats(rawCharacter, abilityScores, equipmentData, proficiencyBonus, allProficiencies),
         isFound: !isEmpty(equipmentData)
       }
     })

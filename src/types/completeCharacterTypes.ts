@@ -1,6 +1,6 @@
 import { PowerType } from '@/types/characterTypes'
 import { EquipmentType } from '@/types/lootTypes'
-import { TweaksType } from './rawCharacterTypes'
+import { TweaksType, CustomProficiencyType } from './rawCharacterTypes'
 import { ConditionType } from './lookupTypes'
 
 export interface AbilityScoreType {
@@ -146,7 +146,7 @@ export interface CompleteCharacterType {
   nonCombatFeatures: CompletedFeatureType[],
   tweaks: TweaksType,
   customLanguages: string[],
-  customProficiencies: string[],
+  customProficiencies: CustomProficiencyType,
   customFeatures: {
     name: string,
     content: string

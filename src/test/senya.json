@@ -213,20 +213,56 @@
       }
     }
   },
-  "customProficiencies": {
-    "Mason's Tools": "proficient",
-    "Biochemist's Kit": "proficient",
-    "Investigation": "proficient",
-    "Medicine": "proficient",
-    "Survival": "proficient",
-    "Piloting": "proficient",
-    "Animal Handling": "proficient",
-    "Heavy Armor": "proficient",
-    "Lightsaber": "proficient",
-    "Carpenter's Kit": "proficient",
-    "Persuasion": "expertise",
-    "Athletics": "expertise"
-  },
+  "customProficiencies": [
+    {
+      "name": "Lightsaber",
+      "proficiencyLevel": "proficient"
+    },
+    {
+      "name": "Mason's Tools",
+      "proficiencyLevel": "proficient"
+    },
+    {
+      "name": "Biochemist's Kit",
+      "proficiencyLevel": "proficient"
+    },
+    {
+      "name": "Investigation",
+      "proficiencyLevel": "proficient"
+    },
+    {
+      "name": "Medicine",
+      "proficiencyLevel": "proficient"
+    },
+    {
+      "name": "Survival",
+      "proficiencyLevel": "proficient"
+    },
+    {
+      "name": "Animal Handling",
+      "proficiencyLevel": "proficient"
+    },
+    {
+      "name": "Heavy Armor",
+      "proficiencyLevel": "proficient"
+    },
+    {
+      "name": "Piloting",
+      "proficiencyLevel": "proficient"
+    },
+    {
+      "name": "Carpenter's Kit",
+      "proficiencyLevel": "proficient"
+    },
+    {
+      "name": "Persuasion",
+      "proficiencyLevel": "expertise"
+    },
+    {
+      "name": "Athletics",
+      "proficiencyLevel": "expertise"
+    }
+  ],
   "customLanguages": [
     "Kel Dorian",
     "Huttese",

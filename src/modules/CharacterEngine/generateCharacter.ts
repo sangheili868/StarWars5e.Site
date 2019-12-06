@@ -93,6 +93,7 @@ export default function generateCharacter (
       'characteristics',
       'tweaks',
       'customProficiencies',
+      'customLanguages',
       'customFeatures'
     ]),
     currentLevel,

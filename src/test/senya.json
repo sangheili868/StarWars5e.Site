@@ -10,8 +10,7 @@
       "Intelligence": 2,
       "Strength": 1,
       "Dexterity": 1
-    },
-    "language": "Kel Dorian"
+    }
   },
   "isFixedHitPoints": true,
   "classes": [
@@ -22,20 +21,8 @@
         5,
         5
       ],
-      "skills": [
-        "Investigation",
-        "Medicine",
-        "Survival"
-      ],
-      "expertise": [
-        "Athletics",
-        "Persuasion"
-      ],
       "archetype": {
-        "name": "Politician Pursuit",
-        "silverTongue": {
-          "language": "Huttese"
-        }
+        "name": "Politician Pursuit"
       }
     },
     {
@@ -46,9 +33,6 @@
         6,
         6,
         6
-      ],
-      "skills": [
-        "Piloting"
       ],
       "techPowers": [
         "Electroshock",
@@ -82,20 +66,14 @@
   },
   "background": {
     "name": "Folk Hero",
-    "skills": [
-      "Athletics",
-      "Animal Handling"
-    ],
+    "skills": [],
     "feat": {
       "name": "Healer",
       "type": "feat",
       "abilityScoreImprovements": {
         "Intelligence": 1
       }
-    },
-    "languages": [
-      "Nautila"
-    ]
+    }
   },
   "characteristics": {
     "alignment": "Lawful Light",
@@ -159,10 +137,6 @@
       "quantity": 1
     },
     {
-      "name": "Backpack",
-      "quantity": 1
-    },
-    {
       "name": "Glowrod",
       "quantity": 5
     },
@@ -201,6 +175,10 @@
     {
       "name": "Light battle armor",
       "quantity": 1
+    },
+    {
+      "name": "Backpack",
+      "quantity": 1
     }
   ],
   "currentStats": {
@@ -218,11 +196,7 @@
       "failures": 0
     },
     "hasInspiration": false,
-    "featuresTimesUsed": {
-      "Ranger's Quarry": 3,
-      "Sage Advice": 1,
-      "Defiant": 0
-    },
+    "featuresTimesUsed": {},
     "conditions": [],
     "exhaustion": 0,
     "unspentLevels": 0
@@ -239,13 +213,24 @@
       }
     }
   },
-  "customProficiencies": [
-    "Heavy Armor",
-    "Mason's Tools",
-    "Biochemist's Kit",
-    "Carpenter's Kit",
-    "Persuasion",
-    "Lightsaber"
+  "customProficiencies": {
+    "Mason's Tools": "proficient",
+    "Biochemist's Kit": "proficient",
+    "Investigation": "proficient",
+    "Medicine": "proficient",
+    "Survival": "proficient",
+    "Piloting": "proficient",
+    "Animal Handling": "proficient",
+    "Heavy Armor": "proficient",
+    "Lightsaber": "proficient",
+    "Carpenter's Kit": "proficient",
+    "Persuasion": "expertise",
+    "Athletics": "expertise"
+  },
+  "customLanguages": [
+    "Kel Dorian",
+    "Huttese",
+    "Nautila"
   ],
   "customFeatures": [
     {

@@ -133,6 +133,10 @@ export interface TweaksType {
   }
 }
 
+export interface CustomProficiencyType {
+  [proficiency: string]: 'proficiency' | 'expertise'
+}
+
 export interface RawCharacterType {
   name: string,
   image: string,
@@ -171,7 +175,8 @@ export interface RawCharacterType {
     exhaustion: number
   },
   tweaks: TweaksType,
-  customProficiencies: string[],
+  customLanguages: string[],
+  customProficiencies: CustomProficiencyType,
   customFeatures: {
     name: string,
     content: string

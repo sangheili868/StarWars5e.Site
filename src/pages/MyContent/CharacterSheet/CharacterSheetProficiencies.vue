@@ -1,5 +1,6 @@
 <script lang="ts">
   import { Component, Prop, Vue } from 'vue-property-decorator'
+  import { CustomProficiencyType } from '@/types/rawCharacterTypes'
   import { CharacteristicsType, CompletedFeatureType } from '@/types/completeCharacterTypes'
   import { capitalize, chain } from 'lodash'
   import CharacterSheetExpansionFeatures from './CharacterSheetExpansionFeatures.vue'
@@ -18,14 +19,18 @@
     @Prop(String) readonly background!: string
     @Prop(Array) readonly proficiencies!: string[]
     @Prop(Array) readonly skillAndSaveProficiencies!: string[]
-    @Prop(Array) readonly customProficiencies!: string[]
+    @Prop(Object) readonly customProficiencies!: CustomProficiencyType
+    @Prop(Array) readonly customLanguages!: string[]
     @Prop(Array) readonly languages!: string[]
     @Prop(Object) readonly characteristics!: CharacteristicsType
     @Prop(Array) readonly nonCombatFeatures!: CompletedFeatureType[]
 
-    isOpen = false
+    isProficienciesOpen = false
+    isLanguagesOpen = false
+    isExpertise = false
     chosenCategory = ''
     newProficiency = ''
+    newLanguage = ''
     allProficiencies = {
       'Weapons': [
         'Simple Vibroweapons',
@@ -94,7 +99,7 @@
 
     get customProficiencyList () {
       return chain(this.allProficiencies).mapValues(proficiencyList => proficiencyList.filter(
-        proficiency => ![...this.proficiencies, ...this.customProficiencies, ...this.skillAndSaveProficiencies]
+        proficiency => ![...this.proficiencies, ...(Object.keys(this.customProficiencies)), ...this.skillAndSaveProficiencies]
           .map(this.startCase)
           .includes(this.startCase(proficiency))
       )).omitBy(proficiencyList => proficiencyList.length <= 0).value()
@@ -108,9 +113,14 @@
       return this.chosenCategory ? this.customProficiencyList[this.chosenCategory] : Object.values(this.customProficiencyList).flat()
     }
 
+    get isSkill () {
+      return this.allProficiencies.Skills.includes(this.newProficiency)
+    }
+
     resetValues () {
       this.chosenCategory = ''
       this.newProficiency = ''
+      this.isExpertise = false
     }
 
     startCase (input: string) {
@@ -118,17 +128,26 @@
       return input.replace(/\w+/g, capitalize).replace("'S", "'s")
     }
 
-    handleDelete (index: number) {
-      this.$emit('deleteCharacterProperty', { path: 'customProficiencies', index })
+    handleDelete (path: string, index: number) {
+      this.$emit('deleteCharacterProperty', { path, index })
     }
 
-    handleAdd () {
+    handleAddProficiency () {
       this.$emit('updateCharacter', {
         customProficiencies: {
-          [this.customProficiencies.length]: this.newProficiency
+          [this.newProficiency]: this.isExpertise ? 'expertise' : 'proficient'
         }
       })
-      this.isOpen = false
+      this.isProficienciesOpen = false
+    }
+
+    handleAddLanguage () {
+      this.$emit('updateCharacter', {
+        customLanguages: {
+          [this.customLanguages.length]: this.newLanguage
+        }
+      })
+      this.isLanguagesOpen = false
     }
   }
 </script>
@@ -142,12 +161,30 @@
     )
     h3.mt-2 Langauges
     div(v-for="language in languages", :key="language").caption {{ language }}
+    div(v-for="(language, index) in customLanguages", :key="'language' + index").d-flex.align-center.justify-space-between
+      div.caption {{ language }}
+      ConfirmDelete(label="Language", :item="language", @delete="handleDelete('customLanguages', index)")
+    MyDialog(v-model="isLanguagesOpen")
+      template(v-slot:activator="{ on }")
+        div.text-center.mt-2
+          v-btn(v-on="on", @click="newLanguage = ''", color="primary") Add Language
+      template(#title) Add Language
+      template(#text)
+        v-text-field(v-model="newLanguage")
+      template(#actions)
+        v-btn(color="primary", :disabled="newLanguage === ''", @click="handleAddLanguage") Add
+        v-spacer
+        v-btn(color="primary", text, @click="isLanguagesOpen=false") Close
     h3.mt-2 Proficiencies
     div(v-for="proficiency in proficiencies", :key="proficiency").caption {{ startCase(proficiency) }}
-    div(v-for="(proficiency, index) in customProficiencies", :key="index").d-flex.align-center.justify-space-between
-      div.caption {{ startCase(proficiency) }}
-      ConfirmDelete(label="Proficiency", :item="startCase(proficiency) + ' proficiency'", @delete="handleDelete(index)")
-    MyDialog(v-if="proficiencyCategories.length", v-model="isOpen")
+    div(v-for="(proficiencyLevel, proficiency, index) in customProficiencies", :key="'prof' + index").d-flex.align-center.justify-space-between
+      div.caption {{ startCase(proficiency) + (proficiencyLevel === 'expertise' ? ' (Expertise)' : '') }}
+      ConfirmDelete(
+        label="Proficiency",
+        :item="startCase(proficiency) + (proficiencyLevel === 'expertise' ? ' expertise' : ' proficiency')",
+        @delete="handleDelete('customProficiencies', proficiency)"
+      )
+    MyDialog(v-if="proficiencyCategories.length", v-model="isProficienciesOpen")
       template(v-slot:activator="{ on }")
         div.text-center.mt-2
           v-btn(v-on="on", @click="resetValues", color="primary") Add Proficiency
@@ -157,11 +194,12 @@
           v-model="chosenCategory",
           :items="proficiencyCategories",
           label="Filter by Category",
-          @change="newProficiency=''"
+          @change="newProficiency=''; isExpertise = false"
         )
-        v-autocomplete(v-model="newProficiency", :items="filteredList", label="Select Proficiency")
+        v-autocomplete(v-model="newProficiency", :items="filteredList", label="Select Proficiency", @change="isExpertise = false")
+        v-checkbox(v-if="isSkill", v-model="isExpertise", color="primary", label="Expertise")
       template(#actions)
-        v-btn(color="primary", :disabled="newProficiency === ''", @click="handleAdd") Add
+        v-btn(color="primary", :disabled="newProficiency === ''", @click="handleAddProficiency") Add
         v-spacer
-        v-btn(color="primary", text, @click="isOpen=false") Close
+        v-btn(color="primary", text, @click="isProficienciesOpen=false") Close
 </template>

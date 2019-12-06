@@ -1,7 +1,7 @@
 import { Module, VuexModule, MutationAction } from 'vuex-module-decorators'
 import { RawCharacterType } from '@/types/rawCharacterTypes'
 import baseCharacter from './CharacterEngine/baseCharacter.json'
-import { isEmpty, merge, get, set, isEqual } from 'lodash'
+import { isEmpty, merge, get, set, isEqual, omit } from 'lodash'
 import generateCharacter from './CharacterEngine/generateCharacter'
 
 function stateOf (context: any) {
@@ -97,10 +97,12 @@ export default class Character extends VuexModule {
   }
 
   @MutationAction({ mutate: ['character'] })
-  async deleteCharacterProperty ({ path, index }: { path: string, index: number }) {
-    const updatedList = get(stateOf(this).character, path).filter((item: any, itemIndex: number) => itemIndex !== index)
+  async deleteCharacterProperty ({ path, index }: { path: string, index: number | string }) {
+    const property = get(stateOf(this).character, path)
+    let updatedProperty = omit(property, index)
+    if (Array.isArray(property)) updatedProperty = Object.values(updatedProperty)
     let characterCopy = merge({}, stateOf(this).character)
-    set(characterCopy, path, updatedList)
+    set(characterCopy, path, updatedProperty)
     return {
       character: characterCopy
     }

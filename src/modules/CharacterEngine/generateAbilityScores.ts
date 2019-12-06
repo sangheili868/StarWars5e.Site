@@ -20,11 +20,12 @@ function getProficientSkills (rawCharacter: RawCharacterType, skillsList: Skills
   return mapValues(skillsList, skills => chain(skills)
     .keyBy()
     .mapValues(skill => {
-      const isExpertise = rawCharacter.classes.some(myClass => Array.isArray(myClass.expertise) && myClass.expertise.includes(skill))
+      const isExpertise = rawCharacter.classes.some(myClass => Array.isArray(myClass.expertise) && myClass.expertise.includes(skill)) ||
+        rawCharacter.customProficiencies[skill] === 'expertise'
       const isProficient = rawCharacter.classes.some(myClass => myClass.skills && myClass.skills.includes(skill)) ||
-        rawCharacter.background.skills.includes(skill) ||
+        (rawCharacter.background.skills && rawCharacter.background.skills.includes(skill)) ||
         rawCharacter.species.skillProficiency === skill ||
-        rawCharacter.customProficiencies.includes(skill)
+        rawCharacter.customProficiencies[skill]
       return (isExpertise && 'expertise') || (isProficient && 'proficient') || 'none'
     }).value())
 }
@@ -33,7 +34,7 @@ function getProficientSaves (rawCharacter: RawCharacterType, myClasses: ClassTyp
   const startingClass = rawCharacter.classes[0]
   if (!startingClass) console.error('Warning: No starting class')
   const startingClassData = startingClass && myClasses.find(({ name }) => name === startingClass.name)
-  const customSaves = rawCharacter.customProficiencies
+  const customSaves = Object.keys(rawCharacter.customProficiencies)
     .filter(proficiency => proficiency.includes('Saving Throws'))
     .map(proficiency => proficiency.split(' ')[0])
   return [ ...(startingClassData ? startingClassData.savingThrows : []), ...customSaves ]

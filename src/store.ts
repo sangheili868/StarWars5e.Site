@@ -24,7 +24,6 @@ import ventures from './modules/ventures'
 import weapons from './modules/weapons'
 import weaponProperties from './modules/weaponProperties'
 import character from './modules/character'
-import tableQueries from './modules/tableQueries'
 import createPersistedState from 'vuex-persistedstate'
 import characterAdvancements from './modules/characterAdvancements'
 import conditions from './modules/conditions'
@@ -58,7 +57,6 @@ export default new Vuex.Store({
     starshipModifications,
     starshipSizes,
     starshipWeapons,
-    tableQueries,
     ui,
     ventures,
     weapons,

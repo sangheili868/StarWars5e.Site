@@ -11677,6 +11677,11 @@ vue-router@^3.0.3:
   resolved "https://registry.yarnpkg.com/vue-router/-/vue-router-3.0.5.tgz#24636923c7f1a62da3a577cf75a058f9fa328581"
   integrity sha512-DGU+7+eeiSq/oNZ6epA/rcNkAd0m2+uugR5i4Eh4KBvclUmorvNJ6iForYjQkgvKi9GdamybaMpl85eDgxM2eQ==
 
+vue-sessionstorage@^1.0.0:
+  version "1.0.0"
+  resolved "https://registry.yarnpkg.com/vue-sessionstorage/-/vue-sessionstorage-1.0.0.tgz#51cc153da7791949dc0494161397533e320f7410"
+  integrity sha512-Axo8oY/3gcmU+OdsB/zePuoBCqmyjB2/ORUTrC/WVFm8OkMp8yYlzz6nOOzIU1Tgg6a4ogBaUa3loPtHROotbQ==
+
 vue-sfc-descriptor-to-string@^1.0.0:
   version "1.0.0"
   resolved "https://registry.yarnpkg.com/vue-sfc-descriptor-to-string/-/vue-sfc-descriptor-to-string-1.0.0.tgz#71e0a648508da9b43a995a595f1e9e570fda92bd"

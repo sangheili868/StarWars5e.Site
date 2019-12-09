@@ -2,7 +2,7 @@
   import { Component, Prop, Vue } from 'vue-property-decorator'
   import { namespace } from 'vuex-class'
   import CharacterBuilderSpecies from './CharacterBuilderSpecies.vue'
-  import CharacterBuilderClass from './CharacterBuilderClass.vue'
+  import CharacterBuilderClasses from './CharacterBuilderClasses.vue'
   import CharacterBuilderAbilityScores from './CharacterBuilderAbilityScores.vue'
   import CharacterBuilderDescription from './CharacterBuilderDescription.vue'
   import CharacterBuilderEquipment from './CharacterBuilderEquipment.vue'
@@ -27,7 +27,7 @@
 @Component({
   components: {
       CharacterBuilderSpecies,
-      CharacterBuilderClass,
+      CharacterBuilderClasses,
       CharacterBuilderAbilityScores,
       CharacterBuilderDescription,
       CharacterBuilderEquipment,
@@ -92,7 +92,7 @@
         },
         {
           name: 'Class',
-          component: 'CharacterBuilderClass',
+          component: 'CharacterBuilderClasses',
           props: {
             classes: this.classes,
             currentClasses: this.character.classes,
@@ -142,28 +142,35 @@
         div This character builder is still in #[span.primary--text beta].
         | We are still working on lots of cool options and updates!
         | Here's a few things to be aware of:
-        h2.mt-5 Features
+        h2.mt-5 Character Features
         div.
-          We have not yet implemented translating #[span.primary--text character features, species, features, feats, etc.]
+          We have not translated #[span.primary--text class features, species features, feats, etc.]
           into code that the character sheet can use. Until that is done, you can enter them as
           #[span.primary--text custom features] by copying the text into your character sheet,
           and make any adjustments to numbers as #[span.primary--text tweaks in the Settings screen.]
+          You can also add custom proficiencies and expertise in the #[span.primary--text Proficiencies Tab]
+        div.mt-2.
+          For example, it does not yet recognize that level 1 operatives gain expertise and sneak attack, so you cannot
+          choose expertise skills in the character builder or see sneak attack in your list of features. However, in the
+          proficiencies tab, you can give yourself a expertise in the skills you choose. Then you can add a custom
+          feature for Sneak Attack, copying the description from the operative page on this site.
+        h2.mt-5 Saving Your Character
         div.
-          For example, it does not yet recognize that level 1 operatives gain expertise, so you cannot choose expertise
-          skills or see the calculated values. However, in the settings page, you can give yourself a +2 bonus to skills
-          you choose. Then you can add a custom feature for Sneak Attack, copying the description from the operative page
-          on this site.
-        h2.mt-5 Local Storage
-        div The next big step is letting you create an account to store characters on our servers.
-        div.
-          Until then, you will have to save your character to a
-          #[span.primary--text file on your computer],
-          and upload it to this site whenever you want to view it.
-        div #[span.primary--text Nothing is saved] unless you download the file, including tracking hit points, force points, etc.
+          We also have not yet implemented account creation to store characters on our servers. Until then, you will
+          have to save your character to a #[span.primary--text file on your computer], and upload it to this site
+          whenever you want to view it. #[span.primary--text No changes to your character are permanently saved] unless
+          you download an updated file, including tracking hit points, force points, etc.
+        h2.mt-5 Help us out!
         div.mt-5.
-          Please report any bugs you find, or features you want to see, at the
-          #[span.primary--text #website-character-builder]
-          channel in our Discord server.
+          There's just two of us working on this website, but there are plenty of features the SW5e community has asked
+          for. If you have an experience in #[span.primary--text front-end development], or you have
+          #[span.primary--text any programming experience at all] and you are willing to learn Javascript, we would
+          love to have your help. Just post in the #[span.primary--text #website-discussion] channel in our Discord
+          server.
+        div.mt-5.
+          Because of the complexity and depth of 5e, there is no way we can test every possible character. Please report
+          any bugs you find, or additional features you want to see, at the
+          #[span.primary--text #website-character-builder] channel in our Discord server.
         div.mt-5.d-flex.flex-wrap.justify-space-around
           a(href="https://discord.gg/zYcPYTu", target="_blank").mb-5
             v-btn(light)
@@ -187,7 +194,6 @@
           v-btn(v-if="currentStep > 0", text, @click="prevStep") Back
     Loading(v-else)
     div.mt-5 {{ character }}
-
 </template>
 
 <style module lang="scss">

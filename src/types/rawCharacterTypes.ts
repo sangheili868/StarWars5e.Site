@@ -29,6 +29,14 @@ export interface RawArchetypeType {
   maneuvers?: string[]
 }
 
+export interface RawASIType {
+  type: string,
+  abilitiesIncreased: {
+    name: string,
+    value: number
+  }[]
+}
+
 export interface RawClassType {
   name: string,
   levels: number,
@@ -44,13 +52,7 @@ export interface RawClassType {
   }[],
   expertise?: string[],
   archetype?: RawArchetypeType,
-  abilityScoreImprovements?: (RawFeatType | {
-    type: string,
-    abilitiesIncreased: {
-      name: string,
-      value: number
-    }[]
-  })[]
+  abilityScoreImprovements: (RawFeatType | RawASIType)[]
 }
 
 export interface RawBackgroundType {

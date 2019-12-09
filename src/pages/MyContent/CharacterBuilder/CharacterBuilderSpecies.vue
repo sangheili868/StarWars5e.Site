@@ -57,11 +57,4 @@
         @replaceCharacterProperty="payload => $emit('replaceCharacterProperty', payload)"
       )
       CharactersSpeciesDetail(:speciesName="currentSpecies.name", isHidingBack)
-    h2.text-left.mt-5 TODO:
-    ul.text-left
-      li Choose Tool proficiency (if available)
-      li Choose Musical Instrument proficiency (if available)
-      li Choose Skill proficiency (if available)
-      li Choose Weapon proficiency (if available)
-      li Choose Language (if available)
 </template>

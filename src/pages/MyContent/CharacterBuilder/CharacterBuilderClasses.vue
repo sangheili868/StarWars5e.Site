@@ -1,0 +1,93 @@
+<script lang="ts">
+  import { Component, Prop, Vue } from 'vue-property-decorator'
+  import { ClassType } from '@/types/characterTypes'
+  import { RawClassType } from '@/types/rawCharacterTypes'
+  import CharacterBuilderClassNew from './CharacterBuilderClassNew.vue'
+  import CharacterBuilderClassHitPoints from './CharacterBuilderClassHitPoints.vue'
+  import CharacterBuilderClass from './CharacterBuilderClass.vue'
+
+  @Component({
+    components: {
+      CharacterBuilderClass,
+      CharacterBuilderClassNew,
+      CharacterBuilderClassHitPoints
+    }
+  })
+  export default class CharacterBuilderClasses extends Vue {
+    @Prop(Array) readonly classes!: ClassType[]
+    @Prop(Array) readonly currentClasses!: RawClassType[]
+    @Prop(Boolean) readonly isFixedHitPoints!: boolean
+
+    get currentLevel () {
+      return this.currentClasses.reduce((acc, { levels }) => acc + levels, 0)
+    }
+
+    handleAddClass ({ name, levels }: { name: string, levels: number }) {
+      const position = this.currentClasses.length
+      const newClassData = this.classes.find(({ name: className }) => name === className)
+      if (!newClassData) console.error('Class not found: ', name)
+      const amount = newClassData ? newClassData.hitPointsAtHigherLevelsNumber : 0
+      this.$emit('updateCharacter', { classes: { [position]: {
+        name,
+        levels,
+        hitPoints: Array(position === 0 ? levels - 1 : levels).fill(amount),
+        abilityScoreImprovements: []
+      } } })
+    }
+  }
+</script>
+
+<template lang="pug">
+  div
+    h1 Choose a Class
+    div Current Level: {{ currentLevel }}
+    v-expansion-panels(accordian)
+      v-expansion-panel(v-for="(myClass, index) in currentClasses", :key="myClass.name")
+        v-expansion-panel-header
+          div.d-flex.align-center
+            h4 {{ myClass.archetype ? myClass.archetype.name : '' }} {{ myClass.name }} {{ myClass.levels }}
+            span(v-if="(index === 0) && currentClasses.length > 1").grey--text.pl-3.caption Starting Class
+        v-expansion-panel-content
+          CharacterBuilderClass(
+            v-bind="{ myClass, classes, index }",
+            @updateCharacter="newCharacter => $emit('updateCharacter', newCharacter)"
+            @replaceCharacterProperty="payload => $emit('replaceCharacterProperty', payload)"
+            @deleteCharacterProperty="payload => $emit('deleteCharacterProperty', payload)"
+          )
+    CharacterBuilderClassNew(v-bind="{ classes, currentClasses }", @add="handleAddClass")
+    CharacterBuilderClassHitPoints(
+      v-bind="{ classes, currentClasses, isFixedHitPoints }",
+      @updateCharacter="newCharacter => $emit('updateCharacter', newCharacter)"
+    )
+
+    h2.text-left.mt-5 TODO:
+    ul.text-left
+      li Ability Score Improvements
+      li * Fighting Style
+      li * Maneuvers
+      li * Tech Powers
+      li * Force Powers
+      li * Expertise
+      li * Discoveries (Scholar)
+      li * Empowerment Options (Consular)
+      li * Sentinel Ideals (Sentinel)
+      li * Guardian Aura (Guardian)
+      li * Archetype
+        ul
+          li * Skill Proficiencies
+          li * Fighting Style
+          li * Languages
+          li * Tech Powers
+          li * Force Powers
+          li * Maneuvers
+          li * Silver Tongue (Politician Pursuit)
+          li * Cybernetic Enhancements (Augmented Approach)
+          li * Modifications (Engineer)
+          li * Droid Companion (Astrotech Engineer)
+          li * Echani Weapons (Echani Order)
+          li * Hunter Features (Hunter Technique)
+</template>
+
+<style module lang="scss">
+
+</style>

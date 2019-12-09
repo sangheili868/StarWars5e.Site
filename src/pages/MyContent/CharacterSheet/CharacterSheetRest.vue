@@ -129,6 +129,8 @@ div
         div Your constitution will heal you an additional {{ conHealing }} hit {{ conHealing === 1 ? 'point' : 'points' }}.
         div In total, you will regain {{ totalHealing }} hit {{ totalHealing === 1 ? 'point' : 'points' }}.
       div(v-else)
+        div(v-if="hitPoints.current < hitPoints.maximum") You will regain {{ hitPoints.maximum - hitPoints.current }} hit points.
+        div(v-if="hitPoints.temporary") You will lose your {{ hitPoints.temporary }} temporary hit points.
         div(v-if="hitPoints.resting.longRestFeatures.length")
           div The following features will have their uses restored:
           ul

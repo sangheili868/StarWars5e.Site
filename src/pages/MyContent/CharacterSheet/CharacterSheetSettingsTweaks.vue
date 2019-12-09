@@ -20,10 +20,10 @@
       {
         category: 'General Stats',
         subtweaks: [
+          { name: 'Hit Point Maximum', path: 'hitPoints.maximum' },
           { name: 'Initiative Modifier', path: 'initiative' },
           { name: 'Proficiency Bonus', path: 'proficiencyBonus' },
           { name: 'Armor Class', path: 'armorClass' },
-          { name: 'Hit Point Maximum', path: 'hitPoints.maximum' },
           { name: 'Passive Perception', path: 'passivePerception' },
           { name: 'Speed', path: 'speed.base' }
         ]
@@ -73,8 +73,8 @@
 
     get tweaksList () {
       return [
-        ...this.abilityScoreTweaks,
         ...this.baseTweaks,
+        ...this.abilityScoreTweaks,
         ...this.castingTweaks,
         {
           category: 'Superiority',

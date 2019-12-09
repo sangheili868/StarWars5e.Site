@@ -73,6 +73,7 @@ export default function generateHitPoints (
 
   return ({
     current: rawCharacter.currentStats.hitPoints,
+    temporary: rawCharacter.currentStats.temporaryHitPoints,
     maximum,
     hitDice,
     deathSaves: rawCharacter.currentStats.deathSaves,

@@ -26,6 +26,10 @@ export interface HitPointsType {
     current: number,
     maximum: number
   }[],
+  deathSaves: {
+    successes: number,
+    failures: number
+  },
   resting: {
     hitDieBonus: number,
     numHitDiceUsed: number,

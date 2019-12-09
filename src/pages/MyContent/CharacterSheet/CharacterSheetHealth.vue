@@ -3,11 +3,13 @@
   import { HitPointsType } from '@/types/completeCharacterTypes'
   import CharacterSheetRest from './CharacterSheetRest.vue'
   import CharacterSheetHealthCircle from './CharacterSheetHealthCircle.vue'
+  import CheckList from '@/components/CheckList.vue'
 
   @Component({
     components: {
       CharacterSheetRest,
-      CharacterSheetHealthCircle
+      CharacterSheetHealthCircle,
+      CheckList
     }
   })
   export default class CharacterSheetHealth extends Vue {
@@ -17,15 +19,16 @@
 
     addHitPoints () {
       const hitPoints = Math.min(this.hitPoints.maximum, this.hitPoints.current + this.healthMod)
-      this.$emit('updateCharacter', { currentStats: { hitPoints } })
+      this.$emit('updateCharacter', { currentStats: { hitPoints, deathSaves: { successes: 0, failures: 0 } } })
       this.healthMod = 0
     }
 
     subtractHitPoints () {
       const temporaryHitPoints = Math.max(0, this.hitPoints.temporary - this.healthMod)
-      const lostHP = Math.max(0, this.hitPoints.current + this.hitPoints.temporary - this.healthMod)
-      const hitPoints = temporaryHitPoints > 0 ? this.hitPoints.current : lostHP
-      this.$emit('updateCharacter', { currentStats: { hitPoints, temporaryHitPoints } })
+      const resultingHP = this.hitPoints.current + this.hitPoints.temporary - this.healthMod
+      const hitPoints = temporaryHitPoints > 0 ? this.hitPoints.current : Math.max(0, resultingHP)
+      const failures = (resultingHP * -1 >= this.hitPoints.maximum) ? 3 : this.hitPoints.deathSaves.failures
+      this.$emit('updateCharacter', { currentStats: { hitPoints, temporaryHitPoints, deathSaves: { failures } } })
       this.healthMod = 0
     }
 
@@ -35,13 +38,33 @@
       }
       this.healthMod = 0
     }
+
+    updateDeathSaves (saveType: string, newValue: number) {
+      this.$emit('updateCharacter', { currentStats: { deathSaves: { [saveType]: newValue } } })
+    }
   }
 </script>
 
 <template lang="pug">
   div.d-flex.align-center.mx-3.my-1
     div(:class="$style.controlDiv").d-flex.flex-column.align-center.mx-4
-      CharacterSheetHealthCircle(v-bind="hitPoints")
+      CharacterSheetHealthCircle(v-if="hitPoints.current", v-bind="hitPoints")
+      div(v-else)
+        h3 Death Saves
+        div.d-flex
+          v-icon(dense) fa-heart
+          CheckList(
+            :current="hitPoints.deathSaves.successes",
+            :maximum="3",
+            @changeSelected="newValue => updateDeathSaves('successes', newValue)"
+          )
+        div.d-flex
+          v-icon(dense) fa-skull
+          CheckList(
+            :current="hitPoints.deathSaves.failures",
+            :maximum="3",
+            @changeSelected="newValue => updateDeathSaves('failures', newValue)"
+          )
       CharacterSheetRest(
         v-bind="{ hitPoints }",
         @updateCharacter="newCharacter => $emit('updateCharacter', newCharacter)"
@@ -56,6 +79,6 @@
 
 <style module lang="scss">
   .controlDiv {
-    max-width: 100px;
+    max-width: 130px;
   }
 </style>

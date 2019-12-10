@@ -9,9 +9,10 @@ export interface ArchetypeType {
   className: string,
   contentType: string,
   leveledTable: {
-    [key: string]: {
-      [key: string]: string
-    }
+    [level: string]: {
+      key: string,
+      value: string
+    }[]
   },
   leveledTableHeaders: string[]
   name: string,

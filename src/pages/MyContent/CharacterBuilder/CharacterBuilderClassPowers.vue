@@ -1,6 +1,6 @@
 <script lang="ts">
   import { Component, Prop, Vue } from 'vue-property-decorator'
-  import { ClassType, PowerType } from '@/types/characterTypes'
+  import { ClassType, PowerType, ArchetypeType } from '@/types/characterTypes'
   import { RawClassType } from '@/types/rawCharacterTypes'
   import CharacterSheetExpansionFeatures from '@/pages/MyContent/CharacterSheet/CharacterSheetExpansionFeatures.vue'
   import { namespace } from 'vuex-class'
@@ -16,6 +16,7 @@
   export default class CharacterBuilderClassPowers extends Vue {
     @Prop(Object) readonly myClass!: RawClassType
     @Prop(Object) readonly classData!: ClassType
+    @Prop(Object) readonly archetypeData: ArchetypeType | undefined
 
     @powersModule.State powers!: PowerType[]
     @powersModule.Action fetchPowers!: () => void
@@ -25,7 +26,9 @@
     }
 
     get powersSelected () {
-      return (this.myClass as any)[this.castingType.toLowerCase() + 'Powers'] as string[] || []
+      const classPowers = (this.myClass as any)[this.castingType.toLowerCase() + 'Powers'] as string[] || []
+      const archetypePowers = (this.isArchetypeCasting && (this.myClass.archetype as any)[this.castingType.toLowerCase() + 'Powers'] as string[]) || []
+      return [ ...classPowers, ...archetypePowers ]
     }
 
     get filteredPowers () {
@@ -36,16 +39,34 @@
         .value()
     }
 
+    get isArchetypeCasting () {
+      return this.archetypeData && this.archetypeData.casterType !== 'None'
+    }
+
     get castingType () {
-      return this.classData.casterType
+      return this.isArchetypeCasting ? this.archetypeData!.casterType : this.classData.casterType
     }
 
     get numberPowersKnown () {
-      return parseInt(this.classData.levelChanges[this.myClass.levels][this.castingType + ' Powers Known'])
+      return this.getLevelTableField(this.castingType + ' Powers Known')
     }
 
     get maxPowerLevel () {
-      return parseInt(this.classData.levelChanges[this.myClass.levels]['Max Power Level'])
+      return this.getLevelTableField('Max Power Level')
+    }
+
+    getLevelTableField (field: string) {
+      const classField = parseInt(this.classData.levelChanges[this.myClass.levels][field])
+      let archetypeField = 0
+      if (this.isArchetypeCasting) {
+        const leveledTable = this.archetypeData!.leveledTable
+        if (leveledTable) {
+          const powersKnownKeyValue = leveledTable[this.myClass.levels].find(({ key }) => key === field)
+          archetypeField = powersKnownKeyValue ? parseInt(powersKnownKeyValue.value) : 0
+        }
+      }
+      archetypeField = isNaN(archetypeField) ? 0 : archetypeField
+      return isNaN(classField) ? archetypeField : classField
     }
 
     isDisabled (powerName: string) {
@@ -56,13 +77,17 @@
       const isSelected = this.powersSelected.includes(powerName)
       const powersWithoutNew = this.powersSelected.filter(power => power !== powerName)
       const powersWithNew = this.powersSelected.concat(powerName)
-      this.$emit('updatePowers', { newPowers: isSelected ? powersWithoutNew : powersWithNew, type: this.castingType })
+      this.$emit('updatePowers', {
+        newPowers: isSelected ? powersWithoutNew : powersWithNew,
+        type: this.castingType,
+        isArchetype: this.isArchetypeCasting
+      })
     }
   }
 </script>
 
 <template lang="pug">
-  div(v-if="['Force', 'Tech'].includes(castingType)").mt-4
+  div(v-if="['Force', 'Tech'].includes(castingType) && numberPowersKnown > 0").mt-4
     h3 {{ castingType }} Powers
     div {{ powersSelected.length }} / {{ numberPowersKnown }} Known
     CharacterSheetExpansionFeatures(:features="filteredPowers", isShowingLevel).text-left

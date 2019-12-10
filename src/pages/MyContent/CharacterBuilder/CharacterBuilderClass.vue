@@ -1,11 +1,14 @@
 <script lang="ts">
   import { Component, Prop, Vue } from 'vue-property-decorator'
+  import { namespace } from 'vuex-class'
   import { chain, range, merge } from 'lodash'
-  import { ClassType } from '@/types/characterTypes'
+  import { ClassType, ArchetypeType } from '@/types/characterTypes'
   import { RawClassType, RawASIType } from '@/types/rawCharacterTypes'
   import CharacterBuilderClassASI from './CharacterBuilderClassASI.vue'
   import CharacterBuilderClassPowers from './CharacterBuilderClassPowers.vue'
   import ConfirmDelete from '@/components/ConfirmDelete.vue'
+
+  const archetypesModule = namespace('archetypes')
 
   @Component({
     components: {
@@ -19,12 +22,25 @@
     @Prop(Object) readonly myClass!: RawClassType
     @Prop(Number) readonly index!: number
 
+    @archetypesModule.State archetypes!: ArchetypeType[]
+    @archetypesModule.Action fetchArchetypes!: () => void
     range = range
+
+    created () {
+      this.fetchArchetypes()
+    }
 
     get classData () {
       const classData = this.classes.find(({ name }) => name === this.myClass.name)
       if (!classData) console.error('Class not found: ', this.myClass.name)
       return classData
+    }
+
+    get archetypeData () {
+      const myArchetype = this.myClass.archetype && this.myClass.archetype.name
+      const archetypeData = this.archetypes.find(({ name }) => name === myArchetype)
+      if (myArchetype && !archetypeData) console.error('Archetype not found: ', myArchetype)
+      return archetypeData
     }
 
     get asiLevels () {
@@ -35,18 +51,31 @@
         .value() : []
     }
 
+    get archetypeOptions () {
+      return this.archetypes.filter(({ className }) => className === this.myClass.name).map(({ name }) => name)
+    }
+
     handleUpdateLevels (levels: number) {
       const amount = this.classData ? this.classData.hitPointsAtHigherLevelsNumber : 0
       const newFixedHP = Array(this.index === 0 ? levels - 1 : levels).fill(amount)
       const hitPoints = merge([], newFixedHP, this.myClass.hitPoints).slice(0, newFixedHP.length)
+      const archetype = levels < 3 ? undefined : this.myClass.archetype
       this.$emit('replaceCharacterProperty', {
         path: 'classes.' + this.index,
         property: {
           ...this.myClass,
           levels,
           hitPoints,
-          abilityScoreImprovements: []
+          abilityScoreImprovements: [],
+          archetype
         }
+      })
+    }
+
+    handleUpdateArchetype (name: string) {
+      this.$emit('replaceCharacterProperty', {
+        path: `classes.${this.index}.archetype`,
+        property: { name }
       })
     }
 
@@ -57,9 +86,9 @@
       })
     }
 
-    handleUpdatePowers (newPowers: string[], type: 'Tech' | 'Force') {
+    handleUpdatePowers (newPowers: string[], type: 'Tech' | 'Force', isArchetype: boolean) {
       this.$emit('replaceCharacterProperty', {
-        path: `classes.${this.index}.${type.toLowerCase()}Powers`,
+        path: `classes.${this.index}.${isArchetype ? 'archetype.' : ''}${type.toLowerCase()}Powers`,
         property: newPowers
       })
     }
@@ -80,6 +109,13 @@
         :item="myClass.name",
         @delete="$emit('deleteCharacterProperty', { path: 'classes', index })"
       )
+    div(v-if="myClass.levels >= 3")
+      h3 Archetype
+      v-autocomplete(
+        :value="myClass.archetype && myClass.archetype.name",
+        :items="archetypeOptions",
+        @change="handleUpdateArchetype"
+      )
     h3(v-if="asiLevels.length > 0") Ability Score Improvements
     CharacterBuilderClassASI(
       v-for="(asiLevel, index) in asiLevels",
@@ -88,7 +124,7 @@
       @updateASI="newASI => handleUpdateASI(index, newASI)"
     )
     CharacterBuilderClassPowers(
-      v-bind="{ myClass, classData }",
-      @updatePowers="({ newPowers, type }) => handleUpdatePowers(newPowers, type)"
+      v-bind="{ myClass, classData, archetypeData }",
+      @updatePowers="({ newPowers, type, isArchetype }) => handleUpdatePowers(newPowers, type, isArchetype)"
     )
 </template>

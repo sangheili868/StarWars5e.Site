@@ -4,6 +4,7 @@
   import { chain, range, merge } from 'lodash'
   import { ClassType, ArchetypeType } from '@/types/characterTypes'
   import { RawClassType, RawASIType } from '@/types/rawCharacterTypes'
+  import CharacterBuilderClassHitPoints from './CharacterBuilderClassHitPoints.vue'
   import CharacterBuilderClassASI from './CharacterBuilderClassASI.vue'
   import CharacterBuilderClassPowers from './CharacterBuilderClassPowers.vue'
   import ConfirmDelete from '@/components/ConfirmDelete.vue'
@@ -12,6 +13,7 @@
 
   @Component({
     components: {
+      CharacterBuilderClassHitPoints,
       CharacterBuilderClassASI,
       CharacterBuilderClassPowers,
       ConfirmDelete
@@ -21,6 +23,7 @@
     @Prop(Array) readonly classes!: ClassType[]
     @Prop(Object) readonly myClass!: RawClassType
     @Prop(Number) readonly index!: number
+    @Prop(Boolean) readonly isFixedHitPoints!: boolean
 
     @archetypesModule.State archetypes!: ArchetypeType[]
     @archetypesModule.Action fetchArchetypes!: () => void
@@ -109,6 +112,10 @@
         :item="myClass.name",
         @delete="$emit('deleteCharacterProperty', { path: 'classes', index })"
       )
+    //- CharacterBuilderClassHitPoints(
+    //-   v-bind="{ myClass, classData, isFixedHitPoints, isStartingClass: index === 0 }",
+    //-   @updateCharacter="newCharacter => $emit('updateCharacter', newCharacter)"
+    //- )
     div(v-if="myClass.levels >= 3")
       h3 Archetype
       v-autocomplete(

@@ -45,7 +45,7 @@
 <template lang="pug">
   div
     h1 Choose a Class
-    div Current Level: {{ currentLevel }}
+    div.mb-3 #[strong Current Level:] {{ currentLevel }}
     v-expansion-panels(accordian, :value="0")
       v-expansion-panel(v-for="(myClass, index) in currentClasses", :key="myClass.name")
         v-expansion-panel-header
@@ -54,24 +54,25 @@
             span(v-if="(index === 0) && currentClasses.length > 1").grey--text.pl-3.caption Starting Class
         v-expansion-panel-content
           CharacterBuilderClass(
-            v-bind="{ myClass, classes, index }",
+            v-bind="{ myClass, classes, index, isFixedHitPoints }",
             @updateCharacter="newCharacter => $emit('updateCharacter', newCharacter)"
             @replaceCharacterProperty="payload => $emit('replaceCharacterProperty', payload)"
             @deleteCharacterProperty="payload => $emit('deleteCharacterProperty', payload)"
           )
     CharacterBuilderClassNew(v-bind="{ classes, currentClasses }", @add="handleAddClass")
-    CharacterBuilderClassHitPoints(
-      v-bind="{ classes, currentClasses, isFixedHitPoints }",
-      @updateCharacter="newCharacter => $emit('updateCharacter', newCharacter)"
-    )
-
-    h2.text-left.mt-5 TODO:
-    ul.text-left
-      li * Archetype
-        li * Tech Powers
-        li * Force Powers
+    h2.mt-5 Settings
+    div.d-flex.align-center
+      h5.mr-5 Hit Points Method:
+      v-autocomplete(
+        :value="isFixedHitPoints ? 'Fixed' : 'Manual'",
+        :items="['Fixed', 'Manual']",
+        :class="$style.method"
+        @input="newMethod => $emit('updateCharacter', { isFixedHitPoints: newMethod === 'Fixed' })"
+      )
 </template>
 
 <style module lang="scss">
-
+  .method {
+    max-width: 110px !important;
+  }
 </style>

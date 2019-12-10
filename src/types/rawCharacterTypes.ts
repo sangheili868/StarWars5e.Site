@@ -11,7 +11,7 @@ export interface RawSpeciesType {
 }
 
 export interface RawFeatType {
-  type: string,
+  type: 'Ability Score Improvement' | 'Feat',
   name: string,
   abilityScoreImprovements?: {
     [ability: string]: number
@@ -30,7 +30,7 @@ export interface RawArchetypeType {
 }
 
 export interface RawASIType {
-  type: string,
+  type: 'Ability Score Improvement' | 'Feat',
   abilitiesIncreased: {
     name: string,
     value: number
@@ -60,7 +60,7 @@ export interface RawBackgroundType {
   skills: string[],
   toolProficiencies?: string[],
   languages?: string[],
-  feat: RawFeatType
+  feat?: RawFeatType
 }
 
 export interface RawCharacteristicsType {

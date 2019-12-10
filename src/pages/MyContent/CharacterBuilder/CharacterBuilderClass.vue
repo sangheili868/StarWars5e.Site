@@ -42,7 +42,8 @@
         property: {
           ...this.myClass,
           levels,
-          hitPoints
+          hitPoints,
+          abilityScoreImprovements: []
         }
       })
     }
@@ -70,7 +71,7 @@
         :item="myClass.name",
         @delete="$emit('deleteCharacterProperty', { path: 'classes', index })"
       )
-    h3 Ability Score Improvements
+    h3(v-if="asiLevels > 0") Ability Score Improvements
     CharacterBuilderClassASI(
       v-for="(asiLevel, index) in asiLevels",
       :key="asiLevel",

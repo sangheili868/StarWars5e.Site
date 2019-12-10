@@ -62,30 +62,11 @@
 
     h2.text-left.mt-5 TODO:
     ul.text-left
-      li Ability Score Improvements
-      li * Fighting Style
-      li * Maneuvers
       li * Tech Powers
       li * Force Powers
-      li * Expertise
-      li * Discoveries (Scholar)
-      li * Empowerment Options (Consular)
-      li * Sentinel Ideals (Sentinel)
-      li * Guardian Aura (Guardian)
       li * Archetype
-        ul
-          li * Skill Proficiencies
-          li * Fighting Style
-          li * Languages
-          li * Tech Powers
-          li * Force Powers
-          li * Maneuvers
-          li * Silver Tongue (Politician Pursuit)
-          li * Cybernetic Enhancements (Augmented Approach)
-          li * Modifications (Engineer)
-          li * Droid Companion (Astrotech Engineer)
-          li * Echani Weapons (Echani Order)
-          li * Hunter Features (Hunter Technique)
+        li * Tech Powers
+        li * Force Powers
 </template>
 
 <style module lang="scss">

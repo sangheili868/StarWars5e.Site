@@ -5,7 +5,7 @@ import { SkillsType } from '@/types/referenceTypes'
 import applyTweak from '@/utilities/applyTweak'
 
 function getAbilityScore (rawCharacter: RawCharacterType, ability: string, mySpecies: SpeciesType | undefined) {
-  const backgroundImprovements = rawCharacter.background.feat.abilityScoreImprovements
+  const backgroundImprovements = rawCharacter.background.feat && rawCharacter.background.feat.abilityScoreImprovements
   const fixedSpeciesImprovement = mySpecies && mySpecies.abilitiesIncreased[0]
     .find(({ abilities }) => abilities.includes(ability))
   const calculatedScore = rawCharacter.baseAbilityScores[ability] +

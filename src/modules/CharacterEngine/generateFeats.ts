@@ -7,12 +7,12 @@ export default function generateFeats (rawCharacter: RawCharacterType, feats: Fe
     .map(({ abilityScoreImprovements }) => abilityScoreImprovements)
     .compact()
     .flatten()
-    .filter(({ type }) => type === 'feat')
+    .filter(({ type }) => type === 'Feat')
     .map(feat => (feat as RawFeatType).name)
     .value()
   const myFeatsList = [
     ...fromClasses,
-    rawCharacter.background.feat.name
+    rawCharacter.background.feat && rawCharacter.background.feat.name
   ]
   const myFeats = myFeatsList.map(name => feats.find(feat => name === feat.name))
   if (myFeats.includes(undefined)) console.error('Feats not found from ' + myFeatsList)

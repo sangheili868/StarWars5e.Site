@@ -76,7 +76,7 @@
         this.fetchSkills(),
         this.fetchConditions()
       ])
-        .then(this.createCharacter)
+        // .then(this.createCharacter) // Disabled for debugging Reenable before merge!!!
         .then(() => { this.isReady = true })
     }
 

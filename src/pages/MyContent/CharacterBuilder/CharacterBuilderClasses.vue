@@ -67,8 +67,6 @@
 
     h2.text-left.mt-5 TODO:
     ul.text-left
-      li * Tech Powers
-      li * Force Powers
       li * Archetype
         li * Tech Powers
         li * Force Powers

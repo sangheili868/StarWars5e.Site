@@ -42,15 +42,11 @@
         "Tracer Bolt"
       ],
       "archetype": {
-        "name": "Inquisitor Technique",
-        "techPowers": [
-          "Denounce",
-          "Sense Force"
-        ]
+        "name": "Inquisitor Technique"
       },
       "abilityScoreImprovements": [
         {
-          "type": "feat",
+          "type": "Feat",
           "name": "Heavily Armored"
         }
       ]
@@ -66,13 +62,9 @@
   },
   "background": {
     "name": "Folk Hero",
-    "skills": [],
     "feat": {
       "name": "Healer",
-      "type": "feat",
-      "abilityScoreImprovements": {
-        "Intelligence": 1
-      }
+      "type": "feat"
     }
   },
   "characteristics": {

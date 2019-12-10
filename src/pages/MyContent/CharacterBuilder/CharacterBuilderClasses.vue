@@ -34,6 +34,11 @@
         abilityScoreImprovements: []
       } } })
     }
+
+    getClassTitle (myClass: RawClassType) {
+      const archetype = myClass.archetype ? ` (${myClass.archetype.name})` : ''
+      return myClass.name + archetype + ' ' + myClass.levels
+    }
   }
 </script>
 
@@ -41,11 +46,11 @@
   div
     h1 Choose a Class
     div Current Level: {{ currentLevel }}
-    v-expansion-panels(accordian)
+    v-expansion-panels(accordian, :value="0")
       v-expansion-panel(v-for="(myClass, index) in currentClasses", :key="myClass.name")
         v-expansion-panel-header
           div.d-flex.align-center
-            h4 {{ myClass.archetype ? myClass.archetype.name : '' }} {{ myClass.name }} {{ myClass.levels }}
+            h4 {{ getClassTitle(myClass) }}
             span(v-if="(index === 0) && currentClasses.length > 1").grey--text.pl-3.caption Starting Class
         v-expansion-panel-content
           CharacterBuilderClass(

@@ -4,11 +4,13 @@
   import { ClassType } from '@/types/characterTypes'
   import { RawClassType, RawASIType } from '@/types/rawCharacterTypes'
   import CharacterBuilderClassASI from './CharacterBuilderClassASI.vue'
+  import CharacterBuilderClassPowers from './CharacterBuilderClassPowers.vue'
   import ConfirmDelete from '@/components/ConfirmDelete.vue'
 
   @Component({
     components: {
       CharacterBuilderClassASI,
+      CharacterBuilderClassPowers,
       ConfirmDelete
     }
   })
@@ -54,6 +56,13 @@
         property: newASI
       })
     }
+
+    handleUpdatePowers (newPowers: string[], type: 'Tech' | 'Force') {
+      this.$emit('replaceCharacterProperty', {
+        path: `classes.${this.index}.${type.toLowerCase()}Powers`,
+        property: newPowers
+      })
+    }
   }
 </script>
 
@@ -71,11 +80,15 @@
         :item="myClass.name",
         @delete="$emit('deleteCharacterProperty', { path: 'classes', index })"
       )
-    h3(v-if="asiLevels > 0") Ability Score Improvements
+    h3(v-if="asiLevels.length > 0") Ability Score Improvements
     CharacterBuilderClassASI(
       v-for="(asiLevel, index) in asiLevels",
       :key="asiLevel",
       v-bind="{ myClass, index }",
       @updateASI="newASI => handleUpdateASI(index, newASI)"
+    )
+    CharacterBuilderClassPowers(
+      v-bind="{ myClass, classData }",
+      @updatePowers="({ newPowers, type }) => handleUpdatePowers(newPowers, type)"
     )
 </template>

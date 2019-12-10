@@ -60,7 +60,7 @@
     @skillsModule.Action fetchSkills!: () => void
     @conditionsModule.Action fetchConditions!: () => void
 
-    currentStep = 0
+    currentStep = 2 // set to 0 when ready to merge
     isReady = false
 
     created () {

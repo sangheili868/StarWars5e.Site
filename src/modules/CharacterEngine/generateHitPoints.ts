@@ -72,7 +72,7 @@ export default function generateHitPoints (
   }
 
   return ({
-    current: rawCharacter.currentStats.hitPoints,
+    current: Math.max(0, maximum - rawCharacter.currentStats.hitPointsLost),
     temporary: rawCharacter.currentStats.temporaryHitPoints,
     maximum,
     hitDice,

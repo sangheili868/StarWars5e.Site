@@ -156,11 +156,11 @@ export interface RawCharacterType {
   credits: number,
   equipment: RawEquipmentType[],
   currentStats: {
-    hitPoints: number,
+    hitPointsLost: number,
     temporaryHitPoints: number,
-    techPoints: number,
-    forcePoints: number,
-    superiorityDice: number,
+    techPointsUsed: number,
+    forcePointsUsed: number,
+    superiorityDiceUsed: number,
     hitDiceUsed: {
       d6?: number,
       d8?: number,

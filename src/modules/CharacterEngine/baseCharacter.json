@@ -42,11 +42,11 @@
   "credits": 0,
   "equipment": [ ],
   "currentStats": {
-    "hitPoints": 0,
+    "hitPointsLost": 0,
     "temporaryHitPoints": 0,
-    "techPoints": 0,
-    "forcePoints": 0,
-    "superiorityDice": 0,
+    "techPointsUsed": 0,
+    "forcePointsUsed": 0,
+    "superiorityDiceUsed": 0,
     "hitDiceUsed": { },
     "deathSaves": {
       "successes": 0,

@@ -58,9 +58,9 @@
         .mapValues('val')
         .value()
       this.$emit('updateCharacter', { currentStats: {
-        hitPoints: Math.min(this.hitPoints.maximum, this.hitPoints.current + this.totalHealing),
-        techPoints: this.hitPoints.resting.maxTechPoints,
-        superiorityDice: this.hitPoints.resting.maxSuperiorityDice,
+        hitPointsLost: Math.max(0, this.hitPoints.maximum - this.hitPoints.current - this.totalHealing),
+        techPointsUsed: 0,
+        superiorityDiceUsed: 0,
         hitDiceUsed: mapValues(this.hitDiceToUse, (numSpent, spentSize) => {
           const dice = this.hitPoints.hitDice.find(({ size }) => size === spentSize)
           return dice ? dice.maximum - dice.current + numSpent : 0
@@ -80,11 +80,11 @@
         return { size, used: maximum - current - (restored ? restored.numRestored : 0) }
       }).keyBy('size').mapValues('used').value()
       this.$emit('updateCharacter', { currentStats: {
-        hitPoints: this.hitPoints.maximum,
+        hitPointsLost: 0,
         temporaryHitPoints: 0,
-        techPoints: this.hitPoints.resting.maxTechPoints,
-        forcePoints: this.hitPoints.resting.maxForcePoints,
-        superiorityDice: this.hitPoints.resting.maxSuperiorityDice,
+        techPointsUsed: 0,
+        forcePointsUsed: 0,
+        superiorityDiceUsed: 0,
         hitDiceUsed,
         featuresTimesUsed
       } })

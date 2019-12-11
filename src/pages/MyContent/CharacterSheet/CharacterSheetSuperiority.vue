@@ -16,6 +16,11 @@
   export default class CharacterSheetSuperiority extends Vue {
     @Prop(Object) readonly superiority!: SuperiorityType
     isEmpty = isEmpty
+
+    handleUpdateSuperiorityDice (superiorityDice: number) {
+      const superiorityDiceUsed = Math.max(0, this.superiority.maxDice - superiorityDice)
+      this.$emit('updateCharacter', { currentStats: { superiorityDiceUsed } })
+    }
   }
 </script>
 
@@ -26,7 +31,7 @@
       :current="superiority.currentDice",
       :maximum="superiority.maxDice",
       :title="superiority.diceSize + 's'"
-      @changeSelected="superiorityDice => $emit('updateCharacter', { currentStats: { superiorityDice } })"
+      @changeSelected="handleUpdateSuperiorityDice"
     )
     CharacterSheetModifier(:modifier="superiority.maneuverSaveDC", label="Maneuver Save DC", isFlatNumber, small)
     CharacterSheetExpansionFeatures(:features="superiority.maneuvers")

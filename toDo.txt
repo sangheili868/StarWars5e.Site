@@ -1,0 +1,12 @@
+Store hit/force/tech points lost instead of hit points
+Test on Mobile
+Sync experience and levels
+Fix slow loads on tweaks and builder
+Allow saving on any builder page
+Handle incomplete character
+Improve page flow between builder and character
+Warning if unsaved changes
+Remove unneeded data fetches from characterBuilder.vue
+Button to show detail in builder for species/class/background
+Show stats in equipmentPanel
+Possible remove tech points from complete character resting object

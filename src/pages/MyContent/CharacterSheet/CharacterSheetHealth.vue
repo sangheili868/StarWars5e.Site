@@ -19,7 +19,8 @@
 
     addHitPoints () {
       const hitPoints = Math.min(this.hitPoints.maximum, this.hitPoints.current + this.healthMod)
-      this.$emit('updateCharacter', { currentStats: { hitPoints, deathSaves: { successes: 0, failures: 0 } } })
+      const hitPointsLost = Math.max(0, this.hitPoints.maximum - hitPoints)
+      this.$emit('updateCharacter', { currentStats: { hitPointsLost, deathSaves: { successes: 0, failures: 0 } } })
       this.healthMod = 0
     }
 
@@ -28,7 +29,8 @@
       const resultingHP = this.hitPoints.current + this.hitPoints.temporary - this.healthMod
       const hitPoints = temporaryHitPoints > 0 ? this.hitPoints.current : Math.max(0, resultingHP)
       const failures = (resultingHP * -1 >= this.hitPoints.maximum) ? 3 : this.hitPoints.deathSaves.failures
-      this.$emit('updateCharacter', { currentStats: { hitPoints, temporaryHitPoints, deathSaves: { failures } } })
+      const hitPointsLost = Math.max(0, this.hitPoints.maximum - hitPoints)
+      this.$emit('updateCharacter', { currentStats: { hitPointsLost, temporaryHitPoints, deathSaves: { failures } } })
       this.healthMod = 0
     }
 

@@ -173,11 +173,11 @@
     }
   ],
   "currentStats": {
-    "hitPoints": 34,
+    "hitPointsLost": 0,
     "temporaryHitPoints": 0,
-    "techPoints": 7,
-    "forcePoints": 0,
-    "superiorityDice": 2,
+    "techPointsUsed": 3,
+    "forcePointsUsed": 0,
+    "superiorityDiceUsed": 1,
     "hitDiceUsed": {
       "d8": 1,
       "d10": 0

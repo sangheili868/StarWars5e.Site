@@ -56,5 +56,4 @@
         @updateCharacter="newCharacter => $emit('updateCharacter', newCharacter)"
         @replaceCharacterProperty="payload => $emit('replaceCharacterProperty', payload)"
       )
-      CharactersSpeciesDetail(:speciesName="currentSpecies.name", isHidingBack)
 </template>

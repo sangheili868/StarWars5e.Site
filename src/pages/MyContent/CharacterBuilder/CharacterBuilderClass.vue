@@ -122,13 +122,13 @@
         v-bind="{ myClass, classData, isStartingClass: index === 0 }",
         @updateHitPoints="({ newValue, hpIndex }) => handleUpdateHitPoints(newValue, hpIndex)"
       )
-    div(v-if="myClass.levels >= 3")
-      h3 Archetype
-      v-autocomplete(
-        :value="myClass.archetype && myClass.archetype.name",
-        :items="archetypeOptions",
-        @change="handleUpdateArchetype"
-      )
+    v-autocomplete(
+      v-if="myClass.levels >= 3",
+      :value="myClass.archetype && myClass.archetype.name",
+      :items="archetypeOptions",
+      label="Archetype",
+      @change="handleUpdateArchetype"
+    )
     h3(v-if="asiLevels.length > 0") Ability Score Improvements
     CharacterBuilderClassASI(
       v-for="(asiLevel, index) in asiLevels",

@@ -1,13 +1,18 @@
 <script lang="ts">
+  import VueMarkdown from 'vue-markdown'
   import { Component, Prop, Vue } from 'vue-property-decorator'
-  import { BackgroundType } from '@/types/characterTypes'
+  import { namespace } from 'vuex-class'
+  import { BackgroundType, FeatType } from '@/types/characterTypes'
   import { RawBackgroundType, RawCharacteristicsType } from '@/types/rawCharacterTypes'
   import CharactersBackgroundDetail from '@/pages/Characters/CharactersBackgroundDetail.vue'
   import { chain } from 'lodash'
 
+  const featModule = namespace('feats')
+
   @Component({
     components: {
-      CharactersBackgroundDetail
+      CharactersBackgroundDetail,
+      VueMarkdown
     }
   })
   export default class CharacterBuilderDescription extends Vue {
@@ -16,6 +21,13 @@
     @Prop(String) readonly name!: string
     @Prop(String) readonly image!: string
     @Prop(Object) readonly characteristics!: RawCharacteristicsType
+
+    @featModule.State feats!: FeatType[]
+    @featModule.Action fetchFeats!: () => void
+
+    created () {
+      this.fetchFeats()
+    }
 
     alignmentOptions = [
       'Lawful Light',
@@ -61,6 +73,12 @@
       return this.chosenBackground && this.chosenBackground.featOptions.map(({ name }) => name)
     }
 
+    get featText () {
+      const featName = this.currentBackground.feat && this.currentBackground.feat.name
+      const featData = this.feats.find(({ name }) => name === featName)
+      return featData ? featData.text : ''
+    }
+
     handleChangeName (name: string) {
       this.$emit('updateCharacter', { name })
     }
@@ -88,8 +106,8 @@
     h1 Describe Your Character
     div.d-flex.mt-5
       div.flex-grow-1
-        v-text-field(:value="name", outlined, label="Name", @input="handleChangeName")
-        v-text-field(:value="image", outlined, label="Image URL", @input="handleChangeImage")
+        v-text-field(:value="name", outlined, label="Name", @change="handleChangeName")
+        v-text-field(:value="image", outlined, label="Image URL", @change="handleChangeImage")
       v-img(
         :src="image",
         contain,
@@ -117,6 +135,7 @@
       label="Choose a feat",
       @change="handleChangeBackgroundFeat"
     )
+    VueMarkdown(:source="featText").caption
     h3.mb-3 Characteristics
     v-text-field(
       v-for="characteristic in characteristicsList",
@@ -125,6 +144,6 @@
       outlined,
       hide-details,
       :label="characteristic",
-      @input="newCharacteristic => handleChangeCharacteristic(characteristic, newCharacteristic)"
+      @change="newCharacteristic => handleChangeCharacteristic(characteristic, newCharacteristic)"
     ).mb-2
 </template>

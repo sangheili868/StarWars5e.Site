@@ -16,12 +16,13 @@
   export default class CharacterSheetEquipment extends Vue {
     @Prop(Array) readonly equipment!: EquipmentType[]
     @Prop(Number) readonly credits!: number
+    @Prop(Boolean) readonly isBuilder!: boolean
   }
 </script>
 
 <template lang="pug">
   div
-    h3 Equipment
+    h3(v-if="!isBuilder") Equipment
     ValueEditor(:value="credits", label="Credits", @input="credits => $emit('updateCharacter', { credits })")
     v-expansion-panels(accordion, multiple)
       CharacterSheetEquipmentPanel(

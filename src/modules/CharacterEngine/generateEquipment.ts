@@ -43,25 +43,33 @@ function getWeaponStats (
   }
 }
 
+export function generateEquipment (rawCharacter: RawCharacterType, equipment: EquipmentType[]): EquipmentType[]
 export default function generateEquipment (
   rawCharacter: RawCharacterType,
   equipment: EquipmentType[],
-  abilityScores: AbilityScoresType,
-  proficiencyBonus: number,
-  proficiencies: string[]
-) {
-  const allProficiencies = [...proficiencies, ...rawCharacter.customProficiencies.map(({ name }) => name)]
+  abilityScores?: AbilityScoresType,
+  proficiencyBonus?: number,
+  proficiencies?: string[]
+): EquipmentType[] {
+  const allProficiencies = [...(proficiencies || []), ...rawCharacter.customProficiencies.map(({ name }) => name)]
   return chain(rawCharacter.equipment)
     .filter(({ name }) => name !== 'custom')
     .map(({ name, quantity, equipped }) => {
       const equipmentData = equipment.find(equipment => name === equipment.name)
       if (!equipmentData) console.error('Equipment Data Not Found:', name)
+      const weaponStats = abilityScores && getWeaponStats(
+        rawCharacter,
+        abilityScores,
+        equipmentData,
+        proficiencyBonus || 0,
+        allProficiencies
+      )
       return {
         name,
         quantity,
         equipped,
         ...(equipmentData || {}),
-        ...getWeaponStats(rawCharacter, abilityScores, equipmentData, proficiencyBonus, allProficiencies),
+        ...weaponStats,
         isFound: !isEmpty(equipmentData)
       }
     })

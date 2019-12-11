@@ -66,6 +66,6 @@
   }
 
   .quantityInput {
-    max-width: 100px;
+    max-width: 100px !important;
   }
 </style>

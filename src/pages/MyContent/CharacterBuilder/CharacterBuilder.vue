@@ -7,7 +7,6 @@
   import CharacterBuilderDescription from './CharacterBuilderDescription.vue'
   import CharacterBuilderEquipment from './CharacterBuilderEquipment.vue'
   import { RawCharacterType } from '@/types/rawCharacterTypes'
-  import { CompleteCharacterType } from '@/types/completeCharacterTypes'
   import { SpeciesType, ClassType, PowerType, FeatType, BackgroundType, ArchetypeType } from '@/types/characterTypes'
   import { EquipmentType } from '@/types/lootTypes'
   import Loading from '@/components/Loading.vue'
@@ -37,7 +36,6 @@
   export default class CharacterBuilder extends Vue {
     @characterModule.State character!: RawCharacterType
     @characterModule.Action createCharacter!: () => void
-    @characterModule.Getter completeCharacter!: CompleteCharacterType
     @characterModule.Action updateCharacter!: (newCharacter: RawCharacterType) => void
     @characterModule.Action replaceCharacterProperty!: ({ path, property }: { path: string, property: any }) => void
     @characterModule.Action deleteCharacterProperty!: ({ path, index }: { path: string, index: number }) => void
@@ -60,7 +58,7 @@
     @skillsModule.Action fetchSkills!: () => void
     @conditionsModule.Action fetchConditions!: () => void
 
-    currentStep = 5 // set to 0 when ready to merge
+    currentStep = 0
     isReady = false
 
     created () {
@@ -76,7 +74,7 @@
         this.fetchSkills(),
         this.fetchConditions()
       ])
-        // .then(this.createCharacter) // Disabled for debugging Reenable before merge!!!
+        .then(this.createCharacter)
         .then(() => { this.isReady = true })
     }
 
@@ -118,7 +116,13 @@
             characteristics: this.character.characteristics
           }
         },
-        { name: 'Equipment', component: 'CharacterBuilderEquipment' }
+        {
+          name: 'Equipment',
+          component: 'CharacterBuilderEquipment',
+          props: {
+            rawCharacter: this.character
+          }
+        }
       ]
     }
 

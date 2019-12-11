@@ -72,15 +72,15 @@
             { to: '/weapons', title: 'Weapons' }
           ]
         },
-        {
-          to: '/myContent',
-          title: 'My Content',
-          nested: [
-            { to: '/characterBuilder', title: 'Character Builder' },
-            { to: '/characterEditor', title: 'Character Editor' },
-            { to: '/characterSheet', title: 'Character Sheet' }
-          ]
-        },
+        // {
+        //   to: '/myContent',
+        //   title: 'My Content',
+        //   nested: [
+        //     { to: '/characterBuilder', title: 'Character Builder' },
+        //     { to: '/characterEditor', title: 'Character Editor' },
+        //     { to: '/characterSheet', title: 'Character Sheet' }
+        //   ]
+        // },
         {
           to: '/assets',
           title: 'Assets'

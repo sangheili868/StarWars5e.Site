@@ -12,7 +12,6 @@
       "Dexterity": 1
     }
   },
-  "isFixedHitPoints": true,
   "classes": [
     {
       "name": "Scholar",
@@ -321,5 +320,9 @@
       "name": "Shielding",
       "content": "You are skilled at using your shield to defend your allies as well as yourself. While you are wielding a medium or heavy shield with which you are proficient, you gain the following benefits:\r\n- When a creature you can see attacks a target other than you that is within 5 feet of you, you can use your reaction to impose disadvantage on the attack roll.\r\n- If you are wielding a heavy shield, you are no longer required to wield a weapon with the *light* property in the other hand."
     }
-  ]
+  ],
+  "settings": {
+    "isFixedHitPoints": true,
+    "abilityScoreMethod": "Point Buy"
+  }
 }

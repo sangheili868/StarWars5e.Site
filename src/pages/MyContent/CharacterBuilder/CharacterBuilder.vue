@@ -60,7 +60,7 @@
     @skillsModule.Action fetchSkills!: () => void
     @conditionsModule.Action fetchConditions!: () => void
 
-    currentStep = 2 // set to 0 when ready to merge
+    currentStep = 3 // set to 0 when ready to merge
     isReady = false
 
     created () {
@@ -96,13 +96,14 @@
           props: {
             classes: this.classes,
             currentClasses: this.character.classes,
-            isFixedHitPoints: this.character.isFixedHitPoints
+            isFixedHitPoints: this.character.settings.isFixedHitPoints
           }
         },
         {
           name: 'Ability Scores',
           component: 'CharacterBuilderAbilityScores',
           props: {
+            abilityScoreMethod: this.character.settings.abilityScoreMethod,
             currentScores: this.character.baseAbilityScores
           }
         },

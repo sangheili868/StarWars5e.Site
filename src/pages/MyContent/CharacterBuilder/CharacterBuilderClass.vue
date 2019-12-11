@@ -119,7 +119,7 @@
     div(v-if="!isFixedHitPoints")
       h3 Hit Points
       CharacterBuilderClassHitPoints(
-        v-bind="{ myClass, classData, isFixedHitPoints, isStartingClass: index === 0 }",
+        v-bind="{ myClass, classData, isStartingClass: index === 0 }",
         @updateHitPoints="({ newValue, hpIndex }) => handleUpdateHitPoints(newValue, hpIndex)"
       )
     div(v-if="myClass.levels >= 3")

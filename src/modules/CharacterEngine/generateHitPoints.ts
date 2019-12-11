@@ -25,7 +25,7 @@ export default function generateHitPoints (
   const startingClassData = startingClass && classes.find(({ name }) => name === startingClass.name)
   const hpFromFirstLevel = (startingClassData && startingClassData.hitPointsAtFirstLevelNumber) || 0
   const manualHitPoints = rawCharacter.classes.reduce((acc, myClass) => acc + myClass.hitPoints.reduce((hpAcc, value) => hpAcc + value, 0), 0)
-  const hpFromLaterLevels = rawCharacter.isFixedHitPoints ? getFixedHitPoints(rawCharacter, classes) : manualHitPoints
+  const hpFromLaterLevels = rawCharacter.settings.isFixedHitPoints ? getFixedHitPoints(rawCharacter, classes) : manualHitPoints
   const baseMaximum = hpFromFirstLevel + hpFromLaterLevels + (currentLevel * abilityScores.Constitution.modifier)
   const maximum = applyTweak(rawCharacter, 'hitPoints.maximum', baseMaximum)
   const featuresWithUsage = [ ...features.combatFeatures, ...features.nonCombatFeatures ].filter(({ usage }) => !isEmpty(usage))

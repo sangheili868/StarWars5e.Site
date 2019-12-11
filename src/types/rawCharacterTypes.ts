@@ -140,12 +140,13 @@ export interface CustomProficiencyType {
   proficiencyLevel: 'proficiency' | 'expertise'
 }
 
+export type AbilityScoreMethodType = 'Standard Array' | 'Point Buy' | 'Manual'
+
 export interface RawCharacterType {
   name: string,
   image: string,
   experiencePoints: number,
   species: RawSpeciesType,
-  isFixedHitPoints: boolean,
   classes: RawClassType[],
   baseAbilityScores: {
     [ability: string]: number
@@ -183,5 +184,9 @@ export interface RawCharacterType {
   customFeatures: {
     name: string,
     content: string
-  }[]
+  }[],
+  settings: {
+    isFixedHitPoints: boolean,
+    abilityScoreMethod: AbilityScoreMethodType | string // Added | string to avoid error when importing JSON
+  }
 }

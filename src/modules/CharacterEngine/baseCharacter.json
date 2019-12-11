@@ -9,7 +9,6 @@
     "abilityScoreImprovementSelectedOption": 0,
     "abilityScoreImprovement": {}
   },
-  "isFixedHitPoints": true,
   "classes": [ ],
   "baseAbilityScores": {
     "Strength": 0,
@@ -61,5 +60,9 @@
   "tweaks": {},
   "customProficiencies": [],
   "customLanguages": [],
-  "customFeatures": []
+  "customFeatures": [],
+  "settings": {
+    "isFixedHitPoints": true,
+    "abilityScoreMethod": "Standard Array"
+  }
 }

@@ -67,7 +67,7 @@
         :value="isFixedHitPoints ? 'Fixed' : 'Manual'",
         :items="['Fixed', 'Manual']",
         :class="$style.method"
-        @input="newMethod => $emit('updateCharacter', { isFixedHitPoints: newMethod === 'Fixed' })"
+        @input="newMethod => $emit('updateCharacter', { settings: { isFixedHitPoints: newMethod === 'Fixed' } })"
       )
 </template>
 

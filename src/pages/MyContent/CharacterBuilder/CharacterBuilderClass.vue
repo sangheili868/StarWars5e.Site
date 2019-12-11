@@ -95,6 +95,10 @@
         property: newPowers
       })
     }
+
+    handleUpdateHitPoints (newValue: number, hpIndex: number) {
+      this.$emit('updateCharacter', { classes: { [this.index]: { hitPoints: { [hpIndex]: newValue } } } })
+    }
   }
 </script>
 
@@ -112,10 +116,12 @@
         :item="myClass.name",
         @delete="$emit('deleteCharacterProperty', { path: 'classes', index })"
       )
-    //- CharacterBuilderClassHitPoints(
-    //-   v-bind="{ myClass, classData, isFixedHitPoints, isStartingClass: index === 0 }",
-    //-   @updateCharacter="newCharacter => $emit('updateCharacter', newCharacter)"
-    //- )
+    div(v-if="!isFixedHitPoints")
+      h3 Hit Points
+      CharacterBuilderClassHitPoints(
+        v-bind="{ myClass, classData, isFixedHitPoints, isStartingClass: index === 0 }",
+        @updateHitPoints="({ newValue, hpIndex }) => handleUpdateHitPoints(newValue, hpIndex)"
+      )
     div(v-if="myClass.levels >= 3")
       h3 Archetype
       v-autocomplete(

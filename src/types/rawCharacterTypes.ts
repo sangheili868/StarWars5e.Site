@@ -64,21 +64,21 @@ export interface RawBackgroundType {
 }
 
 export interface RawCharacteristicsType {
-  placeOfBirth: string,
   alignment: string,
-  personalityTraits: string,
-  ideal: string,
-  bond: string,
-  flaw: string,
-  age: string,
-  gender: string,
-  height: string,
-  weight: string,
-  hair: string,
-  eyes: string,
-  skin: string,
-  appearance: string,
-  backstory: string
+  'Personality Traits': string,
+  Ideal: string,
+  Bond: string,
+  Flaw: string,
+  Gender: string,
+  'Place of Birth': string,
+  Age: string,
+  Height: string,
+  Weight: string,
+  Hair: string,
+  Eyes: string,
+  Skin: string,
+  Appearance: string,
+  Backstory: string
 }
 
 export interface RawEquipmentType {

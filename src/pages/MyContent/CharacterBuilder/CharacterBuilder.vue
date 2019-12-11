@@ -60,7 +60,7 @@
     @skillsModule.Action fetchSkills!: () => void
     @conditionsModule.Action fetchConditions!: () => void
 
-    currentStep = 3 // set to 0 when ready to merge
+    currentStep = 5 // set to 0 when ready to merge
     isReady = false
 
     created () {
@@ -112,7 +112,10 @@
           component: 'CharacterBuilderDescription',
           props: {
             currentBackground: this.character.background,
-            backgrounds: this.backgrounds
+            backgrounds: this.backgrounds,
+            name: this.character.name,
+            image: this.character.image,
+            characteristics: this.character.characteristics
           }
         },
         { name: 'Equipment', component: 'CharacterBuilderEquipment' }

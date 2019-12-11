@@ -55,19 +55,20 @@ export interface CastingType {
 }
 
 export interface CharacteristicsType {
-  placeOfBirth: string,
-  age: string,
-  gender: string,
-  height: string,
-  weight: string,
-  hair: string,
-  eyes: string,
-  skin: string,
-  appearance: string,
-  personalityTraits: string,
-  ideal: string,
-  bond: string,
-  flaw: string
+  'Personality Traits': string,
+  Ideal: string,
+  Bond: string,
+  Flaw: string,
+  Gender: string,
+  'Place of Birth': string,
+  Age: string,
+  Height: string,
+  Weight: string,
+  Hair: string,
+  Eyes: string,
+  Skin: string,
+  Appearance: string,
+  Backstory: string
 }
 
 export interface SuperiorityType {

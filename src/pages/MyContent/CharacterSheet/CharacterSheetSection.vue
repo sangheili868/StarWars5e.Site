@@ -67,9 +67,9 @@
         v-btn(icon, :class="$style.tabButton")
           v-icon(:color="index === currentTab ? 'primary' : ''") {{ icon }}
     v-tabs(height="0", :value="currentTab")
-      v-tab-item(v-for="({ component }) in sections", :key="component")
+      v-tab-item(v-for="index in sections.length", :key="index")
         component(
-          :is="component",
+          :is="sections[index - 1].component",
           v-bind="completeCharacter",
           @updateCharacter="newCharacter => $emit('updateCharacter', newCharacter)",
           @deleteCharacterProperty="payload => $emit('deleteCharacterProperty', payload)"

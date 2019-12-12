@@ -2,38 +2,30 @@
   import { Component, Prop, Vue } from 'vue-property-decorator'
   import { namespace } from 'vuex-class'
   import SearchTable from '@/components/SearchTable.vue'
-  import LinkModal from '@/components/LinkModal.vue'
-  import { WeaponType, WeaponPropertyType } from '@/types/lootTypes'
+  import { WeaponType } from '@/types/lootTypes'
   import _ from 'lodash'
   import VueMarkdown from 'vue-markdown'
+  import LootWeaponsProperties from './LootWeaponsProperties.vue'
   import BackButton from '@/components/BackButton.vue'
 
   const weaponsModule = namespace('weapons')
-  const weaponPropertiesModule = namespace('weaponProperties')
-
-  interface WeaponPropertyModal extends WeaponPropertyType {
-    text: string
-  }
 
   @Component({
     components: {
       SearchTable,
       VueMarkdown,
-      BackButton,
-      LinkModal
+      LootWeaponsProperties,
+      BackButton
     }
   })
   export default class LootWeapons extends Vue {
     @weaponsModule.State weapons!: WeaponType[]
     @weaponsModule.Action fetchWeapons!: () => void
-    @weaponPropertiesModule.State weaponProperties!: WeaponPropertyType[]
-    @weaponPropertiesModule.Action fetchWeaponProperties!: () => void
     initialSearch: string | (string | null)[] = ''
     tableType: string = 'Weapons'
 
     created () {
       this.fetchWeapons()
-      this.fetchWeaponProperties()
       this.initialSearch = this.$route.query.search
     }
 
@@ -72,15 +64,6 @@
     weaponDamage (field: string, fields: WeaponType) {
       return fields.damageNumberOfDice ? `${fields.damageNumberOfDice}d${fields.damageDieType} ${fields.damageType}` : 'Special'
     }
-
-    weaponText (properties: string[]) {
-      return properties.map((propertyString, index) => {
-        const propertyName = _.upperCase(propertyString.split(' ')[0])
-        const text = (index > 0 ? ', ' : ' ') + propertyString
-        const propertyInfo = this.weaponProperties.find(({ name }) => _.upperCase(name) === propertyName)
-        return { ...propertyInfo, text } as WeaponPropertyModal
-      }).filter(({ content }) => content)
-    }
   }
 </script>
 
@@ -92,13 +75,8 @@
     SearchTable(name="Weapons", v-bind="{ headers, items, initialSearch, tableType }")
       template(v-slot:default="props")
         strong Properties:
-        LinkModal(
-          v-for="({ name, content, text }) in weaponText(props.item.properties)",
-          :key="name",
-          :link="text"
-        )
-          VueMarkdown(:source="content.replace(/\ufffd/g, ' - ')")
-        span(v-if="weaponText(props.item.properties).length === 0")  None
+        LootWeaponsProperties(:propertyList="props.item.properties")
+        span(v-if="props.item.properties.length === 0")  None
         VueMarkdown(v-if="props.item.description", :source="props.item.description")
         div(v-for="(mode, index) in props.item.modes", :key="index").
           #[strong {{ mode.name }}:] {{ weaponDamage('', mode) }}, {{ mode.properties.join(', ') }}

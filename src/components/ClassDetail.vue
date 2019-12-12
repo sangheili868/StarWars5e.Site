@@ -16,6 +16,7 @@
   })
   export default class ClassDetail extends Vue {
     @Prop(Object) readonly classData!: ClassType
+    @Prop(Boolean) readonly isHidingBack!: boolean
 
     get isDark () {
       return this.$vuetify.theme.dark
@@ -25,7 +26,7 @@
 
 <template lang="pug">
   div(v-if="classData").text-left
-    BackButton
+    BackButton(v-if="!isHidingBack")
     h1 {{ classData.name }}
     ImageWithLoading(:src="classData.imageUrls[0]", :class="$style.portrait", height="350", width="350", contain).ma-2
     VueMarkdown(:source="classData.flavorText")

@@ -23,6 +23,7 @@
     @speciesModule.State species!: SpeciesType[]
     @speciesModule.Action fetchSpecies!: () => void
     @Prop(String) readonly speciesName!: string
+    @Prop(Boolean) readonly isHidingBack!: boolean
 
     created () {
       this.fetchSpecies()
@@ -43,7 +44,7 @@
 <template lang="pug">
   div
     vue-headful(:title="title")
-    BackButton
+    BackButton(v-if="!isHidingBack")
     CharactersSpeciesDetailHalfHuman(v-if="speciesName === 'Half-Human'", v-bind="{ speciesData }")
     div(v-else-if="speciesData").text-left
       div(:class="$style.topSection")

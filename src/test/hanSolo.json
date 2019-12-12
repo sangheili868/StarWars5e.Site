@@ -1,0 +1,111 @@
+{
+  "name": "Han Solo",
+  "image": "https://upload.wikimedia.org/wikipedia/en/b/be/Han_Solo_depicted_in_promotional_image_for_Star_Wars_%281977%29.jpg",
+  "user": "harrisonFord",
+  "experiencePoints": 0,
+  "species": {
+    "name": "Human",
+    "abilityScoreImprovementSelectedOption": 0,
+    "abilityScoreImprovement": {
+      "Intelligence": 1,
+      "Charisma": 1,
+      "Dexterity": 2
+    },
+    "language": "Shyriiwook"
+  },
+  "classes": [
+    {
+      "name": "Operative",
+      "levels": 1,
+      "hitPoints": [],
+      "toolProficiency": "Security Kit",
+      "skills": [
+        "Investigation",
+        "Persuasion",
+        "Intimidation"
+      ],
+      "expertise": [
+        "Piloting",
+        "Intimidation"
+      ]
+    }
+  ],
+  "baseAbilityScores": {
+    "Strength": 8,
+    "Dexterity": 15,
+    "Constitution": 12,
+    "Intelligence": 13,
+    "Wisdom": 10,
+    "Charisma": 14
+  },
+  "background": {
+    "name": "Scoundrel",
+    "skills": [
+      "Deception",
+      "Sleight of Hand"
+    ],
+    "toolProficiencies": [
+      "Disguise Kit",
+      "Forgery Kit"
+    ],
+    "feat": {
+      "type": "feat",
+      "name": "Silver-Tongued",
+      "abilityScoreImprovements": {
+        "Charisma": 1
+      }
+    }
+  },
+  "characteristics": {
+    "alignment": "Chaotic Light",
+    "personalityTraits": "I'm a born gambler who can't resist taking a risk for a potential payoff. Sarcasm and insults are my weapons of choice.",
+    "ideal": "Independence. I am a free spirit - no one tells me what to do. (Chaotic)",
+    "bond": "I fleeced the wrong person and must work to ensure that this individual never crosses paths with me or those I care about.",
+    "flaw": "I hate to admit it and will hate myself for it, but I'll run and preserve my own hide if the going gets tough.",
+    "gender": "Male"
+  },
+  "credits": 0,
+  "equipment": [
+    {
+      "name": "Combat suit",
+      "quantity": 1,
+      "equipped": true
+    },
+    {
+      "name": "Vibrodagger",
+      "quantity": 1,
+      "equipped": true
+    },
+    {
+      "name": "Light pistol",
+      "quantity": 1,
+      "equipped": true
+    }
+  ],
+  "currentStats": {
+    "unspentLevels": 0,
+    "hitPointsLost": 9,
+    "temporaryHitPoints": 0,
+    "hitDiceUsed": {
+      "d8": 0
+    },
+    "deathSaves": {
+      "successes": 0,
+      "failures": 0
+    },
+    "hasInspiration": false,
+    "featuresTimesUsed": {
+      "Defiant": 0
+    },
+    "conditions": [],
+    "exhaustion": 0
+  },
+  "tweaks": {},
+  "customProficiencies": [ ],
+  "customLanguages": [],
+  "customFeatures": [],
+  "settings": {
+    "isFixedHitPoints": true,
+    "abilityScoreMethod": "Standard Array"
+  }
+}

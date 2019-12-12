@@ -23,7 +23,7 @@ export default new Vuetify({
       light: theme,
       dark: {
         ...theme,
-        secondary: 'black'
+        secondary: '000000'
       }
     }
   },

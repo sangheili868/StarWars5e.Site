@@ -9,6 +9,7 @@ import deployments from './modules/deployments'
 import enhancedItems from './modules/enhancedItems'
 import feats from './modules/feats'
 import gear from './modules/gear'
+import equipment from './modules/equipment'
 import monsters from './modules/monsters'
 import powers from './modules/powers'
 import species from './modules/species'
@@ -22,6 +23,7 @@ import ui from './modules/ui'
 import ventures from './modules/ventures'
 import weapons from './modules/weapons'
 import weaponProperties from './modules/weaponProperties'
+import character from './modules/character'
 import createPersistedState from 'vuex-persistedstate'
 import characterAdvancements from './modules/characterAdvancements'
 import conditions from './modules/conditions'
@@ -36,6 +38,7 @@ export default new Vuex.Store({
     armor,
     backgrounds,
     blobs,
+    character,
     characterAdvancements,
     classes,
     conditions,
@@ -43,6 +46,7 @@ export default new Vuex.Store({
     enhancedItems,
     feats,
     gear,
+    equipment,
     monsters,
     powers,
     species,

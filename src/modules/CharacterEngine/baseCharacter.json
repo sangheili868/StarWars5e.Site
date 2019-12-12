@@ -1,0 +1,68 @@
+
+{
+  "name": "",
+  "image": "",
+  "user": "",
+  "experiencePoints": 0,
+  "species": {
+    "name": "",
+    "abilityScoreImprovementSelectedOption": 0,
+    "abilityScoreImprovement": {}
+  },
+  "classes": [ ],
+  "baseAbilityScores": {
+    "Strength": 0,
+    "Dexterity": 0,
+    "Constitution": 0,
+    "Intelligence": 0,
+    "Wisdom": 0,
+    "Charisma": 0
+  },
+  "background": {
+    "name": "",
+    "skills": []
+  },
+  "characteristics": {
+    "alignment": "",
+    "Personality Traits": "",
+    "Ideal": "",
+    "Bond": "",
+    "Flaw": "",
+    "Gender": "",
+    "Place of Birth": "",
+    "Age": "",
+    "Height": "",
+    "Weight": "",
+    "Hair": "",
+    "Eyes": "",
+    "Skin": "",
+    "Appearance": "",
+    "Backstory": ""
+  },
+  "credits": 0,
+  "equipment": [ ],
+  "currentStats": {
+    "hitPointsLost": 0,
+    "temporaryHitPoints": 0,
+    "techPointsUsed": 0,
+    "forcePointsUsed": 0,
+    "superiorityDiceUsed": 0,
+    "hitDiceUsed": { },
+    "deathSaves": {
+      "successes": 0,
+      "failures": 0
+    },
+    "hasInspiration": false,
+    "featuresTimesUsed": { },
+    "conditions": [],
+    "exhaustion": 0
+  },
+  "tweaks": {},
+  "customProficiencies": [],
+  "customLanguages": [],
+  "customFeatures": [],
+  "settings": {
+    "isFixedHitPoints": true,
+    "abilityScoreMethod": "Standard Array"
+  }
+}

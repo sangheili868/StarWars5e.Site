@@ -3,12 +3,14 @@
   import VueMarkdown from 'vue-markdown'
   import { namespace } from 'vuex-class'
   import { ReferenceTableType } from '@/types/utilityTypes'
+  import MyDialog from '@/components/MyDialog.vue'
 
   const referenceTableModules = namespace('referenceTables')
 
   @Component({
     components: {
-      VueMarkdown
+      VueMarkdown,
+      MyDialog
     }
   })
   export default class FragmentModal extends Vue {
@@ -29,6 +31,10 @@
       return data && data.content
     }
 
+    get hasContent () {
+      return (this.hash !== '') && (this.content !== '')
+    }
+
     get route () {
       return ({
         ...this.$route,
@@ -36,33 +42,15 @@
         hash: ''
       })
     }
-
-    get isDark () {
-      return this.$vuetify.theme.dark
-    }
   }
 </script>
 
 <template lang="pug">
-  v-dialog(:value="hash && content", width="500")
-    v-card(:class="[ $style.modal, { [$style.darkSide]: isDark } ]")
-      v-card-title(primary-title, :class="{ ['darken-1']: isDark, ['lighten-2']: !isDark }").primary--text.headline.grey {{ hash }}
-      v-card-text
-        VueMarkdown(:source="content")
-      v-divider
-      v-card-actions
-        v-spacer
-        v-btn(color="primary", text, :to="route") Close
+  MyDialog(:value="hasContent")
+    template(#title) {{ hash }}
+    template(#text)
+      VueMarkdown(:source="content")
+    template(#actions)
+      v-spacer
+      v-btn(color="primary", text, :to="route") Close
 </template>
-
-<style module lang="scss">
-  @import '@/assets/styles/colors.scss';
-
-  .modal {
-    background: $backgroundGradient;
-
-    &.darkSide {
-      background: $darkSideGradient;
-    }
-  }
-</style>

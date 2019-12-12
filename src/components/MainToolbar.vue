@@ -35,7 +35,7 @@
             { to: '/monsters', title: 'Scum and Villainy' },
             { to: '/starships', title: 'Starships of the Galaxy' },
             { to: '/hives', title: 'Wretched Hives' }
-           ]
+          ]
         },
         {
           to: '/characters',
@@ -72,6 +72,15 @@
             { to: '/weapons', title: 'Weapons' }
           ]
         },
+        // {
+        //   to: '/myContent',
+        //   title: 'My Content',
+        //   nested: [
+        //     { to: '/characterBuilder', title: 'Character Builder' },
+        //     { to: '/characterEditor', title: 'Character Editor' },
+        //     { to: '/characterSheet', title: 'Character Sheet' }
+        //   ]
+        // },
         {
           to: '/assets',
           title: 'Assets'

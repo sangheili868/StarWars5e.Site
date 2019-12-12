@@ -8,6 +8,7 @@ import rulesRoutes from './Rules/router'
 import charactersRoutes from './Characters/router'
 import lootRoutes from './Loot/router'
 import starshipsRoutes from './Starships/router'
+import myContentRoutes from './MyContent/router'
 
 Vue.use(Router)
 
@@ -24,6 +25,7 @@ export default new Router({
     charactersRoutes,
     lootRoutes,
     starshipsRoutes,
+    myContentRoutes,
     {
       path: '/credits',
       component: CreditsPage,

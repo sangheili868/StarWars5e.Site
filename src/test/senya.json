@@ -1,0 +1,328 @@
+{
+  "name": "Senya Halcyon",
+  "image": "https://drive.google.com/uc?export=view&id=1DwIz-WlxPwQn54StakrBOr_JacfNoS-d",
+  "user": "tyrzaphir",
+  "experiencePoints": 23225,
+  "species": {
+    "name": "Human",
+    "abilityScoreImprovementSelectedOption": 0,
+    "abilityScoreImprovement": {
+      "Intelligence": 2,
+      "Strength": 1,
+      "Dexterity": 1
+    }
+  },
+  "classes": [
+    {
+      "name": "Scholar",
+      "levels": 3,
+      "hitPoints": [
+        5,
+        5
+      ],
+      "archetype": {
+        "name": "Politician Pursuit"
+      }
+    },
+    {
+      "name": "Scout",
+      "levels": 4,
+      "hitPoints": [
+        6,
+        6,
+        6,
+        6
+      ],
+      "techPowers": [
+        "Electroshock",
+        "Encrypted Message",
+        "Alarm",
+        "Stack the Deck",
+        "Tracer Bolt"
+      ],
+      "archetype": {
+        "name": "Inquisitor Technique"
+      },
+      "abilityScoreImprovements": [
+        {
+          "type": "Feat",
+          "name": "Heavily Armored"
+        }
+      ]
+    }
+  ],
+  "baseAbilityScores": {
+    "Strength": 15,
+    "Dexterity": 11,
+    "Constitution": 12,
+    "Intelligence": 15,
+    "Wisdom": 8,
+    "Charisma": 10
+  },
+  "background": {
+    "name": "Folk Hero",
+    "feat": {
+      "name": "Healer",
+      "type": "feat"
+    }
+  },
+  "characteristics": {
+    "alignment": "Lawful Light",
+    "Personality Traits": "I am always calm, no matter the situation. Noting is more satisfying that a hard day of good work.",
+    "Ideal": "People. Devotion to the Force brings far too much war and chaos, and commoners like me should not have to pay for it.",
+    "Bond": "The lost people of Rasynda are spread across the galaxy, and I was once their governess.",
+    "Flaw": "I'm always right. If you disagree with me, you don't have the full picture.",
+    "Gender": "female",
+    "Place of Birth": "Rasynda, first planet of the Durgal system",
+    "Age": "46",
+    "Height": "5'2\"",
+    "Weight": "152lbs",
+    "Hair": "black",
+    "Eyes": "brown",
+    "Skin": "dark chocolate",
+    "Appearance": "Poised, brawny woman with short, curly hair and a determined expression. She is wearing heavy armor and has a long, tattered cape",
+    "Backstory": "Rasynda, to most people, is the uninhabited first planet of the star Durga 7 in one quadrant of the Outer Rim. It is relatively unimportant to historians, known only for its thick, foggy atmosphere, large oceans, and the arlestaas, a cow-like creature with decently profitable meat and fur. There was once small colony of livestock farmers here, but they all moved off-planet as the resources dwindled. The only notable event was when the Jedi Daro Jissard fled here after he freed dozens of slaves from a Sith stronghold in the nearby Astan system. He programmed his ship to fly past Rasynda, but took an escape pod to the planet himself so that the Sith would follow him there, allowing the escapees to reach a Jedi safehouse in the next quadrant over. The thick fog and vast oceans make landing a ship on Rasynda nearly impossible, so he was incredibly fortunate to make a safe landing near a small village. After news of slave’s freedom reached the Jedi Council, they quickly dispatched reinforcements to retrieve Daro. They found him before the Sith did and brought him back to civilization.\nWhat the history books won’t tell you is that Rasynda was my home. On this planet, I was born, grew up, got married, had three kids, and got elected as our small colony’s mayor. All of my memories, besides my off-world schooling as a teenager, came from Rasynda. Life there was perfect. Raising and farming arlestaas was tough work, but it was rewarding. You could tell a person’s worth by the effort they showed and the bounty they produced. Everyone knew everyone else. We treated each other fairly because we knew that you would have to live with any enemies you made for the rest of your life. I’d do anything to get back to a life like that, but I know I can’t. I lost all that when that damn Jedi came.\nDaro Jissard arrived at my home in the dead of night. The older man was exhausted, and his cloak was torn, but he had frenetic energy about him. As with any extraterrestrial guest, we treated him well. He had food and water and a comfortable place to sleep. In this time, he began telling the townspeople about the wonders of the Force, and how it had guided him through his whole life. He began to teach people how to wield it, and they began to slack off on their duties. Everyone wanted to “learn the magics from the great wizard.” The fact that he also shared terrifying stories of the atrocities committed by the Sith didn’t help.  Everyone thought that they would come any day hunting for him, so we all had to be prepared for a fight. I know as well as anyone the importance of being able to protect the community. We learned from him how to identify force users, resist their abilities, and fight against a lightsaber.\nAs time passed, most people began to doubt the Sith were actually coming. But Daro’s fear only seemed to intensify. You could see the terror in his face when he spoke of the Sith and their evil ways. Eventually, the devotion to the Force that he had been spreading turned to zealotry. His lessons turned into rants and his meditations into tantrums. This began to drive people away from him. Suddenly, arlestaas began dying off at an alarming rate, and our other crops were consistently failing. Daro then told the village that when he was at the Sith stronghold, he found that they had been developing a new bioweapon. They had unleashed it against our planet in an effort to kill Daro. As quickly as they turned away, people began turning back to him for guidance and training.\nOne day, he announced that a Sith was living in this very community, and began a witch hunt. I tried to put a stop to it. I said that he had wasted too much of our people’s time with his training. Our food supplies were the lowest they had ever been, and winter was on its way. We didn’t have the time or resources to do a thorough investigation of every person in the community. If he wanted to take care of it himself, however, he could do so. I regret that decision more than anything else.\nFirst, it was the mechanic’s daughter. Then the pilot who had retired here a few years ago. Five others disappeared over the next few days. We sent out search parties and scouted the area, but there was no sign of them. Once my son vanished, I made the connection. These were all people who had never trained with Daro. I gathered the militia and went to his homestead. There I found the Jedi, with nearly two dozen apprentices. Daro claimed that I had been working with the Sith, and anyone not with him was against him. He had found and killed several so-called Sith, but they had said that there were others during his interrogations. In fact, he claimed I was the one who planted the bioweapon, and I was the reason we had no food. I laughed at this absurdity, for I had never even met a Sith. But he pressed on, announcing that he knew the location of the bioweapon, and it was in my home. We all went there, and somehow, there was a strange device in a cupboard in my room. As far as I can tell, he did find this bioweapon in the Sith stronghold but used it himself for attention and planted it in my home. He had ruined our entire lifestyle!\nBefore I could react, however, he drew his lightsaber and ordered his followers to kill me for these “evil deeds.” I had no choice but to strike down several of my oldest friends that day. When Daro saw the battle going against him, he fled, abandoning those who had sacrificed everything for him. I chased him for days. When I caught up to him, I saw him stepping onto a Jedi starship. It seems his friends had finally arrived to take him home. I knew I couldn’t give up yet. I returned to our community, kissed my children goodbye, and took a starship up to the space station. I knew that even though Daro was so vile, the Jedi were a righteous and organized group of people who would punish him accordingly. Right? That’s what they told us as kids, right? Wrong. I spent years trying to give Daro the punishment he deserved. I appealed to the Jedi Council, to various planetary governances, and other powerful individuals. No one listed to the farm girl from the outer rim. No one cared. Daro is a Jedi, and Jedi are always right. He didn’t do all these things you say he did. You probably just misunderstood him. Jedi are so much smarter and wiser than you. Go back to your farming and planting. Besides, even if I did get someone to listen, he had the whole council on his side. Who could fight against that?\nMuch later, I was drinking my sorrows away at a shady bar. I had just spent all of the money earned over the last year to get a hearing, but then it was canceled because of another Sith attack. All these deaths, all this suffering, because of the power-hungry force wielders. Sith or Jedi, all they care about is being stronger than the other. I don’t know much about the Force, but I don’t understand how people can trust such a chaotic, unpredictable power. As I finished my next drink, I saw him walk in. Daro Jissard. My adrenaline began to pump as I formed a plan. I offered to buy him a drink and struck up a friendly conversation with him. He had no idea who I was or where I was from. I kept the drinks coming until he was hammered. As it got late, I said that I could give him a lift home. The next thing I knew, I had killed my first Jedi. I don’t know why, but I grabbed his lightsaber before running away. I booked passage off the planet and headed back to Rasynda as quickly as possible.\nThis man deserved this! He was a perversion of everything everyone believed about the Jedi. He should not have been trusted with such power, especially if I was able to assassinate him so easily. There really needs to be more oversight over the Jedi. If they are using the powers of the Force with reckless abandon, someone needs to stop that. But not me. I can finally go home to Rasynda. Justice has been served, and now my people can be at peace.\nHowever, things only got worse. The bioweapon that Daro released in Rasynda had ravaged the planet. All plants and animals, as well as my family, had died off in the few years I had been gone, and the last remaining people had moved off-planet, scattered amongst the stars. Without a community to return to, I had no place to go and no work to do. I began to pick up odd jobs to make ends meet. I finally fell in with a group of smugglers at one of the lowest points in my life. Eventually, I began to hear people grumble about other Jedi using and abusing their power for their own gains. I decided to set out and help people deal with these problems. I believe the Force to be far too powerful and chaotic for normal people to have access too. The Republic needs to do something to stop the endless wars between the Jedi and the Sith, and I hope one day to work with the government to make positive change. Only then will I feel that all of my kinsmen who died from Daro’s mistake will be at peace."
+  },
+  "credits": 260,
+  "equipment": [
+    {
+      "name": "Durasteel armor",
+      "quantity": 1,
+      "equipped": true
+    },
+    {
+      "name": "Heavy shield",
+      "equipped": true,
+      "quantity": 1
+    },
+    {
+      "name": "Shotosaber",
+      "quantity": 1,
+      "equipped": true
+    },
+    {
+      "name": "Lightsaber",
+      "quantity": 1,
+      "equipped": true
+    },
+    {
+      "name": "Hold-out",
+      "quantity": 1,
+      "equipped": true
+    },
+    {
+      "name": "Blaster rifle",
+      "quantity": 1,
+      "equipped": true
+    },
+    {
+      "name": "Medkit",
+      "quantity": 2
+    },
+    {
+      "name": "Biochemist's kit",
+      "quantity": 1
+    },
+    {
+      "name": "Clothes, common",
+      "quantity": 1
+    },
+    {
+      "name": "Glowrod",
+      "quantity": 5
+    },
+    {
+      "name": "Fusion cutter",
+      "quantity": 1
+    },
+    {
+      "name": "Chronometer",
+      "quantity": 1
+    },
+    {
+      "name": "Grappling hook",
+      "quantity": 1
+    },
+    {
+      "name": "Field rations (one day's)",
+      "quantity": 10
+    },
+    {
+      "name": "Canteen",
+      "quantity": 1
+    },
+    {
+      "name": "Fibercord cable, 50 ft (rolled)",
+      "quantity": 1
+    },
+    {
+      "name": "Commlink",
+      "quantity": 4
+    },
+    {
+      "name": "Medium shield generator",
+      "quantity": 1
+    },
+    {
+      "name": "Light battle armor",
+      "quantity": 1
+    },
+    {
+      "name": "Backpack",
+      "quantity": 1
+    }
+  ],
+  "currentStats": {
+    "hitPointsLost": 0,
+    "temporaryHitPoints": 0,
+    "techPointsUsed": 3,
+    "forcePointsUsed": 0,
+    "superiorityDiceUsed": 1,
+    "hitDiceUsed": {
+      "d8": 1,
+      "d10": 0
+    },
+    "deathSaves": {
+      "successes": 0,
+      "failures": 0
+    },
+    "hasInspiration": false,
+    "featuresTimesUsed": {},
+    "conditions": [],
+    "exhaustion": 0,
+    "unspentLevels": 0
+  },
+  "tweaks": {
+    "abilityScores": {
+      "Charisma": {
+        "skills": {
+          "Persuasion": {
+            "bonus": 4,
+            "override": null
+          }
+        }
+      }
+    }
+  },
+  "customProficiencies": [
+    {
+      "name": "Lightsaber",
+      "proficiencyLevel": "proficient"
+    },
+    {
+      "name": "Mason's Tools",
+      "proficiencyLevel": "proficient"
+    },
+    {
+      "name": "Biochemist's Kit",
+      "proficiencyLevel": "proficient"
+    },
+    {
+      "name": "Investigation",
+      "proficiencyLevel": "proficient"
+    },
+    {
+      "name": "Medicine",
+      "proficiencyLevel": "proficient"
+    },
+    {
+      "name": "Survival",
+      "proficiencyLevel": "proficient"
+    },
+    {
+      "name": "Animal Handling",
+      "proficiencyLevel": "proficient"
+    },
+    {
+      "name": "Heavy Armor",
+      "proficiencyLevel": "proficient"
+    },
+    {
+      "name": "Piloting",
+      "proficiencyLevel": "proficient"
+    },
+    {
+      "name": "Carpenter's Kit",
+      "proficiencyLevel": "proficient"
+    },
+    {
+      "name": "Persuasion",
+      "proficiencyLevel": "expertise"
+    },
+    {
+      "name": "Athletics",
+      "proficiencyLevel": "expertise"
+    }
+  ],
+  "customLanguages": [
+    "Kel Dorian",
+    "Huttese",
+    "Nautila"
+  ],
+  "customFeatures": [
+    {
+      "name": "Heads Up",
+      "content": "When a friendly creature who can see or hear you makes a saving throw, you can use your reaction and expend a superiority die, adding the number rolled to the result of the saving throw. You can use this maneuver before or after making the saving throw, but before any effects of the saving throw are determined."
+    },
+    {
+      "name": "One Step Ahead",
+      "content": "When you roll initiative and you are not surprised, you can expend a superiority die and add the number rolled to your initiative."
+    },
+    {
+      "name": "Targeted Strike",
+      "content": "When an ally makes an attack against a creature, you can use your reaction to expend a superiority die. You add the superiority die to the attack roll, and the damage roll if it hits. You can use this maneuver before or after the attack roll, but before the GM determines whether or not the attack hits."
+    },
+    {
+      "name": "Call the Guards",
+      "content": "When a creature makes an attack roll against you, you can use your reaction and expend a superiority die and command a willing ally within 5 feet of that creature to use their reaction to intercede. The creature is then forced to make an attack on the ally instead. If the attack misses, the ally can immediately make a weapon attack against that creature as a part of that same reaction. Roll the superiority die, and add the result to the ally’s attack roll."
+    },
+    {
+      "name": "Critical Analysis",
+      "content": "At 1st level, you are able to analyze a target, develop a plan on how to best overcome any potential obstacle, and execute that plan with ruthless efficiency. As a bonus action on your turn, you can analyze a target you can see within 60 feet of you. For the next minute, or until you analyze another target, you gain the following benefits:\r\n- When you analyze a hostile creature, your attack and damage rolls made with weapons with the finesse property or blaster weapons against that target may use your Intelligence modifier instead of Strength or Dexterity.\r\n- When you analyze a friendly creature, the target can end your Critical Analysis on them (no action required) to add your Intelligence modifier to one attack roll, ability check, or saving throw. Once a friendly creature has benefited from this ability, they can not do so again until they complete a short or long rest."
+    },
+    {
+      "name": "Resolute",
+      "content": "When you make a saving throw to resist charm and fear effects, you may add your Intelligence modifier to the roll."
+    },
+    {
+      "name": "Charming Feint",
+      "content": "Allies within range of your Motivating Diplomat feature also gain a bonus to their damage roll equal to half your Intelligence modifier (rounded down)."
+    },
+    {
+      "name": "Sage Advice",
+      "content": "When you reach 2nd level, you can spend 1 minute spreading your knowledge and experience, advising those around you. When you do so, choose a skill or tool you are proficient with and a number of friendly creatures up to your Intelligence modifier within 30 feet of you who can hear you and who can understand you. Once within the next hour, the next time each creature would make an ability check with the chosen skill or tool, they may add their proficiency bonus to the roll if they are not already proficient. A creature may only benefit from this feature once. If a creature is targeted by this feature again before using it, they can choose to retain the first benefit or replace it with the new skill or tool instead.\r\n\r\nOnce you've used this feature, you can't use it again until you finish a long rest. Starting at 13th level, you regain the ability to use it after you complete a short or long rest."
+    },
+    {
+      "name": "Swift Response",
+      "content": "Beginning at 1st level, you learn to react with swift and decisive action in combat. You gain the following benefits: \r\n- You ignore difficult terrain.\r\n- You add your proficiency bonus to initiative rolls.\r\n- On your first turn during combat, you have advantage on attack rolls against creatures that have not yet acted."
+    },
+    {
+      "name": "Ranger's Quarry",
+      "content": "Also 1st level, you learn how to effectively read and track your prey. On your turn, you can choose a creature you can see within 90 feet and mark it as your quarry (no action required). For the next 10 minutes, you gain the following benefits:\r\n- Once per round, when you hit the target with a weapon attack, you can deal 1d4 additional damage to it of the same type as the weapon's damage. This die changes as you gain scout levels, as shown in the Ranger's Quarry Damage Die column of the scout class table.\r\n- You have advantage on any Wisdom (Perception) or Wisdom (Survival) check you make to find it while it's on the same planet as you. \r\n\r\nYou can use this feature a number of times equal to your Intelligence modifier. You regain all expended uses when you finish a short or long rest."
+    },
+    {
+      "name": "Pathfinder",
+      "content": "Beginning at 3rd level, you are skilled at navigating the untamed wilds. You gain the following benefits when traveling for an hour or more:\r\n- Difficult terrain doesn't slow your group's travel.\r\n- You can't become lost by unenhanced means.\r\n- Even when you are engaged in another activity while traveling (such as foraging, navigating, or tracking), you remain alert to danger.\r\n- If you are traveling alone, you can move stealthily at a normal pace.\r\n- When you forage, you find twice as much food as you normally would.\r\n- When you make a Wisdom (Survival) check, you gain a bonus to the check equal to your Intelligence modifier."
+    },
+    {
+      "name": "Motivating Diplomat",
+      "content": "Also at 3rd level, when you are the target of your Critical Analysis feature, you and all allies within 10 feet of you gain a bonus to their AC equal to half your Intelligence modifier (rounded down)."
+    },
+    {
+      "name": "Mark of the Inquisitor",
+      "content": "Also at 3rd level, when the target of your Ranger's Quarry feature is within 15 feet of you, you gain the following benefits:\r\n- Whenever the creature casts a force power, it must first succeed on a Constitution saving throw against your tech save DC to maintain concentration. On a failed save, the casting is disrupted, the force power fails, and the force points are wasted.\r\n- Whenever the creature starts its turn while concentrating on a force power, it must make a Constitution saving throw against your force save DC to maintain concentration. On a failed save, it loses concentration on the power.\r\n\r\nAt 11th level, the radius of this feature increases to 30 feet."
+    },
+    {
+      "name": "Defiant",
+      "content": "Humans are known to be stubborn and often refuse to give up, even against the worst odds. You can add a d4 to a skill check or saving throw, after rolling but before you know the outcome. You must then finish a short or long rest before you can use this feature again."
+    },
+    {
+      "name": "Shielding",
+      "content": "You are skilled at using your shield to defend your allies as well as yourself. While you are wielding a medium or heavy shield with which you are proficient, you gain the following benefits:\r\n- When a creature you can see attacks a target other than you that is within 5 feet of you, you can use your reaction to impose disadvantage on the attack roll.\r\n- If you are wielding a heavy shield, you are no longer required to wield a weapon with the *light* property in the other hand."
+    }
+  ],
+  "settings": {
+    "isFixedHitPoints": true,
+    "abilityScoreMethod": "Point Buy"
+  }
+}

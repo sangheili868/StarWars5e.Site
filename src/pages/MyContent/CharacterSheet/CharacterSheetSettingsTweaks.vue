@@ -1,0 +1,138 @@
+<script lang="ts">
+  import { Component, Prop, Vue } from 'vue-property-decorator'
+  import { namespace } from 'vuex-class'
+  import { TweaksType } from '@/types/rawCharacterTypes'
+  import { map, startCase, set, get, parseInt as _parseInt, isEmpty, chain } from 'lodash'
+  import { SkillsType } from '@/types/referenceTypes'
+
+  const skillsModule = namespace('skills')
+
+  @Component
+  export default class CharacterSheetSettingsTweaks extends Vue {
+    @Prop(Object) readonly tweaks!: TweaksType
+
+    @skillsModule.State skills!: SkillsType[]
+    @skillsModule.Action fetchSkills!: () => void
+
+    get = get
+    isEmpty = isEmpty
+    baseTweaks = [
+      {
+        category: 'General Stats',
+        subtweaks: [
+          { name: 'Hit Point Maximum', path: 'hitPoints.maximum' },
+          { name: 'Initiative Modifier', path: 'initiative' },
+          { name: 'Proficiency Bonus', path: 'proficiencyBonus' },
+          { name: 'Armor Class', path: 'armorClass' },
+          { name: 'Passive Perception', path: 'passivePerception' },
+          { name: 'Speed', path: 'speed.base' }
+        ]
+      },
+      {
+        category: 'Weapons',
+        subtweaks: [
+          { name: 'To Hit', path: 'weapon.toHit' },
+          { name: 'Damage Bonus', path: 'weapon.damage' }
+        ]
+      }
+    ]
+
+    get abilityScoreTweaks () {
+      let skillsMap = chain(this.skills)
+        .groupBy('baseAttribute')
+        .mapValues(skills => skills.map(({ name }) => name))
+        .value()
+      skillsMap.Constitution = []
+      return map(skillsMap, (skillList: string[], ability) => {
+        const basePath = `abilityScores.${ability}`
+        return {
+          category: ability,
+          subtweaks: [
+            { name: 'Ability Score', path: `${basePath}.score` },
+            { name: 'Saving Throw Modifier', path: `${basePath}.savingThrowModifier` },
+            ...skillList.map(skill => ({
+              name: skill,
+              path: `${basePath}.skills.${skill}`
+            }))
+          ]
+        }
+      })
+    }
+
+    get castingTweaks () {
+      return ['tech', 'force'].map(castingType => ({
+        category: startCase(castingType) + ' Casting',
+        subtweaks: [
+          { name: 'Max Points', path: castingType + 'Casting.maxPoints' },
+          { name: 'Attack Modifier', path: castingType + 'Casting.attackModifier' },
+          { name: 'Save DC', path: castingType + 'Casting.saveDC' },
+          { name: 'Max Power Level', path: castingType + 'Casting.maxPowerLevel' }
+        ]
+      }))
+    }
+
+    get tweaksList () {
+      return [
+        ...this.baseTweaks,
+        ...this.abilityScoreTweaks,
+        ...this.castingTweaks,
+        {
+          category: 'Superiority',
+          subtweaks: [
+            { name: 'Max Dice', path: 'superiority.maxDice' },
+            { name: 'Maneuver Save DC', path: 'superiority.maneuverSaveDC' }
+          ]
+        }
+      ]
+    }
+
+    updateTweak (newValue: string, tweakType: string, path: string) {
+      let tweaks = { ...this.tweaks }
+      let sanitizedValue: number | null = _parseInt(newValue)
+      if (isNaN(sanitizedValue)) sanitizedValue = null
+      set(tweaks, `${path}.${tweakType}`, sanitizedValue)
+
+      const otherTweakType = tweakType === 'override' ? 'bonus' : 'override'
+      set(tweaks, `${path}.${otherTweakType}`, null)
+
+      this.$emit('replaceCharacterProperty', { path: 'tweaks', property: tweaks })
+    }
+  }
+</script>
+
+<template lang="pug">
+  div.pt-5
+    h2 Tweak Values
+    div.caption Set a bonus to add a positive or negative number to the calculated value. Set an override to ignore the calculated value.
+    div(v-for="({ category, subtweaks }) in tweaksList", :key="category")
+      h3 {{ category }}
+      v-container
+        v-row(v-for="({ name, path }) in subtweaks", :key="category + name").d-flex
+          v-col(cols="4").pa-0.d-flex.align-center
+            h5 {{ name }}
+          v-col(cols="4").pa-0
+            v-text-field(
+              :value="get(tweaks, path + '.bonus')"
+              outlined,
+              type="number",
+              hide-details,
+              clearable,
+              label="Bonus",
+              @input="newValue => updateTweak(newValue, 'bonus', path)"
+            ).pa-1
+          v-col(cols="4").pa-0
+            v-text-field(
+              :value="get(tweaks, path + '.override')"
+              outlined,
+              type="number",
+              hide-details,
+              clearable,
+              label="Override",
+              @input="newValue => updateTweak(newValue, 'override', path)"
+            ).pa-1
+    v-btn(
+      v-if="!isEmpty(tweaks)"
+      color="red",
+      @click="$emit('replaceCharacterProperty', { path: 'tweaks', property: {} })"
+    ).white--text Clear All Tweaks
+</template>

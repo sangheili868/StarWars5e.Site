@@ -124,7 +124,15 @@ table.v-table {
 }
 
 .v-application.theme--dark {
-  h1, h2, h3, h4, a:not(.v-btn):not(.v-list-item) {
+  a:not(.v-btn):not(.v-list-item) {
+    color: $darkSidePrimary;
+
+    &:hover {
+      color: lighten($darkSidePrimary, 30%);
+    }
+  }
+
+  h1, h2, h3, h4 {
     color: $darkSidePrimary
   }
 
@@ -162,7 +170,7 @@ table.v-table {
     }
   }
 
-  .v-table, .v-card {
+  .v-table {
     background-color: $darkSideDarkGrey;
     border-color: $darkSideDarkGrey;
   }

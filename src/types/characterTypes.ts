@@ -9,9 +9,10 @@ export interface ArchetypeType {
   className: string,
   contentType: string,
   leveledTable: {
-    [key: string]: {
-      [key: string]: string
-    }
+    [level: string]: {
+      key: string,
+      value: string
+    }[]
   },
   leveledTableHeaders: string[]
   name: string,
@@ -59,9 +60,11 @@ export interface ClassType {
   creatingText: string
   equipmentLines: string[]
   flavorText: string
-  hitDiceDieType: Number
+  hitDiceDieType: number
   hitPointsAtFirstLevel: string
+  hitPointsAtFirstLevelNumber: number,
   hitPointsAtHigherLevels: string
+  hitPointsAtHigherLevelsNumber: number,
   levelChangeHeadersJson: string
   levelChanges: any,
   multiClassProficiencies: string[]
@@ -92,6 +95,12 @@ export interface PowerType {
   powerType: string,
   range: string,
   prerequisite: string
+}
+
+export interface ManeuverType {
+  name: string,
+  classes: string[],
+  description: string
 }
 
 export interface AbilitiesIncreasedType {
@@ -130,4 +139,20 @@ export interface FeatType {
   name: string,
   prerequisites: string,
   attributesIncreased: string[]
+}
+
+export interface FightingStyleType {
+  name: string,
+  description: string
+}
+
+export interface FeatureType {
+  name: string,
+  level?: number,
+  type?: string,
+  description: string
+}
+
+export interface FeaturesType {
+  [ myClass: string ]: FeatureType[]
 }

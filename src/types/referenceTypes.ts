@@ -54,3 +54,13 @@ export interface VariantRuleBlobType {
   chapterName: string,
   contentMarkdown: string
 }
+
+export interface SkillsType {
+  [ ability: string ]: string[]
+}
+
+export interface gdFeats {
+  name: string,
+  description: string,
+  proficiencies: string[]
+}

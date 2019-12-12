@@ -26,13 +26,11 @@
       return level > 0 ? `Level ${level}` : 'At-will'
     }
 
-    handleChangeTechPoints (techPoints: number) {
-      const techPointsUsed = Math.max(0, this.techCasting.maxPoints - techPoints)
+    handleChangeTechPoints (techPointsUsed: number) {
       this.$emit('updateCharacter', { currentStats: { techPointsUsed } })
     }
 
-    handleChangeForcePoints (forcePoints: number) {
-      const forcePointsUsed = Math.max(0, this.forceCasting.maxPoints - forcePoints)
+    handleChangeForcePoints (forcePointsUsed: number) {
       this.$emit('updateCharacter', { currentStats: { forcePointsUsed } })
     }
   }

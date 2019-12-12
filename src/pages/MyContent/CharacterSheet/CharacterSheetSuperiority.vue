@@ -17,8 +17,7 @@
     @Prop(Object) readonly superiority!: SuperiorityType
     isEmpty = isEmpty
 
-    handleUpdateSuperiorityDice (superiorityDice: number) {
-      const superiorityDiceUsed = Math.max(0, this.superiority.maxDice - superiorityDice)
+    handleUpdateSuperiorityDice (superiorityDiceUsed: number) {
       this.$emit('updateCharacter', { currentStats: { superiorityDiceUsed } })
     }
   }

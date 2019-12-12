@@ -192,7 +192,7 @@
             v-on="{ updateCharacter, replaceCharacterProperty, deleteCharacterProperty }"
           )
           v-btn(v-if="currentStep < numSteps", color="primary", @click="nextStep") Continue
-          v-btn(v-if="currentStep === numSteps", color="primary", to="characterSheet") Save and View My Character
+          v-btn(v-if="currentStep === numSteps", color="primary", to="characterSheet") View My Character
           v-btn(v-if="currentStep > 0", text, @click="prevStep") Back
     Loading(v-else)
 </template>

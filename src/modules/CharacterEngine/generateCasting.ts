@@ -92,20 +92,18 @@ export default function generateCasting (
   }
   const techPowers = getPowersKnown(rawCharacter, powers, 'Tech')
   const forcePowers = getPowersKnown(rawCharacter, powers, 'Force')
-  const maxTechPoints = getPowerPoints(rawCharacter, myClasses, myArchetypes, techCastingBonus, 'Tech')
-  const maxForcePoints = getPowerPoints(rawCharacter, myClasses, myArchetypes, techCastingBonus, 'Force')
   return {
     techCasting: techPowers.length ? {
-      currentPoints: Math.max(0, maxTechPoints - rawCharacter.currentStats.techPointsUsed),
-      maxPoints: maxTechPoints,
+      currentPoints: rawCharacter.currentStats.techPointsUsed,
+      maxPoints: getPowerPoints(rawCharacter, myClasses, myArchetypes, techCastingBonus, 'Tech'),
       attackModifier: applyTweak(rawCharacter, 'techCasting.attackModifier', techCastingBonus + proficiencyBonus),
       saveDC: applyTweak(rawCharacter, 'techCasting.saveDC', 8 + techCastingBonus + proficiencyBonus),
       maxPowerLevel: getMaxPowerLevel(rawCharacter, myClasses, myArchetypes, 'Tech'),
       powersKnown: techPowers
     } : {},
     forceCasting: forcePowers.length ? {
-      currentPoints: Math.max(0, maxForcePoints - rawCharacter.currentStats.forcePointsUsed),
-      maxPoints: maxForcePoints,
+      currentPoints: rawCharacter.currentStats.forcePointsUsed,
+      maxPoints: getPowerPoints(rawCharacter, myClasses, myArchetypes, techCastingBonus, 'Force'),
       lightAttackModifier: applyTweak(rawCharacter, 'forceCasting.attackModifier', forceCastingBonus.light + proficiencyBonus),
       lightSaveDC: applyTweak(rawCharacter, 'forceCasting.saveDC', 8 + forceCastingBonus.light + proficiencyBonus),
       darkAttackModifier: applyTweak(rawCharacter, 'forceCasting.attackModifier', forceCastingBonus.dark + proficiencyBonus),

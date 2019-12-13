@@ -1,9 +1,10 @@
 <script lang="ts">
   import { Component, Prop, Vue } from 'vue-property-decorator'
   import { namespace } from 'vuex-class'
-  import { chain, range, merge } from 'lodash'
+  import { chain, range, merge, omit } from 'lodash'
   import { ClassType, ArchetypeType } from '@/types/characterTypes'
-  import { RawClassType, RawASIType } from '@/types/rawCharacterTypes'
+  import { RawClassType, RawASIType, RawCharacterType } from '@/types/rawCharacterTypes'
+  import { CharacterAdvancementType } from '@/types/lookupTypes'
   import CharacterBuilderClassHitPoints from './CharacterBuilderClassHitPoints.vue'
   import CharacterBuilderClassASI from './CharacterBuilderClassASI.vue'
   import CharacterBuilderClassPowers from './CharacterBuilderClassPowers.vue'
@@ -20,10 +21,12 @@
     }
   })
   export default class CharacterBuilderClass extends Vue {
+    @Prop(Object) readonly character!: RawCharacterType
     @Prop(Array) readonly classes!: ClassType[]
     @Prop(Object) readonly myClass!: RawClassType
     @Prop(Number) readonly index!: number
     @Prop(Boolean) readonly isFixedHitPoints!: boolean
+    @Prop(Array) readonly characterAdvancements!: CharacterAdvancementType[]
 
     @archetypesModule.State archetypes!: ArchetypeType[]
     @archetypesModule.Action fetchArchetypes!: () => void
@@ -58,21 +61,33 @@
       return this.archetypes.filter(({ className }) => className === this.myClass.name).map(({ name }) => name)
     }
 
+    get totalOtherClassesLevels () {
+      return this.character.classes
+        .filter(({ name }) => name !== this.myClass.name)
+        .reduce((acc, { levels }) => acc + levels, 0)
+    }
+
     handleUpdateLevels (levels: number) {
       const amount = this.classData ? this.classData.hitPointsAtHigherLevelsNumber : 0
       const newFixedHP = Array(this.index === 0 ? levels - 1 : levels).fill(amount)
       const hitPoints = merge([], newFixedHP, this.myClass.hitPoints).slice(0, newFixedHP.length)
       const archetype = levels < 3 ? undefined : this.myClass.archetype
-      this.$emit('replaceCharacterProperty', {
-        path: 'classes.' + this.index,
-        property: {
-          ...this.myClass,
-          levels,
-          hitPoints,
-          abilityScoreImprovements: [],
-          archetype
-        }
-      })
+      const newLevel = this.totalOtherClassesLevels + levels
+      const advancement = this.characterAdvancements.find(({ level }) => level === newLevel)
+      const experiencePoints = advancement ? advancement.experiencePoints : this.character.experiencePoints
+      this.$emit('replaceCharacterProperties', [
+        {
+          path: 'classes.' + this.index,
+          property: {
+            ...this.myClass,
+            levels,
+            hitPoints,
+            abilityScoreImprovements: [],
+            archetype
+          }
+        },
+        { path: 'experiencePoints', property: experiencePoints }
+      ])
     }
 
     handleUpdateArchetype (name: string) {
@@ -99,6 +114,18 @@
     handleUpdateHitPoints (newValue: number, hpIndex: number) {
       this.$emit('updateCharacter', { classes: { [this.index]: { hitPoints: { [hpIndex]: newValue } } } })
     }
+
+    handleDeleteClass () {
+      const advancement = this.characterAdvancements.find(({ level }) => level === this.totalOtherClassesLevels)
+      const experiencePoints = advancement ? advancement.experiencePoints : this.character.experiencePoints
+      this.$emit('replaceCharacterProperties', [
+        {
+          path: 'classes',
+          property: Object.values(omit(this.character.classes, this.index))
+        },
+        { path: 'experiencePoints', property: experiencePoints }
+      ])
+    }
   }
 </script>
 
@@ -107,14 +134,14 @@
     div.d-flex.align-center
       v-autocomplete(
         :value="myClass.levels",
-        :items="range(1,21)",
+        :items="range(1, 21 - totalOtherClassesLevels)",
         label="Number of levels in this class",
         @change="levels => handleUpdateLevels(levels)"
       ).mr-3
       ConfirmDelete(
         label="Class",
         :item="myClass.name",
-        @delete="$emit('deleteCharacterProperty', { path: 'classes', index })"
+        @delete="handleDeleteClass"
       )
     div(v-if="!isFixedHitPoints")
       h3 Hit Points

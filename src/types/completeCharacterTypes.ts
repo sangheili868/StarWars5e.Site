@@ -110,7 +110,9 @@ export interface CompleteCharacterType {
   experiencePoints: {
     previousLevel: number,
     current: number,
-    nextLevel: number
+    nextLevel: number,
+    isCorrect: boolean,
+    errorMessage: string
   },
   abilityScores: AbilityScoresType,
   proficiencyBonus: number,

@@ -13,6 +13,7 @@
   export default class CharacterBuilderClassNew extends Vue {
     @Prop(Array) readonly classes!: ClassType[]
     @Prop(Array) readonly currentClasses!: RawClassType[]
+    @Prop(Number) readonly currentLevel!: number
 
     isOpen = false
     chosenClass = ''
@@ -37,13 +38,13 @@
 </script>
 
 <template lang="pug">
-  MyDialog(v-model="isOpen")
+  MyDialog(v-if="currentLevel < 20", v-model="isOpen")
     template(v-slot:activator="{ on }")
       v-btn(color="primary", v-on="on", @click="resetValues").mt-3 Add New Class
     template(#title) Add New Class
     template(#text)
       v-autocomplete(v-model="chosenClass", :items="classChoices", label="Choose a class")
-      v-autocomplete(v-model="chosenLevel", :items="range(1,21)", label="Number of levels in this class")
+      v-autocomplete(v-model="chosenLevel", :items="range(1, 21 - currentLevel)", label="Number of levels in this class")
     template(#actions)
       v-btn(color="primary", :disabled="!chosenLevel || !chosenClass", @click="handleAdd") Add Class
       v-spacer

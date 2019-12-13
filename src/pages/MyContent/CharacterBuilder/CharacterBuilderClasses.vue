@@ -1,10 +1,14 @@
 <script lang="ts">
   import { Component, Prop, Vue } from 'vue-property-decorator'
+  import { namespace } from 'vuex-class'
   import { ClassType } from '@/types/characterTypes'
-  import { RawClassType } from '@/types/rawCharacterTypes'
+  import { RawClassType, RawCharacterType } from '@/types/rawCharacterTypes'
+  import { CharacterAdvancementType } from '@/types/lookupTypes'
   import CharacterBuilderClassNew from './CharacterBuilderClassNew.vue'
   import CharacterBuilderClassHitPoints from './CharacterBuilderClassHitPoints.vue'
   import CharacterBuilderClass from './CharacterBuilderClass.vue'
+
+  const characterAdvancementsModule = namespace('characterAdvancements')
 
   @Component({
     components: {
@@ -14,9 +18,23 @@
     }
   })
   export default class CharacterBuilderClasses extends Vue {
+    @Prop(Object) readonly character!: RawCharacterType
     @Prop(Array) readonly classes!: ClassType[]
-    @Prop(Array) readonly currentClasses!: RawClassType[]
-    @Prop(Boolean) readonly isFixedHitPoints!: boolean
+
+    @characterAdvancementsModule.State characterAdvancements!: CharacterAdvancementType[]
+    @characterAdvancementsModule.Action fetchCharacterAdvancements!: () => void
+
+    created () {
+      this.fetchCharacterAdvancements()
+    }
+
+    get currentClasses () {
+      return this.character.classes
+    }
+
+    get isFixedHitPoints () {
+      return this.character.settings.isFixedHitPoints
+    }
 
     get currentLevel () {
       return this.currentClasses.reduce((acc, { levels }) => acc + levels, 0)
@@ -27,12 +45,19 @@
       const newClassData = this.classes.find(({ name: className }) => name === className)
       if (!newClassData) console.error('Class not found: ', name)
       const amount = newClassData ? newClassData.hitPointsAtHigherLevelsNumber : 0
-      this.$emit('updateCharacter', { classes: { [position]: {
-        name,
-        levels,
-        hitPoints: Array(position === 0 ? levels - 1 : levels).fill(amount),
-        abilityScoreImprovements: []
-      } } })
+      const advancement = this.characterAdvancements.find(({ level }) => level === this.currentLevel + levels)
+      const experiencePoints = advancement ? advancement.experiencePoints : this.character.experiencePoints
+      this.$emit('updateCharacter', {
+        classes: {
+          [position]: {
+            name,
+            levels,
+            hitPoints: Array(position === 0 ? levels - 1 : levels).fill(amount),
+            abilityScoreImprovements: []
+          }
+        },
+        experiencePoints
+      })
     }
 
     getClassTitle (myClass: RawClassType) {
@@ -45,7 +70,9 @@
 <template lang="pug">
   div
     h1 Choose a Class
-    div.mb-3 #[strong Current Level:] {{ currentLevel }}
+    div.d-flex.justify-space-around.flex-wrap.mb-3
+      div #[strong Current Level:] {{ currentLevel }}
+      div #[strong Current Experience:] {{ character.experiencePoints }}
     v-expansion-panels(accordion, :value="0")
       v-expansion-panel(v-for="(myClass, index) in currentClasses", :key="myClass.name")
         v-expansion-panel-header
@@ -54,12 +81,13 @@
             span(v-if="(index === 0) && currentClasses.length > 1").grey--text.pl-3.caption Starting Class
         v-expansion-panel-content
           CharacterBuilderClass(
-            v-bind="{ myClass, classes, index, isFixedHitPoints }",
-            @updateCharacter="newCharacter => $emit('updateCharacter', newCharacter)"
-            @replaceCharacterProperty="payload => $emit('replaceCharacterProperty', payload)"
+            v-bind="{ character, myClass, classes, index, isFixedHitPoints, characterAdvancements }",
+            @updateCharacter="newCharacter => $emit('updateCharacter', newCharacter)",
+            @replaceCharacterProperty="payload => $emit('replaceCharacterProperty', payload)",
+            @replaceCharacterProperties="payload => $emit('replaceCharacterProperties', payload)",
             @deleteCharacterProperty="payload => $emit('deleteCharacterProperty', payload)"
           )
-    CharacterBuilderClassNew(v-bind="{ classes, currentClasses }", @add="handleAddClass")
+    CharacterBuilderClassNew(v-bind="{ classes, currentClasses, currentLevel }", @add="handleAddClass")
     h2.mt-5 Settings
     div.d-flex.align-center
       h5.mr-5 Hit Points Method:

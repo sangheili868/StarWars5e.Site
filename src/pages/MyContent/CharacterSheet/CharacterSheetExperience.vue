@@ -52,22 +52,26 @@
 </script>
 
 <template lang="pug">
-  ValueEditor(:value="completeCharacter.experiencePoints.current", label="Experience", @input="updateExperience")
-    div(:class="$style.xpBar").d-flex.align-center
-      v-chip(small, color="secondary", text-color="white").mr-2.ml-0
-        h5 {{ completeCharacter.currentLevel }}
-      v-progress-linear(
-        :value="percentExperience",
-        rounded,
-        color="secondary",
-        height="20"
-      ).text-center.ma-0
-        h5 {{ experienceText }}
-      v-chip(small, color="secondary", text-color="white", :class="$style.rightChip").ml-2.mr-0
-        h5 {{ completeCharacter.currentLevel + 1 }}
-    template(v-slot:result="{ newValue }")
-      div New Experience: {{ newValue }}
-      div New Level: {{ calculateLevel(newValue) }}
+  v-badge(overlap).my-3.mr-3
+    template(v-slot:badge, v-if="!completeCharacter.experiencePoints.isCorrect") !
+    ValueEditor(:value="completeCharacter.experiencePoints.current", label="Experience", @input="updateExperience")
+      div(:class="$style.xpBar").d-flex.align-center
+        v-chip(small, color="secondary", text-color="white").mr-2.ml-0
+          h5 {{ completeCharacter.currentLevel }}
+        v-progress-linear(
+          :value="percentExperience",
+          rounded,
+          color="secondary",
+          height="20"
+        ).text-center.ma-0
+          h5 {{ experienceText }}
+        v-chip(small, color="secondary", text-color="white", :class="$style.rightChip").ml-2.mr-0
+          h5 {{ completeCharacter.currentLevel + 1 }}
+      template(v-slot:result="{ newValue }")
+        div New Experience: {{ newValue }}
+        div New Level: {{ calculateLevel(newValue) }}
+        div.primary--text {{ completeCharacter.experiencePoints.errorMessage }}
+        v-btn(:to="{ path: 'characterBuilder', query: { page: '2' } }", color="primary").mt-3 Manage Class Levels
 </template>
 
 <style module lang="scss">

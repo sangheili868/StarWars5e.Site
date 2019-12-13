@@ -15,6 +15,7 @@ import generateFeatures from './generateFeatures'
 import generateFeats from './generateFeats'
 import applyTweak from '@/utilities/applyTweak'
 import { CharacterAdvancementType, SkillType, ConditionType } from '@/types/lookupTypes'
+import generateExperiencePoints from './generateExperiencePoints'
 
 export default function generateCharacter (
   rawCharacter: RawCharacterType,
@@ -40,7 +41,6 @@ export default function generateCharacter (
   if (myClasses.includes(undefined)) console.error('Class not found from ' + rawCharacter.classes.map(({ name }) => name))
   const myFoundClasses = compact(myClasses)
   const myArchetypes = compact(rawCharacter.classes.map(({ archetype }) => archetype && archetypes.find(myArchetype => archetype.name === myArchetype.name)))
-  const experienceTable = chain(characterAdvancements).keyBy('level').mapValues('experiencePoints').value()
   const skillsMap = chain(['Strength', 'Dexterity', 'Constitution', 'Intelligence', 'Wisdom', 'Charisma'])
     .keyBy()
     .mapValues(ability => skills.filter(({ baseAttribute }) => ability === baseAttribute).map(({ name }) => name))
@@ -55,11 +55,7 @@ export default function generateCharacter (
 
   const currentLevel = rawCharacter.classes.reduce((acc, { levels }) => acc + levels, 0)
   const proficiencyBonus = applyTweak(rawCharacter, 'proficiencyBonus', 1 + Math.ceil(currentLevel / 4))
-  const experiencePoints = {
-    previousLevel: experienceTable[currentLevel],
-    current: rawCharacter.experiencePoints,
-    nextLevel: experienceTable[currentLevel + 1]
-  }
+  const experiencePoints = generateExperiencePoints(rawCharacter, characterAdvancements, currentLevel)
 
   const myFeats = generateFeats(rawCharacter, feats)
   const { abilityScores, skillAndSaveProficiencies } = generateAbilityScores(rawCharacter, myFoundClasses, mySpecies, proficiencyBonus, skillsMap)

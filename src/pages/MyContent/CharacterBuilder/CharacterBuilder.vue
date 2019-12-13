@@ -35,12 +35,14 @@
   })
   export default class CharacterBuilder extends Vue {
     @Prop(String) readonly new!: string
+    @Prop(String) readonly page!: string
 
     @characterModule.State character!: RawCharacterType
     @characterModule.Action createCharacter!: () => void
     @characterModule.Action updateCharacter!: (newCharacter: RawCharacterType) => void
-    @characterModule.Action replaceCharacterProperty!: ({ path, property }: { path: string, property: any }) => void
-    @characterModule.Action deleteCharacterProperty!: ({ path, index }: { path: string, index: number }) => void
+    @characterModule.Action replaceCharacterProperty!: (payload: { path: string, property: any }) => void
+    @characterModule.Action replaceCharacterProperties!: (replacements: { path: string, property: any }[]) => void
+    @characterModule.Action deleteCharacterProperty!: (payload: { path: string, index: number }) => void
 
     @classesModule.State classes!: ClassType[]
     @classesModule.Action fetchClasses!: () => void
@@ -65,6 +67,7 @@
 
     created () {
       if (this.new === 'true') this.currentStep = 0
+      else if (this.page) this.currentStep = parseInt(this.page)
       Promise.all([
         this.fetchClasses(),
         this.fetchArchetypes(),
@@ -95,9 +98,8 @@
           name: 'Class',
           component: 'CharacterBuilderClasses',
           props: {
-            classes: this.classes,
-            currentClasses: this.character.classes,
-            isFixedHitPoints: this.character.settings.isFixedHitPoints
+            character: this.character,
+            classes: this.classes
           }
         },
         {
@@ -192,7 +194,7 @@
           component(
             :is="steps[n].component",
             v-bind="steps[n].props",
-            v-on="{ updateCharacter, replaceCharacterProperty, deleteCharacterProperty }"
+            v-on="{ updateCharacter, replaceCharacterProperty, replaceCharacterProperties, deleteCharacterProperty }"
           )
           v-btn(v-if="currentStep < numSteps", color="primary", @click="nextStep") Continue
           v-btn(v-if="currentStep === numSteps", color="primary", to="characterSheet") View My Character

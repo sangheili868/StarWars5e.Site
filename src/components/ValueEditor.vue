@@ -38,7 +38,7 @@
 <template lang="pug">
   MyDialog(v-model="isOpen")
     template(v-slot:activator="{ on }")
-      v-btn(v-on="on", @click="resetValues").d-flex.align-center.my-2
+      v-btn(v-on="on", @click="resetValues").d-flex.align-center
         slot
           div {{ label }}: {{ value }}
     template(#title) Adjust {{ label }}

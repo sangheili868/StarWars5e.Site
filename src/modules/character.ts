@@ -29,31 +29,35 @@ export default class Character extends VuexModule {
   get characterValidation () {
     const myCharacter = stateOf(this.context).character
     return [
-      { message: 'Character is empty', isValid: !isEmpty(myCharacter) },
-      { message: 'Character has no name', isValid: myCharacter.name },
-      { message: 'Character has no species', isValid: myCharacter.species && myCharacter.species.name },
-      { message: 'Character has no classes', isValid: myCharacter.classes && myCharacter.classes.length > 0 },
-      { message: 'Class has no name', isValid: myCharacter.classes && myCharacter.classes.every(myClass => !!myClass.name) },
+      { code: 1, message: 'Character is empty', isValid: !isEmpty(myCharacter) },
+      { code: 2, message: 'Character has no name', isValid: myCharacter.name },
+      { code: 3, message: 'Character has no species', isValid: myCharacter.species && myCharacter.species.name },
+      { code: 4, message: 'Character has no classes', isValid: myCharacter.classes && myCharacter.classes.length > 0 },
+      { code: 5, message: 'Class has no name', isValid: myCharacter.classes && myCharacter.classes.every(myClass => !!myClass.name) },
       {
+        code: 6,
         message: 'Class is missing hit points',
         isValid: myCharacter.classes && myCharacter.classes.every((myClass, index) =>
           myClass.hitPoints && myClass.hitPoints.length === myClass.levels - (!index ? 1 : 0)
       ) },
       {
+        code: 7,
         message: 'Ability Score is missing',
         isValid: myCharacter.baseAbilityScores &&
           isEqual(Object.keys(myCharacter.baseAbilityScores).sort(), abilityScores.sort())
       },
       {
+        code: 8,
         message: 'Ability Score is not positive',
         isValid: myCharacter.baseAbilityScores && Object.values(myCharacter.baseAbilityScores).every(score => score > 0)
       },
-      { message: 'Background has no name', isValid: myCharacter.background && myCharacter.background.name },
+      { code: 9, message: 'Background has no name', isValid: myCharacter.background && myCharacter.background.name },
       {
+        code: 10,
         message: 'Background feat has no name',
         isValid: myCharacter.background && myCharacter.background.feat && myCharacter.background.feat.name
       }
-    ].find(({ isValid }) => !isValid) || { isValid: true, message: 'All checks passed' }
+    ].find(({ isValid }) => !isValid) || { code: 0, message: 'All checks passed', isValid: true }
   }
 
   get completeCharacter () {

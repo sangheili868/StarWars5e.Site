@@ -8,9 +8,10 @@
   import JSONWriter from '@/components/JSONWriter.vue'
   import CharacterSheetTop from './CharacterSheetTop.vue'
   import CharacterSheetSection from './CharacterSheetSection.vue'
-  import { range, isEmpty, merge, get, set, camelCase } from 'lodash'
+  import { range, isEmpty, isEqual, merge, get, set, camelCase } from 'lodash'
   import { CompleteCharacterType } from '@/types/completeCharacterTypes'
   import Loading from '@/components/Loading.vue'
+  import baseCharacter from '@/modules/CharacterEngine/baseCharacter.json'
 
   const characterModule = namespace('character')
   const classesModule = namespace('classes')
@@ -35,7 +36,7 @@
   })
   export default class CharacterSheet extends Vue {
     @characterModule.State character!: RawCharacterType
-    @characterModule.Getter characterValidation!: { isValid: boolean, message: string }
+    @characterModule.Getter characterValidation!: { code: number, isValid: boolean, message: string }
     @characterModule.Getter completeCharacter!: CompleteCharacterType
     @characterModule.Action setCharacter!: (newCharacter: RawCharacterType) => void
     @characterModule.Action updateCharacter!: (newCharacter: RawCharacterType) => void
@@ -63,7 +64,6 @@
     range = range
     openTabs: number[] = [0, 1, 2]
     filename = ''
-    isAlertOpen = false
     hasFetchedData = false
 
     created () {
@@ -94,6 +94,18 @@
       } as { [ breakpoint: string ] : number })[this.$vuetify.breakpoint.name]
     }
 
+    get isNotCharacter () {
+      return isEmpty(this.character) || this.isBaseCharacter
+    }
+
+    get isBaseCharacter () {
+      return isEqual(this.character, baseCharacter)
+    }
+
+    get isInvalidCharacter () {
+      return !this.characterValidation.isValid && this.characterValidation.code !== 1 && !this.isBaseCharacter
+    }
+
     handleCharacterUpload (newCharacter: any, filename: string) {
       const isValid = newCharacter && [
         'name',
@@ -107,7 +119,6 @@
       ].every((field: string) => field in newCharacter)
       this.setCharacter(isValid ? newCharacter : {})
       this.filename = isValid ? filename : ''
-      this.isAlertOpen = !isValid && newCharacter instanceof Object
     }
 
     goToTab (newTab: number, section: number) {
@@ -118,10 +129,11 @@
 
 <template lang="pug">
   div(v-if="hasFetchedData")
-    v-alert(v-model="isAlertOpen", dismissible, type="error") Invalid Character
+    v-alert(:value="isInvalidCharacter", dismissible, type="error") Incomplete Character: {{ characterValidation.message }}
     div.d-flex.align-center.justify-center.flex-wrap
-      v-btn(to="characterBuilder", color="primary") Create New Character
+      v-btn(:to="{ path: 'characterBuilder', query: { new: 'true' } }", color="primary") Create New Character
       JSONReader(label="Load Character From File", @input="handleCharacterUpload").ma-2
+      v-btn(:disabled="isNotCharacter", to="characterBuilder", color="primary") Edit Character Details
       JSONWriter(:jsonData="character", v-bind="{ filename }").ma-2 Save Character
     CharacterSheetTop(
       v-if="completeCharacter",

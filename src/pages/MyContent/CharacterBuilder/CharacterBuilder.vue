@@ -34,6 +34,8 @@
     }
   })
   export default class CharacterBuilder extends Vue {
+    @Prop(String) readonly new!: string
+
     @characterModule.State character!: RawCharacterType
     @characterModule.Action createCharacter!: () => void
     @characterModule.Action updateCharacter!: (newCharacter: RawCharacterType) => void
@@ -58,10 +60,11 @@
     @skillsModule.Action fetchSkills!: () => void
     @conditionsModule.Action fetchConditions!: () => void
 
-    currentStep = 0
+    currentStep = 1
     isReady = false
 
     created () {
+      if (this.new === 'true') this.currentStep = 0
       Promise.all([
         this.fetchClasses(),
         this.fetchArchetypes(),
@@ -74,7 +77,7 @@
         this.fetchSkills(),
         this.fetchConditions()
       ])
-        .then(this.createCharacter)
+        .then(() => { if (this.new === 'true') this.createCharacter() })
         .then(() => { this.isReady = true })
     }
 

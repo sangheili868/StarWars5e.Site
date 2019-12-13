@@ -3,6 +3,7 @@ import MyContentPage from './MyContentPage.vue'
 import CharacterBuilder from './CharacterBuilder/CharacterBuilder.vue'
 import CharacterEditor from './CharacterEditor.vue'
 import CharacterSheet from './CharacterSheet/CharacterSheet.vue'
+import { Route } from 'vue-router'
 
 export default {
   path: '/myContent',
@@ -18,6 +19,7 @@ export default {
     {
       path: '/myContent/CharacterBuilder',
       component: CharacterBuilder,
+      props: ({ query }: Route) => query,
       meta: {
         title: 'Character Builder'
       }

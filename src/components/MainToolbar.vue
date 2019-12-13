@@ -76,8 +76,7 @@
         //   to: '/myContent',
         //   title: 'My Content',
         //   nested: [
-        //     { to: '/characterBuilder', title: 'Character Builder' },
-        //     { to: '/characterEditor', title: 'Character Editor' },
+        //     { to: { path: '/characterBuilder', query: { new: 'true' } }, title: 'Character Builder' },
         //     { to: '/characterSheet', title: 'Character Sheet' }
         //   ]
         // },

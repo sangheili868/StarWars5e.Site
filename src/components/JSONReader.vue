@@ -38,5 +38,6 @@
 <style module lang="scss">
   .reader {
     max-width: 300px !important;
+    min-width: 275px !important;
   }
 </style>

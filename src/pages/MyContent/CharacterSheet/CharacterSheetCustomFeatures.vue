@@ -43,7 +43,7 @@
 <template lang="pug">
   div
     h3.mt-2 Custom Features
-    v-expansion-panels(accordian, multiple)
+    v-expansion-panels(accordion, multiple)
       v-expansion-panel(v-for="({ name, content }, index) in features", :key="index").featurePanel
         v-expansion-panel-header.pa-2
           h4 {{ name }}

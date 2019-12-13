@@ -46,7 +46,7 @@
   div
     h1 Choose a Class
     div.mb-3 #[strong Current Level:] {{ currentLevel }}
-    v-expansion-panels(accordian, :value="0")
+    v-expansion-panels(accordion, :value="0")
       v-expansion-panel(v-for="(myClass, index) in currentClasses", :key="myClass.name")
         v-expansion-panel-header
           div.d-flex.align-center

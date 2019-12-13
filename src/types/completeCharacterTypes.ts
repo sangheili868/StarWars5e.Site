@@ -37,9 +37,6 @@ export interface HitPointsType {
       size: string,
       numRestored: number
     }[],
-    maxForcePoints: number,
-    maxTechPoints: number,
-    maxSuperiorityDice: number,
     shortRestFeatures: string[],
     longRestFeatures: string[]
   }

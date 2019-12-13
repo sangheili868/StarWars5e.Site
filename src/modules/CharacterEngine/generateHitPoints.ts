@@ -1,5 +1,5 @@
 import { RawCharacterType } from '@/types/rawCharacterTypes'
-import { AbilityScoresType, CastingType, SuperiorityType, CompletedFeatureType } from '@/types/completeCharacterTypes'
+import { AbilityScoresType, CompletedFeatureType } from '@/types/completeCharacterTypes'
 import { ClassType } from '@/types/characterTypes'
 import { chain, isEmpty } from 'lodash'
 import applyTweak from '@/utilities/applyTweak'
@@ -17,8 +17,6 @@ export default function generateHitPoints (
   abilityScores: AbilityScoresType,
   classes: ClassType[],
   currentLevel: number,
-  casting: { techCasting: CastingType | {}, forceCasting: CastingType | {} },
-  superiority: SuperiorityType | {},
   features: { combatFeatures: CompletedFeatureType[], nonCombatFeatures: CompletedFeatureType[]}
 ) {
   const startingClass = rawCharacter.classes[0]
@@ -64,9 +62,6 @@ export default function generateHitPoints (
     hitDieBonus: abilityScores.Constitution.modifier,
     numHitDiceUsed,
     hitDiceRestored,
-    maxForcePoints: isEmpty(casting.forceCasting) ? 0 : (casting.forceCasting as CastingType).maxPoints,
-    maxTechPoints: isEmpty(casting.techCasting) ? 0 : (casting.techCasting as CastingType).maxPoints,
-    maxSuperiorityDice: isEmpty(superiority) ? 0 : (superiority as SuperiorityType).maxDice,
     shortRestFeatures: featuresWithUsage.filter(({ usage }) => usage && usage.recharge === 'shortRest').map(({ name }) => name),
     longRestFeatures: featuresWithUsage.map(({ name }) => name)
   }

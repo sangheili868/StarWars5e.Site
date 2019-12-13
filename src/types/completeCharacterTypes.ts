@@ -46,7 +46,7 @@ export interface HitPointsType {
 }
 
 export interface CastingType {
-  currentPoints: number,
+  pointsUsed: number,
   maxPoints: number,
   attackModifier: number,
   saveDC: number,

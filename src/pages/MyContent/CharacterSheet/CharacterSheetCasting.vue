@@ -42,13 +42,13 @@
       h3 Tech Casting
       CharacterSheetTicker(
         v-if="techCasting.maxPoints > 10",
-        :current="techCasting.currentPoints",
+        :current="Math.max(0, techCasting.maxPoints - techCasting.pointsUsed)",
         :max="techCasting.maxPoints",
-        @changeCount="handleChangeTechPoints"
+        @changeCount="currentPoints => handleChangeTechPoints(Math.max(0, techCasting.maxPoints - currentPoints))"
       ) Tech Points
       CheckList(
         v-else,
-        :current="techCasting.currentPoints",
+        :current="techCasting.pointsUsed",
         :maximum="techCasting.maxPoints",
         title="Tech Points",
         @changeSelected="handleChangeTechPoints"
@@ -63,13 +63,13 @@
       h3 Force Casting
       CharacterSheetTicker(
         v-if="forceCasting.maxPoints > 10",
-        :current="forceCasting.currentPoints",
+        :current="Math.max(0, forceCasting.maxPoints - forceCasting.pointsUsed)",
         :max="forceCasting.maxPoints",
-        @changeCount="handleChangeForcePoints"
+        @changeCount="currentPoints => handleChangeForcePoints(Math.max(0, forceCasting.maxPoints - currentPoints))"
       ) Force Points
       CheckList(
         v-else,
-        :current="forceCasting.currentPoints",
+        :current="forceCasting.pointsUsed",
         :maximum="forceCasting.maxPoints",
         title="Force Points",
         @changeSelected="handleChangeForcePoints"

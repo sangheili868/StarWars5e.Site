@@ -10,6 +10,7 @@
   import { SpeciesType, ClassType, PowerType, FeatType, BackgroundType, ArchetypeType } from '@/types/characterTypes'
   import { EquipmentType } from '@/types/lootTypes'
   import Loading from '@/components/Loading.vue'
+  import JSONWriter from '@/components/JSONWriter.vue'
 
   const characterModule = namespace('character')
   const classesModule = namespace('classes')
@@ -30,7 +31,8 @@
       CharacterBuilderAbilityScores,
       CharacterBuilderDescription,
       CharacterBuilderEquipment,
-      Loading
+      Loading,
+      JSONWriter
     }
   })
   export default class CharacterBuilder extends Vue {
@@ -184,7 +186,7 @@
               v-icon(color="Discord").mr-3 fab fa-discord
               | Go to Discord Server
           v-btn(color="primary", @click="currentStep = 1") Go to character builder
-    v-stepper(v-else-if="isReady", v-model="currentStep", alt-labels)
+    v-stepper(v-else-if="isReady", v-model="currentStep")
       v-stepper-header
         template(v-for="n in numSteps")
           v-stepper-step(:key="`${n}-step`", :complete="currentStep > n", :step="n", editable) {{ steps[n].name }}
@@ -196,9 +198,17 @@
             v-bind="steps[n].props",
             v-on="{ updateCharacter, replaceCharacterProperty, replaceCharacterProperties, deleteCharacterProperty }"
           )
-          v-btn(v-if="currentStep < numSteps", color="primary", @click="nextStep") Continue
-          v-btn(v-if="currentStep === numSteps", color="primary", to="characterSheet") View My Character
-          v-btn(v-if="currentStep > 0", text, @click="prevStep") Back
+          div.d-flex.justify-space-around.flex-wrap.mt-5
+            v-btn(v-if="currentStep > 0", outlined, @click="prevStep")
+              v-icon.mr-2 fa-chevron-left
+              | Back
+            JSONWriter(:jsonData="character", :filename="character.name").hidden-sm-and-down Save Character
+            v-btn(color="primary", to="characterSheet").hidden-sm-and-down Character Sheet
+            v-btn(v-if="currentStep < numSteps", color="primary", @click="nextStep") Continue
+              v-icon.ml-2 fa-chevron-right
+          div.d-flex.justify-center.flex-wrap.mt-2
+            JSONWriter(:jsonData="character", :filename="character.name").ma-2.hidden-md-and-up Save Character
+            v-btn(color="primary", to="characterSheet").ma-2.hidden-md-and-up Character Sheet
     Loading(v-else)
 </template>
 

@@ -44,18 +44,18 @@ export default function generateHitPoints (
     })
     .value()
 
-  const numHitDiceUsed = Object.values(rawCharacter.currentStats.hitDiceUsed).reduce((acc, count) => (acc || 0) + (count || 0), 0)
+  const numHitDiceUsed = Object.values(rawCharacter.currentStats.hitDiceUsed).reduce((acc, count) => (acc || 0) + (count || 0), 0) || 0
   let hitDiceToRegain = Math.max(1, Math.floor(currentLevel / 2))
   const hitDiceRestored = chain(rawCharacter.currentStats.hitDiceUsed)
-    .map((val, key) => ({ size: key, numUsed: val }))
+    .map((val, key) => ({ size: key, numUsed: val || 0 }))
     .sortBy(({ size }) => parseInt(size.substr(1)))
     .reverse()
     .map(({ size, numUsed }) => {
-      const numRestored = Math.min(numUsed || 0, hitDiceToRegain)
+      const numRestored = Math.min(numUsed, hitDiceToRegain)
       hitDiceToRegain -= numRestored
       return { size, numRestored }
     })
-    .filter(({ numRestored }) => numRestored)
+    .filter(({ numRestored }) => numRestored > 0)
     .value()
 
   const resting = {

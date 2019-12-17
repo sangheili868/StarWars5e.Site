@@ -89,7 +89,8 @@ export interface RawEquipmentType {
 
 export interface TweakType {
   override?: number,
-  bonus?: number
+  bonus?: number,
+  dieSize?: number
 }
 
 export interface CastingTweakType {
@@ -113,6 +114,11 @@ export interface TweaksType {
   proficiencyBonus?: TweakType,
   armorClass?: TweakType,
   weapon?: {
+    toHit?: TweakType,
+    damage?: TweakType
+  }
+  unarmed?: {
+    damageDice?: TweakType,
     toHit?: TweakType,
     damage?: TweakType
   }

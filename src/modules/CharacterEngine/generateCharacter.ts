@@ -13,9 +13,11 @@ import generateSuperiorty from './generateSuperiority'
 import generateCasting from './generateCasting'
 import generateFeatures from './generateFeatures'
 import generateFeats from './generateFeats'
+import generateWeapons from './generateWeapons'
 import applyTweak from '@/utilities/applyTweak'
 import { CharacterAdvancementType, SkillType, ConditionType } from '@/types/lookupTypes'
 import generateExperiencePoints from './generateExperiencePoints'
+import { CompleteCharacterType } from '@/types/completeCharacterTypes'
 
 export default function generateCharacter (
   rawCharacter: RawCharacterType,
@@ -29,7 +31,7 @@ export default function generateCharacter (
   characterAdvancements: CharacterAdvancementType[],
   skills: SkillType[],
   conditions: ConditionType[]
-) {
+): CompleteCharacterType {
   // To Do
   const maneuvers = [] as ManeuverType[]
   const classFeatures = {} as FeaturesType
@@ -82,16 +84,13 @@ export default function generateCharacter (
   )
 
   return {
-    ...pick(rawCharacter, [
-      'name',
-      'image',
-      'user',
-      'characteristics',
-      'tweaks',
-      'customProficiencies',
-      'customLanguages',
-      'customFeatures'
-    ]),
+    name: rawCharacter.name,
+    image: rawCharacter.image,
+    characteristics: rawCharacter.characteristics,
+    tweaks: rawCharacter.tweaks,
+    customProficiencies: rawCharacter.customProficiencies,
+    customLanguages: rawCharacter.customLanguages,
+    customFeatures: rawCharacter.customFeatures,
     currentLevel,
     classes: rawCharacter.classes.map(({ name, levels, archetype }) => ({ name, levels, archetype: archetype && archetype.name })),
     alignment: rawCharacter.characteristics.alignment,
@@ -108,6 +107,7 @@ export default function generateCharacter (
     skillAndSaveProficiencies,
     languages: generateLanguages(rawCharacter),
     equipment: myEquipment,
+    weapons: generateWeapons(rawCharacter, myEquipment, abilityScores, proficiencyBonus),
     credits: Math.max(rawCharacter.credits, 0),
     carryingCapacity: generateCarryingCapacity(abilityScores),
     superiority,

@@ -24,14 +24,11 @@
     @Prop(Number) readonly armorClass!: number
     @Prop(Object) readonly speed!: { base: string }
     @Prop(Array) readonly equipment!: EquipmentType[]
+    @Prop(Array) readonly weapons!: EquipmentType[]
     @Prop(Number) readonly passivePerception!: number
-    @Prop(Object) readonly superiority!: SuperiorityType
+    @Prop({ type: [ Boolean, Object ] }) readonly superiority!: false | SuperiorityType
     @Prop(Array) readonly combatFeatures!: CompletedFeatureType[]
     @Prop(Array) readonly customFeatures!: { name: string, content: string }[]
-
-    get weapons () {
-      return this.equipment.filter(({ equipped, equipmentCategory }) => equipped && equipmentCategory === 'Weapon')
-    }
 
     get armor () {
       return this.equipment.filter(({ equipped, equipmentCategory }) => equipped && equipmentCategory === 'Armor')
@@ -57,6 +54,7 @@
     )
     div(v-if="!weapons.length").caption Equip weapons by selecting them in the Equipment section
     CharacterSheetSuperiority(
+      v-if="superiority"
       :superiority="superiority",
       @updateCharacter="newCharacter => $emit('updateCharacter', newCharacter)"
     )

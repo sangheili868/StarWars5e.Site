@@ -14,10 +14,10 @@
     addPlus = addPlus
 
     get damage () {
-      return this.weapon.damageNumberOfDice +
-        'd' + this.weapon.damageDieType +
-        addPlus(this.weapon.damageBonus || 0) +
-        ' ' + this.weapon.damageType
+      const { damageNumberOfDice, damageDieType, damageBonus, damageType } = this.weapon
+      const hasDice = damageNumberOfDice && damageDieType
+      const damage = hasDice ? damageNumberOfDice + 'd' + damageDieType + addPlus(damageBonus || 0) : damageBonus
+      return damage + ' ' + damageType
     }
   }
 </script>

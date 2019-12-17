@@ -45,10 +45,22 @@ export interface HitPointsType {
 export interface CastingType {
   pointsUsed: number,
   maxPoints: number,
-  attackModifier: number,
-  saveDC: number,
   maxPowerLevel: number,
   powersKnown: PowerType[]
+}
+
+export interface TechCastingType extends CastingType {
+  attackModifier: number,
+  saveDC: number
+}
+
+export interface ForceCastingType extends CastingType {
+  lightAttackModifier: number,
+  lightSaveDC: number,
+  darkAttackModifier: number,
+  darkSaveDC: number,
+  universalAttackModifier: number,
+  universalSaveDC: number
 }
 
 export interface CharacteristicsType {
@@ -97,12 +109,11 @@ export interface AbilityScoresType {
 export interface CompleteCharacterType {
   name: string,
   image: string | null,
-  user: string,
   currentLevel: number,
   classes: {
     name: string,
     levels: number,
-    archetype: string
+    archetype?: string
   }[],
   alignment: string,
   species: string,
@@ -134,8 +145,8 @@ export interface CompleteCharacterType {
   skillAndSaveProficiencies: string[],
   languages: string[],
   characteristics: CharacteristicsType,
-  backstory: string,
-  items: EquipmentType[],
+  equipment: EquipmentType[],
+  weapons: EquipmentType[],
   credits: number,
   carryingCapacity: {
     encumbered: number,
@@ -143,14 +154,14 @@ export interface CompleteCharacterType {
     maxCapacity: number,
     pushDragLift: number
   },
-  superiority: SuperiorityType,
-  techCasting: CastingType,
-  forceCasting: CastingType,
+  superiority: false | SuperiorityType,
+  techCasting: false | TechCastingType,
+  forceCasting: false | ForceCastingType,
   combatFeatures: CompletedFeatureType[],
   nonCombatFeatures: CompletedFeatureType[],
   tweaks: TweaksType,
   customLanguages: string[],
-  customProficiencies: CustomProficiencyType,
+  customProficiencies: CustomProficiencyType[],
   customFeatures: {
     name: string,
     content: string

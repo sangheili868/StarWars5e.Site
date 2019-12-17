@@ -90,7 +90,7 @@ export default function generateSuperiority (
 ) {
   const primaryClass = getPrimarySuperiorityClass(rawCharacter)
   const maxDice = applyTweak(rawCharacter, 'superiority.maxDice', primaryClass.maxDice + getMulticlassDiceBonus(rawCharacter))
-  return primaryClass.diceSize === 0 ? {} : {
+  return primaryClass.diceSize !== 0 && {
     currentDice: rawCharacter.currentStats.superiorityDiceUsed,
     maxDice,
     diceSize: 'd' + primaryClass.diceSize,

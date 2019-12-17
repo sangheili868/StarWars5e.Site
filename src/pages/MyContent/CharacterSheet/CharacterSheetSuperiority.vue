@@ -24,7 +24,7 @@
 </script>
 
 <template lang="pug">
-  div(v-if="!isEmpty(superiority)")
+  div
     h3.mt-2 Maneuvers
     CheckList(
       :current="superiority.currentDice",

@@ -4,11 +4,13 @@
   import CheckList from '@/components/CheckList.vue'
   import MyDialog from '@/components/MyDialog.vue'
   import { chain, mapValues } from 'lodash'
+  import MySelect from '@/components/MySelect.vue'
 
   @Component({
     components: {
       CheckList,
-      MyDialog
+      MyDialog,
+      MySelect
     }
   })
   export default class CharacterSheetRest extends Vue {
@@ -100,8 +102,8 @@ div
     template(#title) Rest
     template(#text, v-if="isRestOpen")
       div.d-flex.align-center
-        div.pr-2 Take a
-        v-autocomplete(v-model="mode", :items="['Short Rest', 'Long Rest']")
+        div(:class="$style.takeA").pr-2 Take a
+        MySelect(v-model="mode", :items="['Short Rest', 'Long Rest']")
       div(v-if="mode === 'Short Rest'")
         div(v-if="hitPoints.resting.shortRestFeatures.length")
           div The following features will have their uses restored:
@@ -144,3 +146,9 @@ div
       v-spacer
       v-btn(color="primary", text, @click="isRestOpen=false") Close
 </template>
+
+<style module lang="scss">
+  .takeA {
+    min-width: 50px;
+  }
+</style>

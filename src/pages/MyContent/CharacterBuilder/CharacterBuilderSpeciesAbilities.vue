@@ -4,8 +4,13 @@
   import pluralize from 'pluralize'
   import { RawSpeciesType } from '@/types/rawCharacterTypes'
   import { pickBy, chain } from 'lodash'
+  import MySelect from '@/components/MySelect.vue'
 
-  @Component
+  @Component({
+    components: {
+      MySelect
+    }
+  })
   export default class CharacterBuilderSpeciesAbilities extends Vue {
     @Prop(Object) readonly currentSpecies!: RawSpeciesType
     @Prop(Array) readonly abilitiesIncreased!: AbilitiesIncreasedType[][]
@@ -98,14 +103,14 @@
 
 <template lang="pug">
   div
-    v-autocomplete(
+    MySelect(
       v-if="abilitiesIncreased.length > 1",
       :value="currentSpecies.abilityScoreImprovementSelectedOption"
       :items="abilitiesIncreasedOptions",
       label="Choose an option",
       @change="handleChangeOption"
     )
-    v-autocomplete(
+    MySelect(
       v-for="({amount, max, label, choices}, index) in improvementOptions",
       :value="getImprovementsByAmount(amount, max > 1)"
       :key="index",

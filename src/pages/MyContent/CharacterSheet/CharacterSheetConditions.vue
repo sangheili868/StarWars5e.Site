@@ -5,13 +5,15 @@
   import MyDialog from '@/components/MyDialog.vue'
   import VueMarkdown from 'vue-markdown'
   import { range } from 'lodash'
+  import MySelect from '@/components/MySelect.vue'
 
   const conditionsModule = namespace('conditions')
 
   @Component({
     components: ({
       MyDialog,
-      VueMarkdown
+      VueMarkdown,
+      MySelect
     })
   })
   export default class CharacterSheetConditions extends Vue {
@@ -54,7 +56,7 @@
         v-btn(v-on="on", block, :color="myConditions.length ? 'primary' : ''").mb-2 Conditions ({{ myConditions.length }})
       template(#title) Active Conditions
       template(#text)
-        v-autocomplete(
+        MySelect(
           :value="myConditions.map(({ name }) => name)",
           v-bind="{ items }",
           placeholder="Choose a condition",
@@ -70,7 +72,7 @@
         v-btn(color="primary", text, @click="isOpen=false") Close
     div(v-if="hasExhaustion").d-flex.align-center.justify-space-around
       h4.pa-2 Levels of Exhaustion:
-      v-autocomplete(
+      MySelect(
         :class="$style.exhaustion",
         :value="exhaustion",
         :items="range(0,6)",

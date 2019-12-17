@@ -6,13 +6,15 @@
   import MyDialog from '@/components/MyDialog.vue'
   import { namespace } from 'vuex-class'
   import { chain, range } from 'lodash'
+  import MySelect from '@/components/MySelect.vue'
 
   const powersModule = namespace('powers')
 
   @Component({
     components: {
       CharacterSheetExpansionFeatures,
-      MyDialog
+      MyDialog,
+      MySelect
     }
   })
   export default class CharacterBuilderClassPowers extends Vue {
@@ -109,7 +111,7 @@
           v-btn(v-on="on", @click="levelFilter=0", color="primary") Choose {{ castingType }} Powers
       template(#title) Choose {{ castingType }} Powers
       template(#text)
-        v-autocomplete(v-model="levelFilter", :items="range(0, maxPowerLevel + 1)", label="Filter by Level").mt-3
+        MySelect(v-model="levelFilter", :items="range(0, maxPowerLevel + 1)", label="Filter by Level").mt-3
         CharacterSheetExpansionFeatures(:features="filteredPowers[levelFilter]", isShowingLevel).text-left
           template(v-slot="{ feature }")
             v-checkbox(

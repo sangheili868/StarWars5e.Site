@@ -4,12 +4,14 @@
   import MyDialog from '@/components/MyDialog.vue'
   import { EquipmentType } from '@/types/lootTypes'
   import { chain, startCase } from 'lodash'
+  import MySelect from '@/components/MySelect.vue'
 
   const equipmentModule = namespace('equipment')
 
   @Component({
     components: ({
-      MyDialog
+      MyDialog,
+      MySelect
     })
   })
   export default class CharacterSheetEquipmentAdder extends Vue {
@@ -75,7 +77,7 @@
         v-btn(v-on="on", @click="resetValues", color="primary") Add equipment
     template(#title) Add Equipment
     template(#text)
-      v-autocomplete(v-model="filter", :items="filters", label="Filter by Category", @change="onFilterChange")
+      MySelect(v-model="filter", :items="filters", label="Filter by Category", @change="onFilterChange")
       v-autocomplete(v-model="selected", :items="filteredEquipment", label="Select equipment")
       div(v-if="selectedEquipment")
         div.d-flex.justify-space-between

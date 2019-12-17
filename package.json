@@ -19,6 +19,7 @@
     "axios": "0.18.1",
     "core-js": "^2.6.5",
     "file-saver": "^2.0.2",
+    "ismobilejs": "^1.0.3",
     "material-design-icons-iconfont": "^4.0.5",
     "mathjs": "^5.10.3",
     "ordinal": "^1.0.3",

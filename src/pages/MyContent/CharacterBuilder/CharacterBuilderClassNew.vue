@@ -1,13 +1,15 @@
 <script lang="ts">
   import { Component, Prop, Vue } from 'vue-property-decorator'
   import MyDialog from '@/components/MyDialog.vue'
+  import MySelect from '@/components/MySelect.vue'
   import { ClassType } from '@/types/characterTypes'
   import { RawClassType } from '@/types/rawCharacterTypes'
   import { range } from 'lodash'
 
   @Component({
     components: {
-      MyDialog
+      MyDialog,
+      MySelect
     }
   })
   export default class CharacterBuilderClassNew extends Vue {
@@ -43,8 +45,8 @@
       v-btn(color="primary", v-on="on", @click="resetValues").mt-3 Add New Class
     template(#title) Add New Class
     template(#text)
-      v-autocomplete(v-model="chosenClass", :items="classChoices", label="Choose a class")
-      v-autocomplete(v-model="chosenLevel", :items="range(1, 21 - currentLevel)", label="Number of levels in this class")
+      MySelect(v-model="chosenClass", :items="classChoices", label="Choose a class")
+      MySelect(v-model="chosenLevel", :items="range(1, 21 - currentLevel)", label="Number of levels in this class")
     template(#actions)
       v-btn(color="primary", :disabled="!chosenLevel || !chosenClass", @click="handleAdd") Add Class
       v-spacer

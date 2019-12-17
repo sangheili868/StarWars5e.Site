@@ -1,10 +1,12 @@
 <script lang="ts">
   import { Component, Prop, Vue } from 'vue-property-decorator'
   import MyDialog from '@/components/MyDialog.vue'
+  import MySelect from '@/components/MySelect.vue'
 
   @Component({
     components: {
-      MyDialog
+      MyDialog,
+      MySelect
     }
   })
   export default class ValueEditor extends Vue {
@@ -45,7 +47,7 @@
     template(#text)
       div Current: {{ value }} {{ label }}
       div.d-flex.align-center
-        v-autocomplete(:items="['Add', 'Subtract', 'Set']", v-model="modifierType")
+        MySelect(:items="['Add', 'Subtract', 'Set']", v-model="modifierType")
         v-text-field(outlined, autofocus, type="number", hide-details v-model.number="modifierAmount").mx-1
         div {{ label }}
       slot(name="result", :newValue="newValue")

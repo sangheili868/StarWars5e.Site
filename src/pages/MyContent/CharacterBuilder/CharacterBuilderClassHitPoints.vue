@@ -3,8 +3,13 @@
   import { ClassType } from '@/types/characterTypes'
   import { RawClassType } from '@/types/rawCharacterTypes'
   import { range } from 'lodash'
+  import MySelect from '@/components/MySelect.vue'
 
-  @Component
+  @Component({
+    components: {
+      MySelect
+    }
+  })
   export default class CharacterBuilderClassHitPoints extends Vue {
     @Prop(Object) readonly classData!: ClassType
     @Prop(Object) readonly myClass!: RawClassType
@@ -32,7 +37,7 @@
 
 <template lang="pug">
   div.text-left.d-flex.align-center.mt-2
-    v-autocomplete(
+    MySelect(
       v-for="({ hitPoints, hpIndex }, index) in hitPointsMap",
       :key="hpIndex",
       :value="hitPoints",

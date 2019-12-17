@@ -9,6 +9,7 @@
   import CharacterBuilderClassASI from './CharacterBuilderClassASI.vue'
   import CharacterBuilderClassPowers from './CharacterBuilderClassPowers.vue'
   import ConfirmDelete from '@/components/ConfirmDelete.vue'
+  import MySelect from '@/components/MySelect.vue'
 
   const archetypesModule = namespace('archetypes')
 
@@ -17,7 +18,8 @@
       CharacterBuilderClassHitPoints,
       CharacterBuilderClassASI,
       CharacterBuilderClassPowers,
-      ConfirmDelete
+      ConfirmDelete,
+      MySelect
     }
   })
   export default class CharacterBuilderClass extends Vue {
@@ -132,7 +134,7 @@
 <template lang="pug">
   div
     div.d-flex.align-center
-      v-autocomplete(
+      MySelect(
         :value="myClass.levels",
         :items="range(1, 21 - totalOtherClassesLevels)",
         label="Number of levels in this class",
@@ -149,7 +151,7 @@
         v-bind="{ myClass, classData, isStartingClass: index === 0 }",
         @updateHitPoints="({ newValue, hpIndex }) => handleUpdateHitPoints(newValue, hpIndex)"
       )
-    v-autocomplete(
+    MySelect(
       v-if="myClass.levels >= 3",
       :value="myClass.archetype && myClass.archetype.name",
       :items="archetypeOptions",

@@ -6,13 +6,15 @@
   import { RawBackgroundType, RawCharacteristicsType } from '@/types/rawCharacterTypes'
   import CharactersBackgroundDetail from '@/pages/Characters/CharactersBackgroundDetail.vue'
   import { chain } from 'lodash'
+  import MySelect from '@/components/MySelect.vue'
 
   const featModule = namespace('feats')
 
   @Component({
     components: {
       CharactersBackgroundDetail,
-      VueMarkdown
+      VueMarkdown,
+      MySelect
     }
   })
   export default class CharacterBuilderDescription extends Vue {
@@ -116,7 +118,7 @@
         min-width="100",
         alt="Character Image"
       )
-    v-autocomplete(
+    MySelect(
       :value="characteristics.alignment",
       :items="alignmentOptions",
       label="Choose an Alignment",
@@ -128,7 +130,7 @@
       label="Choose a background",
       @change="handleChangeBackground"
     )
-    v-autocomplete(
+    MySelect(
       v-if="chosenBackground",
       :value="currentBackground.feat.name",
       :items="featOptions"

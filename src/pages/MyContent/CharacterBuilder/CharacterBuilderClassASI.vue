@@ -4,12 +4,14 @@
   import { RawClassType, RawFeatType, RawASIType } from '@/types/rawCharacterTypes'
   import { FeatType } from '@/types/characterTypes'
   import { namespace } from 'vuex-class'
+  import MySelect from '@/components/MySelect.vue'
 
   const featModule = namespace('feats')
 
   @Component({
     components: {
-      VueMarkdown
+      VueMarkdown,
+      MySelect
     }
   })
   export default class CharacterBuilderClassASI extends Vue {
@@ -84,7 +86,7 @@
 <template lang="pug">
   div
     div.d-flex.flex-wrap
-      v-autocomplete(
+      MySelect(
         :value="asi && asi.type",
         :items="['Ability Score Improvement', 'Feat']",
         placeholder="Choose an option",
@@ -93,20 +95,22 @@
         @input="handleChangeType"
       ).mx-2
       template(v-if="asi && asi.type === 'Ability Score Improvement'")
-        v-autocomplete(
+        MySelect(
           :value="selectedAbilityScores[0]",
           :items="asiOptions",
           dense,
+          filled,
           hide-details,
           placeholder="Choose an ability score to increase",
           @input="newAbility => handleUpdateASI(newAbility, 0)"
         ).mx-2
           template(v-slot:selection="data")
             span {{ data && data.item }} +1
-        v-autocomplete(
+        MySelect(
           :value="selectedAbilityScores[1]",
           :items="asiOptions",
           dense,
+          filled,
           hide-details,
           placeholder="Choose an ability score to increase",
           @input="newAbility => handleUpdateASI(newAbility, 1)"
@@ -118,6 +122,7 @@
           :value="asi.name",
           :items="featOptions",
           dense,
+          filled,
           hide-details,
           placeholder="Choose a feat",
           @input="handleUpdateFeat"

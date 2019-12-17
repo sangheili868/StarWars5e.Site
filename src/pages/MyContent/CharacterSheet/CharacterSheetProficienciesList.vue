@@ -7,6 +7,7 @@
   import { EquipmentType } from '@/types/lootTypes'
   import { CustomProficiencyType } from '@/types/rawCharacterTypes'
   import { capitalize, chain, startCase } from 'lodash'
+  import MySelect from '@/components/MySelect.vue'
 
   const skillsModule = namespace('skills')
   const equipmentModule = namespace('equipment')
@@ -14,7 +15,8 @@
   @Component({
     components: {
       ConfirmDelete,
-      MyDialog
+      MyDialog,
+      MySelect
     }
   })
   export default class CharacterSheetProficienciesList extends Vue {
@@ -133,7 +135,7 @@
           v-btn(v-on="on", @click="resetValues", color="primary") Add Proficiency
       template(#title) Add Proficiency
       template(#text)
-        v-autocomplete(
+        MySelect(
           v-model="chosenCategory",
           :items="proficiencyCategories",
           label="Filter by Category",

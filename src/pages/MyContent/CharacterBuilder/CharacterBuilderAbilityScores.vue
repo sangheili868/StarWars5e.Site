@@ -2,6 +2,7 @@
   import { Component, Prop, Vue } from 'vue-property-decorator'
   import { AbilityScoreMethodType } from '@/types/rawCharacterTypes'
   import { difference, chain } from 'lodash'
+  import MySelect from '@/components/MySelect.vue'
 
   const standardArray = [ 15, 14, 13, 12, 10, 8 ]
   const pointMap: { [score: string]: number } = {
@@ -16,7 +17,11 @@
     15: 9
   }
 
-  @Component
+  @Component({
+    components: {
+      MySelect
+    }
+  })
   export default class CharacterBuilderAbilityScores extends Vue {
     @Prop(String) readonly abilityScoreMethod!: AbilityScoreMethodType
     @Prop(Object) readonly currentScores!: { [ability: string]: number }
@@ -68,7 +73,7 @@
 <template lang="pug">
   div
     h1 Determine Ability Scores
-    v-autocomplete(
+    MySelect(
       :value="abilityScoreMethod"
       :items="[ 'Standard Array', 'Point Buy', 'Manual' ]",
       label="Choose a method"
@@ -88,7 +93,7 @@
         @change="newScore => handleChangeAbilityScore(ability, parseInt(newScore))"
       ).pa-2
     div(v-else).d-flex.flex-wrap
-      v-autocomplete(
+      MySelect(
         v-for="(value, ability) in currentScores",
         :key="ability",
         :value="value || undefined",

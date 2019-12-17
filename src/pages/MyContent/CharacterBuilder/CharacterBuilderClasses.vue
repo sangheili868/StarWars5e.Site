@@ -7,6 +7,7 @@
   import CharacterBuilderClassNew from './CharacterBuilderClassNew.vue'
   import CharacterBuilderClassHitPoints from './CharacterBuilderClassHitPoints.vue'
   import CharacterBuilderClass from './CharacterBuilderClass.vue'
+  import MySelect from '@/components/MySelect.vue'
 
   const characterAdvancementsModule = namespace('characterAdvancements')
 
@@ -14,7 +15,8 @@
     components: {
       CharacterBuilderClass,
       CharacterBuilderClassNew,
-      CharacterBuilderClassHitPoints
+      CharacterBuilderClassHitPoints,
+      MySelect
     }
   })
   export default class CharacterBuilderClasses extends Vue {
@@ -91,7 +93,7 @@
     h2.mt-5 Settings
     div.d-flex.align-center
       h5.mr-5 Hit Points Method:
-      v-autocomplete(
+      MySelect(
         :value="isFixedHitPoints ? 'Fixed' : 'Manual'",
         :items="['Fixed', 'Manual']",
         :class="$style.method"

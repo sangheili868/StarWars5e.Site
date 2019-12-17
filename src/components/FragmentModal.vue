@@ -46,7 +46,7 @@
 </script>
 
 <template lang="pug">
-  MyDialog(:value="hasContent")
+  MyDialog(v-if="content", :value="hasContent")
     template(#title) {{ hash }}
     template(#text)
       VueMarkdown(:source="content")

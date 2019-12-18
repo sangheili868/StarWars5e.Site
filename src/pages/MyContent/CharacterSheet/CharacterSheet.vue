@@ -12,6 +12,7 @@
   import { CompleteCharacterType } from '@/types/completeCharacterTypes'
   import Loading from '@/components/Loading.vue'
   import baseCharacter from '@/modules/CharacterEngine/baseCharacter.json'
+  import { CharacterValidationType } from '@/types/utilityTypes'
 
   const characterModule = namespace('character')
   const classesModule = namespace('classes')
@@ -36,7 +37,7 @@
   })
   export default class CharacterSheet extends Vue {
     @characterModule.State character!: RawCharacterType
-    @characterModule.Getter characterValidation!: { code: number, isValid: boolean, message: string }
+    @characterModule.Getter characterValidation!: CharacterValidationType
     @characterModule.Getter completeCharacter!: CompleteCharacterType
     @characterModule.Action setCharacter!: (newCharacter: RawCharacterType) => void
     @characterModule.Action updateCharacter!: (newCharacter: RawCharacterType) => void
@@ -80,7 +81,7 @@
         this.fetchConditions()
       ]).then(() => {
         this.hasFetchedData = true
-        if (this.character && this.character.name) this.filename = camelCase(this.character.name) + '.json'
+        if (this.character && this.character.name) this.filename = camelCase(this.character.name)
       })
     }
 
@@ -129,7 +130,10 @@
 
 <template lang="pug">
   div(v-if="hasFetchedData")
-    v-alert(:value="isInvalidCharacter", dismissible, type="error") Incomplete Character: {{ characterValidation.message }}
+    v-alert(:value="isInvalidCharacter", dismissible, type="error").
+      Incomplete Character:
+      {{ characterValidation.message }}.
+      Edit character details to fix this
     div.d-flex.align-center.justify-center.flex-wrap
       v-btn(:to="{ path: 'characterBuilder', query: { new: 'true' } }", color="primary") Create New Character
       JSONReader(label="Load Character From File", @input="handleCharacterUpload").ma-2

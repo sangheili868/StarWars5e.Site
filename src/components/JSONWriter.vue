@@ -13,7 +13,7 @@
     }
 
     saveToFile () {
-      saveAs(new Blob([JSON.stringify(this.jsonData)], { type: 'text/plain;charset=utf-8;' }), this.filename)
+      saveAs(new Blob([JSON.stringify(this.jsonData)], { type: 'text/plain;charset=utf-8;' }), this.filename + '.json')
     }
   }
 </script>

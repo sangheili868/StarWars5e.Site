@@ -10,7 +10,8 @@
   import { SpeciesType, ClassType, PowerType, FeatType, BackgroundType, ArchetypeType } from '@/types/characterTypes'
   import { EquipmentType } from '@/types/lootTypes'
   import Loading from '@/components/Loading.vue'
-  import JSONWriter from '@/components/JSONWriter.vue'
+  import CharacterBuilderSaveView from './CharacterBuilderSaveView.vue'
+  import { CharacterValidationType } from '@/types/utilityTypes'
 
   const characterModule = namespace('character')
   const classesModule = namespace('classes')
@@ -32,7 +33,7 @@
       CharacterBuilderDescription,
       CharacterBuilderEquipment,
       Loading,
-      JSONWriter
+      CharacterBuilderSaveView
     }
   })
   export default class CharacterBuilder extends Vue {
@@ -40,6 +41,7 @@
     @Prop(String) readonly page!: string
 
     @characterModule.State character!: RawCharacterType
+    @characterModule.Getter characterValidation!: CharacterValidationType
     @characterModule.Action createCharacter!: () => void
     @characterModule.Action updateCharacter!: (newCharacter: RawCharacterType) => void
     @characterModule.Action replaceCharacterProperty!: (payload: { path: string, property: any }) => void
@@ -202,13 +204,11 @@
             v-btn(v-if="currentStep > 0", outlined, @click="prevStep")
               v-icon.mr-2 fa-chevron-left
               | Back
-            JSONWriter(:jsonData="character", :filename="character.name").hidden-sm-and-down Save Character
-            v-btn(color="primary", to="characterSheet").hidden-sm-and-down Character Sheet
+            CharacterBuilderSaveView(v-bind="{ character, characterValidation }").hidden-sm-and-down
             v-btn(v-if="currentStep < numSteps", color="primary", @click="nextStep") Continue
               v-icon.ml-2 fa-chevron-right
           div.d-flex.justify-center.flex-wrap.mt-2
-            JSONWriter(:jsonData="character", :filename="character.name").ma-2.hidden-md-and-up Save Character
-            v-btn(color="primary", to="characterSheet").ma-2.hidden-md-and-up Character Sheet
+            CharacterBuilderSaveView(v-bind="{ character, characterValidation }").hidden-md-and-up
     Loading(v-else)
 </template>
 

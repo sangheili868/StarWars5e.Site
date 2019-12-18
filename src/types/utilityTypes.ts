@@ -11,3 +11,9 @@ export interface SearchResultType {
   searchText: string,
   rowKey: string
 }
+
+export interface CharacterValidationType {
+  code: number,
+  isValid: boolean,
+  message: string
+}

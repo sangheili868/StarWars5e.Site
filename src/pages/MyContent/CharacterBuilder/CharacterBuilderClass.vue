@@ -10,6 +10,7 @@
   import CharacterBuilderClassPowers from './CharacterBuilderClassPowers.vue'
   import ConfirmDelete from '@/components/ConfirmDelete.vue'
   import MySelect from '@/components/MySelect.vue'
+  import CharacterBuilderClassDetail from './CharacterBuilderClassDetail.vue'
 
   const archetypesModule = namespace('archetypes')
 
@@ -18,6 +19,7 @@
       CharacterBuilderClassHitPoints,
       CharacterBuilderClassASI,
       CharacterBuilderClassPowers,
+      CharacterBuilderClassDetail,
       ConfirmDelete,
       MySelect
     }
@@ -133,6 +135,7 @@
 
 <template lang="pug">
   div
+    CharacterBuilderClassDetail(:classData="classData", :archetypeName="myClass.archetype && myClass.archetype.name")
     div.d-flex.align-center
       MySelect(
         :value="myClass.levels",

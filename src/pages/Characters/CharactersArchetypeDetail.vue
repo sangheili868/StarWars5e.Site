@@ -23,6 +23,7 @@
     @archetypeModule.Action fetchArchetypes!: () => void
 
     @Prop(String) readonly archetypeName!: string
+    @Prop(Boolean) readonly isHidingBack!: boolean
 
     created () {
       this.fetchArchetypes()
@@ -60,8 +61,8 @@
 
 <template lang="pug">
   div
-    vue-headful(:title="title")
-    BackButton
+    vue-headful(v-if="!isHidingBack", :title="title")
+    BackButton(v-if="!isHidingBack")
     div(v-if="archetype").text-left
       h1 {{ archetype.name.replace(/\ufffd/g, '-') }}
       VueMarkdown(:source="archetype.text")

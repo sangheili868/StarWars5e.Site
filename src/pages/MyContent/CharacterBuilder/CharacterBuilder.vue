@@ -62,9 +62,6 @@
     @backgroundsModule.Action fetchBackgrounds!: () => void
     @speciesModule.State species!: SpeciesType[]
     @speciesModule.Action fetchSpecies!: () => void
-    @characterAdvancementsModule.Action fetchCharacterAdvancements!: () => void
-    @skillsModule.Action fetchSkills!: () => void
-    @conditionsModule.Action fetchConditions!: () => void
 
     currentStep = 1
     isReady = false
@@ -79,10 +76,7 @@
         this.fetchPowers(),
         this.fetchFeats(),
         this.fetchBackgrounds(),
-        this.fetchSpecies(),
-        this.fetchCharacterAdvancements(),
-        this.fetchSkills(),
-        this.fetchConditions()
+        this.fetchSpecies()
       ])
         .then(() => { if (this.new === 'true') this.createCharacter() })
         .then(() => { this.isReady = true })

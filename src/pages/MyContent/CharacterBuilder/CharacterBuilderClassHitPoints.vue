@@ -36,7 +36,7 @@
 </script>
 
 <template lang="pug">
-  div.text-left.d-flex.align-center.mt-2
+  div.text-left.d-flex.align-center.mt-2.flex-wrap
     MySelect(
       v-for="({ hitPoints, hpIndex }, index) in hitPointsMap",
       :key="hpIndex",

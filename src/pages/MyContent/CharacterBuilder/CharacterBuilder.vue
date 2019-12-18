@@ -42,6 +42,7 @@
 
     @characterModule.State character!: RawCharacterType
     @characterModule.Getter characterValidation!: CharacterValidationType
+    @characterModule.Action setClean!: () => void
     @characterModule.Action createCharacter!: () => void
     @characterModule.Action updateCharacter!: (newCharacter: RawCharacterType) => void
     @characterModule.Action replaceCharacterProperty!: (payload: { path: string, property: any }) => void
@@ -198,11 +199,11 @@
             v-btn(v-if="currentStep > 0", outlined, @click="prevStep")
               v-icon.mr-2 fa-chevron-left
               | Back
-            CharacterBuilderSaveView(v-bind="{ character, characterValidation }").hidden-sm-and-down
+            CharacterBuilderSaveView(v-bind="{ character, characterValidation }", @save="setClean").hidden-sm-and-down
             v-btn(v-if="currentStep < numSteps", color="primary", @click="nextStep") Continue
               v-icon.ml-2 fa-chevron-right
           div.d-flex.justify-center.flex-wrap.mt-2
-            CharacterBuilderSaveView(v-bind="{ character, characterValidation }").hidden-md-and-up
+            CharacterBuilderSaveView(v-bind="{ character, characterValidation }", @save="setClean").hidden-md-and-up
     Loading(v-else)
 </template>
 

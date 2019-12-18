@@ -14,6 +14,7 @@
 
     saveToFile () {
       saveAs(new Blob([JSON.stringify(this.jsonData)], { type: 'text/plain;charset=utf-8;' }), this.filename + '.json')
+      setTimeout(() => this.$emit('save'), 1000)
     }
   }
 </script>

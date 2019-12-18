@@ -37,6 +37,8 @@
   })
   export default class CharacterSheet extends Vue {
     @characterModule.State character!: RawCharacterType
+    @characterModule.State isDirty!: boolean
+    @characterModule.Action setClean!: () => void
     @characterModule.Getter characterValidation!: CharacterValidationType
     @characterModule.Getter completeCharacter!: CompleteCharacterType
     @characterModule.Action setCharacter!: (newCharacter: RawCharacterType) => void
@@ -119,7 +121,7 @@
         'currentStats'
       ].every((field: string) => field in newCharacter)
       this.setCharacter(isValid ? newCharacter : {})
-      this.filename = isValid ? filename : ''
+      this.filename = isValid ? filename.split('.json')[0] : ''
     }
 
     goToTab (newTab: number, section: number) {
@@ -134,11 +136,21 @@
       Incomplete Character:
       {{ characterValidation.message }}.
       Edit character details to fix this
+    v-banner(
+      :value="!isInvalidCharacter && isDirty",
+      sticky,
+      color="white",
+      icon-color="primary",
+      icon="fa-exclamation",
+      :class="$style.banner"
+    ).white--text Character has unsaved changes!
+      template(v-slot:actions)
+        JSONWriter(:jsonData="character", v-bind="{ filename }", @save="setClean").mb-2.mr-2 Save Character
     div.d-flex.align-center.justify-center.flex-wrap
       v-btn(:to="{ path: 'characterBuilder', query: { new: 'true' } }", color="primary") Create New Character
       JSONReader(label="Load Character From File", @input="handleCharacterUpload").ma-2
       v-btn(:disabled="isNotCharacter", to="characterBuilder", color="primary") Edit Character Details
-      JSONWriter(:jsonData="character", v-bind="{ filename }").ma-2 Save Character
+      JSONWriter(:jsonData="character", v-bind="{ filename }", @save="setClean").ma-2 Save Character
     CharacterSheetTop(
       v-if="completeCharacter",
       v-bind="{ completeCharacter }",
@@ -156,3 +168,13 @@
         )
   Loading(v-else)
 </template>
+
+<style module lang="scss">
+  @import '@/assets/styles/colors.scss';
+
+  .banner {
+    z-index: 10 !important;
+    background-color: $primary !important;
+    border-radius: 10px !important;
+  }
+</style>

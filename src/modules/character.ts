@@ -26,6 +26,7 @@ const abilityScores = [
 @Module({ namespaced: true, name: 'character' })
 export default class Character extends VuexModule {
   public character: RawCharacterType = baseCharacter
+  public isDirty: boolean = false
 
   get characterValidation (): CharacterValidationType {
     const myCharacter = stateOf(this.context).character
@@ -74,28 +75,38 @@ export default class Character extends VuexModule {
     }
   }
 
-  @MutationAction({ mutate: ['character'] })
+  @MutationAction({ mutate: ['character', 'isDirty'] })
   async createCharacter () {
     return {
+      isDirty: false,
       character: baseCharacter
     }
   }
 
-  @MutationAction({ mutate: ['character'] })
+  @MutationAction({ mutate: ['character', 'isDirty'] })
   async setCharacter (newCharacter: RawCharacterType) {
     return {
+      isDirty: false,
       character: newCharacter
     }
   }
 
-  @MutationAction({ mutate: ['character'] })
+  @MutationAction({ mutate: ['isDirty'] })
+  async setClean () {
+    return {
+      isDirty: false
+    }
+  }
+
+  @MutationAction({ mutate: ['character', 'isDirty'] })
   async updateCharacter (newCharacter: RawCharacterType) {
     return {
+      isDirty: true,
       character: merge({}, stateOf(this).character, newCharacter)
     }
   }
 
-  @MutationAction({ mutate: ['character'] })
+  @MutationAction({ mutate: ['character', 'isDirty'] })
   async deleteCharacterProperty ({ path, index }: { path: string, index: number | string }) {
     const property = get(stateOf(this).character, path)
     let updatedProperty = omit(property, index)
@@ -103,24 +114,27 @@ export default class Character extends VuexModule {
     let characterCopy = merge({}, stateOf(this).character)
     set(characterCopy, path, updatedProperty)
     return {
+      isDirty: true,
       character: characterCopy
     }
   }
 
-  @MutationAction({ mutate: ['character'] })
+  @MutationAction({ mutate: ['character', 'isDirty'] })
   async replaceCharacterProperty ({ path, property }: { path: string, property: any }) {
     let characterCopy = merge({}, stateOf(this).character)
     set(characterCopy, path, property)
     return {
+      isDirty: true,
       character: characterCopy
     }
   }
 
-  @MutationAction({ mutate: ['character'] })
+  @MutationAction({ mutate: ['character', 'isDirty'] })
   async replaceCharacterProperties (replacements: { path: string, property: any }[]) {
     let characterCopy = merge({}, stateOf(this).character)
     replacements.forEach(({ path, property }) => set(characterCopy, path, property))
     return {
+      isDirty: true,
       character: characterCopy
     }
   }

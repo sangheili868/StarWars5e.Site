@@ -17,7 +17,7 @@
 
 <template lang="pug">
   div
-    JSONWriter(:jsonData="character", :filename="character.name || 'newCharacter'").ma-2 Save Character
+    JSONWriter(:jsonData="character", :filename="character.name || 'incompleteCharacter'", @save="$emit('save')").ma-2 Save Character
     v-tooltip(top, :disabled="characterValidation.code === 0")
       template(v-slot:activator="{ on }")
         span(v-on="on")

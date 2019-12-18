@@ -39,7 +39,7 @@
 </script>
 
 <template lang="pug">
-  div
+  span
     LinkModal(
       v-for="({ name, content, text }) in propertyData",
       :key="name",

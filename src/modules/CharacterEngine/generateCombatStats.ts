@@ -26,6 +26,23 @@ function generateArmorClass (rawCharacter: RawCharacterType, abilityScores: Abil
   return applyTweak(rawCharacter, 'armorClass', bodyAc + shieldAc)
 }
 
+function generateSpeed (rawCharacter: RawCharacterType, equipment: EquipmentType[], abilityScores: AbilityScoresType) {
+  const tooHeavyArmor = equipment.filter(({ equipmentCategory, equipped, strengthRequirement }) =>
+    equipmentCategory === 'Armor' &&
+    equipped &&
+    strengthRequirement &&
+    strengthRequirement.split(' ').length > 1 &&
+    parseInt(strengthRequirement.split(' ')[1]) > abilityScores.Strength.value
+  )
+  const baseSpeed = Math.max(0, applyTweak(rawCharacter, 'speed.base', 30 - (tooHeavyArmor.length * 10)))
+  return {
+    base: baseSpeed + ' ft',
+    hour: baseSpeed / 10 + ' miles',
+    day: baseSpeed * 4 / 5 + ' miles',
+    special: ''
+  }
+}
+
 export default function generateCombatStats (
   rawCharacter: RawCharacterType,
   abilityScores: AbilityScoresType,
@@ -43,11 +60,6 @@ export default function generateCombatStats (
     passivePerception: applyTweak(rawCharacter, 'passivePerception', passivePerception),
     inspiration: rawCharacter.currentStats.hasInspiration,
     vision: 'normal',
-    speed: {
-      base: applyTweak(rawCharacter, 'speed.base', 30) + 'ft',
-      hour: '3 miles',
-      day: '24 miles',
-      special: ''
-    }
+    speed: generateSpeed(rawCharacter, equipment, abilityScores)
   }
 }

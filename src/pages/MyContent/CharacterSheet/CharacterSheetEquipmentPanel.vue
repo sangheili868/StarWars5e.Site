@@ -1,8 +1,14 @@
 <script lang="ts">
   import { Component, Prop, Vue } from 'vue-property-decorator'
   import { EquipmentType } from '@/types/lootTypes'
+  import { startCase } from 'lodash'
+  import LootWeaponsProperties from '@/pages/Loot/LootWeaponsProperties.vue'
 
-  @Component
+  @Component({
+    components: {
+      LootWeaponsProperties
+    }
+  })
   export default class CharacterSheetEquipmentPanel extends Vue {
     @Prop(Object) readonly item!: EquipmentType
     @Prop(Number) readonly index!: number
@@ -11,9 +17,15 @@
       return ['Weapon', 'Armor'].includes(this.item.equipmentCategory)
     }
 
+    startCase = startCase
+
     updateQuantity (newQuantity: number) {
       const fixedQuantity = Math.max(0, newQuantity)
       this.$emit('updateCharacter', { equipment: { [this.index]: { quantity: fixedQuantity } } })
+    }
+
+    getWeaponDamage (weapon: EquipmentType) {
+      return weapon.damageNumberOfDice ? `${weapon.damageNumberOfDice}d${weapon.damageDieType} ${weapon.damageType}` : 'Special'
     }
   }
 </script>
@@ -49,7 +61,17 @@
             :class="$style.checkbox",
             @change="isChecked => $emit('updateCharacter', { equipment: { [index]: { equipped: isChecked } } })"
           ).ma-2
-      br
+      div(v-if="item.equipmentCategory.toLowerCase() === 'armor'")
+        div(v-if="item.armorClassification !== 'Shield'") #[strong {{ item.armorClassification }} Armor]
+        div #[strong AC:] {{ item.ac }}
+        div(v-if="item.stealthDisadvantage") #[strong Imposes Stealth Disadvantage]
+        div(v-if="item.strengthRequirement.includes('Str')") #[strong Requires {{ item.strengthRequirement }}]
+      div(v-else-if="item.equipmentCategory.toLowerCase() === 'weapon'")
+        div #[strong {{ startCase(item.weaponClassification) }}]
+        div #[strong Damage:] {{ getWeaponDamage(item) }}
+        div
+          strong Properties:
+          LootWeaponsProperties(:propertyList="item.properties")
       div {{ item.description }}
 </template>
 

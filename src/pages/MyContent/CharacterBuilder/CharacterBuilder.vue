@@ -174,8 +174,9 @@
           you download an updated file, including changes to hit points, force points, etc.
         h2.mt-5 Feedback
         div.
-          Because of the complexity and depth of SW5e, there is no way we can test every possible character. Please report
-          any bugs you find, or additional features you want to see, at the
+          Because of the complexity and depth of SW5e, there is no way we can test every possible character. There are also
+          lots of other features we plan to implement, like a dice roller and custom weapons and armor.
+          Please report any bugs you find, or additional features you want to see, at the
           #[span.primary--text #website-character-builder] channel in our Discord server.
         div.mt-5.d-flex.flex-wrap.justify-space-around
           a(href="https://discord.gg/zYcPYTu", target="_blank").mb-5

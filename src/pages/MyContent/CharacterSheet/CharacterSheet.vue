@@ -140,23 +140,25 @@
       :value="!isInvalidCharacter && isDirty",
       sticky,
       color="white",
-      icon-color="primary",
-      icon="fa-exclamation",
+      icon-color="red",
+      :icon="$vuetify.breakpoint.name === 'xs' ? '' : 'fa-exclamation'",
+      mobile-break-point="600",
       :class="$style.banner"
-    ).white--text Character has unsaved changes!
-      template(v-slot:actions)
-        JSONWriter(:jsonData="character", v-bind="{ filename }", @save="setClean").mb-2.mr-2 Save Character
+    ).white--text.mb-3
+      div.d-flex.align-center.justify-space-around
+        div Character has unsaved changes!
+        JSONWriter(:jsonData="character", v-bind="{ filename }", @save="setClean").ml-1 Save
     div.d-flex.align-center.justify-center.flex-wrap
-      v-btn(:to="{ path: 'characterBuilder', query: { new: 'true' } }", color="primary") Create New Character
-      JSONReader(label="Load Character From File", @input="handleCharacterUpload").ma-2
-      v-btn(:disabled="isNotCharacter", to="characterBuilder", color="primary") Edit Character Details
-      JSONWriter(:jsonData="character", v-bind="{ filename }", @save="setClean").ma-2 Save Character
+      v-btn(:to="{ path: 'characterBuilder', query: { new: 'true' } }", color="primary").ma-2 Create New Character
+      JSONReader(label="Load Character From File", @input="handleCharacterUpload")
+      v-btn(:disabled="isNotCharacter", to="characterBuilder", color="primary").ma-2 Edit Character Details
+      JSONWriter(:jsonData="character", v-bind="{ filename }", @save="setClean") Save Character
     CharacterSheetTop(
       v-if="completeCharacter",
       v-bind="{ completeCharacter }",
       @updateCharacter="updateCharacter",
       @replaceCharacterProperty="replaceCharacterProperty"
-    )
+    ).mt-2
     v-row(v-if="completeCharacter", justify-space-around).nx-2
       v-col(v-for="section in range(numSections)", :key="section", :md="4", :sm="6")
         CharacterSheetSection(
@@ -174,7 +176,17 @@
 
   .banner {
     z-index: 10 !important;
-    background-color: $primary !important;
+    background-color: #f44336 !important;
     border-radius: 10px !important;
+  }
+</style>
+
+<style lang="scss">
+  .v-banner.v-banner--is-mobile .v-banner__wrapper {
+    padding: 5px;
+  }
+
+  .v-banner__text {
+    flex-grow: 1;
   }
 </style>

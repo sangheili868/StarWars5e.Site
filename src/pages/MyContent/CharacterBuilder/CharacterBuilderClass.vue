@@ -77,8 +77,8 @@
       const hitPoints = merge([], newFixedHP, this.myClass.hitPoints).slice(0, newFixedHP.length)
       const archetype = levels < 3 ? undefined : this.myClass.archetype
       const newLevel = this.totalOtherClassesLevels + levels
-      const advancement = this.characterAdvancements.find(({ level }) => level === newLevel)
-      const experiencePoints = advancement ? advancement.experiencePoints : this.character.experiencePoints
+      const newLevelAdvancement = this.characterAdvancements.find(({ level }) => level === newLevel)
+      const experiencePoints = Math.max(newLevelAdvancement ? newLevelAdvancement.experiencePoints : 0, this.character.experiencePoints)
       this.$emit('replaceCharacterProperties', [
         {
           path: 'classes.' + this.index,

@@ -43,6 +43,17 @@
       return level < 0 ? 20 : level
     }
 
+    getNextAdvancement (experience: number) {
+      const advancement = chain(this.characterAdvancements)
+        .sortBy('experiencePoints')
+        .find(({ experiencePoints }) => experiencePoints > experience)
+        .value()
+      return advancement || {
+        level: 20,
+        experiencePoints: 355000
+      }
+    }
+
     updateExperience (newExperience: number) {
       const unspentLevels = this.calculateLevel(newExperience) - this.completeCharacter.currentLevel
       this.$emit('updateCharacter', { experiencePoints: newExperience, currentStats: { unspentLevels } })
@@ -68,8 +79,8 @@
         v-chip(small, color="secondary", text-color="white", :class="$style.rightChip").ml-2.mr-0
           h5 {{ completeCharacter.currentLevel + 1 }}
       template(v-slot:result="{ newValue }")
-        div New Experience: {{ newValue }}
-        div New Level: {{ calculateLevel(newValue) }}
+        div New Level: {{ calculateLevel(newValue) }} ({{ newValue }} experience points)
+        div Next Level: {{ getNextAdvancement(newValue).level }} ({{ getNextAdvancement(newValue).experiencePoints }} experience Points)
         div.primary--text {{ completeCharacter.experiencePoints.errorMessage }}
         v-btn(:to="{ path: 'characterBuilder', query: { page: '2' } }", color="primary").mt-3 Manage Class Levels
 </template>

@@ -91,60 +91,67 @@
         featuresTimesUsed
       } })
     }
+
+    pluralize (count: number, word: string): string {
+      return `${count} ${word}${count === 1 ? '' : 's'}`
+    }
   }
 </script>
 
 <template lang="pug">
-div
-  MyDialog(v-model="isRestOpen", @input="resetCount")
-    template(v-slot:activator="{ on }")
-      v-btn(small, v-on="on", color="secondary").ma-2 Rest
-    template(#title) Rest
-    template(#text, v-if="isRestOpen")
-      div.d-flex.align-center
-        div(:class="$style.takeA").pr-2 Take a
-        MySelect(v-model="mode", :items="['Short Rest', 'Long Rest']")
-      div(v-if="mode === 'Short Rest'")
-        div(v-if="hitPoints.resting.shortRestFeatures.length")
-          div The following features will have their uses restored:
-          ul
-            li(v-for="feature in hitPoints.resting.shortRestFeatures", :key="feature") {{ feature }}
-        div Select the number of hit dice you are using, if any:
-        CheckList(
-          v-for="{ size, current, maximum} in hitPoints.hitDice",
-          :key="size",
-          :current="hitDiceToUse[size]",
-          v-bind="{ maximum }",
-          :blocked="maximum - current",
-          :title="size + 's'",
-          @changeSelected="numSelected => setCount(size, numSelected)"
-        ).ma-2
-        div Enter the total result rolled on those dice:
-        v-text-field(
-          outlined,
-          single-line,
-          hide-details,
-          :disabled="numHitDiceToUse === 0"
-          type="number",
-          v-model.number="dieResult"
-        ).my-2
-        div Your constitution will heal you an additional {{ conHealing }} hit {{ conHealing === 1 ? 'point' : 'points' }}.
-        div In total, you will regain {{ totalHealing }} hit {{ totalHealing === 1 ? 'point' : 'points' }}.
-      div(v-else)
-        div(v-if="hitPoints.current < hitPoints.maximum") You will regain {{ hitPoints.maximum - hitPoints.current }} hit points.
-        div(v-if="hitPoints.temporary") You will lose your {{ hitPoints.temporary }} temporary hit points.
-        div(v-if="hitPoints.resting.longRestFeatures.length")
-          div The following features will have their uses restored:
-          ul
-            li(v-for="feature in hitPoints.resting.longRestFeatures", :key="feature") {{ feature }}
-        div(v-if="hitPoints.resting.numHitDiceUsed > 0")
-          div You will regain the following hit dice:
-          ul
-            li(v-for="({ size, numRestored }) in hitPoints.resting.hitDiceRestored", :key="size") {{ numRestored }}{{ size }}
-    template(#actions)
-      v-btn(color="primary", @click="takeRest") Take a {{ mode }}
-      v-spacer
-      v-btn(color="primary", text, @click="isRestOpen=false") Close
+  div
+    MyDialog(v-model="isRestOpen", @input="resetCount")
+      template(v-slot:activator="{ on }")
+        v-btn(small, v-on="on", color="secondary").ma-2 Rest
+      template(#title) Rest
+      template(#text, v-if="isRestOpen")
+        div.d-flex.align-center
+          div(:class="$style.takeA").pr-2 Take a
+          MySelect(v-model="mode", :items="['Short Rest', 'Long Rest']")
+        div(v-if="mode === 'Short Rest'")
+          div(v-if="hitPoints.resting.techPointsUsed") You will regain {{ pluralize(hitPoints.resting.techPointsUsed, 'tech point') }}.
+          div(v-if="hitPoints.resting.shortRestFeatures.length")
+            div The following features will have their uses restored:
+            ul
+              li(v-for="feature in hitPoints.resting.shortRestFeatures", :key="feature") {{ feature }}
+          div Select the number of hit dice you are using, if any:
+          CheckList(
+            v-for="{ size, current, maximum} in hitPoints.hitDice",
+            :key="size",
+            :current="hitDiceToUse[size]",
+            v-bind="{ maximum }",
+            :blocked="maximum - current",
+            :title="size + 's'",
+            @changeSelected="numSelected => setCount(size, numSelected)"
+          ).ma-2
+          div Enter the total result rolled on those dice:
+          v-text-field(
+            outlined,
+            single-line,
+            hide-details,
+            :disabled="numHitDiceToUse === 0"
+            type="number",
+            v-model.number="dieResult"
+          ).my-2
+          div Your constitution will heal you an additional {{ conHealing }} hit {{ conHealing === 1 ? 'point' : 'points' }}.
+          div In total, you will regain {{ pluralize(totalHealing, 'hit point') }}.
+        div(v-else)
+          div(v-if="hitPoints.resting.techPointsUsed") You will regain {{ pluralize(hitPoints.resting.techPointsUsed, 'tech point') }}.
+          div(v-if="hitPoints.resting.forcePointsUsed") You will regain {{ pluralize(hitPoints.resting.forcePointsUsed, 'tech point') }}.
+          div(v-if="hitPoints.current < hitPoints.maximum") You will regain {{ pluralize(hitPoints.maximum - hitPoints.current, 'hit point') }}.
+          div(v-if="hitPoints.temporary") You will lose your {{ pluralize(hitPoints.temporary, 'temporary hit point') }}.
+          div(v-if="hitPoints.resting.longRestFeatures.length")
+            div The following features will have their uses restored:
+            ul
+              li(v-for="feature in hitPoints.resting.longRestFeatures", :key="feature") {{ feature }}
+          div(v-if="hitPoints.resting.numHitDiceUsed > 0")
+            div You will regain the following hit dice:
+            ul
+              li(v-for="({ size, numRestored }) in hitPoints.resting.hitDiceRestored", :key="size") {{ numRestored }}{{ size }}
+      template(#actions)
+        v-btn(color="primary", @click="takeRest") Take a {{ mode }}
+        v-spacer
+        v-btn(color="primary", text, @click="isRestOpen=false") Close
 </template>
 
 <style module lang="scss">

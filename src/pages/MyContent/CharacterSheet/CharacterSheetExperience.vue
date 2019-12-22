@@ -66,7 +66,7 @@
   v-badge(overlap).my-3.mr-3
     template(v-slot:badge, v-if="!completeCharacter.experiencePoints.isCorrect") !
     ValueEditor(:value="completeCharacter.experiencePoints.current", label="Experience", @input="updateExperience")
-      div(:class="$style.xpBar").d-flex.align-center
+      div.d-flex.align-center.xpBar
         v-chip(small, color="secondary", text-color="white").mr-2.ml-0
           h5 {{ completeCharacter.currentLevel }}
         v-progress-linear(
@@ -76,7 +76,7 @@
           height="20"
         ).text-center.ma-0
           h5 {{ experienceText }}
-        v-chip(small, color="secondary", text-color="white", :class="$style.rightChip").ml-2.mr-0
+        v-chip(small, color="secondary", text-color="white").ml-2.mr-0.rightChip
           h5 {{ completeCharacter.currentLevel + 1 }}
       template(v-slot:result="{ newValue }")
         div New Level: {{ calculateLevel(newValue) }} ({{ newValue }} experience points)
@@ -85,10 +85,15 @@
         v-btn(:to="{ path: 'characterBuilder', query: { page: '2' } }", color="primary").mt-3 Manage Class Levels
 </template>
 
-<style module lang="scss">
+<style lang="scss">
   @import '@/assets/styles/colors.scss';
   .xpBar {
     min-width: 250px;
+
+    .v-chip__content {
+      display: flex;
+      justify-content: center;
+    }
 
     .rightChip {
       opacity: 0.3

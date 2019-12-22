@@ -38,7 +38,9 @@ export interface HitPointsType {
       numRestored: number
     }[],
     shortRestFeatures: string[],
-    longRestFeatures: string[]
+    longRestFeatures: string[],
+    techPointsUsed: number,
+    forcePointsUsed: number
   }
 }
 

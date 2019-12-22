@@ -3,10 +3,12 @@
   import { EquipmentType } from '@/types/lootTypes'
   import { startCase } from 'lodash'
   import LootWeaponsProperties from '@/pages/Loot/LootWeaponsProperties.vue'
+  import VueMarkdown from 'vue-markdown'
 
   @Component({
     components: {
-      LootWeaponsProperties
+      LootWeaponsProperties,
+      VueMarkdown
     }
   })
   export default class CharacterSheetEquipmentPanel extends Vue {
@@ -72,7 +74,7 @@
         div
           strong Properties:
           LootWeaponsProperties(:propertyList="item.properties")
-      div {{ item.description }}
+      VueMarkdown(:source="item.description")
 </template>
 
 <style lang="scss">

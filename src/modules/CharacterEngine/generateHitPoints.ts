@@ -1,5 +1,5 @@
 import { RawCharacterType } from '@/types/rawCharacterTypes'
-import { AbilityScoresType, CompletedFeatureType } from '@/types/completeCharacterTypes'
+import { AbilityScoresType, CompletedFeatureType, HitPointsType } from '@/types/completeCharacterTypes'
 import { ClassType } from '@/types/characterTypes'
 import { chain, isEmpty } from 'lodash'
 import applyTweak from '@/utilities/applyTweak'
@@ -18,7 +18,7 @@ export default function generateHitPoints (
   classes: ClassType[],
   currentLevel: number,
   features: { combatFeatures: CompletedFeatureType[], nonCombatFeatures: CompletedFeatureType[]}
-) {
+): HitPointsType {
   const startingClass = rawCharacter.classes[0]
   const startingClassData = startingClass && classes.find(({ name }) => name === startingClass.name)
   const hpFromFirstLevel = (startingClassData && startingClassData.hitPointsAtFirstLevelNumber) || 0
@@ -62,16 +62,18 @@ export default function generateHitPoints (
     hitDieBonus: abilityScores.Constitution.modifier,
     numHitDiceUsed,
     hitDiceRestored,
+    techPointsUsed: rawCharacter.currentStats.techPointsUsed,
+    forcePointsUsed: rawCharacter.currentStats.forcePointsUsed,
     shortRestFeatures: featuresWithUsage.filter(({ usage }) => usage && usage.recharge === 'shortRest').map(({ name }) => name),
     longRestFeatures: featuresWithUsage.map(({ name }) => name)
   }
 
-  return ({
+  return {
     current: Math.max(0, maximum - rawCharacter.currentStats.hitPointsLost),
     temporary: rawCharacter.currentStats.temporaryHitPoints,
     maximum,
     hitDice,
     deathSaves: rawCharacter.currentStats.deathSaves,
     resting
-  })
+  }
 }

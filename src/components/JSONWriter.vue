@@ -29,6 +29,7 @@
     copyCharacter () {
       copy(JSON.stringify(this.jsonData))
       this.hasCopied = true
+      this.$emit('save')
     }
   }
 </script>

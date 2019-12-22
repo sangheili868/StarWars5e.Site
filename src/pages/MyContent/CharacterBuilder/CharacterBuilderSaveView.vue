@@ -28,7 +28,3 @@
           ).ma-2 Character Sheet
       div {{ characterValidation.message }}
 </template>
-
-<style module lang="scss">
-
-</style>

@@ -104,7 +104,7 @@
       h3 {{ speciesData.name }} Traits
       p As a {{ speciesData.name }}, you have the following special traits.
       div(v-for="trait in speciesData.traits", :key="trait.name")
-        div #[strong #[em {{trait.name}}] ] {{ trait.description }}
+        VueMarkdown(:source="'***' + trait.name + '.*** ' + trait.description")
     Loading(v-else)
 </template>
 

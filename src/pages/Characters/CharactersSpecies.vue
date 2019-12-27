@@ -33,7 +33,7 @@
     }
 
     get items () {
-      const page = this.isInHandbook ? 'handbook' : 'characters'
+      const page = this.isInHandbook ? 'rules/handbook' : 'characters'
       return _(this.species)
         .filter(({ contentType }) => !this.isInHandbook || contentType === 'Core')
         .map(species => ({

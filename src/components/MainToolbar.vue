@@ -72,14 +72,13 @@
             { to: '/weapons', title: 'Weapons' }
           ]
         },
-        // {
-        //   to: '/myContent',
-        //   title: 'My Content',
-        //   nested: [
-        //     { to: { path: '/characterBuilder', query: { new: 'true' } }, title: 'Character Builder' },
-        //     { to: '/characterSheet', title: 'Character Sheet' }
-        //   ]
-        // },
+        {
+          to: '/myContent',
+          title: 'My Content',
+          nested: [
+            { to: '/characters', title: 'Characters' }
+          ]
+        },
         {
           to: '/assets',
           title: 'Assets'

@@ -63,6 +63,11 @@
           to: 'rules/starships',
           title: 'Starships of the Galaxy',
           image: 'sotg_cover'
+        },
+        {
+          to: 'rules/hives',
+          title: 'Wretched Hives',
+          image: 'wh_cover'
         }
       ]
     }

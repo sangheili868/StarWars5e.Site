@@ -7,7 +7,7 @@ import applyTweak from '@/utilities/applyTweak'
 function isProficientWithWeapon (weapon: EquipmentType, proficiencies: string[]) {
   const completeProficiencies = proficiencies.map(proficiency => {
     const split = proficiency.split(' ')
-    return split[0] === 'All' ? ['Simple ' + split[1], 'Martial ' + split[1]] : proficiency
+    return ['All', 'all'].includes(split[0]) ? ['Simple ' + split[1], 'Martial ' + split[1]] : proficiency
   }).flat()
   return intersection(completeProficiencies.map(camelCase), [
     weapon.name,

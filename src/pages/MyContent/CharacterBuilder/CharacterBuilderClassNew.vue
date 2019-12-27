@@ -5,11 +5,13 @@
   import { ClassType } from '@/types/characterTypes'
   import { RawClassType } from '@/types/rawCharacterTypes'
   import { range } from 'lodash'
+  import ClassDetail from '@/components/ClassDetail.vue'
 
   @Component({
     components: {
       MyDialog,
-      MySelect
+      MySelect,
+      ClassDetail
     }
   })
   export default class CharacterBuilderClassNew extends Vue {
@@ -19,7 +21,6 @@
 
     isOpen = false
     chosenClass = ''
-    chosenLevel = 0
     range = range
 
     get classChoices () {
@@ -27,28 +28,27 @@
       return this.classes.map(({ name }) => name).filter(name => !currentClassList.includes(name))
     }
 
-    resetValues () {
-      this.chosenClass = ''
-      this.chosenLevel = 0
+    get classData () {
+      return this.classes.find(({ name }) => name === this.chosenClass)
     }
 
     handleAdd () {
-      this.$emit('add', { name: this.chosenClass, levels: this.chosenLevel })
+      this.$emit('add', this.chosenClass)
       this.isOpen = false
     }
   }
 </script>
 
 <template lang="pug">
-  MyDialog(v-if="currentLevel < 20", v-model="isOpen")
+  MyDialog(v-if="currentLevel < 20", v-model="isOpen", wide)
     template(v-slot:activator="{ on }")
-      v-btn(color="primary", v-on="on", @click="resetValues").mt-3 Add New Class
+      v-btn(color="primary", v-on="on", @click="chosenClass=''").mt-3 Add New Class
     template(#title) Add New Class
     template(#text)
       MySelect(v-model="chosenClass", :items="classChoices", label="Choose a class")
-      MySelect(v-model="chosenLevel", :items="range(1, 21 - currentLevel)", label="Number of levels in this class")
+      ClassDetail(v-bind="{ classData }", isHidingBack).mt-5
     template(#actions)
-      v-btn(color="primary", :disabled="!chosenLevel || !chosenClass", @click="handleAdd") Add Class
+      v-btn(color="primary", :disabled="!chosenClass", @click="handleAdd") Add Class
       v-spacer
       v-btn(color="primary", text, @click="isOpen=false") Cancel
 </template>

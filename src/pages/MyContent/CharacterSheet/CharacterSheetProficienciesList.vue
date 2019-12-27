@@ -145,6 +145,7 @@
           :search-input.sync="newProficiency",
           :items="filteredList",
           label="Enter a Proficiency",
+          autocomplete="off",
           @change="isExpertise = false"
         )
           template(v-slot:no-data)

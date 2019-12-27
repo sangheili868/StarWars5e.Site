@@ -13,13 +13,10 @@
   export default class JSONWriter extends Vue {
     @Prop(Object) readonly jsonData!: object
     @Prop(String) readonly filename!: string
+    @Prop(Boolean) readonly disabled!: boolean
 
     isOpen = false
     hasCopied = false
-
-    get isDisabled () {
-      return isEmpty(this.jsonData) || this.filename === ''
-    }
 
     saveToFile () {
       saveAs(new Blob([JSON.stringify(this.jsonData)], { type: 'text/plain;charset=utf-8;' }), this.filename + '.json')
@@ -37,7 +34,7 @@
 <template lang="pug">
   MyDialog(v-model="isOpen")
     template(v-slot:activator="{ on }")
-      v-btn(:disabled="isDisabled", v-on="on", @click="hasCopied=false")
+      v-btn(v-bind="{ disabled }", v-on="on", @click="hasCopied=false")
         slot
     template(#title) Save Character
     template(#text)

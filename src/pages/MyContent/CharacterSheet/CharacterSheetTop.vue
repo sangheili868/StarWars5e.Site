@@ -37,6 +37,7 @@
       CharacterSheetExperience(
         v-bind="{ completeCharacter }",
         @updateCharacter="newCharacter => $emit('updateCharacter', newCharacter)"
+        @goToStep="step => $emit('goToStep', step)"
       )
     CharacterSheetHealth(
       :hitPoints="completeCharacter.hitPoints",

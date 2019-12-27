@@ -13,9 +13,7 @@
         {
           category: '',
           routes: [
-            { to: '/myContent/characterBuilder', title: 'Character Builder' },
-            { to: '/myContent/characterEditor', title: 'Character Editor' },
-            { to: '/myContent/characterSheet', title: 'Character Sheet' }
+            { to: '/myContent/characters', title: 'Characters' }
           ]
         }
       ]
@@ -27,4 +25,5 @@
   div
     h1 My Content
     RoutesList(:categories="categories")
+    div More Coming Soon!
 </template>

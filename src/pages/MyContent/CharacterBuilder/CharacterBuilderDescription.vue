@@ -111,6 +111,7 @@
         v-text-field(:value="name", outlined, label="Name", @change="handleChangeName")
         v-text-field(:value="image", outlined, label="Image URL", @change="handleChangeImage")
       v-img(
+        v-if="image",
         :src="image",
         contain,
         max-height="175",

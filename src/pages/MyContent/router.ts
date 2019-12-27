@@ -1,8 +1,6 @@
 import PageNester from '@/components/PageNester.vue'
 import MyContentPage from './MyContentPage.vue'
-import CharacterBuilder from './CharacterBuilder/CharacterBuilder.vue'
-import CharacterEditor from './CharacterEditor.vue'
-import CharacterSheet from './CharacterSheet/CharacterSheet.vue'
+import Characters from './Characters.vue'
 import { Route } from 'vue-router'
 
 export default {
@@ -17,25 +15,11 @@ export default {
       }
     },
     {
-      path: '/myContent/CharacterBuilder',
-      component: CharacterBuilder,
+      path: '/myContent/characters',
+      component: Characters,
       props: ({ query }: Route) => query,
       meta: {
-        title: 'Character Builder'
-      }
-    },
-    {
-      path: '/myContent/CharacterEditor',
-      component: CharacterEditor,
-      meta: {
-        title: 'Character Editor'
-      }
-    },
-    {
-      path: '/myContent/CharacterSheet',
-      component: CharacterSheet,
-      meta: {
-        title: 'Character Sheet'
+        title: 'Characters'
       }
     }
   ]

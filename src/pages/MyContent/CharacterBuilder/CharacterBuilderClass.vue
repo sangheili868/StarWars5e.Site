@@ -79,6 +79,7 @@
       const newLevel = this.totalOtherClassesLevels + levels
       const newLevelAdvancement = this.characterAdvancements.find(({ level }) => level === newLevel)
       const experiencePoints = Math.max(newLevelAdvancement ? newLevelAdvancement.experiencePoints : 0, this.character.experiencePoints)
+      const abilityScoreImprovements = this.myClass.abilityScoreImprovements.slice(0, this.asiLevels.length)
       this.$emit('replaceCharacterProperties', [
         {
           path: 'classes.' + this.index,
@@ -86,7 +87,7 @@
             ...this.myClass,
             levels,
             hitPoints,
-            abilityScoreImprovements: [],
+            abilityScoreImprovements,
             archetype
           }
         },
@@ -121,7 +122,7 @@
 
     handleDeleteClass () {
       const advancement = this.characterAdvancements.find(({ level }) => level === this.totalOtherClassesLevels)
-      const experiencePoints = advancement ? advancement.experiencePoints : this.character.experiencePoints
+      const experiencePoints = advancement ? advancement.experiencePoints : 0
       this.$emit('replaceCharacterProperties', [
         {
           path: 'classes',
@@ -142,7 +143,7 @@
         :items="range(1, 21 - totalOtherClassesLevels)",
         label="Number of levels in this class",
         @change="levels => handleUpdateLevels(levels)"
-      ).mr-3
+      ).mr-3.mt-3
       ConfirmDelete(
         label="Class",
         :item="myClass.name",

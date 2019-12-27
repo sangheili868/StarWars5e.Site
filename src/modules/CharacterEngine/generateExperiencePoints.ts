@@ -10,10 +10,11 @@ export default function generateExperiencePoints (
   const experienceTable = chain(characterAdvancements).keyBy('level').mapValues('experiencePoints').value()
   const previousLevel = experienceTable[currentLevel]
   const current = rawCharacter.experiencePoints
-  const nextLevel = experienceTable[currentLevel + 1]
-  const isCorrect = current >= previousLevel && current < nextLevel
+  const isMax = currentLevel === 20
+  const nextLevel = isMax ? experienceTable[20] : experienceTable[currentLevel + 1]
+  const isCorrect = current >= previousLevel && (isMax || current < nextLevel)
   let errorMessage = ''
   if (current < previousLevel) errorMessage = 'Experience too low. Increase experience or remove class levels below'
-  else if (current >= nextLevel) errorMessage = 'You have unused levels. Click below to add more class levels.'
+  else if (!isMax && (current >= nextLevel)) errorMessage = 'You have unused levels. Click below to add more class levels.'
   return { previousLevel, current: rawCharacter.experiencePoints, nextLevel, isCorrect, errorMessage }
 }

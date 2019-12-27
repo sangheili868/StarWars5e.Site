@@ -22,7 +22,8 @@
       ],
       "archetype": {
         "name": "Politician Pursuit"
-      }
+      },
+      "abilityScoreImprovements": []
     },
     {
       "name": "Scout",

@@ -10,7 +10,7 @@
 <template lang="pug">
     v-container(fluid)
       v-row(justify="center")
-        v-col(v-for="(card, index) in cards", :key="card.name", :cols="12", :sm="6", :md="4")
+        v-col(v-for="(card, index) in cards", :key="card.name", :cols="12", :sm="6", :md="4", :lg="3")
           v-card(:to="card.to", hover, exact, height="100%")
             slot(:card="card")
 </template>

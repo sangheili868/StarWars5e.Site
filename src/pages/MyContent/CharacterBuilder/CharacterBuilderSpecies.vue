@@ -50,7 +50,7 @@
       @change="handleChangeSpecies"
     )
     div(v-if="currentSpecies.name && currentSpeciesData")
-      CharactersSpeciesDetail(:speciesName="currentSpecies.name", isHidingBack)
+      CharactersSpeciesDetail(:speciesName="currentSpecies.name", isHidingBack).mb-5
       CharacterBuilderSpeciesAbilities(
         :abilitiesIncreased="currentSpeciesData.abilitiesIncreased",
         :currentSpecies="currentSpecies",

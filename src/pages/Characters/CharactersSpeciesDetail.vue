@@ -43,7 +43,7 @@
 
 <template lang="pug">
   div
-    vue-headful(:title="title")
+    vue-headful(v-if="!isHidingBack", :title="title")
     BackButton(v-if="!isHidingBack")
     CharactersSpeciesDetailHalfHuman(v-if="speciesName === 'Half-Human'", v-bind="{ speciesData }")
     div(v-else-if="speciesData").text-left

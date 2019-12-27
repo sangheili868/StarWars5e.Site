@@ -76,13 +76,13 @@
           height="20"
         ).text-center.ma-0
           h5 {{ experienceText }}
-        v-chip(small, color="secondary", text-color="white").ml-2.mr-0.rightChip
+        v-chip(v-if="completeCharacter.currentLevel < 20", small, color="secondary", text-color="white").ml-2.mr-0.rightChip
           h5 {{ completeCharacter.currentLevel + 1 }}
       template(v-slot:result="{ newValue }")
         div New Level: {{ calculateLevel(newValue) }} ({{ newValue }} experience points)
         div Next Level: {{ getNextAdvancement(newValue).level }} ({{ getNextAdvancement(newValue).experiencePoints }} experience Points)
         div.primary--text {{ completeCharacter.experiencePoints.errorMessage }}
-        v-btn(:to="{ path: 'characterBuilder', query: { page: '2' } }", color="primary").mt-3 Manage Class Levels
+        v-btn(color="primary", @click="$emit('goToStep', 2)").mt-3 Manage Class Levels
 </template>
 
 <style lang="scss">

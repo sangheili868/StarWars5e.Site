@@ -74,7 +74,7 @@
         div
           strong Properties:
           LootWeaponsProperties(:propertyList="item.properties")
-      VueMarkdown(:source="item.description")
+      VueMarkdown(v-if="item.description", :source="item.description")
 </template>
 
 <style lang="scss">

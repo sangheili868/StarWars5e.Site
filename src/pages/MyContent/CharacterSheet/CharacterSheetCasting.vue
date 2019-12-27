@@ -38,8 +38,8 @@
 
 <template lang="pug">
   div
-    div(v-if="techCasting")
-      h3 Tech Casting
+    div(v-if="techCasting").mb-3
+      h2 Tech Casting
       CharacterSheetTicker(
         v-if="techCasting.maxPoints > 10",
         :current="Math.max(0, techCasting.maxPoints - techCasting.pointsUsed)",
@@ -60,7 +60,7 @@
         h3.mt-2 {{ powerLevelText(level) }}
         CharacterSheetExpansionFeatures(:features="powers")
     div(v-if="forceCasting")
-      h3 Force Casting
+      h2 Force Casting
       CharacterSheetTicker(
         v-if="forceCasting.maxPoints > 10",
         :current="Math.max(0, forceCasting.maxPoints - forceCasting.pointsUsed)",

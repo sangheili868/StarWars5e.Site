@@ -42,19 +42,19 @@
       return this.currentClasses.reduce((acc, { levels }) => acc + levels, 0)
     }
 
-    handleAddClass ({ name, levels }: { name: string, levels: number }) {
+    handleAddClass (name: string) {
       const position = this.currentClasses.length
       const newClassData = this.classes.find(({ name: className }) => name === className)
       if (!newClassData) console.error('Class not found: ', name)
       const amount = newClassData ? newClassData.hitPointsAtHigherLevelsNumber : 0
-      const advancement = this.characterAdvancements.find(({ level }) => level === this.currentLevel + levels)
+      const advancement = this.characterAdvancements.find(({ level }) => level === this.currentLevel + 1)
       const experiencePoints = advancement ? advancement.experiencePoints : this.character.experiencePoints
       this.$emit('updateCharacter', {
         classes: {
           [position]: {
             name,
-            levels,
-            hitPoints: Array(position === 0 ? levels - 1 : levels).fill(amount),
+            levels: 1,
+            hitPoints: position === 0 ? [] : [amount],
             abilityScoreImprovements: []
           }
         },
@@ -72,9 +72,17 @@
 <template lang="pug">
   div
     h1 Choose a Class
-    div.d-flex.justify-space-around.flex-wrap.mb-3
+    div.d-flex.justify-space-around.flex-wrap.mb-3.align-center
       div #[strong Current Level:] {{ currentLevel }}
       div #[strong Current Experience:] {{ character.experiencePoints }}
+      div.d-flex.align-center
+        h5.mr-5 Hit Points Method:
+        MySelect(
+          :value="isFixedHitPoints ? 'Fixed' : 'Manual'",
+          :items="['Fixed', 'Manual']",
+          :class="$style.method"
+          @input="newMethod => $emit('updateCharacter', { settings: { isFixedHitPoints: newMethod === 'Fixed' } })"
+        )
     v-expansion-panels(accordion, :value="0")
       v-expansion-panel(v-for="(myClass, index) in currentClasses", :key="myClass.name")
         v-expansion-panel-header
@@ -90,15 +98,6 @@
             @deleteCharacterProperty="payload => $emit('deleteCharacterProperty', payload)"
           )
     CharacterBuilderClassNew(v-bind="{ classes, currentClasses, currentLevel }", @add="handleAddClass")
-    h2.mt-5 Settings
-    div.d-flex.align-center
-      h5.mr-5 Hit Points Method:
-      MySelect(
-        :value="isFixedHitPoints ? 'Fixed' : 'Manual'",
-        :items="['Fixed', 'Manual']",
-        :class="$style.method"
-        @input="newMethod => $emit('updateCharacter', { settings: { isFixedHitPoints: newMethod === 'Fixed' } })"
-      )
 </template>
 
 <style module lang="scss">

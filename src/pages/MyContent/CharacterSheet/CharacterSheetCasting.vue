@@ -59,6 +59,8 @@
       div(v-for="(powers, level) in groupBy(techCasting.powersKnown, 'level')", :key="level")
         h3.mt-2 {{ powerLevelText(level) }}
         CharacterSheetExpansionFeatures(:features="powers")
+      div(v-if="techCasting.powersKnown.length <= 0").mt-5
+        div Click Edit Character above to choose tech powers
     div(v-if="forceCasting")
       h2 Force Casting
       CharacterSheetTicker(
@@ -84,4 +86,6 @@
       div(v-for="(powers, level) in groupBy(forceCasting.powersKnown, 'level')", :key="level")
         h3.mt-2 {{ powerLevelText(level) }}
         CharacterSheetExpansionFeatures(:features="powers")
+      div(v-if="forceCasting.powersKnown.length <= 0").mt-5
+        div Click Edit Character above to choose force powers
 </template>

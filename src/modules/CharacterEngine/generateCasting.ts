@@ -103,7 +103,7 @@ export default function generateCasting (
     },
     forceCasting: forcePowers.length > 0 && {
       pointsUsed: rawCharacter.currentStats.forcePointsUsed,
-      maxPoints: getPowerPoints(rawCharacter, myClasses, myArchetypes, techCastingBonus, 'Force'),
+      maxPoints: getPowerPoints(rawCharacter, myClasses, myArchetypes, forceCastingBonus.universal, 'Force'),
       lightAttackModifier: applyTweak(rawCharacter, 'forceCasting.attackModifier', forceCastingBonus.light + proficiencyBonus),
       lightSaveDC: applyTweak(rawCharacter, 'forceCasting.saveDC', 8 + forceCastingBonus.light + proficiencyBonus),
       darkAttackModifier: applyTweak(rawCharacter, 'forceCasting.attackModifier', forceCastingBonus.dark + proficiencyBonus),

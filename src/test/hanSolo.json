@@ -27,7 +27,8 @@
       "expertise": [
         "Piloting",
         "Intimidation"
-      ]
+      ],
+      "abilityScoreImprovements": []
     }
   ],
   "baseAbilityScores": {
@@ -101,7 +102,7 @@
     "exhaustion": 0
   },
   "tweaks": {},
-  "customProficiencies": [ ],
+  "customProficiencies": [],
   "customLanguages": [],
   "customFeatures": [],
   "settings": {

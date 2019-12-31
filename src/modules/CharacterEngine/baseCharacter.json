@@ -63,6 +63,7 @@
   "customProficiencies": [],
   "customLanguages": [],
   "customFeatures": [],
+  "customFeats": [],
   "settings": {
     "isFixedHitPoints": true,
     "abilityScoreMethod": "Standard Array"

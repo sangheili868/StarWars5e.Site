@@ -71,6 +71,7 @@
         component(
           :is="sections[index - 1].component",
           v-bind="completeCharacter",
+          @goToStep="step => $emit('goToStep', step)"
           @updateCharacter="newCharacter => $emit('updateCharacter', newCharacter)",
           @deleteCharacterProperty="payload => $emit('deleteCharacterProperty', payload)"
         ).text-left

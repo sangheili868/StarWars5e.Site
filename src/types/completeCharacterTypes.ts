@@ -97,6 +97,7 @@ export interface CompletedFeatureType {
   name: string,
   description: string,
   combat: boolean,
+  customIndex?: number,
   usage?: {
     recharge: string,
     used: number,
@@ -167,5 +168,6 @@ export interface CompleteCharacterType {
   customFeatures: {
     name: string,
     content: string
-  }[]
+  }[],
+  numCustomFeats: number
 }

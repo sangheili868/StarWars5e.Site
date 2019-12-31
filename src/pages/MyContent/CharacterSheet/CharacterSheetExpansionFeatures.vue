@@ -4,11 +4,13 @@
   import { PowerType } from '@/types/characterTypes'
   import VueMarkdown from 'vue-markdown'
   import CheckList from '@/components/CheckList.vue'
+  import ConfirmDelete from '@/components/ConfirmDelete.vue'
 
   @Component({
     components: {
       CheckList,
-      VueMarkdown
+      VueMarkdown,
+      ConfirmDelete
     }
   })
   export default class CharacterSheetExpansionFeatures extends Vue {
@@ -39,6 +41,12 @@
         div(v-if="feature.duration") #[strong Duration:] {{ feature.duration }} {{ feature.concentration ? '(Concentration)' : ''}}
         br(v-if="feature.castingPeriodText || feature.range || feature.duration")
         VueMarkdown {{ feature.description }}
+        div(v-if="feature.customIndex > -1").d-flex.justify-end
+          ConfirmDelete(
+            label="Feature",
+            :item="feature.name",
+            @delete="$emit('deleteFeature', feature)"
+          )
 </template>
 
 <style lang="scss">

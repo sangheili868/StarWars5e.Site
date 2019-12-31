@@ -86,6 +86,6 @@
       div(v-for="(powers, level) in groupBy(forceCasting.powersKnown, 'level')", :key="level")
         h3.mt-2 {{ powerLevelText(level) }}
         CharacterSheetExpansionFeatures(:features="powers")
-      div(v-if="forceCasting.powersKnown.length <= 0").mt-5
-        div Click Edit Character above to choose force powers
+      div(v-if="forceCasting.powersKnown.length <= 0").mt-3
+        v-btn(color="primary", @click="$emit('goToStep', 2)") Choose Powers
 </template>

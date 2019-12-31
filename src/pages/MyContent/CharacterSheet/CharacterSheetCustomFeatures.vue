@@ -42,7 +42,19 @@
 
 <template lang="pug">
   div
-    h3.mt-2 Custom Features
+    h3.mt-2.d-flex.justify-space-between.align-end Custom Features
+      MyDialog(v-model="isOpen")
+        template(v-slot:activator="{ on }")
+          v-btn(v-on="on", icon, @click="resetValues", color="primary")
+            v-icon fa-plus
+        template(#title) Add Feature
+        template(#text)
+          v-text-field(outlined, autofocus, hide-details, label="Name", v-model="name").my-2
+          v-textarea(outlined, autofocus, hide-details, label="Feature Text", v-model="content").my-2
+        template(#actions)
+          v-btn(color="primary", :disabled="!name", @click="addItem") Add
+          v-spacer
+          v-btn(color="primary", text, @click="isOpen=false") Close
     v-expansion-panels(accordion, multiple)
       v-expansion-panel(v-for="({ name, content }, index) in features", :key="index").featurePanel
         v-expansion-panel-header.pa-2
@@ -59,18 +71,6 @@
               :item="name",
               @delete="$emit('deleteCharacterProperty', { path: 'customFeatures', index })"
             )
-    MyDialog(v-model="isOpen")
-      template(v-slot:activator="{ on }")
-        div.text-center.mt-2
-          v-btn(v-on="on", color="primary", @click="resetValues") Add Feature
-      template(#title) Add Feature
-      template(#text)
-        v-text-field(outlined, autofocus, hide-details, label="Name", v-model="name").my-2
-        v-textarea(outlined, autofocus, hide-details, label="Feature Text", v-model="content").my-2
-      template(#actions)
-        v-btn(color="primary", :disabled="!name", @click="addItem") Add
-        v-spacer
-        v-btn(color="primary", text, @click="isOpen=false") Close
 </template>
 
 <style module lang="scss">

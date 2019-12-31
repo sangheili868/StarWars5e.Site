@@ -1,8 +1,24 @@
 import { RawCharacterType, RawFeatType } from '@/types/rawCharacterTypes'
-import { chain, compact } from 'lodash'
+import { chain } from 'lodash'
 import { FeatType } from '@/types/characterTypes'
+import { CompletedFeatureType } from '@/types/completeCharacterTypes'
 
-export default function generateFeats (rawCharacter: RawCharacterType, feats: FeatType[]) {
+function findFeats (myFeats: string[], feats: FeatType[], isCustom: boolean): (CompletedFeatureType)[] {
+  return chain(myFeats).map((name, index) => {
+    const foundFeat = feats.find(feat => name === feat.name)
+    if (!foundFeat) console.error('Feat not found: ' + name)
+    else {
+      return {
+        ...foundFeat,
+        customIndex: isCustom ? index : -1,
+        description: foundFeat.text,
+        combat: true
+      }
+    }
+  }).compact().value()
+}
+
+export default function generateFeats (rawCharacter: RawCharacterType, feats: FeatType[]): CompletedFeatureType[] {
   const fromClasses = chain(rawCharacter.classes)
     .map(({ abilityScoreImprovements }) => abilityScoreImprovements)
     .compact()
@@ -14,7 +30,8 @@ export default function generateFeats (rawCharacter: RawCharacterType, feats: Fe
     ...fromClasses,
     rawCharacter.background.feat && rawCharacter.background.feat.name
   ]
-  const myFeats = myFeatsList.map(name => feats.find(feat => name === feat.name))
-  if (myFeats.includes(undefined)) console.error('Feats not found from ' + myFeatsList)
-  return compact(myFeats)
+  return [
+    ...findFeats(myFeatsList, feats, false),
+    ...findFeats(rawCharacter.customFeats || [], feats, true)
+  ]
 }

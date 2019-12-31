@@ -187,6 +187,7 @@ export interface RawCharacterType {
   tweaks: TweaksType,
   customLanguages: string[],
   customProficiencies: CustomProficiencyType[],
+  customFeats: string[],
   customFeatures: {
     name: string,
     content: string

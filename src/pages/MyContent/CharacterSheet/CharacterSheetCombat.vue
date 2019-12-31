@@ -8,6 +8,7 @@
   import CharacterSheetSuperiority from './CharacterSheetSuperiority.vue'
   import CharacterSheetExpansionFeatures from './CharacterSheetExpansionFeatures.vue'
   import CharacterSheetCustomFeatures from './CharacterSheetCustomFeatures.vue'
+  import CharacterSheetCustomFeats from './CharacterSheetCustomFeats.vue'
 
   @Component({
     components: {
@@ -15,7 +16,8 @@
       CharacterSheetWeapon,
       CharacterSheetSuperiority,
       CharacterSheetExpansionFeatures,
-      CharacterSheetCustomFeatures
+      CharacterSheetCustomFeatures,
+      CharacterSheetCustomFeats
     }
   })
   export default class CharacterSheetCombat extends Vue {
@@ -29,6 +31,7 @@
     @Prop({ type: [ Boolean, Object ] }) readonly superiority!: false | SuperiorityType
     @Prop(Array) readonly combatFeatures!: CompletedFeatureType[]
     @Prop(Array) readonly customFeatures!: { name: string, content: string }[]
+    @Prop(Number) readonly numCustomFeats!: number
 
     get armor () {
       return this.equipment.filter(({ equipped, equipmentCategory }) => equipped && equipmentCategory === 'Armor')
@@ -58,10 +61,16 @@
       :superiority="superiority",
       @updateCharacter="newCharacter => $emit('updateCharacter', newCharacter)"
     )
-    h3(v-if="combatFeatures.length").mt-2 Feats
+    h3.mt-2.d-flex.justify-space-between.align-end Feats
+      CharacterSheetCustomFeats(
+        v-bind="{ combatFeatures, numCustomFeats }",
+        @updateCharacter="newCharacter => $emit('updateCharacter', newCharacter)",
+        @deleteCharacterProperty="payload => $emit('deleteCharacterProperty', payload)"
+      )
     CharacterSheetExpansionFeatures(
       :features="combatFeatures",
-      @updateCharacter="newCharacter => $emit('updateCharacter', newCharacter)"
+      @updateCharacter="newCharacter => $emit('updateCharacter', newCharacter)",
+      @deleteFeature="({ customIndex }) => $emit('deleteCharacterProperty', { path: 'customFeats', index: customIndex })"
     )
     CharacterSheetCustomFeatures(
       :features="customFeatures",

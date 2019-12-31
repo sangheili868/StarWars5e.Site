@@ -104,12 +104,12 @@ export default function generateCasting (
     forceCasting: maxForceLevel > 0 && {
       pointsUsed: rawCharacter.currentStats.forcePointsUsed,
       maxPoints: getPowerPoints(rawCharacter, myClasses, myArchetypes, forceCastingBonus.universal, 'Force'),
-      lightAttackModifier: applyTweak(rawCharacter, 'forceCasting.attackModifier', forceCastingBonus.light + proficiencyBonus),
-      lightSaveDC: applyTweak(rawCharacter, 'forceCasting.saveDC', 8 + forceCastingBonus.light + proficiencyBonus),
-      darkAttackModifier: applyTweak(rawCharacter, 'forceCasting.attackModifier', forceCastingBonus.dark + proficiencyBonus),
-      darkSaveDC: applyTweak(rawCharacter, 'forceCasting.saveDC', 8 + forceCastingBonus.dark + proficiencyBonus),
-      universalAttackModifier: applyTweak(rawCharacter, 'forceCasting.attackModifier', forceCastingBonus.universal + proficiencyBonus),
-      universalSaveDC: applyTweak(rawCharacter, 'forceCasting.saveDC', 8 + forceCastingBonus.universal + proficiencyBonus),
+      lightAttackModifier: applyTweak(rawCharacter, 'forceCasting.lightAttackModifier', forceCastingBonus.light + proficiencyBonus),
+      lightSaveDC: applyTweak(rawCharacter, 'forceCasting.lightSaveDC', 8 + forceCastingBonus.light + proficiencyBonus),
+      darkAttackModifier: applyTweak(rawCharacter, 'forceCasting.darkAttackModifier', forceCastingBonus.dark + proficiencyBonus),
+      darkSaveDC: applyTweak(rawCharacter, 'forceCasting.darkSaveDC', 8 + forceCastingBonus.dark + proficiencyBonus),
+      universalAttackModifier: applyTweak(rawCharacter, 'forceCasting.universalAttackModifier', forceCastingBonus.universal + proficiencyBonus),
+      universalSaveDC: applyTweak(rawCharacter, 'forceCasting.universalSaveDC', 8 + forceCastingBonus.universal + proficiencyBonus),
       maxPowerLevel: maxForceLevel,
       powersKnown: getPowersKnown(rawCharacter, powers, 'Force')
     }

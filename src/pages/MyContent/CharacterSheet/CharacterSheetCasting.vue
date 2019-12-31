@@ -1,6 +1,7 @@
 <script lang="ts">
   import { Component, Prop, Vue } from 'vue-property-decorator'
   import { TechCastingType, ForceCastingType } from '@/types/completeCharacterTypes'
+  import { TweaksType } from '@/types/rawCharacterTypes'
   import CharacterSheetModifier from './CharacterSheetModifier.vue'
   import CharacterSheetExpansionFeatures from './CharacterSheetExpansionFeatures.vue'
   import { groupBy } from 'lodash'
@@ -19,6 +20,7 @@
   export default class CharacterSheetCasting extends Vue {
     @Prop({ type: [ Boolean, Object ] }) readonly techCasting!: false | TechCastingType
     @Prop({ type: [ Boolean, Object ] }) readonly forceCasting!: false | ForceCastingType
+    @Prop(Object) readonly tweaks!: TweaksType
     groupBy = groupBy
     ordinal = ordinal
 
@@ -53,9 +55,27 @@
         title="Tech Points",
         @changeSelected="handleChangeTechPoints"
       )
-      CharacterSheetModifier(:modifier="techCasting.attackModifier", label="Tech Attack Modifier", small)
-      CharacterSheetModifier(:modifier="techCasting.saveDC", label="Tech Save DC", isFlatNumber, small)
-      CharacterSheetModifier(:modifier="ordinal(techCasting.maxPowerLevel)", label="Max Power Level", isFlatNumber, small)
+      CharacterSheetModifier(
+        :modifier="techCasting.attackModifier",
+        label="Tech Attack Modifier",
+        :tweaks="tweaks",
+        tweakPath="techCasting.attackModifier",
+        @replaceCharacterProperty="payload => $emit('replaceCharacterProperty', payload)"
+      )
+      CharacterSheetModifier(
+        :value="techCasting.saveDC",
+        label="Tech Save DC",
+        :tweaks="tweaks",
+        tweakPath="techCasting.saveDC",
+        @replaceCharacterProperty="payload => $emit('replaceCharacterProperty', payload)"
+      )
+      CharacterSheetModifier(
+        :value="ordinal(techCasting.maxPowerLevel)",
+        label="Max Power Level",
+        :tweaks="tweaks",
+        tweakPath="techCasting.maxPowerLevel",
+        @replaceCharacterProperty="payload => $emit('replaceCharacterProperty', payload)"
+      )
       div(v-for="(powers, level) in groupBy(techCasting.powersKnown, 'level')", :key="level")
         h3.mt-2 {{ powerLevelText(level) }}
         CharacterSheetExpansionFeatures(:features="powers")
@@ -76,13 +96,55 @@
         title="Force Points",
         @changeSelected="handleChangeForcePoints"
       )
-      CharacterSheetModifier(:modifier="forceCasting.lightAttackModifier", label="Light Attack Modifier", small)
-      CharacterSheetModifier(:modifier="forceCasting.lightSaveDC", label="Light Save DC", isFlatNumber, small)
-      CharacterSheetModifier(:modifier="forceCasting.darkAttackModifier", label="Dark Attack Modifier", small)
-      CharacterSheetModifier(:modifier="forceCasting.darkSaveDC", label="Dark Save DC", isFlatNumber, small)
-      CharacterSheetModifier(:modifier="forceCasting.universalAttackModifier", label="Universal Attack Modifier", small)
-      CharacterSheetModifier(:modifier="forceCasting.universalSaveDC", label="Universal Save DC", isFlatNumber, small)
-      CharacterSheetModifier(:modifier="ordinal(forceCasting.maxPowerLevel)", label="Max Power Level", isFlatNumber, small)
+      CharacterSheetModifier(
+        :modifier="forceCasting.lightAttackModifier",
+        label="Light Attack Modifier",
+        :tweaks="tweaks",
+        tweakPath="forceCasting.lightAttackModifier",
+        @replaceCharacterProperty="payload => $emit('replaceCharacterProperty', payload)"
+      )
+      CharacterSheetModifier(
+        :value="forceCasting.lightSaveDC",
+        label="Light Save DC",
+        :tweaks="tweaks",
+        tweakPath="forceCasting.lightSaveDC",
+        @replaceCharacterProperty="payload => $emit('replaceCharacterProperty', payload)"
+      )
+      CharacterSheetModifier(
+        :modifier="forceCasting.darkAttackModifier",
+        label="Dark Attack Modifier",
+        :tweaks="tweaks",
+        tweakPath="forceCasting.darkAttackModifier",
+        @replaceCharacterProperty="payload => $emit('replaceCharacterProperty', payload)"
+      )
+      CharacterSheetModifier(
+        :value="forceCasting.darkSaveDC",
+        label="Dark Save DC",
+        :tweaks="tweaks",
+        tweakPath="forceCasting.darkSaveDC",
+        @replaceCharacterProperty="payload => $emit('replaceCharacterProperty', payload)"
+      )
+      CharacterSheetModifier(
+        :modifier="forceCasting.universalAttackModifier",
+        label="Universal Attack Modifier",
+        :tweaks="tweaks",
+        tweakPath="forceCasting.universalAttackModifier",
+        @replaceCharacterProperty="payload => $emit('replaceCharacterProperty', payload)"
+      )
+      CharacterSheetModifier(
+        :value="forceCasting.universalSaveDC",
+        label="Universal Save DC",
+        :tweaks="tweaks",
+        tweakPath="forceCasting.universalSaveDC",
+        @replaceCharacterProperty="payload => $emit('replaceCharacterProperty', payload)"
+      )
+      CharacterSheetModifier(
+        :value="ordinal(forceCasting.maxPowerLevel)",
+        label="Max Power Level",
+        :tweaks="tweaks",
+        tweakPath="forceCasting.maxPowerLevel",
+        @replaceCharacterProperty="payload => $emit('replaceCharacterProperty', payload)"
+      )
       div(v-for="(powers, level) in groupBy(forceCasting.powersKnown, 'level')", :key="level")
         h3.mt-2 {{ powerLevelText(level) }}
         CharacterSheetExpansionFeatures(:features="powers")

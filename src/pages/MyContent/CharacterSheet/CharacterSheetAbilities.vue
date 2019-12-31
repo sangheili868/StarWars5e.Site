@@ -20,21 +20,23 @@
 </script>
 
 <template lang="pug">
-  div.d-flex.flex-wrap.mx-n3
-    CharacterSheetModifier(
-      v-for="({ value, modifier, savingThrow, skills }, ability) in abilityScores",
-      :key="ability",
-      v-bind="{ modifier, value }",
-      :label="ability",
-      :class="$style.modifier"
-    ).mx-3.flex-grow-1
-      div
-        ProficiencyDots(:proficiency="savingThrow.proficiency") #[strong {{ addPlus(savingThrow.modifier) }} Saving Throw]
-        ProficiencyDots(
-          v-for="{ name, proficiency, modifier } in skills",
-          :key="name",
-          v-bind="{ proficiency }"
-        ) {{ addPlus(modifier) }} {{ name }}
+  div.d-flex.flex-wrap
+    div(v-for="({ value, modifier, savingThrow, skills }, ability) in abilityScores", :key="ability").flex-grow-1
+      CharacterSheetModifier(
+        v-bind="{ modifier, value }",
+        :label="ability",
+        big,
+        :class="$style.modifier"
+      )
+        div
+          ProficiencyDots(:proficiency="savingThrow.proficiency")
+            CharacterSheetModifier(:modifier="savingThrow.modifier", label="Saving Throw")
+          ProficiencyDots(
+            v-for="{ name, proficiency, modifier } in skills",
+            :key="name",
+            v-bind="{ proficiency }"
+          )
+            CharacterSheetModifier(:modifier="modifier", :label="name", noStyles)
 </template>
 
 <style module lang="scss">

@@ -3,6 +3,7 @@
   import { SuperiorityType } from '@/types/completeCharacterTypes'
   import CheckList from '@/components/CheckList.vue'
   import CharacterSheetModifier from './CharacterSheetModifier.vue'
+  import { TweaksType } from '@/types/rawCharacterTypes'
   import CharacterSheetExpansionFeatures from './CharacterSheetExpansionFeatures.vue'
   import { isEmpty } from 'lodash'
 
@@ -15,6 +16,8 @@
   })
   export default class CharacterSheetSuperiority extends Vue {
     @Prop(Object) readonly superiority!: SuperiorityType
+    @Prop(Object) readonly tweaks!: TweaksType
+
     isEmpty = isEmpty
 
     handleUpdateSuperiorityDice (superiorityDiceUsed: number) {
@@ -32,6 +35,12 @@
       :title="superiority.diceSize + 's'"
       @changeSelected="handleUpdateSuperiorityDice"
     )
-    CharacterSheetModifier(:modifier="superiority.maneuverSaveDC", label="Maneuver Save DC", isFlatNumber, small)
+    CharacterSheetModifier(
+      :value="superiority.maneuverSaveDC",
+      label="Maneuver Save DC",
+      :tweaks="tweaks",
+      tweakPath="superiority.maneuverSaveDC",
+      @replaceCharacterProperty="payload => $emit('replaceCharacterProperty', payload)"
+    )
     CharacterSheetExpansionFeatures(:features="superiority.maneuvers")
 </template>

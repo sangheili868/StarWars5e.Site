@@ -16,75 +16,46 @@
 
     get = get
     isEmpty = isEmpty
-    baseTweaks = [
-      {
-        category: 'General Stats',
-        subtweaks: [
-          { name: 'Hit Point Maximum', path: 'hitPoints.maximum' },
-          { name: 'Initiative Modifier', path: 'initiative' },
-          { name: 'Proficiency Bonus', path: 'proficiencyBonus' },
-          { name: 'Armor Class', path: 'armorClass' },
-          { name: 'Passive Perception', path: 'passivePerception' },
-          { name: 'Speed', path: 'speed.base' }
-        ]
-      },
-      {
-        category: 'Weapons',
-        subtweaks: [
-          { name: 'To Hit', path: 'weapon.toHit' },
-          { name: 'Damage Bonus', path: 'weapon.damage' },
-          { name: 'Unarmed Damage Dice', path: 'unarmed.damageDice', type: 'dice' },
-          { name: 'Unarmed To Hit', path: 'unarmed.toHit' },
-          { name: 'Unarmed Damage Bonus', path: 'unarmed.damage' }
-        ]
-      }
-    ]
-
-    get abilityScoreTweaks () {
-      return chain(['Strength', 'Dexterity', 'Constitution', 'Intelligence', 'Wisdom', 'Charisma'])
-        .keyBy()
-        .map(ability => {
-          const skillList = this.skills
-            .filter(({ baseAttribute }) => ability === baseAttribute)
-            .map(({ name }) => name)
-          const basePath = `abilityScores.${ability}`
-          return {
-            category: ability,
-            subtweaks: [
-              { name: 'Ability Score', path: `${basePath}.score` },
-              { name: 'Saving Throw Modifier', path: `${basePath}.savingThrowModifier` },
-              ...skillList.map(skill => ({
-                name: skill,
-                path: `${basePath}.skills.${skill}`
-              }))
-            ]
-          }
-        })
-        .value()
-    }
-
-    get castingTweaks () {
-      return ['tech', 'force'].map(castingType => ({
-        category: startCase(castingType) + ' Casting',
-        subtweaks: [
-          { name: 'Max Points', path: castingType + 'Casting.maxPoints' },
-          { name: 'Attack Modifier', path: castingType + 'Casting.attackModifier' },
-          { name: 'Save DC', path: castingType + 'Casting.saveDC' },
-          { name: 'Max Power Level', path: castingType + 'Casting.maxPowerLevel' }
-        ]
-      }))
-    }
 
     get tweaksList () {
       return [
-        ...this.baseTweaks,
-        ...this.abilityScoreTweaks,
-        ...this.castingTweaks,
         {
-          category: 'Superiority',
+          category: 'Combat',
           subtweaks: [
-            { name: 'Max Dice', path: 'superiority.maxDice' },
-            { name: 'Maneuver Save DC', path: 'superiority.maneuverSaveDC' }
+            { name: 'Hit Point Maximum', path: 'hitPoints.maximum' },
+            { name: 'To Hit', path: 'weapon.toHit' },
+            { name: 'Damage Bonus', path: 'weapon.damage' },
+            { name: 'Unarmed Damage Dice', path: 'unarmed.damageDice', type: 'dice' },
+            { name: 'Unarmed To Hit', path: 'unarmed.toHit' },
+            { name: 'Unarmed Damage Bonus', path: 'unarmed.damage' }
+          ]
+        },
+        ...chain(['Strength', 'Dexterity', 'Constitution', 'Intelligence', 'Wisdom', 'Charisma'])
+          .keyBy()
+          .map(ability => {
+            const skillList = this.skills
+              .filter(({ baseAttribute }) => ability === baseAttribute)
+              .map(({ name }) => name)
+            const basePath = `abilityScores.${ability}`
+            return {
+              category: ability,
+              subtweaks: [
+                { name: 'Ability Score', path: `${basePath}.score` },
+                { name: 'Saving Throw Modifier', path: `${basePath}.savingThrowModifier` },
+                ...skillList.map(skill => ({
+                  name: skill,
+                  path: `${basePath}.skills.${skill}`
+                }))
+              ]
+            }
+          })
+          .value(),
+        {
+          category: 'Powers',
+          subtweaks: [
+            { name: 'Max Superiority Dice', path: 'superiority.maxDice' },
+            { name: 'Max Force Points', path: 'forceCasting.maxPoints' },
+            { name: 'Max Tech Points', path: 'techCasting.maxPoints' }
           ]
         }
       ]

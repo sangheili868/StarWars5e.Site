@@ -93,13 +93,6 @@ export interface TweakType {
   dieSize?: number
 }
 
-export interface CastingTweakType {
-  maxPoints?: TweakType,
-  attackModifier?: TweakType,
-  saveDC?: TweakType,
-  maxPowerLevel?: TweakType
-}
-
 export interface TweaksType {
   abilityScores?: {
     [ability: string]: {
@@ -133,8 +126,22 @@ export interface TweaksType {
   speed?: {
     base?: TweakType
   },
-  techCasting?: CastingTweakType,
-  forceCasting?: CastingTweakType,
+  techCasting?: {
+    maxPoints?: TweakType,
+    attackModifier?: TweakType,
+    saveDC?: TweakType,
+    maxPowerLevel?: TweakType
+  },
+  forceCasting?: {
+    maxPoints?: TweakType,
+    lightAttackModifier?: TweakType,
+    lightSaveDC?: TweakType,
+    darkAttackModifier?: TweakType,
+    darkSaveDC?: TweakType,
+    universalAttackModifier?: TweakType,
+    universalSaveDC?: TweakType,
+    maxPowerLevel?: TweakType
+  }
   superiority?: {
     maxDice?: TweakType,
     maneuverSaveDC?: TweakType

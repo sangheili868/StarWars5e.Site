@@ -3,6 +3,7 @@
   import addPlus from '@/utilities/addPlus'
   import { EquipmentType } from '@/types/lootTypes'
   import { SuperiorityType, CompletedFeatureType } from '@/types/completeCharacterTypes'
+  import { TweaksType } from '@/types/rawCharacterTypes'
   import CharacterSheetModifier from './CharacterSheetModifier.vue'
   import CharacterSheetWeapon from './CharacterSheetWeapon.vue'
   import CharacterSheetSuperiority from './CharacterSheetSuperiority.vue'
@@ -32,6 +33,7 @@
     @Prop(Array) readonly combatFeatures!: CompletedFeatureType[]
     @Prop(Array) readonly customFeatures!: { name: string, content: string }[]
     @Prop(Number) readonly numCustomFeats!: number
+    @Prop(Object) readonly tweaks!: TweaksType
 
     get armor () {
       return this.equipment.filter(({ equipped, equipmentCategory }) => equipped && equipmentCategory === 'Armor')
@@ -43,12 +45,42 @@
 
 <template lang="pug">
   div
-    CharacterSheetModifier(:modifier="proficiencyBonus", label="Proficiency", small)
-    CharacterSheetModifier(:modifier="initiative", label="Initiative", small)
-    CharacterSheetModifier(:modifier="armorClass", label="Armor Class", isFlatNumber, small)
+    CharacterSheetModifier(
+      :modifier="proficiencyBonus",
+      label="Proficiency Bonus",
+      :tweaks="tweaks",
+      tweakPath="proficiencyBonus",
+      @replaceCharacterProperty="payload => $emit('replaceCharacterProperty', payload)"
+    )
+    CharacterSheetModifier(
+      :modifier="initiative",
+      label="Initiative",
+      :tweaks="tweaks",
+      tweakPath="initiative",
+      @replaceCharacterProperty="payload => $emit('replaceCharacterProperty', payload)"
+    )
+    CharacterSheetModifier(
+      :value="armorClass",
+      label="Armor Class",
+      :tweaks="tweaks",
+      tweakPath="armorClass",
+      @replaceCharacterProperty="payload => $emit('replaceCharacterProperty', payload)"
+    )
       div.caption {{ armor }}
-    CharacterSheetModifier(:modifier="parseInt(speed.base)", label="Speed", isFlatNumber, small)
-    CharacterSheetModifier(:modifier="passivePerception", label="Passive Perception", isFlatNumber, small)
+    CharacterSheetModifier(
+      :value="parseInt(speed.base)"
+      label="Speed",
+      :tweaks="tweaks",
+      tweakPath="speed.base",
+      @replaceCharacterProperty="payload => $emit('replaceCharacterProperty', payload)"
+    )
+    CharacterSheetModifier(
+      :value="passivePerception",
+      label="Passive Perception",
+      :tweaks="tweaks",
+      tweakPath="passivePerception",
+      @replaceCharacterProperty="payload => $emit('replaceCharacterProperty', payload)"
+    )
     h3.mt-2 Weapons
     CharacterSheetWeapon(
       v-for="weapon in weapons",
@@ -58,8 +90,9 @@
     div(v-if="!weapons.length").caption Equip weapons by selecting them in the Equipment section
     CharacterSheetSuperiority(
       v-if="superiority"
-      :superiority="superiority",
-      @updateCharacter="newCharacter => $emit('updateCharacter', newCharacter)"
+      v-bind="{ superiority, tweaks }"
+      @updateCharacter="newCharacter => $emit('updateCharacter', newCharacter)",
+      @replaceCharacterProperty="payload => $emit('replaceCharacterProperty', payload)"
     )
     h3.mt-2.d-flex.justify-space-between.align-end Feats
       CharacterSheetCustomFeats(

@@ -1,7 +1,12 @@
 <script lang="ts">
   import { Component, Prop, Vue } from 'vue-property-decorator'
+  import VueMarkdown from 'vue-markdown'
 
-  @Component
+  @Component({
+    components: {
+      VueMarkdown
+    }
+  })
   export default class TextEditor extends Vue {
     @Prop(String) readonly label!: string
     @Prop(String) readonly placeholder!: string
@@ -45,7 +50,7 @@
     div.d-flex.justify-space-between
       div
         strong(v-if="label").pr-1 {{ label }}:
-        span(v-if="value") {{ value }}
+        VueMarkdown(v-if="value", :source="value")
         span(v-else).grey--text {{ placeholder}}
       v-btn(v-if="hasOwnState", icon, @click="handleOpen")
         v-icon fa-edit

@@ -14,11 +14,15 @@
             },
             {
               href: 'https://drive.google.com/file/d/18NDEJLTtfkVt4kqqj204KJpub0l7A9MX/view?usp=sharing',
-              title: 'Monster Manual'
+              title: 'Scum & Villainy'
             },
             {
               href: 'https://drive.google.com/file/d/1XXE50huqr93gT-sujqjcQ-Eq8OE7-HfD/view?usp=sharing',
               title: 'Starships of the Galaxy'
+            },
+            {
+              href: 'https://drive.google.com/file/d/1-SJrGjriK2qgGaQSzcqEGiuRwLPvgqOS/view?usp=sharing',
+              title: 'Wretched Hives'
             }
           ]
         },

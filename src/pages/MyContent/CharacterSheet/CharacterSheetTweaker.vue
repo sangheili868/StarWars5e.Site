@@ -1,4 +1,3 @@
-
 <script lang="ts">
   import { Component, Prop, Vue } from 'vue-property-decorator'
   import { TweaksType } from '@/types/rawCharacterTypes'
@@ -54,7 +53,7 @@
 </script>
 
 <template lang="pug">
-  MyDialog(v-model="isOpen", :disabled="!tweakPath")
+  MyDialog(v-model="isOpen")
     template(v-slot:activator="{ on }")
       div(:class="$style.button", v-on="on", @click="resetValues").pa-1
         slot

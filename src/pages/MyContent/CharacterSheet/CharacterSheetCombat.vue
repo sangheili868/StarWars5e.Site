@@ -5,6 +5,7 @@
   import { SuperiorityType, CompletedFeatureType } from '@/types/completeCharacterTypes'
   import { TweaksType } from '@/types/rawCharacterTypes'
   import CharacterSheetModifier from './CharacterSheetModifier.vue'
+  import CharacterSheetTweakMultiple from './CharacterSheetTweakMultiple.vue'
   import CharacterSheetWeapon from './CharacterSheetWeapon.vue'
   import CharacterSheetSuperiority from './CharacterSheetSuperiority.vue'
   import CharacterSheetExpansionFeatures from './CharacterSheetExpansionFeatures.vue'
@@ -14,6 +15,7 @@
   @Component({
     components: {
       CharacterSheetModifier,
+      CharacterSheetTweakMultiple,
       CharacterSheetWeapon,
       CharacterSheetSuperiority,
       CharacterSheetExpansionFeatures,
@@ -34,6 +36,11 @@
     @Prop(Array) readonly customFeatures!: { name: string, content: string }[]
     @Prop(Number) readonly numCustomFeats!: number
     @Prop(Object) readonly tweaks!: TweaksType
+
+    weaponTweakPaths = [
+      { name: 'To Hit', path: 'weapon.toHit' },
+      { name: 'Damage Bonus', path: 'weapon.damage' }
+    ]
 
     get armor () {
       return this.equipment.filter(({ equipped, equipmentCategory }) => equipped && equipmentCategory === 'Armor')
@@ -83,11 +90,21 @@
       tweakPath="passivePerception",
       @replaceCharacterProperty="payload => $emit('replaceCharacterProperty', payload)"
     )
-    h3.mt-2 Weapons
+    h3.mt-2.d-flex.justify-space-between.align-end Weapons
+      CharacterSheetTweakMultiple(
+        title="Global Weapon Modifiers",
+        :tweaks="tweaks",
+        noStyle,
+        :tweakPaths="weaponTweakPaths",
+        @replaceCharacterProperty="payload => $emit('replaceCharacterProperty', payload)"
+      )
+        v-btn(icon, color="primary")
+          v-icon fa-edit
     CharacterSheetWeapon(
       v-for="weapon in weapons",
-      :key="weapon.name"
-      v-bind="{ weapon }"
+      :key="weapon.name",
+      v-bind="{ weapon, tweaks }",
+      @replaceCharacterProperty="payload => $emit('replaceCharacterProperty', payload)"
     )
     div(v-if="!weapons.length").caption Equip weapons by selecting them in the Equipment section
     CharacterSheetSuperiority(

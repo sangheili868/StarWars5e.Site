@@ -1,59 +1,63 @@
+
 <script lang="ts">
   import { Component, Prop, Vue } from 'vue-property-decorator'
-  import { namespace } from 'vuex-class'
   import { TweaksType } from '@/types/rawCharacterTypes'
-  import { map, startCase, set, get, parseInt as _parseInt, isEmpty, chain } from 'lodash'
+  import MyDialog from '@/components/MyDialog.vue'
+  import { get, set, parseInt as _parseInt } from 'lodash'
 
-  @Component
-  export default class CharacterSheetSettingsTweaks extends Vue {
-    @Prop(Object) readonly tweaks!: TweaksType
-
-    get = get
-    isEmpty = isEmpty
-
-    get tweaksList () {
-      return [
-        {
-          category: 'Combat',
-          subtweaks: [
-            { name: 'To Hit', path: 'weapon.toHit' },
-            { name: 'Damage Bonus', path: 'weapon.damage' },
-            { name: 'Unarmed Damage Dice', path: 'unarmed.damageDice', type: 'dice' },
-            { name: 'Unarmed To Hit', path: 'unarmed.toHit' },
-            { name: 'Unarmed Damage Bonus', path: 'unarmed.damage' }
-          ]
-        }
-      ]
+  @Component({
+    components: {
+      MyDialog
     }
+  })
+  export default class CharacterSheetTweakMultiple extends Vue {
+    @Prop(Object) readonly tweaks!: TweaksType
+    @Prop(Array) readonly tweakPaths!: { name: string, path: string, type?: 'dice' }[]
+    @Prop(String) readonly title!: string
+    @Prop(Boolean) readonly noStyle!: boolean
+
+    isOpen = false
+    get = get
+    myTweaks: TweaksType = {}
 
     get diceSizes () {
       return [4, 6, 8, 10, 12].map(value => ({ text: 'd' + value, value }))
     }
 
+    resetValues () {
+      this.myTweaks = this.tweaks
+    }
+
+    sanitize (value: string) {
+      const sanitizedValue: number | null = _parseInt(value)
+      return isNaN(sanitizedValue) ? null : sanitizedValue
+    }
+
     updateTweak (newValue: string, tweakType: string, path: string) {
-      let tweaks = { ...this.tweaks }
-      let sanitizedValue: number | null = _parseInt(newValue)
-      if (isNaN(sanitizedValue)) sanitizedValue = null
-      set(tweaks, `${path}.${tweakType}`, sanitizedValue)
+      set(this.myTweaks, `${path}.${tweakType}`, this.sanitize(newValue))
 
       if (tweakType !== 'dieSize') {
         const otherTweakType = tweakType === 'override' ? 'bonus' : 'override'
-        set(tweaks, `${path}.${otherTweakType}`, null)
+        set(this.myTweaks, `${path}.${otherTweakType}`, null)
       }
+    }
 
-      this.$emit('replaceCharacterProperty', { path: 'tweaks', property: tweaks })
+    handleSave () {
+      this.$emit('replaceCharacterProperty', { path: 'tweaks', property: this.myTweaks })
+      this.isOpen = false
     }
   }
 </script>
 
 <template lang="pug">
-  div.pt-5
-    h2 Tweak Values
-    div.caption Set a bonus to add a positive or negative number to the calculated value. Set an override to ignore the calculated value.
-    div(v-for="({ category, subtweaks }) in tweaksList", :key="category")
-      h3 {{ category }}
+  MyDialog(v-model="isOpen")
+    template(v-slot:activator="{ on }")
+      div(:class="{ [$style.button]: !noStyle }", v-on="on", @click="resetValues").pa-1
+        slot
+    template(#title) Tweak {{ title }}
+    template(#text)
       v-container
-        v-row(v-for="({ name, path, type }) in subtweaks", :key="category + name").d-flex
+        v-row(v-for="({ name, path, type }) in tweakPaths", :key="path").d-flex
           v-col(cols="4").pa-0.d-flex.align-center
             h5 {{ name }}
           v-col(v-if="type === 'dice'", cols="8").pa-0
@@ -87,9 +91,21 @@
                 label="Override",
                 @input="newValue => updateTweak(newValue, 'override', path)"
               ).pa-1
-    v-btn(
-      v-if="!isEmpty(tweaks)"
-      color="red",
-      @click="$emit('replaceCharacterProperty', { path: 'tweaks', property: {} })"
-    ).white--text Clear All Tweaks
+    template(#actions)
+      v-btn(color="primary", @click="handleSave") Save
+      v-spacer
+      v-btn(color="primary", text, @click="isOpen=false") Cancel
 </template>
+
+<style module lang="scss">
+  @import "src/assets/styles/colors.scss";
+
+  .button {
+    cursor: pointer;
+    border-radius: 5px;
+
+    &:hover {
+      background-color: $lightGrey;
+    }
+  }
+</style>

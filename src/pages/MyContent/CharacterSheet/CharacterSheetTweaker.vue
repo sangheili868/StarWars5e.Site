@@ -56,9 +56,8 @@
 <template lang="pug">
   MyDialog(v-model="isOpen", :disabled="!tweakPath")
     template(v-slot:activator="{ on }")
-      v-hover(v-slot:default="{ hover }")
-        div(:class="[$style.button, { [$style.hovered]: hover }]", v-on="on", @click="resetValues").pa-1
-          slot
+      div(:class="$style.button", v-on="on", @click="resetValues").pa-1
+        slot
     template(#title) Tweak {{ title }}
     template(#text)
       div.mt-3 Current Value (including tweaks): {{ value }}
@@ -94,7 +93,7 @@
     cursor: pointer;
     border-radius: 5px;
 
-    &.hovered {
+    &:hover {
       background-color: $lightGrey;
     }
   }

@@ -3,16 +3,10 @@
   import { namespace } from 'vuex-class'
   import { TweaksType } from '@/types/rawCharacterTypes'
   import { map, startCase, set, get, parseInt as _parseInt, isEmpty, chain } from 'lodash'
-  import { SkillType } from '@/types/lookupTypes'
-
-  const skillsModule = namespace('skills')
 
   @Component
   export default class CharacterSheetSettingsTweaks extends Vue {
     @Prop(Object) readonly tweaks!: TweaksType
-
-    @skillsModule.State skills!: SkillType[]
-    @skillsModule.Action fetchSkills!: () => void
 
     get = get
     isEmpty = isEmpty
@@ -22,7 +16,6 @@
         {
           category: 'Combat',
           subtweaks: [
-            { name: 'Hit Point Maximum', path: 'hitPoints.maximum' },
             { name: 'To Hit', path: 'weapon.toHit' },
             { name: 'Damage Bonus', path: 'weapon.damage' },
             { name: 'Unarmed Damage Dice', path: 'unarmed.damageDice', type: 'dice' },

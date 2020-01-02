@@ -29,34 +29,6 @@
             { name: 'Unarmed To Hit', path: 'unarmed.toHit' },
             { name: 'Unarmed Damage Bonus', path: 'unarmed.damage' }
           ]
-        },
-        ...chain(['Strength', 'Dexterity', 'Constitution', 'Intelligence', 'Wisdom', 'Charisma'])
-          .keyBy()
-          .map(ability => {
-            const skillList = this.skills
-              .filter(({ baseAttribute }) => ability === baseAttribute)
-              .map(({ name }) => name)
-            const basePath = `abilityScores.${ability}`
-            return {
-              category: ability,
-              subtweaks: [
-                { name: 'Ability Score', path: `${basePath}.score` },
-                { name: 'Saving Throw Modifier', path: `${basePath}.savingThrowModifier` },
-                ...skillList.map(skill => ({
-                  name: skill,
-                  path: `${basePath}.skills.${skill}`
-                }))
-              ]
-            }
-          })
-          .value(),
-        {
-          category: 'Powers',
-          subtweaks: [
-            { name: 'Max Superiority Dice', path: 'superiority.maxDice' },
-            { name: 'Max Force Points', path: 'forceCasting.maxPoints' },
-            { name: 'Max Tech Points', path: 'techCasting.maxPoints' }
-          ]
         }
       ]
     }

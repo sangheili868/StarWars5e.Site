@@ -46,15 +46,17 @@
 <template lang="pug">
   div
     CharacterSheetModifier(
-      :modifier="proficiencyBonus",
+      :value="proficiencyBonus",
       label="Proficiency Bonus",
+      addPlus,
       :tweaks="tweaks",
       tweakPath="proficiencyBonus",
       @replaceCharacterProperty="payload => $emit('replaceCharacterProperty', payload)"
     )
     CharacterSheetModifier(
-      :modifier="initiative",
+      :value="initiative",
       label="Initiative",
+      addPlus,
       :tweaks="tweaks",
       tweakPath="initiative",
       @replaceCharacterProperty="payload => $emit('replaceCharacterProperty', payload)"

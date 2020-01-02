@@ -3,16 +3,17 @@
   import { TechCastingType, ForceCastingType } from '@/types/completeCharacterTypes'
   import { TweaksType } from '@/types/rawCharacterTypes'
   import CharacterSheetModifier from './CharacterSheetModifier.vue'
+  import CharacterSheetTweaker from './CharacterSheetTweaker.vue'
   import CharacterSheetExpansionFeatures from './CharacterSheetExpansionFeatures.vue'
   import { groupBy } from 'lodash'
   import CharacterSheetTicker from './CharacterSheetTicker.vue'
   import CheckList from '@/components/CheckList.vue'
-  import ordinal from 'ordinal'
 
   @Component({
     components: {
       CheckList,
       CharacterSheetModifier,
+      CharacterSheetTweaker,
       CharacterSheetExpansionFeatures,
       CharacterSheetTicker
     }
@@ -22,7 +23,6 @@
     @Prop({ type: [ Boolean, Object ] }) readonly forceCasting!: false | ForceCastingType
     @Prop(Object) readonly tweaks!: TweaksType
     groupBy = groupBy
-    ordinal = ordinal
 
     powerLevelText (level: number) {
       return level > 0 ? `Level ${level}` : 'At-will'
@@ -42,21 +42,30 @@
   div
     div(v-if="techCasting").mb-3
       h2 Tech Casting
-      CharacterSheetTicker(
-        v-if="techCasting.maxPoints > 10",
-        :current="Math.max(0, techCasting.maxPoints - techCasting.pointsUsed)",
-        :max="techCasting.maxPoints",
-        @changeCount="currentPoints => handleChangeTechPoints(Math.max(0, techCasting.maxPoints - currentPoints))"
-      ) Tech Points
-      CheckList(
-        v-else,
-        :current="techCasting.pointsUsed",
-        :maximum="techCasting.maxPoints",
-        title="Tech Points",
-        @changeSelected="handleChangeTechPoints"
-      )
+      div.d-flex.align-center
+        CharacterSheetTweaker(
+          title="Number of Tech Points",
+          :value="techCasting.maxPoints",
+          :tweaks="tweaks",
+          tweakPath="techCasting.maxPoints",
+          @replaceCharacterProperty="payload => $emit('replaceCharacterProperty', payload)"
+        )
+          h4 Tech Points
+        CharacterSheetTicker(
+          v-if="techCasting.maxPoints > 10",
+          :current="Math.max(0, techCasting.maxPoints - techCasting.pointsUsed)",
+          :max="techCasting.maxPoints",
+          @changeCount="currentPoints => handleChangeTechPoints(Math.max(0, techCasting.maxPoints - currentPoints))"
+        )
+        CheckList(
+          v-else,
+          :current="techCasting.pointsUsed",
+          :maximum="techCasting.maxPoints",
+          @changeSelected="handleChangeTechPoints"
+        )
       CharacterSheetModifier(
-        :modifier="techCasting.attackModifier",
+        :value="techCasting.attackModifier",
+        addPlus,
         label="Tech Attack Modifier",
         :tweaks="tweaks",
         tweakPath="techCasting.attackModifier",
@@ -70,8 +79,9 @@
         @replaceCharacterProperty="payload => $emit('replaceCharacterProperty', payload)"
       )
       CharacterSheetModifier(
-        :value="ordinal(techCasting.maxPowerLevel)",
+        :value="techCasting.maxPowerLevel",
         label="Max Power Level",
+        ordinal,
         :tweaks="tweaks",
         tweakPath="techCasting.maxPowerLevel",
         @replaceCharacterProperty="payload => $emit('replaceCharacterProperty', payload)"
@@ -83,21 +93,30 @@
         div Click Edit Character above to choose tech powers
     div(v-if="forceCasting")
       h2 Force Casting
-      CharacterSheetTicker(
-        v-if="forceCasting.maxPoints > 10",
-        :current="Math.max(0, forceCasting.maxPoints - forceCasting.pointsUsed)",
-        :max="forceCasting.maxPoints",
-        @changeCount="currentPoints => handleChangeForcePoints(Math.max(0, forceCasting.maxPoints - currentPoints))"
-      ) Force Points
-      CheckList(
-        v-else,
-        :current="forceCasting.pointsUsed",
-        :maximum="forceCasting.maxPoints",
-        title="Force Points",
-        @changeSelected="handleChangeForcePoints"
-      )
+      div.d-flex.align-center
+        CharacterSheetTweaker(
+          title="Number of Force Points",
+          :value="forceCasting.maxPoints",
+          :tweaks="tweaks",
+          tweakPath="forceCasting.maxPoints",
+          @replaceCharacterProperty="payload => $emit('replaceCharacterProperty', payload)"
+        )
+          h4 Force Points
+        CharacterSheetTicker(
+          v-if="forceCasting.maxPoints > 10",
+          :current="Math.max(0, forceCasting.maxPoints - forceCasting.pointsUsed)",
+          :max="forceCasting.maxPoints",
+          @changeCount="currentPoints => handleChangeForcePoints(Math.max(0, forceCasting.maxPoints - currentPoints))"
+        )
+        CheckList(
+          v-else,
+          :current="forceCasting.pointsUsed",
+          :maximum="forceCasting.maxPoints",
+          @changeSelected="handleChangeForcePoints"
+        )
       CharacterSheetModifier(
-        :modifier="forceCasting.lightAttackModifier",
+        :value="forceCasting.lightAttackModifier",
+        addPlus,
         label="Light Attack Modifier",
         :tweaks="tweaks",
         tweakPath="forceCasting.lightAttackModifier",
@@ -111,7 +130,8 @@
         @replaceCharacterProperty="payload => $emit('replaceCharacterProperty', payload)"
       )
       CharacterSheetModifier(
-        :modifier="forceCasting.darkAttackModifier",
+        :value="forceCasting.darkAttackModifier",
+        addPlus,
         label="Dark Attack Modifier",
         :tweaks="tweaks",
         tweakPath="forceCasting.darkAttackModifier",
@@ -125,7 +145,8 @@
         @replaceCharacterProperty="payload => $emit('replaceCharacterProperty', payload)"
       )
       CharacterSheetModifier(
-        :modifier="forceCasting.universalAttackModifier",
+        :value="forceCasting.universalAttackModifier",
+        addPlus,
         label="Universal Attack Modifier",
         :tweaks="tweaks",
         tweakPath="forceCasting.universalAttackModifier",
@@ -139,8 +160,9 @@
         @replaceCharacterProperty="payload => $emit('replaceCharacterProperty', payload)"
       )
       CharacterSheetModifier(
-        :value="ordinal(forceCasting.maxPowerLevel)",
+        :value="forceCasting.maxPowerLevel",
         label="Max Power Level",
+        ordinal,
         :tweaks="tweaks",
         tweakPath="forceCasting.maxPowerLevel",
         @replaceCharacterProperty="payload => $emit('replaceCharacterProperty', payload)"

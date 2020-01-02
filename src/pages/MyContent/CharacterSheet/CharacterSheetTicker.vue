@@ -9,23 +9,16 @@
 </script>
 
 <template lang="pug">
-  div(:class="$style.ticker")
+  div.d-flex.align-center
     v-btn(icon, small, elevation="4" color="primary", :disabled="current <= 0" @click="$emit('changeCount', current - 1)").ma-2
       v-icon fa-minus
     h5(:class="$style.count").title {{ current }} / {{ max }}
     v-btn(icon, small, elevation="4" color="primary", :disabled="current >= max" @click="$emit('changeCount', current + 1)").ma-2
       v-icon fa-plus
-    h4
-      slot
 </template>
 
 <style module lang="scss">
-  .ticker {
-    display: flex;
-    align-items: center;
-
-    .count {
-      min-width: 20px;
-    }
+  .count {
+    min-width: 20px;
   }
 </style>

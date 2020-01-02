@@ -3,6 +3,7 @@
   import { SuperiorityType } from '@/types/completeCharacterTypes'
   import CheckList from '@/components/CheckList.vue'
   import CharacterSheetModifier from './CharacterSheetModifier.vue'
+  import CharacterSheetTweaker from './CharacterSheetTweaker.vue'
   import { TweaksType } from '@/types/rawCharacterTypes'
   import CharacterSheetExpansionFeatures from './CharacterSheetExpansionFeatures.vue'
   import { isEmpty } from 'lodash'
@@ -11,6 +12,7 @@
     components: {
       CheckList,
       CharacterSheetModifier,
+      CharacterSheetTweaker,
       CharacterSheetExpansionFeatures
     }
   })
@@ -28,13 +30,20 @@
 
 <template lang="pug">
   div
-    h3.mt-2 Maneuvers
+    h3.mt-2 Superiority
     CheckList(
       :current="superiority.currentDice",
       :maximum="superiority.maxDice",
-      :title="superiority.diceSize + 's'"
       @changeSelected="handleUpdateSuperiorityDice"
     )
+      CharacterSheetTweaker(
+        title="Number of Superiority Dice"
+        :value="superiority.maxDice",
+        :tweaks="tweaks",
+        tweakPath="superiority.maxDice",
+        @replaceCharacterProperty="payload => $emit('replaceCharacterProperty', payload)"
+      )
+        h4 {{ superiority.diceSize }}s
     CharacterSheetModifier(
       :value="superiority.maneuverSaveDC",
       label="Maneuver Save DC",

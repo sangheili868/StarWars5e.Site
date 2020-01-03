@@ -11,7 +11,7 @@ function isASI (asi: RawFeatType | RawASIType): asi is RawASIType {
 function getAbilityScore (rawCharacter: RawCharacterType, ability: string, mySpecies: SpeciesType | undefined) {
   const backgroundImprovements = rawCharacter.background.feat && rawCharacter.background.feat.abilityScoreImprovements
   const fixedSpeciesImprovement = mySpecies && mySpecies.abilitiesIncreased[0]
-    .find(({ abilities }) => abilities.includes(ability))
+    .find(({ abilities }) => abilities.includes(ability) && abilities.length === 1)
   const classImprovements = rawCharacter.classes
     .reduce((acc, { abilityScoreImprovements }) => acc + abilityScoreImprovements
       .reduce((acc2, abilityScoreImprovement) => acc2 + (isASI(abilityScoreImprovement) ? abilityScoreImprovement.abilitiesIncreased

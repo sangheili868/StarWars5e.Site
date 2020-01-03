@@ -45,6 +45,7 @@ export interface GearType {
 export interface EquipmentType extends GearType, WeaponType, ArmorType {
   equipped?: boolean,
   quantity: number,
+  index: number,
   attackBonus?: number,
   damageBonus?: number
 }

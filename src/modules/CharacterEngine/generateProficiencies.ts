@@ -1,11 +1,12 @@
 import { RawCharacterType } from '@/types/rawCharacterTypes'
-import { ClassType, FeatType } from '@/types/characterTypes'
-import { compact, uniqBy, lowerCase, chain } from 'lodash'
+import { ClassType } from '@/types/characterTypes'
+import { CompletedFeatureType } from '@/types/completeCharacterTypes'
+import { compact, uniqBy, lowerCase} from 'lodash'
 
 export default function generateProficiencies (
   rawCharacter: RawCharacterType,
   classes: ClassType[],
-  feats: FeatType[]
+  feats: CompletedFeatureType[]
 ) {
   const startingClass = rawCharacter.classes[0]
   const startingClassData = startingClass && classes.find(({ name }) => name === startingClass.name)

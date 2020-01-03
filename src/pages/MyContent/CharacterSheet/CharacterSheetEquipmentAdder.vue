@@ -73,8 +73,8 @@
 <template lang="pug">
   MyDialog(v-model="isOpen")
     template(v-slot:activator="{ on }")
-      div.text-center.mt-2
-        v-btn(v-on="on", @click="resetValues", color="primary") Add equipment
+      v-btn(v-on="on", icon, @click="resetValues", color="primary")
+        v-icon fa-plus
     template(#title) Add Equipment
     template(#text)
       MySelect(v-model="filter", :items="filters", label="Filter by Category", @change="onFilterChange")

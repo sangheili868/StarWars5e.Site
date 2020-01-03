@@ -4,41 +4,66 @@
   import addPlus from '@/utilities/addPlus'
   import { startCase, upperCase } from 'lodash'
   import ProficiencyDots from '@/components/ProficiencyDots.vue'
-  import CharacterSheetModifier from './CharacterSheetModifier.vue'
+  import CharacterSheetTweaker from './CharacterSheetTweaker.vue'
 
   @Component({
     components: {
-      CharacterSheetModifier,
+      CharacterSheetTweaker,
       ProficiencyDots
     }
   })
   export default class CharacterSheetAbilities extends Vue {
     @Prop(Object) readonly abilityScores!: AbilityScoreType
+
     addPlus = addPlus
     startCase = startCase
   }
 </script>
 
 <template lang="pug">
-  div.d-flex.flex-wrap.mx-n3
-    CharacterSheetModifier(
+  div.d-flex.flex-wrap
+    div(
       v-for="({ value, modifier, savingThrow, skills }, ability) in abilityScores",
-      :key="ability",
-      v-bind="{ modifier, value }",
-      :label="ability",
-      :class="$style.modifier"
-    ).mx-3.flex-grow-1
-      div
-        ProficiencyDots(:proficiency="savingThrow.proficiency") #[strong {{ addPlus(savingThrow.modifier) }} Saving Throw]
-        ProficiencyDots(
-          v-for="{ name, proficiency, modifier } in skills",
-          :key="name",
-          v-bind="{ proficiency }"
-        ) {{ addPlus(modifier) }} {{ name }}
+      :key="ability"
+      :class="$style.ability",
+    ).flex-grow-1
+      CharacterSheetTweaker(
+        :title="ability + ' Score'"
+        :tweakPaths="[{ name: ability + ' Score', path: `abilityScores.${ability}.score` }]",
+        @replaceCharacterProperty="payload => $emit('replaceCharacterProperty', payload)"
+      )
+        div.d-flex
+          h2(:class="$style.modifier").pr-2 {{ addPlus(modifier) }}
+          h3.flex-grow-1 {{ ability }}
+      div.d-flex.px-1.pb-1
+        h5(:class="$style.modifier") {{ value }}
+        div
+          CharacterSheetTweaker(
+            :title="ability + ' Saving Throw'",
+            :tweakPaths="[{ name: ability + ' Saving Throw', path: `abilityScores.${ability}.savingThrowModifier` }]",
+            @replaceCharacterProperty="payload => $emit('replaceCharacterProperty', payload)"
+          )
+            ProficiencyDots(:proficiency="savingThrow.proficiency")
+              h4(:class="$style.modifier").mr-1.text-center {{ addPlus(savingThrow.modifier) }}
+              h4 Saving Throw
+          CharacterSheetTweaker(
+            v-for="{ name, proficiency, modifier } in skills",
+            :key="name",
+            :title="name",
+            :tweakPaths="[{ name, path: `abilityScores.${ability}.skills.${name}` }]",
+            @replaceCharacterProperty="payload => $emit('replaceCharacterProperty', payload)"
+          )
+            ProficiencyDots(v-bind="{ proficiency }")
+              div(:class="$style.modifier").mr-1.text-center {{ addPlus(modifier) }}
+              div {{ name }}
 </template>
 
 <style module lang="scss">
-  .modifier {
-    min-width: 183px;
+  .ability {
+    min-width: 211px;
+
+    .modifier {
+      min-width: 25px;
+    }
   }
 </style>

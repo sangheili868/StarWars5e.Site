@@ -51,8 +51,10 @@
         CharacterSheetSection(
           v-bind="{ completeCharacter }",
           :currentTab="openTabs[section]",
+          @goToStep="step => $emit('goToStep', step)"
           @updateCharacter="newCharacter => $emit('updateCharacter', newCharacter)",
           @deleteCharacterProperty="payload => $emit('deleteCharacterProperty', payload)",
+          @replaceCharacterProperty="payload => $emit('replaceCharacterProperty', payload)",
           @goToTab="newTab => goToTab(newTab, section)"
         )
 </template>

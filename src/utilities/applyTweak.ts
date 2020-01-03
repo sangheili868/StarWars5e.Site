@@ -2,7 +2,11 @@ import { RawCharacterType, TweakType } from '@/types/rawCharacterTypes'
 import { get, isFinite } from 'lodash'
 
 export default function (rawCharacter: RawCharacterType, tweakPath: string, calculatedValue: number) {
-  const tweak: TweakType = get(rawCharacter.tweaks, tweakPath) || {}
+  return applyCustomTweak(get(rawCharacter.tweaks, tweakPath) || {}, calculatedValue)
+}
+
+export function applyCustomTweak (tweak: TweakType | undefined, calculatedValue: number) {
+  if (!tweak) return calculatedValue
   return isFinite(tweak.override) ? tweak.override as number : calculatedValue + (tweak.bonus || 0)
 }
 
@@ -56,4 +60,12 @@ Possible Tweaks:
   "forceCasting.maxPowerLevel",
   "superiority.maxDice",
   "superiority.maneuverSaveDC"
+*/
+
+/*
+  Custom Tweaks:
+  Equipment
+    toHit
+    damage
+    damageDice
 */

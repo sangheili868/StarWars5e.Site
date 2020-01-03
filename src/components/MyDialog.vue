@@ -4,6 +4,7 @@
   @Component
   export default class MyDialog extends Vue {
     @Prop(Boolean) readonly value!: Boolean
+    @Prop(Boolean) readonly disabled!: Boolean
     @Prop(Boolean) readonly wide!: Boolean
 
     get isDark () {
@@ -17,7 +18,7 @@
 </script>
 
 <template lang="pug">
-  v-dialog(:value="value", :width="wide ? 1000 : 500", scrollable, @input="input => $emit('input', input)")
+  v-dialog(v-bind="{ value, disabled }", :width="wide ? 1000 : 500", scrollable, @input="input => $emit('input', input)")
     template(v-slot:activator="{ on }")
       slot(name="activator", :on="on")
     v-card(:class="[ $style.modal, { [$style.darkSide]: isDark } ]")

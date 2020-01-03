@@ -1,7 +1,12 @@
 <script lang="ts">
   import { Component, Prop, Vue } from 'vue-property-decorator'
+  import CharacterSheetTweaker from './CharacterSheetTweaker.vue'
 
-  @Component
+  @Component({
+    components: {
+      CharacterSheetTweaker
+    }
+  })
   export default class CharacterSheetHealthCircle extends Vue {
     @Prop(Number) readonly current!: number
     @Prop(Number) readonly temporary!: number
@@ -10,7 +15,11 @@
 </script>
 
 <template lang="pug">
-  div
+  CharacterSheetTweaker(
+    title="Maximum Hit Points"
+    :tweakPaths="[{ name: 'Maximum Hit Points', path: 'hitPoints.maximum' }]",
+    @replaceCharacterProperty="payload => $emit('replaceCharacterProperty', payload)"
+  )
     v-progress-circular(
       :value="100 * current / maximum",
       color="red",

@@ -81,23 +81,30 @@ export interface RawCharacteristicsType {
   Backstory: string
 }
 
+export interface EquipmentTweakType {
+  toHit?: TweakType,
+  damageDice?: TweakType,
+  damage?: TweakType
+}
+
+export interface TweakPathType {
+  name: string,
+  path: string,
+  type?: 'dice'
+}
+
 export interface RawEquipmentType {
   name: string,
   quantity: number,
-  equipped?: boolean
+  equipped?: boolean,
+  tweaks?: EquipmentTweakType
 }
 
 export interface TweakType {
   override?: number,
   bonus?: number,
-  dieSize?: number
-}
-
-export interface CastingTweakType {
-  maxPoints?: TweakType,
-  attackModifier?: TweakType,
-  saveDC?: TweakType,
-  maxPowerLevel?: TweakType
+  dieSize?: number,
+  proficiency?: 'proficient' | 'expertise'
 }
 
 export interface TweaksType {
@@ -133,8 +140,22 @@ export interface TweaksType {
   speed?: {
     base?: TweakType
   },
-  techCasting?: CastingTweakType,
-  forceCasting?: CastingTweakType,
+  techCasting?: {
+    maxPoints?: TweakType,
+    attackModifier?: TweakType,
+    saveDC?: TweakType,
+    maxPowerLevel?: TweakType
+  },
+  forceCasting?: {
+    maxPoints?: TweakType,
+    lightAttackModifier?: TweakType,
+    lightSaveDC?: TweakType,
+    darkAttackModifier?: TweakType,
+    darkSaveDC?: TweakType,
+    universalAttackModifier?: TweakType,
+    universalSaveDC?: TweakType,
+    maxPowerLevel?: TweakType
+  }
   superiority?: {
     maxDice?: TweakType,
     maneuverSaveDC?: TweakType
@@ -187,6 +208,7 @@ export interface RawCharacterType {
   tweaks: TweaksType,
   customLanguages: string[],
   customProficiencies: CustomProficiencyType[],
+  customFeats: string[],
   customFeatures: {
     name: string,
     content: string

@@ -50,7 +50,11 @@
 <template lang="pug">
   div.d-flex.align-center.mx-3.my-1
     div(:class="$style.controlDiv").d-flex.flex-column.align-center.mx-4.mt-1
-      CharacterSheetHealthCircle(v-if="hitPoints.current", v-bind="hitPoints")
+      CharacterSheetHealthCircle(
+        v-if="hitPoints.current",
+        v-bind="hitPoints",
+        @replaceCharacterProperty="payload => $emit('replaceCharacterProperty', payload)"
+      )
       div(v-else)
         h3 Death Saves
         div.d-flex

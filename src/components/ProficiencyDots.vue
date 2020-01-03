@@ -8,7 +8,7 @@
 </script>
 
 <template lang="pug">
-  div
+  div.d-flex
     v-icon(v-if="proficiency==='proficient'", size="8").py-1.pr-1 fa-circle
     v-icon(v-else-if="proficiency==='expertise'", size="8").py-1.pr-1 fa-star
     v-icon(v-else, size="8").py-1.pr-1 far fa-circle

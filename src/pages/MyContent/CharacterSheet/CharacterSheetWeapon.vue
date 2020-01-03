@@ -3,15 +3,31 @@
   import { EquipmentType } from '@/types/lootTypes'
   import addPlus from '@/utilities/addPlus'
   import LootWeaponsProperties from '@/pages/Loot/LootWeaponsProperties.vue'
+  import { TweakPathType } from '@/types/rawCharacterTypes'
+  import CharacterSheetTweaker from './CharacterSheetTweaker.vue'
 
   @Component({
     components: {
-      LootWeaponsProperties
+      LootWeaponsProperties,
+      CharacterSheetTweaker
     }
   })
   export default class CharacterSheetWeapon extends Vue {
     @Prop(Object) readonly weapon!: EquipmentType
+
     addPlus = addPlus
+
+    get rootPath () {
+      return this.weapon.name === 'Unarmed Strike' ? 'tweaks.unarmed' : `equipment.${this.weapon.index}.tweaks`
+    }
+
+    get tweakPaths (): TweakPathType[] {
+      return [
+        { name: 'Damage Dice', path: 'damageDice', type: 'dice' },
+        { name: 'To Hit', path: 'toHit' },
+        { name: 'Damage Bonus', path: 'damage' }
+      ]
+    }
 
     get damage () {
       const { damageNumberOfDice, damageDieType, damageBonus, damageType } = this.weapon
@@ -23,17 +39,24 @@
 </script>
 
 <template lang="pug">
-  div.text-left
-    div(:class="$style.name")
-      h4 {{ weapon.name }}
-      div {{ addPlus(weapon.attackBonus) }}
-      div {{ damage }}
-    LootWeaponsProperties(:propertyList="weapon.properties").caption
+  div.d-flex.flex-column
+    CharacterSheetTweaker(
+      v-bind="{ tweakPaths, rootPath }",
+      :title="weapon.name",
+      @replaceCharacterProperty="payload => $emit('replaceCharacterProperty', payload)"
+    )
+      div.d-flex.justify-space-between
+        h4.flex-grow-1 {{ weapon.name }}
+        div(:class="$style.toHit").text-left {{ addPlus(weapon.attackBonus) }}
+        div(:class="$style.damage").text-right {{ damage }}
+    LootWeaponsProperties(:propertyList="weapon.properties").caption.px-1
 </template>
 
-<style lang="scss" module>
-  .name {
-    display: flex;
-    justify-content: space-between;
+<style module lang="scss">
+  .toHit {
+    min-width: 28px;
+  }
+  .damage {
+    min-width: 140px;
   }
 </style>

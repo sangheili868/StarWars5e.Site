@@ -120,7 +120,35 @@
 
 <template lang="pug">
   div
-    h3.mt-2 Proficiencies
+    h3.mt-2.d-flex.justify-space-between.align-end Proficiencies
+      MyDialog(v-if="proficiencyCategories.length", v-model="isOpen")
+        template(v-slot:activator="{ on }")
+          v-btn(v-on="on", icon, @click="resetValues", color="primary")
+            v-icon fa-plus
+        template(#title) Add Proficiency
+        template(#text)
+          MySelect(
+            v-model="chosenCategory",
+            :items="proficiencyCategories",
+            label="Filter by Category",
+            @change="newProficiency=''; isExpertise = false"
+          )
+          v-combobox(
+            :search-input.sync="newProficiency",
+            :items="filteredList",
+            label="Enter a Proficiency",
+            autocomplete="off",
+            @change="isExpertise = false"
+          )
+            template(v-slot:no-data)
+              v-list-item
+                v-list-item-content
+                  v-list-item-title No proficiencies matching "#[strong {{ newProficiency }} ]". Press #[kbd tab] to create a custom one
+          v-checkbox(v-if="isSkill", v-model="isExpertise", color="primary", label="Expertise")
+        template(#actions)
+          v-btn(color="primary", :disabled="!newProficiency", @click="handleAddProficiency") Add {{ newProficiency }}
+          v-spacer
+          v-btn(color="primary", text, @click="isOpen=false") Close
     div(v-for="proficiency in proficiencies", :key="proficiency").caption {{ startCase(proficiency) }}
     div(v-for="({ name, proficiencyLevel }, index) in customProficiencies", :key="'prof' + index").d-flex.align-center.justify-space-between
       div.caption {{ startCase(name) + (proficiencyLevel === 'expertise' ? ' (Expertise)' : '') }}
@@ -129,32 +157,4 @@
         :item="startCase(name) + '' + (proficiencyLevel === 'expertise' ? ' expertise' : ' proficiency')",
         @delete="handleDelete(index)"
       )
-    MyDialog(v-if="proficiencyCategories.length", v-model="isOpen")
-      template(v-slot:activator="{ on }")
-        div.text-center.mt-2
-          v-btn(v-on="on", @click="resetValues", color="primary") Add Proficiency
-      template(#title) Add Proficiency
-      template(#text)
-        MySelect(
-          v-model="chosenCategory",
-          :items="proficiencyCategories",
-          label="Filter by Category",
-          @change="newProficiency=''; isExpertise = false"
-        )
-        v-combobox(
-          :search-input.sync="newProficiency",
-          :items="filteredList",
-          label="Enter a Proficiency",
-          autocomplete="off",
-          @change="isExpertise = false"
-        )
-          template(v-slot:no-data)
-            v-list-item
-              v-list-item-content
-                v-list-item-title No proficiencies matching "#[strong {{ newProficiency }} ]". Press #[kbd tab] to create a custom one
-        v-checkbox(v-if="isSkill", v-model="isExpertise", color="primary", label="Expertise")
-      template(#actions)
-        v-btn(color="primary", :disabled="!newProficiency", @click="handleAddProficiency") Add {{ newProficiency }}
-        v-spacer
-        v-btn(color="primary", text, @click="isOpen=false") Close
 </template>

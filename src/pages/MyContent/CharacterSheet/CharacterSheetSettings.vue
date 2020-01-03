@@ -1,12 +1,10 @@
 <script lang="ts">
   import { Component, Prop, Vue } from 'vue-property-decorator'
   import MyDialog from '@/components/MyDialog.vue'
-  import CharacterSheetSettingsTweaks from './CharacterSheetSettingsTweaks.vue'
   import { CompleteCharacterType } from '@/types/completeCharacterTypes'
 
   @Component({
     components: {
-      CharacterSheetSettingsTweaks,
       MyDialog
     }
   })
@@ -22,10 +20,9 @@
       v-btn(block, v-on="on").my-3 Settings
     template(#title) Settings
     template(#text)
-      CharacterSheetSettingsTweaks(
-        :tweaks="completeCharacter.tweaks",
-        @replaceCharacterProperty="payload => $emit('replaceCharacterProperty', payload)"
-      )
+      div More to come here soon
+      v-btn(color="red", @click="$emit('replaceCharacterProperty', { path: 'tweaks', property: {} })").white--text
+        | Clear All Tweaks
     template(#actions)
       v-spacer
       v-btn(color="primary", text, @click="isOpen=false") Close

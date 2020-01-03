@@ -55,7 +55,7 @@ export default class Character extends VuexModule {
   async setCharacter (newCharacter: RawCharacterType) {
     return {
       isDirty: false,
-      character: newCharacter
+      character: merge({}, baseCharacter, newCharacter)
     }
   }
 

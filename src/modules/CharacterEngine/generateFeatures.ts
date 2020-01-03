@@ -42,10 +42,10 @@ export default function generateFeatures (
   speciesFeatures: FeaturesType,
   currentLevel: number,
   fightingStyles: FightingStyleType[],
-  myFeats: FeatType[],
+  myFeats: CompletedFeatureType[],
   myBackground: BackgroundType,
   abilityScores: AbilityScoresType
-) {
+) : { combatFeatures: CompletedFeatureType[], nonCombatFeatures: CompletedFeatureType[] } {
   const mySpeciesFeatures = getValidFeatures(speciesFeatures[rawCharacter.species.name], currentLevel)
   const myClassFeatures = rawCharacter.classes.map(({ name: className, levels, discoveries }) =>
     getValidFeatures(classFeatures[className], levels, discoveries)
@@ -63,7 +63,7 @@ export default function generateFeatures (
   const myFeatures = [
     ...myClassFeatures,
     ...myArchetypeFeatures,
-    ...myFeats.map(feat => ({ ...feat, combat: true, description: feat.text })),
+    ...myFeats,
     ...myFightingStyles,
     ...mySpeciesFeatures,
     {

@@ -13,6 +13,7 @@ function getUnarmedStrike (
   const attackBonus = applyTweak(rawCharacter, 'unarmed.toHit', proficiencyBonus + abilityScores.Strength.modifier)
   const damageBonus = applyTweak(rawCharacter, 'unarmed.damage', Math.max(0, 1 + abilityScores.Strength.modifier))
   return {
+    index: -1,
     contentType: 'Core',
     cost: 0,
     equipped: true,

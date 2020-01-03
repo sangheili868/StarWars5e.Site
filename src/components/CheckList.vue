@@ -18,25 +18,18 @@
 </script>
 
 <template lang="pug">
-  v-layout(align-center)
+  div.d-flex.align-center
+    slot
     h4.mr-2 {{ title }}
-    v-layout(justify-start, wrap)
+    div.d-flex.align-center.justify-start.flex-wrap
       v-checkbox(
         v-for="index in range(maximum)",
         :key="index",
         color="primary",
         hide-details,
-        :class="$style.checkbox",
         :indeterminate="index >= maximum - blocked",
         :readonly="index >= maximum - blocked",
         :input-value="current > index",
         @change="isChecked => increment(index, isChecked)"
-      )
+      ).pt-0.mt-0
 </template>
-
-<style lang="scss" module>
-  .checkbox {
-    flex: none !important;
-    margin-top: 0 !important;
-  }
-</style>

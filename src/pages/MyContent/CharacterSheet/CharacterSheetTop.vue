@@ -41,7 +41,6 @@
       )
     CharacterSheetHealth(
       :hitPoints="completeCharacter.hitPoints",
-      :tweaks="completeCharacter.tweaks",
       @updateCharacter="newCharacter => $emit('updateCharacter', newCharacter)",
       @replaceCharacterProperty="payload => $emit('replaceCharacterProperty', payload)"
     )

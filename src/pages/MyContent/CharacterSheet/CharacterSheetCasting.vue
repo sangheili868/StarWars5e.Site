@@ -1,7 +1,6 @@
 <script lang="ts">
   import { Component, Prop, Vue } from 'vue-property-decorator'
   import { TechCastingType, ForceCastingType } from '@/types/completeCharacterTypes'
-  import { TweaksType } from '@/types/rawCharacterTypes'
   import CharacterSheetModifier from './CharacterSheetModifier.vue'
   import CharacterSheetTweaker from './CharacterSheetTweaker.vue'
   import CharacterSheetExpansionFeatures from './CharacterSheetExpansionFeatures.vue'
@@ -21,7 +20,6 @@
   export default class CharacterSheetCasting extends Vue {
     @Prop({ type: [ Boolean, Object ] }) readonly techCasting!: false | TechCastingType
     @Prop({ type: [ Boolean, Object ] }) readonly forceCasting!: false | ForceCastingType
-    @Prop(Object) readonly tweaks!: TweaksType
     groupBy = groupBy
 
     powerLevelText (level: number) {
@@ -45,7 +43,6 @@
       div.d-flex.align-center
         CharacterSheetTweaker(
           title="Number of Tech Points",
-          :tweaks="tweaks",
           :tweakPaths="[{ name: 'Number of Tech Points', path: 'techCasting.maxPoints' }]",
           @replaceCharacterProperty="payload => $emit('replaceCharacterProperty', payload)"
         )
@@ -66,14 +63,12 @@
         :value="techCasting.attackModifier",
         addPlus,
         label="Tech Attack Modifier",
-        :tweaks="tweaks",
         tweakPath="techCasting.attackModifier",
         @replaceCharacterProperty="payload => $emit('replaceCharacterProperty', payload)"
       )
       CharacterSheetModifier(
         :value="techCasting.saveDC",
         label="Tech Save DC",
-        :tweaks="tweaks",
         tweakPath="techCasting.saveDC",
         @replaceCharacterProperty="payload => $emit('replaceCharacterProperty', payload)"
       )
@@ -81,7 +76,6 @@
         :value="techCasting.maxPowerLevel",
         label="Max Power Level",
         ordinal,
-        :tweaks="tweaks",
         tweakPath="techCasting.maxPowerLevel",
         @replaceCharacterProperty="payload => $emit('replaceCharacterProperty', payload)"
       )
@@ -95,7 +89,6 @@
       div.d-flex.align-center
         CharacterSheetTweaker(
           title="Number of Force Points",
-          :tweaks="tweaks",
           :tweakPaths="[{ name: 'Number of Force Points', path: 'forceCasting.maxPoints' }]",
           @replaceCharacterProperty="payload => $emit('replaceCharacterProperty', payload)"
         )
@@ -116,14 +109,12 @@
         :value="forceCasting.lightAttackModifier",
         addPlus,
         label="Light Attack Modifier",
-        :tweaks="tweaks",
         tweakPath="forceCasting.lightAttackModifier",
         @replaceCharacterProperty="payload => $emit('replaceCharacterProperty', payload)"
       )
       CharacterSheetModifier(
         :value="forceCasting.lightSaveDC",
         label="Light Save DC",
-        :tweaks="tweaks",
         tweakPath="forceCasting.lightSaveDC",
         @replaceCharacterProperty="payload => $emit('replaceCharacterProperty', payload)"
       )
@@ -131,14 +122,12 @@
         :value="forceCasting.darkAttackModifier",
         addPlus,
         label="Dark Attack Modifier",
-        :tweaks="tweaks",
         tweakPath="forceCasting.darkAttackModifier",
         @replaceCharacterProperty="payload => $emit('replaceCharacterProperty', payload)"
       )
       CharacterSheetModifier(
         :value="forceCasting.darkSaveDC",
         label="Dark Save DC",
-        :tweaks="tweaks",
         tweakPath="forceCasting.darkSaveDC",
         @replaceCharacterProperty="payload => $emit('replaceCharacterProperty', payload)"
       )
@@ -146,14 +135,12 @@
         :value="forceCasting.universalAttackModifier",
         addPlus,
         label="Universal Attack Modifier",
-        :tweaks="tweaks",
         tweakPath="forceCasting.universalAttackModifier",
         @replaceCharacterProperty="payload => $emit('replaceCharacterProperty', payload)"
       )
       CharacterSheetModifier(
         :value="forceCasting.universalSaveDC",
         label="Universal Save DC",
-        :tweaks="tweaks",
         tweakPath="forceCasting.universalSaveDC",
         @replaceCharacterProperty="payload => $emit('replaceCharacterProperty', payload)"
       )
@@ -161,7 +148,6 @@
         :value="forceCasting.maxPowerLevel",
         label="Max Power Level",
         ordinal,
-        :tweaks="tweaks",
         tweakPath="forceCasting.maxPowerLevel",
         @replaceCharacterProperty="payload => $emit('replaceCharacterProperty', payload)"
       )

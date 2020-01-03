@@ -1,10 +1,13 @@
 
 <script lang="ts">
   import { Component, Prop, Vue } from 'vue-property-decorator'
-  import { TweaksType } from '@/types/rawCharacterTypes'
+  import { RawCharacterType, TweakPathType } from '@/types/rawCharacterTypes'
   import MyDialog from '@/components/MyDialog.vue'
   import { get, set, parseInt as _parseInt, cloneDeep } from 'lodash'
   import vueSetPath from '@/utilities/vueSetPath'
+  import { namespace } from 'vuex-class'
+
+  const characterModule = namespace('character')
 
   @Component({
     components: {
@@ -12,21 +15,23 @@
     }
   })
   export default class CharacterSheetTweaker extends Vue {
-    @Prop(Object) readonly tweaks!: TweaksType
-    @Prop(Array) readonly tweakPaths!: { name: string, path: string, type?: 'dice' }[]
+    @Prop(Array) readonly tweakPaths!: TweakPathType[]
     @Prop(String) readonly title!: string
+    @Prop({ default: 'tweaks', type: String }) readonly rootPath!: string
     @Prop(Boolean) readonly noStyle!: boolean
+
+    @characterModule.State character!: RawCharacterType
 
     isOpen = false
     myGet = get
-    myTweaks: TweaksType = {}
+    myTweaks = {}
 
     get diceSizes () {
       return [4, 6, 8, 10, 12].map(value => ({ text: 'd' + value, value }))
     }
 
     resetValues () {
-      this.myTweaks = cloneDeep(this.tweaks)
+      this.myTweaks = cloneDeep(get(this.character, this.rootPath) || {})
     }
 
     sanitize (value: string) {
@@ -44,7 +49,7 @@
     }
 
     handleSave () {
-      this.$emit('replaceCharacterProperty', { path: 'tweaks', property: this.myTweaks })
+      this.$emit('replaceCharacterProperty', { path: this.rootPath, property: this.myTweaks })
       this.isOpen = false
     }
   }
@@ -58,7 +63,7 @@
     template(#title) Tweak {{ title }}
     template(#text)
       v-container
-        v-row(v-for="({ name, path, type }) in tweakPaths", :key="path").d-flex
+        v-row(v-for="({ name, path, type, rootPath }) in tweakPaths", :key="path").d-flex
           v-col(cols="4").pa-0.d-flex.align-center
             h5 {{ name }}
           v-col(v-if="type === 'dice'", cols="8").pa-0
@@ -69,7 +74,7 @@
               hide-details,
               clearable,
               label="Dice Size",
-              @input="newValue => updateTweak(newValue, 'dieSize', path)"
+              @input="newValue => updateTweak(newValue, 'dieSize', path, rootPath)"
             ).pa-1
           template(v-else)
             v-col(cols="4").pa-0

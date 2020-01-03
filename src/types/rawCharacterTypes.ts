@@ -87,6 +87,12 @@ export interface EquipmentTweakType {
   damage?: TweakType
 }
 
+export interface TweakPathType {
+  name: string,
+  path: string,
+  type?: 'dice'
+}
+
 export interface RawEquipmentType {
   name: string,
   quantity: number,

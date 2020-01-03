@@ -26,6 +26,7 @@ function getWeaponStats (
   tweaks: EquipmentTweakType | undefined
 ) {
   if (equipmentData && equipmentData.equipmentCategory === 'Weapon') {
+    const damageDieType = get(tweaks, 'damageDice.dieSize') || equipmentData.damageDieType
     const dexModifier = abilityScores['Dexterity'].modifier
     const strModifier = abilityScores['Strength'].modifier
     const isFinesse = equipmentData.properties && intersection(equipmentData.properties, ['finesse', 'Finesse']).length > 0
@@ -38,14 +39,14 @@ function getWeaponStats (
 
     const isProficient = isProficientWithWeapon(equipmentData, proficiencies) || get(tweaks, 'toHit.proficiency') === 'proficient'
     let attackBonus = weaponModifier + (isProficient ? proficiencyBonus : 0)
-    attackBonus = applyCustomTweak(tweaks && tweaks.toHit, attackBonus)
     attackBonus = applyTweak(rawCharacter, 'weapon.toHit', attackBonus)
+    attackBonus = applyCustomTweak(tweaks && tweaks.toHit, attackBonus)
 
     let damageBonus = weaponModifier + equipmentData.damageDieModifier
-    damageBonus = applyCustomTweak(tweaks && tweaks.damage, damageBonus)
     damageBonus = applyTweak(rawCharacter, 'weapon.damage', damageBonus)
+    damageBonus = applyCustomTweak(tweaks && tweaks.damage, damageBonus)
 
-    return { attackBonus, damageBonus }
+    return { attackBonus, damageBonus, damageDieType }
   }
 }
 
@@ -59,8 +60,7 @@ export default function generateEquipment (
 ): EquipmentType[] {
   const allProficiencies = [...(proficiencies || []), ...rawCharacter.customProficiencies.map(({ name }) => name)]
   return chain(rawCharacter.equipment)
-    .filter(({ name }) => name !== 'custom')
-    .map(({ name, quantity, equipped, tweaks }) => {
+    .map(({ name, quantity, equipped, tweaks }, index) => {
       const equipmentData = equipment.find(equipment => name === equipment.name)
       if (!equipmentData) console.error('Equipment Data Not Found:', name)
       const weaponStats = abilityScores && getWeaponStats(
@@ -75,6 +75,7 @@ export default function generateEquipment (
         name,
         quantity,
         equipped,
+        index,
         ...(equipmentData || {}),
         ...weaponStats,
         isFound: !isEmpty(equipmentData)

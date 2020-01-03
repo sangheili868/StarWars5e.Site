@@ -3,7 +3,7 @@
   import { EquipmentType } from '@/types/lootTypes'
   import addPlus from '@/utilities/addPlus'
   import LootWeaponsProperties from '@/pages/Loot/LootWeaponsProperties.vue'
-  import { TweaksType } from '@/types/rawCharacterTypes'
+  import { TweakPathType } from '@/types/rawCharacterTypes'
   import CharacterSheetTweaker from './CharacterSheetTweaker.vue'
 
   @Component({
@@ -14,16 +14,19 @@
   })
   export default class CharacterSheetWeapon extends Vue {
     @Prop(Object) readonly weapon!: EquipmentType
-    @Prop(Object) readonly tweaks!: TweaksType
 
     addPlus = addPlus
 
-    get tweakPaths (): { name: string, path: string, type?: 'dice' }[] {
-      return this.weapon.name === 'Unarmed Strike' ? [
-        { name: 'Unarmed Damage Dice', path: 'unarmed.damageDice', type: 'dice' },
-        { name: 'Unarmed To Hit', path: 'unarmed.toHit' },
-        { name: 'Unarmed Damage Bonus', path: 'unarmed.damage' }
-      ] : []
+    get rootPath () {
+      return this.weapon.name === 'Unarmed Strike' ? 'tweaks.unarmed' : `equipment.${this.weapon.index}.tweaks`
+    }
+
+    get tweakPaths (): TweakPathType[] {
+      return [
+        { name: 'Damage Dice', path: 'damageDice', type: 'dice' },
+        { name: 'To Hit', path: 'toHit' },
+        { name: 'Damage Bonus', path: 'damage' }
+      ]
     }
 
     get damage () {
@@ -38,7 +41,7 @@
 <template lang="pug">
   div.d-flex.flex-column
     CharacterSheetTweaker(
-      v-bind="{ tweaks, tweakPaths }",
+      v-bind="{ tweakPaths, rootPath }",
       :title="weapon.name",
       @replaceCharacterProperty="payload => $emit('replaceCharacterProperty', payload)"
     )

@@ -4,7 +4,6 @@
   import CheckList from '@/components/CheckList.vue'
   import CharacterSheetModifier from './CharacterSheetModifier.vue'
   import CharacterSheetTweaker from './CharacterSheetTweaker.vue'
-  import { TweaksType } from '@/types/rawCharacterTypes'
   import CharacterSheetExpansionFeatures from './CharacterSheetExpansionFeatures.vue'
   import { isEmpty } from 'lodash'
 
@@ -18,7 +17,6 @@
   })
   export default class CharacterSheetSuperiority extends Vue {
     @Prop(Object) readonly superiority!: SuperiorityType
-    @Prop(Object) readonly tweaks!: TweaksType
 
     isEmpty = isEmpty
 
@@ -38,7 +36,6 @@
     )
       CharacterSheetTweaker(
         title="Number of Superiority Dice"
-        :tweaks="tweaks",
         :tweakPaths="[{ name: 'Number of Superiority Dice', path: 'superiority.maxDice' }]",
         @replaceCharacterProperty="payload => $emit('replaceCharacterProperty', payload)"
       )
@@ -46,7 +43,6 @@
     CharacterSheetModifier(
       :value="superiority.maneuverSaveDC",
       label="Maneuver Save DC",
-      :tweaks="tweaks",
       tweakPath="superiority.maneuverSaveDC",
       @replaceCharacterProperty="payload => $emit('replaceCharacterProperty', payload)"
     )

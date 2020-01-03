@@ -29,7 +29,8 @@
 
 <template lang="pug">
   CharacterSheetTweaker(
-    v-bind="{ value, tweaks, tweakPath }"
+    v-bind="{ tweaks }",
+    :tweakPaths="[{ name: title || label, path: tweakPath }]",
     :title="title || label"
     @replaceCharacterProperty="payload => $emit('replaceCharacterProperty', payload)"
   )

@@ -38,9 +38,8 @@
     )
       CharacterSheetTweaker(
         title="Number of Superiority Dice"
-        :value="superiority.maxDice",
         :tweaks="tweaks",
-        tweakPath="superiority.maxDice",
+        :tweakPaths="[{ name: 'Number of Superiority Dice', path: 'superiority.maxDice' }]",
         @replaceCharacterProperty="payload => $emit('replaceCharacterProperty', payload)"
       )
         h4 {{ superiority.diceSize }}s

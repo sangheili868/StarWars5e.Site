@@ -45,9 +45,8 @@
       div.d-flex.align-center
         CharacterSheetTweaker(
           title="Number of Tech Points",
-          :value="techCasting.maxPoints",
           :tweaks="tweaks",
-          tweakPath="techCasting.maxPoints",
+          :tweakPaths="[{ name: 'Number of Tech Points', path: 'techCasting.maxPoints' }]",
           @replaceCharacterProperty="payload => $emit('replaceCharacterProperty', payload)"
         )
           h4 Tech Points
@@ -96,9 +95,8 @@
       div.d-flex.align-center
         CharacterSheetTweaker(
           title="Number of Force Points",
-          :value="forceCasting.maxPoints",
           :tweaks="tweaks",
-          tweakPath="forceCasting.maxPoints",
+          :tweakPaths="[{ name: 'Number of Force Points', path: 'forceCasting.maxPoints' }]",
           @replaceCharacterProperty="payload => $emit('replaceCharacterProperty', payload)"
         )
           h4 Force Points

@@ -1,8 +1,10 @@
+
 <script lang="ts">
   import { Component, Prop, Vue } from 'vue-property-decorator'
   import { TweaksType } from '@/types/rawCharacterTypes'
   import MyDialog from '@/components/MyDialog.vue'
-  import { get, parseInt as _parseInt } from 'lodash'
+  import { get, set, parseInt as _parseInt, cloneDeep } from 'lodash'
+  import vueSetPath from '@/utilities/vueSetPath'
 
   @Component({
     components: {
@@ -10,18 +12,21 @@
     }
   })
   export default class CharacterSheetTweaker extends Vue {
-    @Prop(Number) readonly value!: number
     @Prop(Object) readonly tweaks!: TweaksType
-    @Prop(String) readonly tweakPath!: string
+    @Prop(Array) readonly tweakPaths!: { name: string, path: string, type?: 'dice' }[]
     @Prop(String) readonly title!: string
+    @Prop(Boolean) readonly noStyle!: boolean
 
     isOpen = false
-    bonus: number | null = null
-    override: number | null = null
+    myGet = get
+    myTweaks: TweaksType = {}
+
+    get diceSizes () {
+      return [4, 6, 8, 10, 12].map(value => ({ text: 'd' + value, value }))
+    }
 
     resetValues () {
-      this.bonus = get(this.tweaks, this.tweakPath + '.bonus')
-      this.override = get(this.tweaks, this.tweakPath + '.override')
+      this.myTweaks = cloneDeep(this.tweaks)
     }
 
     sanitize (value: string) {
@@ -29,24 +34,17 @@
       return isNaN(sanitizedValue) ? null : sanitizedValue
     }
 
-    setBonus (bonus: string) {
-      this.bonus = this.sanitize(bonus)
-      this.override = null
+    updateTweak (newValue: string, tweakType: string, path: string) {
+      vueSetPath(this.myTweaks, `${path}.${tweakType}`, this.sanitize(newValue))
+
+      if (tweakType !== 'dieSize') {
+        const otherTweakType = tweakType === 'override' ? 'bonus' : 'override'
+        vueSetPath(this.myTweaks, `${path}.${otherTweakType}`, null)
+      }
     }
 
-    setOverride (override: string) {
-      this.override = this.sanitize(override)
-      this.bonus = null
-    }
-
-    updateTweak () {
-      this.$emit('replaceCharacterProperty', {
-        path: 'tweaks.' + this.tweakPath,
-        property: {
-          bonus: this.bonus,
-          override: this.override
-        }
-      })
+    handleSave () {
+      this.$emit('replaceCharacterProperty', { path: 'tweaks', property: this.myTweaks })
       this.isOpen = false
     }
   }
@@ -55,32 +53,47 @@
 <template lang="pug">
   MyDialog(v-model="isOpen")
     template(v-slot:activator="{ on }")
-      div(:class="$style.button", v-on="on", @click="resetValues").pa-1
+      div(:class="{ [$style.button]: !noStyle }", v-on="on", @click="resetValues").pa-1
         slot
     template(#title) Tweak {{ title }}
     template(#text)
-      div.mt-3 Current Value (including tweaks): {{ value }}
-      div.d-flex.mt-1
-        v-text-field(
-          :value="bonus"
-          outlined,
-          type="number",
-          hide-details,
-          clearable,
-          label="Bonus",
-          @input="setBonus"
-        ).pa-1
-        v-text-field(
-          :value="override"
-          outlined,
-          type="number",
-          hide-details,
-          clearable,
-          label="Override",
-          @input="setOverride"
-        ).pa-1
+      v-container
+        v-row(v-for="({ name, path, type }) in tweakPaths", :key="path").d-flex
+          v-col(cols="4").pa-0.d-flex.align-center
+            h5 {{ name }}
+          v-col(v-if="type === 'dice'", cols="8").pa-0
+            v-select(
+              :value="myGet(myTweaks, path + '.dieSize')"
+              outlined,
+              :items="diceSizes",
+              hide-details,
+              clearable,
+              label="Dice Size",
+              @input="newValue => updateTweak(newValue, 'dieSize', path)"
+            ).pa-1
+          template(v-else)
+            v-col(cols="4").pa-0
+              v-text-field(
+                :value="myGet(myTweaks, path + '.bonus')"
+                outlined,
+                type="number",
+                hide-details,
+                clearable,
+                label="Bonus",
+                @input="newValue => updateTweak(newValue, 'bonus', path)"
+              ).pa-1
+            v-col(cols="4").pa-0
+              v-text-field(
+                :value="myGet(myTweaks, path + '.override')"
+                outlined,
+                type="number",
+                hide-details,
+                clearable,
+                label="Override",
+                @input="newValue => updateTweak(newValue, 'override', path)"
+              ).pa-1
     template(#actions)
-      v-btn(color="primary", @click="updateTweak") Save
+      v-btn(color="primary", @click="handleSave") Save
       v-spacer
       v-btn(color="primary", text, @click="isOpen=false") Cancel
 </template>

@@ -19,9 +19,8 @@
 <template lang="pug">
   CharacterSheetTweaker(
     title="Maximum Hit Points"
-    :value="maximum",
     :tweaks="tweaks",
-    tweakPath="hitPoints.maximum",
+    :tweakPaths="[{ name: 'Maximum Hit Points', path: 'hitPoints.maximum' }]",
     @replaceCharacterProperty="payload => $emit('replaceCharacterProperty', payload)"
   )
     v-progress-circular(

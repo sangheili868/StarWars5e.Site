@@ -4,12 +4,12 @@
   import addPlus from '@/utilities/addPlus'
   import LootWeaponsProperties from '@/pages/Loot/LootWeaponsProperties.vue'
   import { TweaksType } from '@/types/rawCharacterTypes'
-  import CharacterSheetTweakMultiple from './CharacterSheetTweakMultiple.vue'
+  import CharacterSheetTweaker from './CharacterSheetTweaker.vue'
 
   @Component({
     components: {
       LootWeaponsProperties,
-      CharacterSheetTweakMultiple
+      CharacterSheetTweaker
     }
   })
   export default class CharacterSheetWeapon extends Vue {
@@ -30,14 +30,14 @@
       const { damageNumberOfDice, damageDieType, damageBonus, damageType } = this.weapon
       const hasDice = damageNumberOfDice && damageDieType
       const damage = hasDice ? damageNumberOfDice + 'd' + damageDieType + addPlus(damageBonus || 0) : damageBonus
-      return damage + ' ' + 'Lightning'
+      return damage + ' ' + damageType
     }
   }
 </script>
 
 <template lang="pug">
   div.d-flex.flex-column
-    CharacterSheetTweakMultiple(
+    CharacterSheetTweaker(
       v-bind="{ tweaks, tweakPaths }",
       :title="weapon.name",
       @replaceCharacterProperty="payload => $emit('replaceCharacterProperty', payload)"

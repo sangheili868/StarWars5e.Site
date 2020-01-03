@@ -1,12 +1,10 @@
 <script lang="ts">
   import { Component, Prop, Vue } from 'vue-property-decorator'
   import MyDialog from '@/components/MyDialog.vue'
-  import CharacterSheetSettingsTweaks from './CharacterSheetSettingsTweaks.vue'
   import { CompleteCharacterType } from '@/types/completeCharacterTypes'
 
   @Component({
     components: {
-      CharacterSheetSettingsTweaks,
       MyDialog
     }
   })

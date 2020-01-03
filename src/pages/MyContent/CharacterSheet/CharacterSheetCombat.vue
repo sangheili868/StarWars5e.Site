@@ -5,7 +5,7 @@
   import { SuperiorityType, CompletedFeatureType } from '@/types/completeCharacterTypes'
   import { TweaksType } from '@/types/rawCharacterTypes'
   import CharacterSheetModifier from './CharacterSheetModifier.vue'
-  import CharacterSheetTweakMultiple from './CharacterSheetTweakMultiple.vue'
+  import CharacterSheetTweaker from './CharacterSheetTweaker.vue'
   import CharacterSheetWeapon from './CharacterSheetWeapon.vue'
   import CharacterSheetSuperiority from './CharacterSheetSuperiority.vue'
   import CharacterSheetExpansionFeatures from './CharacterSheetExpansionFeatures.vue'
@@ -15,7 +15,7 @@
   @Component({
     components: {
       CharacterSheetModifier,
-      CharacterSheetTweakMultiple,
+      CharacterSheetTweaker,
       CharacterSheetWeapon,
       CharacterSheetSuperiority,
       CharacterSheetExpansionFeatures,
@@ -91,7 +91,7 @@
       @replaceCharacterProperty="payload => $emit('replaceCharacterProperty', payload)"
     )
     h3.mt-2.d-flex.justify-space-between.align-end Weapons
-      CharacterSheetTweakMultiple(
+      CharacterSheetTweaker(
         title="Global Weapon Modifiers",
         :tweaks="tweaks",
         noStyle,

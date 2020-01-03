@@ -5,12 +5,10 @@
   import addPlus from '@/utilities/addPlus'
   import { startCase, upperCase } from 'lodash'
   import ProficiencyDots from '@/components/ProficiencyDots.vue'
-  import CharacterSheetModifier from './CharacterSheetModifier.vue'
   import CharacterSheetTweaker from './CharacterSheetTweaker.vue'
 
   @Component({
     components: {
-      CharacterSheetModifier,
       CharacterSheetTweaker,
       ProficiencyDots
     }
@@ -32,9 +30,9 @@
       :class="$style.ability",
     ).flex-grow-1
       CharacterSheetTweaker(
-        v-bind="{ value, tweaks }",
+        :tweaks="tweaks",
         :title="ability + ' Score'"
-        :tweakPath="`abilityScores.${ability}.score`",
+        :tweakPaths="[{ name: ability + ' Score', path: `abilityScores.${ability}.score` }]",
         @replaceCharacterProperty="payload => $emit('replaceCharacterProperty', payload)"
       )
         div.d-flex
@@ -44,10 +42,9 @@
         h5(:class="$style.modifier") {{ value }}
         div
           CharacterSheetTweaker(
-            :value="savingThrow.modifier",
-            :title="ability + 'Saving Throw'",
+            :title="ability + ' Saving Throw'",
             :tweaks="tweaks",
-            :tweakPath="`abilityScores.${ability}.savingThrowModifier`",
+            :tweakPaths="[{ name: ability + ' Saving Throw', path: `abilityScores.${ability}.savingThrowModifier` }]",
             @replaceCharacterProperty="payload => $emit('replaceCharacterProperty', payload)"
           )
             ProficiencyDots(:proficiency="savingThrow.proficiency")
@@ -56,10 +53,9 @@
           CharacterSheetTweaker(
             v-for="{ name, proficiency, modifier } in skills",
             :key="name",
-            :value="modifier",
             :title="name",
             :tweaks="tweaks",
-            :tweakPath="`abilityScores.${ability}.skills.${name}`",
+            :tweakPaths="[{ name, path: `abilityScores.${ability}.skills.${name}` }]",
             @replaceCharacterProperty="payload => $emit('replaceCharacterProperty', payload)"
           )
             ProficiencyDots(v-bind="{ proficiency }")

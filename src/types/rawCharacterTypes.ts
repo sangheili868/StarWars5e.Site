@@ -81,16 +81,24 @@ export interface RawCharacteristicsType {
   Backstory: string
 }
 
+export interface EquipmentTweakType {
+  toHit?: TweakType,
+  damageDice?: TweakType,
+  damage?: TweakType
+}
+
 export interface RawEquipmentType {
   name: string,
   quantity: number,
-  equipped?: boolean
+  equipped?: boolean,
+  tweaks?: EquipmentTweakType
 }
 
 export interface TweakType {
   override?: number,
   bonus?: number,
-  dieSize?: number
+  dieSize?: number,
+  proficiency?: 'proficient' | 'expertise'
 }
 
 export interface TweaksType {

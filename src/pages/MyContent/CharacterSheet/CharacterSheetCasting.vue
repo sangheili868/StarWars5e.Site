@@ -155,6 +155,7 @@
           @changeSelected="handleChangeForcePoints"
         )
       CharacterSheetModifier(
+        v-if="forceCasting.lightAttackModifier !== false",
         :value="forceCasting.lightAttackModifier",
         addPlus,
         label="Light Attack Modifier",
@@ -162,25 +163,14 @@
         @replaceCharacterProperty="payload => $emit('replaceCharacterProperty', payload)"
       )
       CharacterSheetModifier(
+        v-if="forceCasting.lightSaveDC !== false",
         :value="forceCasting.lightSaveDC",
         label="Light Save DC",
         tweakPath="forceCasting.lightSaveDC",
         @replaceCharacterProperty="payload => $emit('replaceCharacterProperty', payload)"
       )
       CharacterSheetModifier(
-        :value="forceCasting.darkAttackModifier",
-        addPlus,
-        label="Dark Attack Modifier",
-        tweakPath="forceCasting.darkAttackModifier",
-        @replaceCharacterProperty="payload => $emit('replaceCharacterProperty', payload)"
-      )
-      CharacterSheetModifier(
-        :value="forceCasting.darkSaveDC",
-        label="Dark Save DC",
-        tweakPath="forceCasting.darkSaveDC",
-        @replaceCharacterProperty="payload => $emit('replaceCharacterProperty', payload)"
-      )
-      CharacterSheetModifier(
+        v-if="forceCasting.universalAttackModifier !== false",
         :value="forceCasting.universalAttackModifier",
         addPlus,
         label="Universal Attack Modifier",
@@ -188,9 +178,25 @@
         @replaceCharacterProperty="payload => $emit('replaceCharacterProperty', payload)"
       )
       CharacterSheetModifier(
+        v-if="forceCasting.universalSaveDC !== false",
         :value="forceCasting.universalSaveDC",
         label="Universal Save DC",
         tweakPath="forceCasting.universalSaveDC",
+        @replaceCharacterProperty="payload => $emit('replaceCharacterProperty', payload)"
+      )
+      CharacterSheetModifier(
+        v-if="forceCasting.darkAttackModifier !== false",
+        :value="forceCasting.darkAttackModifier",
+        addPlus,
+        label="Dark Attack Modifier",
+        tweakPath="forceCasting.darkAttackModifier",
+        @replaceCharacterProperty="payload => $emit('replaceCharacterProperty', payload)"
+      )
+      CharacterSheetModifier(
+        v-if="forceCasting.darkSaveDC !== false",
+        :value="forceCasting.darkSaveDC",
+        label="Dark Save DC",
+        tweakPath="forceCasting.darkSaveDC",
         @replaceCharacterProperty="payload => $emit('replaceCharacterProperty', payload)"
       )
       CharacterSheetModifier(

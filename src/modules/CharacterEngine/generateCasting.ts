@@ -112,17 +112,22 @@ export default function generateCasting (
     universal: Math.max(abilityScores.Wisdom.modifier, abilityScores.Charisma.modifier)
   }
   const forceCastingLevel = getCastingLevel(rawCharacter, myClasses, myArchetypes, 'Force')
+  const forcePowersKnown = getPowersKnown(rawCharacter, powers, 'Force')
+  const hasLightPowers = forcePowersKnown.some(power => power.forceAlignment === 'Light')
+  const hasDarkPowers = forcePowersKnown.some(power => power.forceAlignment === 'Dark')
+  const hasUniversalPowers = forcePowersKnown.some(power => power.forceAlignment === 'Universal')
+
   const forceCasting = {
     pointsUsed: rawCharacter.currentStats.forcePointsUsed,
     maxPoints: getPowerPoints(rawCharacter, myClasses, myArchetypes, forceCastingBonus.universal, 'Force'),
-    lightAttackModifier: applyTweak(rawCharacter, 'forceCasting.lightAttackModifier', forceCastingBonus.light + proficiencyBonus),
-    lightSaveDC: applyTweak(rawCharacter, 'forceCasting.lightSaveDC', 8 + forceCastingBonus.light + proficiencyBonus),
-    darkAttackModifier: applyTweak(rawCharacter, 'forceCasting.darkAttackModifier', forceCastingBonus.dark + proficiencyBonus),
-    darkSaveDC: applyTweak(rawCharacter, 'forceCasting.darkSaveDC', 8 + forceCastingBonus.dark + proficiencyBonus),
-    universalAttackModifier: applyTweak(rawCharacter, 'forceCasting.universalAttackModifier', forceCastingBonus.universal + proficiencyBonus),
-    universalSaveDC: applyTweak(rawCharacter, 'forceCasting.universalSaveDC', 8 + forceCastingBonus.universal + proficiencyBonus),
+    lightAttackModifier: hasLightPowers && applyTweak(rawCharacter, 'forceCasting.lightAttackModifier', forceCastingBonus.light + proficiencyBonus),
+    lightSaveDC: hasLightPowers && applyTweak(rawCharacter, 'forceCasting.lightSaveDC', 8 + forceCastingBonus.light + proficiencyBonus),
+    darkAttackModifier: hasDarkPowers && applyTweak(rawCharacter, 'forceCasting.darkAttackModifier', forceCastingBonus.dark + proficiencyBonus),
+    darkSaveDC: hasDarkPowers && applyTweak(rawCharacter, 'forceCasting.darkSaveDC', 8 + forceCastingBonus.dark + proficiencyBonus),
+    universalAttackModifier: hasUniversalPowers && applyTweak(rawCharacter, 'forceCasting.universalAttackModifier', forceCastingBonus.universal + proficiencyBonus),
+    universalSaveDC: hasUniversalPowers && applyTweak(rawCharacter, 'forceCasting.universalSaveDC', 8 + forceCastingBonus.universal + proficiencyBonus),
     maxPowerLevel: getMaxPowerLevel(rawCharacter, forceCastingLevel, 'Force'),
-    powersKnown: getPowersKnown(rawCharacter, powers, 'Force')
+    powersKnown: forcePowersKnown
   }
   const hasForceCasting = forceCastingLevel > 0 || forceCasting.powersKnown.length > 0
 

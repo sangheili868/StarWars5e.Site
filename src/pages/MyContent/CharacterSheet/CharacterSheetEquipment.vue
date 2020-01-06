@@ -32,7 +32,7 @@
     v-expansion-panels(accordion, multiple)
       CharacterSheetEquipmentPanel(
         v-for="(item, index) in equipment",
-        :key="item.name",
+        :key="index",
         v-bind="{ item, index }",
         @updateCharacter="newCharacter => $emit('updateCharacter', newCharacter)",
         @deleteCharacterProperty="payload => $emit('deleteCharacterProperty', payload)"

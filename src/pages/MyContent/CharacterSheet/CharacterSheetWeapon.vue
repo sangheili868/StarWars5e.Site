@@ -32,7 +32,8 @@
     get damage () {
       const { damageNumberOfDice, damageDieType, damageBonus, damageType } = this.weapon
       const hasDice = damageNumberOfDice && damageDieType
-      const damage = hasDice ? damageNumberOfDice + 'd' + damageDieType + addPlus(damageBonus || 0) : damageBonus
+      const damageModifier = damageBonus ? addPlus(damageBonus) : ''
+      const damage = hasDice ? damageNumberOfDice + 'd' + damageDieType + damageModifier : damageBonus
       return damage + ' ' + damageType
     }
   }

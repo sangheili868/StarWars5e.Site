@@ -5,7 +5,7 @@
   import CharacterSheetTweaker from './CharacterSheetTweaker.vue'
   import CharacterSheetExpansionFeatures from './CharacterSheetExpansionFeatures.vue'
   import CharacterSheetCastingAddPower from './CharacterSheetCastingAddPower.vue'
-  import { groupBy } from 'lodash'
+  import { groupBy, startCase, filter } from 'lodash'
   import CharacterSheetTicker from './CharacterSheetTicker.vue'
   import CheckList from '@/components/CheckList.vue'
 
@@ -26,6 +26,20 @@
     @Prop(Array) readonly customForcePowers!: string[]
 
     groupBy = groupBy
+    startCase = startCase
+
+    get alignments () {
+      if (!this.forceCasting) return []
+      const hasLightPowers = this.forceCasting.powersKnown.some(power => power.forceAlignment === 'Light')
+      const hasDarkPowers = this.forceCasting.powersKnown.some(power => power.forceAlignment === 'Dark')
+      const hasUniversalPowers = this.forceCasting.powersKnown.some(power => power.forceAlignment === 'Universal') && (
+        (hasLightPowers && hasDarkPowers) ||
+        (!hasLightPowers && !hasDarkPowers) ||
+        (hasLightPowers && !hasDarkPowers && this.forceCasting.universalSaveDC > this.forceCasting.lightSaveDC) ||
+        (hasDarkPowers && !hasLightPowers && this.forceCasting.universalSaveDC > this.forceCasting.darkSaveDC)
+      )
+      return filter([hasLightPowers && 'light', hasUniversalPowers && 'universal', hasDarkPowers && 'dark'])
+    }
 
     powerLevelText (level: number) {
       return level > 0 ? `Level ${level}` : 'At-will'
@@ -92,6 +106,13 @@
           @changeSelected="handleChangeTechPoints"
         )
       CharacterSheetModifier(
+        :value="techCasting.maxPowerLevel",
+        label="Max Power Level",
+        ordinal,
+        tweakPath="techCasting.maxPowerLevel",
+        @replaceCharacterProperty="payload => $emit('replaceCharacterProperty', payload)"
+      )
+      CharacterSheetModifier(
         :value="techCasting.attackModifier",
         addPlus,
         label="Tech Attack Modifier",
@@ -102,13 +123,6 @@
         :value="techCasting.saveDC",
         label="Tech Save DC",
         tweakPath="techCasting.saveDC",
-        @replaceCharacterProperty="payload => $emit('replaceCharacterProperty', payload)"
-      )
-      CharacterSheetModifier(
-        :value="techCasting.maxPowerLevel",
-        label="Max Power Level",
-        ordinal,
-        tweakPath="techCasting.maxPowerLevel",
         @replaceCharacterProperty="payload => $emit('replaceCharacterProperty', payload)"
       )
       div(v-for="(powers, level) in groupBy(techCasting.powersKnown, 'level')", :key="level")
@@ -155,57 +169,94 @@
           @changeSelected="handleChangeForcePoints"
         )
       CharacterSheetModifier(
-        v-if="forceCasting.lightAttackModifier !== false",
-        :value="forceCasting.lightAttackModifier",
-        addPlus,
-        label="Light Attack Modifier",
-        tweakPath="forceCasting.lightAttackModifier",
-        @replaceCharacterProperty="payload => $emit('replaceCharacterProperty', payload)"
-      )
-      CharacterSheetModifier(
-        v-if="forceCasting.lightSaveDC !== false",
-        :value="forceCasting.lightSaveDC",
-        label="Light Save DC",
-        tweakPath="forceCasting.lightSaveDC",
-        @replaceCharacterProperty="payload => $emit('replaceCharacterProperty', payload)"
-      )
-      CharacterSheetModifier(
-        v-if="forceCasting.universalAttackModifier !== false",
-        :value="forceCasting.universalAttackModifier",
-        addPlus,
-        label="Universal Attack Modifier",
-        tweakPath="forceCasting.universalAttackModifier",
-        @replaceCharacterProperty="payload => $emit('replaceCharacterProperty', payload)"
-      )
-      CharacterSheetModifier(
-        v-if="forceCasting.universalSaveDC !== false",
-        :value="forceCasting.universalSaveDC",
-        label="Universal Save DC",
-        tweakPath="forceCasting.universalSaveDC",
-        @replaceCharacterProperty="payload => $emit('replaceCharacterProperty', payload)"
-      )
-      CharacterSheetModifier(
-        v-if="forceCasting.darkAttackModifier !== false",
-        :value="forceCasting.darkAttackModifier",
-        addPlus,
-        label="Dark Attack Modifier",
-        tweakPath="forceCasting.darkAttackModifier",
-        @replaceCharacterProperty="payload => $emit('replaceCharacterProperty', payload)"
-      )
-      CharacterSheetModifier(
-        v-if="forceCasting.darkSaveDC !== false",
-        :value="forceCasting.darkSaveDC",
-        label="Dark Save DC",
-        tweakPath="forceCasting.darkSaveDC",
-        @replaceCharacterProperty="payload => $emit('replaceCharacterProperty', payload)"
-      )
-      CharacterSheetModifier(
         :value="forceCasting.maxPowerLevel",
         label="Max Power Level",
         ordinal,
         tweakPath="forceCasting.maxPowerLevel",
         @replaceCharacterProperty="payload => $emit('replaceCharacterProperty', payload)"
       )
+      template(v-if="alignments.length === 1")
+        CharacterSheetModifier(
+          :value="forceCasting[alignments[0] + 'AttackModifier']",
+          addPlus,
+          :label="startCase(alignments[0]) + ' Attack Modifier'",
+          :tweakPath="`forceCasting.${alignments[0]}AttackModifier`",
+          @replaceCharacterProperty="payload => $emit('replaceCharacterProperty', payload)"
+        )
+        CharacterSheetModifier(
+          :value="forceCasting[alignments[0] + 'SaveDC']",
+          :label="startCase(alignments[0]) + ' Save DC'",
+          :tweakPath="`forceCasting.${alignments[0]}SaveDC`",
+          @replaceCharacterProperty="payload => $emit('replaceCharacterProperty', payload)"
+        )
+      v-container(v-else-if="alignments.length > 1")
+        v-row(no-gutters)
+          v-col(cols="2")
+            div
+          v-col(cols="6").d-flex.justify-end
+            h4 Attack Modifier
+          v-col(cols="4").d-flex.justify-center
+            h4 Save DC
+        v-row(v-if="alignments.includes('light')", no-gutters)
+          v-col(cols="4")
+            h5 Light
+          v-col(cols="4").d-flex.justify-center
+            CharacterSheetModifier(
+              v-if="forceCasting.lightAttackModifier !== false",
+              :value="forceCasting.lightAttackModifier",
+              addPlus,
+              title="Light Attack Modifier",
+              tweakPath="forceCasting.lightAttackModifier",
+              @replaceCharacterProperty="payload => $emit('replaceCharacterProperty', payload)"
+            )
+          v-col(cols="4").d-flex.justify-center
+            CharacterSheetModifier(
+              v-if="forceCasting.lightSaveDC !== false",
+              :value="forceCasting.lightSaveDC",
+              title="Light Save DC",
+              tweakPath="forceCasting.lightSaveDC",
+              @replaceCharacterProperty="payload => $emit('replaceCharacterProperty', payload)"
+            )
+        v-row(v-if="alignments.includes('universal')", no-gutters)
+          v-col(cols="4")
+            h5 Universal
+          v-col(cols="4").d-flex.justify-center
+            CharacterSheetModifier(
+              v-if="forceCasting.universalAttackModifier !== false",
+              :value="forceCasting.universalAttackModifier",
+              addPlus,
+              title="Universal Attack Modifier",
+              tweakPath="forceCasting.universalAttackModifier",
+              @replaceCharacterProperty="payload => $emit('replaceCharacterProperty', payload)"
+            )
+          v-col(cols="4").d-flex.justify-center
+            CharacterSheetModifier(
+              v-if="forceCasting.universalSaveDC !== false",
+              :value="forceCasting.universalSaveDC",
+              title="Universal Save DC",
+              tweakPath="forceCasting.universalSaveDC",
+              @replaceCharacterProperty="payload => $emit('replaceCharacterProperty', payload)"
+            )
+        v-row(v-if="alignments.includes('dark')", no-gutters)
+          v-col(cols="4")
+            h5 Dark
+          v-col(cols="4").d-flex.justify-center
+            CharacterSheetModifier(
+              v-if="forceCasting.darkAttackModifier !== false",
+              :value="forceCasting.darkAttackModifier",
+              addPlus,
+              title="Dark Attack Modifier",
+              tweakPath="forceCasting.darkAttackModifier",
+              @replaceCharacterProperty="payload => $emit('replaceCharacterProperty', payload)"
+            )
+          v-col(cols="4").d-flex.justify-center
+            CharacterSheetModifier(
+              v-if="forceCasting.darkSaveDC !== false",
+              :value="forceCasting.darkSaveDC",
+              title="Dark Save DC",
+              tweakPath="forceCasting.darkSaveDC",
+              @replaceCharacterProperty="payload => $emit('replaceCharacterProperty', payload)"
+            )
       div(v-for="(powers, level) in groupBy(forceCasting.powersKnown, 'level')", :key="level")
         h3.mt-2.d-flex.justify-space-between.align-end {{ powerLevelText(level) }}
           v-btn(

@@ -57,12 +57,12 @@ export interface TechCastingType extends CastingType {
 }
 
 export interface ForceCastingType extends CastingType {
-  lightAttackModifier: number | false,
-  lightSaveDC: number | false,
-  darkAttackModifier: number | false,
-  darkSaveDC: number | false,
-  universalAttackModifier: number | false,
-  universalSaveDC: number | false
+  lightAttackModifier: number,
+  lightSaveDC: number,
+  darkAttackModifier: number,
+  darkSaveDC: number,
+  universalAttackModifier: number,
+  universalSaveDC: number
 }
 
 export interface CharacteristicsType {

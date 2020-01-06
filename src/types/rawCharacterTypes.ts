@@ -20,10 +20,6 @@ export interface RawFeatType {
 
 export interface RawArchetypeType {
   name: string,
-  silverTongue?: {
-    language: string,
-    intSkillBonus: string
-  },
   forcePowers?: string[],
   techPowers?: string[],
   maneuvers?: string[]
@@ -90,7 +86,7 @@ export interface EquipmentTweakType {
 export interface TweakPathType {
   name: string,
   path: string,
-  type?: 'dice'
+  type?: 'dice' | 'proficiency'
 }
 
 export interface RawEquipmentType {
@@ -104,7 +100,7 @@ export interface TweakType {
   override?: number,
   bonus?: number,
   dieSize?: number,
-  proficiency?: 'proficient' | 'expertise'
+  proficiency?: 'Proficient' | 'Expertise' | null
 }
 
 export interface TweaksType {

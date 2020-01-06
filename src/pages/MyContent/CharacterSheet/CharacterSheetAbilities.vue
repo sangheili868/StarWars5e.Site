@@ -40,7 +40,7 @@
         div
           CharacterSheetTweaker(
             :title="ability + ' Saving Throw'",
-            :tweakPaths="[{ name: ability + ' Saving Throw', path: `abilityScores.${ability}.savingThrowModifier` }]",
+            :tweakPaths="[{ name: ability + ' Saving Throw', path: `abilityScores.${ability}.savingThrowModifier`, type: 'proficiency' }]",
             @replaceCharacterProperty="payload => $emit('replaceCharacterProperty', payload)"
           )
             ProficiencyDots(:proficiency="savingThrow.proficiency")
@@ -50,7 +50,7 @@
             v-for="{ name, proficiency, modifier } in skills",
             :key="name",
             :title="name",
-            :tweakPaths="[{ name, path: `abilityScores.${ability}.skills.${name}` }]",
+            :tweakPaths="[{ name, path: `abilityScores.${ability}.skills.${name}`, type: 'proficiency' }]",
             @replaceCharacterProperty="payload => $emit('replaceCharacterProperty', payload)"
           )
             ProficiencyDots(v-bind="{ proficiency }")

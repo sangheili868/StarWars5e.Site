@@ -26,15 +26,16 @@ function getAbilityScore (rawCharacter: RawCharacterType, ability: string, mySpe
 }
 
 function getProficientSkills (rawCharacter: RawCharacterType, skillsList: SkillsType):{ [ability: string]: { [skill: string]: string } } {
-  return mapValues(skillsList, skills => chain(skills)
+  return mapValues(skillsList, (skills, ability) => chain(skills)
     .keyBy()
     .mapValues(skill => {
+      const tweak = get(rawCharacter, `tweaks.abilityScores.${ability}.skills.${skill}.proficiency`)
       const isExpertise = rawCharacter.classes.some(myClass => Array.isArray(myClass.expertise) && myClass.expertise.includes(skill)) ||
-        rawCharacter.customProficiencies.some(({ name, proficiencyLevel }) => (name === skill && proficiencyLevel === 'expertise'))
+        tweak === 'Expertise'
       const isProficient = rawCharacter.classes.some(myClass => myClass.skills && myClass.skills.includes(skill)) ||
         (rawCharacter.background.skills && rawCharacter.background.skills.includes(skill)) ||
         rawCharacter.species.skillProficiency === skill ||
-        rawCharacter.customProficiencies.some(({ name }) => name === skill)
+        tweak === 'Proficient'
       return (isExpertise && 'expertise') || (isProficient && 'proficient') || 'none'
     }).value())
 }
@@ -70,9 +71,6 @@ export default function generateAbilityScores (
     .map(skillList => Object.keys(skillList).filter(skill => ['expertise', 'proficient'].includes(skillList[skill])))
     .flat()
   const proficientSaves = getProficientSaves(rawCharacter, myClasses)
-  const intBonus = getModifier(getAbilityScore(rawCharacter, 'Intelligence', mySpecies))
-  const scholarData = rawCharacter.classes.find(({ name }) => name === 'Scholar')
-  const skillWithIntBonus = get(scholarData, 'archetype.silverTongue.intSkillBonus')
 
   return {
     abilityScores: mapValues(skillsList, (skills, ability) => {
@@ -90,8 +88,7 @@ export default function generateAbilityScores (
         },
         skills: skills.map(name => {
           const proficiency = proficientSkills[ability][name] || 'none'
-          const silverTongueBonus = skillWithIntBonus === name ? intBonus : 0
-          const skillModifer = modifier + proficiencyBonuses[proficiency] + silverTongueBonus
+          const skillModifer = modifier + proficiencyBonuses[proficiency]
           return {
             name,
             modifier: applyTweak(rawCharacter, `abilityScores.${ability}.skills.${name}`, skillModifer),

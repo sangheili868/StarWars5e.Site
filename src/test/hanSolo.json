@@ -85,7 +85,7 @@
   ],
   "currentStats": {
     "unspentLevels": 0,
-    "hitPointsLost": 9,
+    "hitPointsLost": 0,
     "temporaryHitPoints": 0,
     "hitDiceUsed": {
       "d8": 0

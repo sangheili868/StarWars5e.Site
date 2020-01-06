@@ -3,18 +3,15 @@
   import { ClassType, PowerType, ArchetypeType } from '@/types/characterTypes'
   import { RawClassType } from '@/types/rawCharacterTypes'
   import CharacterSheetExpansionFeatures from '@/pages/MyContent/CharacterSheet/CharacterSheetExpansionFeatures.vue'
-  import MyDialog from '@/components/MyDialog.vue'
+  import CharacterSheetCastingAddPower from '@/pages/MyContent/CharacterSheet/CharacterSheetCastingAddPower.vue'
   import { namespace } from 'vuex-class'
-  import { chain, range } from 'lodash'
-  import MySelect from '@/components/MySelect.vue'
 
   const powersModule = namespace('powers')
 
   @Component({
     components: {
       CharacterSheetExpansionFeatures,
-      MyDialog,
-      MySelect
+      CharacterSheetCastingAddPower
     }
   })
   export default class CharacterBuilderClassPowers extends Vue {
@@ -25,15 +22,11 @@
     @powersModule.State powers!: PowerType[]
     @powersModule.Action fetchPowers!: () => void
 
-    isOpen = false
-    levelFilter = 0
-    range = range
-
     created () {
       this.fetchPowers()
     }
 
-    get powersSelected () {
+    get powersSelected (): string[] {
       const classPowers = (this.myClass as any)[this.castingType.toLowerCase() + 'Powers'] as string[] || []
       const archetypePowers = (this.isArchetypeCasting && (this.myClass.archetype as any)[this.castingType.toLowerCase() + 'Powers'] as string[]) || []
       return [ ...classPowers, ...archetypePowers ]
@@ -41,16 +34,6 @@
 
     get powersSelectedData () {
       return this.powers.filter(({ level, powerType, name }) => this.powersSelected.includes(name))
-    }
-
-    get filteredPowers () {
-      return chain(this.powers)
-        .filter(({ level, powerType, name }) =>
-          level <= this.maxPowerLevel &&
-          powerType === this.castingType
-        )
-        .groupBy('level')
-        .value()
     }
 
     get isArchetypeCasting () {
@@ -83,19 +66,8 @@
       return isNaN(classField) ? archetypeField : classField
     }
 
-    isDisabled (powerName: string) {
-      return !this.powersSelected.includes(powerName) && this.powersSelected.length >= this.numberPowersKnown
-    }
-
-    togglePower (powerName: string) {
-      const isSelected = this.powersSelected.includes(powerName)
-      const powersWithoutNew = this.powersSelected.filter(power => power !== powerName)
-      const powersWithNew = this.powersSelected.concat(powerName)
-      this.$emit('updatePowers', {
-        newPowers: isSelected ? powersWithoutNew : powersWithNew,
-        type: this.castingType,
-        isArchetype: this.isArchetypeCasting
-      })
+    handleUpdatePowers (newPowers: string[]) {
+      this.$emit('updatePowers', { newPowers, type: this.castingType, isArchetype: this.isArchetypeCasting })
     }
   }
 </script>
@@ -105,37 +77,16 @@
     h3 {{ castingType }} Powers
     div {{ powersSelected.length }} / {{ numberPowersKnown }} Known
     CharacterSheetExpansionFeatures(:features="powersSelectedData", isShowingLevel, :class="$style.powersList").text-left
-    MyDialog(v-model="isOpen")
-      template(v-slot:activator="{ on }")
-        div.text-center.mt-2
-          v-btn(v-on="on", @click="levelFilter=0", color="primary") Choose {{ castingType }} Powers
-      template(#title) Choose {{ castingType }} Powers
-      template(#text)
-        MySelect(v-model="levelFilter", :items="range(0, maxPowerLevel + 1)", label="Filter by Level").mt-3
-        CharacterSheetExpansionFeatures(:features="filteredPowers[levelFilter]", isShowingLevel).text-left
-          template(v-slot="{ feature }")
-            v-checkbox(
-              :input-value="powersSelected.includes(feature.name)"
-              color="primary",
-              hide-details,
-              :indeterminate="isDisabled(feature.name)",
-              :disabled="isDisabled(feature.name)",
-              :class="$style.checkbox",
-              @click.stop="togglePower(feature.name)"
-            )
-      template(#actions)
-        v-spacer
-        v-btn(color="primary", text, @click="isOpen=false") Done
+    CharacterSheetCastingAddPower(
+      :disabled="this.powersSelected.length >= this.numberPowersKnown",
+      v-bind="{ castingType, maxPowerLevel, powersSelected }",
+      @updatePowers="handleUpdatePowers"
+    )
 </template>
 
 <style lang="scss" module>
   .powersList {
     max-height: 400px;
     overflow-y: scroll;
-  }
-
-  .checkbox {
-    flex: none !important;
-    margin-top: 0 !important;
   }
 </style>

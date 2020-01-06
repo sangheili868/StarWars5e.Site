@@ -209,6 +209,8 @@ export interface RawCharacterType {
     name: string,
     content: string
   }[],
+  customTechPowers: string[],
+  customForcePowers: string[],
   settings: {
     isFixedHitPoints: boolean,
     abilityScoreMethod: AbilityScoreMethodType | string // Added | string to avoid error when importing JSON

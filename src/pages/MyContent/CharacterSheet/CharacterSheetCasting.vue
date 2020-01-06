@@ -4,6 +4,7 @@
   import CharacterSheetModifier from './CharacterSheetModifier.vue'
   import CharacterSheetTweaker from './CharacterSheetTweaker.vue'
   import CharacterSheetExpansionFeatures from './CharacterSheetExpansionFeatures.vue'
+  import CharacterSheetCastingAddPower from './CharacterSheetCastingAddPower.vue'
   import { groupBy } from 'lodash'
   import CharacterSheetTicker from './CharacterSheetTicker.vue'
   import CheckList from '@/components/CheckList.vue'
@@ -14,12 +15,16 @@
       CharacterSheetModifier,
       CharacterSheetTweaker,
       CharacterSheetExpansionFeatures,
-      CharacterSheetTicker
+      CharacterSheetTicker,
+      CharacterSheetCastingAddPower
     }
   })
   export default class CharacterSheetCasting extends Vue {
     @Prop({ type: [ Boolean, Object ] }) readonly techCasting!: false | TechCastingType
     @Prop({ type: [ Boolean, Object ] }) readonly forceCasting!: false | ForceCastingType
+    @Prop(Array) readonly customTechPowers!: string[]
+    @Prop(Array) readonly customForcePowers!: string[]
+
     groupBy = groupBy
 
     powerLevelText (level: number) {
@@ -38,8 +43,15 @@
 
 <template lang="pug">
   div
-    div(v-if="techCasting").mb-3
+    div.d-flex.justify-space-between.align-center
       h2 Tech Casting
+      CharacterSheetCastingAddPower(
+        icon,
+        castingType="Tech",
+        :powersSelected="customTechPowers"
+        @updatePowers="newPowers => $emit('replaceCharacterProperty', { path: 'customTechPowers', property: newPowers })"
+      )
+    div(v-if="techCasting").mb-3
       div.d-flex.align-center
         CharacterSheetTweaker(
           title="Number of Tech Points",
@@ -84,8 +96,15 @@
         CharacterSheetExpansionFeatures(:features="powers")
       div(v-if="techCasting.powersKnown.length <= 0").mt-5
         div Click Edit Character above to choose tech powers
-    div(v-if="forceCasting")
+    div.d-flex.justify-space-between.align-center
       h2 Force Casting
+      CharacterSheetCastingAddPower(
+        icon,
+        castingType="Force",
+        :powersSelected="customForcePowers"
+        @updatePowers="newPowers => $emit('replaceCharacterProperty', { path: 'customForcePowers', property: newPowers })"
+      )
+    div(v-if="forceCasting")
       div.d-flex.align-center
         CharacterSheetTweaker(
           title="Number of Force Points",

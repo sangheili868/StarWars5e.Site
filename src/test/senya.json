@@ -330,6 +330,8 @@
     }
   ],
   "customFeats": [],
+  "customTechPowers": [],
+  "customForcePowers": [ "Battle Precognition"],
   "settings": {
     "isFixedHitPoints": true,
     "abilityScoreMethod": "Point Buy"

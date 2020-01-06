@@ -64,6 +64,8 @@
   "customLanguages": [],
   "customFeatures": [],
   "customFeats": [],
+  "customTechPowers": [],
+  "customForcePowers": [],
   "settings": {
     "isFixedHitPoints": true,
     "abilityScoreMethod": "Standard Array"

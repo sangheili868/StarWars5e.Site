@@ -169,5 +169,7 @@ export interface CompleteCharacterType {
     name: string,
     content: string
   }[],
+  customTechPowers: string[],
+  customForcePowers: string[],
   numCustomFeats: number
 }

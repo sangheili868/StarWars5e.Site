@@ -91,6 +91,8 @@ export default function generateCharacter (
     customProficiencies: rawCharacter.customProficiencies,
     customLanguages: rawCharacter.customLanguages,
     customFeatures: rawCharacter.customFeatures,
+    customTechPowers: rawCharacter.customTechPowers,
+    customForcePowers: rawCharacter.customForcePowers,
     numCustomFeats: rawCharacter.customFeats.length,
     currentLevel,
     classes: rawCharacter.classes.map(({ name, levels, archetype }) => ({ name, levels, archetype: archetype && archetype.name })),

@@ -38,6 +38,24 @@
     handleChangeForcePoints (forcePointsUsed: number) {
       this.$emit('updateCharacter', { currentStats: { forcePointsUsed } })
     }
+
+    castTechPower (powerLevel: string) {
+      if (this.techCasting) {
+        this.handleChangeTechPoints(Math.min(
+          this.techCasting.maxPoints,
+          this.techCasting.pointsUsed + parseInt(powerLevel) + 1
+        ))
+      }
+    }
+
+    castForcePower (powerLevel: string) {
+      if (this.forceCasting) {
+        this.handleChangeForcePoints(Math.min(
+          this.forceCasting.maxPoints,
+          this.forceCasting.pointsUsed + parseInt(powerLevel) + 1
+        ))
+      }
+    }
   }
 </script>
 
@@ -58,7 +76,9 @@
           :tweakPaths="[{ name: 'Number of Tech Points', path: 'techCasting.maxPoints' }]",
           @replaceCharacterProperty="payload => $emit('replaceCharacterProperty', payload)"
         )
-          h4 Tech Points
+          div.d-flex
+            h4 Tech Points
+            div(v-if="techCasting.maxPoints === 0").caption.ml-3 None
         CharacterSheetTicker(
           v-if="techCasting.maxPoints > 10",
           :current="Math.max(0, techCasting.maxPoints - techCasting.pointsUsed)",
@@ -92,7 +112,15 @@
         @replaceCharacterProperty="payload => $emit('replaceCharacterProperty', payload)"
       )
       div(v-for="(powers, level) in groupBy(techCasting.powersKnown, 'level')", :key="level")
-        h3.mt-2 {{ powerLevelText(level) }}
+        h3.mt-2.d-flex.justify-space-between.align-end {{ powerLevelText(level) }}
+          v-btn(
+            v-if="level > 0",
+            :disabled="level >= techCasting.maxPoints - techCasting.pointsUsed",
+            color="primary",
+            small,
+            rounded,
+            @click.stop="castTechPower(level)"
+          ).ma-1 Cast
         CharacterSheetExpansionFeatures(:features="powers")
       div(v-if="techCasting.powersKnown.length <= 0").mt-5
         div Click Edit Character above to choose tech powers
@@ -111,7 +139,9 @@
           :tweakPaths="[{ name: 'Number of Force Points', path: 'forceCasting.maxPoints' }]",
           @replaceCharacterProperty="payload => $emit('replaceCharacterProperty', payload)"
         )
-          h4 Force Points
+          div.d-flex
+            h4 Force Points
+            div(v-if="forceCasting.maxPoints === 0").caption.ml-3 None
         CharacterSheetTicker(
           v-if="forceCasting.maxPoints > 10",
           :current="Math.max(0, forceCasting.maxPoints - forceCasting.pointsUsed)",
@@ -171,7 +201,15 @@
         @replaceCharacterProperty="payload => $emit('replaceCharacterProperty', payload)"
       )
       div(v-for="(powers, level) in groupBy(forceCasting.powersKnown, 'level')", :key="level")
-        h3.mt-2 {{ powerLevelText(level) }}
+        h3.mt-2.d-flex.justify-space-between.align-end {{ powerLevelText(level) }}
+          v-btn(
+            v-if="level > 0",
+            :disabled="level >= forceCasting.maxPoints - forceCasting.pointsUsed",
+            color="primary",
+            small,
+            rounded,
+            @click.stop="castForcePower(level)"
+          ).ma-1 Cast
         CharacterSheetExpansionFeatures(:features="powers")
       div(v-if="forceCasting.powersKnown.length <= 0").mt-3
         v-btn(color="primary", @click="$emit('goToStep', 2)") Choose Powers

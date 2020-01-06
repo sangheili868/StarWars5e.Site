@@ -33,13 +33,14 @@
     isExpertise = false
     chosenCategory = ''
     newProficiency = ''
+    toolCategories = ['Tool', 'MusicalInstrument', 'Kit', 'GamingSet']
 
     created () {
       this.fetchSkills()
       this.fetchEquipment()
     }
 
-    get allProficiencies () {
+    get allProficiencies (): { [category: string]: string[] } {
       return {
         Weapons: [
           'Simple Vibroweapons',
@@ -51,21 +52,12 @@
           ...this.equipment.filter(({ equipmentCategory }) => equipmentCategory === 'Weapon').map(({ name }) => name)
         ],
         ...chain(this.equipment)
-          .filter(({ equipmentCategory }) => ['Tool', 'MusicalInstrument', 'Kit', 'GamingSet'].includes(equipmentCategory))
+          .filter(({ equipmentCategory }) => this.toolCategories.includes(equipmentCategory))
           .groupBy('equipmentCategory')
           .mapValues(items => items.map(({ name }) => name))
           .mapKeys((list, key) => startCase(key))
           .value(),
-        Armor: ['Light Armor', 'Medium Armor', 'Heavy Armor'],
-        'Saving Throws': [
-          'Dexterity Saving Throws',
-          'Wisdom Saving Throws',
-          'Constitution Saving Throws',
-          'Strength Saving Throws',
-          'Charisma Saving Throws',
-          'Intelligence Saving Throws'
-        ],
-        Skills: this.skills.map(({ name }) => name)
+        Armor: ['Light Armor', 'Medium Armor', 'Heavy Armor']
       }
     }
 
@@ -85,8 +77,8 @@
       return this.chosenCategory ? this.customProficiencyList[this.chosenCategory] : Object.values(this.customProficiencyList).flat()
     }
 
-    get isSkill () {
-      return this.allProficiencies.Skills.includes(this.newProficiency)
+    get isTool () {
+      return this.toolCategories.some(category => this.allProficiencies[startCase(category)].includes(this.newProficiency))
     }
 
     resetValues () {
@@ -131,6 +123,7 @@
             v-model="chosenCategory",
             :items="proficiencyCategories",
             label="Filter by Category",
+            clearable,
             @change="newProficiency=''; isExpertise = false"
           )
           v-combobox(
@@ -144,7 +137,7 @@
               v-list-item
                 v-list-item-content
                   v-list-item-title No proficiencies matching "#[strong {{ newProficiency }} ]". Press #[kbd tab] to create a custom one
-          v-checkbox(v-if="isSkill", v-model="isExpertise", color="primary", label="Expertise")
+          v-checkbox(v-if="isTool", v-model="isExpertise", color="primary", label="Expertise")
         template(#actions)
           v-btn(color="primary", :disabled="!newProficiency", @click="handleAddProficiency") Add {{ newProficiency }}
           v-spacer

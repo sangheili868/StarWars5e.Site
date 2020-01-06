@@ -26,6 +26,10 @@
       return this.validate && !this.validate(this.workingValue)
     }
 
+    get source () {
+      return this.label ? `**${this.label}:** ${this.value}` : this.value
+    }
+
     handleOpen () {
       this.isEditingStateful = true
       this.workingValue = this.value
@@ -48,9 +52,8 @@
 <template lang="pug">
   div(v-if="!isActuallyEditing").text-wrap
     div.d-flex.justify-space-between
-      div
-        strong(v-if="label").pr-1 {{ label }}:
-        VueMarkdown(v-if="value", :source="value")
+      div.d-flex
+        VueMarkdown(v-if="source", :source="source").textEditorMarkdown
         span(v-else).grey--text {{ placeholder}}
       v-btn(v-if="hasOwnState", icon, @click="handleOpen")
         v-icon fa-edit
@@ -62,3 +65,9 @@
       v-btn(icon, @click="handleClose")
         v-icon fa-times
 </template>
+
+<style lang="scss">
+  .textEditorMarkdown p {
+    margin-bottom: 0;
+  }
+</style>

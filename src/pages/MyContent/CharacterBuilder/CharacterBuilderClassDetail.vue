@@ -23,7 +23,7 @@
 
 <template lang="pug">
   div.text-left
-    MyDialog(v-model="isClassOpen")
+    MyDialog(v-model="isClassOpen", wide)
       template(v-slot:activator="{ on }")
         v-btn(v-on="on") View Class Details
       template(#title) {{ classData.name }}
@@ -32,7 +32,7 @@
       template(#actions)
         v-spacer
         v-btn(color="primary", text, @click="isClassOpen=false") Close
-    MyDialog(v-if="archetypeName", v-model="isArchetypeOpen").ml-3
+    MyDialog(v-if="archetypeName", v-model="isArchetypeOpen", wide).ml-3
       template(v-slot:activator="{ on }")
         v-btn(v-on="on") View Archetype Details
       template(#title) {{ archetypeName }}

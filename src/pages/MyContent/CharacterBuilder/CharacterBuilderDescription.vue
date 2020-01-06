@@ -7,6 +7,7 @@
   import CharactersBackgroundDetail from '@/pages/Characters/CharactersBackgroundDetail.vue'
   import { chain } from 'lodash'
   import MySelect from '@/components/MySelect.vue'
+  import MyDialog from '@/components/MyDialog.vue'
 
   const featModule = namespace('feats')
 
@@ -14,7 +15,8 @@
     components: {
       CharactersBackgroundDetail,
       VueMarkdown,
-      MySelect
+      MySelect,
+      MyDialog
     }
   })
   export default class CharacterBuilderDescription extends Vue {
@@ -26,6 +28,8 @@
 
     @featModule.State feats!: FeatType[]
     @featModule.Action fetchFeats!: () => void
+
+    isOpen = false
 
     created () {
       this.fetchFeats()
@@ -125,12 +129,22 @@
       label="Choose an Alignment",
       @change="newAlignment => handleChangeCharacteristic('alignment', newAlignment)"
     )
-    v-autocomplete(
-      :value="currentBackground.name",
-      :items="backgroundChoices",
-      label="Choose a background",
-      @change="handleChangeBackground"
-    )
+    div.d-flex.align-center
+      v-autocomplete(
+        :value="currentBackground.name",
+        :items="backgroundChoices",
+        label="Choose a background",
+        @change="handleChangeBackground"
+      )
+      MyDialog(v-if="currentBackground.name", v-model="isOpen", wide)
+        template(v-slot:activator="{ on }")
+          v-btn(v-on="on").ml-3 View Background Details
+        template(#title) {{ currentBackground.name }}
+        template(#text)
+          CharactersBackgroundDetail(:backgroundName="currentBackground.name", isHidingBack).mt-3
+        template(#actions)
+          v-spacer
+          v-btn(color="primary", text, @click="isOpen=false") Close
     MySelect(
       v-if="chosenBackground",
       :value="currentBackground.feat.name",

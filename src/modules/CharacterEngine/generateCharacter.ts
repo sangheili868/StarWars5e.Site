@@ -70,7 +70,7 @@ export default function generateCharacter (
   const myBackground = backgrounds.find(({ name }) => name === rawCharacter.background.name)
   if (!myBackground) console.error('Background not found: ', rawCharacter.background.name)
   const casting = generateCasting(rawCharacter, abilityScores, powers, proficiencyBonus, myFoundClasses, myArchetypes)
-  const superiority = generateSuperiorty(rawCharacter, abilityScores, proficiencyBonus, maneuvers)
+  const superiority = generateSuperiorty(rawCharacter, myFoundClasses, myArchetypes, abilityScores, proficiencyBonus, maneuvers)
   const features = generateFeatures(
     rawCharacter,
     classFeatures,

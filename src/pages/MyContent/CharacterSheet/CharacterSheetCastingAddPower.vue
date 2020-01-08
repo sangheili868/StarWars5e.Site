@@ -28,6 +28,7 @@
 
     isOpen = false
     levelFilter = 0
+    alignmentFilter: string[] = []
     range = range
 
     created () {
@@ -36,8 +37,9 @@
 
     get filteredPowers () {
       return chain(this.powers)
-        .filter(({ level, powerType, name }) =>
+        .filter(({ level, powerType, name, forceAlignment }: PowerType) =>
           level <= this.maxPowerLevel &&
+          (!this.alignmentFilter.length || this.alignmentFilter.includes(forceAlignment)) &&
           powerType === this.castingType
         )
         .groupBy('level')
@@ -67,6 +69,14 @@
     template(#title) Choose {{ castingType }} Powers
     template(#text)
       MySelect(v-model="levelFilter", :items="range(0, maxPowerLevel + 1)", label="Filter by Level").mt-3
+      MySelect(
+        v-if="castingType === 'Force'",
+        v-model="alignmentFilter",
+        :items="['Light', 'Universal', 'Dark']",
+        multiple,
+        clearable,
+        label="Filter by Alignment"
+      ).mt-3
       CharacterSheetExpansionFeatures(:features="filteredPowers[levelFilter]", isShowingLevel).text-left
         template(v-slot="{ feature }")
           v-checkbox(

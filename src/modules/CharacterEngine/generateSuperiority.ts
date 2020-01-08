@@ -19,6 +19,38 @@ function getArchetypeField (archetypeData: ArchetypeType, level: number, field: 
   return get(archetypeData, `leveledTable.${level}.${fieldIndex}.value`) as (string | undefined) || '0'
 }
 
+function getMulticlassDice (
+  rawCharacter: RawCharacterType,
+  myClasses: ClassType[],
+  myArchetypes: ArchetypeType[],
+  initialClass: string
+) {
+  return chain(rawCharacter.classes)
+    .filter(multiclassClass =>
+      isSuperiorityClass(multiclassClass) &&
+      multiclassClass.name !== initialClass
+    )
+    .reduce((sum, multiclassClass) => {
+      const classData = myClasses.find(({ name }) => name === multiclassClass.name)
+      const classGains = (classData ? chain(classData.levelChanges)
+        .map('Superiority Dice')
+        .slice(0, multiclassClass.levels)
+        .filter((level: string) => parseInt(level) > 0)
+        .uniq()
+        .value()
+        .length : 0)
+      const archetypeData = myArchetypes.find(({ name }) => name === get(multiclassClass, 'archetype.name'))
+      const archetypeGains = (archetypeData ? chain(archetypeData.leveledTable)
+        .pickBy((fields, level) => parseInt(level) <= multiclassClass.levels)
+        .map(fields => fields[1].value)
+        .uniq()
+        .value()
+        .length : 0)
+      return sum + classGains + archetypeGains
+    }, 0)
+    .value()
+}
+
 function getSuperiorityValues (
   rawCharacter: RawCharacterType,
   myClasses: ClassType[],
@@ -33,7 +65,7 @@ function getSuperiorityValues (
   const classData = myClasses.find(({ name }) => name === completeClass.name)
   if (!classData) return false
   const archetypeData = myArchetypes.find(({ name }) => name === get(completeClass, 'archetype.name'))
-  const multiclassDice = Math.max(0, rawCharacter.classes.filter(isSuperiorityClass).length - 1)
+  const multiclassDice = getMulticlassDice(rawCharacter, myClasses, myArchetypes, completeClass.name)
 
   switch (completeClass.name) {
     case 'Fighter':

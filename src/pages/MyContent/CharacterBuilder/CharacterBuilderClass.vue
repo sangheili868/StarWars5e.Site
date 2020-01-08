@@ -1,7 +1,7 @@
 <script lang="ts">
   import { Component, Prop, Vue } from 'vue-property-decorator'
   import { namespace } from 'vuex-class'
-  import { chain, range, merge, omit } from 'lodash'
+  import { chain, range, merge, omit, set } from 'lodash'
   import { ClassType, ArchetypeType } from '@/types/characterTypes'
   import { RawClassType, RawASIType, RawCharacterType } from '@/types/rawCharacterTypes'
   import { CharacterAdvancementType } from '@/types/lookupTypes'
@@ -123,10 +123,13 @@
     handleDeleteClass () {
       const advancement = this.characterAdvancements.find(({ level }) => level === this.totalOtherClassesLevels)
       const experiencePoints = advancement ? advancement.experiencePoints : 0
+      let newClasses = Object.values(omit(this.character.classes, this.index))
+      // Starting class changed, so use its max hit points for level 1
+      if (this.index === 0 && newClasses.length) newClasses[0].hitPoints = newClasses[0].hitPoints.slice(1)
       this.$emit('replaceCharacterProperties', [
         {
           path: 'classes',
-          property: Object.values(omit(this.character.classes, this.index))
+          property: newClasses
         },
         { path: 'experiencePoints', property: experiencePoints }
       ])

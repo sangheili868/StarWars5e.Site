@@ -48,6 +48,10 @@
       }
     }
 
+    updateProficiency (newValue: string | null, path: string) {
+      vueSetPath(this.myTweaks, `${path}.proficiency`, newValue)
+    }
+
     handleSave () {
       this.$emit('replaceCharacterProperty', { path: this.rootPath, property: this.myTweaks })
       this.isOpen = false
@@ -62,41 +66,48 @@
         slot
     template(#title) Tweak {{ title }}
     template(#text)
-      v-container
-        v-row(v-for="({ name, path, type, rootPath }) in tweakPaths", :key="path").d-flex
-          v-col(cols="4").pa-0.d-flex.align-center
-            h5 {{ name }}
-          v-col(v-if="type === 'dice'", cols="8").pa-0
-            v-select(
-              :value="myGet(myTweaks, path + '.dieSize')"
+      div(v-for="({ name, path, type, rootPath }) in tweakPaths", :key="path").d-flex.align-center
+        h5(:class="$style.label") {{ name }}
+        v-select(
+          v-if="type === 'dice'",
+          :value="myGet(myTweaks, path + '.dieSize')"
+          outlined,
+          :items="diceSizes",
+          hide-details,
+          clearable,
+          label="Dice Size",
+          @input="newValue => updateTweak(newValue, 'dieSize', path, rootPath)"
+        ).pa-1
+        div(v-else)
+          div.d-flex
+            v-text-field(
+              :value="myGet(myTweaks, path + '.bonus')"
               outlined,
-              :items="diceSizes",
+              type="number",
               hide-details,
               clearable,
-              label="Dice Size",
-              @input="newValue => updateTweak(newValue, 'dieSize', path, rootPath)"
+              label="Bonus",
+              @input="newValue => updateTweak(newValue, 'bonus', path)"
             ).pa-1
-          template(v-else)
-            v-col(cols="4").pa-0
-              v-text-field(
-                :value="myGet(myTweaks, path + '.bonus')"
-                outlined,
-                type="number",
-                hide-details,
-                clearable,
-                label="Bonus",
-                @input="newValue => updateTweak(newValue, 'bonus', path)"
-              ).pa-1
-            v-col(cols="4").pa-0
-              v-text-field(
-                :value="myGet(myTweaks, path + '.override')"
-                outlined,
-                type="number",
-                hide-details,
-                clearable,
-                label="Override",
-                @input="newValue => updateTweak(newValue, 'override', path)"
-              ).pa-1
+            v-text-field(
+              :value="myGet(myTweaks, path + '.override')"
+              outlined,
+              type="number",
+              hide-details,
+              clearable,
+              label="Override",
+              @input="newValue => updateTweak(newValue, 'override', path)"
+            ).pa-1
+          div(v-if="type === 'proficiency'")
+            v-select(
+              :value="myGet(myTweaks, path + '.proficiency')",
+              :items="[ 'Expertise', 'Proficient' ]",
+              outlined,
+              hide-details,
+              clearable,
+              label="Proficiency Level",
+              @input="newValue => updateProficiency(newValue, path)"
+            ).pa-1
     template(#actions)
       v-btn(color="primary", @click="handleSave") Save
       v-spacer
@@ -113,5 +124,9 @@
     &:hover {
       background-color: $lightGrey;
     }
+  }
+
+  .label {
+    min-width: 130px;
   }
 </style>

@@ -20,10 +20,6 @@ export interface RawFeatType {
 
 export interface RawArchetypeType {
   name: string,
-  silverTongue?: {
-    language: string,
-    intSkillBonus: string
-  },
   forcePowers?: string[],
   techPowers?: string[],
   maneuvers?: string[]
@@ -90,7 +86,7 @@ export interface EquipmentTweakType {
 export interface TweakPathType {
   name: string,
   path: string,
-  type?: 'dice'
+  type?: 'dice' | 'proficiency'
 }
 
 export interface RawEquipmentType {
@@ -104,7 +100,7 @@ export interface TweakType {
   override?: number,
   bonus?: number,
   dieSize?: number,
-  proficiency?: 'proficient' | 'expertise'
+  proficiency?: 'Proficient' | 'Expertise' | null
 }
 
 export interface TweaksType {
@@ -169,6 +165,13 @@ export interface CustomProficiencyType {
 
 export type AbilityScoreMethodType = 'Standard Array' | 'Point Buy' | 'Manual'
 
+export interface HighLevelCastingType {
+  level6: boolean,
+  level7: boolean,
+  level8: boolean,
+  level9: boolean
+}
+
 export interface RawCharacterType {
   name: string,
   image: string,
@@ -203,7 +206,8 @@ export interface RawCharacterType {
       [feature: string]: number
     },
     conditions: string[],
-    exhaustion: number
+    exhaustion: number,
+    highLevelCasting: HighLevelCastingType
   },
   tweaks: TweaksType,
   customLanguages: string[],
@@ -213,6 +217,8 @@ export interface RawCharacterType {
     name: string,
     content: string
   }[],
+  customTechPowers: string[],
+  customForcePowers: string[],
   settings: {
     isFixedHitPoints: boolean,
     abilityScoreMethod: AbilityScoreMethodType | string // Added | string to avoid error when importing JSON

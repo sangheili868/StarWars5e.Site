@@ -100,6 +100,10 @@
       return isEmpty(this.character) || isEqual(this.character, baseCharacter)
     }
 
+    get title () {
+      return (this.character.name || 'Characters') + Vue.prototype.$titleSuffix
+    }
+
     goToStep (step: number) {
       this.isEditing = true
       this.currentStep = step
@@ -121,6 +125,7 @@
 
 <template lang="pug">
   div(v-if="hasFetchedData")
+    vue-headful(:title="title")
     v-banner(
       :value="isDirty",
       sticky,

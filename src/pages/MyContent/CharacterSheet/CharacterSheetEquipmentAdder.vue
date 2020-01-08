@@ -9,10 +9,10 @@
   const equipmentModule = namespace('equipment')
 
   @Component({
-    components: ({
+    components: {
       MyDialog,
       MySelect
-    })
+    }
   })
   export default class CharacterSheetEquipmentAdder extends Vue {
     @Prop(Number) readonly position!: number

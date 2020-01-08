@@ -64,6 +64,7 @@ export default function generateHitPoints (
     hitDiceRestored,
     techPointsUsed: rawCharacter.currentStats.techPointsUsed,
     forcePointsUsed: rawCharacter.currentStats.forcePointsUsed,
+    highLevelCasting: rawCharacter.currentStats.highLevelCasting,
     shortRestFeatures: featuresWithUsage.filter(({ usage }) => usage && usage.recharge === 'shortRest').map(({ name }) => name),
     longRestFeatures: featuresWithUsage.map(({ name }) => name)
   }

@@ -10,11 +10,11 @@
   const conditionsModule = namespace('conditions')
 
   @Component({
-    components: ({
+    components: {
       MyDialog,
       VueMarkdown,
       MySelect
-    })
+    }
   })
   export default class CharacterSheetConditions extends Vue {
     @Prop(Array) readonly myConditions!: ConditionType[]

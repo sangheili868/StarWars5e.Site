@@ -199,7 +199,42 @@
         "skills": {
           "Persuasion": {
             "bonus": 4,
-            "override": null
+            "override": null,
+            "proficiency": "Expertise"
+          }
+        }
+      },
+      "Intelligence": {
+        "skills": {
+          "Investigation": {
+            "proficiency": "Proficient"
+          },
+          "Piloting": {
+            "proficiency": "Proficient"
+          }
+        },
+        "score": {
+          "bonus": 1,
+          "override": null
+        }
+      },
+      "Wisdom": {
+        "skills": {
+          "Medicine": {
+            "proficiency": "Proficient"
+          },
+          "Survival": {
+            "proficiency": "Proficient"
+          },
+          "Animal Handling": {
+            "proficiency": "Proficient"
+          }
+        }
+      },
+      "Strength": {
+        "skills": {
+          "Athletics": {
+            "proficiency": "Expertise"
           }
         }
       }
@@ -219,40 +254,12 @@
       "proficiencyLevel": "proficient"
     },
     {
-      "name": "Investigation",
-      "proficiencyLevel": "proficient"
-    },
-    {
-      "name": "Medicine",
-      "proficiencyLevel": "proficient"
-    },
-    {
-      "name": "Survival",
-      "proficiencyLevel": "proficient"
-    },
-    {
-      "name": "Animal Handling",
-      "proficiencyLevel": "proficient"
-    },
-    {
       "name": "Heavy Armor",
-      "proficiencyLevel": "proficient"
-    },
-    {
-      "name": "Piloting",
       "proficiencyLevel": "proficient"
     },
     {
       "name": "Carpenter's Kit",
       "proficiencyLevel": "proficient"
-    },
-    {
-      "name": "Persuasion",
-      "proficiencyLevel": "expertise"
-    },
-    {
-      "name": "Athletics",
-      "proficiencyLevel": "expertise"
     }
   ],
   "customLanguages": [
@@ -322,6 +329,9 @@
       "content": "You are skilled at using your shield to defend your allies as well as yourself. While you are wielding a medium or heavy shield with which you are proficient, you gain the following benefits:\r\n- When a creature you can see attacks a target other than you that is within 5 feet of you, you can use your reaction to impose disadvantage on the attack roll.\r\n- If you are wielding a heavy shield, you are no longer required to wield a weapon with the *light* property in the other hand."
     }
   ],
+  "customFeats": [],
+  "customTechPowers": [],
+  "customForcePowers": [ "Battle Precognition"],
   "settings": {
     "isFixedHitPoints": true,
     "abilityScoreMethod": "Point Buy"

@@ -5,7 +5,6 @@ export default function generateLanguages (rawCharacter: RawCharacterType) {
   return compact([
     'Galactic Basic',
     rawCharacter.species.language,
-    ...(rawCharacter.background.languages || []),
-    ...rawCharacter.classes.map(({ archetype }) => get(archetype, 'silverTongue.language'))
+    ...(rawCharacter.background.languages || [])
   ])
 }

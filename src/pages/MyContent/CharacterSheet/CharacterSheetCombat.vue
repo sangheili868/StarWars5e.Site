@@ -93,8 +93,8 @@
         v-btn(icon, color="primary")
           v-icon fa-edit
     CharacterSheetWeapon(
-      v-for="weapon in weapons",
-      :key="weapon.name",
+      v-for="(weapon, index) in weapons",
+      :key="index",
       v-bind="{ weapon }",
       @replaceCharacterProperty="payload => $emit('replaceCharacterProperty', payload)"
     )

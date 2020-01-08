@@ -57,13 +57,21 @@
     "hasInspiration": false,
     "featuresTimesUsed": { },
     "conditions": [],
-    "exhaustion": 0
+    "exhaustion": 0,
+    "highLevelCasting": {
+      "level6": false,
+      "level7": false,
+      "level8": false,
+      "level9": false
+    }
   },
   "tweaks": {},
   "customProficiencies": [],
   "customLanguages": [],
   "customFeatures": [],
   "customFeats": [],
+  "customTechPowers": [],
+  "customForcePowers": [],
   "settings": {
     "isFixedHitPoints": true,
     "abilityScoreMethod": "Standard Array"

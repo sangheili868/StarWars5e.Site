@@ -1,4 +1,4 @@
-import { RawCharacterType } from '@/types/rawCharacterTypes'
+import { RawCharacterType, HighLevelCastingType } from '@/types/rawCharacterTypes'
 import { AbilityScoresType, TechCastingType, ForceCastingType } from '@/types/completeCharacterTypes'
 import { PowerType, ClassType, ArchetypeType } from '@/types/characterTypes'
 import { chain, concat, get, lowerCase, filter } from 'lodash'
@@ -93,7 +93,11 @@ export default function generateCasting (
   proficiencyBonus: number,
   myClasses: ClassType[],
   myArchetypes: ArchetypeType[]
-): { techCasting: false | TechCastingType, forceCasting: false | ForceCastingType } {
+): {
+  techCasting: false | TechCastingType,
+  forceCasting: false | ForceCastingType,
+  highLevelCasting: HighLevelCastingType
+} {
   const techCastingBonus = abilityScores.Intelligence.modifier
   const techCastingLevel = getCastingLevel(rawCharacter, myClasses, myArchetypes, 'Tech')
   const techCasting = {
@@ -129,6 +133,7 @@ export default function generateCasting (
   const hasForceCasting = forceCastingLevel > 0 || forceCasting.powersKnown.length > 0
 
   return {
+    highLevelCasting: rawCharacter.currentStats.highLevelCasting,
     techCasting: hasTechCasting && techCasting,
     forceCasting: hasForceCasting && forceCasting
   }

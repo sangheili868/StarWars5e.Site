@@ -57,7 +57,13 @@
     "hasInspiration": false,
     "featuresTimesUsed": { },
     "conditions": [],
-    "exhaustion": 0
+    "exhaustion": 0,
+    "highLevelCasting": {
+      "level6": false,
+      "level7": false,
+      "level8": false,
+      "level9": false
+    }
   },
   "tweaks": {},
   "customProficiencies": [],

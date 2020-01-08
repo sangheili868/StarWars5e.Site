@@ -165,6 +165,13 @@ export interface CustomProficiencyType {
 
 export type AbilityScoreMethodType = 'Standard Array' | 'Point Buy' | 'Manual'
 
+export interface HighLevelCastingType {
+  level6: boolean,
+  level7: boolean,
+  level8: boolean,
+  level9: boolean
+}
+
 export interface RawCharacterType {
   name: string,
   image: string,
@@ -199,7 +206,8 @@ export interface RawCharacterType {
       [feature: string]: number
     },
     conditions: string[],
-    exhaustion: number
+    exhaustion: number,
+    highLevelCasting: HighLevelCastingType
   },
   tweaks: TweaksType,
   customLanguages: string[],

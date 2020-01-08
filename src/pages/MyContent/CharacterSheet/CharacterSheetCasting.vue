@@ -1,11 +1,12 @@
 <script lang="ts">
   import { Component, Prop, Vue } from 'vue-property-decorator'
   import { TechCastingType, ForceCastingType } from '@/types/completeCharacterTypes'
+  import { HighLevelCastingType } from '@/types/rawCharacterTypes'
   import CharacterSheetModifier from './CharacterSheetModifier.vue'
   import CharacterSheetTweaker from './CharacterSheetTweaker.vue'
   import CharacterSheetExpansionFeatures from './CharacterSheetExpansionFeatures.vue'
   import CharacterSheetCastingAddPower from './CharacterSheetCastingAddPower.vue'
-  import { groupBy, startCase, filter } from 'lodash'
+  import { groupBy, startCase, filter, cloneDeep } from 'lodash'
   import CharacterSheetTicker from './CharacterSheetTicker.vue'
   import CheckList from '@/components/CheckList.vue'
 
@@ -22,6 +23,7 @@
   export default class CharacterSheetCasting extends Vue {
     @Prop({ type: [ Boolean, Object ] }) readonly techCasting!: false | TechCastingType
     @Prop({ type: [ Boolean, Object ] }) readonly forceCasting!: false | ForceCastingType
+    @Prop(Object) readonly highLevelCasting!: HighLevelCastingType
     @Prop(Array) readonly customTechPowers!: string[]
     @Prop(Array) readonly customForcePowers!: string[]
 
@@ -41,33 +43,47 @@
       return filter([hasLightPowers && 'light', hasUniversalPowers && 'universal', hasDarkPowers && 'dark'])
     }
 
+    isDisabled (level: number, casting: TechCastingType | ForceCastingType) {
+      const hasNotEnoughPoints = level >= casting.maxPoints - casting.pointsUsed
+      const isAlreadyCastAtHighLevel = (this.highLevelCasting as unknown as { [level: string]: boolean | undefined })['level' + level]
+      return hasNotEnoughPoints || isAlreadyCastAtHighLevel
+    }
+
     powerLevelText (level: number) {
       return level > 0 ? `Level ${level}` : 'At-will'
     }
 
-    handleChangeTechPoints (techPointsUsed: number) {
-      this.$emit('updateCharacter', { currentStats: { techPointsUsed } })
+    handleChangeTechPoints (techPointsUsed: number, highLevelCasting: HighLevelCastingType) {
+      this.$emit('updateCharacter', { currentStats: { techPointsUsed, highLevelCasting } })
     }
 
-    handleChangeForcePoints (forcePointsUsed: number) {
-      this.$emit('updateCharacter', { currentStats: { forcePointsUsed } })
+    handleChangeForcePoints (forcePointsUsed: number, highLevelCasting: HighLevelCastingType) {
+      this.$emit('updateCharacter', { currentStats: { forcePointsUsed, highLevelCasting } })
     }
 
     castTechPower (powerLevel: string) {
+      const highLevelCasting = cloneDeep(this.highLevelCasting)
+      if (parseInt(powerLevel) > 5) {
+        (highLevelCasting as unknown as { [level: string]: boolean | undefined })['level' + powerLevel] = true
+      }
       if (this.techCasting) {
         this.handleChangeTechPoints(Math.min(
           this.techCasting.maxPoints,
           this.techCasting.pointsUsed + parseInt(powerLevel) + 1
-        ))
+        ), highLevelCasting)
       }
     }
 
     castForcePower (powerLevel: string) {
+      const highLevelCasting = cloneDeep(this.highLevelCasting)
+      if (parseInt(powerLevel) > 5) {
+        (highLevelCasting as unknown as { [level: string]: boolean | undefined })['level' + powerLevel] = true
+      }
       if (this.forceCasting) {
         this.handleChangeForcePoints(Math.min(
           this.forceCasting.maxPoints,
           this.forceCasting.pointsUsed + parseInt(powerLevel) + 1
-        ))
+        ), highLevelCasting)
       }
     }
   }
@@ -129,12 +145,13 @@
         h3.mt-2.d-flex.justify-space-between.align-end {{ powerLevelText(level) }}
           v-btn(
             v-if="level > 0",
-            :disabled="level >= techCasting.maxPoints - techCasting.pointsUsed",
+            :disabled="isDisabled(level, techCasting)"
             color="primary",
             small,
             rounded,
             @click.stop="castTechPower(level)"
           ).ma-1 Cast
+            span(v-if="level > 5") (1/long rest)
         CharacterSheetExpansionFeatures(:features="powers")
       div(v-if="techCasting.powersKnown.length <= 0").mt-5
         div Click Edit Character above to choose tech powers
@@ -261,12 +278,13 @@
         h3.mt-2.d-flex.justify-space-between.align-end {{ powerLevelText(level) }}
           v-btn(
             v-if="level > 0",
-            :disabled="level >= forceCasting.maxPoints - forceCasting.pointsUsed",
+            :disabled="isDisabled(level, forceCasting)"
             color="primary",
             small,
             rounded,
             @click.stop="castForcePower(level)"
           ).ma-1 Cast
+            span(v-if="level > 5") (1/long rest)
         CharacterSheetExpansionFeatures(:features="powers")
       div(v-if="forceCasting.powersKnown.length <= 0").mt-3
         v-btn(color="primary", @click="$emit('goToStep', 2)") Choose Powers

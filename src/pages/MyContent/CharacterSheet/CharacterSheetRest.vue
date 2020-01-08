@@ -88,7 +88,13 @@
         forcePointsUsed: 0,
         superiorityDiceUsed: 0,
         hitDiceUsed,
-        featuresTimesUsed
+        featuresTimesUsed,
+        highLevelCasting: {
+          level6: false,
+          level7: false,
+          level8: false,
+          level9: false
+        }
       } })
     }
 
@@ -137,9 +143,11 @@
           div In total, you will regain {{ pluralize(totalHealing, 'hit point') }}.
         div(v-else)
           div(v-if="hitPoints.resting.techPointsUsed") You will regain {{ pluralize(hitPoints.resting.techPointsUsed, 'tech point') }}.
-          div(v-if="hitPoints.resting.forcePointsUsed") You will regain {{ pluralize(hitPoints.resting.forcePointsUsed, 'tech point') }}.
+          div(v-if="hitPoints.resting.forcePointsUsed") You will regain {{ pluralize(hitPoints.resting.forcePointsUsed, 'force point') }}.
           div(v-if="hitPoints.current < hitPoints.maximum") You will regain {{ pluralize(hitPoints.maximum - hitPoints.current, 'hit point') }}.
           div(v-if="hitPoints.temporary") You will lose your {{ pluralize(hitPoints.temporary, 'temporary hit point') }}.
+          div(v-for="(isUsed, level) in hitPoints.resting.highLevelCasting", :key="level")
+            div(v-if="isUsed") You will regain the ability to cast a level {{ level.slice(5) }} power.
           div(v-if="hitPoints.resting.longRestFeatures.length")
             div The following features will have their uses restored:
             ul

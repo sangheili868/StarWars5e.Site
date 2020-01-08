@@ -1,6 +1,6 @@
 import { PowerType } from '@/types/characterTypes'
 import { EquipmentType } from '@/types/lootTypes'
-import { TweaksType, CustomProficiencyType } from './rawCharacterTypes'
+import { TweaksType, CustomProficiencyType, HighLevelCastingType } from './rawCharacterTypes'
 import { ConditionType } from './lookupTypes'
 
 export interface AbilityScoreType {
@@ -39,6 +39,7 @@ export interface HitPointsType {
     }[],
     shortRestFeatures: string[],
     longRestFeatures: string[],
+    highLevelCasting: HighLevelCastingType,
     techPointsUsed: number,
     forcePointsUsed: number
   }
@@ -159,6 +160,7 @@ export interface CompleteCharacterType {
   },
   superiority: false | SuperiorityType,
   techCasting: false | TechCastingType,
+  highLevelCasting: HighLevelCastingType,
   forceCasting: false | ForceCastingType,
   combatFeatures: CompletedFeatureType[],
   nonCombatFeatures: CompletedFeatureType[],

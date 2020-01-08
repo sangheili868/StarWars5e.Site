@@ -93,8 +93,7 @@ export default class MonsterDescription extends Vue {
         v-btn(v-if="!isAtDetail", text, icon, color="secondary")
           v-icon fa-external-link-alt
     hr
-    div(:class="[ $style.sectionFlavorText, { [$style.darkSide]: isDark } ]") {{monster.sectionText}}
-    div(:class="[ $style.monsterFlavorText, { [$style.darkSide]: isDark } ]") {{monster.flavorText}}
+    p(:class="[ $style.flavorText, { [$style.darkSide]: isDark } ]") {{(monster.sectionText + '\n\n' + monster.flavorText).trim()}}
     i {{ monster.size }} {{ monster.types.join(', ')}}, {{ monster.alignment }}
 
     hr.mt-2
@@ -151,28 +150,14 @@ export default class MonsterDescription extends Vue {
   justify-content: flex-start;
 }
 
-.sectionFlavorText {
+.flavorText {
   display: flex;
   margin-right: 48px;
   margin-top: 12px;
   margin-bottom: 12px;
   justify-content: flex-start;
   font-style: italic;
-
-  border-top: 1px rgba($color: #000, $alpha: 0.25) solid;
-
-  &.darkSide {
-    border-top: 1px rgba($color: #fff, $alpha: 0.25) solid;
-  }
-}
-
-.monsterFlavorText {
-  display: flex;
-  margin-right: 48px;
-  margin-top: 12px;
-  margin-bottom: 12px;
-  justify-content: flex-start;
-  font-style: italic;
+  white-space: pre-line;
 
   border-bottom: 1px rgba($color: #000, $alpha: 0.25) solid;
 

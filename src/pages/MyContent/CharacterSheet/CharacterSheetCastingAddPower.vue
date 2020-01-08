@@ -42,6 +42,7 @@
           (!this.alignmentFilter.length || this.alignmentFilter.includes(forceAlignment)) &&
           powerType === this.castingType
         )
+        .sortBy(({ name }) => !this.powersSelected.includes(name))
         .groupBy('level')
         .value()
     }

@@ -92,10 +92,11 @@ export default class MonsterDescription extends Vue {
       a(:href="`/rules/monsters/monsters/${monster.name}`", target="_blank")
         v-btn(v-if="!isAtDetail", text, icon, color="secondary")
           v-icon fa-external-link-alt
-    i {{ monster.size }} {{ monster.types.join(', ')}}, {{ monster.alignment }}
     hr
     div(:class="[ $style.sectionFlavorText, { [$style.darkSide]: isDark } ]") {{monster.sectionText}}
     div(:class="[ $style.monsterFlavorText, { [$style.darkSide]: isDark } ]") {{monster.flavorText}}
+    i {{ monster.size }} {{ monster.types.join(', ')}}, {{ monster.alignment }}
+
     hr.mt-2
     div #[strong Armor Class] {{ monster.armorClass }} ({{ monster.armorType }})
     div #[strong Hit Points] {{ monster.hitPoints }} ({{ monster.hitPointRoll }})
@@ -152,33 +153,31 @@ export default class MonsterDescription extends Vue {
 
 .sectionFlavorText {
   display: flex;
-  margin-left: 48px;
   margin-right: 48px;
   margin-top: 12px;
   margin-bottom: 12px;
   justify-content: flex-start;
   font-style: italic;
 
-  border-top: 1px black solid;
+  border-top: 1px rgba($color: #000, $alpha: 0.25) solid;
 
   &.darkSide {
-    border-top: 1px white solid;
+    border-top: 1px rgba($color: #fff, $alpha: 0.25) solid;
   }
 }
 
 .monsterFlavorText {
   display: flex;
-  margin-left: 50px;
-  margin-right: 50px;
+  margin-right: 48px;
   margin-top: 12px;
   margin-bottom: 12px;
   justify-content: flex-start;
   font-style: italic;
 
-  border-bottom: 1px black solid;
+  border-bottom: 1px rgba($color: #000, $alpha: 0.25) solid;
 
   &.darkSide {
-    border-bottom: 1px white solid;
+    border-bottom: 1px rgba($color: #fff, $alpha: 0.25) solid;
   }
 }
 </style>

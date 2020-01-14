@@ -43,8 +43,8 @@
           text: 'Type',
           value: 'type',
           render: _.startCase,
-          filterChoices: ['Adventuring Gear', 'Armor', 'Consumable', 'Cybernetic Augmentation', 'Droid Customization',
-           'Focus', 'Item Modification', 'Shield', 'Weapon', 'Valuable' ],
+          filterChoices: ['Adventuring Gear', 'Armor', 'Blaster Modification', 'Consumable', 'Cybernetic Augmentation',
+           'Droid Customization', 'Focus', 'Item Modification', 'Shield', 'Weapon', 'Valuable' ],
           filterFunction: ({ type }: EnhancedItemType, filterValue: string) => _.startCase(type) === filterValue
         },
         {
@@ -55,15 +55,9 @@
         {
           text: 'Rarity',
           value: 'rarityText',
-          filterChoices: ['Standard', 'Premium', 'Prototype', 'Advanced', 'Legendary',
-           'Artifact', 'Multiple' ],
+          filterChoices: ['Standard', 'Premium', 'Prototype', 'Advanced', 'Legendary', 'Artifact'],
           render: _.startCase,
           filterFunction: ({ searchableRarity }: EnhancedItemType, filterValue: string) => searchableRarity === filterValue
-        },
-        {
-          text: 'Value',
-          value: 'valueText',
-          sort: (a: string, b: string) => parseInt(a.replace(',', '')) - parseInt(b.replace(',', ''))
         },
         {
           text: 'Attunement',

@@ -43,8 +43,9 @@
           text: 'Type',
           value: 'type',
           render: _.startCase,
-          filterChoices: ['Adventuring Gear', 'Armor', 'Blaster Modification', 'Consumable', 'Cybernetic Augmentation',
-           'Droid Customization', 'Focus', 'Item Modification', 'Shield', 'Weapon', 'Valuable' ],
+          filterChoices: ['Adventuring Gear', 'Armor', 'Armor Modification', 'Blaster Modification', 'Consumable', 'Clothing Modification',
+           'Cybernetic Augmentation', 'Droid Customization', 'Focus', 'Focus Generator Modification', 'Item Modification',
+           'Lightweapon Modification', 'Shield', 'Weapon', 'Wristpad Modification', 'Valuable', 'Vibroweapon Modification' ],
           filterFunction: ({ type }: EnhancedItemType, filterValue: string) => _.startCase(type) === filterValue
         },
         {

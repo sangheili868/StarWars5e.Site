@@ -60,5 +60,6 @@ export interface EnhancedItemType {
   valueOptions: string[],
   valueText: string,
   text: string,
-  subtype: string
+  subtype: string,
+  prerequisite: string
 }

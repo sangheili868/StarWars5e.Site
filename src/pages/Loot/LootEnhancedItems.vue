@@ -61,6 +61,13 @@
           filterFunction: ({ searchableRarity }: EnhancedItemType, filterValue: string) => searchableRarity === filterValue
         },
         {
+          text: 'Prerequisite',
+          value: 'prerequisite',
+          render: (prerequisite: string) => prerequisite ? 'Yes' : 'No',
+          filterChoices: [ 'Yes', 'No' ],
+          filterFunction: ({ prerequisite }: EnhancedItemType, filterValue: string) => (prerequisite ? 'Yes' : 'No') === filterValue
+        },
+        {
           text: 'Attunement',
           value: 'requiresAttunement',
           render: (requiresAttunement: boolean) => requiresAttunement ? 'Yes' : 'No',
@@ -80,5 +87,7 @@
     br
     SearchTable(name="EnhancedItems", v-bind="{ headers, items, initialSearch, tableType }")
       template(v-slot:default="props")
+        i(v-if="props.item.prerequisite")
+          VueMarkdown(:source="'Prerequisite: ' + props.item.prerequisite")
         VueMarkdown(:source="props.item.text")
 </template>

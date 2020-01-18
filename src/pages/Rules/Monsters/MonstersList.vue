@@ -34,11 +34,17 @@
           } else {
             return math.eval(b[sortBy[0]]) < math.eval(a[sortBy[0]]) ? -1 : 1
           }
+        } else if (sortBy[0] === 'types') {
+          if (!sortDesc[0]) {
+            return a[sortBy[0]][0].toLowerCase() < b[sortBy[0]][0].toLowerCase() ? -1 : 1
+          } else {
+            return b[sortBy[0]][0].toLowerCase() < a[sortBy[0]][0].toLowerCase() ? -1 : 1
+          }
         } else {
           if (!sortDesc[0]) {
-            return a[sortBy[0]] < b[sortBy[0]] ? -1 : 1
+            return (a[sortBy[0]]) < (b[sortBy[0]]) ? -1 : 1
           } else {
-            return b[sortBy[0]] < a[sortBy[0]] ? -1 : 1
+            return (b[sortBy[0]]) < (a[sortBy[0]]) ? -1 : 1
           }
         }
       })

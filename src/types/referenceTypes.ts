@@ -14,7 +14,7 @@ export interface MonsterType {
     damage: string,
     damageType: string
   }[],
-  challengeRating: number,
+  challengeRating: string,
   charisma: number,
   charismaModifier: number,
   conditionsImmunitiesOther: string[],

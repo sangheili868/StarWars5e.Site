@@ -26,19 +26,19 @@
       this.fetchMonsters()
     }
 
-    customSort (items: any[], index: string, isDescending: boolean) {
+    customSort (items: any[], sortBy: string[], sortDesc: boolean[]) {
       items.sort((a, b) => {
-        if (index === 'challengeRating') {
-          if (!isDescending) {
-            return math.eval(a[index]) < math.eval(b[index]) ? -1 : 1
+        if (sortBy[0] === 'challengeRating' && parseFloat(a[sortBy[0]]) && parseFloat(b[sortBy[0]])) {
+          if (!sortDesc[0]) {
+            return math.eval(a[sortBy[0]]) < math.eval(b[sortBy[0]]) ? -1 : 1
           } else {
-            return math.eval(b[index]) < math.eval(a[index]) ? -1 : 1
+            return math.eval(b[sortBy[0]]) < math.eval(a[sortBy[0]]) ? -1 : 1
           }
         } else {
-          if (!isDescending) {
-            return a[index] < b[index] ? -1 : 1
+          if (!sortDesc[0]) {
+            return a[sortBy[0]] < b[sortBy[0]] ? -1 : 1
           } else {
-            return b[index] < a[index] ? -1 : 1
+            return b[sortBy[0]] < a[sortBy[0]] ? -1 : 1
           }
         }
       })
@@ -69,7 +69,7 @@
           text: 'Type',
           value: 'types',
           render: (types: string[]) => types.map(_.upperFirst).join(', '),
-          filterChoices: ['Beast', 'Construct', 'Droid', 'Force-wielder', 'Humanoid', 'Swarm'],
+          filterChoices: ['Aberration', 'Beast', 'Construct', 'Droid', 'Elemental', 'Humanoid', 'Plant', 'Swarm', 'Undead'],
           isMultiSelect: true,
           filterFunction: ({ types }: MonsterType, filterValue: string[]) => _.some(filterValue, (filter: string) =>
             _.some(types.map(_.upperFirst), (type: string) => _.includes(type, filter)))
@@ -78,7 +78,7 @@
           text: 'CR',
           value: 'challengeRating',
           filterChoices: ['0', '1/8', '1/4', '1/2', '1', '2', '3', '4', '5', '6', '7', '8', '9', '10',
-          '11', '12', '13', '14', '15', '16', '17', '18', '19'],
+          '11', '12', '13', '14', '15', '16', '17', '18', '19', '20', '21', '23', '24', '25', '26'],
           isMultiSelect: true,
           filterFunction: ({ challengeRating }: MonsterType, filterValue: string[]) => _.some(filterValue, (filter: string) => filter === challengeRating.toString())
         }

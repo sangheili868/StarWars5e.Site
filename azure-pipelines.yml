@@ -9,11 +9,14 @@ trigger:
 pool:
   vmImage: 'Ubuntu-16.04'
 
+variables:
+  keyVault: 'kv-sw5eweb-prod'
+
 steps:
 - task: AzureKeyVault@1
   inputs:
     ConnectedServiceName: 'Azure'
-    KeyVaultName: 'kv-sw5eweb-prod'
+    KeyVaultName: $(keyVault)
 
 - task: YarnInstaller@2
   inputs:

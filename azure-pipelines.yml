@@ -13,7 +13,7 @@ steps:
 - task: AzureKeyVault@1
   inputs:
     ConnectedServiceName: 'Azure'
-    KeyVaultName: 'kv-sw5eweb-dev'
+    KeyVaultName: $(keyVault)
 
 - task: YarnInstaller@2
   inputs:

@@ -50,7 +50,7 @@
         { text: 'AC', value: 'ac' },
         { text: 'Strength', value: 'strengthRequirement' },
         { text: 'Stealth', value: 'stealthDisadvantage', render: (isDisadvantage: boolean) => isDisadvantage ? 'Disadvantage' : '-' },
-        { text: 'Source', value: 'contentType', render: _.startCase }
+        { text: 'Source', value: 'contentSource', render: _.startCase }
       ]
     }
   }

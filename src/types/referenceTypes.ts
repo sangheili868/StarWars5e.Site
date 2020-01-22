@@ -21,6 +21,7 @@ export interface MonsterType {
   conditionsImmunitiesParsed: number[],
   constitution: number,
   constitutionModifier: number,
+  contentSource: string,
   contentType: string,
   damageImmunitiesOther: string[],
   damageImmunitiesParsed: number[],

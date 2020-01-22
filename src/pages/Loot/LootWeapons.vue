@@ -53,10 +53,10 @@
         { text: 'Damage', value: 'damageNumberOfDice', render: this.weaponDamage },
         {
           text: 'Source',
-          value: 'contentType',
+          value: 'contentSource',
           render: _.startCase,
-          filterChoices: ['Core', 'Expanded Content'],
-          filterFunction: ({ contentType }: WeaponType, filterValue: string) => _.startCase(contentType) === filterValue
+          filterChoices: ['PHB', 'EC'],
+          filterFunction: ({ contentSource }: WeaponType, filterValue: string) => _.startCase(contentSource) === filterValue
         }
       ]
     }

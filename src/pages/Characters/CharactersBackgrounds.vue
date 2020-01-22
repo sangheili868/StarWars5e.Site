@@ -73,10 +73,10 @@
         },
         {
           text: 'Source',
-          value: 'contentType',
+          value: 'contentSource',
           render: _.startCase,
-          filterChoices: ['Core', 'Expanded Content'],
-          filterFunction: ({ contentType }: BackgroundType, filterValue: string) => _.startCase(contentType) === filterValue
+          filterChoices: ['PHB', 'EC'],
+          filterFunction: ({ contentSource }: BackgroundType, filterValue: string) => _.startCase(contentSource) === filterValue
         }
       ]
     }

@@ -42,11 +42,12 @@
         {
           text: 'Type',
           value: 'type',
+          isMultiSelect: true,
           render: _.startCase,
           filterChoices: ['Adventuring Gear', 'Armor', 'Armor Modification', 'Blaster Modification', 'Consumable', 'Clothing Modification',
            'Cybernetic Augmentation', 'Droid Customization', 'Focus', 'Focus Generator Modification', 'Item Modification',
            'Lightweapon Modification', 'Shield', 'Weapon', 'Wristpad Modification', 'Valuable', 'Vibroweapon Modification' ],
-          filterFunction: ({ type }: EnhancedItemType, filterValue: string) => _.startCase(type) === filterValue
+          filterFunction: ({ type }: EnhancedItemType, filterValue: string[]) => _.includes(filterValue, _.startCase(type))
         },
         {
           text: 'Subtype',
@@ -56,9 +57,10 @@
         {
           text: 'Rarity',
           value: 'rarityText',
+          isMultiSelect: true,
           filterChoices: ['Standard', 'Premium', 'Prototype', 'Advanced', 'Legendary', 'Artifact'],
           render: _.startCase,
-          filterFunction: ({ searchableRarity }: EnhancedItemType, filterValue: string) => searchableRarity === filterValue
+          filterFunction: ({ searchableRarity }: EnhancedItemType, filterValue: string[]) => _.includes(filterValue, searchableRarity)
         },
         {
           text: 'Prerequisite',
@@ -74,7 +76,13 @@
           filterChoices: [ 'Yes', 'No' ],
           filterFunction: ({ requiresAttunement }: EnhancedItemType, filterValue: string) => (requiresAttunement ? 'Yes' : 'No') === filterValue
         },
-        { text: 'Source', value: 'contentType', render: _.startCase }
+        {
+          text: 'Source',
+          value: 'contentSource',
+          render: _.startCase,
+          filterChoices: ['EC', 'WH'],
+          filterFunction: ({ contentSource }: EnhancedItemType, filterValue: string) => _.startCase(contentSource) === filterValue
+        }
       ]
     }
   }

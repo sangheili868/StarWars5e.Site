@@ -1,4 +1,5 @@
 export interface WeaponType {
+  contentSource: string,
   contentType: string,
   cost: number,
   damageDieModifier: number,
@@ -23,6 +24,7 @@ export interface WeaponPropertyType {
 export interface ArmorType {
   ac: number | string | null,
   armorClassification: string,
+  contentSource: string,
   contentType: string,
   cost: number,
   description: string | null,
@@ -34,6 +36,7 @@ export interface ArmorType {
 }
 
 export interface GearType {
+  contentSource: string,
   contentType: string,
   cost: number,
   description: string | null,
@@ -51,6 +54,7 @@ export interface EquipmentType extends GearType, WeaponType, ArmorType {
 }
 
 export interface EnhancedItemType {
+  contentSource: string,
   contentType: string,
   name: string,
   type: string,

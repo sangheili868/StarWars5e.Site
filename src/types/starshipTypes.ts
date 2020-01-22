@@ -1,6 +1,7 @@
 export interface DeploymentType {
   name: string,
   contentType: string,
+  contentSource: string,
   flavorText: string,
   description: string,
   featureText: string
@@ -10,6 +11,7 @@ export interface StarshipSizeType {
   additionalHitDiceText: string,
   constitution: number,
   constitutionModifier: number,
+  contentSource: string,
   contentType: string,
   dexterity: number,
   dexterityModifier: number,
@@ -38,6 +40,7 @@ export interface StarshipSizeType {
 export interface StarshipWeaponType {
   attackBonus: number,
   attacksPerRound: number,
+  contentSource: string,
   contentType: string,
   cost: number,
   damageDieModifier: number,
@@ -57,6 +60,7 @@ export interface StarshipWeaponType {
 export interface StarshipEquipmentType {
   armorClassBonus?: number, // armor
   bonus?: number, // navcomputer
+  contentSource: string,
   contentType: string,
   cost: number,
   hitPointsPerHitDie?: number, // armor
@@ -68,6 +72,7 @@ export interface StarshipEquipmentType {
 
 export interface StarshipModificationType {
   content: string,
+  contentSource: string,
   contentType: string,
   name: string,
   prerequisites: string[],
@@ -76,6 +81,7 @@ export interface StarshipModificationType {
 
 export interface VentureType {
   content: string,
+  contentSource: string,
   contentType: string,
   name: string,
   prerequisites: string[]

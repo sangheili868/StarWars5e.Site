@@ -51,10 +51,11 @@
         { text: 'Weight', value: 'weight' },
         {
           text: 'Source',
-          value: 'contentType',
+          value: 'contentSource',
           render: _.startCase,
-          filterChoices: ['Core', 'Expanded Content'],
-          filterFunction: ({ contentType }: GearType, filterValue: string) => _.startCase(contentType) === filterValue }
+          filterChoices: ['PHB', 'EC'],
+          filterFunction: ({ contentSource }: GearType, filterValue: string) => _.startCase(contentSource) === filterValue
+        }
       ]
     }
   }

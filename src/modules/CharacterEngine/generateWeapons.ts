@@ -15,6 +15,7 @@ function getUnarmedStrike (
   return {
     index: -1,
     contentType: 'Core',
+    contentSource: 'PHB',
     cost: 0,
     equipped: true,
     quantity: 0,

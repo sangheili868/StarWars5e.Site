@@ -7,6 +7,7 @@
 
 export interface ArchetypeType {
   className: string,
+  contentSource: string,
   contentType: string,
   leveledTable: {
     [level: string]: {
@@ -30,6 +31,7 @@ export interface BackgroundTableRowType {
 
 export interface BackgroundType {
   bondOptions: BackgroundTableRowType[],
+  contentSource: string,
   contentType: string,
   equipment: string,
   featOptions: BackgroundTableRowType[],
@@ -50,6 +52,7 @@ export interface BackgroundType {
 }
 
 export interface ClassType {
+  contentSource: string,
   contentType: string,
   archetypeFlavorName: string
   archetypeFlavorText: string
@@ -87,6 +90,7 @@ export interface PowerType {
   castingPeriod: string,
   castingPeriodText: string,
   concentration: boolean,
+  contentSource: string,
   contentType: string,
   description: string,
   duration: string,
@@ -109,7 +113,8 @@ export interface AbilitiesIncreasedType {
 }
 
 export interface SpeciesType {
-  abilitiesIncreased: AbilitiesIncreasedType[][]
+  abilitiesIncreased: AbilitiesIncreasedType[][],
+  contentSource: string,
   contentType: string,
   colorScheme: string,
   distinctions: string,
@@ -135,6 +140,7 @@ export interface SpeciesType {
 
 export interface FeatType {
   text: string,
+  contentSource: string,
   contentType: string,
   name: string,
   prerequisites: string,

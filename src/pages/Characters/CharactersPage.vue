@@ -20,7 +20,7 @@
             { to: '/characters/feats', title: 'Feats' },
             { to: '/characters/forcePowers', title: 'Force Powers' },
             { to: '/characters/techPowers', title: 'Tech Powers' },
-            { to: '/characters/additionalVariantRules', title: 'Additional Variant Rules' }
+            { to: '/characters/additionalVariantRules', title: 'Variant Rules' }
           ]
         }
       ]

@@ -48,7 +48,7 @@
             { to: '/feats', title: 'Feats' },
             { to: '/forcePowers', title: 'Force Powers' },
             { to: '/techPowers', title: 'Tech Powers' },
-            { to: '/additionalVariantRules', title: 'Additional Variant Rules' }
+            { to: '/additionalVariantRules', title: 'Variant Rules' }
           ]
         },
         {

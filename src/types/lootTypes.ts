@@ -21,6 +21,12 @@ export interface WeaponPropertyType {
   name: string
 }
 
+export interface ArmorPropertyType {
+  content: string,
+  contentType: string,
+  name: string
+}
+
 export interface ArmorType {
   ac: number | string | null,
   armorClassification: string,
@@ -32,7 +38,8 @@ export interface ArmorType {
   name: string,
   stealthDisadvantage: boolean,
   strengthRequirement: string | null,
-  weight: number
+  weight: number,
+  properties: string[] | null
 }
 
 export interface GearType {

@@ -5,6 +5,7 @@
   import { ArmorType } from '@/types/lootTypes'
   import _ from 'lodash'
   import VueMarkdown from 'vue-markdown'
+  import LootArmorProperties from './LootArmorProperties.vue'
   import BackButton from '@/components/BackButton.vue'
 
   const armorModule = namespace('armor')
@@ -13,6 +14,7 @@
     components: {
       SearchTable,
       BackButton,
+      LootArmorProperties,
       VueMarkdown
     }
   })
@@ -48,7 +50,6 @@
         { text: 'Cost', value: 'cost' },
         { text: 'Weight', value: 'weight' },
         { text: 'AC', value: 'ac' },
-        { text: 'Strength', value: 'strengthRequirement' },
         { text: 'Stealth', value: 'stealthDisadvantage', render: (isDisadvantage: boolean) => isDisadvantage ? 'Disadvantage' : '-' },
         { text: 'Source', value: 'contentSource', render: _.startCase }
       ]
@@ -63,5 +64,8 @@
     br
     SearchTable(name="Armor", v-bind="{ headers, items, initialSearch, tableType }")
       template(v-slot:default="props")
-        VueMarkdown(:source="props.item.description")
+        strong Properties:
+        LootArmorProperties(:propertyList="props.item.properties")
+        span(v-if="props.item.properties.length === 0")  None
+        VueMarkdown(v-if="props.item.description", :source="props.item.description")
 </template>

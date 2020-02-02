@@ -2,6 +2,7 @@ import Vue from 'vue'
 import Vuex from 'vuex'
 import archetypes from './modules/archetypes'
 import armor from './modules/armor'
+import armorProperties from './modules/armorProperties'
 import backgrounds from './modules/backgrounds'
 import blobs from './modules/blobs'
 import classes from './modules/classes'
@@ -36,6 +37,7 @@ export default new Vuex.Store({
   modules: {
     archetypes,
     armor,
+    armorProperties,
     backgrounds,
     blobs,
     character,

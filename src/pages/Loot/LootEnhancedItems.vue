@@ -8,6 +8,14 @@
   import BackButton from '@/components/BackButton.vue'
 
   const enhancedItemsModule = namespace('enhancedItems')
+  const raritySort = [
+    { rarity: 'standard', rank: 0 },
+    { rarity: 'premium', rank: 1 },
+    { rarity: 'prototype', rank: 2 },
+    { rarity: 'advanced', rank: 3 },
+    { rarity: 'legendary', rank: 4 },
+    { rarity: 'artifact', rank: 5 }
+  ]
 
   @Component({
     components: {
@@ -34,6 +42,33 @@
           id: enhancedItem.name,
           isExpandable: enhancedItem.text
         })).value()
+    }
+
+    customSort (items: any[], sortBy: string[], sortDesc: boolean[]) {
+      items.sort((a, b) => {
+        if (sortBy[0] === 'rarityText') {
+          if (!sortDesc[0]) {
+            return (_.find(raritySort, ['rarity', a[sortBy[0]]]) || { rank: 0 }).rank <
+            (_.find(raritySort, ['rarity', b[sortBy[0]]]) || { rank: 1 }).rank ? -1 : 1
+          } else {
+            return (_.find(raritySort, ['rarity', a[sortBy[0]]]) || { rank: 0 }).rank >
+            (_.find(raritySort, ['rarity', b[sortBy[0]]]) || { rank: 1 }).rank ? -1 : 1
+          }
+        } else if (sortBy[0] === 'prerequisite') {
+          if (!sortDesc[0]) {
+            return (!!a[sortBy[0]]) < (!!b[sortBy[0]]) ? -1 : 1
+          } else {
+            return (!!b[sortBy[0]]) < (!!a[sortBy[0]]) ? -1 : 1
+          }
+        } else {
+          if (!sortDesc[0]) {
+            return (a[sortBy[0]]) < (b[sortBy[0]]) ? -1 : 1
+          } else {
+            return (b[sortBy[0]]) < (a[sortBy[0]]) ? -1 : 1
+          }
+        }
+      })
+      return items
     }
 
     get headers () {
@@ -93,7 +128,7 @@
     BackButton
     h1 Enhanced Items
     br
-    SearchTable(name="EnhancedItems", v-bind="{ headers, items, initialSearch, tableType }")
+    SearchTable(name="EnhancedItems", v-bind="{ headers, items, customSort, initialSearch, tableType }")
       template(v-slot:default="props")
         i(v-if="props.item.prerequisite")
           VueMarkdown(:source="'Prerequisite: ' + props.item.prerequisite")

@@ -82,6 +82,15 @@
           ]
         },
         {
+          category: 'Podcasts and other media',
+          routes: [
+            {
+              href: 'https://dungeonjedimasters.com/',
+              title: 'Dungeon Jedi Masters'
+            }
+          ]
+        },
+        {
           category: 'Other',
           routes: [
             {

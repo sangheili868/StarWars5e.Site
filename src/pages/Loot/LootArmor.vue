@@ -34,7 +34,7 @@
         .map(armor => ({
           ...armor,
           id: armor.name,
-          isExpandable: armor.description
+          isExpandable: true
         })).value()
     }
 

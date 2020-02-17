@@ -22,10 +22,10 @@
       downtime: 'Entertainment and Downtime',
       factionsAndMembership: 'Factions and Membership',
       abilityScores: 'Using Ability Scores',
+      equipment: 'Equipment',
+      customizationOptions: 'Customization Options',
       enhancedItems: 'Enhanced Items',
       modifiableItems: 'Modifiable Items',
-      cyberneticAugmentations: 'Cybernetic Augmentations',
-      droidCustomizations: 'Droid Customizations',
       toolProficiencies: 'Tool Proficiencies'
     }
 

@@ -30,33 +30,24 @@
         route: '/rules/hives/abilityScores'
       },
       {
+        title: 'Equipment',
+        icon: 'fa-shopping-bag',
+        route: '/rules/hives/equipment'
+      },
+      {
+        title: 'Customization Options',
+        icon: 'fa-tools',
+        route: '/rules/hives/customizationOptions'
+      },
+      {
         title: 'Enhanced Items',
         icon: 'fa-hat-wizard',
         route: '/rules/hives/enhancedItems'
       },
       {
-        title: 'Modifiable Items',
-        icon: 'fa-tools',
-        route: '/rules/hives/modifiableItems'
-      },
-      {
-        title: 'Cybernetic Augmentations',
-        icon: 'fa-car-battery',
-        route: '/rules/hives/cyberneticAugmentations'
-      },
-      {
-        title: 'Droid Customizations',
-        icon: 'fa-robot',
-        route: '/rules/hives/droidCustomizations'
-      },
-      {
         title: 'Tool Proficiencies',
         icon: 'fa-mortar-pestle',
         route: '/rules/hives/toolProficiencies'
-      },
-      {
-        title: 'More coming soon...',
-        icon: 'fa-toolbox'
       }
     ]
   }

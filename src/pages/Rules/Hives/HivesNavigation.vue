@@ -10,9 +10,14 @@
   export default class HivesNavigation extends Vue {
     items = [
       {
+        title: 'Introduction',
+        icon: 'fa-journal-whills',
+        route: '/rules/hives'
+      },
+      {
         title: 'Step-By-Step Factions',
         icon: 'fa-beer',
-        route: '/rules/hives'
+        route: '/rules/hives/stepByStepFactions'
       },
       {
         title: 'Entertainment and Downtime',
@@ -48,6 +53,11 @@
         title: 'Tool Proficiencies',
         icon: 'fa-mortar-pestle',
         route: '/rules/hives/toolProficiencies'
+      },
+      {
+        title: 'Changelog',
+        icon: 'fa-list',
+        route: '/rules/hives/changelog'
       }
     ]
   }

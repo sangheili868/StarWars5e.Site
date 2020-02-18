@@ -18,6 +18,7 @@
     @Prop(String) readonly chapter!: string
 
     chapterMap: { [key: string]: string } = {
+      introduction: 'Introduction',
       stepByStep: 'Step-By-Step Factions',
       downtime: 'Entertainment and Downtime',
       factionsAndMembership: 'Factions and Membership',
@@ -26,7 +27,8 @@
       customizationOptions: 'Customization Options',
       enhancedItems: 'Enhanced Items',
       modifiableItems: 'Modifiable Items',
-      toolProficiencies: 'Tool Proficiencies'
+      toolProficiencies: 'Tool Proficiencies',
+      changelog: 'Changelog'
     }
 
     created () {
@@ -39,11 +41,11 @@
     }
 
     get title () {
-        return (this.chapterMap[this.chapter] || 'Step-By-Step Factions') + ' | Hives' + Vue.prototype.$titleSuffix
+        return (this.chapterMap[this.chapter] || 'Introduction') + ' | Hives' + Vue.prototype.$titleSuffix
     }
 
     get blobName () {
-      return this.chapterMap[this.chapter] || 'Step-By-Step Factions'
+      return this.chapterMap[this.chapter] || 'Introduction'
     }
 
     get blob () {

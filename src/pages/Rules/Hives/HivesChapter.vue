@@ -19,7 +19,7 @@
 
     chapterMap: { [key: string]: string } = {
       introduction: 'Introduction',
-      stepByStep: 'Step-By-Step Factions',
+      stepByStepFactions: 'Step-By-Step Factions',
       downtime: 'Entertainment and Downtime',
       factionsAndMembership: 'Factions and Membership',
       abilityScores: 'Using Ability Scores',

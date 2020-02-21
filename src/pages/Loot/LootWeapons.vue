@@ -55,7 +55,7 @@
           text: 'Source',
           value: 'contentSource',
           render: _.startCase,
-          filterChoices: ['PHB', 'EC'],
+          filterChoices: ['PHB', 'EC', 'WH'],
           filterFunction: ({ contentSource }: WeaponType, filterValue: string) => _.startCase(contentSource) === filterValue
         }
       ]

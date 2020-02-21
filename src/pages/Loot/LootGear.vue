@@ -53,7 +53,7 @@
           text: 'Source',
           value: 'contentSource',
           render: _.startCase,
-          filterChoices: ['PHB', 'EC'],
+          filterChoices: ['PHB', 'EC', 'WH'],
           filterFunction: ({ contentSource }: GearType, filterValue: string) => _.startCase(contentSource) === filterValue
         }
       ]

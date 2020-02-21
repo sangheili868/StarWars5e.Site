@@ -51,7 +51,13 @@
         { text: 'Weight', value: 'weight' },
         { text: 'AC', value: 'ac' },
         { text: 'Stealth', value: 'stealthDisadvantage', render: (isDisadvantage: boolean) => isDisadvantage ? 'Disadvantage' : '-' },
-        { text: 'Source', value: 'contentSource', render: _.startCase }
+        {
+          text: 'Source',
+          value: 'contentSource',
+          render: _.startCase,
+          filterChoices: ['PHB', 'EC', 'WH'],
+          filterFunction: ({ contentSource }: ArmorType, filterValue: string) => _.startCase(contentSource) === filterValue
+        }
       ]
     }
   }

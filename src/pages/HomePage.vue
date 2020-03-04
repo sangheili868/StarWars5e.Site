@@ -50,22 +50,22 @@
     get books () {
       return [
         {
-          to: 'rules/handbook',
+          to: 'rules/phb',
           title: 'Player\' Handbook',
           image: 'phb_cover'
         },
         {
-          to: 'rules/monsters',
+          to: 'rules/snv',
           title: 'Monster Manual',
           image: 'sav_cover'
         },
         {
-          to: 'rules/starships',
+          to: 'rules/sotg',
           title: 'Starships of the Galaxy',
           image: 'sotg_cover'
         },
         {
-          to: 'rules/hives',
+          to: 'rules/wh',
           title: 'Wretched Hives',
           image: 'wh_cover'
         }

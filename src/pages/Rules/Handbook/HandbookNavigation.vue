@@ -30,146 +30,146 @@
         {
           title: 'Introduction',
           icon: 'fa-journal-whills',
-          route: '/rules/handbook'
+          route: '/rules/phb'
         },
         {
           title: 'What\'s Different?',
           icon: 'fa-exclamation-circle',
-          route: '/rules/handbook/whatsDifferent'
+          route: '/rules/phb/whatsDifferent'
         },
         {
           title: 'Step-By-Step Characters',
           icon: 'fa-male',
-          route: '/rules/handbook/stepByStep'
+          route: '/rules/phb/stepByStep'
         },
         {
           title: 'Species',
           icon: 'fa-users',
-          route: '/rules/handbook/species',
+          route: '/rules/phb/species',
           items: this.species.filter(({ contentType }) => contentType === 'Core').map(({ name }) => ({
             title: name,
             icon: '',
-            route: '/rules/handbook/species/' + name
+            route: '/rules/phb/species/' + name
           }))
         },
         {
           title: 'Classes',
           icon: 'fab fa-galactic-republic',
-          route: '/rules/handbook/classes',
+          route: '/rules/phb/classes',
           items: [
             {
               title: 'Berserker',
               icon: '',
-              route: '/rules/handbook/classes/Berserker'
+              route: '/rules/phb/classes/Berserker'
             },
             {
               title: 'Consular',
               icon: '',
-              route: '/rules/handbook/classes/Consular'
+              route: '/rules/phb/classes/Consular'
             },
             {
               title: 'Engineer',
               icon: '',
-              route: '/rules/handbook/classes/Engineer'
+              route: '/rules/phb/classes/Engineer'
             },
             {
               title: 'Fighter',
               icon: '',
-              route: '/rules/handbook/classes/Fighter'
+              route: '/rules/phb/classes/Fighter'
             },
             {
               title: 'Guardian',
               icon: '',
-              route: '/rules/handbook/classes/Guardian'
+              route: '/rules/phb/classes/Guardian'
             },
             {
               title: 'Monk',
               icon: '',
-              route: '/rules/handbook/classes/Monk'
+              route: '/rules/phb/classes/Monk'
             },
             {
               title: 'Operative',
               icon: '',
-              route: '/rules/handbook/classes/Operative'
+              route: '/rules/phb/classes/Operative'
             },
             {
               title: 'Scholar',
               icon: '',
-              route: '/rules/handbook/classes/Scholar'
+              route: '/rules/phb/classes/Scholar'
             },
             {
               title: 'Scout',
               icon: '',
-              route: '/rules/handbook/classes/Scout'
+              route: '/rules/phb/classes/Scout'
             },
             {
               title: 'Sentinel',
               icon: '',
-              route: '/rules/handbook/classes/Sentinel'
+              route: '/rules/phb/classes/Sentinel'
             }
           ]
         },
         {
           title: 'Backgrounds',
           icon: 'fa-briefcase',
-          route: '/rules/handbook/backgrounds'
+          route: '/rules/phb/backgrounds'
         },
         {
           title: 'Equipment',
           icon: 'fa-tools',
-          route: '/rules/handbook/equipment'
+          route: '/rules/phb/equipment'
         },
         {
           title: 'Customization Options',
           icon: 'fa-edit',
-          route: '/rules/handbook/customization'
+          route: '/rules/phb/customization'
         },
         {
           title: 'Using Ability Scores',
           icon: 'fa-dice-d20',
-          route: '/rules/handbook/abilityScores'
+          route: '/rules/phb/abilityScores'
         },
         {
           title: 'Adventuring',
           icon: 'fa-rocket',
-          route: '/rules/handbook/adventuring'
+          route: '/rules/phb/adventuring'
         },
         {
           title: 'Combat',
           icon: 'fa-fist-raised',
-          route: '/rules/handbook/combat'
+          route: '/rules/phb/combat'
         },
         {
           title: 'Casting',
           icon: 'fa-bolt',
-          route: '/rules/handbook/casting',
+          route: '/rules/phb/casting',
           items: [
             {
               title: 'Force Powers',
               icon: 'fas fa-jedi',
-              route: '/rules/handbook/casting/forcePowers'
+              route: '/rules/phb/casting/forcePowers'
             },
             {
               title: 'Tech Powers',
               icon: 'fa-microchip',
-              route: '/rules/handbook/casting/techPowers'
+              route: '/rules/phb/casting/techPowers'
             }
           ]
         },
         {
           title: 'Conditions',
           icon: 'fa-biohazard',
-          route: '/rules/handbook/conditions'
+          route: '/rules/phb/conditions'
         },
         {
           title: 'Variant Rules',
           icon: 'fa-cogs',
-          route: '/rules/handbook/variantRules'
+          route: '/rules/phb/variantRules'
         },
         {
           title: 'Changelog',
           icon: 'fa-list',
-          route: '/rules/handbook/changelog'
+          route: '/rules/phb/changelog'
         }
       ]
     }
@@ -177,5 +177,5 @@
 </script>
 
 <template lang="pug">
-  NavigationDrawer(:items="items", baseRoute="/rules/handbook")
+  NavigationDrawer(:items="items", baseRoute="/phb/handbook")
 </template>

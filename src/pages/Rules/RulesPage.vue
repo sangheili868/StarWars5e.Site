@@ -12,10 +12,11 @@
       return [
         {
           routes: [
-            { to: '/rules/handbook', title: 'Player\'s Handbook' },
-            { to: '/rules/monsters', title: 'Scum and Villainy' },
-            { to: '/rules/starships', title: 'Starships of the Galaxy' },
-            { to: '/rules/hives', title: 'Wretched Hives' }
+            { to: '/rules/phb', title: 'Player\'s Handbook' },
+            { to: '/rules/snv', title: 'Scum and Villainy' },
+            { to: '/rules/sotg', title: 'Starships of the Galaxy' },
+            { to: '/rules/wh', title: 'Wretched Hives' },
+            { to: '/rules/variantRules', title: 'Variant Rules' }
           ]
         }
       ]

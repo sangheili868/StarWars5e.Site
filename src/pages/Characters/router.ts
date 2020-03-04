@@ -11,8 +11,6 @@ import CharactersArchetypeDetail from './CharactersArchetypeDetail.vue'
 import CharactersBackgrounds from './CharactersBackgrounds.vue'
 import CharactersBackgroundDetail from './CharactersBackgroundDetail.vue'
 import CharactersFeats from './CharactersFeats.vue'
-import CharactersVariantRules from './CharactersVariantRules.vue'
-import CharactersVariantRulesDetail from './CharactersVariantRulesDetail.vue'
 
 export default {
   path: '/characters',
@@ -104,21 +102,6 @@ export default {
       component: CharactersTechPowers,
       meta: {
         title: 'Tech Powers'
-      }
-    },
-    {
-      path: '/characters/additionalVariantRules',
-      component: CharactersVariantRules,
-      meta: {
-        title: 'Variant Rules'
-      }
-    },
-    {
-      path: '/characters/additionalVariantRules/:variantRuleName',
-      component: CharactersVariantRulesDetail,
-      props: true,
-      meta: {
-        title: 'Variant Rules'
       }
     }
   ]

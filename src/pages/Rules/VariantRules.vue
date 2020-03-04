@@ -14,7 +14,7 @@
       CardSet
     }
   })
-  export default class CharactersVariantRules extends Vue {
+  export default class VariantRules extends Vue {
     @blobsModule.State variantRuleBlobs!: any[]
     @blobsModule.Action fetchVariantRuleBlobs!: () => void
 
@@ -25,7 +25,7 @@
     get variantRuleBlobsWithLinks () {
       return this.variantRuleBlobs.map(variantRuleBlob => ({
         ...variantRuleBlob,
-        to: `additionalVariantRules/${variantRuleBlob.chapterName}`
+        to: `variantRules/${variantRuleBlob.chapterName}`
       }))
     }
   }

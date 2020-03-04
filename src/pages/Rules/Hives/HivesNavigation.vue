@@ -12,57 +12,57 @@
       {
         title: 'Introduction',
         icon: 'fa-journal-whills',
-        route: '/rules/hives'
+        route: '/rules/wh'
       },
       {
         title: 'Step-By-Step Factions',
         icon: 'fa-beer',
-        route: '/rules/hives/stepByStepFactions'
+        route: '/rules/wh/stepByStepFactions'
       },
       {
         title: 'Entertainment and Downtime',
         icon: 'fa-pencil-ruler',
-        route: '/rules/hives/downtime'
+        route: '/rules/wh/downtime'
       },
       {
         title: 'Factions and Membership',
         icon: 'fa-globe',
-        route: '/rules/hives/factionsAndMembership'
+        route: '/rules/wh/factionsAndMembership'
       },
       {
         title: 'Using Ability Scores',
         icon: 'fa-dice-d20',
-        route: '/rules/hives/abilityScores'
+        route: '/rules/wh/abilityScores'
       },
       {
         title: 'Equipment',
         icon: 'fa-shopping-bag',
-        route: '/rules/hives/equipment'
+        route: '/rules/wh/equipment'
       },
       {
         title: 'Customization Options',
         icon: 'fa-tools',
-        route: '/rules/hives/customizationOptions'
+        route: '/rules/wh/customizationOptions'
       },
       {
         title: 'Enhanced Items',
         icon: 'fa-hat-wizard',
-        route: '/rules/hives/enhancedItems'
+        route: '/rules/wh/enhancedItems'
       },
       {
         title: 'Tool Proficiencies',
         icon: 'fa-mortar-pestle',
-        route: '/rules/hives/toolProficiencies'
+        route: '/rules/wh/toolProficiencies'
       },
       {
         title: 'Changelog',
         icon: 'fa-list',
-        route: '/rules/hives/changelog'
+        route: '/rules/wh/changelog'
       }
     ]
   }
 </script>
 
 <template lang="pug">
-  NavigationDrawer(:items="items", baseRoute="/rules/hives")
+  NavigationDrawer(:items="items", baseRoute="/rules/wh")
 </template>

@@ -3,7 +3,7 @@ import HivesNavigation from './HivesNavigation.vue'
 import HivesChapter from './HivesChapter.vue'
 
 export default {
-  path: 'hives',
+  path: 'wh',
   components: {
     default: PageNester,
     navigation: HivesNavigation

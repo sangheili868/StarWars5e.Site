@@ -14,7 +14,7 @@
       Loading
     }
   })
-  export default class CharactersVariantRulesDetail extends Vue {
+  export default class VariantRulesDetail extends Vue {
     @blobsModule.State variantRuleBlobs!: any[]
     @blobsModule.Action fetchVariantRuleBlobs!: () => void
     @Prop(String) readonly variantRuleName!: string

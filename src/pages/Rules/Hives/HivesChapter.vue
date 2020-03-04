@@ -41,7 +41,7 @@
     }
 
     get title () {
-        return (this.chapterMap[this.chapter] || 'Introduction') + ' | Hives' + Vue.prototype.$titleSuffix
+        return (this.chapterMap[this.chapter] || 'Introduction') + ' | WH' + Vue.prototype.$titleSuffix
     }
 
     get blobName () {

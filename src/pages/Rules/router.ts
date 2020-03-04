@@ -5,6 +5,8 @@ import starshipRoutes from './Starships/router'
 import monsterRoutes from './Monsters/router'
 import hivesRoutes from './Hives/router'
 import RulesPage from './RulesPage.vue'
+import VariantRules from './VariantRules.vue'
+import VariantRulesDetail from './VariantRulesDetail.vue'
 
 export default {
   path: '/rules',
@@ -22,6 +24,21 @@ export default {
     {
       path: '',
       component: RulesPage
+    },
+    {
+      path: '/rules/variantRules',
+      component: VariantRules,
+      meta: {
+        title: 'Variant Rules'
+      }
+    },
+    {
+      path: '/rules/variantRules/:variantRuleName',
+      component: VariantRulesDetail,
+      props: true,
+      meta: {
+        title: 'Variant Rules'
+      }
     },
     handbookRoutes,
     starshipRoutes,

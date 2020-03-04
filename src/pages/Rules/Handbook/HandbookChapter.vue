@@ -46,7 +46,7 @@
     }
 
     get title () {
-        return this.chapterMap[this.chapter] + ' | Handbook' + Vue.prototype.$titleSuffix
+        return this.chapterMap[this.chapter] + ' | PHB' + Vue.prototype.$titleSuffix
     }
 
     get blobName () {

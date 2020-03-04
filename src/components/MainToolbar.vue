@@ -31,10 +31,11 @@
           to: '/rules',
           title: 'Rules',
           nested: [
-            { to: '/handbook', title: 'Player\'s Handbook' },
-            { to: '/monsters', title: 'Scum and Villainy' },
-            { to: '/starships', title: 'Starships of the Galaxy' },
-            { to: '/hives', title: 'Wretched Hives' }
+            { to: '/phb', title: 'Player\'s Handbook' },
+            { to: '/snv', title: 'Scum and Villainy' },
+            { to: '/sotg', title: 'Starships of the Galaxy' },
+            { to: '/wh', title: 'Wretched Hives' },
+            { to: '/variantRules', title: 'Variant Rules' }
           ]
         },
         {
@@ -47,8 +48,7 @@
             { to: '/backgrounds', title: 'Backgrounds' },
             { to: '/feats', title: 'Feats' },
             { to: '/forcePowers', title: 'Force Powers' },
-            { to: '/techPowers', title: 'Tech Powers' },
-            { to: '/additionalVariantRules', title: 'Variant Rules' }
+            { to: '/techPowers', title: 'Tech Powers' }
           ]
         },
         {

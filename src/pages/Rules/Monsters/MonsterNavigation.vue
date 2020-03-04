@@ -22,7 +22,7 @@
       {
         title: 'Monsters',
         icon: 'fa-paw',
-        route: '/rules/monsters'
+        route: '/rules/snv'
       },
       {
         title: 'More coming soon...',
@@ -38,5 +38,5 @@
 </script>
 
 <template lang="pug">
-  NavigationDrawer(:items="items", baseRoute="/rules/monsters")
+  NavigationDrawer(:items="items", baseRoute="/rules/snv")
 </template>

@@ -12,7 +12,7 @@ import HandbookBackgrounds from './HandbookBackgrounds.vue'
 import HandbookCustomizationOptions from './HandbookCustomizationOptions.vue'
 
 export default {
-  path: 'handbook',
+  path: 'phb',
   components: {
     default: PageNester,
     navigation: HandbookNavigation

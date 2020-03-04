@@ -53,7 +53,7 @@
 <template lang="pug">
   div( v-if="monster" ).text-left
     h1 {{ monster.name }}
-      a(:href="`/rules/monsters/monsters/${monster.name}`", target="_blank")
+      a(:href="`/rules/snv/monsters/${monster.name}`", target="_blank")
         v-btn(v-if="!isAtDetail", text, icon, color="secondary")
           v-icon fa-external-link-alt
     i {{ monster.size }} {{ monster.types.join(', ')}}, {{ monster.alignment }}

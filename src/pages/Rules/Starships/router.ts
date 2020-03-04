@@ -9,7 +9,7 @@ import StarshipModifications from './StarshipModifications.vue'
 import StarshipCustomization from './StarshipCustomization.vue'
 
 export default {
-  path: 'starships',
+  path: 'sotg',
   components: {
     default: PageNester,
     navigation: StarshipNavigation

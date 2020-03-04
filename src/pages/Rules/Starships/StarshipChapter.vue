@@ -44,7 +44,7 @@
     }
 
     get title () {
-        return this.blobName + ' | Starships' + Vue.prototype.$titleSuffix
+        return this.blobName + ' | SOTG' + Vue.prototype.$titleSuffix
     }
 
     get blobName () {

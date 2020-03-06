@@ -30,7 +30,7 @@
     }
 
     get title () {
-        return this.$router.currentRoute.path.includes('handbook')
+        return this.$router.currentRoute.path.includes('phb')
         ? this.speciesName + ' | Handbook' + Vue.prototype.$titleSuffix
         : this.speciesName + Vue.prototype.$titleSuffix
     }

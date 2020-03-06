@@ -27,7 +27,7 @@
     }
 
     get items () {
-      const page = this.isInHandbook ? 'handbook' : 'characters'
+      const page = this.isInHandbook ? 'phb' : 'characters'
       return _(this.archetypes)
         .filter(({ contentType }) => !this.isInHandbook || contentType === 'Core')
         .map(archetype => ({

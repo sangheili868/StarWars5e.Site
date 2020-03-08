@@ -8,6 +8,7 @@ import '@/assets/styles/global.scss'
 import '@fortawesome/fontawesome-free/css/all.css'
 import vueHeadful from 'vue-headful'
 import VueSessionStorage from 'vue-sessionstorage'
+import VueAppInsights from 'vue-application-insights'
 
 Vue.use(VueSessionStorage)
 
@@ -21,6 +22,11 @@ router.beforeEach((to, from, next) => {
     ? to.meta.title + Vue.prototype.$titleSuffix
     : 'SW5E'
   next()
+})
+
+Vue.use(VueAppInsights, {
+  id: 'b5b30062-61c2-4ad6-9c52-277f91a16734',
+  router
 })
 
 new Vue({

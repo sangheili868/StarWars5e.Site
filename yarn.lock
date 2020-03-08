@@ -1217,6 +1217,79 @@
     cssnano-preset-default "^4.0.0"
     postcss "^7.0.0"
 
+"@microsoft/applicationinsights-analytics-js@2.5.1":
+  version "2.5.1"
+  resolved "https://registry.yarnpkg.com/@microsoft/applicationinsights-analytics-js/-/applicationinsights-analytics-js-2.5.1.tgz#75c597a58e4d22bdfa7c1da521571decb3230065"
+  integrity sha512-9dk0PJdc9lW1h9uYd+novCqFUm6yXmMurQY87ts1afK9xxgAjmMm+02veb0Rm2C4uKYjsm/Ecfw7wenYTdburQ==
+  dependencies:
+    "@microsoft/applicationinsights-common" "2.5.1"
+    "@microsoft/applicationinsights-core-js" "2.5.1"
+    "@microsoft/dynamicproto-js" "^0.5.1"
+    tslib "1.10.0"
+
+"@microsoft/applicationinsights-channel-js@2.5.1":
+  version "2.5.1"
+  resolved "https://registry.yarnpkg.com/@microsoft/applicationinsights-channel-js/-/applicationinsights-channel-js-2.5.1.tgz#3882b6a7d5d8d8a041101af1a45f48a0926785c5"
+  integrity sha512-oB5QNiwz/MM1JfgCfaFeDmMRNKpo9xxKDhuhyc9A6keITSYbC24283bTvWfV279VPUcEZni9rx6DAKoFfjZ0nw==
+  dependencies:
+    "@microsoft/applicationinsights-common" "2.5.1"
+    "@microsoft/applicationinsights-core-js" "2.5.1"
+    tslib "1.10.0"
+
+"@microsoft/applicationinsights-common@2.5.1":
+  version "2.5.1"
+  resolved "https://registry.yarnpkg.com/@microsoft/applicationinsights-common/-/applicationinsights-common-2.5.1.tgz#ab1eab905b936bbab8caf901f9427f1afd4fcbba"
+  integrity sha512-gUHryKaAUMXakTq0aCrKIEhyFCyKP0peKFKgw7nTV4Y++3EeyPOrHUiCJ8j19c51balmzRHVuWKIVZiY3Ryv5A==
+  dependencies:
+    "@microsoft/applicationinsights-core-js" "2.5.1"
+    tslib "1.10.0"
+
+"@microsoft/applicationinsights-core-js@2.5.1":
+  version "2.5.1"
+  resolved "https://registry.yarnpkg.com/@microsoft/applicationinsights-core-js/-/applicationinsights-core-js-2.5.1.tgz#393d222104d08b68883d2f5a479c91889c56e7a8"
+  integrity sha512-aptF65Cunfroou8gL+Pl8yHdM/mxUtPiksSRnBnSJ3wGyPDB+K/x8tSO4kJFR6Dewvf2cJdV8mEtHCdXyaTnqw==
+  dependencies:
+    "@microsoft/dynamicproto-js" "^0.5.1"
+    tslib "1.10.0"
+
+"@microsoft/applicationinsights-dependencies-js@2.5.1":
+  version "2.5.1"
+  resolved "https://registry.yarnpkg.com/@microsoft/applicationinsights-dependencies-js/-/applicationinsights-dependencies-js-2.5.1.tgz#b9ac67fd7e2bc4d0ef43d63d37155e4eb587b5f9"
+  integrity sha512-zquZVqD8JSfqzo8mxjjyNziUusvaZ7gvPcOAbnVHrkI/DfibkGMiz9lNPZsATFWPHtipj3US8+gqPgOos2ZHvA==
+  dependencies:
+    "@microsoft/applicationinsights-common" "2.5.1"
+    "@microsoft/applicationinsights-core-js" "2.5.1"
+    "@microsoft/dynamicproto-js" "^0.5.1"
+    tslib "1.10.0"
+
+"@microsoft/applicationinsights-properties-js@2.5.1":
+  version "2.5.1"
+  resolved "https://registry.yarnpkg.com/@microsoft/applicationinsights-properties-js/-/applicationinsights-properties-js-2.5.1.tgz#4fef00a4fce65b6dac1bf1405d0ced75e197bbcb"
+  integrity sha512-TGoUnrdVGhJlyXRNA/vuDiRMw/x5t9B3fqTfLZMlaOchGz5DdTtCyl05t2q4zg+zRuTz9maxqXkHFNei6WMqKg==
+  dependencies:
+    "@microsoft/applicationinsights-common" "2.5.1"
+    "@microsoft/applicationinsights-core-js" "2.5.1"
+    tslib "1.10.0"
+
+"@microsoft/applicationinsights-web@^2.4.4":
+  version "2.5.1"
+  resolved "https://registry.yarnpkg.com/@microsoft/applicationinsights-web/-/applicationinsights-web-2.5.1.tgz#cf0621f496a783482dab8e9dd146848f3874176c"
+  integrity sha512-pWZRjwtZL+/tsKhYcLIYbmAjAhjBB9CGkt0u86iWjNpNsz64+fo+IwDVtKP8CSmtkjF/EDvVspLCn22uhHLQhw==
+  dependencies:
+    "@microsoft/applicationinsights-analytics-js" "2.5.1"
+    "@microsoft/applicationinsights-channel-js" "2.5.1"
+    "@microsoft/applicationinsights-common" "2.5.1"
+    "@microsoft/applicationinsights-core-js" "2.5.1"
+    "@microsoft/applicationinsights-dependencies-js" "2.5.1"
+    "@microsoft/applicationinsights-properties-js" "2.5.1"
+    "@microsoft/dynamicproto-js" "^0.5.1"
+    tslib "1.10.0"
+
+"@microsoft/dynamicproto-js@^0.5.1":
+  version "0.5.1"
+  resolved "https://registry.yarnpkg.com/@microsoft/dynamicproto-js/-/dynamicproto-js-0.5.1.tgz#5f5df6444871911ba251572779fda72b1b1fc17f"
+  integrity sha512-Umt5dUMnycNOFMdu0yZUAtFRVH2I31IjBKivEw3ancVE09rACrHsUVqJnPxYjTFH28QxHQKg/PBv3sPS1a748A==
+
 "@mrmlnc/readdir-enhanced@^2.2.1":
   version "2.2.1"
   resolved "https://registry.yarnpkg.com/@mrmlnc/readdir-enhanced/-/readdir-enhanced-2.2.1.tgz#524af240d1a360527b730475ecfa1344aa540dde"
@@ -11146,15 +11219,15 @@ ts-node@^8.0.3:
     source-map-support "^0.5.6"
     yn "^3.0.0"
 
+tslib@1.10.0, tslib@^1.9.3:
+  version "1.10.0"
+  resolved "https://registry.yarnpkg.com/tslib/-/tslib-1.10.0.tgz#c3c19f95973fb0a62973fb09d90d961ee43e5c8a"
+  integrity sha512-qOebF53frne81cf0S9B41ByenJ3/IuH8yJKngAX35CmiZySA0khhkovshKK+jGCaMnVomla7gVlIcc3EvKPbTQ==
+
 tslib@^1.8.0, tslib@^1.8.1, tslib@^1.9.0:
   version "1.9.3"
   resolved "https://registry.yarnpkg.com/tslib/-/tslib-1.9.3.tgz#d7e4dd79245d85428c4d7e4822a79917954ca286"
   integrity sha512-4krF8scpejhaOgqzBEcGM7yDIEfi0/8+8zDRZhNZZ2kjmHJ4hv3zCbQWxoJGz1iw5U0Jl0nma13xzHXcncMavQ==
-
-tslib@^1.9.3:
-  version "1.10.0"
-  resolved "https://registry.yarnpkg.com/tslib/-/tslib-1.10.0.tgz#c3c19f95973fb0a62973fb09d90d961ee43e5c8a"
-  integrity sha512-qOebF53frne81cf0S9B41ByenJ3/IuH8yJKngAX35CmiZySA0khhkovshKK+jGCaMnVomla7gVlIcc3EvKPbTQ==
 
 tslint@^5.15.0:
   version "5.15.0"
@@ -11568,6 +11641,13 @@ void-elements@^2.0.1:
   version "2.0.1"
   resolved "https://registry.yarnpkg.com/void-elements/-/void-elements-2.0.1.tgz#c066afb582bb1cb4128d60ea92392e94d5e9dbec"
   integrity sha1-wGavtYK7HLQSjWDqkjkulNXp2+w=
+
+vue-application-insights@^1.0.7:
+  version "1.0.7"
+  resolved "https://registry.yarnpkg.com/vue-application-insights/-/vue-application-insights-1.0.7.tgz#ce2e63ead7c625713bc18dd230d81446f87562e5"
+  integrity sha512-7H5Zc8MgXoJ5DQj9JZylZUEwChSYoDh6PMnmTXPTJG92BlNQovCw3FZLPRkJBGU0kupyZqvKlAyzSneAzXsYpg==
+  dependencies:
+    "@microsoft/applicationinsights-web" "^2.4.4"
 
 vue-class-component@^7.0.1, vue-class-component@^7.0.2:
   version "7.0.2"

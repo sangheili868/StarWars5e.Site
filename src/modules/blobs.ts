@@ -1,4 +1,4 @@
-import axios from 'axios'
+import safeFetch from '@/utilities/safeFetch'
 import _ from 'lodash'
 import { Module, VuexModule, MutationAction } from 'vuex-module-decorators'
 import { VariantRuleBlobType } from '@/types/referenceTypes'
@@ -14,7 +14,7 @@ export default class Blobs extends VuexModule {
 
   @MutationAction({ mutate: ['handbookBlobs'] })
   async fetchHandbookBlobs () {
-    const results = await axios.get(`${process.env.VUE_APP_sw5eapiurl}/api/HandbookBlob`)
+    const results = await safeFetch('api/HandbookBlob')
     return {
       handbookBlobs: _(results.data).keyBy('chapterName')
     }
@@ -22,7 +22,7 @@ export default class Blobs extends VuexModule {
 
   @MutationAction({ mutate: ['handbookBlobs'] })
   async fetchHandbookBlob (chapter: string) {
-    const results = await axios.get(`${process.env.VUE_APP_sw5eapiurl}/api/PlayerHandbookRule/${chapter}.json`)
+    const results = await safeFetch('api/PlayerHandbookRule/${chapter}.json')
     return {
       handbookBlobs: {
         ...this.state && (this.state as any).handbookBlobs,
@@ -33,7 +33,7 @@ export default class Blobs extends VuexModule {
 
   @MutationAction({ mutate: ['starshipBlobs'] })
   async fetchStarshipBlob (chapter: string) {
-    const results = await axios.get(`${process.env.VUE_APP_sw5eapiurl}/api/StarshipRule/${chapter}.json`)
+    const results = await safeFetch('api/StarshipRule/${chapter}.json')
     return {
       starshipBlobs: {
         ...this.state && (this.state as any).starshipBlobs,
@@ -44,7 +44,7 @@ export default class Blobs extends VuexModule {
 
   @MutationAction({ mutate: ['variantRuleBlobs'] })
   async fetchVariantRuleBlobs () {
-    const results = await axios.get(`${process.env.VUE_APP_sw5eapiurl}/api/VariantRule`)
+    const results = await safeFetch('api/VariantRule')
     return {
       variantRuleBlobs: results.data.map((variantRuleBlob: VariantRuleBlobType) =>
         _.pick(variantRuleBlob, ['chapterName', 'contentMarkdown'])
@@ -54,7 +54,7 @@ export default class Blobs extends VuexModule {
 
   @MutationAction({ mutate: ['monsterBlobs'] })
   async fetchMonsterBlobs (chapter: string) {
-    const results = await axios.get(`${process.env.VUE_APP_sw5eapiurl}/api/MonsterChapters/${chapter}.json`)
+    const results = await safeFetch('api/MonsterChapters/${chapter}.json')
     return {
       monsterBlobs: {
         ...this.state && (this.state as any).monsterBlobs,
@@ -65,7 +65,7 @@ export default class Blobs extends VuexModule {
 
   @MutationAction({ mutate: ['hivesBlobs'] })
   async fetchHivesBlob (chapter: string) {
-    const results = await axios.get(`${process.env.VUE_APP_sw5eapiurl}/api/WretchedHivesRule/${chapter}.json`)
+    const results = await safeFetch('api/WretchedHivesRule/${chapter}.json')
     return {
       hivesBlobs: {
         ...this.state && (this.state as any).hivesBlobs,
@@ -76,7 +76,7 @@ export default class Blobs extends VuexModule {
 
   @MutationAction({ mutate: ['creditsBlob'] })
   async fetchCreditsBlob () {
-    const results = await axios.get(`${process.env.VUE_APP_sw5eapiurl}/api/Credit`)
+    const results = await safeFetch('api/Credit')
     return {
       creditsBlob: results.data
     }

@@ -1,4 +1,4 @@
-import axios from 'axios'
+import safeFetch from '@/utilities/safeFetch'
 import { Module, VuexModule, MutationAction } from 'vuex-module-decorators'
 import { SpeciesType } from '@/types/characterTypes.ts'
 
@@ -8,7 +8,7 @@ export default class Species extends VuexModule {
 
   @MutationAction({ mutate: ['species'] })
   async fetchSpecies () {
-    const results = await axios.get(`${process.env.VUE_APP_sw5eapiurl}/api/Species`)
+    const results = await safeFetch('api/Species')
     return {
       species: results.data
     }

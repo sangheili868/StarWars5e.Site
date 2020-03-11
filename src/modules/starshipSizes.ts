@@ -1,4 +1,4 @@
-import axios from 'axios'
+import safeFetch from '@/utilities/safeFetch'
 import { Module, VuexModule, MutationAction } from 'vuex-module-decorators'
 import { StarshipSizeType } from '@/types/starshipTypes'
 
@@ -8,7 +8,7 @@ export default class StarshipSizes extends VuexModule {
 
   @MutationAction({ mutate: ['starshipSizes'] })
   async fetchStarshipSizes () {
-    const results = await axios.get(`${process.env.VUE_APP_sw5eapiurl}/api/StarshipBaseSize`)
+    const results = await safeFetch('api/StarshipBaseSize')
     return {
       starshipSizes: results.data
     }

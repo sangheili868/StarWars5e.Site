@@ -1,4 +1,4 @@
-import axios from 'axios'
+import safeFetch from '@/utilities/safeFetch'
 import { Module, VuexModule, MutationAction } from 'vuex-module-decorators'
 import { FeatType } from '@/types/characterTypes'
 
@@ -8,7 +8,7 @@ export default class Feats extends VuexModule {
 
   @MutationAction({ mutate: ['feats'] })
   async fetchFeats () {
-    const results = await axios.get(`${process.env.VUE_APP_sw5eapiurl}/api/Feat`)
+    const results = await safeFetch('api/Feat')
     return {
       feats: results.data
     }

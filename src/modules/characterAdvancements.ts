@@ -1,4 +1,4 @@
-import axios from 'axios'
+import safeFetch from '@/utilities/safeFetch'
 import { Module, VuexModule, MutationAction } from 'vuex-module-decorators'
 import { CharacterAdvancementType } from '@/types/lookupTypes'
 
@@ -8,7 +8,7 @@ export default class CharacterAdvancements extends VuexModule {
 
   @MutationAction({ mutate: ['characterAdvancements'] })
   async fetchCharacterAdvancements () {
-    const results = await axios.get(`${process.env.VUE_APP_sw5eapiurl}/api/CharacterAdvancement`)
+    const results = await safeFetch('api/CharacterAdvancement')
     return {
       characterAdvancements: results.data
     }

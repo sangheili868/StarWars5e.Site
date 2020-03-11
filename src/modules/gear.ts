@@ -1,4 +1,4 @@
-import axios from 'axios'
+import safeFetch from '@/utilities/safeFetch'
 import { Module, VuexModule, MutationAction } from 'vuex-module-decorators'
 import { GearType } from '@/types/lootTypes'
 
@@ -8,7 +8,7 @@ export default class Gear extends VuexModule {
 
   @MutationAction({ mutate: ['gear'] })
   async fetchGear () {
-    const results = await axios.get(`${process.env.VUE_APP_sw5eapiurl}/api/Equipment`)
+    const results = await safeFetch('api/Equipment')
     return {
       gear: results.data.filter(({ equipmentCategory }: GearType) => !['Weapon', 'Armor'].includes(equipmentCategory))
     }

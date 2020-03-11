@@ -1,4 +1,4 @@
-import axios from 'axios'
+import safeFetch from '@/utilities/safeFetch'
 import { Module, VuexModule, MutationAction } from 'vuex-module-decorators'
 import { DeploymentType } from '@/types/starshipTypes.ts'
 
@@ -8,7 +8,7 @@ export default class Deployments extends VuexModule {
 
   @MutationAction({ mutate: ['deployments'] })
   async fetchDeployments () {
-    const results = await axios.get(`${process.env.VUE_APP_sw5eapiurl}/api/StarshipDeployment`)
+    const results = await safeFetch('api/StarshipDeployment')
     return {
       deployments: results.data
     }

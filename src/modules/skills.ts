@@ -1,4 +1,4 @@
-import axios from 'axios'
+import safeFetch from '@/utilities/safeFetch'
 import { Module, VuexModule, MutationAction } from 'vuex-module-decorators'
 import { SkillType } from '@/types/lookupTypes'
 
@@ -8,7 +8,7 @@ export default class Skills extends VuexModule {
 
   @MutationAction({ mutate: ['skills'] })
   async fetchSkills () {
-    const results = await axios.get(`${process.env.VUE_APP_sw5eapiurl}/api/Skills`)
+    const results = await safeFetch('api/Skills')
     return {
       skills: results.data
     }

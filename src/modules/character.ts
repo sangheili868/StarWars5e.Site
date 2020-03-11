@@ -29,16 +29,16 @@ export default class Character extends VuexModule {
       const rootState = this.context.rootState
       return generateCharacter(
         stateOf(this.context).character,
-        rootState.classes.classes,
-        rootState.archetypes.archetypes,
-        rootState.species.species,
-        rootState.equipment.equipment,
-        rootState.powers.powers,
-        rootState.feats.feats,
-        rootState.backgrounds.backgrounds,
-        rootState.characterAdvancements.characterAdvancements,
-        rootState.skills.skills,
-        rootState.conditions.conditions
+        rootState.classes.classes || [],
+        rootState.archetypes.archetypes || [],
+        rootState.species.species || [],
+        rootState.equipment.equipment || [],
+        rootState.powers.powers || [],
+        rootState.feats.feats || [],
+        rootState.backgrounds.backgrounds || [],
+        rootState.characterAdvancements.characterAdvancements || [],
+        rootState.skills.skills || [],
+        rootState.conditions.conditions || []
       )
     }
   }

@@ -1,4 +1,4 @@
-import axios from 'axios'
+import safeFetch from '@/utilities/safeFetch'
 import { Module, VuexModule, MutationAction } from 'vuex-module-decorators'
 import { WeaponPropertyType } from '@/types/lootTypes'
 import _ from 'lodash'
@@ -9,7 +9,7 @@ export default class WeaponProperties extends VuexModule {
 
   @MutationAction({ mutate: ['weaponProperties'] })
   async fetchWeaponProperties () {
-    const results = await axios.get(`${process.env.VUE_APP_sw5eapiurl}/api/WeaponProperty`)
+    const results = await safeFetch('api/WeaponProperty')
     return {
       weaponProperties: results.data
     }

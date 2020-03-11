@@ -15,6 +15,7 @@
   import { range, isEmpty, isEqual, merge, get, set, camelCase } from 'lodash'
   import baseCharacter from '@/modules/CharacterEngine/baseCharacter.json'
   import validateCharacter from '@/modules/CharacterEngine/validateCharacter'
+  import Alert from '@/components/Alert.vue'
 
   const characterModule = namespace('character')
   const classesModule = namespace('classes')
@@ -35,7 +36,8 @@
       CharacterSheet,
       JSONReader,
       JSONWriter,
-      Loading
+      Loading,
+      Alert
     }
   })
   export default class Characters extends Vue {
@@ -126,15 +128,7 @@
 <template lang="pug">
   div(v-if="hasFetchedData")
     vue-headful(:title="title")
-    v-banner(
-      :value="isDirty",
-      sticky,
-      color="white",
-      icon-color="red",
-      :icon="$vuetify.breakpoint.name === 'xs' ? '' : 'fa-exclamation'",
-      mobile-break-point="600",
-      :class="$style.banner"
-    ).white--text.mb-3
+    Alert(:value="isDirty")
       div.d-flex.align-center.justify-space-around
         div Character has unsaved changes!
         JSONWriter(:jsonData="character", v-bind="{ filename }", @save="setClean").ml-1 Save
@@ -157,23 +151,3 @@
     )
   Loading(v-else)
 </template>
-
-<style module lang="scss">
-  @import '@/assets/styles/colors.scss';
-
-  .banner {
-    z-index: 4 !important;
-    background-color: #f44336 !important;
-    border-radius: 10px !important;
-  }
-</style>
-
-<style lang="scss">
-  .v-banner.v-banner--is-mobile .v-banner__wrapper {
-    padding: 5px;
-  }
-
-  .v-banner__text {
-    flex-grow: 1;
-  }
-</style>

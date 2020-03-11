@@ -1,4 +1,4 @@
-import axios from 'axios'
+import safeFetch from '@/utilities/safeFetch'
 import { Module, VuexModule, MutationAction } from 'vuex-module-decorators'
 import { VentureType } from '@/types/starshipTypes'
 
@@ -8,7 +8,7 @@ export default class Ventures extends VuexModule {
 
   @MutationAction({ mutate: ['ventures'] })
   async fetchVentures () {
-    const results = await axios.get(`${process.env.VUE_APP_sw5eapiurl}/api/StarshipVenture`)
+    const results = await safeFetch('api/StarshipVenture')
     return {
       ventures: results.data
     }

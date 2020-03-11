@@ -4,6 +4,7 @@ import { Module, VuexModule, MutationAction } from 'vuex-module-decorators'
 export default class Ui extends VuexModule {
   isSideBarOpen: boolean | null = null
   isDarkSide: boolean | null = false
+  isOffline: boolean | null = false
 
   @MutationAction({ mutate: ['isSideBarOpen'] })
   async updateSideBar (value: boolean) {
@@ -17,5 +18,10 @@ export default class Ui extends VuexModule {
     return {
       isDarkSide: value
     }
+  }
+
+  @MutationAction({ mutate: ['isOffline'] })
+  async setOffline (isOffline: boolean) {
+    return { isOffline }
   }
 }

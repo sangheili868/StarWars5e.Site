@@ -1,5 +1,5 @@
 import { RawCharacterType } from '@/types/rawCharacterTypes'
-import { FightingStyleType, FeatType, FeatureType, FeaturesType, BackgroundType } from '@/types/characterTypes'
+import { FightingStyleType, FeatureType, FeaturesType, BackgroundType } from '@/types/characterTypes'
 import { chain, compact } from 'lodash'
 import { CompletedFeatureType, AbilityScoresType } from '@/types/completeCharacterTypes'
 
@@ -60,17 +60,18 @@ export default function generateFeatures (
   const myFightingStyles = compact(rawCharacter.classes
     .map(({ fightingStyle }) => fightingStyles.find(({ name }) => name === fightingStyle))
   )
+  const backgroundFeature = myBackground ? [{
+    name: myBackground.featureName,
+    combat: false,
+    description: myBackground.featureText
+  }] : []
   const myFeatures = [
     ...myClassFeatures,
     ...myArchetypeFeatures,
     ...myFeats,
     ...myFightingStyles,
     ...mySpeciesFeatures,
-    {
-      name: myBackground.featureName,
-      combat: false,
-      description: myBackground.featureText
-    }
+    ...backgroundFeature
   ].map(feature => calculateUsage(rawCharacter, abilityScores, feature as CompletedFeatureType))
 
   return {

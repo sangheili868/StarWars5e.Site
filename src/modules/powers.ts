@@ -1,4 +1,4 @@
-import axios from 'axios'
+import safeFetch from '@/utilities/safeFetch'
 import { Module, VuexModule, MutationAction } from 'vuex-module-decorators'
 import { PowerType } from '@/types/characterTypes.ts'
 
@@ -8,7 +8,7 @@ export default class Power extends VuexModule {
 
   @MutationAction({ mutate: ['powers'] })
   async fetchPowers () {
-    const results = await axios.get(`${process.env.VUE_APP_sw5eapiurl}/api/Power`)
+    const results = await safeFetch('api/Power')
     return {
       powers: results.data
     }

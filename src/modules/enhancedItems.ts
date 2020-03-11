@@ -1,4 +1,4 @@
-import axios from 'axios'
+import safeFetch from '@/utilities/safeFetch'
 import { Module, VuexModule, MutationAction } from 'vuex-module-decorators'
 import { EnhancedItemType } from '@/types/lootTypes.ts'
 
@@ -8,7 +8,7 @@ export default class EnhancedItems extends VuexModule {
 
   @MutationAction({ mutate: ['enhancedItems'] })
   async fetchEnhancedItems () {
-    const results = await axios.get(`${process.env.VUE_APP_sw5eapiurl}/api/EnhancedItem`)
+    const results = await safeFetch('api/EnhancedItem')
     return {
       enhancedItems: results.data
     }

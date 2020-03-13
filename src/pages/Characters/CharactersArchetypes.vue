@@ -32,7 +32,7 @@
         .filter(({ contentType }) => !this.isInHandbook || contentType === 'Core')
         .map(archetype => ({
           ...archetype,
-          to: `/${page}/archetypes/${archetype.name}`
+          to: `/${page}/archetypes/${encodeURIComponent(archetype.name)}`
         })).value()
     }
 

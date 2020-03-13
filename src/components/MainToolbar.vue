@@ -91,7 +91,7 @@
     }
 
     get isPageWithNavigation () {
-      return ['phb', 'wh'].some(page => this.$route.path.includes(page))
+      return ['phb', 'wh', 'sotg', 'snv'].some(page => this.$route.path.includes(page))
     }
 
     get darkColor () {

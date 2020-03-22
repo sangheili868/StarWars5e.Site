@@ -23,5 +23,5 @@
 </script>
 
 <template lang="pug">
-  VueMarkdown(:source="source", toc=true, toc-anchor-link-symbol="", @rendered="jumpToHash")
+  VueMarkdown(:source="source", toc=true, toc-anchor-link-symbol="", @rendered="jumpToHash").overflow-x-auto
 </template>

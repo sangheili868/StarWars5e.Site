@@ -12,7 +12,7 @@ Set the environment variables:
 
 `NODE_ENV` = "development" or "production"
 
-`VUE_APP_sw5eapiurl` = the URL of the API (https://localhost:44341 for local dev)
+`VUE_APP_sw5eapiurl` = the URL of the API (http://localhost:44341 for local dev)
 
 ### Install dependencies
 ```

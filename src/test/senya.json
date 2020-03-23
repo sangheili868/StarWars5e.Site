@@ -87,12 +87,12 @@
   "credits": 260,
   "equipment": [
     {
-      "name": "Durasteel armor",
+      "name": "Fiber armor",
       "quantity": 1,
-      "equipped": true
+      "equipped": false
     },
     {
-      "name": "Heavy shield",
+      "name": "Battle armor",
       "equipped": true,
       "quantity": 1
     },
@@ -117,7 +117,7 @@
       "equipped": true
     },
     {
-      "name": "Medkit",
+      "name": "Traumakit",
       "quantity": 2
     },
     {
@@ -157,15 +157,16 @@
       "quantity": 1
     },
     {
-      "name": "Commlink",
-      "quantity": 4
+      "name": "Heavy physical shield",
+      "quantity": 1,
+      "equipped": true
     },
     {
       "name": "Medium shield generator",
       "quantity": 1
     },
     {
-      "name": "Light battle armor",
+      "name": "Fiber armor",
       "quantity": 1
     },
     {
@@ -191,6 +192,12 @@
     "featuresTimesUsed": {},
     "conditions": [],
     "exhaustion": 0,
+    "highLevelCasting": {
+      "level6": false,
+      "level7": false,
+      "level8": false,
+      "level9": false
+    },
     "unspentLevels": 0
   },
   "tweaks": {
@@ -331,7 +338,9 @@
   ],
   "customFeats": [],
   "customTechPowers": [],
-  "customForcePowers": [ "Battle Precognition"],
+  "customForcePowers": [
+    "Battle Precognition"
+  ],
   "settings": {
     "isFixedHitPoints": true,
     "abilityScoreMethod": "Point Buy"

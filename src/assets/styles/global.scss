@@ -175,3 +175,10 @@ table.v-table {
     border-color: $darkSideDarkGrey;
   }
 }
+
+@media print {
+  @page {
+    size: auto;
+    margin: 0;
+  }
+}

@@ -1,6 +1,7 @@
 import PageNester from '@/components/PageNester.vue'
 import MyContentPage from './MyContentPage.vue'
 import Characters from './Characters.vue'
+import CharacterPrint from './CharacterSheet/CharacterPrint.vue'
 import { Route } from 'vue-router'
 
 export default {
@@ -21,6 +22,10 @@ export default {
       meta: {
         title: 'Characters'
       }
+    },
+    {
+      path: '/myContent/characters/print',
+      component: CharacterPrint
     }
   ]
 }

@@ -3,15 +3,13 @@
   import MainToolbar from '@/components/MainToolbar.vue'
   import FragmentModal from '@/components/FragmentModal.vue'
   import { namespace } from 'vuex-class'
-  import CharacterSheetSettingsPDF from '@/pages/MyContent/CharacterSheet/CharacterSheetSettingsPDF.vue'
 
   const uiModule = namespace('ui')
 
   @Component({
     components: {
       MainToolbar,
-      FragmentModal,
-      CharacterSheetSettingsPDF
+      FragmentModal
     }
   })
   export default class App extends Vue {
@@ -23,9 +21,8 @@
   v-app(:dark="isDarkSide")
     MainToolbar
     FragmentModal
-    CharacterSheetSettingsPDF
-    v-content(:class="[ $style.content, { [$style.darkSide]: isDarkSide } ]")
-      v-container(fluid)
+    v-content(:class="[ $style.content, $style.noPadding, { [$style.darkSide]: isDarkSide } ]")
+      v-container(fluid, :class="$style.noPadding")
         router-view
     router-view(name="navigation")
 </template>
@@ -40,6 +37,12 @@
 
     &.darkSide {
       background: $darkSideGradient;
+    }
+  }
+
+  @media print {
+    .noPadding {
+      padding: 0 !important;
     }
   }
 </style>

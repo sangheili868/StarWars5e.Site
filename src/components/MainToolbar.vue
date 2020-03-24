@@ -119,7 +119,7 @@
 </script>
 
 <template lang="pug">
-  v-app-bar(app, clipped-left, :color="$vuetify.theme.dark ? 'secondary' : undefined")
+  v-app-bar(app, clipped-left, :color="$vuetify.theme.dark ? 'secondary' : undefined").d-print-none
     v-app-bar-nav-icon(v-if="isPageWithNavigation", @click="handleSideIconClick").hidden-md-and-up
     v-toolbar-title
       router-link(to="/")

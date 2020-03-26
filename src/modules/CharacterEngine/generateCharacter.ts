@@ -39,6 +39,9 @@ export default function generateCharacter (
   const speciesFeatures = {} as FeaturesType
   const fightingStyles = [] as FightingStyleType[]
 
+  const classText = rawCharacter.classes
+    .map(({ name, levels, archetype }) => `${name}${archetype ? ` (${archetype.name})` : ''} ${levels}`)
+    .join(', ')
   const myClasses = rawCharacter.classes.map(({ name }) => classes.find(myClass => name === myClass.name))
   if (myClasses.includes(undefined)) console.error('Class not found from ' + rawCharacter.classes.map(({ name }) => name))
   const myFoundClasses = compact(myClasses)
@@ -95,7 +98,7 @@ export default function generateCharacter (
     customForcePowers: rawCharacter.customForcePowers,
     numCustomFeats: rawCharacter.customFeats.length,
     currentLevel,
-    classes: rawCharacter.classes.map(({ name, levels, archetype }) => ({ name, levels, archetype: archetype && archetype.name })),
+    classText,
     alignment: rawCharacter.characteristics.alignment,
     species: rawCharacter.species.name,
     background: rawCharacter.background.name,

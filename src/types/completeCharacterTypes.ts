@@ -114,11 +114,7 @@ export interface CompleteCharacterType {
   name: string,
   image: string | null,
   currentLevel: number,
-  classes: {
-    name: string,
-    levels: number,
-    archetype?: string
-  }[],
+  classText: string,
   alignment: string,
   species: string,
   background: string,

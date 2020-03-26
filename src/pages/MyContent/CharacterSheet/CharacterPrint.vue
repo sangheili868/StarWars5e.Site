@@ -10,9 +10,9 @@
   interface field {
     top: Number,
     left: Number,
-    width: Number,
+    width?: Number,
     myClass?: String,
-    text: String | Number
+    text?: String | Number
   }
 
   @Component
@@ -37,57 +37,90 @@
         .value()
     }
 
+    isProficient (proficiency: string) {
+      if (proficiency === 'proficient') return this.myClasses.dot
+      else if (proficiency === 'expertise') return this.myClasses.diamond
+      else return ''
+    }
+
     get pages (): field[][] {
       return [
         [
-          { top: 99, left: 77, width: 235, myClass: 'text-left', text: this.completeCharacter.name },
+          // Top Box
+          { top: 99, left: 77, width: 235, myClass: this.myClasses.big + ' text-left', text: this.completeCharacter.name },
+          { top: 52, left: 357, width: 245, myClass: 'text-left', text: this.completeCharacter.classText },
+
           // Strength
-          { top: 168, left: 81, width: 48, myClass: this.myClasses.big, text: addPlus(this.completeCharacter.abilityScores.Strength.modifier) },
-          { top: 200, left: 88, width: 34, text: this.completeCharacter.abilityScores.Strength.value },
-          { top: 179, left: 164, width: 23, myClass: 'caption', text: addPlus(this.completeCharacter.abilityScores.Strength.savingThrow.modifier) },
-          { top: 200, left: 164, width: 23, myClass: 'caption', text: addPlus(this.skillsMap.Athletics.modifier) },
+          { top: 168, left: 81, width: 48, myClass: this.myClasses.bigger, text: addPlus(this.completeCharacter.abilityScores.Strength.modifier) },
+          { top: 200, left: 88, width: 34, myClass: this.myClasses.big, text: this.completeCharacter.abilityScores.Strength.value },
+          { top: 187, left: 146, myClass: this.isProficient(this.completeCharacter.abilityScores.Strength.savingThrow.proficiency) },
+          { top: 179, left: 164, width: 23, text: addPlus(this.completeCharacter.abilityScores.Strength.savingThrow.modifier) },
+          { top: 207, left: 138, myClass: this.isProficient(this.skillsMap.Athletics.proficiency) },
+          { top: 200, left: 164, width: 23, text: addPlus(this.skillsMap.Athletics.modifier) },
 
           // Dexterity
-          { top: 241, left: 81, width: 48, myClass: this.myClasses.big, text: addPlus(this.completeCharacter.abilityScores.Dexterity.modifier) },
-          { top: 273, left: 88, width: 34, text: this.completeCharacter.abilityScores.Dexterity.value },
-          { top: 253, left: 164, width: 23, myClass: 'caption', text: addPlus(this.completeCharacter.abilityScores.Dexterity.savingThrow.modifier) },
-          { top: 272, left: 164, width: 23, myClass: 'caption', text: addPlus(this.skillsMap.Acrobatics.modifier) },
-          { top: 290, left: 164, width: 23, myClass: 'caption', text: addPlus(this.skillsMap['Sleight of Hand'].modifier) },
-          { top: 307, left: 164, width: 23, myClass: 'caption', text: addPlus(this.skillsMap.Stealth.modifier) },
+          { top: 241, left: 81, width: 48, myClass: this.myClasses.bigger, text: addPlus(this.completeCharacter.abilityScores.Dexterity.modifier) },
+          { top: 273, left: 88, width: 34, myClass: this.myClasses.big, text: this.completeCharacter.abilityScores.Dexterity.value },
+          { top: 261, left: 146, myClass: this.isProficient(this.completeCharacter.abilityScores.Dexterity.savingThrow.proficiency) },
+          { top: 253, left: 164, width: 23, text: addPlus(this.completeCharacter.abilityScores.Dexterity.savingThrow.modifier) },
+          { top: 280, left: 138, myClass: this.isProficient(this.skillsMap.Acrobatics.proficiency) },
+          { top: 272, left: 164, width: 23, text: addPlus(this.skillsMap.Acrobatics.modifier) },
+          { top: 298, left: 138, myClass: this.isProficient(this.skillsMap['Sleight of Hand'].proficiency) },
+          { top: 290, left: 164, width: 23, text: addPlus(this.skillsMap['Sleight of Hand'].modifier) },
+          { top: 316, left: 138, myClass: this.isProficient(this.skillsMap.Stealth.proficiency) },
+          { top: 307, left: 164, width: 23, text: addPlus(this.skillsMap.Stealth.modifier) },
 
           // Constitution
-          { top: 336, left: 81, width: 48, myClass: this.myClasses.big, text: addPlus(this.completeCharacter.abilityScores.Constitution.modifier) },
-          { top: 368, left: 88, width: 34, text: this.completeCharacter.abilityScores.Constitution.value },
-          { top: 348, left: 164, width: 23, myClass: 'caption', text: addPlus(this.completeCharacter.abilityScores.Constitution.savingThrow.modifier) },
+          { top: 336, left: 81, width: 48, myClass: this.myClasses.bigger, text: addPlus(this.completeCharacter.abilityScores.Constitution.modifier) },
+          { top: 368, left: 88, width: 34, myClass: this.myClasses.big, text: this.completeCharacter.abilityScores.Constitution.value },
+          { top: 357, left: 146, myClass: this.isProficient(this.completeCharacter.abilityScores.Constitution.savingThrow.proficiency) },
+          { top: 348, left: 164, width: 23, text: addPlus(this.completeCharacter.abilityScores.Constitution.savingThrow.modifier) },
 
           // Intelligence
-          { top: 410, left: 81, width: 48, myClass: this.myClasses.big, text: addPlus(this.completeCharacter.abilityScores.Intelligence.modifier) },
-          { top: 442, left: 88, width: 34, text: this.completeCharacter.abilityScores.Intelligence.value },
-          { top: 421, left: 164, width: 23, myClass: 'caption', text: addPlus(this.completeCharacter.abilityScores.Intelligence.savingThrow.modifier) },
-          { top: 441, left: 164, width: 23, myClass: 'caption', text: addPlus(this.skillsMap.Investigation.modifier) },
-          { top: 459, left: 164, width: 23, myClass: 'caption', text: addPlus(this.skillsMap.Lore.modifier) },
-          { top: 476, left: 164, width: 23, myClass: 'caption', text: addPlus(this.skillsMap.Nature.modifier) },
-          { top: 493, left: 164, width: 23, myClass: 'caption', text: addPlus(this.skillsMap.Piloting.modifier) },
-          { top: 511, left: 164, width: 23, myClass: 'caption', text: addPlus(this.skillsMap.Technology.modifier) },
+          { top: 410, left: 81, width: 48, myClass: this.myClasses.bigger, text: addPlus(this.completeCharacter.abilityScores.Intelligence.modifier) },
+          { top: 442, left: 88, width: 34, myClass: this.myClasses.big, text: this.completeCharacter.abilityScores.Intelligence.value },
+          { top: 430, left: 146, myClass: this.isProficient(this.completeCharacter.abilityScores.Intelligence.savingThrow.proficiency) },
+          { top: 421, left: 164, width: 23, text: addPlus(this.completeCharacter.abilityScores.Intelligence.savingThrow.modifier) },
+          { top: 450, left: 138, myClass: this.isProficient(this.skillsMap.Investigation.proficiency) },
+          { top: 441, left: 164, width: 23, text: addPlus(this.skillsMap.Investigation.modifier) },
+          { top: 467, left: 138, myClass: this.isProficient(this.skillsMap.Lore.proficiency) },
+          { top: 459, left: 164, width: 23, text: addPlus(this.skillsMap.Lore.modifier) },
+          { top: 484, left: 138, myClass: this.isProficient(this.skillsMap.Nature.proficiency) },
+          { top: 476, left: 164, width: 23, text: addPlus(this.skillsMap.Nature.modifier) },
+          { top: 502, left: 138, myClass: this.isProficient(this.skillsMap.Piloting.proficiency) },
+          { top: 493, left: 164, width: 23, text: addPlus(this.skillsMap.Piloting.modifier) },
+          { top: 519, left: 138, myClass: this.isProficient(this.skillsMap.Technology.proficiency) },
+          { top: 511, left: 164, width: 23, text: addPlus(this.skillsMap.Technology.modifier) },
 
           // Wisdom
-          { top: 541, left: 81, width: 48, myClass: this.myClasses.big, text: addPlus(this.completeCharacter.abilityScores.Wisdom.modifier) },
-          { top: 573, left: 88, width: 34, text: this.completeCharacter.abilityScores.Wisdom.value },
-          { top: 552, left: 164, width: 23, myClass: 'caption', text: addPlus(this.completeCharacter.abilityScores.Wisdom.savingThrow.modifier) },
-          { top: 571, left: 164, width: 23, myClass: 'caption', text: addPlus(this.skillsMap['Animal Handling'].modifier) },
-          { top: 589, left: 164, width: 23, myClass: 'caption', text: addPlus(this.skillsMap.Insight.modifier) },
-          { top: 607, left: 164, width: 23, myClass: 'caption', text: addPlus(this.skillsMap.Medicine.modifier) },
-          { top: 624, left: 164, width: 23, myClass: 'caption', text: addPlus(this.skillsMap.Perception.modifier) },
-          { top: 641, left: 164, width: 23, myClass: 'caption', text: addPlus(this.skillsMap.Survival.modifier) },
+          { top: 541, left: 81, width: 48, myClass: this.myClasses.bigger, text: addPlus(this.completeCharacter.abilityScores.Wisdom.modifier) },
+          { top: 573, left: 88, width: 34, myClass: this.myClasses.big, text: this.completeCharacter.abilityScores.Wisdom.value },
+          { top: 561, left: 146, myClass: this.isProficient(this.completeCharacter.abilityScores.Wisdom.savingThrow.proficiency) },
+          { top: 552, left: 164, width: 23, text: addPlus(this.completeCharacter.abilityScores.Wisdom.savingThrow.modifier) },
+          { top: 580, left: 138, myClass: this.isProficient(this.skillsMap['Animal Handling'].proficiency) },
+          { top: 571, left: 164, width: 23, text: addPlus(this.skillsMap['Animal Handling'].modifier) },
+          { top: 598, left: 138, myClass: this.isProficient(this.skillsMap.Insight.proficiency) },
+          { top: 589, left: 164, width: 23, text: addPlus(this.skillsMap.Insight.modifier) },
+          { top: 615, left: 138, myClass: this.isProficient(this.skillsMap.Medicine.proficiency) },
+          { top: 607, left: 164, width: 23, text: addPlus(this.skillsMap.Medicine.modifier) },
+          { top: 632, left: 138, myClass: this.isProficient(this.skillsMap.Perception.proficiency) },
+          { top: 624, left: 164, width: 23, text: addPlus(this.skillsMap.Perception.modifier) },
+          { top: 650, left: 138, myClass: this.isProficient(this.skillsMap.Survival.proficiency) },
+          { top: 641, left: 164, width: 23, text: addPlus(this.skillsMap.Survival.modifier) },
 
           // Charisma
-          { top: 671, left: 81, width: 48, myClass: this.myClasses.big, text: addPlus(this.completeCharacter.abilityScores.Charisma.modifier) },
-          { top: 703, left: 88, width: 34, text: this.completeCharacter.abilityScores.Charisma.value },
-          { top: 682, left: 164, width: 23, myClass: 'caption', text: addPlus(this.completeCharacter.abilityScores.Charisma.savingThrow.modifier) },
-          { top: 702, left: 164, width: 23, myClass: 'caption', text: addPlus(this.skillsMap.Deception.modifier) },
-          { top: 719, left: 164, width: 23, myClass: 'caption', text: addPlus(this.skillsMap.Intimidation.modifier) },
-          { top: 737, left: 164, width: 23, myClass: 'caption', text: addPlus(this.skillsMap.Performance.modifier) },
-          { top: 755, left: 164, width: 23, myClass: 'caption', text: addPlus(this.skillsMap.Persuasion.modifier) }
+          { top: 671, left: 81, width: 48, myClass: this.myClasses.bigger, text: addPlus(this.completeCharacter.abilityScores.Charisma.modifier) },
+          { top: 703, left: 88, width: 34, myClass: this.myClasses.big, text: this.completeCharacter.abilityScores.Charisma.value },
+          { top: 691, left: 146, myClass: this.isProficient(this.completeCharacter.abilityScores.Charisma.savingThrow.proficiency) },
+          { top: 682, left: 164, width: 23, text: addPlus(this.completeCharacter.abilityScores.Charisma.savingThrow.modifier) },
+          { top: 710, left: 138, myClass: this.isProficient(this.skillsMap.Deception.proficiency) },
+          { top: 702, left: 164, width: 23, text: addPlus(this.skillsMap.Deception.modifier) },
+          { top: 728, left: 138, myClass: this.isProficient(this.skillsMap.Intimidation.proficiency) },
+          { top: 719, left: 164, width: 23, text: addPlus(this.skillsMap.Intimidation.modifier) },
+          { top: 746, left: 138, myClass: this.isProficient(this.skillsMap.Performance.proficiency) },
+          { top: 737, left: 164, width: 23, text: addPlus(this.skillsMap.Performance.modifier) },
+          { top: 763, left: 138, myClass: this.isProficient(this.skillsMap.Persuasion.proficiency) },
+          { top: 755, left: 164, width: 23, text: addPlus(this.skillsMap.Persuasion.modifier) }
         ],
         [],
         [],
@@ -131,14 +164,48 @@
     .text {
       position: absolute;
       font-family: 'Russo One', sans-serif;
-      text-transform: capitalize;
-      border: 1px solid red;
+      // border: 1px solid red;
       white-space: nowrap;
       overflow: hidden;
       text-align: center;
+      font-size: 12px;
 
       &.big {
+        font-size: 16px;
+      }
+
+      &.bigger {
         font-size: 20px;
+      }
+
+      &.dot, &.diamond::before {
+        background-color: $black;
+        border-radius: 100px;
+        width: 8px;
+        height: 8px;
+        font-size: 6px;
+      }
+
+      &.diamond {
+        height: 13px;
+        width: 27px;
+        transform: translate(-2px, -2px);
+
+        &::before {
+          content: '.';
+          display: inline-block;
+          transform: translate(-4px, -5px);
+        }
+
+        &::after {
+          background-color: $black;
+          width: 7px;
+          height: 7px;
+          font-size: 6px;
+          transform: translate(3px, -4px) rotate(45deg) ;
+          display: inline-block;
+          content: '.';
+        }
       }
     }
   }

@@ -16,15 +16,6 @@
   })
   export default class CharacterSheetTop extends Vue {
     @Prop(Object) readonly completeCharacter!: CompleteCharacterType
-
-    get classText () {
-      return this.completeCharacter.species + ' ' + this.completeCharacter.classes
-        .map(({ name, levels, archetype }) => {
-          const archetypeText = archetype ? ` (${archetype})` : ''
-          return `${name}${archetypeText} ${levels}`
-        })
-        .join(', ')
-    }
   }
 </script>
 
@@ -33,7 +24,7 @@
     v-img(:src="completeCharacter.image", contain, max-height="90", max-width="90", min-width="100")
     div.text-left
       h1 {{ completeCharacter.name }}
-      h5 {{ classText }}
+      h5 {{ completeCharacter.species }} {{ completeCharacter.classText }}
       CharacterSheetExperience(
         v-bind="{ completeCharacter }",
         @updateCharacter="newCharacter => $emit('updateCharacter', newCharacter)"

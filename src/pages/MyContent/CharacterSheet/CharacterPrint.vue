@@ -3,7 +3,7 @@
   import { CompleteCharacterType } from '@/types/completeCharacterTypes'
   import { namespace } from 'vuex-class'
   import addPlus from '@/utilities/addPlus'
-  import { chain } from 'lodash'
+  import { chain, startCase } from 'lodash'
   import BackButton from '@/components/BackButton.vue'
 
   const characterModule = namespace('character')
@@ -12,6 +12,7 @@
     top: Number,
     left: Number,
     width?: Number,
+    height?: Number,
     fontSize?: Number,
     myClass?: String,
     text?: String | Number
@@ -41,17 +42,68 @@
         .value()
     }
 
+    get armorList (): field[] {
+      return this.completeCharacter.equipment
+        .filter(({ equipped, equipmentCategory }) => equipped && equipmentCategory === 'Armor')
+        .map(({ name }, index) => ({
+          top: 242 + index * 17,
+          left: 324,
+          width: 169,
+          myClass: this.myClasses.openSans + ' text-left',
+          text: name
+        }))
+    }
+
+    get hitDiceList (): field {
+      const text = this.completeCharacter.hitPoints.hitDice.map(({ size, maximum }) => maximum + size).join(' ')
+      return { top: 381, left: 657, width: 64, text }
+    }
+
+    get weaponList (): field[] {
+      return this.completeCharacter.weapons.map((weapon, index) => {
+        const { damageNumberOfDice, damageDieType, damageBonus, damageType } = weapon
+        const hasDice = damageNumberOfDice && damageDieType
+        const damageModifier = damageBonus ? addPlus(damageBonus) : ''
+        const damage = hasDice ? damageNumberOfDice + 'd' + damageDieType + damageModifier : damageBonus
+        const properties = (weapon.properties || []).join(', ')
+        return [
+          { top: 529 + index * 42, left: 312, width: 128, myClass: 'text-left', text: weapon.name },
+          { top: 529 + index * 42, left: 442, width: 60, myClass: this.myClasses.openSans, text: addPlus(weapon.attackBonus || 0) },
+          { top: 529 + index * 42, left: 504, width: 118, myClass: this.myClasses.openSans, text: damage + ' ' + damageType },
+          { top: 548 + index * 42, left: 313, width: 424, myClass: this.myClasses.openSans + ' text-left', text: properties }
+        ]
+      }).flat()
+    }
+
+    get proficienciesList (): field {
+      const proficiencies = [
+        ...this.completeCharacter.proficiencies.map(startCase),
+        ...this.completeCharacter.customProficiencies.map(({ name, proficiencyLevel }, index) =>
+          startCase(name) + (proficiencyLevel === 'expertise' ? ' (Expertise)' : '')
+        )
+      ].join(', ')
+      return {
+        top: 34,
+        left: 70,
+        width: 212,
+        height: 160,
+        myClass: this.myClasses.openSans + ' ' + this.myClasses.multiline,
+        text: proficiencies
+      }
+    }
+
     isProficient (proficiency: string) {
       if (proficiency === 'proficient') return this.myClasses.dot
       else if (proficiency === 'expertise') return this.myClasses.diamond
       else return ''
     }
 
-    setStyle ({ top, left, width, fontSize }: field) {
+    setStyle ({ top, left, width, height, fontSize }: field) {
       return {
         top: top + 'px',
         left: left + 'px',
         width: width + 'px',
+        height: height + 'px',
         ...(fontSize ? { 'font-size': fontSize + 'px' } : {})
       }
     }
@@ -145,13 +197,25 @@
           { top: 763, left: 138, myClass: this.isProficient(this.skillsMap.Persuasion.proficiency) },
           { top: 755, left: 164, width: 23, text: addPlus(this.skillsMap.Persuasion.modifier) },
 
+          // Senses & Movement
+          { top: 818, left: 79, width: 42, fontSize: 16, text: this.completeCharacter.passivePerception },
+          { top: 908, left: 86, width: 42, text: this.completeCharacter.vision },
+          { top: 958, left: 86, width: 42, text: this.completeCharacter.speed.base },
+          { top: 960, left: 151, width: 46, fontSize: 10, text: this.completeCharacter.speed.hour },
+          { top: 960, left: 218, width: 46, fontSize: 10, text: this.completeCharacter.speed.day },
+
           // Combat
           { top: 155, left: 302, width: 42, fontSize: 20, text: addPlus(this.completeCharacter.proficiencyBonus) },
           { top: 154, left: 535, width: 37, fontSize: 20, text: addPlus(this.completeCharacter.initiative) },
           { top: 203, left: 306, width: 41, fontSize: 20, text: this.completeCharacter.armorClass },
-          { top: 210, left: 665, width: 64, fontSize: 20, text: this.completeCharacter.hitPoints.maximum }
+          ...this.armorList,
+          { top: 210, left: 665, width: 64, fontSize: 20, text: this.completeCharacter.hitPoints.maximum },
+          this.hitDiceList,
+          ...this.weaponList
         ],
-        [],
+        [
+          this.proficienciesList
+        ],
         [],
         []
       ]
@@ -193,11 +257,22 @@
     .text {
       position: absolute;
       font-family: 'Russo One', sans-serif;
-      // border: 1px solid red;
+      border: 1px solid red;
       white-space: nowrap;
       overflow: hidden;
       text-align: center;
       font-size: 12px;
+
+      &.openSans {
+        font-family: 'Open Sans', sans-serif;
+      }
+
+      &.multiline {
+        text-align: left;
+        overflow-x: auto;
+        overflow-y: hidden;
+        white-space: normal;
+      }
 
       &.dot, &.diamond::before {
         background-color: $black;

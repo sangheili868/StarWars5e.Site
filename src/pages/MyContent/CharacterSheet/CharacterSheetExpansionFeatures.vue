@@ -39,6 +39,7 @@
         div(v-if="feature.castingPeriodText") #[strong Casting Time:] {{ feature.castingPeriodText }}
         div(v-if="feature.range") #[strong Range:] {{ feature.range }}
         div(v-if="feature.duration") #[strong Duration:] {{ feature.duration }} {{ feature.concentration ? '(Concentration)' : ''}}
+        div(v-if="feature.prerequisite") #[strong Prerequisite:] {{ feature.prerequisite }}
         br(v-if="feature.castingPeriodText || feature.range || feature.duration")
         VueMarkdown {{ feature.description }}
         div(v-if="feature.customIndex > -1").d-flex.justify-end

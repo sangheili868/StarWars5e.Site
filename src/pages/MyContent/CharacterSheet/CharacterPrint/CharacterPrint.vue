@@ -19,7 +19,7 @@
   export default class CharacterPrint extends Vue {
     @characterModule.Getter completeCharacter!: CompleteCharacterType
 
-    playerName = 'Tyrzaphir'
+    playerName = ''
 
     get myClasses () {
       return ((this as any).$style) as { [key: string]: string }

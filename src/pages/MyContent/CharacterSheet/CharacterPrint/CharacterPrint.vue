@@ -64,7 +64,7 @@
         li Size and vision are missing
         li Only feats show up in the combat features list
         li All items are either equipped or in the backpack
-        li It prints a blank fifth page
+        li There is an extra blank page
     div(v-for="(fields, pageNumber) in pages", :class="$style.page")
       img(:src="require(`@/assets/CharacterSheets/CharacterSheetPage${pageNumber + 1}.png`)", :class="$style.template")
       div(v-for="field in fields", :class="[$style.text, field.myClass]", :style="setStyle(field)") {{ field.text }}

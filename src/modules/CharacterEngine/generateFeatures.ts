@@ -45,7 +45,11 @@ export default function generateFeatures (
   myFeats: CompletedFeatureType[],
   myBackground: BackgroundType,
   abilityScores: AbilityScoresType
-) : { combatFeatures: CompletedFeatureType[], nonCombatFeatures: CompletedFeatureType[] } {
+) : {
+  combatFeatures: CompletedFeatureType[],
+  nonCombatFeatures: CompletedFeatureType[],
+  backgroundFeature: CompletedFeatureType
+} {
   const mySpeciesFeatures = getValidFeatures(speciesFeatures[rawCharacter.species.name], currentLevel)
   const myClassFeatures = rawCharacter.classes.map(({ name: className, levels, discoveries }) =>
     getValidFeatures(classFeatures[className], levels, discoveries)
@@ -60,21 +64,22 @@ export default function generateFeatures (
   const myFightingStyles = compact(rawCharacter.classes
     .map(({ fightingStyle }) => fightingStyles.find(({ name }) => name === fightingStyle))
   )
+  const backgroundFeature = {
+    name: myBackground.featureName,
+    combat: false,
+    description: myBackground.featureText
+  }
   const myFeatures = [
     ...myClassFeatures,
     ...myArchetypeFeatures,
     ...myFeats,
     ...myFightingStyles,
-    ...mySpeciesFeatures,
-    {
-      name: myBackground.featureName,
-      combat: false,
-      description: myBackground.featureText
-    }
+    ...mySpeciesFeatures
   ].map(feature => calculateUsage(rawCharacter, abilityScores, feature as CompletedFeatureType))
 
   return {
     combatFeatures: myFeatures.filter(({ combat }) => combat),
-    nonCombatFeatures: myFeatures.filter(({ combat }) => !combat)
+    nonCombatFeatures: myFeatures.filter(({ combat }) => !combat),
+    backgroundFeature
   }
 }

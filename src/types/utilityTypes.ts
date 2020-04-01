@@ -17,3 +17,13 @@ export interface CharacterValidationType {
   isValid: boolean,
   message: string
 }
+
+export interface printFieldType {
+  top: Number,
+  left: Number,
+  width?: Number,
+  height?: Number,
+  fontSize?: Number,
+  myClass?: String,
+  text?: String | Number
+}

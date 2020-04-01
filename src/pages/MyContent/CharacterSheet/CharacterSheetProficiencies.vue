@@ -15,6 +15,7 @@
   })
   export default class CharacterSheetProficiencies extends Vue {
     @Prop(Array) readonly nonCombatFeatures!: CompletedFeatureType[]
+    @Prop(Array) readonly backgroundFeature!: CompletedFeatureType
     @Prop(Array) readonly customLanguages!: string[]
     @Prop(Array) readonly languages!: string[]
     @Prop(Array) readonly proficiencies!: string[]
@@ -27,7 +28,7 @@
   div
     h3 Background Feature
     CharacterSheetExpansionFeatures(
-      :features="nonCombatFeatures",
+      :features="[ backgroundFeature ]",
       @updateCharacter="newCharacter => $emit('updateCharacter', newCharacter)"
     )
     CharacterSheetProficienciesLanguages(

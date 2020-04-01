@@ -110,6 +110,11 @@ export interface AbilityScoresType {
   [ability: string]: AbilityScoreType
 }
 
+export interface CustomFeaturesType {
+  name: string,
+  content: string
+}
+
 export interface CompleteCharacterType {
   name: string,
   image: string | null,
@@ -160,13 +165,11 @@ export interface CompleteCharacterType {
   forceCasting: false | ForceCastingType,
   combatFeatures: CompletedFeatureType[],
   nonCombatFeatures: CompletedFeatureType[],
+  backgroundFeature: CompletedFeatureType,
   tweaks: TweaksType,
   customLanguages: string[],
   customProficiencies: CustomProficiencyType[],
-  customFeatures: {
-    name: string,
-    content: string
-  }[],
+  customFeatures: CustomFeaturesType[],
   customTechPowers: string[],
   customForcePowers: string[],
   numCustomFeats: number

@@ -1,7 +1,7 @@
 import PageNester from '@/components/PageNester.vue'
 import MyContentPage from './MyContentPage.vue'
 import Characters from './Characters.vue'
-import CharacterPrint from './CharacterSheet/CharacterPrint.vue'
+import CharacterPrint from './CharacterSheet/CharacterPrint/CharacterPrint.vue'
 import { Route } from 'vue-router'
 
 export default {

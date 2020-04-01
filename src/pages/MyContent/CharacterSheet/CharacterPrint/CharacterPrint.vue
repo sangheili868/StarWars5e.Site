@@ -53,21 +53,23 @@
 <template lang="pug">
   div
     BackButton.d-print-none
-    div(:class="$style.playerInput").d-flex.align-center.d-print-none
-      v-text-field(v-model="playerName", label="Player Name", outlined, width="100").mr-4
-      v-btn(color="primary", @click="print").mb-5
-        v-icon.mr-2 fa-print
-        | Print
-    div.d-print-none.caption.text-left Known Issues:
-      ul
-        li Fields have limited space and can be cut off (especially Features)
-        li Size and vision are missing
-        li Only feats show up in the combat features list
-        li All items are either equipped or in the backpack
-        li There is an extra blank page
-    div(v-for="(fields, pageNumber) in pages", :class="$style.page")
-      img(:src="require(`@/assets/CharacterSheets/CharacterSheetPage${pageNumber + 1}.png`)", :class="$style.template")
-      div(v-for="field in fields", :class="[$style.text, field.myClass]", :style="setStyle(field)") {{ field.text }}
+    template(v-if="completeCharacter")
+      div(:class="$style.playerInput").d-flex.align-center.d-print-none
+        v-text-field(v-model="playerName", label="Player Name", outlined, width="100").mr-4
+        v-btn(color="primary", @click="print").mb-5
+          v-icon.mr-2 fa-print
+          | Print
+      div.d-print-none.caption.text-left Known Issues:
+        ul
+          li Fields have limited space and can be cut off (especially Features)
+          li Size and vision are missing
+          li Only feats show up in the combat features list
+          li All items are either equipped or in the backpack
+          li There is an extra blank page
+      div(v-for="(fields, pageNumber) in pages", :class="$style.page")
+        img(:src="require(`@/assets/CharacterSheets/CharacterSheetPage${pageNumber + 1}.png`)", :class="$style.template")
+        div(v-for="field in fields", :class="[$style.text, field.myClass]", :style="setStyle(field)") {{ field.text }}
+    div(v-else) No character loaded
 </template>
 
 <style module lang="scss">

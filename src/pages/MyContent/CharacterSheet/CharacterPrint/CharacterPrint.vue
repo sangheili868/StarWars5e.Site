@@ -52,7 +52,7 @@
 
 <template lang="pug">
   div
-    BackButton.d-print-none
+    BackButton(:label="completeCharacter.name").d-print-none
     template(v-if="completeCharacter")
       div(:class="$style.playerInput").d-flex.align-center.d-print-none
         v-text-field(v-model="playerName", label="Player Name", outlined, width="100").mr-4

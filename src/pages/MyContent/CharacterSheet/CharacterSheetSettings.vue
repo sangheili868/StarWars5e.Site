@@ -20,8 +20,7 @@
       v-btn(block, v-on="on").my-3 Settings
     template(#title) Settings
     template(#text)
-      a(href="/myContent/characters/print")
-        v-btn.d-block.ma-2 Print Character Sheet
+      v-btn(to="/myContent/characters/print").ma-2 Print Character Sheet
       v-btn(color="red", @click="$emit('replaceCharacterProperty', { path: 'tweaks', property: {} })").white--text.ma-2
         | Clear All Tweaks
     template(#actions)

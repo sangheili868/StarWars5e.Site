@@ -4,6 +4,8 @@
 
   @Component
   export default class BackButton extends Vue {
+    @Prop(String) readonly label!: String
+
     get splitRoute () {
       return this.$route.path.split('/')
     }
@@ -23,5 +25,5 @@
   div.text-left
     v-btn(text, :to="parentRoute", exact).secondary--text
       v-icon.mr-2 fa-angle-left
-      | {{ parentRouteName }}
+      | {{ label || parentRouteName }}
 </template>

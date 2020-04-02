@@ -70,7 +70,6 @@
         img(:src="require(`@/assets/CharacterSheets/CharacterSheetPage${pageNumber + 1}.png`)", :class="$style.template")
         div(v-for="field in fields", :class="[$style.text, field.myClass]", :style="setStyle(field)") {{ field.text }}
     div(v-else) No character loaded
-      div If you are on mobile and you see this message, but you have a character loaded, know that we are working on that issue.
 </template>
 
 <style module lang="scss">

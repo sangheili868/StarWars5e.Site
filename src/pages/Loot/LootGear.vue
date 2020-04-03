@@ -44,7 +44,7 @@
           value: 'equipmentCategory',
           render: _.startCase,
           filterChoices: ['Ammunition', 'Clothing', 'Communications', 'Data Recording And Storage', 'Explosive', 'Gaming Set',
-          'Kit', 'Life Support', 'Medical', 'Musical Instrument', 'Storage', 'Tool'],
+          'Kit', 'Life Support', 'Medical', 'Musical Instrument', 'Storage', 'Tool', 'Utility', 'Weapon Or Armor Accessory'],
           filterFunction: ({ equipmentCategory }: GearType, filterValue: string) => _.startCase(equipmentCategory) === filterValue
         },
         { text: 'Cost', value: 'cost' },

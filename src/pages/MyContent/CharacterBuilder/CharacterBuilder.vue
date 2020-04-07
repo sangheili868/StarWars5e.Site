@@ -12,6 +12,7 @@
   import { SpeciesType, ClassType, PowerType, FeatType, BackgroundType, ArchetypeType } from '@/types/characterTypes'
   import { EquipmentType } from '@/types/lootTypes'
   import { every } from 'lodash'
+  import CharacterBuilderSettings from './CharacterBuilderSettings.vue'
 
   const characterModule = namespace('character')
   const classesModule = namespace('classes')
@@ -28,6 +29,7 @@
 @Component({
   components: {
       CharactersViewSheet,
+      CharacterBuilderSettings,
       CharacterBuilderSpecies,
       CharacterBuilderClasses,
       CharacterBuilderAbilityScores,
@@ -117,7 +119,11 @@
 
 <template lang="pug">
   div
-    h1.pb-3 Character Builder (BETA)
+    h1.pb-3.d-flex.justify-center Character Builder (BETA)
+      CharacterBuilderSettings(
+        :rawCharacter="this.character",
+        @updateCharacter="newCharacter => $emit('updateCharacter', newCharacter)",
+      )
     div.d-flex.justify-center
       div(v-if="currentStep === 0", :class="$style.page").text-left
         div This character builder is still in #[span.primary--text beta].

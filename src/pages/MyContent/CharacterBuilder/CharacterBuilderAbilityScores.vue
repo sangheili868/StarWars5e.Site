@@ -50,20 +50,6 @@
         (score < 1 && 'Must be greater than 0')
     }
 
-    handleChangeMethod (newMethod: AbilityScoreMethodType) {
-      this.$emit('updateCharacter', {
-        baseAbilityScores: {
-          Strength: 0,
-          Dexterity: 0,
-          Constitution: 0,
-          Intelligence: 0,
-          Wisdom: 0,
-          Charisma: 0
-        },
-        settings: { abilityScoreMethod: newMethod }
-      })
-    }
-
     handleChangeAbilityScore (ability: string, score: number) {
       this.$emit('updateCharacter', { baseAbilityScores: { [ability]: score || 0 } })
     }
@@ -73,12 +59,7 @@
 <template lang="pug">
   div
     h1 Determine Ability Scores
-    MySelect(
-      :value="abilityScoreMethod"
-      :items="[ 'Standard Array', 'Point Buy', 'Manual' ]",
-      label="Choose a method"
-      @change="handleChangeMethod"
-    )
+    div.caption.mb-5 Choose a method by clicking the #[v-icon(x-small) fa-cog] icon above
     div(v-if="abilityScoreMethod === 'Point Buy'")
       div #[strong Remaining Points:] {{ remainingPoints}}
     div(v-if="abilityScoreMethod === 'Manual'").d-flex.flex-wrap

@@ -75,14 +75,6 @@
     div.d-flex.justify-space-around.flex-wrap.mb-3.align-center
       div #[strong Current Level:] {{ currentLevel }}
       div #[strong Current Experience:] {{ character.experiencePoints }}
-      div.d-flex.align-center
-        h5.mr-5 Hit Points Method:
-        MySelect(
-          :value="isFixedHitPoints ? 'Fixed' : 'Manual'",
-          :items="['Fixed', 'Manual']",
-          :class="$style.method"
-          @input="newMethod => $emit('updateCharacter', { settings: { isFixedHitPoints: newMethod === 'Fixed' } })"
-        )
     v-expansion-panels(accordion, :value="0")
       v-expansion-panel(v-for="(myClass, index) in currentClasses", :key="myClass.name")
         v-expansion-panel-header
@@ -99,9 +91,3 @@
           )
     CharacterBuilderClassNew(v-bind="{ classes, currentClasses, currentLevel }", @add="handleAddClass")
 </template>
-
-<style module lang="scss">
-  .method {
-    max-width: 110px !important;
-  }
-</style>

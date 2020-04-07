@@ -167,7 +167,7 @@
 
   .banner {
     z-index: 4 !important;
-    background-color: #f44336 !important;
+    background-color: $alert !important;
     border-radius: 10px !important;
   }
 </style>

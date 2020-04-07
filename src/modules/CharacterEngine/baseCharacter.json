@@ -75,7 +75,7 @@
   "customForcePowers": [],
   "settings": {
     "isEnforcingForcePrerequisites": true,
-    "isFixedHitPoints": true,
+    "isFixedHitPoints": false,
     "abilityScoreMethod": "Standard Array"
   }
 }

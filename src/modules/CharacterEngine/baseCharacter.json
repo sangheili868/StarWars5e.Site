@@ -1,5 +1,6 @@
 {
   "name": "",
+  "builderVersion": 0,
   "image": "",
   "user": "",
   "experiencePoints": 0,
@@ -73,6 +74,7 @@
   "customTechPowers": [],
   "customForcePowers": [],
   "settings": {
+    "isEnforcingForcePrerequisites": true,
     "isFixedHitPoints": true,
     "abilityScoreMethod": "Standard Array"
   }

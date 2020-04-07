@@ -20,6 +20,7 @@
       v-btn(block, v-on="on").my-3 Settings
     template(#title) Settings
     template(#text)
+      //- v-checkbox(:value="completeCharacter", hide-details, color="primary", label="Enforce Force Power Prerequisites").ma-2
       v-btn(to="/myContent/characters/print").ma-2 Print Character Sheet
       v-btn(color="red", @click="$emit('replaceCharacterProperty', { path: 'tweaks', property: {} })").white--text.ma-2
         | Clear All Tweaks

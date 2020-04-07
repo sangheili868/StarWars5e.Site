@@ -88,6 +88,7 @@ export default function generateCharacter (
 
   return {
     name: rawCharacter.name,
+    builderVersion: rawCharacter.builderVersion,
     image: rawCharacter.image,
     characteristics: rawCharacter.characteristics,
     tweaks: rawCharacter.tweaks,
@@ -118,6 +119,7 @@ export default function generateCharacter (
     carryingCapacity: generateCarryingCapacity(abilityScores),
     superiority,
     ...casting,
-    ...features
+    ...features,
+    settings: rawCharacter.settings
   }
 }

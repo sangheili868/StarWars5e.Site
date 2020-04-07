@@ -1,3 +1,7 @@
+/// ////////////////////////////////////////////////////////
+// IF YOU CHANGE THIS FILE, INCREMENT BUILDER VERSION IN modules/character.ts
+/// ////////////////////////////////////////////////////////
+
 export interface RawSpeciesType {
   name: string,
   abilityScoreImprovementSelectedOption: number,
@@ -174,6 +178,7 @@ export interface HighLevelCastingType {
 
 export interface RawCharacterType {
   name: string,
+  builderVersion: number,
   image: string,
   experiencePoints: number,
   species: RawSpeciesType,
@@ -220,6 +225,7 @@ export interface RawCharacterType {
   customTechPowers: string[],
   customForcePowers: string[],
   settings: {
+    isEnforcingForcePrerequisites: boolean,
     isFixedHitPoints: boolean,
     abilityScoreMethod: AbilityScoreMethodType | string // Added | string to avoid error when importing JSON
   }

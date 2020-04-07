@@ -73,6 +73,8 @@
     isEditing = true
     currentStep = 0
 
+    builderVersion = 1
+
     created () {
       Promise.all([
         this.fetchClasses(),
@@ -89,6 +91,8 @@
         this.hasFetchedData = true
         this.isEditing = this.characterValidation.code > 0
         this.currentStep = this.isEmptyCharacter ? 0 : 1
+      }).then(() => {
+        if (this.completeCharacter) this.updateCharacter({ builderVersion: 1 } as RawCharacterType)
       })
     }
 

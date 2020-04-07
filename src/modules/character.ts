@@ -27,19 +27,28 @@ export default class Character extends VuexModule {
   get completeCharacter () {
     if (this.characterValidation.isValid) {
       const rootState = this.context.rootState
-      return generateCharacter(
-        stateOf(this.context).character,
-        rootState.classes.classes,
-        rootState.archetypes.archetypes,
-        rootState.species.species,
-        rootState.equipment.equipment,
-        rootState.powers.powers,
-        rootState.feats.feats,
-        rootState.backgrounds.backgrounds,
-        rootState.characterAdvancements.characterAdvancements,
-        rootState.skills.skills,
-        rootState.conditions.conditions
-      )
+      const rawCharacter = stateOf(this.context).character
+      let character = null
+      try {
+        character = generateCharacter(
+          rawCharacter,
+          rootState.classes.classes,
+          rootState.archetypes.archetypes,
+          rootState.species.species,
+          rootState.equipment.equipment,
+          rootState.powers.powers,
+          rootState.feats.feats,
+          rootState.backgrounds.backgrounds,
+          rootState.characterAdvancements.characterAdvancements,
+          rootState.skills.skills,
+          rootState.conditions.conditions
+        )
+      } catch (e) {
+        console.error('Character Generation failed. Character built with builder version ' + rawCharacter.builderVersion)
+        console.error(e)
+        character = null
+      }
+      return character
     }
   }
 

@@ -117,6 +117,7 @@ export interface CustomFeaturesType {
 
 export interface CompleteCharacterType {
   name: string,
+  builderVersion: number,
   image: string | null,
   currentLevel: number,
   classText: string,
@@ -172,5 +173,8 @@ export interface CompleteCharacterType {
   customFeatures: CustomFeaturesType[],
   customTechPowers: string[],
   customForcePowers: string[],
-  numCustomFeats: number
+  numCustomFeats: number,
+  settings: {
+    isEnforcingForcePrerequisites: boolean
+  }
 }

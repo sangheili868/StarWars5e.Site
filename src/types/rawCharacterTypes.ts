@@ -1,5 +1,5 @@
 /// ////////////////////////////////////////////////////////
-// IF YOU CHANGE THIS FILE, INCREMENT BUILDER VERSION IN modules/character.ts
+// IF YOU CHANGE THIS FILE, INCREMENT BUILDER VERSION IN assets/builderVersion.ts
 /// ////////////////////////////////////////////////////////
 
 export interface RawSpeciesType {
@@ -184,7 +184,7 @@ export interface SettingsType {
 
 export interface RawCharacterType {
   name: string,
-  builderVersion: number,
+  builderVersion: string,
   image: string,
   experiencePoints: number,
   species: RawSpeciesType,

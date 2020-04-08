@@ -1,0 +1,38 @@
+export default '0.3.1'
+
+/*
+0.3.1
+- Add gear that opens Character Builder Settings Menu
+- Move Ability Score Generation Method and Hit Points Calculation method to Character Builder Settings Menu
+- Add Enforce/Ignore Force Powers Prerequisites option to Character Builder Settings Menu
+- When that option is enabled (enabled by default), don't allow selecting force powers when the prerequisite has not been selected
+- Display force power prerequisites more clearly in Add Power menu
+- Sort force powers in Add Power menu so that selected powers are on top, followed by powers known from other sources, available powers, and lastly disallowed powers (whether because you can't select more powers or you don't have the prerequisite)
+- Fixed bug where you could choose a force power you already know from another class
+- Implemented BuilderVersion tracking
+
+0.3.0
+- Make class and archetype detail popups in character builder wider.
+- Add a button to view background details in character builder.
+- Select skill and save proficiency  level in the tweak popup, rather than the proficiencies page
+- Allow Tool Expertise
+- Allow manually adding powers, outside powers gained from class
+- Add Cast Power Button next to power levels that automatically subtracts the appropriate number of tech/force points.
+- Changed design of force attack modifiers and save DCs based on what alignments of powers you have.
+- Use class tables to determine superiority max dice and dice size rather than formulas (Fixes bug with level 1/2 scholar having d4 superiority dice).
+- Fix issues with calculating superiority dice when multiclassing
+- Don't allow casting level 6 and higher powers more than once per long rest.
+- Add an alignment filter to force power selectors
+- Put selected powers at the top of the list in the selection popups
+- Show character name in tab title
+
+0.2.0
+- Added  a link to Wretched Hives PDF in the assets page
+- Changed "Monster Manual" button to say "Scum and Villainy" in the assets page
+- Custom features and character description fields now support [markdown](https://paperhive.org/help/markdown)
+- Removed tweaks from the settings menu. Now they can be accessed by clicking on the appropriate number/label. For example, click on "+1 Acrobatics" to tweak the acrobatics modifier.
+- Implemented tweaking individual weapon damage dice, damage bonuses, and attack bonuses. You can still use global weapon tweaks.
+- Fixed bug when calculating ability score improvements chosen for sith pureblood and zabrak
+- Allow manually adding feats outside of ability score improvements.
+- Changed "add" button at the bottom to plus icon in the top right corner for adding custom features, feats, equipment, languages, and proficiencies.
+*/

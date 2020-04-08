@@ -1,5 +1,6 @@
 {
   "name": "Han Solo",
+  "builderVersion": "0.3.1",
   "image": "https://upload.wikimedia.org/wikipedia/en/b/be/Han_Solo_depicted_in_promotional_image_for_Star_Wars_%281977%29.jpg",
   "user": "harrisonFord",
   "experiencePoints": 0,
@@ -41,6 +42,13 @@
   },
   "background": {
     "name": "Scoundrel",
+    "feat": {
+      "name": "Silver-Tongued",
+      "type": "feat",
+      "abilityScoreImprovements": {
+        "Charisma": 1
+      }
+    },
     "skills": [
       "Deception",
       "Sleight of Hand"
@@ -48,17 +56,24 @@
     "toolProficiencies": [
       "Disguise Kit",
       "Forgery Kit"
-    ],
-    "feat": {
-      "type": "feat",
-      "name": "Silver-Tongued",
-      "abilityScoreImprovements": {
-        "Charisma": 1
-      }
-    }
+    ]
   },
   "characteristics": {
     "alignment": "Chaotic Light",
+    "Personality Traits": "",
+    "Ideal": "",
+    "Bond": "",
+    "Flaw": "",
+    "Gender": "",
+    "Place of Birth": "",
+    "Age": "",
+    "Height": "",
+    "Weight": "",
+    "Hair": "",
+    "Eyes": "",
+    "Skin": "",
+    "Appearance": "",
+    "Backstory": "",
     "personalityTraits": "I'm a born gambler who can't resist taking a risk for a potential payoff. Sarcasm and insults are my weapons of choice.",
     "ideal": "Independence. I am a free spirit - no one tells me what to do. (Chaotic)",
     "bond": "I fleeced the wrong person and must work to ensure that this individual never crosses paths with me or those I care about.",
@@ -84,9 +99,11 @@
     }
   ],
   "currentStats": {
-    "unspentLevels": 0,
     "hitPointsLost": 0,
     "temporaryHitPoints": 0,
+    "techPointsUsed": 0,
+    "forcePointsUsed": 0,
+    "superiorityDiceUsed": 0,
     "hitDiceUsed": {
       "d8": 0
     },
@@ -99,13 +116,24 @@
       "Defiant": 0
     },
     "conditions": [],
-    "exhaustion": 0
+    "exhaustion": 0,
+    "highLevelCasting": {
+      "level6": false,
+      "level7": false,
+      "level8": false,
+      "level9": false
+    },
+    "unspentLevels": 0
   },
   "tweaks": {},
   "customProficiencies": [],
   "customLanguages": [],
   "customFeatures": [],
+  "customFeats": [],
+  "customTechPowers": [],
+  "customForcePowers": [],
   "settings": {
+    "isEnforcingForcePrerequisites": true,
     "isFixedHitPoints": true,
     "abilityScoreMethod": "Standard Array"
   }

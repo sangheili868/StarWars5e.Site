@@ -10,11 +10,13 @@
   import { ClassType, ArchetypeType, PowerType, FeatType, BackgroundType, SpeciesType } from '@/types/characterTypes'
   import { CompleteCharacterType } from '@/types/completeCharacterTypes'
   import { EquipmentType } from '@/types/lootTypes'
-  import { RawCharacterType } from '@/types/rawCharacterTypes'
+  import { RawCharacterType, RawCharacteristicsType } from '@/types/rawCharacterTypes'
   import { CharacterValidationType } from '@/types/utilityTypes'
   import { range, isEmpty, isEqual, merge, get, set, camelCase } from 'lodash'
   import baseCharacter from '@/modules/CharacterEngine/baseCharacter.json'
   import validateCharacter from '@/modules/CharacterEngine/validateCharacter'
+  import builderVersion from '@/assets/builderVersion'
+  import semver from 'semver'
 
   const characterModule = namespace('character')
   const classesModule = namespace('classes')
@@ -45,7 +47,7 @@
     @characterModule.Getter completeCharacter!: CompleteCharacterType
     @characterModule.Action setClean!: () => void
     @characterModule.Action createCharacter!: () => void
-    @characterModule.Action setCharacter!: (newCharacter: RawCharacterType) => void
+    @characterModule.Action setCharacter!: (newCharacter: RawCharacterType) => Promise<any>
     @characterModule.Action updateCharacter!: (newCharacter: RawCharacterType) => void
     @characterModule.Action deleteCharacterProperty!: (payload: { path: string, index: number }) => void
     @characterModule.Action replaceCharacterProperty!: (payload: { path: string, property: any[] }) => void
@@ -73,8 +75,6 @@
     isEditing = true
     currentStep = 0
 
-    builderVersion = 1
-
     created () {
       Promise.all([
         this.fetchClasses(),
@@ -91,8 +91,6 @@
         this.hasFetchedData = true
         this.isEditing = this.characterValidation.code > 0
         this.currentStep = this.isEmptyCharacter ? 0 : 1
-      }).then(() => {
-        if (this.completeCharacter) this.updateCharacter({ builderVersion: 1 } as RawCharacterType)
       })
     }
 
@@ -119,8 +117,19 @@
       this.createCharacter()
     }
 
+    checkBuilderVersion () {
+      if (validateCharacter(this.character).isValid) {
+        const isValidBuilderVersion = semver.valid(this.completeCharacter.builderVersion)
+        const isCurrentBuilderVersion = isValidBuilderVersion && !semver.gt(builderVersion, this.completeCharacter.builderVersion)
+        if (!isCurrentBuilderVersion) {
+          console.log(`Upgrading character from builderVersion ${this.completeCharacter.builderVersion} to builderVersion ${builderVersion}`)
+          this.updateCharacter({ builderVersion } as RawCharacterType)
+        }
+      }
+    }
+
     handleCharacterUpload (newCharacter: any, newFilename: string) {
-      this.setCharacter(newCharacter)
+      this.setCharacter(newCharacter).then(this.checkBuilderVersion)
       this.isEditing = !validateCharacter(newCharacter).isValid
       this.currentStep = this.isEmptyCharacter ? 0 : 1
     }

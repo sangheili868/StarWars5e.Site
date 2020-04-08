@@ -117,7 +117,7 @@ export interface CustomFeaturesType {
 
 export interface CompleteCharacterType {
   name: string,
-  builderVersion: number,
+  builderVersion: string,
   image: string | null,
   currentLevel: number,
   classText: string,

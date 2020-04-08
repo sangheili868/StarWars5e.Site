@@ -1,5 +1,6 @@
 {
   "name": "Drakul Wren",
+  "builderVersion": "0.3.1",
   "image": "https://i.imgur.com/U3cscSh.jpg",
   "user": "",
   "experiencePoints": 0,
@@ -53,7 +54,6 @@
         "Gleaming Outline",
         "Smoke Cloud",
         "Tranquilizer",
-        "Charge Power Cell",
         "Shatter",
         "Smuggle",
         "Explosion",
@@ -78,10 +78,11 @@
   },
   "background": {
     "name": "Mandalorian",
-    "skills": [],
     "feat": {
-      "name": "Durable"
-    }
+      "name": "Durable",
+      "type": "Feat"
+    },
+    "skills": []
   },
   "characteristics": {
     "alignment": "Lawful Balanced",
@@ -113,21 +114,12 @@
       "equipped": false
     },
     {
-      "name": "Powered battle armor",
-      "quantity": 1,
-      "equipped": true
-    },
-    {
       "name": "Bandolier",
       "quantity": "2"
     },
     {
       "name": "Remote detonator",
       "quantity": 1
-    },
-    {
-      "name": "Grenade, frag",
-      "quantity": "5"
     }
   ],
   "currentStats": {
@@ -144,13 +136,23 @@
     "hasInspiration": false,
     "featuresTimesUsed": {},
     "conditions": [],
-    "exhaustion": 0
+    "exhaustion": 0,
+    "highLevelCasting": {
+      "level6": false,
+      "level7": false,
+      "level8": false,
+      "level9": false
+    }
   },
   "tweaks": {},
   "customProficiencies": [],
   "customLanguages": [],
   "customFeatures": [],
+  "customFeats": [],
+  "customTechPowers": [],
+  "customForcePowers": [],
   "settings": {
+    "isEnforcingForcePrerequisites": true,
     "isFixedHitPoints": true,
     "abilityScoreMethod": "Manual"
   }

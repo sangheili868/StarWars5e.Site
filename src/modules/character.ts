@@ -5,6 +5,7 @@ import { merge, get, set, omit } from 'lodash'
 import generateCharacter from './CharacterEngine/generateCharacter'
 import { CharacterValidationType } from '@/types/utilityTypes'
 import validateCharacter from './CharacterEngine/validateCharacter'
+import builderVersion from '@/assets/builderVersion'
 
 function stateOf (context: any) {
   // Vuex-module-decorator changes 'this' when it converts into a module.
@@ -56,7 +57,10 @@ export default class Character extends VuexModule {
   async createCharacter () {
     return {
       isDirty: false,
-      character: baseCharacter
+      character: {
+        ...baseCharacter,
+        builderVersion
+      }
     }
   }
 

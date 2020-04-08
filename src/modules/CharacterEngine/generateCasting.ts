@@ -96,7 +96,8 @@ export default function generateCasting (
 ): {
   techCasting: false | TechCastingType,
   forceCasting: false | ForceCastingType,
-  highLevelCasting: HighLevelCastingType
+  highLevelCasting: HighLevelCastingType,
+  allForcePowers: string[]
 } {
   const techCastingBonus = abilityScores.Intelligence.modifier
   const techCastingLevel = getCastingLevel(rawCharacter, myClasses, myArchetypes, 'Tech')
@@ -131,10 +132,15 @@ export default function generateCasting (
     powersKnown: forcePowersKnown
   }
   const hasForceCasting = forceCastingLevel > 0 || forceCasting.powersKnown.length > 0
+  const allForcePowers = [
+    ...rawCharacter.customForcePowers,
+    ...rawCharacter.classes.map(({ forcePowers }) => forcePowers || []).flat()
+  ]
 
   return {
     highLevelCasting: rawCharacter.currentStats.highLevelCasting,
     techCasting: hasTechCasting && techCasting,
-    forceCasting: hasForceCasting && forceCasting
+    forceCasting: hasForceCasting && forceCasting,
+    allForcePowers
   }
 }

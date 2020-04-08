@@ -2,7 +2,6 @@
   import { Component, Prop, Vue } from 'vue-property-decorator'
   import MyDialog from '@/components/MyDialog.vue'
   import VueMarkdown from 'vue-markdown'
-  import CharacterSheetExpansionFeatures from './CharacterSheetExpansionFeatures.vue'
   import { namespace } from 'vuex-class'
   import { FeatType } from '@/types/characterTypes'
   import { CompletedFeatureType } from '@/types/completeCharacterTypes'
@@ -12,8 +11,7 @@
   @Component({
     components: {
       MyDialog,
-      VueMarkdown,
-      CharacterSheetExpansionFeatures
+      VueMarkdown
     }
   })
   export default class CharacterSheetCustomFeats extends Vue {

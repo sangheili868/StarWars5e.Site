@@ -1,7 +1,7 @@
 <script lang="ts">
   import { Component, Prop, Vue } from 'vue-property-decorator'
   import { ClassType, PowerType, ArchetypeType } from '@/types/characterTypes'
-  import { RawClassType } from '@/types/rawCharacterTypes'
+  import { RawClassType, SettingsType } from '@/types/rawCharacterTypes'
   import CharacterSheetExpansionFeatures from '@/pages/MyContent/CharacterSheet/CharacterSheetExpansionFeatures.vue'
   import CharacterSheetCastingAddPower from '@/pages/MyContent/CharacterSheet/CharacterSheetCastingAddPower.vue'
   import { namespace } from 'vuex-class'
@@ -18,6 +18,8 @@
     @Prop(Object) readonly myClass!: RawClassType
     @Prop(Object) readonly classData!: ClassType
     @Prop(Object) readonly archetypeData: ArchetypeType | undefined
+    @Prop(Object) readonly settings!: SettingsType
+    @Prop(Array) readonly allForcePowers!: string[]
 
     @powersModule.State powers!: PowerType[]
     @powersModule.Action fetchPowers!: () => void
@@ -79,7 +81,8 @@
     CharacterSheetExpansionFeatures(:features="powersSelectedData", isShowingLevel, :class="$style.powersList").text-left
     CharacterSheetCastingAddPower(
       :disabled="this.powersSelected.length >= this.numberPowersKnown",
-      v-bind="{ castingType, maxPowerLevel, powersSelected }",
+      v-bind="{ castingType, maxPowerLevel, powersSelected, allForcePowers }",
+      :isEnforcingForcePrerequisites="settings.isEnforcingForcePrerequisites"
       @updatePowers="handleUpdatePowers"
     )
 </template>

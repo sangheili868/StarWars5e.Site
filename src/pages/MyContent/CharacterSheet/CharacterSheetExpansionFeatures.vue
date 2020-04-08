@@ -23,8 +23,7 @@
   v-expansion-panels(accordion, multiple)
     v-expansion-panel(v-for="(feature, index) in features", :key="feature.name + index").powerPanel
       v-expansion-panel-header.pa-3
-        div.d-flex.align-center
-          slot(v-bind="{ feature }")
+        slot(v-bind="{ feature }")
           h4 {{ feature.name }}
       v-expansion-panel-content.ma-2.caption
         CheckList(

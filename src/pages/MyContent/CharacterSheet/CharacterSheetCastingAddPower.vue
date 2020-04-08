@@ -20,8 +20,10 @@
     @Prop(Boolean) readonly icon!: boolean
     @Prop(Boolean) readonly disabled!: boolean
     @Prop(String) readonly castingType!: 'Tech' | 'Force'
+    @Prop(Boolean) readonly isEnforcingForcePrerequisites!: boolean
     @Prop({ default: 9, type: Number }) readonly maxPowerLevel!: number
     @Prop(Array) readonly powersSelected!: string[]
+    @Prop({ type: Array, default: () => [] }) readonly allForcePowers!: string[]
 
     @powersModule.State powers!: PowerType[]
     @powersModule.Action fetchPowers!: () => void
@@ -42,13 +44,25 @@
           (!this.alignmentFilter.length || this.alignmentFilter.includes(forceAlignment)) &&
           powerType === this.castingType
         )
-        .sortBy(({ name }) => !this.powersSelected.includes(name))
+        .sortBy(({ name, prerequisite }) => {
+          if (this.powersSelected.includes(name)) return 2
+          else if (this.isAlreadyKnown(name)) return 1
+          else if (this.isDisabled(name, prerequisite)) return -1
+          else return 0
+        })
+        .reverse()
         .groupBy('level')
         .value()
     }
 
-    isDisabled (powerName: string) {
-      return this.disabled && !this.powersSelected.includes(powerName)
+    isAlreadyKnown (powerName: string) {
+      return !this.powersSelected.includes(powerName) && this.allForcePowers.includes(powerName)
+    }
+
+    isDisabled (powerName: string, prerequisite: string) {
+      const hasEnforcablePrerequisite = prerequisite && this.isEnforcingForcePrerequisites
+      const isMeetingPrerequisite = !hasEnforcablePrerequisite || this.allForcePowers.includes(prerequisite)
+      return (this.disabled || !isMeetingPrerequisite || this.isAlreadyKnown(powerName)) && !this.powersSelected.includes(powerName)
     }
 
     togglePower (powerName: string) {
@@ -80,15 +94,20 @@
       ).mt-3
       CharacterSheetExpansionFeatures(:features="filteredPowers[levelFilter]", isShowingLevel).text-left
         template(v-slot="{ feature }")
-          v-checkbox(
-            :input-value="powersSelected.includes(feature.name)"
-            color="primary",
-            hide-details,
-            :indeterminate="isDisabled(feature.name)",
-            :disabled="isDisabled(feature.name)",
-            :class="$style.checkbox",
-            @click.stop="togglePower(feature.name)"
-          )
+          div.d-flex.align-center
+            v-checkbox(
+              :input-value="powersSelected.includes(feature.name)"
+              color="primary",
+              hide-details,
+              :indeterminate="isDisabled(feature.name, feature.prerequisite)",
+              :disabled="isDisabled(feature.name, feature.prerequisite)",
+              :class="$style.checkbox",
+              @click.stop="togglePower(feature.name)"
+            )
+            div
+              h4 {{ feature.name }}
+              div(v-if="isAlreadyKnown(feature.name)").caption Power already known
+              div(v-else-if="feature.prerequisite").caption Prerequisite: #[strong {{ feature.prerequisite }}]
     template(#actions)
       v-spacer
       v-btn(color="primary", text, @click="isOpen=false") Done

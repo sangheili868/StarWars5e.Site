@@ -71,6 +71,13 @@
         .reduce((acc, { levels }) => acc + levels, 0)
     }
 
+    get allForcePowers () {
+      return [
+        ...this.character.customForcePowers,
+        ...this.character.classes.map(({ forcePowers }) => forcePowers || []).flat()
+      ]
+    }
+
     handleUpdateLevels (levels: number) {
       const amount = this.classData ? this.classData.hitPointsAtHigherLevelsNumber : 0
       const newFixedHP = Array(this.index === 0 ? levels - 1 : levels).fill(amount)
@@ -173,7 +180,8 @@
       @updateASI="newASI => handleUpdateASI(index, newASI)"
     )
     CharacterBuilderClassPowers(
-      v-bind="{ myClass, classData, archetypeData }",
+      v-bind="{ myClass, classData, archetypeData, allForcePowers }",
+      :settings="character.settings",
       @updatePowers="({ newPowers, type, isArchetype }) => handleUpdatePowers(newPowers, type, isArchetype)"
     )
 </template>

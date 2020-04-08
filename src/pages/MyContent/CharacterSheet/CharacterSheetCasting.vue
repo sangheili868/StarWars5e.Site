@@ -1,7 +1,7 @@
 <script lang="ts">
   import { Component, Prop, Vue } from 'vue-property-decorator'
   import { TechCastingType, ForceCastingType } from '@/types/completeCharacterTypes'
-  import { HighLevelCastingType } from '@/types/rawCharacterTypes'
+  import { HighLevelCastingType, SettingsType } from '@/types/rawCharacterTypes'
   import CharacterSheetModifier from './CharacterSheetModifier.vue'
   import CharacterSheetTweaker from './CharacterSheetTweaker.vue'
   import CharacterSheetExpansionFeatures from './CharacterSheetExpansionFeatures.vue'
@@ -26,6 +26,8 @@
     @Prop(Object) readonly highLevelCasting!: HighLevelCastingType
     @Prop(Array) readonly customTechPowers!: string[]
     @Prop(Array) readonly customForcePowers!: string[]
+    @Prop(Array) readonly allForcePowers!: string[]
+    @Prop(Object) readonly settings!: SettingsType
 
     groupBy = groupBy
     startCase = startCase
@@ -160,7 +162,9 @@
       CharacterSheetCastingAddPower(
         icon,
         castingType="Force",
-        :powersSelected="customForcePowers"
+        :isEnforcingForcePrerequisites="settings.isEnforcingForcePrerequisites",
+        :powersSelected="customForcePowers",
+        v-bind="{ allForcePowers }",
         @updatePowers="newPowers => $emit('replaceCharacterProperty', { path: 'customForcePowers', property: newPowers })"
       )
     div(v-if="forceCasting")

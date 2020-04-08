@@ -59,7 +59,7 @@
               :items="[ 'Standard Array', 'Point Buy', 'Manual' ]",
               @change="handleChangeMethod"
             )
-        v-row(align="center", no-gutters).mb-2.d-none
+        v-row(align="center", no-gutters).mb-2
           v-col Force Power Prerequisites
           v-col(cols="8", sm="6").d-flex.justify-center
             BooleanSelect(

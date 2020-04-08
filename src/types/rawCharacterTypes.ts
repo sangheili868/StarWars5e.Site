@@ -176,6 +176,12 @@ export interface HighLevelCastingType {
   level9: boolean
 }
 
+export interface SettingsType {
+  isEnforcingForcePrerequisites: boolean,
+  isFixedHitPoints: boolean,
+  abilityScoreMethod: AbilityScoreMethodType | string // Added | string to avoid error when importing JSON
+}
+
 export interface RawCharacterType {
   name: string,
   builderVersion: number,
@@ -224,9 +230,5 @@ export interface RawCharacterType {
   }[],
   customTechPowers: string[],
   customForcePowers: string[],
-  settings: {
-    isEnforcingForcePrerequisites: boolean,
-    isFixedHitPoints: boolean,
-    abilityScoreMethod: AbilityScoreMethodType | string // Added | string to avoid error when importing JSON
-  }
+  settings: SettingsType
 }

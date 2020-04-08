@@ -19,8 +19,7 @@
             { to: '/characters/backgrounds', title: 'Backgrounds' },
             { to: '/characters/feats', title: 'Feats' },
             { to: '/characters/forcePowers', title: 'Force Powers' },
-            { to: '/characters/techPowers', title: 'Tech Powers' },
-            { to: '/characters/additionalVariantRules', title: 'Variant Rules' }
+            { to: '/characters/techPowers', title: 'Tech Powers' }
           ]
         }
       ]

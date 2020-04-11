@@ -1,8 +1,8 @@
-import { RawCharacterType } from '@/types/rawCharacterTypes'
+import { RawCharacterType, CustomEquipmentType } from '@/types/rawCharacterTypes'
 import { EquipmentType } from '@/types/lootTypes'
-import { AbilityScoresType } from '@/types/completeCharacterTypes'
+import { AbilityScoresType, CustomWeaponType } from '@/types/completeCharacterTypes'
 import { get } from 'lodash'
-import applyTweak from '@/utilities/applyTweak'
+import applyTweak, { applyCustomTweak } from '@/utilities/applyTweak'
 
 function getUnarmedStrike (
   rawCharacter: RawCharacterType,
@@ -39,12 +39,43 @@ function getUnarmedStrike (
   }
 }
 
+function getCustomWeaponStats (
+  customEquipment: CustomEquipmentType,
+  rawCharacter: RawCharacterType,
+  index: number
+) {
+    const tweaks = customEquipment.tweaks
+    let attackBonus = 0
+    attackBonus = applyTweak(rawCharacter, 'weapon.toHit', attackBonus)
+    attackBonus = applyCustomTweak(tweaks && tweaks.toHit, attackBonus)
+
+    let damageBonus = 0
+    damageBonus = applyTweak(rawCharacter, 'weapon.damage', damageBonus)
+    damageBonus = applyCustomTweak(tweaks && tweaks.damage, damageBonus)
+  return {
+    ...customEquipment,
+    attackBonus,
+    damageBonus,
+    index,
+    properties: [],
+    isCustom: true,
+    damageDieType: get(tweaks, 'damageDice.dieSize') || 4
+  }
+}
+
 export default function generateWeapons (
   rawCharacter: RawCharacterType,
   equipment: EquipmentType[],
   abilityScores: AbilityScoresType,
   proficiencyBonus: number
-): EquipmentType[] {
+): (EquipmentType | CustomWeaponType)[] {
   const equippedWeapons = equipment.filter(({ equipped, equipmentCategory }) => equipped && equipmentCategory === 'Weapon')
-  return [ ...equippedWeapons, getUnarmedStrike(rawCharacter, abilityScores, proficiencyBonus) ]
+  const equippedCustomWeapons = rawCharacter.customEquipment
+    .map((customEquipment, index) => getCustomWeaponStats(customEquipment, rawCharacter, index))
+    .filter(({ equipped, equipmentCategory }) => equipped && equipmentCategory === 'Weapon')
+  return [
+    ...equippedWeapons,
+    ...equippedCustomWeapons,
+    getUnarmedStrike(rawCharacter, abilityScores, proficiencyBonus)
+  ]
 }

@@ -10,6 +10,7 @@
   import CharacterSheetExpansionFeatures from './CharacterSheetExpansionFeatures.vue'
   import CharacterSheetCustomFeatures from './CharacterSheetCustomFeatures.vue'
   import CharacterSheetCustomFeats from './CharacterSheetCustomFeats.vue'
+  import { CustomEquipmentType } from '@/types/rawCharacterTypes'
 
   @Component({
     components: {
@@ -28,6 +29,7 @@
     @Prop(Number) readonly armorClass!: number
     @Prop(Object) readonly speed!: { base: string }
     @Prop(Array) readonly equipment!: EquipmentType[]
+    @Prop(Array) readonly customEquipment!: CustomEquipmentType[]
     @Prop(Array) readonly weapons!: EquipmentType[]
     @Prop(Number) readonly passivePerception!: number
     @Prop({ type: [ Boolean, Object ] }) readonly superiority!: false | SuperiorityType
@@ -41,7 +43,10 @@
     ]
 
     get armor () {
-      return this.equipment.filter(({ equipped, equipmentCategory }) => equipped && equipmentCategory === 'Armor')
+      return [
+        ...this.equipment,
+        ...this.customEquipment
+      ].filter(({ equipped, equipmentCategory }) => equipped && equipmentCategory === 'Armor')
         .map(({ name }) => name)
         .join(', ')
     }

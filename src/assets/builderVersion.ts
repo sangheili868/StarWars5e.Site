@@ -1,6 +1,14 @@
-export default '0.3.1'
+export default '0.3.2'
 
 /*
+
+0.3.2
+- Added Custom Items to the Equipment Panel and the Equipment Builder Step
+- Allow setting a custom item's name, type, cost, weight, quantity, and description
+- When a custom item is set as type armor and is equipped, display it under the character's armor class
+- Allow setting a damage bonus, to-hit bonus, damage dice count, and damage dice size for custom weapons
+- When a custom weapon is equipped, it appears in the weapons list
+
 0.3.1
 - Add gear that opens Character Builder Settings Menu
 - Move Ability Score Generation Method and Hit Points Calculation method to Character Builder Settings Menu
@@ -35,4 +43,5 @@ export default '0.3.1'
 - Fixed bug when calculating ability score improvements chosen for sith pureblood and zabrak
 - Allow manually adding feats outside of ability score improvements.
 - Changed "add" button at the bottom to plus icon in the top right corner for adding custom features, feats, equipment, languages, and proficiencies.
+
 */

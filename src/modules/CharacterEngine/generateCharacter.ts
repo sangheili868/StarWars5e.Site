@@ -97,6 +97,7 @@ export default function generateCharacter (
     customFeatures: rawCharacter.customFeatures,
     customTechPowers: rawCharacter.customTechPowers,
     customForcePowers: rawCharacter.customForcePowers,
+    customEquipment: rawCharacter.customEquipment,
     numCustomFeats: rawCharacter.customFeats.length,
     currentLevel,
     classText,

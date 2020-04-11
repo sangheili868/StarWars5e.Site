@@ -182,6 +182,17 @@ export interface SettingsType {
   abilityScoreMethod: AbilityScoreMethodType | string // Added | string to avoid error when importing JSON
 }
 
+export type CustomEquipmentCategoryType = 'Weapon' | 'Armor' | 'Gear'
+
+export interface CustomEquipmentType extends RawEquipmentType {
+  equipmentCategory: CustomEquipmentCategoryType,
+  cost: number,
+  description: string,
+  weight: number,
+  damageType?: string,
+  damageNumberOfDice?: number
+}
+
 export interface RawCharacterType {
   name: string,
   builderVersion: string,
@@ -230,5 +241,6 @@ export interface RawCharacterType {
   }[],
   customTechPowers: string[],
   customForcePowers: string[],
-  settings: SettingsType
+  settings: SettingsType,
+  customEquipment: CustomEquipmentType[]
 }

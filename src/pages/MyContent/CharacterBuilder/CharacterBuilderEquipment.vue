@@ -30,6 +30,7 @@
     h1 Choose Equipment
     CharacterSheetEquipment(
       :equipment="myEquipment",
+      :customEquipment="rawCharacter.customEquipment",
       :credits="rawCharacter.credits",
       isBuilder,
       @updateCharacter="newCharacter => $emit('updateCharacter', newCharacter)",

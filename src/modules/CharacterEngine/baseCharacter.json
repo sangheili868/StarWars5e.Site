@@ -73,6 +73,7 @@
   "customFeats": [],
   "customTechPowers": [],
   "customForcePowers": [],
+  "customEquipment": [],
   "settings": {
     "isEnforcingForcePrerequisites": true,
     "isFixedHitPoints": false,

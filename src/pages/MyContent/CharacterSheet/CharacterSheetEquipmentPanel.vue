@@ -4,6 +4,7 @@
   import { startCase } from 'lodash'
   import LootWeaponsProperties from '@/pages/Loot/LootWeaponsProperties.vue'
   import VueMarkdown from 'vue-markdown'
+  import { CustomEquipmentType } from '@/types/rawCharacterTypes'
 
   @Component({
     components: {
@@ -12,18 +13,23 @@
     }
   })
   export default class CharacterSheetEquipmentPanel extends Vue {
-    @Prop(Object) readonly item!: EquipmentType
+    @Prop(Object) readonly item!: EquipmentType | CustomEquipmentType
     @Prop(Number) readonly index!: number
+    @Prop(Boolean) readonly isCustomEquipment!: boolean
 
     get isEquippable () {
       return ['Weapon', 'Armor'].includes(this.item.equipmentCategory)
+    }
+
+    get equimentType () {
+      return this.isCustomEquipment ? 'customEquipment' : 'equipment'
     }
 
     startCase = startCase
 
     updateQuantity (newQuantity: number) {
       const fixedQuantity = Math.max(0, newQuantity)
-      this.$emit('updateCharacter', { equipment: { [this.index]: { quantity: fixedQuantity } } })
+      this.$emit('updateCharacter', { [this.equimentType]: { [this.index]: { quantity: fixedQuantity } } })
     }
 
     getWeaponDamage (weapon: EquipmentType) {
@@ -40,7 +46,7 @@
         div
           div #[strong Cost:] {{ item.cost }}
           div #[strong Weight:] {{ item.weight}}
-        v-btn(icon, @click="$emit('deleteCharacterProperty', { path: 'equipment', index })")
+        v-btn(icon, @click="$emit('deleteCharacterProperty', { path: equimentType, index })")
           v-icon fa-trash
       v-row
         v-col.d-flex.align-center
@@ -61,14 +67,14 @@
             hide-details,
             color="primary",
             :class="$style.checkbox",
-            @change="isChecked => $emit('updateCharacter', { equipment: { [index]: { equipped: isChecked } } })"
+            @change="isChecked => $emit('updateCharacter', { [equimentType]: { [index]: { equipped: isChecked } } })"
           ).ma-2
-      div(v-if="item.equipmentCategory.toLowerCase() === 'armor'")
+      div(v-if="!isCustomEquipment && item.equipmentCategory.toLowerCase() === 'armor'")
         div(v-if="item.armorClassification !== 'Shield'") #[strong {{ item.armorClassification }} Armor]
         div #[strong AC:] {{ item.ac }}
         div(v-if="item.stealthDisadvantage") #[strong Imposes Stealth Disadvantage]
         div(v-if="item.strengthRequirement.includes('Str')") #[strong Requires {{ item.strengthRequirement }}]
-      div(v-else-if="item.equipmentCategory.toLowerCase() === 'weapon'")
+      div(v-else-if="!isCustomEquipment && item.equipmentCategory.toLowerCase() === 'weapon'")
         div #[strong {{ startCase(item.weaponClassification) }}]
         div #[strong Damage:] {{ getWeaponDamage(item) }}
         div

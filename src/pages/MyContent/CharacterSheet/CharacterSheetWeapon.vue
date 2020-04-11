@@ -3,8 +3,9 @@
   import { EquipmentType } from '@/types/lootTypes'
   import addPlus from '@/utilities/addPlus'
   import LootWeaponsProperties from '@/pages/Loot/LootWeaponsProperties.vue'
-  import { TweakPathType } from '@/types/rawCharacterTypes'
+  import { TweakPathType, CustomEquipmentType } from '@/types/rawCharacterTypes'
   import CharacterSheetTweaker from './CharacterSheetTweaker.vue'
+  import { CustomWeaponType } from '@/types/completeCharacterTypes'
 
   @Component({
     components: {
@@ -13,12 +14,13 @@
     }
   })
   export default class CharacterSheetWeapon extends Vue {
-    @Prop(Object) readonly weapon!: EquipmentType
+    @Prop(Object) readonly weapon!: EquipmentType | CustomWeaponType
 
     addPlus = addPlus
 
     get rootPath () {
-      return this.weapon.name === 'Unarmed Strike' ? 'tweaks.unarmed' : `equipment.${this.weapon.index}.tweaks`
+      const equipmentType = (this.weapon as CustomWeaponType).isCustom ? 'customEquipment' : 'equipment'
+      return this.weapon.name === 'Unarmed Strike' ? 'tweaks.unarmed' : `${equipmentType}.${this.weapon.index}.tweaks`
     }
 
     get tweakPaths (): TweakPathType[] {

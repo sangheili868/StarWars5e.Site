@@ -44,10 +44,11 @@ function getProficientSaves (rawCharacter: RawCharacterType, myClasses: ClassTyp
   const startingClass = rawCharacter.classes[0]
   if (!startingClass) console.error('Warning: No starting class')
   const startingClassData = startingClass && myClasses.find(({ name }) => name === startingClass.name)
-  const customSaves = rawCharacter.customProficiencies
-    .filter(({ name }) => name.includes('Saving Throws'))
-    .map(({ name }) => name.split(' ')[0])
-  return [ ...(startingClassData ? startingClassData.savingThrows : []), ...customSaves ]
+  const tweakedSaves = chain(rawCharacter.tweaks.abilityScores || {})
+    .pickBy(({ savingThrowModifier }) => !!(savingThrowModifier && savingThrowModifier.proficiency))
+    .keys()
+    .value()
+  return [ ...(startingClassData ? startingClassData.savingThrows : []), ...tweakedSaves ]
 }
 
 function getModifier (value: number) {

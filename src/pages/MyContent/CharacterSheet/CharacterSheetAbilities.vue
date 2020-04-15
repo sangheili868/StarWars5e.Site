@@ -40,7 +40,7 @@
         div
           CharacterSheetTweaker(
             :title="ability + ' Saving Throw'",
-            :tweakPaths="[{ name: ability + ' Saving Throw', path: `abilityScores.${ability}.savingThrowModifier`, type: 'proficiency' }]",
+            :tweakPaths="[{ name: ability + ' Saving Throw', path: `abilityScores.${ability}.savingThrowModifier`, type: 'savingThrow' }]",
             @replaceCharacterProperty="payload => $emit('replaceCharacterProperty', payload)"
           )
             ProficiencyDots(:proficiency="savingThrow.proficiency")

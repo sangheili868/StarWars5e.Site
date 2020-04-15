@@ -108,6 +108,14 @@
               label="Proficiency Level",
               @input="newValue => updateProficiency(newValue, path)"
             ).pa-1
+          div(v-else-if="type === 'savingThrow'")
+            v-checkbox(
+              :input-value="myGet(myTweaks, path + '.proficiency') === 'Proficient'",
+              color="primary",
+              hide-details,
+              label="Proficient?",
+              @change="newValue => updateProficiency(newValue ? 'Proficient' : null, path)"
+            ).pa-1
     template(#actions)
       v-btn(color="primary", @click="handleSave") Save
       v-spacer

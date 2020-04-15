@@ -2,6 +2,10 @@ export default '0.3.2'
 
 /*
 
+0.3.3
+- Fix bug found by FelgrandKnight34 where tweaking saving throw proficiency does not work
+- Prevent setting expertise for a saving throw
+
 0.3.2
 - Added Custom Items to the Equipment Panel and the Equipment Builder Step
 - Allow setting a custom item's name, type, cost, weight, quantity, and description

@@ -9,7 +9,7 @@
           category: 'Source Books',
           routes: [
             {
-              href: 'https://drive.google.com/file/d/1eFTWbzZEYnpizz13wjNU_9uXuJ3f9hki/view?usp=sharing',
+              href: 'https://drive.google.com/file/d/1W1S-fqkMyyeU1PaB3H4pAxYUric_u1eX/view?usp=sharing',
               title: 'Player\'s Handbook'
             },
             {

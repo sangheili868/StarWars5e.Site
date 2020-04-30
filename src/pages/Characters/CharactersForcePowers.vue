@@ -86,7 +86,14 @@
             return false
           }
         },
-        { text: 'Prerequisite', value: 'prerequisite', render: (value: string) => value || '-' }
+        { text: 'Prerequisite', value: 'prerequisite', render: (value: string) => value || '-' },
+        {
+          text: 'Source',
+          value: 'contentSource',
+          render: _.startCase,
+          filterChoices: ['PHB', 'EC'],
+          filterFunction: ({ contentSource }: PowerType, filterValue: string) => _.startCase(contentSource) === filterValue
+        }
       ]
     }
   }

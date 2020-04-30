@@ -74,6 +74,13 @@
             if (!concentration && filterValue === 'No') return true
             return false
           }
+        },
+        {
+          text: 'Source',
+          value: 'contentSource',
+          render: _.startCase,
+          filterChoices: ['PHB', 'EC'],
+          filterFunction: ({ contentSource }: PowerType, filterValue: string) => _.startCase(contentSource) === filterValue
         }
       ]
     }

@@ -1,6 +1,10 @@
-export default '0.3.3'
+export default '0.3.4'
 
 /*
+
+0.3.4
+- Added Source column to powers tables
+- Renamed builder version to just version
 
 0.3.3
 - Fix bug found by FelgrandKnight34 where tweaking saving throw proficiency does not work

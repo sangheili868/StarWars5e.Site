@@ -5,7 +5,7 @@ import { merge, get, set, omit } from 'lodash'
 import generateCharacter from './CharacterEngine/generateCharacter'
 import { CharacterValidationType } from '@/types/utilityTypes'
 import validateCharacter from './CharacterEngine/validateCharacter'
-import builderVersion from '@/assets/builderVersion'
+import builderVersion from '@/assets/version'
 
 function stateOf (context: any) {
   // Vuex-module-decorator changes 'this' when it converts into a module.

@@ -1,4 +1,4 @@
-import axios from 'axios'
+import fetchFromCache from '@/utilities/fetchFromCache'
 import { Module, VuexModule, MutationAction } from 'vuex-module-decorators'
 import { SpeciesType } from '@/types/characterTypes.ts'
 
@@ -8,9 +8,8 @@ export default class Species extends VuexModule {
 
   @MutationAction({ mutate: ['species'] })
   async fetchSpecies () {
-    const results = await axios.get(`${process.env.VUE_APP_sw5eapiurl}/api/Species`)
     return {
-      species: results.data
+      species: await fetchFromCache((this as any).state.species, 'Species')
     }
   }
 }

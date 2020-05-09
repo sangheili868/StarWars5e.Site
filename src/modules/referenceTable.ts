@@ -1,4 +1,4 @@
-import axios from 'axios'
+import fetchFromCache from '@/utilities/fetchFromCache'
 import { Module, VuexModule, MutationAction } from 'vuex-module-decorators'
 import { ReferenceTableType } from '@/types/utilityTypes'
 
@@ -8,9 +8,8 @@ export default class ReferenceTables extends VuexModule {
 
   @MutationAction({ mutate: ['referenceTables'] })
   async fetchReferenceTables () {
-    const results = await axios.get(`${process.env.VUE_APP_sw5eapiurl}/api/ReferenceTable`)
     return {
-      referenceTables: results.data
+      referenceTables: await fetchFromCache((this as any).state.referenceTables, 'ReferenceTable')
     }
   }
 }

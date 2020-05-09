@@ -1,16 +1,15 @@
-import axios from 'axios'
+import fetchFromCache from '@/utilities/fetchFromCache'
 import { Module, VuexModule, MutationAction } from 'vuex-module-decorators'
-import { DeploymentType } from '@/types/starshipTypes.ts'
+import { DeploymentType } from '@/types/starshipTypes'
 
-@Module({ namespaced: true, name: 'deployments' })
+@Module({ namespaced: true, name: 'depoyment' })
 export default class Deployments extends VuexModule {
-  deployments: DeploymentType[] = []
+  depoyments: DeploymentType[] = []
 
-  @MutationAction({ mutate: ['deployments'] })
+  @MutationAction({ mutate: ['depoyments'] })
   async fetchDeployments () {
-    const results = await axios.get(`${process.env.VUE_APP_sw5eapiurl}/api/StarshipDeployment`)
     return {
-      deployments: results.data
+      depoyments: await fetchFromCache((this as any).state.depoyment, 'StarshipDeployment')
     }
   }
 }

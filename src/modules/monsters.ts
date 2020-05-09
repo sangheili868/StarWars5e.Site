@@ -1,4 +1,4 @@
-import axios from 'axios'
+import fetchFromCache from '@/utilities/fetchFromCache'
 import { Module, VuexModule, MutationAction } from 'vuex-module-decorators'
 import { MonsterType } from '@/types/referenceTypes'
 
@@ -8,9 +8,8 @@ export default class Monsters extends VuexModule {
 
   @MutationAction({ mutate: ['monsters'] })
   async fetchMonsters () {
-    const results = await axios.get(`${process.env.VUE_APP_sw5eapiurl}/api/Monster`)
     return {
-      monsters: results.data
+      monsters: await fetchFromCache((this as any).state.monsters, 'Monster')
     }
   }
 }

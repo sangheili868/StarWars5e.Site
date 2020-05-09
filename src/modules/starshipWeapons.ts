@@ -1,4 +1,4 @@
-import axios from 'axios'
+import fetchFromCache from '@/utilities/fetchFromCache'
 import { Module, VuexModule, MutationAction } from 'vuex-module-decorators'
 import { StarshipWeaponType, StarshipEquipmentType } from '@/types/starshipTypes'
 
@@ -8,9 +8,9 @@ export default class StarshipWeapons extends VuexModule {
 
   @MutationAction({ mutate: ['starshipWeapons'] })
   async fetchStarshipWeapons () {
-    const results = await axios.get(`${process.env.VUE_APP_sw5eapiurl}/api/StarshipEquipment`)
     return {
-      starshipWeapons: results.data.filter(({ type }: StarshipEquipmentType) => type === 'Weapon')
+      starshipWeapons: (await fetchFromCache((this as any).rootState.StarshipEquipment.starshipEquipment, 'StarshipEquipment'))
+        .filter(({ type }: StarshipEquipmentType) => type === 'Weapon')
     }
   }
 }

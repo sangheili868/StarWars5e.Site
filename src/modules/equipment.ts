@@ -1,5 +1,4 @@
-
-import axios from 'axios'
+import fetchFromCache from '@/utilities/fetchFromCache'
 import { Module, VuexModule, MutationAction } from 'vuex-module-decorators'
 import { EquipmentType } from '@/types/lootTypes'
 
@@ -9,7 +8,8 @@ export default class Armor extends VuexModule {
 
   @MutationAction({ mutate: ['equipment'] })
   async fetchEquipment () {
-    const results = await axios.get(`${process.env.VUE_APP_sw5eapiurl}/api/Equipment`)
-    return { equipment: results.data }
+    return {
+      equipment: await fetchFromCache((this as any).state.equipment, 'Equipment')
+    }
   }
 }

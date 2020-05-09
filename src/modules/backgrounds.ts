@@ -1,4 +1,4 @@
-import axios from 'axios'
+import fetchFromCache from '@/utilities/fetchFromCache'
 import { Module, VuexModule, MutationAction } from 'vuex-module-decorators'
 import { BackgroundType } from '@/types/characterTypes'
 
@@ -8,9 +8,8 @@ export default class Backgrounds extends VuexModule {
 
   @MutationAction({ mutate: ['backgrounds'] })
   async fetchBackgrounds () {
-    const results = await axios.get(`${process.env.VUE_APP_sw5eapiurl}/api/Background`)
     return {
-      backgrounds: results.data
+      backgrounds: await fetchFromCache((this as any).state.backgrounds, 'Background')
     }
   }
 }

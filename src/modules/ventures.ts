@@ -1,4 +1,4 @@
-import axios from 'axios'
+import fetchFromCache from '@/utilities/fetchFromCache'
 import { Module, VuexModule, MutationAction } from 'vuex-module-decorators'
 import { VentureType } from '@/types/starshipTypes'
 
@@ -8,9 +8,8 @@ export default class Ventures extends VuexModule {
 
   @MutationAction({ mutate: ['ventures'] })
   async fetchVentures () {
-    const results = await axios.get(`${process.env.VUE_APP_sw5eapiurl}/api/StarshipVenture`)
     return {
-      ventures: results.data
+      ventures: await fetchFromCache((this as any).state.venture, 'Venture')
     }
   }
 }

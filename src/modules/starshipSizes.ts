@@ -1,4 +1,4 @@
-import axios from 'axios'
+import fetchFromCache from '@/utilities/fetchFromCache'
 import { Module, VuexModule, MutationAction } from 'vuex-module-decorators'
 import { StarshipSizeType } from '@/types/starshipTypes'
 
@@ -8,9 +8,8 @@ export default class StarshipSizes extends VuexModule {
 
   @MutationAction({ mutate: ['starshipSizes'] })
   async fetchStarshipSizes () {
-    const results = await axios.get(`${process.env.VUE_APP_sw5eapiurl}/api/StarshipBaseSize`)
     return {
-      starshipSizes: results.data
+      starshipSizes: await fetchFromCache((this as any).state.starshipSize, 'StarshipBaseSize')
     }
   }
 }

@@ -1,4 +1,4 @@
-import axios from 'axios'
+import fetchFromCache from '@/utilities/fetchFromCache'
 import { Module, VuexModule, MutationAction } from 'vuex-module-decorators'
 import { PowerType } from '@/types/characterTypes.ts'
 
@@ -8,9 +8,8 @@ export default class Power extends VuexModule {
 
   @MutationAction({ mutate: ['powers'] })
   async fetchPowers () {
-    const results = await axios.get(`${process.env.VUE_APP_sw5eapiurl}/api/Power`)
     return {
-      powers: results.data
+      powers: await fetchFromCache((this as any).state.powers, 'Powers')
     }
   }
 }

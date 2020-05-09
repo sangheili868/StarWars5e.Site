@@ -1,4 +1,4 @@
-import axios from 'axios'
+import fetchFromCache from '@/utilities/fetchFromCache'
 import { Module, VuexModule, MutationAction } from 'vuex-module-decorators'
 import { ClassType } from '@/types/characterTypes.ts'
 
@@ -8,9 +8,8 @@ export default class Classes extends VuexModule {
 
   @MutationAction({ mutate: ['classes'] })
   async fetchClasses () {
-    const results = await axios.get(`${process.env.VUE_APP_sw5eapiurl}/api/Class`)
     return {
-      classes: results.data
+      classes: await fetchFromCache((this as any).state.classes, 'Class')
     }
   }
 }

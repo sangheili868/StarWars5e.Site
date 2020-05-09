@@ -1,17 +1,15 @@
-import axios from 'axios'
+import fetchFromCache from '@/utilities/fetchFromCache'
 import { Module, VuexModule, MutationAction } from 'vuex-module-decorators'
 import { ArmorPropertyType } from '@/types/lootTypes'
-import _ from 'lodash'
 
-@Module({ namespaced: true, name: 'ArmorProperties' })
-export default class ArmorProperties extends VuexModule {
+@Module({ namespaced: true, name: 'armorProperties' })
+export default class ArmorPropertys extends VuexModule {
   armorProperties: ArmorPropertyType[] = []
 
   @MutationAction({ mutate: ['armorProperties'] })
-  async fetchArmorProperties () {
-    const results = await axios.get(`${process.env.VUE_APP_sw5eapiurl}/api/ArmorProperty`)
+  async fetchArmorPropertys () {
     return {
-      armorProperties: results.data
+      armorProperties: await fetchFromCache((this as any).state.armorPropertie, 'ArmorProperty')
     }
   }
 }

@@ -1,16 +1,15 @@
-import axios from 'axios'
+import fetchFromCache from '@/utilities/fetchFromCache'
 import { Module, VuexModule, MutationAction } from 'vuex-module-decorators'
 import { ConditionType } from '@/types/lookupTypes'
 
 @Module({ namespaced: true, name: 'conditions' })
 export default class Conditions extends VuexModule {
   conditions: ConditionType[] = []
+  cachedVersion: number = 0
 
-  @MutationAction({ mutate: ['conditions'] })
+  @MutationAction({ mutate: ['conditions', 'cachedVersion'] })
   async fetchConditions () {
-    const results = await axios.get(`${process.env.VUE_APP_sw5eapiurl}/api/Conditions`)
-    return {
-      conditions: results.data
-    }
+    const { data: conditions, cachedVersion } = await fetchFromCache(this, 'conditions', 'conditions')
+    return { conditions, cachedVersion }
   }
 }

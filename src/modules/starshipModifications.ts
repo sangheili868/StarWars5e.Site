@@ -1,16 +1,15 @@
-import axios from 'axios'
+import fetchFromCache from '@/utilities/fetchFromCache'
 import { Module, VuexModule, MutationAction } from 'vuex-module-decorators'
 import { StarshipModificationType } from '@/types/starshipTypes'
 
-@Module({ namespaced: true, name: 'starshipModification' })
+@Module({ namespaced: true, name: 'starshipModifications' })
 export default class StarshipModifications extends VuexModule {
   starshipModifications: StarshipModificationType[] = []
+  cachedVersion: number = 0
 
-  @MutationAction({ mutate: ['starshipModifications'] })
+  @MutationAction({ mutate: ['starshipModifications', 'cachedVersion'] })
   async fetchStarshipModifications () {
-    const results = await axios.get(`${process.env.VUE_APP_sw5eapiurl}/api/StarshipModification`)
-    return {
-      starshipModifications: results.data
-    }
+    const { data: starshipModifications, cachedVersion } = await fetchFromCache(this, 'starshipModifications', 'starshipModification')
+    return { starshipModifications, cachedVersion }
   }
 }

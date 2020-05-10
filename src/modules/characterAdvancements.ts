@@ -1,16 +1,15 @@
-import axios from 'axios'
+import fetchFromCache from '@/utilities/fetchFromCache'
 import { Module, VuexModule, MutationAction } from 'vuex-module-decorators'
 import { CharacterAdvancementType } from '@/types/lookupTypes'
 
 @Module({ namespaced: true, name: 'characterAdvancements' })
 export default class CharacterAdvancements extends VuexModule {
   characterAdvancements: CharacterAdvancementType[] = []
+  cachedVersion: number = 0
 
-  @MutationAction({ mutate: ['characterAdvancements'] })
+  @MutationAction({ mutate: ['characterAdvancements', 'cachedVersion'] })
   async fetchCharacterAdvancements () {
-    const results = await axios.get(`${process.env.VUE_APP_sw5eapiurl}/api/CharacterAdvancement`)
-    return {
-      characterAdvancements: results.data
-    }
+    const { data: characterAdvancements, cachedVersion } = await fetchFromCache(this, 'characterAdvancements', 'characterAdvancement')
+    return { characterAdvancements, cachedVersion }
   }
 }

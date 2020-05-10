@@ -1,16 +1,15 @@
-import axios from 'axios'
+import fetchFromCache from '@/utilities/fetchFromCache'
 import { Module, VuexModule, MutationAction } from 'vuex-module-decorators'
 import { FeatType } from '@/types/characterTypes'
 
-@Module({ namespaced: true, name: 'feat' })
+@Module({ namespaced: true, name: 'feats' })
 export default class Feats extends VuexModule {
   feats: FeatType[] = []
+  cachedVersion: number = 0
 
-  @MutationAction({ mutate: ['feats'] })
+  @MutationAction({ mutate: ['feats', 'cachedVersion'] })
   async fetchFeats () {
-    const results = await axios.get(`${process.env.VUE_APP_sw5eapiurl}/api/Feat`)
-    return {
-      feats: results.data
-    }
+    const { data: feats, cachedVersion } = await fetchFromCache(this, 'feats', 'feat')
+    return { feats, cachedVersion }
   }
 }

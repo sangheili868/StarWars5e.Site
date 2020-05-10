@@ -1,16 +1,15 @@
-import axios from 'axios'
+import fetchFromCache from '@/utilities/fetchFromCache'
 import { Module, VuexModule, MutationAction } from 'vuex-module-decorators'
 import { SkillType } from '@/types/lookupTypes'
 
 @Module({ namespaced: true, name: 'skills' })
 export default class Skills extends VuexModule {
   skills: SkillType[] = []
+  cachedVersion: number = 0
 
-  @MutationAction({ mutate: ['skills'] })
+  @MutationAction({ mutate: ['skills', 'cachedVersion'] })
   async fetchSkills () {
-    const results = await axios.get(`${process.env.VUE_APP_sw5eapiurl}/api/Skills`)
-    return {
-      skills: results.data
-    }
+    const { data: skills, cachedVersion } = await fetchFromCache(this, 'skills', 'skills')
+    return { skills, cachedVersion }
   }
 }

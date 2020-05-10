@@ -1,20 +1,3 @@
-export interface WeaponType {
-  contentSource: string,
-  contentType: string,
-  cost: number,
-  damageDieModifier: number,
-  damageDieType: number,
-  damageNumberOfDice: number,
-  damageType: string,
-  description: string | null,
-  equipmentCategory: string,
-  modes: WeaponType[],
-  name: string,
-  properties: string[] | null,
-  weaponClassification: string,
-  weight: number
-}
-
 export interface WeaponPropertyType {
   content: string,
   contentType: string,
@@ -27,7 +10,7 @@ export interface ArmorPropertyType {
   name: string
 }
 
-export interface ArmorType {
+export interface EquipmentType {
   ac: number | string | null,
   armorClassification: string,
   contentSource: string,
@@ -40,19 +23,12 @@ export interface ArmorType {
   strengthRequirement: string | null,
   weight: number,
   properties: string[] | null
-}
-
-export interface GearType {
-  contentSource: string,
-  contentType: string,
-  cost: number,
-  description: string | null,
-  equipmentCategory: string,
-  name: string,
-  weight: number
-}
-
-export interface EquipmentType extends GearType, WeaponType, ArmorType {
+  damageDieModifier: number,
+  damageDieType: number,
+  damageNumberOfDice: number,
+  damageType: string,
+  modes: EquipmentType[],
+  weaponClassification: string,
   equipped?: boolean,
   quantity: number,
   index: number,

@@ -2,13 +2,13 @@
   import { Component, Prop, Vue } from 'vue-property-decorator'
   import { namespace } from 'vuex-class'
   import SearchTable from '@/components/SearchTable.vue'
-  import { WeaponType } from '@/types/lootTypes'
+  import { EquipmentType } from '@/types/lootTypes'
   import _ from 'lodash'
   import VueMarkdown from 'vue-markdown'
   import LootWeaponsProperties from './LootWeaponsProperties.vue'
   import BackButton from '@/components/BackButton.vue'
 
-  const weaponsModule = namespace('weapons')
+  const equipmentModule = namespace('equipment')
 
   @Component({
     components: {
@@ -19,21 +19,22 @@
     }
   })
   export default class LootWeapons extends Vue {
-    @weaponsModule.State weapons!: WeaponType[]
-    @weaponsModule.Action fetchWeapons!: () => void
+    @equipmentModule.State equipment!: EquipmentType[]
+    @equipmentModule.Action fetchEquipment!: () => void
     initialSearch: string | (string | null)[] = ''
     tableType: string = 'Weapons'
 
     created () {
-      this.fetchWeapons()
+      this.fetchEquipment()
       this.initialSearch = this.$route.query.search
     }
 
     get items () {
-      return _(this.weapons)
-        .map(weapons => ({
-          ...weapons,
-          id: weapons.name,
+      return _(this.equipment)
+        .filter(({ equipmentCategory }: EquipmentType) => equipmentCategory === 'Weapon')
+        .map(equipment => ({
+          ...equipment,
+          id: equipment.name,
           isExpandable: true
         })).value()
     }
@@ -46,7 +47,7 @@
           value: 'weaponClassification',
           render: _.startCase,
           filterChoices: ['Simple Blaster', 'Martial Blaster', 'Simple Lightweapon', 'Martial Lightweapon', 'Simple Vibroweapon', 'Martial Vibroweapon'],
-          filterFunction: ({ weaponClassification }: WeaponType, filterValue: string) => _.startCase(weaponClassification) === filterValue
+          filterFunction: ({ weaponClassification }: EquipmentType, filterValue: string) => _.startCase(weaponClassification) === filterValue
         },
         { text: 'Cost', value: 'cost' },
         { text: 'Weight', value: 'weight' },
@@ -56,12 +57,12 @@
           value: 'contentSource',
           render: _.startCase,
           filterChoices: ['PHB', 'EC', 'WH'],
-          filterFunction: ({ contentSource }: WeaponType, filterValue: string) => _.startCase(contentSource) === filterValue
+          filterFunction: ({ contentSource }: EquipmentType, filterValue: string) => _.startCase(contentSource) === filterValue
         }
       ]
     }
 
-    weaponDamage (field: string, fields: WeaponType) {
+    weaponDamage (field: string, fields: EquipmentType) {
       return fields.damageNumberOfDice ? `${fields.damageNumberOfDice}d${fields.damageDieType} ${fields.damageType}` : 'Special'
     }
   }

@@ -37,26 +37,6 @@ export interface StarshipSizeType {
   strengthModifier: number
 }
 
-export interface StarshipWeaponType {
-  attackBonus: number,
-  attacksPerRound: number,
-  contentSource: string,
-  contentType: string,
-  cost: number,
-  damageDieModifier: number,
-  damageDieType: number,
-  damageNumberOfDice: number,
-  damageType: string,
-  longRange: number,
-  name: string,
-  properties: string,
-  reload: number,
-  shortRange: number,
-  type: string,
-  weaponCategory: string,
-  weaponSize: string
-}
-
 export interface StarshipEquipmentType {
   armorClassBonus?: number, // armor
   bonus?: number, // navcomputer
@@ -67,7 +47,19 @@ export interface StarshipEquipmentType {
   name: string,
   starshipWeaponCategory?: string, // ammunition
   type: string,
-  description?: string
+  description?: string,
+  attackBonus: number,
+  attacksPerRound: number,
+  damageDieModifier: number,
+  damageDieType: number,
+  damageNumberOfDice: number,
+  damageType: string,
+  longRange: number,
+  properties: string,
+  reload: number,
+  shortRange: number,
+  weaponCategory: string,
+  weaponSize: string
 }
 
 export interface StarshipModificationType {

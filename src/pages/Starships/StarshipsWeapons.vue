@@ -2,12 +2,12 @@
   import { Component, Prop, Vue } from 'vue-property-decorator'
   import { namespace } from 'vuex-class'
   import SearchTable from '@/components/SearchTable.vue'
-  import { StarshipWeaponType } from '@/types/starshipTypes'
+  import { StarshipEquipmentType } from '@/types/starshipTypes'
   import _ from 'lodash'
   import VueMarkdown from 'vue-markdown'
   import BackButton from '@/components/BackButton.vue'
 
-  const starshipWeaponsModule = namespace('starshipWeapons')
+  const starshipEquipmentModule = namespace('starshipEquipment')
 
   @Component({
     components: {
@@ -17,21 +17,22 @@
     }
   })
   export default class StarshipsWeapons extends Vue {
-    @starshipWeaponsModule.State starshipWeapons!: StarshipWeaponType[]
-    @starshipWeaponsModule.Action fetchStarshipWeapons!: () => void
+    @starshipEquipmentModule.State starshipEquipment!: StarshipEquipmentType[]
+    @starshipEquipmentModule.Action fetchStarshipEquipment!: () => void
     initialSearch: string | (string | null)[] = ''
     tableType: string = 'Starship Weapons'
 
     created () {
-      this.fetchStarshipWeapons()
+      this.fetchStarshipEquipment()
       this.initialSearch = this.$route.query.search
     }
 
     get items () {
-      return _(this.starshipWeapons)
-        .map(starshipWeapons => ({
-          ...starshipWeapons,
-          id: starshipWeapons.name,
+      return _(this.starshipEquipment)
+        .filter(({ type }: StarshipEquipmentType) => type === 'Weapon')
+        .map(starshipEquipment => ({
+          ...starshipEquipment,
+          id: starshipEquipment.name,
           isExpandable: false
         })).value()
     }
@@ -44,7 +45,7 @@
           value: 'weaponCategory',
           isMultiSelect: true,
           filterChoices: ['Primary', 'Secondary', 'Tertiary', 'Quaternary'],
-          filterFunction: ({ weaponCategory }: StarshipWeaponType, filterValue: string[]) =>
+          filterFunction: ({ weaponCategory }: StarshipEquipmentType, filterValue: string[]) =>
             _.some(filterValue, (filter: string) => _.includes(weaponCategory, filter))
         },
         { text: 'Cost', value: 'cost' },
@@ -54,7 +55,7 @@
       ]
     }
 
-    weaponDamage (field: string, fields: StarshipWeaponType) {
+    weaponDamage (field: string, fields: StarshipEquipmentType) {
       let modifier = ''
       if (fields.damageDieModifier && fields.damageDieModifier > 0) modifier = `+${fields.damageDieModifier}`
       if (fields.damageDieModifier && fields.damageDieModifier < 0) modifier = fields.damageDieModifier.toString()

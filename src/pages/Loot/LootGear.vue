@@ -2,12 +2,12 @@
   import { Component, Prop, Vue } from 'vue-property-decorator'
   import { namespace } from 'vuex-class'
   import SearchTable from '@/components/SearchTable.vue'
-  import { GearType } from '@/types/lootTypes'
+  import { EquipmentType } from '@/types/lootTypes'
   import _ from 'lodash'
   import VueMarkdown from 'vue-markdown'
   import BackButton from '@/components/BackButton.vue'
 
-  const gearModule = namespace('gear')
+  const equipmentModule = namespace('equipment')
 
   @Component({
     components: {
@@ -17,22 +17,23 @@
     }
   })
   export default class LootGear extends Vue {
-    @gearModule.State gear!: GearType[]
-    @gearModule.Action fetchGear!: () => void
+    @equipmentModule.State equipment!: EquipmentType[]
+    @equipmentModule.Action fetchEquipment!: () => void
     initialSearch: string | (string | null)[] = ''
     tableType: string = 'Adventuring Gear'
 
     created () {
-      this.fetchGear()
+      this.fetchEquipment()
       this.initialSearch = this.$route.query.search
     }
 
     get items () {
-      return _(this.gear)
-        .map(gear => ({
-          ...gear,
-          id: gear.name,
-          isExpandable: gear.description
+      return _(this.equipment)
+        .filter(({ equipmentCategory }: EquipmentType) => !['Weapon', 'Armor'].includes(equipmentCategory))
+        .map(equipment => ({
+          ...equipment,
+          id: equipment.name,
+          isExpandable: equipment.description
         })).value()
     }
 
@@ -45,7 +46,7 @@
           render: _.startCase,
           filterChoices: ['Ammunition', 'Clothing', 'Communications', 'Data Recording And Storage', 'Explosive', 'Gaming Set',
           'Kit', 'Life Support', 'Medical', 'Musical Instrument', 'Storage', 'Tool', 'Utility', 'Weapon Or Armor Accessory'],
-          filterFunction: ({ equipmentCategory }: GearType, filterValue: string) => _.startCase(equipmentCategory) === filterValue
+          filterFunction: ({ equipmentCategory }: EquipmentType, filterValue: string) => _.startCase(equipmentCategory) === filterValue
         },
         { text: 'Cost', value: 'cost' },
         { text: 'Weight', value: 'weight' },
@@ -54,7 +55,7 @@
           value: 'contentSource',
           render: _.startCase,
           filterChoices: ['PHB', 'EC', 'WH'],
-          filterFunction: ({ contentSource }: GearType, filterValue: string) => _.startCase(contentSource) === filterValue
+          filterFunction: ({ contentSource }: EquipmentType, filterValue: string) => _.startCase(contentSource) === filterValue
         }
       ]
     }

@@ -1,16 +1,15 @@
-import axios from 'axios'
+import fetchFromCache from '@/utilities/fetchFromCache'
 import { Module, VuexModule, MutationAction } from 'vuex-module-decorators'
-import { EnhancedItemType } from '@/types/lootTypes.ts'
+import { EnhancedItemType } from '@/types/lootTypes'
 
 @Module({ namespaced: true, name: 'enhancedItems' })
 export default class EnhancedItems extends VuexModule {
   enhancedItems: EnhancedItemType[] = []
+  cachedVersion: number = 0
 
-  @MutationAction({ mutate: ['enhancedItems'] })
+  @MutationAction({ mutate: ['enhancedItems', 'cachedVersion'] })
   async fetchEnhancedItems () {
-    const results = await axios.get(`${process.env.VUE_APP_sw5eapiurl}/api/EnhancedItem`)
-    return {
-      enhancedItems: results.data
-    }
+    const { data: enhancedItems, cachedVersion } = await fetchFromCache(this, 'enhancedItems', 'enhancedItem')
+    return { enhancedItems, cachedVersion }
   }
 }

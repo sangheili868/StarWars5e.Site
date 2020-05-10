@@ -1,16 +1,15 @@
-import axios from 'axios'
+import fetchFromCache from '@/utilities/fetchFromCache'
 import { Module, VuexModule, MutationAction } from 'vuex-module-decorators'
 import { ArchetypeType } from '@/types/characterTypes'
 
-@Module({ namespaced: true, name: 'archetype' })
+@Module({ namespaced: true, name: 'archetypes' })
 export default class Archetypes extends VuexModule {
   archetypes: ArchetypeType[] = []
+  cachedVersion: number = 0
 
-  @MutationAction({ mutate: ['archetypes'] })
+  @MutationAction({ mutate: ['archetypes', 'cachedVersion'] })
   async fetchArchetypes () {
-    const results = await axios.get(`${process.env.VUE_APP_sw5eapiurl}/api/Archetype`)
-    return {
-      archetypes: results.data
-    }
+    const { data: archetypes, cachedVersion } = await fetchFromCache(this, 'archetypes', 'archetype')
+    return { archetypes, cachedVersion }
   }
 }

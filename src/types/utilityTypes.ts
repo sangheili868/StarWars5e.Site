@@ -12,6 +12,11 @@ export interface SearchResultType {
   rowKey: string
 }
 
+export interface DataVersionType {
+  name: string,
+  version: number
+}
+
 export interface CharacterValidationType {
   code: number,
   isValid: boolean,

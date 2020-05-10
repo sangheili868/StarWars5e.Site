@@ -2,13 +2,13 @@
   import { Component, Prop, Vue } from 'vue-property-decorator'
   import { namespace } from 'vuex-class'
   import SearchTable from '@/components/SearchTable.vue'
-  import { ArmorType } from '@/types/lootTypes'
+  import { EquipmentType } from '@/types/lootTypes'
   import _ from 'lodash'
   import VueMarkdown from 'vue-markdown'
   import LootArmorProperties from './LootArmorProperties.vue'
   import BackButton from '@/components/BackButton.vue'
 
-  const armorModule = namespace('armor')
+  const equipmentModule = namespace('equipment')
 
   @Component({
     components: {
@@ -19,21 +19,22 @@
     }
   })
   export default class LootArmor extends Vue {
-    @armorModule.State armor!: ArmorType[]
-    @armorModule.Action fetchArmor!: () => void
+    @equipmentModule.State equipment!: EquipmentType[]
+    @equipmentModule.Action fetchEquipment!: () => void
     initialSearch: string | (string | null)[] = ''
     tableType: string = 'Armor'
 
     created () {
-      this.fetchArmor()
+      this.fetchEquipment()
       this.initialSearch = this.$route.query.search
     }
 
     get items () {
-      return _(this.armor)
-        .map(armor => ({
-          ...armor,
-          id: armor.name,
+      return _(this.equipment)
+        .filter(({ equipmentCategory }: EquipmentType) => equipmentCategory === 'Armor')
+        .map(equipment => ({
+          ...equipment,
+          id: equipment.name,
           isExpandable: true
         })).value()
     }
@@ -45,7 +46,7 @@
           text: 'Type',
           value: 'armorClassification',
           filterChoices: ['Light', 'Medium', 'Heavy', 'Shield'],
-          filterFunction: ({ armorClassification }: ArmorType, filterValue: string) => armorClassification === filterValue
+          filterFunction: ({ armorClassification }: EquipmentType, filterValue: string) => armorClassification === filterValue
         },
         { text: 'Cost', value: 'cost' },
         { text: 'Weight', value: 'weight' },
@@ -56,7 +57,7 @@
           value: 'contentSource',
           render: _.startCase,
           filterChoices: ['PHB', 'EC', 'WH'],
-          filterFunction: ({ contentSource }: ArmorType, filterValue: string) => _.startCase(contentSource) === filterValue
+          filterFunction: ({ contentSource }: EquipmentType, filterValue: string) => _.startCase(contentSource) === filterValue
         }
       ]
     }

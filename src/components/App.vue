@@ -5,6 +5,7 @@
   import { namespace } from 'vuex-class'
 
   const uiModule = namespace('ui')
+  const dataVersionsModule = namespace('dataVersions')
 
   @Component({
     components: {
@@ -14,6 +15,11 @@
   })
   export default class App extends Vue {
     @uiModule.State isDarkSide!: boolean
+    @dataVersionsModule.Action fetchDataVersions!: () => Promise<any>
+
+    created () {
+      this.fetchDataVersions()
+    }
   }
 </script>
 

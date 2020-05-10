@@ -29,6 +29,7 @@ import createPersistedState from 'vuex-persistedstate'
 import characterAdvancements from './modules/characterAdvancements'
 import conditions from './modules/conditions'
 import skills from './modules/skills'
+import dataVersion from './modules/dataVersions'
 
 Vue.use(Vuex)
 
@@ -44,6 +45,7 @@ export default new Vuex.Store({
     characterAdvancements,
     classes,
     conditions,
+    dataVersion,
     deployments,
     enhancedItems,
     feats,

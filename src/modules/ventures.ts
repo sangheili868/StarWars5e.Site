@@ -9,7 +9,7 @@ export default class Ventures extends VuexModule {
   @MutationAction({ mutate: ['ventures'] })
   async fetchVentures () {
     return {
-      ventures: await fetchFromCache((this as any).state.venture, 'Venture')
+      ventures: await fetchFromCache((this as any).state.ventures, 'Venture')
     }
   }
 }

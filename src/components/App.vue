@@ -14,6 +14,10 @@
   })
   export default class App extends Vue {
     @uiModule.State isDarkSide!: boolean
+
+    created () {
+      window.alert('hello there')
+    }
   }
 </script>
 

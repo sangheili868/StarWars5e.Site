@@ -5,11 +5,11 @@ import { ArchetypeType } from '@/types/characterTypes'
 @Module({ namespaced: true, name: 'archetype' })
 export default class Archetypes extends VuexModule {
   archetypes: ArchetypeType[] = []
+  cachedVersion: number = 0
 
-  @MutationAction({ mutate: ['archetypes'] })
+  @MutationAction({ mutate: ['archetypes', 'cachedVersion'] })
   async fetchArchetypes () {
-    return {
-      archetypes: await fetchFromCache((this as any).state.archetypes, 'Archetype')
-    }
+    const { data: archetypes, cachedVersion } = await fetchFromCache((this as any).state, 'archetypes', 'archetype')
+    return { archetypes, cachedVersion }
   }
 }

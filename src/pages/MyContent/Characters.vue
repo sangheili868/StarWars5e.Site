@@ -76,8 +76,6 @@
     currentStep = 0
 
     created () {
-      const x = new Date()
-      console.log(x)
       Promise.all([
         this.fetchClasses(),
         this.fetchArchetypes(),
@@ -93,8 +91,6 @@
         this.hasFetchedData = true
         this.isEditing = this.characterValidation.code > 0
         this.currentStep = this.isEmptyCharacter ? 0 : 1
-        const y = new Date()
-        console.log(y, Math.abs(x.getTime() - y.getTime()))
       })
     }
 

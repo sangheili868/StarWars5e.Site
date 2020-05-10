@@ -5,11 +5,12 @@ import { ArmorPropertyType } from '@/types/lootTypes'
 @Module({ namespaced: true, name: 'armorProperties' })
 export default class ArmorPropertys extends VuexModule {
   armorProperties: ArmorPropertyType[] = []
+  cachedVersion: number = 0
 
-  @MutationAction({ mutate: ['armorProperties'] })
-  async fetchArmorPropertys () {
-    return {
-      armorProperties: await fetchFromCache((this as any).state.armorPropertie, 'ArmorProperty')
-    }
+  @MutationAction({ mutate: ['armorProperties', 'cachedVersion'] })
+  async fetchArmorProperties () {
+    const state = (this as any).state
+    const { data: armorProperties, cachedVersion } = await fetchFromCache(state.armorProperties, state.cachedVersion, 'armorProperties', 'ArmorProperty')
+    return { armorProperties, cachedVersion }
   }
 }

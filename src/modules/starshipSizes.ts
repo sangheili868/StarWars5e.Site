@@ -9,7 +9,7 @@ export default class StarshipSizes extends VuexModule {
   @MutationAction({ mutate: ['starshipSizes'] })
   async fetchStarshipSizes () {
     return {
-      starshipSizes: await fetchFromCache((this as any).state.starshipSize, 'StarshipBaseSize')
+      starshipSizes: await fetchFromCache((this as any).state.starshipSizes, 'StarshipBaseSize')
     }
   }
 }

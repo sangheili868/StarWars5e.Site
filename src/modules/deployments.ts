@@ -2,14 +2,14 @@ import fetchFromCache from '@/utilities/fetchFromCache'
 import { Module, VuexModule, MutationAction } from 'vuex-module-decorators'
 import { DeploymentType } from '@/types/starshipTypes'
 
-@Module({ namespaced: true, name: 'depoyment' })
+@Module({ namespaced: true, name: 'deployments' })
 export default class Deployments extends VuexModule {
-  depoyments: DeploymentType[] = []
+  deployments: DeploymentType[] = []
 
-  @MutationAction({ mutate: ['depoyments'] })
+  @MutationAction({ mutate: ['deployments'] })
   async fetchDeployments () {
     return {
-      depoyments: await fetchFromCache((this as any).state.depoyment, 'StarshipDeployment')
+      deployments: await fetchFromCache((this as any).state.deployment, 'StarshipDeployment')
     }
   }
 }

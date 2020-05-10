@@ -5,11 +5,11 @@ import { ReferenceTableType } from '@/types/utilityTypes'
 @Module({ namespaced: true, name: 'referenceTable' })
 export default class ReferenceTables extends VuexModule {
   referenceTables: ReferenceTableType[] = []
+  cachedVersion: number = 0
 
-  @MutationAction({ mutate: ['referenceTables'] })
+  @MutationAction({ mutate: ['referenceTables', 'cachedVersion'] })
   async fetchReferenceTables () {
-    return {
-      referenceTables: await fetchFromCache((this as any).state.referenceTables, 'ReferenceTable')
-    }
+    const { data: referenceTables, cachedVersion } = await fetchFromCache((this as any).state, 'referenceTables', 'referenceTable')
+    return { referenceTables, cachedVersion }
   }
 }

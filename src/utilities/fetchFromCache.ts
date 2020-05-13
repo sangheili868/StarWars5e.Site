@@ -62,7 +62,6 @@ export async function fetchBlobsFromCache (context: any, dataName: string, dataV
   let cachedVersions = context.state.cachedVersions
   const dataVersions = context.rootState.dataVersions
   if (!dataVersions || dataVersions.dataVersionTimeout <= (new Date())) {
-    console.log('fetching data versions')
     await context.dispatch('dataVersions/fetchDataVersions', null, { root: true })
   }
   try {

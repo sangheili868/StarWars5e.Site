@@ -55,7 +55,13 @@
           filterChoices: ['1 action', '1 bonus action', '1 reaction', '1 hour', '8 hours', '1 minute', '10 minutes'],
           filterFunction: ({ castingPeriodText }: PowerType, filterValue: string[]) => _.some(filterValue, (filter: string) => _.includes(castingPeriodText, filter))
         },
-        { text: 'Range', value: 'range' },
+        {
+          text: 'Range',
+          value: 'range',
+          isMultiSelect: true,
+          filterChoices: ['Varies', 'Self', 'Touch', '10 feet', '15 feet', '30 feet', '60 feet', '90 feet', '100 feet', '120 feet', '150 feet', '250 feet', '300 feet', '500 feet', 'Unlimited'],
+          filterFunction: ({ range }: PowerType, filterValue: string[]) => _.some(filterValue, (filter: string) => range.includes(filter))
+        },
         {
           text: 'Duration',
           value: 'duration',

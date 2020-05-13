@@ -87,6 +87,13 @@
           '11', '12', '13', '14', '15', '16', '17', '18', '19', '20', '21', '23', '24', '25', '26'],
           isMultiSelect: true,
           filterFunction: ({ challengeRating }: MonsterType, filterValue: string[]) => _.some(filterValue, (filter: string) => filter === challengeRating.toString())
+        },
+        {
+          text: 'Alignment',
+          value: 'alignment',
+          filterChoices: ['unaligned', 'any dark', 'any neutral alignment', 'neutral dark', 'lawful dark', 'chaotic dark', 'chaotic balanced', 'lawful balanced', 'any alignment'],
+          isMultiSelect: true,
+          filterFunction: ({ alignment }: MonsterType, filterValue: string[]) => _.includes(filterValue, alignment)
         }
       ]
     }

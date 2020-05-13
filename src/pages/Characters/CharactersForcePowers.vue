@@ -65,7 +65,10 @@
         },
         {
           text: 'Range',
-          value: 'range'
+          value: 'range',
+          isMultiSelect: true,
+          filterChoices: ['Varies', 'Self', 'Touch', '10 feet', '15 feet', '30 feet', '60 feet', '90 feet', '100 feet', '120 feet', '150 feet', '250 feet', '300 feet', '500 feet', 'Unlimited'],
+          filterFunction: ({ range }: PowerType, filterValue: string[]) => _.some(filterValue, (filter: string) => range.includes(filter))
         },
         {
           text: 'Duration',

@@ -10,8 +10,9 @@ function getUnarmedStrike (
   proficiencyBonus: number
 ): EquipmentType {
   const damageDieType: number = get(rawCharacter, 'tweaks.unarmed.damageDice.dieSize') || 0
+  const damageBase = damageDieType > 0 ? 0 : 1
   const attackBonus = applyTweak(rawCharacter, 'unarmed.toHit', proficiencyBonus + abilityScores.Strength.modifier)
-  const damageBonus = applyTweak(rawCharacter, 'unarmed.damage', Math.max(0, 1 + abilityScores.Strength.modifier))
+  const damageBonus = applyTweak(rawCharacter, 'unarmed.damage', Math.max(0, damageBase + abilityScores.Strength.modifier))
   return {
     index: -1,
     contentType: 'Core',

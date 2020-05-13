@@ -1,6 +1,15 @@
-export default '0.3.4'
+export default '0.4.0'
 
 /*
+
+0.4.0
+- Use local cache instead of accessing database if not out of date
+- Access data versions table to track version of local cache
+- Show an alert if failure to connect to database
+- Added Range filter to Force and Tech Power Tables (suggested by @alapornik)
+- Added Alignment filter to Monsters table (suggested by @alapornik)
+- Fixed bug where Introduction Navlink in PHB was always highlighted (found by @alapornik)
+- Fixed bug where unarmed strike damage calculated incorrectly with custom die size (found by @san cron)
 
 0.3.4
 - Added Source column to powers tables

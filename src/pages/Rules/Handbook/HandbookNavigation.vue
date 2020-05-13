@@ -177,5 +177,5 @@
 </script>
 
 <template lang="pug">
-  NavigationDrawer(:items="items", baseRoute="/phb/handbook")
+  NavigationDrawer(:items="items", baseRoute="/rules/phb")
 </template>

@@ -1,4 +1,5 @@
 import axios from 'axios'
+import { fetchBlobFromCache, fetchBlobsFromCache } from '@/utilities/fetchFromCache'
 import _ from 'lodash'
 import { Module, VuexModule, MutationAction } from 'vuex-module-decorators'
 import { VariantRuleBlobType } from '@/types/referenceTypes'
@@ -11,74 +12,47 @@ export default class Blobs extends VuexModule {
   monsterBlobs: { [blob: string]: string } = {}
   hivesBlobs: { [blob: string]: string } = {}
   creditsBlob: string = ''
-
-  @MutationAction({ mutate: ['handbookBlobs'] })
-  async fetchHandbookBlobs () {
-    const results = await axios.get(`${process.env.VUE_APP_sw5eapiurl}/api/HandbookBlob`)
-    return {
-      handbookBlobs: _(results.data).keyBy('chapterName')
-    }
+  cachedVersions: { [dataName: string]: number } = {
+    handbookBlobs: 0,
+    starshipBlobs: 0,
+    variantRulesBlobs: 0,
+    monsterBlobs: 0,
+    hivesBlobs: 0,
+    creditsBlob: 0
   }
 
-  @MutationAction({ mutate: ['handbookBlobs'] })
+  @MutationAction({ mutate: ['handbookBlobs', 'cachedVersions'] })
   async fetchHandbookBlob (chapter: string) {
-    const results = await axios.get(`${process.env.VUE_APP_sw5eapiurl}/api/PlayerHandbookRule/${chapter}.json`)
-    return {
-      handbookBlobs: {
-        ...this.state && (this.state as any).handbookBlobs,
-        [results.data.chapterName]: results.data.contentMarkdown
-      }
-    }
+    const { blobs: handbookBlobs, cachedVersions } = await fetchBlobFromCache(this, 'handbookBlobs', chapter, 'player-handbook-rules', 'PlayerHandbookRule')
+    return { handbookBlobs, cachedVersions }
   }
 
-  @MutationAction({ mutate: ['starshipBlobs'] })
+  @MutationAction({ mutate: ['starshipBlobs', 'cachedVersions'] })
   async fetchStarshipBlob (chapter: string) {
-    const results = await axios.get(`${process.env.VUE_APP_sw5eapiurl}/api/StarshipRule/${chapter}.json`)
-    return {
-      starshipBlobs: {
-        ...this.state && (this.state as any).starshipBlobs,
-        [results.data.chapterName]: results.data.contentMarkdown
-      }
-    }
+    const { blobs: starshipBlobs, cachedVersions } = await fetchBlobFromCache(this, 'starshipBlobs', chapter, 'starship-rules', 'StarshipRule')
+    return { starshipBlobs, cachedVersions }
   }
 
-  @MutationAction({ mutate: ['variantRuleBlobs'] })
+  @MutationAction({ mutate: ['variantRuleBlobs', 'cachedVersions'] })
   async fetchVariantRuleBlobs () {
-    const results = await axios.get(`${process.env.VUE_APP_sw5eapiurl}/api/VariantRule`)
+    const { data, cachedVersions } = await fetchBlobsFromCache(this, 'variantRuleBlobs', 'variant-rules', 'VariantRule')
     return {
-      variantRuleBlobs: results.data.map((variantRuleBlob: VariantRuleBlobType) =>
+      variantRuleBlobs: data.map((variantRuleBlob: VariantRuleBlobType) =>
         _.pick(variantRuleBlob, ['chapterName', 'contentMarkdown'])
-      )
+      ),
+      cachedVersions
     }
   }
 
-  @MutationAction({ mutate: ['monsterBlobs'] })
-  async fetchMonsterBlobs (chapter: string) {
-    const results = await axios.get(`${process.env.VUE_APP_sw5eapiurl}/api/MonsterChapters/${chapter}.json`)
-    return {
-      monsterBlobs: {
-        ...this.state && (this.state as any).monsterBlobs,
-        [results.data.chapterName]: results.data.contentMarkdown
-      }
-    }
-  }
-
-  @MutationAction({ mutate: ['hivesBlobs'] })
+  @MutationAction({ mutate: ['hivesBlobs', 'cachedVersions'] })
   async fetchHivesBlob (chapter: string) {
-    const results = await axios.get(`${process.env.VUE_APP_sw5eapiurl}/api/WretchedHivesRule/${chapter}.json`)
-    return {
-      hivesBlobs: {
-        ...this.state && (this.state as any).hivesBlobs,
-        [results.data.chapterName]: results.data.contentMarkdown
-      }
-    }
+    const { blobs: hivesBlobs, cachedVersions } = await fetchBlobFromCache(this, 'hivesBlobs', chapter, 'wretched-hives-rules', 'WretchedHivesRule')
+    return { hivesBlobs, cachedVersions }
   }
 
-  @MutationAction({ mutate: ['creditsBlob'] })
+  @MutationAction({ mutate: ['creditsBlob', 'cachedVersions'] })
   async fetchCreditsBlob () {
-    const results = await axios.get(`${process.env.VUE_APP_sw5eapiurl}/api/Credit`)
-    return {
-      creditsBlob: results.data
-    }
+    const { data: creditsBlob, cachedVersions } = await fetchBlobsFromCache(this, 'creditsBlob', 'credits', 'Credit')
+    return { creditsBlob, cachedVersions }
   }
 }

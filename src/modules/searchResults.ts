@@ -10,7 +10,15 @@ export default class SearchResults extends VuexModule {
   @MutationAction({ mutate: ['searchResults'] })
   async fetchSearchResults (searchText: string) {
     searchText = `${searchText}*`
-    const results = await axios.get(`${process.env.VUE_APP_sw5eapiurl}/api/search`, { params: { searchText } })
+    let results
+    try {
+      results = await axios.get(`${process.env.VUE_APP_sw5eapiurl}/api/search`, { params: { searchText } })
+      await (this as any).dispatch('dataVersions/setInternet', null, { root: true })
+    } catch (e) {
+      console.error('Failed to get search results')
+      await (this as any).dispatch('dataVersions/setNoInternet', null, { root: true })
+      throw e
+    }
     return { searchResults: results.data }
   }
 }

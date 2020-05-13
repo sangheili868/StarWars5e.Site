@@ -15,6 +15,7 @@
   })
   export default class App extends Vue {
     @uiModule.State isDarkSide!: boolean
+    @dataVersionsModule.State hasInternet!: boolean
     @dataVersionsModule.Action fetchDataVersions!: () => Promise<any>
 
     created () {
@@ -28,7 +29,8 @@
     MainToolbar
     FragmentModal
     v-content(:class="[ $style.content, $style.noPadding, { [$style.darkSide]: isDarkSide } ]")
-      v-container(fluid, :class="$style.noPadding")
+      v-alert(v-if="!hasInternet", type="error", :class="$style.alert") Warning: Could not connect to database. Check your internet connection.
+      v-container(fluid, :class="[$style.noPadding, { [$style.alertMargin]: !hasInternet }]")
         router-view
     router-view(name="navigation")
 </template>
@@ -43,6 +45,16 @@
 
     &.darkSide {
       background: $darkSideGradient;
+    }
+
+    .alert {
+      position: fixed;
+      z-index: 5;
+      width: 100%;
+    }
+
+    .alertMargin {
+      margin-top: 72px;
     }
   }
 

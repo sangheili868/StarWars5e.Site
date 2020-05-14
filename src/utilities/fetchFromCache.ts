@@ -16,7 +16,7 @@ export default async function fetchFromCache (context: any, dataName: string, en
     if (!data || !dataVersion || (context.state.cachedVersion < dataVersion.version)) {
       console.log(`Fetching ${dataName} from database`)
       data = (await axios.get(`${process.env.VUE_APP_sw5eapiurl}/api/${endpoint}`)).data
-      cachedVersion = dataVersion
+      cachedVersion = dataVersion.version
       await context.dispatch('dataVersions/setInternet', null, { root: true })
     }
   } catch (e) {
@@ -36,7 +36,14 @@ export async function fetchBlobFromCache (context: any, bookName: string, chapte
   }
   try {
     const dataVersion = dataVersions.dataVersions.find(({ name }: { name: string }) => name === dataVersionName)
-    if (!blobs || !blobs[chapterName] || !dataVersion || !cachedVersions || (cachedVersions[bookName] < dataVersion.version)) {
+    if (
+      !blobs ||
+      !blobs[chapterName] ||
+      !dataVersion ||
+      !cachedVersions ||
+      isNaN(cachedVersions[bookName]) || // fix a bug
+      (cachedVersions[bookName] < dataVersion.version)
+    ) {
       console.log(`Fetching ${chapterName} blob from database`)
       const chapter = (await axios.get(`${process.env.VUE_APP_sw5eapiurl}/api/${endpoint}/${chapterName}.json`)).data
       blobs = {
@@ -45,7 +52,7 @@ export async function fetchBlobFromCache (context: any, bookName: string, chapte
       }
       cachedVersions = {
         ...cachedVersions,
-        [bookName]: dataVersion
+        [bookName]: dataVersion.version
       }
       await context.dispatch('dataVersions/setInternet', null, { root: true })
     }
@@ -66,12 +73,19 @@ export async function fetchBlobsFromCache (context: any, dataName: string, dataV
   }
   try {
     const dataVersion = dataVersions.dataVersions.find(({ name }: { name: string }) => name === dataVersionName)
-    if (!data || !data.length || !dataVersion || !cachedVersions || (cachedVersions[dataName] < dataVersion.version)) {
+    if (
+      !data ||
+      !data.length ||
+      !dataVersion ||
+      !cachedVersions ||
+      isNaN(cachedVersions[dataName]) || // fix a bug
+      (cachedVersions[dataName] < dataVersion.version)
+    ) {
       console.log(`Fetching ${dataName} blobs from database`)
       data = (await axios.get(`${process.env.VUE_APP_sw5eapiurl}/api/${endpoint}`)).data
       cachedVersions = {
         ...cachedVersions,
-        [dataName]: dataVersion
+        [dataName]: dataVersion.version
       }
       await context.dispatch('dataVersions/setInternet', null, { root: true })
     }

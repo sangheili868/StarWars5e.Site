@@ -29,7 +29,7 @@ export default class Blobs extends VuexModule {
 
   @MutationAction({ mutate: ['starshipBlobs', 'cachedVersions'] })
   async fetchStarshipBlob (chapter: string) {
-    const { blobs: starshipBlobs, cachedVersions } = await fetchBlobFromCache(this, 'starshipBlobs', chapter, 'starship-rules', 'StarshipRule')
+    const { blobs: starshipBlobs, cachedVersions } = await fetchBlobFromCache(this, 'starshipBlobs', chapter, 'starships-rules', 'StarshipRule')
     return { starshipBlobs, cachedVersions }
   }
 

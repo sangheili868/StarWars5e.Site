@@ -2,6 +2,9 @@ export default '0.4.0'
 
 /*
 
+0.4.1
+- Fixed bug where blob cache versions were not being stored correctly, causing blobs to never update
+
 0.4.0
 - Use local cache instead of accessing database if not out of date
 - Access data versions table to track version of local cache
@@ -39,7 +42,7 @@ export default '0.4.0'
 0.3.0
 - Make class and archetype detail popups in character builder wider.
 - Add a button to view background details in character builder.
-- Select skill and save proficiency  level in the tweak popup, rather than the proficiencies page
+- Select skill and save proficiency level in the tweak popup, rather than the proficiencies page
 - Allow Tool Expertise
 - Allow manually adding powers, outside powers gained from class
 - Add Cast Power Button next to power levels that automatically subtracts the appropriate number of tech/force points.

@@ -33,3 +33,6 @@ yarn build
 ```
 yarn lint
 ```
+
+### For prod debugging:
+`document.getElementById('app').__vue__.$store.state`

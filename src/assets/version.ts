@@ -2,6 +2,9 @@ export default '0.4.0'
 
 /*
 
+0.4.2
+- Fixed bug when attempting to cache tables that do not have a version number in the data versions table (found by @ItsMeDanielTheOne)
+
 0.4.1
 - Fixed bug where blob cache versions were not being stored correctly, causing blobs to never update
 

@@ -16,7 +16,7 @@ export default async function fetchFromCache (context: any, dataName: string, en
     if (!data || !dataVersion || (context.state.cachedVersion < dataVersion.version)) {
       console.log(`Fetching ${dataName} from database`)
       data = (await axios.get(`${process.env.VUE_APP_sw5eapiurl}/api/${endpoint}`)).data
-      cachedVersion = dataVersion.version
+      cachedVersion = dataVersion ? dataVersion.version : 0
       await context.dispatch('dataVersions/setInternet', null, { root: true })
     }
   } catch (e) {

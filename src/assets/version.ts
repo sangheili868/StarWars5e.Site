@@ -2,6 +2,10 @@ export default '0.4.0'
 
 /*
 
+0.4.3
+- Added Google Analytics support
+- Updated asset links for EC
+
 0.4.2
 - Fixed bug when attempting to cache tables that do not have a version number in the data versions table (found by @ItsMeDanielTheOne)
 

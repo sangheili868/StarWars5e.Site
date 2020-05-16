@@ -30,15 +30,15 @@
           category: 'Expanded Content',
           routes: [
             {
-              href: 'https://drive.google.com/file/d/1zDBxUX4ao96oR2cTFkD0rQL-Xw30bCrk/view?usp=sharing',
+              href: 'https://www.gmbinder.com/share/-LM7Sz_VhFOf0IYKXHQG',
               title: 'Species'
             },
             {
-              href: 'https://drive.google.com/file/d/1b5srpCjqHV9ZICSHnXbfTUcmhsIg6OGo/view?usp=sharing',
+              href: 'https://www.gmbinder.com/share/-LM7VwslAMiI0A6oG6pf',
               title: 'Archetypes'
             },
             {
-              href: 'https://drive.google.com/file/d/11gtMu3mxVVcA29hHP3NKT8N3L2lpCp2W/view?usp=sharing',
+              href: 'https://www.gmbinder.com/share/-LM7YKv2CF9ziIA3Bg0q',
               title: 'Backgrounds'
             }
           ]

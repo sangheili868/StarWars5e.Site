@@ -50,11 +50,9 @@ function getMaxPowerLevelForClass (
     const leveledTable = myArchetype.leveledTable
     if (leveledTable) {
       const maxPowerLevelValue = leveledTable[levels].find(({ key }) => key === 'Max Power Level')
-      console.log(myClass, myArchetypes, maxPowerLevelValue)
       return maxPowerLevelValue ? parseInt(maxPowerLevelValue.value) : 0
     }
   }
-  console.log(className, levels, myClass, myArchetypes, myClass && myClass.levelChanges[levels]['Max Power Level'])
   return myClass ? parseInt(myClass.levelChanges[levels]['Max Power Level']) : 0
 }
 

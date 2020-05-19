@@ -1,14 +1,26 @@
 <script lang="ts">
   import { Component, Prop, Vue } from 'vue-property-decorator'
+  import Draggable from 'vuedraggable'
   import MyDialog from '@/components/MyDialog.vue'
   import TextEditor from '@/components/TextEditor.vue'
   import ConfirmDelete from '@/components/ConfirmDelete.vue'
 
   @Component({
     components: {
+      Draggable,
       MyDialog,
       TextEditor,
       ConfirmDelete
+    },
+    computed: {
+      draggableFeatures: {
+        get () {
+          return this.$props.features
+        },
+        set (value) {
+          this.$emit('updateCharacter', { customFeatures: value })
+        }
+      }
     }
   })
   export default class CharacterSheetCustomFeatures extends Vue {
@@ -56,25 +68,32 @@
           v-spacer
           v-btn(color="primary", text, @click="isOpen=false") Close
     v-expansion-panels(accordion, multiple)
-      v-expansion-panel(v-for="({ name, content }, index) in features", :key="index").featurePanel
-        v-expansion-panel-header.pa-2
-          h4 {{ name }}
-        v-expansion-panel-content.ma-2.caption
-          TextEditor(
-            :value="content",
-            hasOwnState,
-            placeholder="Feature Text",
-            @input="newValue => handleEdit ('content', newValue, index)")
-          div.d-flex.justify-end
-            ConfirmDelete(
-              label="Feature",
-              :item="name",
-              @delete="$emit('deleteCharacterProperty', { path: 'customFeatures', index })"
-            )
+      Draggable(v-model="draggableFeatures", @start="drag=true", @end="drag=false").dragContainer
+        v-expansion-panel(v-for="({ name, content }, index) in features", :key="index").featurePanel
+          v-expansion-panel-header.pa-2
+            h4 {{ name }}
+          v-expansion-panel-content.ma-2.caption
+            TextEditor(
+              :value="content",
+              hasOwnState,
+              placeholder="Feature Text",
+              @input="newValue => handleEdit ('content', newValue, index)")
+            div.d-flex.justify-end
+              ConfirmDelete(
+                label="Feature",
+                :item="name",
+                @delete="$emit('deleteCharacterProperty', { path: 'customFeatures', index })"
+              )
 </template>
 
 <style module lang="scss">
   .featurePanel .v-expansion-panel-header {
     min-height: 0;
+  }
+</style>
+
+<style lang="scss">
+  .dragContainer {
+    flex: 1;
   }
 </style>

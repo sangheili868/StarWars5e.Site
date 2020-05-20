@@ -11,16 +11,13 @@
       MyDialog,
       TextEditor,
       ConfirmDelete
-    },
-    computed: {
-      draggableFeatures: {
-        get () {
-          return this.$props.features
-        },
-        set (value) {
-          this.$emit('updateCharacter', { customFeatures: value })
-        }
-      }
+    get draggableFeatures () {
+      return this.features
+    }
+
+    set draggableFeatures (customFeatures) {
+      this.$emit('updateCharacter', { customFeatures })
+    }
     }
   })
   export default class CharacterSheetCustomFeatures extends Vue {

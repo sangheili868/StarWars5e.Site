@@ -68,7 +68,7 @@
           v-spacer
           v-btn(color="primary", text, @click="isOpen=false") Close
     v-expansion-panels(accordion, multiple)
-      Draggable(v-model="draggableFeatures", @start="drag=true", @end="drag=false").dragContainer
+      Draggable(v-model="draggableFeatures").dragContainer
         v-expansion-panel(v-for="({ name, content }, index) in features", :key="index").featurePanel
           v-expansion-panel-header.pa-2
             h4 {{ name }}

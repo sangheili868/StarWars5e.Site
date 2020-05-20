@@ -68,7 +68,7 @@
           v-spacer
           v-btn(color="primary", text, @click="isOpen=false") Close
     v-expansion-panels(accordion, multiple)
-      Draggable(v-model="draggableFeatures").dragContainer
+      Draggable(v-model="draggableFeatures").flex-grow-1
         v-expansion-panel(v-for="({ name, content }, index) in features", :key="index").featurePanel
           v-expansion-panel-header.pa-2
             h4 {{ name }}
@@ -89,11 +89,5 @@
 <style module lang="scss">
   .featurePanel .v-expansion-panel-header {
     min-height: 0;
-  }
-</style>
-
-<style lang="scss">
-  .dragContainer {
-    flex: 1;
   }
 </style>

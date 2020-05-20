@@ -11,14 +11,7 @@
       MyDialog,
       TextEditor,
       ConfirmDelete
-    get draggableFeatures () {
-      return this.features
-    }
-
-    set draggableFeatures (customFeatures) {
-      this.$emit('updateCharacter', { customFeatures })
-    }
-    }
+    }    
   })
   export default class CharacterSheetCustomFeatures extends Vue {
     @Prop(Array) readonly features!: { name: string, content: string }[]
@@ -45,6 +38,14 @@
 
     isEmptyString (input: string) {
       return input.length > 0
+    }
+
+    get draggableFeatures () {
+      return this.$props.features
+    }
+
+    set draggableFeatures (customFeatures) {
+      this.$emit('updateCharacter', { customFeatures })
     }
   }
 </script>

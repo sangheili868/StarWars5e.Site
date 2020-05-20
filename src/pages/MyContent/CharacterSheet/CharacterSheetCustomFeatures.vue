@@ -1,17 +1,17 @@
 <script lang="ts">
   import { Component, Prop, Vue } from 'vue-property-decorator'
-  import Draggable from 'vuedraggable'
+  import DraggableList from '@/components/DraggableList.vue'
   import MyDialog from '@/components/MyDialog.vue'
   import TextEditor from '@/components/TextEditor.vue'
   import ConfirmDelete from '@/components/ConfirmDelete.vue'
 
   @Component({
     components: {
-      Draggable,
+      DraggableList,
       MyDialog,
       TextEditor,
       ConfirmDelete
-    }    
+    }
   })
   export default class CharacterSheetCustomFeatures extends Vue {
     @Prop(Array) readonly features!: { name: string, content: string }[]
@@ -39,14 +39,6 @@
     isEmptyString (input: string) {
       return input.length > 0
     }
-
-    get draggableFeatures () {
-      return this.$props.features
-    }
-
-    set draggableFeatures (customFeatures) {
-      this.$emit('updateCharacter', { customFeatures })
-    }
   }
 </script>
 
@@ -66,7 +58,7 @@
           v-spacer
           v-btn(color="primary", text, @click="isOpen=false") Close
     v-expansion-panels(accordion, multiple)
-      Draggable(v-model="draggableFeatures").flex-grow-1
+      DraggableList(:items="features", @update="customFeatures => $emit('updateCharacter', { customFeatures })")
         v-expansion-panel(v-for="({ name, content }, index) in features", :key="index").featurePanel
           v-expansion-panel-header.pa-2
             h4 {{ name }}

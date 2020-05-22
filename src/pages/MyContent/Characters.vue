@@ -15,7 +15,7 @@
   import { range, isEmpty, isEqual, merge, get, set, camelCase } from 'lodash'
   import baseCharacter from '@/modules/CharacterEngine/baseCharacter.json'
   import validateCharacter from '@/modules/CharacterEngine/validateCharacter'
-  import builderVersion from '@/assets/version'
+  import builderVersion from '@/version'
   import semver from 'semver'
 
   const characterModule = namespace('character')

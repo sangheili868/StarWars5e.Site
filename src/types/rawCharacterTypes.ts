@@ -1,5 +1,5 @@
 /// ////////////////////////////////////////////////////////
-// IF YOU CHANGE THIS FILE, INCREMENT BUILDER VERSION IN assets/builderVersion.ts
+// IF YOU CHANGE THIS FILE, INCREMENT BUILDER VERSION IN src/version.ts
 /// ////////////////////////////////////////////////////////
 
 export interface RawSpeciesType {

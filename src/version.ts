@@ -1,6 +1,9 @@
-export default '0.4.5'
+export default '0.4.6'
 
 /*
+
+0.4.6 (@cynicaloptimist)
+- Added Draggable functionality to custom features
 
 0.4.5
 - Added Sponsored Content section on Assets page

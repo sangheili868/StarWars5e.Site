@@ -2,6 +2,9 @@
   "name": "starwars5e",
   "version": "0.1.0",
   "private": true,
+  "engines": {
+    "node": ">=12.0.0 <13.0.0"
+  },
   "scripts": {
     "serve": "vue-cli-service serve",
     "build": "vue-cli-service build",
@@ -16,6 +19,7 @@
     "@types/pluralize": "^0.0.29",
     "@types/semver": "^7.1.0",
     "@types/vue-markdown": "^2.2.1",
+    "@types/vuedraggable": "^2.23.1",
     "@vue/cli": "^3.11.0",
     "axios": "0.18.1",
     "copy-to-clipboard": "^3.2.0",
@@ -38,6 +42,7 @@
     "vue-property-decorator": "^8.1.0",
     "vue-router": "^3.0.3",
     "vue-sessionstorage": "^1.0.0",
+    "vuedraggable": "^2.23.2",
     "vuetify": "2.0.18",
     "vuetify-scss": "^1.4.0",
     "vuex": "^3.0.1",

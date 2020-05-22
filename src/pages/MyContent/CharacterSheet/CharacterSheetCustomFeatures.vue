@@ -1,11 +1,13 @@
 <script lang="ts">
   import { Component, Prop, Vue } from 'vue-property-decorator'
+  import DraggableList from '@/components/DraggableList.vue'
   import MyDialog from '@/components/MyDialog.vue'
   import TextEditor from '@/components/TextEditor.vue'
   import ConfirmDelete from '@/components/ConfirmDelete.vue'
 
   @Component({
     components: {
+      DraggableList,
       MyDialog,
       TextEditor,
       ConfirmDelete
@@ -56,21 +58,22 @@
           v-spacer
           v-btn(color="primary", text, @click="isOpen=false") Close
     v-expansion-panels(accordion, multiple)
-      v-expansion-panel(v-for="({ name, content }, index) in features", :key="index").featurePanel
-        v-expansion-panel-header.pa-2
-          h4 {{ name }}
-        v-expansion-panel-content.ma-2.caption
-          TextEditor(
-            :value="content",
-            hasOwnState,
-            placeholder="Feature Text",
-            @input="newValue => handleEdit ('content', newValue, index)")
-          div.d-flex.justify-end
-            ConfirmDelete(
-              label="Feature",
-              :item="name",
-              @delete="$emit('deleteCharacterProperty', { path: 'customFeatures', index })"
-            )
+      DraggableList(:items="features", @update="customFeatures => $emit('updateCharacter', { customFeatures })")
+        v-expansion-panel(v-for="({ name, content }, index) in features", :key="index").featurePanel
+          v-expansion-panel-header.pa-2
+            h4 {{ name }}
+          v-expansion-panel-content.ma-2.caption
+            TextEditor(
+              :value="content",
+              hasOwnState,
+              placeholder="Feature Text",
+              @input="newValue => handleEdit ('content', newValue, index)")
+            div.d-flex.justify-end
+              ConfirmDelete(
+                label="Feature",
+                :item="name",
+                @delete="$emit('deleteCharacterProperty', { path: 'customFeatures', index })"
+              )
 </template>
 
 <style module lang="scss">

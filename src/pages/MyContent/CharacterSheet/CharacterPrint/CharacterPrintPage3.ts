@@ -1,5 +1,6 @@
 import { CompleteCharacterType } from '@/types/completeCharacterTypes'
 import { printFieldType } from '@/types/utilityTypes'
+import math from 'mathjs'
 
 export default function CharacterPrintPage3 (
   completeCharacter: CompleteCharacterType,
@@ -8,10 +9,10 @@ export default function CharacterPrintPage3 (
   const equipment = completeCharacter.equipment.slice(0, 47).map(({ name, equipped, quantity, weight }, index) => [
     { top: 52 + index * 17.8, left: 70, width: 190, myClass: myClasses.openSans + ' text-left', text: name },
     ...(quantity > 1 ? [{ top: 52 + index * 17.8, left: 264, width: 30, myClass: myClasses.openSans + ' text-left', text: 'x' + quantity }] : []),
-    { top: 52 + index * 17.8, left: 294 + (equipped ? 0 : 35), width: 35, fontSize: 10, myClass: myClasses.openSans, text: quantity * weight + ' lbs.' }
+    { top: 52 + index * 17.8, left: 294 + (equipped ? 0 : 35), width: 35, fontSize: 10, myClass: myClasses.openSans, text: math.eval(`quantity * ${math.number(math.fraction(weight))}`) + ' lbs.' }
   ]).flat()
-  const totalDonned = completeCharacter.equipment.filter(({ equipped }) => equipped).reduce((sum, { quantity, weight }) => sum + quantity * weight, 0)
-  const totalBag = completeCharacter.equipment.filter(({ equipped }) => !equipped).reduce((sum, { quantity, weight }) => sum + quantity * weight, 0)
+  const totalDonned = completeCharacter.equipment.filter(({ equipped }) => equipped).reduce((sum, { quantity, weight }) => math.eval(`sum + quantity * ${math.number(math.fraction(weight))}`), 0)
+  const totalBag = completeCharacter.equipment.filter(({ equipped }) => !equipped).reduce((sum, { quantity, weight }) => math.eval(`sum + quantity * ${math.number(math.fraction(weight))}`), 0)
   const totalWeight = totalDonned + totalBag
 
   return [

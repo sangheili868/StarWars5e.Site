@@ -1,9 +1,11 @@
-export default '0.4.4'
+export default '0.4.5'
 
 /*
 
 0.4.5
 - Added Sponsored Content section on Assets page
+- Updated equipment weight to handle a string
+- Content update
 
 0.4.4
 - Fixed bug where level 3 sentinel has max power level 1 (found by @ItsMeDanielTheOne)

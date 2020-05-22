@@ -6,6 +6,7 @@
   import _ from 'lodash'
   import VueMarkdown from 'vue-markdown'
   import BackButton from '@/components/BackButton.vue'
+  import math from 'mathjs'
 
   const equipmentModule = namespace('equipment')
 
@@ -25,6 +26,25 @@
     created () {
       this.fetchEquipment()
       this.initialSearch = this.$route.query.search
+    }
+
+    customSort (items: any[], sortBy: string[], sortDesc: boolean[]) {
+      items.sort((a, b) => {
+        if (sortBy[0] === 'weight' && parseFloat(a[sortBy[0]]) && parseFloat(b[sortBy[0]])) {
+          if (!sortDesc[0]) {
+            return math.eval(a[sortBy[0]]) < math.eval(b[sortBy[0]]) ? -1 : 1
+          } else {
+            return math.eval(b[sortBy[0]]) < math.eval(a[sortBy[0]]) ? -1 : 1
+          }
+        } else {
+          if (!sortDesc[0]) {
+            return (a[sortBy[0]]) < (b[sortBy[0]]) ? -1 : 1
+          } else {
+            return (b[sortBy[0]]) < (a[sortBy[0]]) ? -1 : 1
+          }
+        }
+      })
+      return items
     }
 
     get items () {
@@ -49,7 +69,7 @@
           filterFunction: ({ equipmentCategory }: EquipmentType, filterValue: string) => _.startCase(equipmentCategory) === filterValue
         },
         { text: 'Cost', value: 'cost' },
-        { text: 'Weight', value: 'weight' },
+        { text: 'Weight (lb)', value: 'weight' },
         {
           text: 'Source',
           value: 'contentSource',
@@ -67,7 +87,7 @@
     BackButton
     h1 Gear
     br
-    SearchTable(name="Gear", v-bind="{ headers, items, initialSearch, tableType }")
+    SearchTable(name="Gear", v-bind="{ headers, items, customSort, initialSearch, tableType }")
       template(v-slot:default="props")
         VueMarkdown(:source="props.item.description")
 </template>

@@ -30,7 +30,7 @@ function getUnarmedStrike (
     name: 'Unarmed Strike',
     properties: [],
     weaponClassification: '',
-    weight: 0,
+    weight: '0',
     description: null,
     modes: [],
     ac: 0,

@@ -2,6 +2,9 @@ export default '0.4.4'
 
 /*
 
+0.4.5
+- Added Sponsored Content section on Assets page
+
 0.4.4
 - Fixed bug where level 3 sentinel has max power level 1 (found by @ItsMeDanielTheOne)
 

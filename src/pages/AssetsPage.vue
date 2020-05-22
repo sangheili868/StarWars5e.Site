@@ -44,6 +44,15 @@
           ]
         },
         {
+          category: 'Sponsored Content',
+          routes: [
+            {
+              href: 'https://www.gmbinder.com/share/-M-qA_FYgTwJjU8yFjjx',
+              title: 'The Legobis Codex'
+            }
+          ]
+        },
+        {
           category: 'Character Sheets',
           routes: [
             {

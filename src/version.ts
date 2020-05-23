@@ -1,6 +1,9 @@
-export default '0.4.6'
+export default '0.4.7'
 
 /*
+
+0.4.7 (@cynicaloptimist)
+- Added Drake's Shipyard to Assets page
 
 0.4.6 (@cynicaloptimist)
 - Added Draggable functionality to custom features

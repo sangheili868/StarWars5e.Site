@@ -49,6 +49,10 @@
             {
               href: 'https://www.gmbinder.com/share/-M-qA_FYgTwJjU8yFjjx',
               title: 'The Legobis Codex'
+            },
+            {
+              href: 'https://www.gmbinder.com/share/-M7y5JXBmMCskhJPFhUp',
+              title: 'Drake\'s Shipyard'
             }
           ]
         },

@@ -1,8 +1,12 @@
-export default '0.4.7'
+export default '0.4.8'
 
 /*
 
-0.4.7 (@cynicaloptimist)
+0.4.8
+- Added Caster Type column to archetypes table
+- Fixed issues with csting data missing from database (reported by @aelin ashryver galathynius)
+
+0.4.7
 - Added Drake's Shipyard to Assets page
 
 0.4.6 (@cynicaloptimist)

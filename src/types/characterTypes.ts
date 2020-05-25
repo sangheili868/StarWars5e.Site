@@ -17,7 +17,8 @@ export interface ArchetypeType {
   },
   leveledTableHeaders: string[]
   name: string,
-  casterType: string, // None, Force
+  casterType: string, // None, Force, Tech
+  classCasterType: string,
   casterRatio: number, // 0, 0.33333333
   text: string,
   text2: string,

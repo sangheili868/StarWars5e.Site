@@ -32,6 +32,7 @@
         .filter(({ contentType }) => !this.isInHandbook || contentType === 'Core')
         .map(archetype => ({
           ...archetype,
+          casterTypes: [archetype.classCasterType, archetype.casterType].filter(casterType => casterType !== 'None'),
           to: `/${page}/archetypes/${encodeURIComponent(archetype.name)}`
         })).value()
     }
@@ -51,9 +52,12 @@
         },
         {
           text: 'Caster Type',
-          value: 'casterType',
+          value: 'casterTypes',
+          isMultiSelect: true,
+          render: (casterTypes: string[]) => casterTypes.join(', ') || 'None',
           filterChoices: ['Tech', 'Force', 'None'],
-          filterFunction: ({ casterType }: ArchetypeType, filterValue: string) => casterType === filterValue
+          filterFunction: ({ casterTypes }: { casterTypes: string[] }, filterValue: string[]) => casterTypes.some(casterType => filterValue.includes(casterType)) ||
+            (filterValue.includes('None') && _.isEmpty(casterTypes))
         },
         {
           text: 'Source',

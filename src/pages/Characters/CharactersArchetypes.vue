@@ -50,6 +50,12 @@
           filterFunction: ({ className }: ArchetypeType, filterValue: string) => className === filterValue
         },
         {
+          text: 'Caster Type',
+          value: 'casterType',
+          filterChoices: ['Tech', 'Force', 'None'],
+          filterFunction: ({ casterType }: ArchetypeType, filterValue: string) => casterType === filterValue
+        },
+        {
           text: 'Source',
           value: 'contentSource',
           render: _.startCase,

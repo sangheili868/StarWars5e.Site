@@ -48,7 +48,7 @@
           routes: [
             {
               href: 'https://www.gmbinder.com/share/-M-qA_FYgTwJjU8yFjjx',
-              title: 'The Legobis Codex'
+              title: 'Fisto\'s Codex'
             },
             {
               href: 'https://www.gmbinder.com/share/-M7y5JXBmMCskhJPFhUp',

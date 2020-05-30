@@ -1,6 +1,10 @@
-export default '0.4.8'
+export default '0.4.9'
 
 /*
+
+0.4.9
+- Fix bug due to gaming sets renamed (found by @Halimeni)
+- Warn the user if they have an item that no longer exists in the database
 
 0.4.8
 - Added Caster Type column to archetypes table

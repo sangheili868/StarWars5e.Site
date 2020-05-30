@@ -62,7 +62,18 @@ export default function generateEquipment (
   return chain(rawCharacter.equipment)
     .map(({ name, quantity, equipped, tweaks }, index) => {
       const equipmentData = equipment.find(equipment => name === equipment.name)
-      if (!equipmentData) console.error('Equipment Data Not Found:', name)
+      if (isEmpty(equipmentData)) {
+        console.error('Equipment Data Not Found:', name)
+        return {
+          name,
+          quantity,
+          equipped,
+          index,
+          cost: 0,
+          weight: 0,
+          isFound: false
+        }
+      }
       const weaponStats = abilityScores && getWeaponStats(
         rawCharacter,
         abilityScores,
@@ -78,9 +89,8 @@ export default function generateEquipment (
         index,
         ...(equipmentData || {}),
         ...weaponStats,
-        isFound: !isEmpty(equipmentData)
+        isFound: true
       }
     })
-    .filter(({ isFound }) => isFound)
     .value() as EquipmentType[]
 }

@@ -15,7 +15,7 @@
   })
   export default class CharacterSheetProficiencies extends Vue {
     @Prop(Array) readonly nonCombatFeatures!: CompletedFeatureType[]
-    @Prop(Array) readonly backgroundFeature!: CompletedFeatureType
+    @Prop(Object) readonly backgroundFeature!: CompletedFeatureType
     @Prop(Array) readonly customLanguages!: string[]
     @Prop(Array) readonly languages!: string[]
     @Prop(Array) readonly proficiencies!: string[]

@@ -27,8 +27,8 @@
 
     startCase = startCase
 
-    updateQuantity (newQuantity: number) {
-      const fixedQuantity = Math.max(0, newQuantity)
+    updateQuantity (newQuantity: string) {
+      const fixedQuantity = Math.max(0, parseInt(newQuantity) || 0)
       this.$emit('updateCharacter', { [this.equimentType]: { [this.index]: { quantity: fixedQuantity } } })
     }
 
@@ -69,18 +69,21 @@
             :class="$style.checkbox",
             @change="isChecked => $emit('updateCharacter', { [equimentType]: { [index]: { equipped: isChecked } } })"
           ).ma-2
-      div(v-if="!isCustomEquipment && item.equipmentCategory.toLowerCase() === 'armor'")
-        div(v-if="item.armorClassification !== 'Shield'") #[strong {{ item.armorClassification }} Armor]
-        div #[strong AC:] {{ item.ac }}
-        div(v-if="item.stealthDisadvantage") #[strong Imposes Stealth Disadvantage]
-        div(v-if="item.strengthRequirement.includes('Str')") #[strong Requires {{ item.strengthRequirement }}]
-      div(v-else-if="!isCustomEquipment && item.equipmentCategory.toLowerCase() === 'weapon'")
-        div #[strong {{ startCase(item.weaponClassification) }}]
-        div #[strong Damage:] {{ getWeaponDamage(item) }}
-        div
-          strong Properties:
-          LootWeaponsProperties(:propertyList="item.properties")
-      VueMarkdown(v-if="item.description", :source="item.description")
+      template(v-if="!isCustomEquipment")
+        template(v-if="item.isFound")
+          div(v-if="item.equipmentCategory.toLowerCase() === 'armor'")
+            div(v-if="item.armorClassification !== 'Shield'") #[strong {{ item.armorClassification }} Armor]
+            div #[strong AC:] {{ item.ac }}
+            div(v-if="item.stealthDisadvantage") #[strong Imposes Stealth Disadvantage]
+            div(v-if="item.strengthRequirement.includes('Str')") #[strong Requires {{ item.strengthRequirement }}]
+          div(v-else-if="item.equipmentCategory.toLowerCase() === 'weapon'")
+            div #[strong {{ startCase(item.weaponClassification) }}]
+            div #[strong Damage:] {{ getWeaponDamage(item) }}
+            div
+              strong Properties:
+              LootWeaponsProperties(:propertyList="item.properties")
+          VueMarkdown(v-if="item.description", :source="item.description")
+        div(v-else) Warning: No data found for this item. It may have been renamed or removed from the core rules. Consider changing it to a custom item.
 </template>
 
 <style lang="scss">

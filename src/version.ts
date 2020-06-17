@@ -2,6 +2,9 @@ export default '0.4.10'
 
 /*
 
+0.4.11
+- Added alcoholic beverage and spice categories to Gear table
+
 0.4.10
 - Fixed global search and added filters to the results
 

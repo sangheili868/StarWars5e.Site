@@ -64,8 +64,8 @@
           text: 'Category',
           value: 'equipmentCategory',
           render: _.startCase,
-          filterChoices: ['Ammunition', 'Clothing', 'Communications', 'Data Recording And Storage', 'Explosive', 'Gaming Set',
-          'Kit', 'Life Support', 'Medical', 'Musical Instrument', 'Storage', 'Tool', 'Utility', 'Weapon Or Armor Accessory'],
+          filterChoices: ['Ammunition', 'Alcoholic Beverage', 'Clothing', 'Communications', 'Data Recording And Storage', 'Explosive', 'Gaming Set',
+          'Kit', 'Life Support', 'Medical', 'Musical Instrument', 'Spice', 'Storage', 'Tool', 'Utility', 'Weapon Or Armor Accessory'],
           filterFunction: ({ equipmentCategory }: EquipmentType, filterValue: string) => _.startCase(equipmentCategory) === filterValue
         },
         { text: 'Cost', value: 'cost' },

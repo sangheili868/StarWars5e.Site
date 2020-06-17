@@ -1,6 +1,9 @@
-export default '0.4.9'
+export default '0.4.10'
 
 /*
+
+0.4.10
+- Fixed global search and added filters to the results
 
 0.4.9
 - Fix bug due to gaming sets renamed (found by @Halimeni)

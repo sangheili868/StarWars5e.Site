@@ -37,7 +37,7 @@
     autofocus,
     @click:append="handleSubmit"
     @keypress="handleInput"
-  ).searchInput.ml-2
+  ).searchInput
 </template>
 
 <style lang="scss">

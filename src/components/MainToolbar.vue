@@ -125,7 +125,7 @@
       router-link(to="/")
         v-img(:src="require('@/assets/sw5e-logo.png')", width="100px")
     v-spacer
-    SearchBox(v-if="isSearchOpen")
+    SearchBox(v-if="isSearchOpen").ml-2
     v-toolbar-items.hidden-sm-and-down
       template(v-if="!isSearchOpen")
         component(v-for="({ to, title, nested }) in routes", :key="title", v-bind="buildComponentProps(to, nested)")

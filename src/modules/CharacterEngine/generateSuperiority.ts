@@ -14,9 +14,8 @@ function getClassField (classData: ClassType, level: number, field: string): str
   return get(classData, ['levelChanges', level, field]) as (string | undefined) || '0'
 }
 
-function getArchetypeField (archetypeData: ArchetypeType, level: number, field: string): string {
-  const fieldIndex = field === 'Superiority Dice' ? 1 : 0
-  return get(archetypeData, `leveledTable.${level}.${fieldIndex}.value`) as (string | undefined) || '0'
+function getArchetypeField (archetypeData: ArchetypeType, level: number, index: number): string {
+  return get(archetypeData, `leveledTable.${level}.${index}.value`) as (string | undefined) || '0'
 }
 
 function getMulticlassDice (
@@ -70,19 +69,20 @@ function getSuperiorityValues (
   switch (completeClass.name) {
     case 'Fighter':
       const maxDice = parseInt(getClassField(classData, completeClass.levels, 'Superiority Dice')) + multiclassDice
+      const diceSize = getClassField(classData, completeClass.levels, 'Martial Superiority')
       const saveDcAbilities = ['Strength', 'Dexterity']
       const isTactical = completeClass.archetype && completeClass.archetype.name === 'Tactical Specialist'
       if (isTactical && archetypeData) {
         return {
-          diceSize: getArchetypeField(archetypeData, completeClass.levels, 'Combat Superiority'),
-          maxDice: maxDice + parseInt(getArchetypeField(archetypeData, completeClass.levels, 'Superiority Dice')),
+          diceSize,
+          maxDice: maxDice + parseInt(getArchetypeField(archetypeData, completeClass.levels, 0)),
           saveDcAbilities
         }
       } else if (completeClass.levels === 1) {
         return false
       } else {
         return {
-          diceSize: 'd4',
+          diceSize,
           maxDice,
           saveDcAbilities
         }
@@ -95,8 +95,8 @@ function getSuperiorityValues (
       }
     case 'Scout':
       return archetypeData ? {
-        diceSize: getArchetypeField(archetypeData, completeClass.levels, 'Focused Superiority'),
-        maxDice: parseInt(getArchetypeField(archetypeData, completeClass.levels, 'Superiority Dice')) + multiclassDice,
+        diceSize: getArchetypeField(archetypeData, completeClass.levels, 0),
+        maxDice: parseInt(getArchetypeField(archetypeData, completeClass.levels, 1)) + multiclassDice,
         saveDcAbilities: ['Dexterity']
       } : false
     default:

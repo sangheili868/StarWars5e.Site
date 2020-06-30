@@ -1,6 +1,9 @@
-export default '0.4.14'
+export default '0.4.15'
 
 /*
+0.4.15
+- Fixed bug with tactical specialist max superiority dice calculation.
+
 0.4.14
 - Added Lightsaber Forms.
 

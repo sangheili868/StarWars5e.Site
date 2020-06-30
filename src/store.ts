@@ -9,6 +9,8 @@ import classes from './modules/classes'
 import deployments from './modules/deployments'
 import enhancedItems from './modules/enhancedItems'
 import feats from './modules/feats'
+import fightingStyles from './modules/fightingStyles'
+import fightingMasteries from './modules/fightingMasteries'
 import equipment from './modules/equipment'
 import monsters from './modules/monsters'
 import powers from './modules/powers'
@@ -44,6 +46,8 @@ export default new Vuex.Store({
     deployments,
     enhancedItems,
     feats,
+    fightingMasteries,
+    fightingStyles,
     equipment,
     monsters,
     powers,

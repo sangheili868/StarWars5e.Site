@@ -1,6 +1,14 @@
-export default '0.4.10'
+export default '0.4.13'
 
 /*
+
+0.4.13
+- Added Fighting Masteries.
+- Added Fighting Styles.
+
+0.4.12
+- Added filtering by weapon property to the weapon table.
+- Added filtering by armor property to the armor table.
 
 0.4.11
 - Added alcoholic beverage and spice categories to Gear table

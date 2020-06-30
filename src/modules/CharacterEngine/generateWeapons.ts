@@ -29,6 +29,7 @@ function getUnarmedStrike (
     equipmentCategory: 'weapon',
     name: 'Unarmed Strike',
     properties: [],
+    propertiesMap: {},
     weaponClassification: '',
     weight: '0',
     description: null,

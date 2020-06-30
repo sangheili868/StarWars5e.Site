@@ -39,6 +39,13 @@
         })).value()
     }
 
+    filterProperties (propertiesMap : { [property: string]: string }, filterValue: string[]) {
+      var x = Object.keys(propertiesMap)
+      var y = _.intersection(x, filterValue)
+
+      return y.length
+    }
+
     get headers () {
       return [
         { text: 'Name', value: 'name' },
@@ -48,6 +55,16 @@
           render: _.startCase,
           filterChoices: ['Simple Blaster', 'Martial Blaster', 'Simple Lightweapon', 'Martial Lightweapon', 'Simple Vibroweapon', 'Martial Vibroweapon'],
           filterFunction: ({ weaponClassification }: EquipmentType, filterValue: string) => _.startCase(weaponClassification) === filterValue
+        },
+        {
+          text: 'Property',
+          value: 'propertiesMap',
+          isMultiSelect: true,
+          render: (propertiesMap: { [property: string]: string }) => Object.values(propertiesMap).map((property) => _.upperFirst(property)).join(', '),
+          filterChoices: ['Ammunition', 'Auto', 'Burst', 'Defensive', 'Dexterity', 'Dire', 'Disarming', 'Disguised', 'Disintegrate', 'Disruptive', 'Double',
+          'Finesse', 'Fixed', 'Heavy', 'Hidden', 'Light', 'Luminous', 'Mighty', 'Piercing', 'Range', 'Rapid', 'Reload', 'Returning',
+          'Shocking', 'Silent', 'Special', 'Strength', 'Two-Handed', 'Versatile', 'Vicious'],
+          filterFunction: ({ propertiesMap }: EquipmentType, filterValue: string[]) => this.filterProperties(propertiesMap, filterValue)
         },
         { text: 'Cost', value: 'cost' },
         { text: 'Weight', value: 'weight' },

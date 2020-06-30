@@ -148,9 +148,18 @@ export interface FeatType {
   attributesIncreased: string[]
 }
 
+export interface FightingMasteryType {
+  text: string,
+  name: string,
+  contentSource: string,
+  contentType: string
+}
+
 export interface FightingStyleType {
   name: string,
-  description: string
+  description: string,
+  contentSource: string,
+  contentType: string
 }
 
 export interface FeatureType {

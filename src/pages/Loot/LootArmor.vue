@@ -39,6 +39,13 @@
         })).value()
     }
 
+    filterProperties (propertiesMap : { [property: string]: string }, filterValue: string[]) {
+      var x = Object.keys(propertiesMap)
+      var y = _.intersection(x, filterValue)
+
+      return y.length
+    }
+
     get headers () {
       return [
         { text: 'Name', value: 'name', render: _.startCase },
@@ -47,6 +54,16 @@
           value: 'armorClassification',
           filterChoices: ['Light', 'Medium', 'Heavy', 'Shield'],
           filterFunction: ({ armorClassification }: EquipmentType, filterValue: string) => armorClassification === filterValue
+        },
+        {
+          text: 'Property',
+          value: 'propertiesMap',
+          isMultiSelect: true,
+          render: (propertiesMap: { [property: string]: string }) => Object.values(propertiesMap).map((property) => _.upperFirst(property)).join(', '),
+          filterChoices: ['Absorptive', 'Agile', 'Anchor', 'Avoidant', 'Barbed', 'Bulky', 'Charging', 'Concealing', 'Cubmersome',
+          'Gauntleted', 'Imbalanced', 'Impermeable', 'Insulated', 'Interlocking', 'Lambent', 'Lightweight', 'Magnetic', 'Obscured', 'Obtrusive',
+          'Powered', 'Regulated', 'Reinforced', 'Responsive', 'Rigid', 'Silent', 'Spiked', 'Steadfast', 'Strength', 'Versatile'],
+          filterFunction: ({ propertiesMap }: EquipmentType, filterValue: string[]) => this.filterProperties(propertiesMap, filterValue)
         },
         { text: 'Cost', value: 'cost' },
         { text: 'Weight', value: 'weight' },

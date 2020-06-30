@@ -4,11 +4,13 @@
   import VueMarkdown from 'vue-markdown'
   import Loading from '@/components/Loading.vue'
   import _ from 'lodash'
+  import MonsterPower from './MonsterPower.vue'
 
   @Component({
     components: {
       VueMarkdown,
-      Loading
+      Loading,
+      MonsterPower
     }
   })
   export default class MonsterDescription extends Vue {

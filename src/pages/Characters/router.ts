@@ -11,6 +11,8 @@ import CharactersArchetypeDetail from './CharactersArchetypeDetail.vue'
 import CharactersBackgrounds from './CharactersBackgrounds.vue'
 import CharactersBackgroundDetail from './CharactersBackgroundDetail.vue'
 import CharactersFeats from './CharactersFeats.vue'
+import CharactersFightingStyles from './CharactersFightingStyles.vue'
+import CharactersFightingMasteries from './CharactersFightingMasteries.vue'
 
 export default {
   path: '/characters',
@@ -88,6 +90,20 @@ export default {
       component: CharactersFeats,
       meta: {
         title: 'Feats'
+      }
+    },
+    {
+      path: '/characters/fightingStyles',
+      component: CharactersFightingStyles,
+      meta: {
+        title: 'Fighting Styles'
+      }
+    },
+    {
+      path: '/characters/fightingMasteries',
+      component: CharactersFightingMasteries,
+      meta: {
+        title: 'Fighting Masteries'
       }
     },
     {

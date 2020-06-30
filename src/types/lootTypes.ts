@@ -22,7 +22,8 @@ export interface EquipmentType {
   stealthDisadvantage: boolean,
   strengthRequirement: string | null,
   weight: string,
-  properties: string[] | null
+  properties: string[] | null,
+  propertiesMap: { [property: string]: string },
   damageDieModifier: number,
   damageDieType: number,
   damageNumberOfDice: number,

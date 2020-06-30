@@ -50,7 +50,8 @@
             { to: '/fightingStyles', title: 'Fighting Styles' },
             { to: '/fightingMasteries', title: 'Fighting Masteries' },
             { to: '/forcePowers', title: 'Force Powers' },
-            { to: '/techPowers', title: 'Tech Powers' }
+            { to: '/techPowers', title: 'Tech Powers' },
+            { to: '/lightsaberForms', title: 'Lightsaber Forms' }
           ]
         },
         {

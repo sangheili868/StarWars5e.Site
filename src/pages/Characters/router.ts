@@ -13,6 +13,7 @@ import CharactersBackgroundDetail from './CharactersBackgroundDetail.vue'
 import CharactersFeats from './CharactersFeats.vue'
 import CharactersFightingStyles from './CharactersFightingStyles.vue'
 import CharactersFightingMasteries from './CharactersFightingMasteries.vue'
+import CharactersLightsaberForms from './CharactersLightsaberForms.vue'
 
 export default {
   path: '/characters',
@@ -118,6 +119,13 @@ export default {
       component: CharactersTechPowers,
       meta: {
         title: 'Tech Powers'
+      }
+    },
+    {
+      path: '/characters/lightsaberForms',
+      component: CharactersLightsaberForms,
+      meta: {
+        title: 'Lightsaber Forms'
       }
     }
   ]

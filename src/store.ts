@@ -12,6 +12,7 @@ import feats from './modules/feats'
 import fightingStyles from './modules/fightingStyles'
 import fightingMasteries from './modules/fightingMasteries'
 import equipment from './modules/equipment'
+import lightsaberForms from './modules/lightsaberForms'
 import monsters from './modules/monsters'
 import powers from './modules/powers'
 import species from './modules/species'
@@ -49,6 +50,7 @@ export default new Vuex.Store({
     fightingMasteries,
     fightingStyles,
     equipment,
+    lightsaberForms,
     monsters,
     powers,
     species,

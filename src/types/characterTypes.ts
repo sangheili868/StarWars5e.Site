@@ -162,6 +162,13 @@ export interface FightingStyleType {
   contentType: string
 }
 
+export interface LightsaberFormType {
+  name: string,
+  description: string,
+  contentSource: string,
+  contentType: string
+}
+
 export interface FeatureType {
   name: string,
   level?: number,

@@ -1,6 +1,10 @@
 export default '0.4.15'
 
 /*
+
+0.4.16
+- Disabled draggable list on mobolie to deal with bug that prevented custom features from opening on mobile
+
 0.4.15
 - Fixed bug with tactical specialist max superiority dice calculation.
 

@@ -60,7 +60,7 @@
     get categories () {
       return _(this.items).map(({ equipmentCategory }) => (
           _.startCase(equipmentCategory)
-      )).flattenDeep().compact().sortBy().uniq().value()
+      )).compact().sortBy().uniq().value()
     }
 
     get headers () {

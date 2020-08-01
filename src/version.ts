@@ -1,9 +1,12 @@
-export default '0.4.15'
+export default '0.4.17'
 
 /*
 
+0.4.17
+- Made most filters dynamic based on table content
+
 0.4.16
-- Disabled draggable list on mobolie to deal with bug that prevented custom features from opening on mobile
+- Disabled draggable list on mobile to deal with bug that prevented custom features from opening on mobile
 
 0.4.15
 - Fixed bug with tactical specialist max superiority dice calculation.

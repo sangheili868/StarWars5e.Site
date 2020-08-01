@@ -61,18 +61,28 @@
         })).value()
     }
 
-    // get sizes () {
+    get alignments () {
+      return _(this.items).map(({ alignment }) => (
+          _.startCase(alignment)
+      )).flattenDeep().compact().sortBy().uniq().value()
+    }
 
-    // }
+    get sizes () {
+      return _(this.items).map(({ size }) => (
+          size
+      )).compact().sortBy().uniq().value().reverse()
+    }
 
-    // get types () {
-
-    // }
+    get types () {
+      return _(this.items).map(({ types }) => (
+          types.map(_.upperFirst)
+      )).flattenDeep().compact().sortBy().uniq().value()
+    }
 
     get challengeRatings () {
         return _(this.items).map(({ challengeRating }) => (
           challengeRating
-      )).flattenDeep().compact().sortBy().uniq().value()
+      )).compact().uniq().sortBy((value) => { return parseFloat(value) ? math.eval(value) : value }).value()
     }
 
     get headers () {
@@ -81,7 +91,7 @@
         {
           text: 'Size',
           value: 'size',
-          filterChoices: ['Tiny', 'Small', 'Medium', 'Large', 'Huge', 'Gargantuan'],
+          filterChoices: this.sizes,
           isMultiSelect: true,
           filterFunction: ({ size }: MonsterType, filterValue: string[]) => _.some(filterValue, (filter: string) => filter === size)
         },
@@ -89,7 +99,7 @@
           text: 'Type',
           value: 'types',
           render: (types: string[]) => types.map(_.upperFirst).join(', '),
-          filterChoices: ['Aberration', 'Beast', 'Construct', 'Droid', 'Elemental', 'Humanoid', 'Plant', 'Swarm', 'Undead'],
+          filterChoices: this.types,
           isMultiSelect: true,
           filterFunction: ({ types }: MonsterType, filterValue: string[]) => _.some(filterValue, (filter: string) =>
             _.some(types.map(_.upperFirst), (type: string) => _.includes(type, filter)))
@@ -104,9 +114,10 @@
         {
           text: 'Alignment',
           value: 'alignment',
-          filterChoices: ['unaligned', 'any dark', 'any neutral alignment', 'neutral dark', 'lawful dark', 'chaotic dark', 'chaotic balanced', 'lawful balanced', 'any alignment'],
+          filterChoices: this.alignments,
           isMultiSelect: true,
-          filterFunction: ({ alignment }: MonsterType, filterValue: string[]) => _.includes(filterValue, alignment)
+          render: (alignment: string) => _.startCase(alignment),
+          filterFunction: ({ alignment }: MonsterType, filterValue: string[]) => _.includes(filterValue, _.startCase(alignment))
         }
       ]
     }

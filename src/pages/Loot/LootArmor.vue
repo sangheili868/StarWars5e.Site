@@ -46,6 +46,12 @@
       return y.length
     }
 
+    get properties () {
+      return _(this.items).map(({ propertiesMap }) => (
+          Object.keys(propertiesMap)
+      )).flattenDeep().compact().sortBy().uniq().value()
+    }
+
     get headers () {
       return [
         { text: 'Name', value: 'name', render: _.startCase },
@@ -60,9 +66,7 @@
           value: 'propertiesMap',
           isMultiSelect: true,
           render: (propertiesMap: { [property: string]: string }) => Object.values(propertiesMap).map((property) => _.upperFirst(property)).join(', '),
-          filterChoices: ['Absorptive', 'Agile', 'Anchor', 'Avoidant', 'Barbed', 'Bulky', 'Charging', 'Concealing', 'Cubmersome',
-          'Gauntleted', 'Imbalanced', 'Impermeable', 'Insulated', 'Interlocking', 'Lambent', 'Lightweight', 'Magnetic', 'Obscured', 'Obtrusive',
-          'Powered', 'Regulated', 'Reinforced', 'Responsive', 'Rigid', 'Silent', 'Spiked', 'Steadfast', 'Strength', 'Versatile'],
+          filterChoices: this.properties,
           filterFunction: ({ propertiesMap }: EquipmentType, filterValue: string[]) => this.filterProperties(propertiesMap, filterValue)
         },
         { text: 'Cost', value: 'cost' },

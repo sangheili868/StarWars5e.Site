@@ -46,6 +46,12 @@
       return y.length
     }
 
+    get properties () {
+      return _(this.items).map(({ propertiesMap }) => (
+          Object.keys(propertiesMap)
+      )).flattenDeep().compact().sortBy().uniq().value()
+    }
+
     get headers () {
       return [
         { text: 'Name', value: 'name' },
@@ -61,9 +67,7 @@
           value: 'propertiesMap',
           isMultiSelect: true,
           render: (propertiesMap: { [property: string]: string }) => Object.values(propertiesMap).map((property) => _.upperFirst(property)).join(', '),
-          filterChoices: ['Ammunition', 'Auto', 'Burst', 'Defensive', 'Dexterity', 'Dire', 'Disarming', 'Disguised', 'Disintegrate', 'Disruptive', 'Double',
-          'Finesse', 'Fixed', 'Heavy', 'Hidden', 'Light', 'Luminous', 'Mighty', 'Piercing', 'Range', 'Rapid', 'Reload', 'Returning',
-          'Shocking', 'Silent', 'Special', 'Strength', 'Two-Handed', 'Versatile', 'Vicious'],
+          filterChoices: this.properties,
           filterFunction: ({ propertiesMap }: EquipmentType, filterValue: string[]) => this.filterProperties(propertiesMap, filterValue)
         },
         { text: 'Cost', value: 'cost' },

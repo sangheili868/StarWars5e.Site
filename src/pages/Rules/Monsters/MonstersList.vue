@@ -61,6 +61,20 @@
         })).value()
     }
 
+    // get sizes () {
+
+    // }
+
+    // get types () {
+
+    // }
+
+    get challengeRatings () {
+        return _(this.items).map(({ challengeRating }) => (
+          challengeRating
+      )).flattenDeep().compact().sortBy().uniq().value()
+    }
+
     get headers () {
       return [
         { text: 'Name', value: 'name' },
@@ -83,8 +97,7 @@
         {
           text: 'CR',
           value: 'challengeRating',
-          filterChoices: ['0', '1/8', '1/4', '1/2', '1', '2', '3', '4', '5', '6', '7', '8', '9', '10',
-          '11', '12', '13', '14', '15', '16', '17', '18', '19', '20', '21', '23', '24', '25', '26'],
+          filterChoices: this.challengeRatings,
           isMultiSelect: true,
           filterFunction: ({ challengeRating }: MonsterType, filterValue: string[]) => _.some(filterValue, (filter: string) => filter === challengeRating.toString())
         },

@@ -57,6 +57,12 @@
         })).value()
     }
 
+    get categories () {
+      return _(this.items).map(({ equipmentCategory }) => (
+          _.startCase(equipmentCategory)
+      )).flattenDeep().compact().sortBy().uniq().value()
+    }
+
     get headers () {
       return [
         { text: 'Name', value: 'name' },
@@ -64,8 +70,7 @@
           text: 'Category',
           value: 'equipmentCategory',
           render: _.startCase,
-          filterChoices: ['Ammunition', 'Alcoholic Beverage', 'Clothing', 'Communications', 'Data Recording And Storage', 'Explosive', 'Gaming Set',
-          'Kit', 'Life Support', 'Medical', 'Musical Instrument', 'Spice', 'Storage', 'Tool', 'Utility', 'Weapon Or Armor Accessory'],
+          filterChoices: this.categories,
           filterFunction: ({ equipmentCategory }: EquipmentType, filterValue: string) => _.startCase(equipmentCategory) === filterValue
         },
         { text: 'Cost', value: 'cost' },

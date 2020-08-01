@@ -71,6 +71,12 @@
       return items
     }
 
+    get types () {
+        return _(this.items).map(({ type }) => (
+          _.startCase(type)
+      )).flattenDeep().compact().sortBy().uniq().value()
+    }
+
     get headers () {
       return [
         { text: 'Name', value: 'name' },
@@ -79,9 +85,7 @@
           value: 'type',
           isMultiSelect: true,
           render: _.startCase,
-          filterChoices: ['Adventuring Gear', 'Armor', 'Armor Modification', 'Blaster Modification', 'Consumable', 'Clothing Modification',
-            'Cybernetic Augmentation', 'Droid Customization', 'Focus', 'Focus Generator Modification', 'Item Modification',
-            'Lightweapon Modification', 'None', 'Shield', 'Ship Armor', 'Ship Shield', 'Ship Weapon', 'Weapon', 'Wristpad Modification', 'Valuable', 'Vibroweapon Modification' ],
+          filterChoices: this.types,
           filterFunction: ({ type }: EnhancedItemType, filterValue: string[]) => _.includes(filterValue, _.startCase(type))
         },
         {

@@ -1,6 +1,9 @@
-export default '0.4.17'
+export default '0.4.18'
 
 /*
+
+0.4.18
+- Added Bob's Galactic Strongholds to sponsored content
 
 0.4.17
 - Made most filters dynamic based on table content

@@ -53,6 +53,10 @@
             {
               href: 'https://www.gmbinder.com/share/-M7y5JXBmMCskhJPFhUp',
               title: 'Drake\'s Shipyard'
+            },
+            {
+              href: 'https://docs.google.com/document/d/18CKs0EXQV1aQLsuX-x22GNiMOZ69bMEze4Z_vz-4-wk/edit',
+              title: 'Bob\'s Galactic Strongholds'
             }
           ]
         },

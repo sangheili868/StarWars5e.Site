@@ -1,6 +1,10 @@
-export default '0.4.18'
+export default '0.4.19'
 
 /*
+
+0.4.19
+- Update Bob's Galactic Strongholds link
+- Added Hugehuman's Force/Tech powers to sponsored content
 
 0.4.18
 - Added Bob's Galactic Strongholds to sponsored content

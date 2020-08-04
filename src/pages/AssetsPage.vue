@@ -55,8 +55,16 @@
               title: 'Drake\'s Shipyard'
             },
             {
-              href: 'https://docs.google.com/document/d/18CKs0EXQV1aQLsuX-x22GNiMOZ69bMEze4Z_vz-4-wk/edit',
+              href: 'https://www.gmbinder.com/share/-MA24CpxiSf9qM8z_TY4',
               title: 'Bob\'s Galactic Strongholds'
+            },
+            {
+              href: 'https://www.gmbinder.com/share/-MDp2nOeGD6JJLxNM_lT',
+              title: 'Hugehuman\'s Tech Powers'
+            },
+            {
+              href: 'https://www.gmbinder.com/share/-MDosNzOCLn0_ColYfBf',
+              title: 'Hugehuman\'s Force Powers'
             }
           ]
         },

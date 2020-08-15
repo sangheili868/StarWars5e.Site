@@ -22,23 +22,28 @@
     selected = ''
     quantity = 1
     equipped = false
-    filter = ''
+    filter = 'All Equipment'
     startCase = startCase
 
     get filters () {
-      return chain(this.equipment)
-        .uniqBy('equipmentCategory')
-        .map(({ equipmentCategory }) => ({
-          text: startCase(equipmentCategory),
-          value: equipmentCategory
-        }))
-        .sortBy('value')
-        .value()
+      return [
+        'All Equipment',
+        ...chain(this.equipment)
+          .uniqBy('equipmentCategory')
+          .map(({ equipmentCategory }) => ({
+            text: startCase(equipmentCategory),
+            value: equipmentCategory
+          }))
+          .sortBy('value')
+          .value()
+      ]
     }
 
     get filteredEquipment () {
       return this.equipment
-        .filter(({ equipmentCategory }) => !this.filter || (equipmentCategory === this.filter))
+        .filter(({ equipmentCategory }) => !this.filter ||
+          this.filter === 'All Equipment' ||
+          (equipmentCategory === this.filter))
         .map(({ name }) => name)
     }
     get selectedEquipment () {

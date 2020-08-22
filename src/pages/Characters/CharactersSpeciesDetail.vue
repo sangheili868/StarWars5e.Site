@@ -45,7 +45,7 @@
   div
     vue-headful(v-if="!isHidingBack", :title="title")
     BackButton(v-if="!isHidingBack")
-    CharactersSpeciesDetailHalfHuman(v-if="speciesName === 'Half-Human'", v-bind="{ speciesData }")
+    CharactersSpeciesDetailHalfHuman(v-if="speciesName.toUpperCase() === 'Half-Human'.toUpperCase()", v-bind="{ speciesData }")
     div(v-else-if="speciesData").text-left
       div(:class="$style.topSection")
         div(:class="$style.bioBlock").block

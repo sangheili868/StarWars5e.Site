@@ -1,6 +1,9 @@
-export default '0.4.19'
+export default '0.4.20'
 
 /*
+
+0.4.20
+- Fixed Half-human layout issue
 
 0.4.19
 - Update Bob's Galactic Strongholds link

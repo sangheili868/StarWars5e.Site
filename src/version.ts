@@ -2,6 +2,9 @@ export default '0.4.21'
 
 /*
 
+0.4.22
+- Fixed bug where custom item descriptions don't show up, found by @Vacant Top Hat
+
 0.4.21
 - Add All Equipment option to equipment adder
 - Fix Bug with Artificer Engineering not able to select tech powers found by @Side Waifu

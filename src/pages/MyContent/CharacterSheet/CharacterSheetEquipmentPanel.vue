@@ -114,9 +114,9 @@
             div
               strong Properties:
               LootWeaponsProperties(:propertyList="item.properties")
-          VueMarkdown(v-if="item.description", :source="item.description")
-          VueMarkdown(v-if="item.text", :source="item.text")
         div(v-else) Warning: No data found for this item. It may have been renamed or removed from the core rules. Consider changing it to a custom item.
+      VueMarkdown(v-if="item.description", :source="item.description")
+      VueMarkdown(v-if="item.text", :source="item.text")
 </template>
 
 <style lang="scss">

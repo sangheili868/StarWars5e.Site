@@ -1,38 +1,33 @@
 import { RawCharacterType } from '@/types/rawCharacterTypes'
-import { AbilityScoresType } from '@/types/completeCharacterTypes'
-import { EquipmentType } from '@/types/lootTypes'
+import { AbilityScoresType, CharacterLootType, isCharacterArmorType, CharacterArmorType } from '@/types/completeCharacterTypes'
 import applyTweak from '@/utilities/applyTweak'
 
-function generateArmorClass (rawCharacter: RawCharacterType, abilityScores: AbilityScoresType, equipment: EquipmentType[]) {
-  const equippedArmor = equipment.filter(({ equipmentCategory, equipped }) => equipmentCategory === 'Armor' && equipped)
+function generateArmorClass (rawCharacter: RawCharacterType, abilityScores: AbilityScoresType, armor: CharacterArmorType[]) {
   const baseAc = 10 + abilityScores.Dexterity.modifier
-  const bodyAc = Math.max(baseAc, ...equippedArmor.map(({ armorClassification, ac }) => {
-    const safeAc = parseInt((ac || 10).toString())
+  const bodyAc = Math.max(baseAc, ...armor.map(({ armorClassification, ac }) => {
+    const armorAC = parseInt((ac || 10).toString())
     switch (armorClassification) {
       case 'Light':
-        return safeAc + abilityScores.Dexterity.modifier
+        return armorAC + abilityScores.Dexterity.modifier
       case 'Medium':
-        return safeAc + Math.min(2, abilityScores.Dexterity.modifier)
+        return armorAC + Math.min(2, abilityScores.Dexterity.modifier)
       case 'Heavy':
-        return safeAc
+        return armorAC
       default:
         return 0
     }
   }))
-  const shieldAc = Math.max(0, ...equippedArmor
+  const shieldAc = Math.max(0, ...armor
     .filter(({ armorClassification }) => armorClassification === 'Shield')
     .map(({ ac }) => parseInt((ac || 0).toString()))
   )
   return applyTweak(rawCharacter, 'armorClass', bodyAc + shieldAc)
 }
 
-function generateSpeed (rawCharacter: RawCharacterType, equipment: EquipmentType[], abilityScores: AbilityScoresType) {
-  const tooHeavyArmor = equipment.filter(({ equipmentCategory, equipped, strengthRequirement }) =>
-    equipmentCategory === 'Armor' &&
-    equipped &&
-    strengthRequirement &&
-    strengthRequirement.split(' ').length > 1 &&
-    parseInt(strengthRequirement.split(' ')[1]) > abilityScores.Strength.value
+function generateSpeed (rawCharacter: RawCharacterType, armor: CharacterArmorType[], abilityScores: AbilityScoresType) {
+  const tooHeavyArmor = armor.filter(({ propertiesMap }) =>
+    propertiesMap.Strength &&
+    parseInt(propertiesMap.Strength.replace('strength', '').trim()) > abilityScores.Strength.value
   )
   const baseSpeed = Math.max(0, applyTweak(rawCharacter, 'speed.base', 30 - (tooHeavyArmor.length * 10)))
   return {
@@ -46,9 +41,11 @@ function generateSpeed (rawCharacter: RawCharacterType, equipment: EquipmentType
 export default function generateCombatStats (
   rawCharacter: RawCharacterType,
   abilityScores: AbilityScoresType,
-  equipment: EquipmentType[],
+  equipment: CharacterLootType[],
   proficiencyBonus: number
 ) {
+  const equippedArmor = equipment.filter(isCharacterArmorType).filter(armor => armor.equipped)
+  const armorList = equippedArmor.map(({ name }) => name)
   const perceptionModifier = abilityScores.Wisdom.skills.find(({ name }) => name === 'Perception')
   const isScout = rawCharacter.classes.find(({ name }) => name === 'Scout')
   const initiative = abilityScores.Dexterity.modifier + (isScout ? proficiencyBonus : 0)
@@ -56,10 +53,11 @@ export default function generateCombatStats (
 
   return {
     initiative: applyTweak(rawCharacter, 'initiative', initiative),
-    armorClass: generateArmorClass(rawCharacter, abilityScores, equipment),
+    armorClass: generateArmorClass(rawCharacter, abilityScores, equippedArmor),
+    armorList,
     passivePerception: applyTweak(rawCharacter, 'passivePerception', passivePerception),
     inspiration: rawCharacter.currentStats.hasInspiration,
     vision: 'normal',
-    speed: generateSpeed(rawCharacter, equipment, abilityScores)
+    speed: generateSpeed(rawCharacter, equippedArmor, abilityScores)
   }
 }

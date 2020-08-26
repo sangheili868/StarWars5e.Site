@@ -2,7 +2,7 @@
   import { Component, Prop, Vue } from 'vue-property-decorator'
   import addPlus from '@/utilities/addPlus'
   import { EquipmentType } from '@/types/lootTypes'
-  import { SuperiorityType, CompletedFeatureType } from '@/types/completeCharacterTypes'
+  import { SuperiorityType, CompletedFeatureType, CharacterLootType, CustomWeaponType, CharacterWeaponType } from '@/types/completeCharacterTypes'
   import CharacterSheetModifier from './CharacterSheetModifier.vue'
   import CharacterSheetTweaker from './CharacterSheetTweaker.vue'
   import CharacterSheetWeapon from './CharacterSheetWeapon.vue'
@@ -27,10 +27,11 @@
     @Prop(Number) readonly proficiencyBonus!: number
     @Prop(Number) readonly initiative!: number
     @Prop(Number) readonly armorClass!: number
+    @Prop(Array) readonly armorList!: string[]
     @Prop(Object) readonly speed!: { base: string }
-    @Prop(Array) readonly equipment!: EquipmentType[]
+    @Prop(Array) readonly equipment!: CharacterLootType[]
     @Prop(Array) readonly customEquipment!: CustomEquipmentType[]
-    @Prop(Array) readonly weapons!: EquipmentType[]
+    @Prop(Array) readonly weapons!: (CharacterWeaponType | CustomWeaponType)[]
     @Prop(Number) readonly passivePerception!: number
     @Prop({ type: [ Boolean, Object ] }) readonly superiority!: false | SuperiorityType
     @Prop(Array) readonly combatFeatures!: CompletedFeatureType[]
@@ -41,15 +42,6 @@
       { name: 'To Hit', path: 'weapon.toHit' },
       { name: 'Damage Bonus', path: 'weapon.damage' }
     ]
-
-    get armor () {
-      return [
-        ...this.equipment,
-        ...this.customEquipment
-      ].filter(({ equipped, equipmentCategory }) => equipped && equipmentCategory === 'Armor')
-        .map(({ name }) => name)
-        .join(', ')
-    }
   }
 </script>
 
@@ -75,7 +67,7 @@
       tweakPath="armorClass",
       @replaceCharacterProperty="payload => $emit('replaceCharacterProperty', payload)"
     )
-      div.caption {{ armor }}
+      div.caption {{ armorList.join(', ') }}
     CharacterSheetModifier(
       :value="parseInt(speed.base)"
       label="Speed",

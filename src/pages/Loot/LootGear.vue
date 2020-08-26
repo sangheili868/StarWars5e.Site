@@ -2,7 +2,7 @@
   import { Component, Prop, Vue } from 'vue-property-decorator'
   import { namespace } from 'vuex-class'
   import SearchTable from '@/components/SearchTable.vue'
-  import { EquipmentType } from '@/types/lootTypes'
+  import { EquipmentType, GearType, isGearType } from '@/types/lootTypes'
   import _ from 'lodash'
   import VueMarkdown from 'vue-markdown'
   import BackButton from '@/components/BackButton.vue'
@@ -47,9 +47,9 @@
       return items
     }
 
-    get items () {
+    get items (): GearType[] {
       return _(this.equipment)
-        .filter(({ equipmentCategory }: EquipmentType) => !['Weapon', 'Armor'].includes(equipmentCategory))
+        .filter(isGearType)
         .map(equipment => ({
           ...equipment,
           id: equipment.name,
@@ -71,7 +71,7 @@
           value: 'equipmentCategory',
           render: _.startCase,
           filterChoices: this.categories,
-          filterFunction: ({ equipmentCategory }: EquipmentType, filterValue: string) => _.startCase(equipmentCategory) === filterValue
+          filterFunction: ({ equipmentCategory }: GearType, filterValue: string) => _.startCase(equipmentCategory) === filterValue
         },
         { text: 'Cost', value: 'cost' },
         { text: 'Weight (lb)', value: 'weight' },
@@ -80,7 +80,7 @@
           value: 'contentSource',
           render: _.startCase,
           filterChoices: ['PHB', 'EC', 'WH'],
-          filterFunction: ({ contentSource }: EquipmentType, filterValue: string) => _.startCase(contentSource) === filterValue
+          filterFunction: ({ contentSource }: GearType, filterValue: string) => _.startCase(contentSource) === filterValue
         }
       ]
     }

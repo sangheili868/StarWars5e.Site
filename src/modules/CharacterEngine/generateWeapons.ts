@@ -1,6 +1,6 @@
 import { RawCharacterType, CustomEquipmentType } from '@/types/rawCharacterTypes'
-import { EquipmentType } from '@/types/lootTypes'
-import { AbilityScoresType, CustomWeaponType } from '@/types/completeCharacterTypes'
+import { damageDieTypes } from '@/types/lootTypes'
+import { AbilityScoresType, CustomWeaponType, isCharacterWeaponType, CharacterLootType, CharacterWeaponType } from '@/types/completeCharacterTypes'
 import { get } from 'lodash'
 import applyTweak, { applyCustomTweak } from '@/utilities/applyTweak'
 
@@ -8,36 +8,33 @@ function getUnarmedStrike (
   rawCharacter: RawCharacterType,
   abilityScores: AbilityScoresType,
   proficiencyBonus: number
-): EquipmentType {
-  const damageDieType: number = get(rawCharacter, 'tweaks.unarmed.damageDice.dieSize') || 0
+): CharacterWeaponType {
+  const damageDieType: damageDieTypes = get(rawCharacter, 'tweaks.unarmed.damageDice.dieSize') || 0
   const damageBase = damageDieType > 0 ? 0 : 1
   const attackBonus = applyTweak(rawCharacter, 'unarmed.toHit', proficiencyBonus + abilityScores.Strength.modifier)
   const damageBonus = applyTweak(rawCharacter, 'unarmed.damage', Math.max(0, damageBase + abilityScores.Strength.modifier))
   return {
-    index: -1,
+    name: 'Unarmed Strike',
+    description: null,
+    cost: 0,
+    weight: '0',
+    equipmentCategory: 'Weapon',
     contentType: 'Core',
     contentSource: 'PHB',
-    cost: 0,
-    equipped: true,
-    quantity: 0,
-    attackBonus,
-    damageBonus,
-    damageDieModifier: 1,
-    damageDieType,
     damageNumberOfDice: 1,
     damageType: 'kinetic',
-    equipmentCategory: 'weapon',
-    name: 'Unarmed Strike',
+    weaponClassification: 'Unarmed',
+    damageDieType,
     properties: [],
     propertiesMap: {},
-    weaponClassification: '',
-    weight: '0',
-    description: null,
     modes: [],
-    ac: 0,
-    armorClassification: '',
-    stealthDisadvantage: false,
-    strengthRequirement: null
+    quantity: 0,
+    index: -1,
+    isFound: true,
+    equipped: true,
+    attackBonus,
+    damageBonus,
+    isCustom: false
   }
 }
 
@@ -45,7 +42,7 @@ function getCustomWeaponStats (
   customEquipment: CustomEquipmentType,
   rawCharacter: RawCharacterType,
   index: number
-) {
+): CustomWeaponType {
     const tweaks = customEquipment.tweaks
     let attackBonus = 0
     attackBonus = applyTweak(rawCharacter, 'weapon.toHit', attackBonus)
@@ -67,14 +64,14 @@ function getCustomWeaponStats (
 
 export default function generateWeapons (
   rawCharacter: RawCharacterType,
-  equipment: EquipmentType[],
+  equipment: CharacterLootType[],
   abilityScores: AbilityScoresType,
   proficiencyBonus: number
-): (EquipmentType | CustomWeaponType)[] {
-  const equippedWeapons = equipment.filter(({ equipped, equipmentCategory }) => equipped && equipmentCategory === 'Weapon')
-  const equippedCustomWeapons = rawCharacter.customEquipment
-    .map((customEquipment, index) => getCustomWeaponStats(customEquipment, rawCharacter, index))
+): (CharacterWeaponType | CustomWeaponType)[] {
+  const equippedWeapons = equipment.filter(isCharacterWeaponType).filter(({ equipped }) => equipped)
+  const equippedCustomWeapons: CustomWeaponType[] = rawCharacter.customEquipment
     .filter(({ equipped, equipmentCategory }) => equipped && equipmentCategory === 'Weapon')
+    .map((customEquipment, index) => getCustomWeaponStats(customEquipment, rawCharacter, index))
   return [
     ...equippedWeapons,
     ...equippedCustomWeapons,

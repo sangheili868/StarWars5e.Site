@@ -29,6 +29,7 @@
   const characterAdvancementsModule = namespace('characterAdvancements')
   const skillsModule = namespace('skills')
   const conditionsModule = namespace('conditions')
+  const enhancedItemsModule = namespace('enhancedItems')
 
   @Component({
     components: {
@@ -70,6 +71,7 @@
     @characterAdvancementsModule.Action fetchCharacterAdvancements!: () => void
     @skillsModule.Action fetchSkills!: () => void
     @conditionsModule.Action fetchConditions!: () => void
+    @enhancedItemsModule.Action fetchEnhancedItems!: () => void
 
     hasFetchedData = false
     isEditing = true
@@ -86,7 +88,8 @@
         this.fetchSpecies(),
         this.fetchCharacterAdvancements(),
         this.fetchSkills(),
-        this.fetchConditions()
+        this.fetchConditions(),
+        this.fetchEnhancedItems()
       ]).then(() => {
         this.hasFetchedData = true
         this.isEditing = this.characterValidation.code > 0

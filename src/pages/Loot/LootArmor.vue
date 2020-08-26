@@ -2,7 +2,7 @@
   import { Component, Prop, Vue } from 'vue-property-decorator'
   import { namespace } from 'vuex-class'
   import SearchTable from '@/components/SearchTable.vue'
-  import { EquipmentType } from '@/types/lootTypes'
+  import { EquipmentType, ArmorType, isArmorType } from '@/types/lootTypes'
   import _ from 'lodash'
   import VueMarkdown from 'vue-markdown'
   import LootArmorProperties from './LootArmorProperties.vue'
@@ -29,9 +29,9 @@
       this.initialSearch = this.$route.query.search
     }
 
-    get items () {
+    get items (): ArmorType[] {
       return _(this.equipment)
-        .filter(({ equipmentCategory }: EquipmentType) => equipmentCategory === 'Armor')
+        .filter(isArmorType)
         .map(equipment => ({
           ...equipment,
           id: equipment.name,
@@ -59,7 +59,7 @@
           text: 'Type',
           value: 'armorClassification',
           filterChoices: ['Light', 'Medium', 'Heavy', 'Shield'],
-          filterFunction: ({ armorClassification }: EquipmentType, filterValue: string) => armorClassification === filterValue
+          filterFunction: ({ armorClassification }: ArmorType, filterValue: string) => armorClassification === filterValue
         },
         {
           text: 'Property',
@@ -67,7 +67,7 @@
           isMultiSelect: true,
           render: (propertiesMap: { [property: string]: string }) => Object.values(propertiesMap).map((property) => _.upperFirst(property)).join(', '),
           filterChoices: this.properties,
-          filterFunction: ({ propertiesMap }: EquipmentType, filterValue: string[]) => this.filterProperties(propertiesMap, filterValue)
+          filterFunction: ({ propertiesMap }: ArmorType, filterValue: string[]) => this.filterProperties(propertiesMap, filterValue)
         },
         { text: 'Cost', value: 'cost' },
         { text: 'Weight', value: 'weight' },
@@ -78,7 +78,7 @@
           value: 'contentSource',
           render: _.startCase,
           filterChoices: ['PHB', 'EC', 'WH'],
-          filterFunction: ({ contentSource }: EquipmentType, filterValue: string) => _.startCase(contentSource) === filterValue
+          filterFunction: ({ contentSource }: ArmorType, filterValue: string) => _.startCase(contentSource) === filterValue
         }
       ]
     }

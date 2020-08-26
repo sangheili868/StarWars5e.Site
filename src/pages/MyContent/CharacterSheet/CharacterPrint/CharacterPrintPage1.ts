@@ -1,4 +1,4 @@
-import { CompleteCharacterType } from '@/types/completeCharacterTypes'
+import { CompleteCharacterType, isCharacterArmorType } from '@/types/completeCharacterTypes'
 import addPlus from '@/utilities/addPlus'
 import { chain } from 'lodash'
 import { printFieldType } from '@/types/utilityTypes'
@@ -17,7 +17,7 @@ export default function CharacterPrintPage1 (
     .value()
 
   const armorList = completeCharacter.equipment
-    .filter(({ equipped, equipmentCategory }) => equipped && equipmentCategory === 'Armor')
+    .filter(isCharacterArmorType)
     .map(({ name }, index) => ({
       top: 242 + index * 17,
       left: 324,

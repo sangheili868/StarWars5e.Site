@@ -1,7 +1,7 @@
 import { RawCharacterType } from '@/types/rawCharacterTypes'
 import { pick, compact, chain } from 'lodash'
 import { ClassType, PowerType, FeatType, BackgroundType, SpeciesType, ArchetypeType, ManeuverType, FeaturesType, FightingStyleType } from '@/types/characterTypes'
-import { EquipmentType } from '@/types/lootTypes'
+import { EquipmentType, EnhancedItemType } from '@/types/lootTypes'
 import generateAbilityScores from './generateAbilityScores'
 import generateCombatStats from './generateCombatStats'
 import generateHitPoints from './generateHitPoints'
@@ -18,6 +18,7 @@ import applyTweak from '@/utilities/applyTweak'
 import { CharacterAdvancementType, SkillType, ConditionType } from '@/types/lookupTypes'
 import generateExperiencePoints from './generateExperiencePoints'
 import { CompleteCharacterType } from '@/types/completeCharacterTypes'
+import generateAttunement from './generateAttunement'
 
 export default function generateCharacter (
   rawCharacter: RawCharacterType,
@@ -25,6 +26,7 @@ export default function generateCharacter (
   archetypes: ArchetypeType[],
   species: SpeciesType[],
   equipment: EquipmentType[],
+  enhancedItems: EnhancedItemType[],
   powers: PowerType[],
   feats: FeatType[],
   backgrounds: BackgroundType[],
@@ -69,7 +71,7 @@ export default function generateCharacter (
     description: (conditionsMap as { [key: string]: string })[condition]
   }))
   const proficiencies = generateProficiencies(rawCharacter, myFoundClasses, myFeats)
-  const myEquipment = generateEquipment(rawCharacter, equipment, abilityScores, proficiencyBonus, proficiencies)
+  const myEquipment = generateEquipment(rawCharacter, equipment, enhancedItems, abilityScores, proficiencyBonus, proficiencies)
   const myBackground = backgrounds.find(({ name }) => name === rawCharacter.background.name)
   if (!myBackground) console.error('Background not found: ', rawCharacter.background.name)
   const casting = generateCasting(rawCharacter, abilityScores, powers, proficiencyBonus, myFoundClasses, myArchetypes)
@@ -115,6 +117,7 @@ export default function generateCharacter (
     skillAndSaveProficiencies,
     languages: generateLanguages(rawCharacter),
     equipment: myEquipment,
+    attunement: generateAttunement(myEquipment, proficiencyBonus),
     weapons: generateWeapons(rawCharacter, myEquipment, abilityScores, proficiencyBonus),
     credits: Math.max(rawCharacter.credits, 0),
     carryingCapacity: generateCarryingCapacity(abilityScores),

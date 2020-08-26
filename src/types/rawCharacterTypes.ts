@@ -95,9 +95,11 @@ export interface TweakPathType {
 
 export interface RawEquipmentType {
   name: string,
+  category: 'Equipment' | 'EnhancedItem',
   quantity: number,
   equipped?: boolean,
-  tweaks?: EquipmentTweakType
+  tweaks?: EquipmentTweakType,
+  attuned?: boolean
 }
 
 export interface TweakType {

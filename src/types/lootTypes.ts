@@ -10,31 +10,47 @@ export interface ArmorPropertyType {
   name: string
 }
 
-export interface EquipmentType {
-  ac: number | string | null,
-  armorClassification: string,
-  contentSource: string,
-  contentType: string,
-  cost: number,
-  description: string | null,
-  equipmentCategory: string,
+export interface GearType {
   name: string,
-  stealthDisadvantage: boolean,
-  strengthRequirement: string | null,
+  description: string | null,
+  cost: number,
   weight: string,
-  properties: string[] | null,
+  equipmentCategory: string,
+  contentSource: 'WH' | 'PHB' | 'EC',
+  contentType: 'Core' | 'ExpandedContent',
+}
+
+export interface ArmorType extends GearType {
+  equipmentCategory: 'Armor'
+  armorClassification: 'Heavy' | 'Medium' | 'Shield' | 'Light',
+  properties: string[]
   propertiesMap: { [property: string]: string },
-  damageDieModifier: number,
-  damageDieType: number,
-  damageNumberOfDice: number,
+  ac: string,
+  stealthDisadvantage: boolean,
+}
+
+export type damageNumberOfDice = 0 | 1 | 2 | 3
+export type damageDieTypes = 0 | 4 | 6 | 8 | 10 | 12
+
+export interface WeaponType extends GearType {
+  equipmentCategory: 'Weapon',
+  damageNumberOfDice: damageNumberOfDice,
   damageType: string,
-  modes: EquipmentType[],
-  weaponClassification: string,
-  equipped?: boolean,
-  quantity: number,
-  index: number,
-  attackBonus?: number,
-  damageBonus?: number
+  weaponClassification: 'MartialBlaster' | 'SimpleBlaster' |
+    'MartialVibroweapon' | 'SimpleVibroweapon' |
+    'MartialLightweapon' | 'SimpleLightweapon' |
+    'Unarmed',
+  damageDieType: damageDieTypes,
+  properties: string[],
+  propertiesMap: { [property: string]: string },
+  modes: {
+    name: string,
+    damageDieType: damageDieTypes,
+    damageNumberOfDice: damageNumberOfDice,
+    damageType: string,
+    properties: string[],
+    propertiesMap: { [property: string]: string },
+  }[]
 }
 
 export interface EnhancedItemType {
@@ -49,5 +65,26 @@ export interface EnhancedItemType {
   valueText: string,
   text: string,
   subtype: string,
-  prerequisite: string
+  prerequisite: string,
+}
+
+export type EquipmentType = GearType | ArmorType | WeaponType
+export type LootType = EquipmentType | EnhancedItemType
+
+// Typeguards
+
+export function isEnhancedItem (loot: LootType): loot is EnhancedItemType {
+  return !((loot as EquipmentType).equipmentCategory)
+}
+
+export function isWeaponType (loot: LootType): loot is WeaponType {
+  return !isEnhancedItem(loot) && loot.equipmentCategory === 'Weapon'
+}
+
+export function isArmorType (loot: LootType): loot is ArmorType {
+  return !isEnhancedItem(loot) && loot.equipmentCategory === 'Armor'
+}
+
+export function isGearType (loot: LootType): loot is GearType {
+  return !isEnhancedItem(loot) && !['Weapon', 'Armor'].includes(loot.equipmentCategory)
 }

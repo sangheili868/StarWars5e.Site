@@ -5,7 +5,7 @@
   import LootWeaponsProperties from '@/pages/Loot/LootWeaponsProperties.vue'
   import { TweakPathType, CustomEquipmentType } from '@/types/rawCharacterTypes'
   import CharacterSheetTweaker from './CharacterSheetTweaker.vue'
-  import { CustomWeaponType } from '@/types/completeCharacterTypes'
+  import { CustomWeaponType, CharacterWeaponType } from '@/types/completeCharacterTypes'
 
   @Component({
     components: {
@@ -14,7 +14,7 @@
     }
   })
   export default class CharacterSheetWeapon extends Vue {
-    @Prop(Object) readonly weapon!: EquipmentType | CustomWeaponType
+    @Prop(Object) readonly weapon!: CharacterWeaponType | CustomWeaponType
 
     addPlus = addPlus
 

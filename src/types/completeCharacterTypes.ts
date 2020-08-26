@@ -1,5 +1,5 @@
 import { PowerType } from '@/types/characterTypes'
-import { EquipmentType } from '@/types/lootTypes'
+import { EquipmentType, EnhancedItemType, GearType, ArmorType, WeaponType } from '@/types/lootTypes'
 import { TweaksType, CustomProficiencyType, HighLevelCastingType, SettingsType, CustomEquipmentType } from './rawCharacterTypes'
 import { ConditionType } from './lookupTypes'
 
@@ -121,7 +121,47 @@ export interface CustomWeaponType extends CustomEquipmentType {
   damageDieType: number,
   index: number,
   properties: null[],
-  isCustom: boolean
+  isCustom: true
+}
+
+interface CharacterBaseLootType {
+  quantity: number,
+  index: number,
+  isFound: true
+}
+
+export interface CharacterLootMissingType {
+  name: string,
+  quantity: number,
+  index: number,
+  isFound: false
+}
+
+export interface CharacterGearType extends GearType, CharacterBaseLootType {}
+
+export interface CharacterArmorType extends ArmorType, CharacterBaseLootType {
+  equipped: boolean
+}
+
+export interface CharacterWeaponType extends WeaponType, CharacterBaseLootType {
+  equipped: boolean,
+  attackBonus: number,
+  damageBonus: number
+  isCustom: false
+}
+
+export interface CharacterEnhancedItemType extends EnhancedItemType, CharacterBaseLootType {
+  equipped: boolean,
+  attuned: boolean
+}
+
+export type CharacterEquipmentType = CharacterGearType | CharacterArmorType | CharacterWeaponType
+export type CharacterValidLootType = CharacterEquipmentType | CharacterEnhancedItemType
+export type CharacterLootType = CharacterValidLootType | CharacterLootMissingType
+export interface AttunementType {
+  current: number,
+  maximum: number,
+  hasAttunable: boolean
 }
 
 export interface CompleteCharacterType {
@@ -144,6 +184,7 @@ export interface CompleteCharacterType {
   proficiencyBonus: number,
   initiative: number,
   armorClass: number,
+  armorList: string[]
   hitPoints: HitPointsType,
   conditions: ConditionType[],
   exhaustion: number,
@@ -160,8 +201,9 @@ export interface CompleteCharacterType {
   skillAndSaveProficiencies: string[],
   languages: string[],
   characteristics: CharacteristicsType,
-  equipment: EquipmentType[],
-  weapons: (EquipmentType | CustomWeaponType)[],
+  equipment: CharacterLootType[],
+  attunement: AttunementType,
+  weapons: (CharacterWeaponType | CustomWeaponType)[],
   credits: number,
   carryingCapacity: {
     encumbered: number,
@@ -186,4 +228,30 @@ export interface CompleteCharacterType {
   customEquipment: CustomEquipmentType[],
   numCustomFeats: number,
   settings: SettingsType
+}
+
+// Typeguards
+
+export function isCharacterValidLootType (loot: CharacterLootType): loot is CharacterValidLootType {
+  return loot.isFound
+}
+
+export function isCharacterEnhancedItem (loot: CharacterLootType): loot is CharacterEnhancedItemType {
+  return isCharacterValidLootType(loot) && !((loot as EquipmentType).equipmentCategory)
+}
+
+export function isEquippable (loot: CharacterLootType): loot is CharacterArmorType | CharacterWeaponType {
+  return isCharacterValidLootType(loot) && !isCharacterEnhancedItem(loot) && ['Weapon', 'Armor'].includes(loot.equipmentCategory)
+}
+
+export function isCharacterWeaponType (loot: CharacterLootType): loot is CharacterWeaponType {
+  return isCharacterValidLootType(loot) && !isCharacterEnhancedItem(loot) && loot.equipmentCategory === 'Weapon'
+}
+
+export function isCharacterArmorType (loot: CharacterLootType): loot is CharacterArmorType {
+  return isCharacterValidLootType(loot) && !isCharacterEnhancedItem(loot) && loot.equipmentCategory === 'Armor'
+}
+
+export function isCharacterGearType (loot: CharacterLootType): loot is CharacterGearType {
+  return isCharacterValidLootType(loot) && !isCharacterEnhancedItem(loot) && !['Weapon', 'Armor'].includes(loot.equipmentCategory)
 }

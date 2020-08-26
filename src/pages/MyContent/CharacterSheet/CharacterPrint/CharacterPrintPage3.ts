@@ -1,4 +1,4 @@
-import { CompleteCharacterType } from '@/types/completeCharacterTypes'
+import { CompleteCharacterType, isCharacterEnhancedItem, isEquippable, isCharacterGearType, isCharacterValidLootType } from '@/types/completeCharacterTypes'
 import { printFieldType } from '@/types/utilityTypes'
 import math from 'mathjs'
 
@@ -6,14 +6,27 @@ export default function CharacterPrintPage3 (
   completeCharacter: CompleteCharacterType,
   myClasses: { [key: string]: string }
 ): printFieldType[] {
-  console.log(completeCharacter.equipment)
-  const equipment = completeCharacter.equipment.slice(0, 47).map(({ name, equipped, quantity, weight }, index) => [
+  const validEquipment = completeCharacter.equipment.filter(isCharacterValidLootType)
+  const equipment = validEquipment.slice(0, 47).map((equipment, index) => [
     { top: 52 + index * 17.8, left: 70, width: 190, myClass: myClasses.openSans + ' text-left', text: name },
-    ...(quantity > 1 ? [{ top: 52 + index * 17.8, left: 264, width: 30, myClass: myClasses.openSans + ' text-left', text: 'x' + quantity }] : []),
-    { top: 52 + index * 17.8, left: 294 + (equipped ? 0 : 35), width: 35, fontSize: 10, myClass: myClasses.openSans, text: quantity * (math.number(math.fraction(weight)) as number) + ' lbs.' }
+    ...(equipment.quantity > 1 ? [{ top: 52 + index * 17.8, left: 264, width: 30, myClass: myClasses.openSans + ' text-left', text: 'x' + equipment.quantity }] : []),
+    ...(!isCharacterEnhancedItem(equipment) ? [{
+      top: 52 + index * 17.8,
+      left: 294 + (isEquippable(equipment) && equipment.equipped ? 0 : 35),
+      width: 35,
+      fontSize: 10,
+      myClass: myClasses.openSans,
+      text: equipment.quantity * (math.number(math.fraction(equipment.weight)) as number) + ' lbs.'
+    }] : [])
   ]).flat()
-  const totalDonned = completeCharacter.equipment.filter(({ equipped }) => equipped).reduce((sum, { quantity, weight }) => sum + quantity * (math.number(math.fraction(weight)) as number), 0)
-  const totalBag = completeCharacter.equipment.filter(({ equipped }) => !equipped).reduce((sum, { quantity, weight }) => sum + quantity * (math.number(math.fraction(weight)) as number), 0)
+  const equippedGear = validEquipment.filter(isEquippable).filter(equipment => equipment.equipped)
+  const totalDonned = equippedGear.filter(({ equipped }) => equipped).reduce((sum, { quantity, weight }) => sum + quantity * (math.number(math.fraction(weight)) as number), 0)
+
+  const unequippedGear = [
+    ...validEquipment.filter(isCharacterGearType),
+    ...validEquipment.filter(isEquippable).filter(({ equipped }) => !equipped)
+  ]
+  const totalBag = unequippedGear.reduce((sum, { quantity, weight }) => sum + quantity * (math.number(math.fraction(weight)) as number), 0)
   const totalWeight = totalDonned + totalBag
 
   return [

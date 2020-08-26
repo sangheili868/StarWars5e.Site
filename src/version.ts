@@ -1,6 +1,13 @@
-export default '0.4.20'
+export default '0.4.21'
 
 /*
+
+0.4.21
+- Add All Equipment option to equipment adder
+- Fix Bug with Artificer Engineering not able to select tech powers found by @Side Waifu
+- Allow adding enhanced items to characters in the character builder
+- Allow attuning to enhanced items and limit attunement by proficiency bonus
+- Reworked internal item typings
 
 0.4.20
 - Fixed Half-human layout issue

@@ -39,7 +39,7 @@
     }
 
     get isArchetypeCasting () {
-      return this.archetypeData && this.archetypeData.casterType !== 'None'
+      return this.archetypeData && this.archetypeData.casterType !== 'None' && this.archetypeData.casterRatio > 0
     }
 
     get castingType () {

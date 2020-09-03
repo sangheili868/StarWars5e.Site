@@ -1,0 +1,50 @@
+{
+    "schema_version": 1,
+    "name": "Default",
+    "avatar": "",
+    "bio": "",
+    "attribs": [
+        {
+            "name": "version",
+            "current": "2.4",
+            "max": "",
+            "id": "-MG-8LD3oD8rEzSzc1pw"
+        },
+        {
+            "name": "global_skill_mod",
+            "current": "",
+            "max": "",
+            "id": "-MG-8LD94twu3RPZ-_11"
+        },
+        {
+            "name": "global_save_mod",
+            "current": "",
+            "max": "",
+            "id": "-MG-8LDA3S0VinPGngx-"
+        },
+        {
+            "name": "global_attack_mod",
+            "current": "",
+            "max": "",
+            "id": "-MG-8LDFibFXzTNFLACv"
+        },
+        {
+            "name": "global_damage_mod_roll",
+            "current": "",
+            "max": "",
+            "id": "-MG-8LDJKEz0gKr9e-Cn"
+        },
+        {
+            "name": "global_damage_mod_crit",
+            "current": "",
+            "max": "",
+            "id": "-MG-8LDKyegAAUclfTBc"
+        },
+        {
+            "name": "global_damage_mod_type",
+            "current": "",
+            "max": "",
+            "id": "-MG-8LDKyegAAUclfTBd"
+        }
+    ]
+}

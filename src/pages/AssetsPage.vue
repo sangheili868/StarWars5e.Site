@@ -119,6 +119,10 @@
           category: 'Other',
           routes: [
             {
+              href: 'https://teespring.com/stores/sw5e',
+              title: 'Merchandise'
+            },
+            {
               href: 'https://www.reddit.com/r/sw5e/comments/cb1i87/printing_a_star_wars_5e_story/',
               title: 'Printing Instructions'
             },

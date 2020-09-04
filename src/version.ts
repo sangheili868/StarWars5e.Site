@@ -1,6 +1,9 @@
-export default '0.4.21'
+export default '0.4.23'
 
 /*
+
+0.4.23
+- Added Merchandise link on Assets page
 
 0.4.22
 - Fixed bug where custom item descriptions don't show up, found by @Vacant Top Hat

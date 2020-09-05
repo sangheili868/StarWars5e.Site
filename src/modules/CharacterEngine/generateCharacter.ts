@@ -124,6 +124,7 @@ export default function generateCharacter (
     superiority,
     ...casting,
     ...features,
-    settings: rawCharacter.settings
+    settings: rawCharacter.settings,
+    notes: rawCharacter.notes
   }
 }

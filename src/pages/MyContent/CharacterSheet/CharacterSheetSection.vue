@@ -6,6 +6,7 @@
   import CharacterSheetEquipment from './CharacterSheetEquipment.vue'
   import CharacterSheetDescription from './CharacterSheetDescription.vue'
   import CharacterSheetProficiencies from './CharacterSheetProficiencies.vue'
+  import CharacterSheetNotes from './CharacterSheetNotes.vue'
   import { CompleteCharacterType } from '@/types/completeCharacterTypes'
   import { isEmpty } from 'lodash'
 
@@ -16,7 +17,8 @@
       CharacterSheetCasting,
       CharacterSheetEquipment,
       CharacterSheetDescription,
-      CharacterSheetProficiencies
+      CharacterSheetProficiencies,
+      CharacterSheetNotes
     }
   })
   export default class CharacterSheetSection extends Vue {
@@ -48,6 +50,10 @@
         {
           component: 'CharacterSheetDescription',
           icon: 'fa-user'
+        },
+        {
+          component: 'CharacterSheetNotes',
+          icon: 'fa-clipboard'
         }
       ]
     }

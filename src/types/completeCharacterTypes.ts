@@ -227,7 +227,8 @@ export interface CompleteCharacterType {
   customForcePowers: string[],
   customEquipment: CustomEquipmentType[],
   numCustomFeats: number,
-  settings: SettingsType
+  settings: SettingsType,
+  notes: String
 }
 
 // Typeguards

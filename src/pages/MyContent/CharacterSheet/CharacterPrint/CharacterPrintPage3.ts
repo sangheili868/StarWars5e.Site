@@ -8,7 +8,7 @@ export default function CharacterPrintPage3 (
 ): printFieldType[] {
   const validEquipment = completeCharacter.equipment.filter(isCharacterValidLootType)
   const equipment = validEquipment.slice(0, 47).map((equipment, index) => [
-    { top: 52 + index * 17.8, left: 70, width: 190, myClass: myClasses.openSans + ' text-left', text: name },
+    { top: 52 + index * 17.8, left: 70, width: 190, myClass: myClasses.openSans + ' text-left', text: equipment.name },
     ...(equipment.quantity > 1 ? [{ top: 52 + index * 17.8, left: 264, width: 30, myClass: myClasses.openSans + ' text-left', text: 'x' + equipment.quantity }] : []),
     ...(!isCharacterEnhancedItem(equipment) ? [{
       top: 52 + index * 17.8,

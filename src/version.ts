@@ -2,6 +2,9 @@ export default '0.4.23'
 
 /*
 
+0.4.24
+- Fixed bug where equipment names don't show up on the printable character sheet, found by @BigRedJedi
+
 0.4.23
 - Added Merchandise link on Assets page
 

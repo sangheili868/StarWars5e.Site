@@ -3,6 +3,7 @@ import { ClassType, SpeciesType } from '@/types/characterTypes'
 import { chain, mapValues, get } from 'lodash'
 import { SkillsType } from '@/types/referenceTypes'
 import applyTweak from '@/utilities/applyTweak'
+import { AbilityScoresType } from '@/types/completeCharacterTypes'
 
 function isASI (asi: RawFeatType | RawASIType): asi is RawASIType {
   return asi && asi.type === 'Ability Score Improvement'
@@ -61,7 +62,7 @@ export default function generateAbilityScores (
   mySpecies: SpeciesType | undefined,
   proficiencyBonus: number,
   skillsList: SkillsType
-) {
+): { abilityScores: AbilityScoresType, skillAndSaveProficiencies: string[] } {
   const proficiencyBonuses: { [proficiencyLevel: string]: number } = {
     expertise: 2 * proficiencyBonus,
     proficient: proficiencyBonus,

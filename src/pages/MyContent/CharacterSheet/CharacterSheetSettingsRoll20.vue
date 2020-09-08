@@ -1,11 +1,12 @@
 <script lang="ts">
   import { Component, Prop, Vue } from 'vue-property-decorator'
-  import { CompleteCharacterType } from '@/types/completeCharacterTypes'
+  import { CompleteCharacterType, isCharacterEnhancedItem, isCharacterValidLootType } from '@/types/completeCharacterTypes'
   import { RawCharacterType } from '@/types/rawCharacterTypes'
   import { Roll20CharacterType } from '@/types/exportTypes'
   import MyDialog from '@/components/MyDialog.vue'
   import { saveAs } from 'file-saver'
   import { camelCase, map, mapValues, chain, snakeCase } from 'lodash'
+  import { isEnhancedItem } from '@/types/lootTypes'
 
   @Component({
     components: {
@@ -21,7 +22,29 @@
     const c = this.completeCharacter
     const r = this.rawCharacter
 
-    const forcePowers = Object.assign({}, ...(c.forceCasting ? c.forceCasting.powersKnown.map(power => {
+    const abilityScores = map(c.abilityScores, ({ value, modifier, savingThrow, skills }, ability) => ({
+      [ability.toLowerCase()]: value,
+      [ability.toLowerCase() + '_base']: value.toString(),
+      [ability.toLowerCase() + '_mod']: modifier.toString(),
+      [ability.toLowerCase() + '_save_bonus']: savingThrow.modifier,
+      [ability.toLowerCase() + '_save_prof']: savingThrow.proficiency !== 'none' ? '(@{pb})' : 0,
+      ...Object.assign({}, ...map(skills, ({ name, modifier, proficiency }) => ({
+        [snakeCase(name) + '_bonus']: modifier,
+        [snakeCase(name) + '_prof']: proficiency !== 'none' ? '(@{pb}*@{' + snakeCase(name) + '_type})' : 0,
+        [snakeCase(name) + '_type']: ({
+          proficient: 1,
+          expertise: 2,
+          none: 0
+        } as { [key: string]: string | number })[proficiency]
+      })))
+    }))
+
+    const allPowers = [
+      ...(c.forceCasting ? c.forceCasting.powersKnown : []),
+      ...(c.techCasting ? c.techCasting.powersKnown : [])
+    ]
+
+    const powers = allPowers.map(power => {
       const levelText = power.level ? power.level : 'cantrip'
       const header = `repeating_power-${levelText}_${this.makeId()}_`
       return {
@@ -40,7 +63,72 @@
         [header + 'powerdescription']: power.description,
         [header + 'options-flag']: '0'
       }
-    }) : []))
+    })
+
+    const equipment = c.equipment.map(equipment => {
+      const header = 'repeating_inventory_' + this.makeId() + '_item'
+      return {
+        [header + 'name']: equipment.name,
+        [header + 'weight']: !isCharacterEnhancedItem(equipment) && isCharacterValidLootType(equipment) ? equipment.weight : 0,
+        [header + 'count']: equipment.quantity
+      }
+    })
+
+    const languages = [ c.languages, ...c.customLanguages ].map(proficiency => {
+      const header = 'repeating_proficiencies_' + this.makeId() + '_'
+      return {
+        [header + 'name']: proficiency,
+        [header + 'options-flag']: '0'
+      }
+    })
+
+    const bgheader = 'repeating_traits_' + this.makeId() + '_'
+    const traits = [
+      ...c.combatFeatures.map(combatFeature => {
+        const header = 'repeating_traits_' + this.makeId() + '_'
+        return {
+          [header + 'name']: combatFeature.name,
+          [header + 'source']: 'Feat',
+          [header + 'description']: combatFeature.description,
+          [header + 'options-flag']: '0',
+          [header + 'display_flag']: 'on'
+        }
+      }),
+      {
+        [bgheader + 'name']: c.backgroundFeature.name,
+        [bgheader + 'source']: 'Background',
+        [bgheader + 'description']: c.backgroundFeature.description,
+        [bgheader + 'options-flag']: '0',
+        [bgheader + 'display_flag']: 'on'
+      },
+      ...c.customFeatures.map(customFeature => {
+        const header = 'repeating_traits_' + this.makeId() + '_'
+        return {
+          [header + 'name']: customFeature.name,
+          [header + 'source']: 'Other',
+          [header + 'description']: customFeature.content,
+          [header + 'options-flag']: '0',
+          [header + 'display_flag']: 'on'
+        }
+      })
+    ]
+
+    const attacks = c.weapons.map(weapon => {
+      const header = 'repeating_attack_' + this.makeId() + '_'
+      const hasDice = weapon.damageNumberOfDice && weapon.damageDieType
+      const damage = hasDice ? weapon.damageNumberOfDice + 'd' + weapon.damageDieType : weapon.damageBonus
+      const range = weapon.properties[0] !== null && (weapon.properties as string[]).find(property => property.includes('range'))
+      return {
+        [header + 'atkname']: weapon.name,
+        [header + 'options-flag']: '0',
+        [header + 'atkbonus']: weapon.attackBonus,
+        [header + 'dmgtype']: weapon.damageType,
+        [header + 'dmgbase']: damage,
+        [header + 'atkrange']: range ? range.replace('Ammunition (range ', '').replace(')', '') : '',
+        [header + 'atk_desc']: weapon.properties.join(', '),
+        [header + 'saveeffect']: ' '
+      }
+    })
 
     const attribs: { [key: string]: string | number } = {
       version: '2.4',
@@ -59,22 +147,7 @@
       experience: c.experiencePoints.current.toString(),
       background: c.background,
       alignment: c.alignment,
-      ...Object.assign({}, ...map(c.abilityScores, ({ value, modifier, savingThrow, skills }, ability) => ({
-        [ability.toLowerCase()]: value,
-        [ability.toLowerCase() + '_base']: value.toString(),
-        [ability.toLowerCase() + '_mod']: modifier.toString(),
-        [ability.toLowerCase() + '_save_bonus']: savingThrow.modifier,
-        [ability.toLowerCase() + '_save_prof']: savingThrow.proficiency !== 'none' ? '(@{pb})' : 0,
-        ...Object.assign({}, ...map(skills, ({ name, modifier, proficiency }) => ({
-          [snakeCase(name) + '_bonus']: modifier,
-          [snakeCase(name) + '_prof']: proficiency !== 'none' ? '(@{pb}*@{' + snakeCase(name) + '_type})' : 0,
-          [snakeCase(name) + '_type']: ({
-            proficient: 1,
-            expertise: 2,
-            none: 0
-          } as { [key: string]: string | number })[proficiency]
-        })))
-      }))),
+      ...Object.assign({}, ...abilityScores, ...powers, ...equipment, ...languages, ...attacks, ...traits),
       hitdietype: parseInt(c.hitPoints.hitDice[0].size),
       hitdie_final: '@{hitdietype}',
       personality_traits: c.characteristics['Personality Traits'],
@@ -82,6 +155,10 @@
       bonds: c.characteristics.Bond,
       flaws: c.characteristics.Flaw,
       hair: c.characteristics.Hair,
+      'options-flag-personality': '0',
+      'options-flag-ideals': '0',
+      'options-flag-bonds': '0',
+      'options-flag-flaws': '0',
       height: c.characteristics.Height,
       eyes: c.characteristics.Eyes,
       skin: c.characteristics.Skin,
@@ -94,9 +171,9 @@
       force_power_points_total: c.forceCasting ? c.forceCasting.maxPoints : 0,
       force_power_points_expended: c.forceCasting ? c.forceCasting.maxPoints - c.forceCasting.pointsUsed : 0,
       tech_power_points_total: c.techCasting ? c.techCasting.maxPoints : 0,
-      tech_power_points_expended: c.techCasting ? c.techCasting.maxPoints - c.techCasting.pointsUsed : 0,
-      ...forcePowers
+      tech_power_points_expended: c.techCasting ? c.techCasting.maxPoints - c.techCasting.pointsUsed : 0
     }
+
     const attribsWithMax = [
       {
         name: 'hp',
@@ -109,6 +186,7 @@
         max: c.hitPoints.hitDice[0].maximum
       }
     ]
+    console.log(attribs)
     return {
       schema_version: 2,
       name: c.name,

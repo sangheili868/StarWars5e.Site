@@ -22,7 +22,7 @@ function getUnarmedStrike (
     contentType: 'Core',
     contentSource: 'PHB',
     damageNumberOfDice: 1,
-    damageType: 'kinetic',
+    damageType: 'Kinetic',
     weaponClassification: 'Unarmed',
     damageDieType,
     properties: [],

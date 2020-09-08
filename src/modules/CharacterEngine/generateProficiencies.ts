@@ -7,7 +7,7 @@ export default function generateProficiencies (
   rawCharacter: RawCharacterType,
   classes: ClassType[],
   feats: CompletedFeatureType[]
-) {
+): string[] {
   const startingClass = rawCharacter.classes[0]
   const startingClassData = startingClass && classes.find(({ name }) => name === startingClass.name)
   const fromStartingClass = startingClassData && [

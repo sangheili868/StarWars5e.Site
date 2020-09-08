@@ -474,7 +474,7 @@
         },
         {
             "name": "weighttotal",
-            "current": 40,
+            "current": 42,
             "max": "",
             "id": "-MG-Ub16oSuZ8Ay89l0x"
         },
@@ -732,7 +732,7 @@
         },
         {
             "name": "tab",
-            "current": "powers",
+            "current": "core",
             "max": "",
             "id": "-MG-Ub1FhAx8TvR_YLYR"
         },
@@ -792,7 +792,7 @@
         },
         {
             "name": "repeating_power-cantrip_-M47-uAAjHgEuOBQWOhM_rollcontent",
-            "current": "%{-MG-Ub0kjy8WyNN9beal|repeating_attack_-mgdq8v6nt6kxnq3d4td_attack}",
+            "current": "@{wtype}&{template:power} {{level=@{powerschool} @{powerlevel}}} {{name=@{powername}}} {{castingtime=@{powercastingtime}}} {{range=@{powerrange}}} {{target=@{powertarget}}} {{duration=@{powerduration}}} {{description=@{powerdescription}}} {{athigherlevels=@{powerathigherlevels}}}  {{innate=@{innate}}} @{powerconcentration} @{charname_output}",
             "max": "",
             "id": "-MG-Ub1HoVriG8B5dYJz"
         },
@@ -1944,7 +1944,7 @@
         },
         {
             "name": "repeating_power-cantrip_-M47-uAAjHgEuOBQWOhM_poweroutput",
-            "current": "ATTACK",
+            "current": "POWERCARD",
             "max": "",
             "id": "-MG-Ub1yjt4ZoIY1CTXO"
         },
@@ -3216,7 +3216,7 @@
         },
         {
             "name": "repeating_power-2_-M5p0N6rnfae4Lmcf7ke_options-flag",
-            "current": "on",
+            "current": "0",
             "max": "",
             "id": "-MG-Ub2zYNqJlHiImz9A"
         },
@@ -3455,168 +3455,6 @@
             "id": "-MGZlC1-TpCw1A_HQoRz"
         },
         {
-            "name": "repeating_attack_-MGdq8v6Nt6kxNQ3D4td_atkattr_base",
-            "current": "power",
-            "max": "",
-            "id": "-MGdq8vEROuLL8ZiiPLq"
-        },
-        {
-            "name": "repeating_attack_-MGdq8v6Nt6kxNQ3D4td_options-flag",
-            "current": "0",
-            "max": "",
-            "id": "-MGdq8vI5ehPWrkwNEwK"
-        },
-        {
-            "name": "repeating_attack_-MGdq8v6Nt6kxNQ3D4td_powerid",
-            "current": "-m47-uaajhgeuobqwohm",
-            "max": "",
-            "id": "-MGdq8vKPxq1QyTyzDJo"
-        },
-        {
-            "name": "repeating_attack_-MGdq8v6Nt6kxNQ3D4td_powerlevel",
-            "current": "cantrip",
-            "max": "",
-            "id": "-MGdq8vNGfvtJbeOnYft"
-        },
-        {
-            "name": "repeating_attack_-MGdq8v6Nt6kxNQ3D4td_savedc",
-            "current": "(@{power_save_dc})",
-            "max": "",
-            "id": "-MGdq8vP0O-2r0a5lmWX"
-        },
-        {
-            "name": "repeating_attack_-MGdq8v6Nt6kxNQ3D4td_atkname",
-            "current": "Force Push/Pull",
-            "max": "",
-            "id": "-MGdq8vRsw9E9HT6dZrR"
-        },
-        {
-            "name": "repeating_attack_-MGdq8v6Nt6kxNQ3D4td_atkflag",
-            "current": "0",
-            "max": "",
-            "id": "-MGdq8vS3sQsvB98gQQ6"
-        },
-        {
-            "name": "repeating_attack_-MGdq8v6Nt6kxNQ3D4td_dmgflag",
-            "current": "{{damage=1}} {{dmg1flag=1}}",
-            "max": "",
-            "id": "-MGdq8vVE5-8IzOR-KC8"
-        },
-        {
-            "name": "repeating_attack_-MGdq8v6Nt6kxNQ3D4td_dmgbase",
-            "current": "[[round((@{level} + 1) / 6 + 0.5)]]d4",
-            "max": "",
-            "id": "-MGdq8vZLcUA8J5xuXA-"
-        },
-        {
-            "name": "repeating_attack_-MGdq8v6Nt6kxNQ3D4td_dmgattr",
-            "current": "0",
-            "max": "",
-            "id": "-MGdq8va2RH0KkNnmtkE"
-        },
-        {
-            "name": "repeating_attack_-MGdq8v6Nt6kxNQ3D4td_dmgtype",
-            "current": "kinetic",
-            "max": "",
-            "id": "-MGdq8vcYhyA32CqfjR8"
-        },
-        {
-            "name": "repeating_attack_-MGdq8v6Nt6kxNQ3D4td_dmg2base",
-            "current": "",
-            "max": "",
-            "id": "-MGdq8vemg_Sa2tZQAQl"
-        },
-        {
-            "name": "repeating_attack_-MGdq8v6Nt6kxNQ3D4td_dmg2attr",
-            "current": 0,
-            "max": "",
-            "id": "-MGdq8vemg_Sa2tZQAQm"
-        },
-        {
-            "name": "repeating_attack_-MGdq8v6Nt6kxNQ3D4td_dmg2flag",
-            "current": "0",
-            "max": "",
-            "id": "-MGdq8vg2TBnpGPlIXs0"
-        },
-        {
-            "name": "repeating_attack_-MGdq8v6Nt6kxNQ3D4td_dmg2type",
-            "current": "",
-            "max": "",
-            "id": "-MGdq8vjT2cvOsKQa-lr"
-        },
-        {
-            "name": "repeating_attack_-MGdq8v6Nt6kxNQ3D4td_atkrange",
-            "current": "60 feet",
-            "max": "",
-            "id": "-MGdq8vkj4D_gu5psxKt"
-        },
-        {
-            "name": "repeating_attack_-MGdq8v6Nt6kxNQ3D4td_saveflag",
-            "current": "{{save=1}} {{saveattr=@{saveattr}}} {{savedesc=@{saveeffect}}} {{savedc=[[[[@{savedc}]][SAVE]]]}}",
-            "max": "",
-            "id": "-MGdq8vpRE14dbbA7IET"
-        },
-        {
-            "name": "repeating_attack_-MGdq8v6Nt6kxNQ3D4td_saveattr",
-            "current": "Strength",
-            "max": "",
-            "id": "-MGdq8vqLCU4RVzBNtKr"
-        },
-        {
-            "name": "repeating_attack_-MGdq8v6Nt6kxNQ3D4td_saveeffect",
-            "current": "To not be moved 5ft",
-            "max": "",
-            "id": "-MGdq8vs6myrEvWL-d7n"
-        },
-        {
-            "name": "repeating_attack_-MGdq8v6Nt6kxNQ3D4td_hldmg",
-            "current": "",
-            "max": "",
-            "id": "-MGdq8vtJa3-Y_jZ3q7J"
-        },
-        {
-            "name": "repeating_attack_-MGdq8v6Nt6kxNQ3D4td_power_innate",
-            "current": "",
-            "max": "",
-            "id": "-MGdq8vvy92McDVq-l7z"
-        },
-        {
-            "name": "repeating_attack_-MGdq8v6Nt6kxNQ3D4td_atk_desc",
-            "current": "You gain the minor ability to move or manipulate creatures and objects with the Force. You can exert fine control on objects with your telekinetic grip, such as manipulating a simple tool, opening a door or a container, stowing or retrieving an item from an open container, or pouring the contents from a vial. Alternatively, you can push or pull a creature or object you can see.\n\nYou use the Force to move a Medium or smaller creature or object not being worn or carried within range. The target must make a Strength saving throw. An object automatically fails this saving throw. On a failed save, the creature or object moves a number of feet in a direction of your choice based on its size. A Tiny creature or object can be moved up to 20 feet, a Small creature or object can be moved up to 10 feet, and a Medium creature or object can be moved up to 5 feet. If at the end of this movement the creature or object strikes another creature or object, they both take 1d4 kinetic damage.\n\nThis power improves when you reach higher levels. At 5th level, you can move a Tiny creature or object up to 30 feet, a Small creature or object up to 20 feet, a Medium creature or object up to 10 feet, and the power’s damage increases to 2d4 kinetic damage. At 11th level, you can move a Small creature or object up to 30 feet, a Medium creature up to 20 feet, and the power’s damage increases to 3d4 kinetic damage. At 17th level, you can move a Medium creature to up 30 feet, and the power’s damage increases to 4d4 kinetic damage",
-            "max": "",
-            "id": "-MGdq8vwyMxvxsyA518H"
-        },
-        {
-            "name": "repeating_attack_-MGdq8v6Nt6kxNQ3D4td_rollbase_dmg",
-            "current": "@{wtype}&{template:dmg} {{rname=@{atkname}}} @{atkflag} {{range=@{atkrange}}} @{dmgflag} {{dmg1=[[[[round((@{level} + 1) / 6 + 0.5)]]d4]]}} {{dmg1type=kinetic }} @{dmg2flag} {{dmg2=[[0]]}} {{dmg2type=}} @{saveflag} {{desc=@{atk_desc}}} @{hldmg} {{powerlevel=@{powerlevel}}} {{innate=@{power_innate}}} {{globaldamage=[[0]]}} {{globaldamagetype=@{global_damage_mod_type}}} @{charname_output}",
-            "max": "",
-            "id": "-MGdq8w60u9oBgzUx_ih"
-        },
-        {
-            "name": "repeating_attack_-MGdq8v6Nt6kxNQ3D4td_rollbase_crit",
-            "current": "@{wtype}&{template:dmg} {{crit=1}} {{rname=@{atkname}}} @{atkflag} {{range=@{atkrange}}} @{dmgflag} {{dmg1=[[[[round((@{level} + 1) / 6 + 0.5)]]d4]]}} {{dmg1type=kinetic }} @{dmg2flag} {{dmg2=[[0]]}} {{dmg2type=}} {{crit1=[[[[round((@{level} + 1) / 6 + 0.5)]]d4]]}} {{crit2=[[0]]}} @{saveflag} {{desc=@{atk_desc}}} @{hldmg}  {{powerlevel=@{powerlevel}}} {{innate=@{power_innate}}} {{globaldamage=[[0]]}} {{globaldamagecrit=[[0]]}} {{globaldamagetype=@{global_damage_mod_type}}} @{charname_output}",
-            "max": "",
-            "id": "-MGdq8w8ffoWRiijkD3z"
-        },
-        {
-            "name": "repeating_attack_-MGdq8v6Nt6kxNQ3D4td_atkbonus",
-            "current": "DC16",
-            "max": "",
-            "id": "-MGdq8w9nn0PRqzZocMB"
-        },
-        {
-            "name": "repeating_attack_-MGdq8v6Nt6kxNQ3D4td_atkdmgtype",
-            "current": "2d4 kinetic  ",
-            "max": "",
-            "id": "-MGdq8wBESDEOn62fBsk"
-        },
-        {
-            "name": "repeating_attack_-MGdq8v6Nt6kxNQ3D4td_rollbase",
-            "current": "@{wtype}&{template:atkdmg} {{mod=@{atkbonus}}} {{rname=@{atkname}}} {{r1=[[0d20cs>@{atkcritrange}]]}} {{r2=[[0d20cs>@{atkcritrange}]]}} @{atkflag} {{range=@{atkrange}}} @{dmgflag} {{dmg1=[[[[round((@{level} + 1) / 6 + 0.5)]]d4]]}} {{dmg1type=kinetic }} @{dmg2flag} {{dmg2=[[0]]}} {{dmg2type=}} {{crit1=[[[[round((@{level} + 1) / 6 + 0.5)]]d4[CRIT]]]}} {{crit2=[[0[CRIT]]]}} @{saveflag} {{desc=@{atk_desc}}} @{hldmg}  {{powerlevel=@{powerlevel}}} {{innate=@{power_innate}}} {{globalattack=@{global_attack_mod}}} {{globaldamage=[[0]]}} {{globaldamagecrit=[[0]]}} {{globaldamagetype=@{global_damage_mod_type}}} ammo=@{ammo} @{charname_output}",
-            "max": "",
-            "id": "-MGdq8wDLngRSON7bNUf"
-        },
-        {
             "name": "repeating_power-cantrip_-MGdqzykXwaHyuWK6RNk_powername",
             "current": "Test Power",
             "max": "",
@@ -3689,138 +3527,6 @@
             "id": "-MGdrCFikSLb-kftFgrK"
         },
         {
-            "name": "repeating_attack_-MGdrB6Zp-P2jl29bKIj_atkattr_base",
-            "current": "@{wisdom_mod}",
-            "max": "",
-            "id": "-MGdrCHsjANW8FLZU_KP"
-        },
-        {
-            "name": "repeating_attack_-MGdrB6Zp-P2jl29bKIj_savedc",
-            "current": "(@{wisdom_mod}+8+@{power_dc_mod}+@{pb})",
-            "max": "",
-            "id": "-MGdrCHvUCQrSle4N7x0"
-        },
-        {
-            "name": "repeating_attack_-MGdrB6Zp-P2jl29bKIj_atkname",
-            "current": "Test Power",
-            "max": "",
-            "id": "-MGdrCHwod-K01nHuJdw"
-        },
-        {
-            "name": "repeating_attack_-MGdrB6Zp-P2jl29bKIj_atkflag",
-            "current": "0",
-            "max": "",
-            "id": "-MGdrCHxD7AyFGmU_-OM"
-        },
-        {
-            "name": "repeating_attack_-MGdrB6Zp-P2jl29bKIj_dmgflag",
-            "current": "0",
-            "max": "",
-            "id": "-MGdrCHyDG9e2wOx5SFX"
-        },
-        {
-            "name": "repeating_attack_-MGdrB6Zp-P2jl29bKIj_dmgattr",
-            "current": "0",
-            "max": "",
-            "id": "-MGdrCI-TvwFF6q91IW9"
-        },
-        {
-            "name": "repeating_attack_-MGdrB6Zp-P2jl29bKIj_dmgtype",
-            "current": "",
-            "max": "",
-            "id": "-MGdrCI0k1muQWdINDqm"
-        },
-        {
-            "name": "repeating_attack_-MGdrB6Zp-P2jl29bKIj_dmg2base",
-            "current": "",
-            "max": "",
-            "id": "-MGdrCI1Cpp510SiwP6j"
-        },
-        {
-            "name": "repeating_attack_-MGdrB6Zp-P2jl29bKIj_dmg2attr",
-            "current": 0,
-            "max": "",
-            "id": "-MGdrCI35vuAXi5YZ8wI"
-        },
-        {
-            "name": "repeating_attack_-MGdrB6Zp-P2jl29bKIj_dmg2flag",
-            "current": "0",
-            "max": "",
-            "id": "-MGdrCI4N3xQ_qgJqk6W"
-        },
-        {
-            "name": "repeating_attack_-MGdrB6Zp-P2jl29bKIj_dmg2type",
-            "current": "",
-            "max": "",
-            "id": "-MGdrCI6UzU25CT60J2f"
-        },
-        {
-            "name": "repeating_attack_-MGdrB6Zp-P2jl29bKIj_atkrange",
-            "current": "300 feet",
-            "max": "",
-            "id": "-MGdrCI8qJ040t442F4r"
-        },
-        {
-            "name": "repeating_attack_-MGdrB6Zp-P2jl29bKIj_saveflag",
-            "current": "0",
-            "max": "",
-            "id": "-MGdrCI98tEP9gpv0KNU"
-        },
-        {
-            "name": "repeating_attack_-MGdrB6Zp-P2jl29bKIj_saveeffect",
-            "current": "",
-            "max": "",
-            "id": "-MGdrCIAlLwYp_EQdHla"
-        },
-        {
-            "name": "repeating_attack_-MGdrB6Zp-P2jl29bKIj_hldmg",
-            "current": "",
-            "max": "",
-            "id": "-MGdrCIB_AEdaWDi0Mr6"
-        },
-        {
-            "name": "repeating_attack_-MGdrB6Zp-P2jl29bKIj_power_innate",
-            "current": "",
-            "max": "",
-            "id": "-MGdrCIDgecNp5GAB6N9"
-        },
-        {
-            "name": "repeating_attack_-MGdrB6Zp-P2jl29bKIj_atk_desc",
-            "current": "",
-            "max": "",
-            "id": "-MGdrCIFKi5Ir1p80ra_"
-        },
-        {
-            "name": "repeating_attack_-MGdrB6Zp-P2jl29bKIj_rollbase_dmg",
-            "current": "@{wtype}&{template:dmg} {{rname=@{atkname}}} @{atkflag} {{range=@{atkrange}}} @{dmgflag} {{dmg1=[[0]]}} {{dmg1type=}} @{dmg2flag} {{dmg2=[[0]]}} {{dmg2type=}} @{saveflag} {{desc=@{atk_desc}}} @{hldmg} {{powerlevel=@{powerlevel}}} {{innate=@{power_innate}}} {{globaldamage=[[0]]}} {{globaldamagetype=@{global_damage_mod_type}}} @{charname_output}",
-            "max": "",
-            "id": "-MGdrCIPYSXED0TB0Jkj"
-        },
-        {
-            "name": "repeating_attack_-MGdrB6Zp-P2jl29bKIj_rollbase_crit",
-            "current": "@{wtype}&{template:dmg} {{crit=1}} {{rname=@{atkname}}} @{atkflag} {{range=@{atkrange}}} @{dmgflag} {{dmg1=[[0]]}} {{dmg1type=}} @{dmg2flag} {{dmg2=[[0]]}} {{dmg2type=}} {{crit1=[[0]]}} {{crit2=[[0]]}} @{saveflag} {{desc=@{atk_desc}}} @{hldmg}  {{powerlevel=@{powerlevel}}} {{innate=@{power_innate}}} {{globaldamage=[[0]]}} {{globaldamagecrit=[[0]]}} {{globaldamagetype=@{global_damage_mod_type}}} @{charname_output}",
-            "max": "",
-            "id": "-MGdrCIQBBA3GK3eFbym"
-        },
-        {
-            "name": "repeating_attack_-MGdrB6Zp-P2jl29bKIj_atkbonus",
-            "current": "-",
-            "max": "",
-            "id": "-MGdrCISU5dVwJP1UImn"
-        },
-        {
-            "name": "repeating_attack_-MGdrB6Zp-P2jl29bKIj_atkdmgtype",
-            "current": " ",
-            "max": "",
-            "id": "-MGdrCITDf7hIwmtJhTH"
-        },
-        {
-            "name": "repeating_attack_-MGdrB6Zp-P2jl29bKIj_rollbase",
-            "current": "@{wtype}&{template:atkdmg} {{mod=@{atkbonus}}} {{rname=@{atkname}}} {{r1=[[0d20cs>@{atkcritrange}]]}} {{r2=[[0d20cs>@{atkcritrange}]]}} @{atkflag} {{range=@{atkrange}}} @{dmgflag} {{dmg1=[[0]]}} {{dmg1type=}} @{dmg2flag} {{dmg2=[[0]]}} {{dmg2type=}} {{crit1=[[0[CRIT]]]}} {{crit2=[[0[CRIT]]]}} @{saveflag} {{desc=@{atk_desc}}} @{hldmg}  {{powerlevel=@{powerlevel}}} {{innate=@{power_innate}}} {{globalattack=@{global_attack_mod}}} {{globaldamage=[[0]]}} {{globaldamagecrit=[[0]]}} {{globaldamagetype=@{global_damage_mod_type}}} ammo=@{ammo} @{charname_output}",
-            "max": "",
-            "id": "-MGdrCIVnoJeiliitB4Y"
-        },
-        {
             "name": "repeating_power-cantrip_-MGdqzykXwaHyuWK6RNk_powerathigherlevels",
             "current": "test power at higher levels",
             "max": "",
@@ -3828,9 +3534,345 @@
         },
         {
             "name": "repeating_power-cantrip_-MGdqzykXwaHyuWK6RNk_options-flag",
-            "current": "on",
+            "current": "0",
             "max": "",
             "id": "-MGdrDZ-n_yH4BthdiFD"
+        },
+        {
+            "name": "repeating_tool_-MGe2KxVrbekHm85zV7u_toolbonus_base",
+            "current": "(@{pb}*2)",
+            "max": "",
+            "id": "-MGe2LWN27gxPcO5wBZL"
+        },
+        {
+            "name": "repeating_tool_-MGe2KxVrbekHm85zV7u_toolattr",
+            "current": "INTELLIGENCE",
+            "max": "",
+            "id": "-MGe2LYLRBX6fdVUmvp2"
+        },
+        {
+            "name": "repeating_tool_-MGe2KxVrbekHm85zV7u_toolbonus",
+            "current": 12,
+            "max": "",
+            "id": "-MGe2LYMU8ZAX8-FJrU-"
+        },
+        {
+            "name": "repeating_tool_-MGe2KxVrbekHm85zV7u_toolbonus_display",
+            "current": 12,
+            "max": "",
+            "id": "-MGe2LYOyD0AcNuU-b1l"
+        },
+        {
+            "name": "repeating_tool_-MGe2KxVrbekHm85zV7u_toolname",
+            "current": "TEST PROFICIENCY",
+            "max": "",
+            "id": "-MGe2Mj-WJDtgnAGZszy"
+        },
+        {
+            "name": "repeating_tool_-MGe2KxVrbekHm85zV7u_toolattr_base",
+            "current": "@{intelligence_mod}",
+            "max": "",
+            "id": "-MGe2O0GXCLQX51wrh-3"
+        },
+        {
+            "name": "repeating_tool_-MGe2KxVrbekHm85zV7u_tool_mod",
+            "current": "4",
+            "max": "",
+            "id": "-MGe2Q6W4zfoRNEf492L"
+        },
+        {
+            "name": "repeating_tool_-MGe2KxVrbekHm85zV7u_options-flag",
+            "current": "0",
+            "max": "",
+            "id": "-MGe2QQ_vxyxmj7k3i4R"
+        },
+        {
+            "name": "repeating_proficiencies_-MGe2QsCO4N4BvQGgDaR_name",
+            "current": "TEST LANGUAGE",
+            "max": "",
+            "id": "-MGe2SilqfrXr59BE68s"
+        },
+        {
+            "name": "repeating_proficiencies_-MGe2QsCO4N4BvQGgDaR_options-flag",
+            "current": "0",
+            "max": "",
+            "id": "-MGe2Tl6RaPM_JDaMs5z"
+        },
+        {
+            "name": "repeating_proficiencies_-MGe2TzcpfboZ2cHZecZ_prof_type",
+            "current": "WEAPON",
+            "max": "",
+            "id": "-MGe2UoYy99vC1cNFOo-"
+        },
+        {
+            "name": "repeating_proficiencies_-MGe2TzcpfboZ2cHZecZ_name",
+            "current": "COOL WEAPON PROF",
+            "max": "",
+            "id": "-MGe2WGWsUaYOTuBfozZ"
+        },
+        {
+            "name": "repeating_proficiencies_-MGe2Wk899Jv99P8fukZ_prof_type",
+            "current": "ARMOR",
+            "max": "",
+            "id": "-MGe2XJvWhZTSfUH74qc"
+        },
+        {
+            "name": "repeating_proficiencies_-MGe2Wk899Jv99P8fukZ_name",
+            "current": "armor proficiency",
+            "max": "",
+            "id": "-MGe2ZSQ00w8dp922rmx"
+        },
+        {
+            "name": "repeating_proficiencies_-MGe2Z6doQ4ZrXy2LmDb_prof_type",
+            "current": "OTHER",
+            "max": "",
+            "id": "-MGe2_azOZr-HzAZNAaD"
+        },
+        {
+            "name": "repeating_proficiencies_-MGe2Z6doQ4ZrXy2LmDb_name",
+            "current": "other proficiency",
+            "max": "",
+            "id": "-MGe2azyoa-HIa5lPpz4"
+        },
+        {
+            "name": "repeating_proficiencies_-MGe2Z6doQ4ZrXy2LmDb_options-flag",
+            "current": "0",
+            "max": "",
+            "id": "-MGe2b6_iCgrLsojQTbu"
+        },
+        {
+            "name": "repeating_proficiencies_-MGe2Wk899Jv99P8fukZ_options-flag",
+            "current": "0",
+            "max": "",
+            "id": "-MGe2bEsocAQXNtwyo5j"
+        },
+        {
+            "name": "repeating_proficiencies_-MGe2TzcpfboZ2cHZecZ_options-flag",
+            "current": "0",
+            "max": "",
+            "id": "-MGe2c-aqVZ8hx5rOQ1D"
+        },
+        {
+            "name": "repeating_deployments_-MGe2cs8IAQKlwntrj3G_options-flag",
+            "current": "0",
+            "max": "",
+            "id": "-MGe2dJs1SULA4fnRZEx"
+        },
+        {
+            "name": "repeating_inventory_-MGe2fY6V5OWXOxGXkNF_itemname",
+            "current": "My Cool Item",
+            "max": "",
+            "id": "-MGe2gr3yyyX1heY_Frt"
+        },
+        {
+            "name": "repeating_inventory_-MGe2fY6V5OWXOxGXkNF_itemweight",
+            "current": "2",
+            "max": "",
+            "id": "-MGe2h-0yFifcUDGZhZT"
+        },
+        {
+            "name": "repeating_inventory_-MGe2iDBjz1YaaUwcdjs_itemname",
+            "current": "MY Mnay Cool Items",
+            "max": "",
+            "id": "-MGe2jaERmFQOdJihjcK"
+        },
+        {
+            "name": "repeating_inventory_-MGe2iDBjz1YaaUwcdjs_itemcount",
+            "current": "55",
+            "max": "",
+            "id": "-MGe2k2LBmBeSoNYduji"
+        },
+        {
+            "name": "repeating_inventory_-MGe2iDBjz1YaaUwcdjs_itemweight",
+            "current": "0",
+            "max": "",
+            "id": "-MGe2keVnDthCSqnNu3n"
+        },
+        {
+            "name": "repeating_tool_-MGjpDiIoylBUc14NGQ6_toolname",
+            "current": "COOL TEST TOOL",
+            "max": "",
+            "id": "-MGjpGjIP_3ethAAIH0u"
+        },
+        {
+            "name": "repeating_tool_-MGjpDiIoylBUc14NGQ6_toolattr",
+            "current": "QUERY",
+            "max": "",
+            "id": "-MGjpGlSecmlK_Tk3wfx"
+        },
+        {
+            "name": "repeating_tool_-MGjpDiIoylBUc14NGQ6_toolbonus",
+            "current": "?{Attribute?|Strength,@{strength_mod}|Dexterity,@{dexterity_mod}|Constitution,@{constitution_mod}|Intelligence,@{intelligence_mod}|Wisdom,@{wisdom_mod}|Charisma,@{charisma_mod}}+0+3",
+            "max": "",
+            "id": "-MGjpGlVCWpDTZxodSJs"
+        },
+        {
+            "name": "repeating_tool_-MGjpDiIoylBUc14NGQ6_toolbonus_display",
+            "current": "?",
+            "max": "",
+            "id": "-MGjpGlYJdibgUnAKwdB"
+        },
+        {
+            "name": "repeating_tool_-MGjpDiIoylBUc14NGQ6_toolattr_base",
+            "current": "?{Attribute?|Strength,@{strength_mod}|Dexterity,@{dexterity_mod}|Constitution,@{constitution_mod}|Intelligence,@{intelligence_mod}|Wisdom,@{wisdom_mod}|Charisma,@{charisma_mod}}",
+            "max": "",
+            "id": "-MGjpHTEIpcu5rn9eD_k"
+        },
+        {
+            "name": "repeating_tool_-MGjpDiIoylBUc14NGQ6_options-flag",
+            "current": "0",
+            "max": "",
+            "id": "-MGjpIAghPjUWXeKc8cv"
+        },
+        {
+            "name": "repeating_tool_-MGjpDiIoylBUc14NGQ6_toolbonus_base",
+            "current": "(@{pb})",
+            "max": "",
+            "id": "-MGjpN2TmbYfsemv37xP"
+        },
+        {
+            "name": "repeating_tool_-MGjpDiIoylBUc14NGQ6_tool_mod",
+            "current": "0",
+            "max": "",
+            "id": "-MGjpNmqHYpQ8pWx_LR8"
+        },
+        {
+            "name": "repeating_attack_-MGk-GYqa11zsixQaUaE_atkname",
+            "current": "COOL TEST ATTACK",
+            "max": "",
+            "id": "-MGk-Hgydyk5zWSJEanO"
+        },
+        {
+            "name": "repeating_attack_-MGk-GYqa11zsixQaUaE_atkprofflag",
+            "current": "(@{pb})",
+            "max": "",
+            "id": "-MGk-HhyOixEv0FLyv_F"
+        },
+        {
+            "name": "repeating_attack_-MGk-GYqa11zsixQaUaE_rollbase_dmg",
+            "current": "@{wtype}&{template:dmg} {{rname=@{atkname}}} @{atkflag} {{range=@{atkrange}}} @{dmgflag} {{dmg1=[[1 + 3[DEX]]]}} {{dmg1type=}} @{dmg2flag} {{dmg2=[[0]]}} {{dmg2type=}} @{saveflag} {{desc=@{atk_desc}}} @{hldmg} {{powerlevel=@{powerlevel}}} {{innate=@{power_innate}}} {{globaldamage=[[0]]}} {{globaldamagetype=@{global_damage_mod_type}}} @{charname_output}",
+            "max": "",
+            "id": "-MGk-HkcMfiaOJxkVbFt"
+        },
+        {
+            "name": "repeating_attack_-MGk-GYqa11zsixQaUaE_rollbase_crit",
+            "current": "@{wtype}&{template:dmg} {{crit=1}} {{rname=@{atkname}}} @{atkflag} {{range=@{atkrange}}} @{dmgflag} {{dmg1=[[1 + 3[DEX]]]}} {{dmg1type=}} @{dmg2flag} {{dmg2=[[0]]}} {{dmg2type=}} {{crit1=[[1]]}} {{crit2=[[0]]}} @{saveflag} {{desc=@{atk_desc}}} @{hldmg}  {{powerlevel=@{powerlevel}}} {{innate=@{power_innate}}} {{globaldamage=[[0]]}} {{globaldamagecrit=[[0]]}} {{globaldamagetype=@{global_damage_mod_type}}} @{charname_output}",
+            "max": "",
+            "id": "-MGk-Hke-B8eRjinQj4i"
+        },
+        {
+            "name": "repeating_attack_-MGk-GYqa11zsixQaUaE_atkbonus",
+            "current": "+6",
+            "max": "",
+            "id": "-MGk-Hkgu0CIs-AZTcK0"
+        },
+        {
+            "name": "repeating_attack_-MGk-GYqa11zsixQaUaE_atkdmgtype",
+            "current": "1+3  ",
+            "max": "",
+            "id": "-MGk-HkjLikmJPkTI8dl"
+        },
+        {
+            "name": "repeating_attack_-MGk-GYqa11zsixQaUaE_rollbase",
+            "current": "@{wtype}&{template:atkdmg} {{mod=@{atkbonus}}} {{rname=@{atkname}}} {{r1=[[@{d20}cs>@{atkcritrange} + 3[DEX] + 3[PROF]]]}} @{rtype}cs>@{atkcritrange} + 3[DEX] + 3[PROF]]]}} @{atkflag} {{range=@{atkrange}}} @{dmgflag} {{dmg1=[[1 + 3[DEX]]]}} {{dmg1type=}} @{dmg2flag} {{dmg2=[[0]]}} {{dmg2type=}} {{crit1=[[1[CRIT]]]}} {{crit2=[[0[CRIT]]]}} @{saveflag} {{desc=@{atk_desc}}} @{hldmg}  {{powerlevel=@{powerlevel}}} {{innate=@{power_innate}}} {{globalattack=@{global_attack_mod}}} {{globaldamage=[[0]]}} {{globaldamagecrit=[[0]]}} {{globaldamagetype=@{global_damage_mod_type}}} ammo=@{ammo} @{charname_output}",
+            "max": "",
+            "id": "-MGk-HkkWRT8cZRjZRdy"
+        },
+        {
+            "name": "repeating_attack_-MGk-GYqa11zsixQaUaE_options-flag",
+            "current": "0",
+            "max": "",
+            "id": "-MGk-L7E9TMtE8dYFX6o"
+        },
+        {
+            "name": "repeating_attack_-MGk-GYqa11zsixQaUaE_dmgbase",
+            "current": "1",
+            "max": "",
+            "id": "-MGk-MgeolBA5ijP4iqe"
+        },
+        {
+            "name": "repeating_traits_-MGk0NN61XDImDOuqtue_name",
+            "current": "COOL TEST FEAT",
+            "max": "",
+            "id": "-MGk0PudaPR5BPuXU0al"
+        },
+        {
+            "name": "repeating_traits_-MGk0NN61XDImDOuqtue_source",
+            "current": "Feat",
+            "max": "",
+            "id": "-MGk0QGlBeBoLo34xHMR"
+        },
+        {
+            "name": "repeating_traits_-MGk0NN61XDImDOuqtue_description",
+            "current": "This is the description for my cool feat.",
+            "max": "",
+            "id": "-MGk0Ue2LybT46-i5Yxp"
+        },
+        {
+            "name": "repeating_traits_-MGk0UhvkTfDK0AjkPtY_source",
+            "current": "Background",
+            "max": "",
+            "id": "-MGk0VaacXYtUfaXmZTI"
+        },
+        {
+            "name": "repeating_traits_-MGk0UhvkTfDK0AjkPtY_name",
+            "current": "COOL BACKGROUND FEATURE",
+            "max": "",
+            "id": "-MGk0X3DWeZzqFtJxkyv"
+        },
+        {
+            "name": "repeating_traits_-MGk0UhvkTfDK0AjkPtY_description",
+            "current": "This is the cool description for my background feature",
+            "max": "",
+            "id": "-MGk0ZN35Tj4rzh49Mr5"
+        },
+        {
+            "name": "repeating_traits_-MGk0UhvkTfDK0AjkPtY_source_type",
+            "current": "BACKGROUND.NAME",
+            "max": "",
+            "id": "-MGk0_QYsd-MuZ_CKZW-"
+        },
+        {
+            "name": "repeating_traits_-MGk0dqttF297TShXA4w_source",
+            "current": "Other",
+            "max": "",
+            "id": "-MGk0eMPMmhlpzytqQ29"
+        },
+        {
+            "name": "repeating_traits_-MGk0dqttF297TShXA4w_name",
+            "current": "COOL OTHER FEATURE",
+            "max": "",
+            "id": "-MGk0fPTcdXWWiT5UlJn"
+        },
+        {
+            "name": "repeating_traits_-MGk0dqttF297TShXA4w_source_type",
+            "current": "Custom Feature",
+            "max": "",
+            "id": "-MGk0g_GLM6kJUmpaAxy"
+        },
+        {
+            "name": "repeating_traits_-MGk0dqttF297TShXA4w_description",
+            "current": "this is the desc for my cool custom feature",
+            "max": "",
+            "id": "-MGk0huQq8OdsB9gYLKL"
+        },
+        {
+            "name": "repeating_traits_-MGk0dqttF297TShXA4w_options-flag",
+            "current": "0",
+            "max": "",
+            "id": "-MGk0i6-jL4HzCiqMZCE"
+        },
+        {
+            "name": "repeating_traits_-MGk0UhvkTfDK0AjkPtY_options-flag",
+            "current": "0",
+            "max": "",
+            "id": "-MGk0iHkovYs3KgrGlFl"
+        },
+        {
+            "name": "repeating_traits_-MGk0NN61XDImDOuqtue_options-flag",
+            "current": "0",
+            "max": "",
+            "id": "-MGk0ik0N3I36i7uAAqQ"
         }
     ],
     "abilities": []

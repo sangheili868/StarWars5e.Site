@@ -27,7 +27,7 @@
     h3 Notes
     TextEditor(
       :label="'Notes'",
-      v-bind="notes",
+      :value="notes",
       :isEditing="editing == true",
       @input="newValue => $emit('updateCharacter', { notes: newValue })",
       @close.stop="dothing()"

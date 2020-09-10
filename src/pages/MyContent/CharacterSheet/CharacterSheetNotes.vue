@@ -12,11 +12,6 @@
   export default class CharacterSheetNotes extends Vue {
     @Prop(String) readonly notes!: string
     editing = false
-    dothing () {
-      let test = this.notes
-      this.editing = false
-      debugger
-    }
   }
 </script>
 
@@ -30,7 +25,7 @@
       :value="notes",
       :isEditing="editing == true",
       @input="newValue => $emit('updateCharacter', { notes: newValue })",
-      @close.stop="dothing()"
+      @close.stop="this.editing = false"
     )
 </template>
 

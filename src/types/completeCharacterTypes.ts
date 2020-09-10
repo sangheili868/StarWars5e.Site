@@ -235,7 +235,7 @@ export interface CompleteCharacterType {
   customEquipment: CustomEquipmentType[],
   numCustomFeats: number,
   settings: SettingsType,
-  notes: String
+  notes: string
 }
 
 // Typeguards

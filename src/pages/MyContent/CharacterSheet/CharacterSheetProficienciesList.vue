@@ -5,9 +5,10 @@
   import MyDialog from '@/components/MyDialog.vue'
   import { SkillType } from '@/types/lookupTypes'
   import { EquipmentType } from '@/types/lootTypes'
-  import { CustomProficiencyType } from '@/types/rawCharacterTypes'
+  import { CustomProficiencyType, ProficiencyType } from '@/types/rawCharacterTypes'
   import { capitalize, chain, startCase } from 'lodash'
   import MySelect from '@/components/MySelect.vue'
+  import { CharacterProficiency } from '@/types/completeCharacterTypes'
 
   const skillsModule = namespace('skills')
   const equipmentModule = namespace('equipment')
@@ -20,7 +21,7 @@
     }
   })
   export default class CharacterSheetProficienciesList extends Vue {
-    @Prop(Array) readonly proficiencies!: string[]
+    @Prop(Array) readonly proficiencies!: CharacterProficiency[]
     @Prop(Array) readonly skillAndSaveProficiencies!: string[]
     @Prop(Array) readonly customProficiencies!: CustomProficiencyType[]
 
@@ -63,7 +64,7 @@
 
     get customProficiencyList () {
       return chain(this.allProficiencies).mapValues(proficiencyList => proficiencyList.filter(
-        proficiency => ![...this.proficiencies, ...this.customProficiencies.map(({ name }) => name), ...this.skillAndSaveProficiencies]
+        proficiency => ![...[...this.proficiencies, ...this.customProficiencies].map(({ name }) => name), ...this.skillAndSaveProficiencies]
           .map(this.startCase)
           .includes(this.startCase(proficiency))
       )).omitBy((proficiencyList, category) => proficiencyList.length <= 0).value()
@@ -81,6 +82,13 @@
       return this.toolCategories.some(category => this.allProficiencies[startCase(category)].includes(this.newProficiency))
     }
 
+    get proficiencyType (): ProficiencyType {
+      if (this.isTool) return 'tool'
+      else if (this.allProficiencies['Weapons'].includes(this.newProficiency)) return 'weapon'
+      else if (this.allProficiencies['Armor'].includes(this.newProficiency)) return 'armor'
+      else return 'other'
+    }
+
     resetValues () {
       this.chosenCategory = ''
       this.newProficiency = ''
@@ -92,6 +100,7 @@
         customProficiencies: {
           [this.customProficiencies.length]: {
             name: this.newProficiency,
+            type: this.proficiencyType,
             proficiencyLevel: this.isExpertise ? 'expertise' : 'proficient'
           }
         }
@@ -142,7 +151,7 @@
           v-btn(color="primary", :disabled="!newProficiency", @click="handleAddProficiency") Add {{ newProficiency }}
           v-spacer
           v-btn(color="primary", text, @click="isOpen=false") Close
-    div(v-for="proficiency in proficiencies", :key="proficiency").caption {{ startCase(proficiency) }}
+    div(v-for="proficiency in proficiencies", :key="proficiency.name").caption {{ startCase(proficiency.name) }}
     div(v-for="({ name, proficiencyLevel }, index) in customProficiencies", :key="'prof' + index").d-flex.align-center.justify-space-between
       div.caption {{ startCase(name) + (proficiencyLevel === 'expertise' ? ' (Expertise)' : '') }}
       ConfirmDelete(

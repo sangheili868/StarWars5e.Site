@@ -22,7 +22,7 @@ function getUnarmedStrike (
     contentType: 'Core',
     contentSource: 'PHB',
     damageNumberOfDice: 1,
-    damageType: 'kinetic',
+    damageType: 'Kinetic',
     weaponClassification: 'Unarmed',
     damageDieType,
     properties: [],
@@ -34,6 +34,7 @@ function getUnarmedStrike (
     equipped: true,
     attackBonus,
     damageBonus,
+    ability: 'Strength',
     isCustom: false
   }
 }
@@ -55,6 +56,7 @@ function getCustomWeaponStats (
     ...customEquipment,
     attackBonus,
     damageBonus,
+    ability: 'Strength',
     index,
     properties: [],
     isCustom: true,

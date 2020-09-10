@@ -17,6 +17,7 @@
   })
   export default class CharacterSheet extends Vue {
     @Prop(Object) readonly completeCharacter!: CompleteCharacterType
+    @Prop(Object) readonly rawCharacter!: RawCharacterType
 
     range = range
     openTabs: number[] = [0, 1, 2]
@@ -41,7 +42,7 @@
   div
     CharacterSheetTop(
       v-if="completeCharacter",
-      v-bind="{ completeCharacter }",
+      v-bind="{ completeCharacter, rawCharacter }",
       @updateCharacter="newCharacter => $emit('updateCharacter', newCharacter)",
       @replaceCharacterProperty="payload => $emit('replaceCharacterProperty', payload)",
       @goToStep="step => $emit('goToStep', step)"

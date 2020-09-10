@@ -1,6 +1,7 @@
 <script lang="ts">
   import { Component, Prop, Vue } from 'vue-property-decorator'
   import { CompleteCharacterType } from '@/types/completeCharacterTypes'
+  import { RawCharacterType } from '@/types/rawCharacterTypes'
   import CharacterSheetHealth from './CharacterSheetHealth.vue'
   import CharacterSheetExperience from './CharacterSheetExperience.vue'
   import CharacterSheetConditions from './CharacterSheetConditions.vue'
@@ -16,6 +17,7 @@
   })
   export default class CharacterSheetTop extends Vue {
     @Prop(Object) readonly completeCharacter!: CompleteCharacterType
+    @Prop(Object) readonly rawCharacter!: RawCharacterType
   }
 </script>
 
@@ -37,7 +39,7 @@
     )
     div
       CharacterSheetSettings(
-        :completeCharacter="completeCharacter",
+        v-bind="{ completeCharacter, rawCharacter }",
         @replaceCharacterProperty="payload => $emit('replaceCharacterProperty', payload)"
       )
       CharacterSheetConditions(

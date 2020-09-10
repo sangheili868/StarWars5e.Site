@@ -169,6 +169,7 @@
     CharacterSheet(
       v-else,
       v-bind="{ completeCharacter }",
+      :rawCharacter="character",
       v-on="{ updateCharacter, deleteCharacterProperty, replaceCharacterProperty, goToStep }"
     )
   Loading(v-else)

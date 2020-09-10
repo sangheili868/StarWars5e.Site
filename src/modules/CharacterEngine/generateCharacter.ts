@@ -70,10 +70,10 @@ export default function generateCharacter (
     name: condition,
     description: (conditionsMap as { [key: string]: string })[condition]
   }))
-  const proficiencies = generateProficiencies(rawCharacter, myFoundClasses, myFeats)
-  const myEquipment = generateEquipment(rawCharacter, equipment, enhancedItems, abilityScores, proficiencyBonus, proficiencies)
   const myBackground = backgrounds.find(({ name }) => name === rawCharacter.background.name)
   if (!myBackground) console.error('Background not found: ', rawCharacter.background.name)
+  const proficiencies = generateProficiencies(rawCharacter, myFoundClasses, myBackground)
+  const myEquipment = generateEquipment(rawCharacter, equipment, enhancedItems, abilityScores, proficiencyBonus, proficiencies)
   const casting = generateCasting(rawCharacter, abilityScores, powers, proficiencyBonus, myFoundClasses, myArchetypes)
   const superiority = generateSuperiorty(rawCharacter, myFoundClasses, myArchetypes, abilityScores, proficiencyBonus, maneuvers)
   const features = generateFeatures(

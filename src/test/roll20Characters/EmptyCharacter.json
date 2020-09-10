@@ -1,0 +1,57 @@
+{
+    "schema_version": 2,
+    "oldId": "-MGZGMEk7DcXHqH3X9tu",
+    "name": "EmptyCharacter",
+    "avatar": "",
+    "bio": "",
+    "gmnotes": "",
+    "defaulttoken": "",
+    "tags": "[]",
+    "controlledby": "",
+    "inplayerjournals": "",
+    "attribs": [
+        {
+            "name": "version",
+            "current": "2.4",
+            "max": "",
+            "id": "-MGZGNaSvCD076e0LmDQ"
+        },
+        {
+            "name": "global_skill_mod",
+            "current": "",
+            "max": "",
+            "id": "-MGZGNaXFFQsAQKJLzcr"
+        },
+        {
+            "name": "global_save_mod",
+            "current": "",
+            "max": "",
+            "id": "-MGZGNaYnLKiQYOuQ8-N"
+        },
+        {
+            "name": "global_attack_mod",
+            "current": "",
+            "max": "",
+            "id": "-MGZGNaYnLKiQYOuQ8-O"
+        },
+        {
+            "name": "global_damage_mod_roll",
+            "current": "",
+            "max": "",
+            "id": "-MGZGNa_sPs_M2IOAs_a"
+        },
+        {
+            "name": "global_damage_mod_crit",
+            "current": "",
+            "max": "",
+            "id": "-MGZGNa_sPs_M2IOAs_b"
+        },
+        {
+            "name": "global_damage_mod_type",
+            "current": "",
+            "max": "",
+            "id": "-MGZGNaaAQ2kgDLoN-TA"
+        }
+    ],
+    "abilities": []
+}

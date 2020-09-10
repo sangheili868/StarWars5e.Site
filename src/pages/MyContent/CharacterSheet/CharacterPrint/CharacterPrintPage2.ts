@@ -15,7 +15,7 @@ export default function CharacterPrintPage2 (
       height: 160,
       myClass: myClasses.multiline,
       text: [
-        ...completeCharacter.proficiencies.map(startCase),
+        ...completeCharacter.proficiencies.map(({ name }) => startCase(name)),
         ...completeCharacter.customProficiencies.map(({ name, proficiencyLevel }, index) =>
           startCase(name) + (proficiencyLevel === 'expertise' ? ' (Expertise)' : '')
         )

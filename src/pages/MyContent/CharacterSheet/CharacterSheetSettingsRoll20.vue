@@ -118,15 +118,36 @@
       const hasDice = weapon.damageNumberOfDice && weapon.damageDieType
       const damage = hasDice ? weapon.damageNumberOfDice + 'd' + weapon.damageDieType : weapon.damageBonus
       const range = weapon.properties[0] !== null && (weapon.properties as string[]).find(property => property.includes('range'))
+      const shortAbility = weapon.ability === 'Dexterity' ? 'DEX' : 'STR'
+      const abilityModifier = c.abilityScores[weapon.ability].modifier
+      const attackRollTemplate = `${abilityModifier}[${shortAbility}] + ${c.proficiencyBonus}[PROF]`
+      const damageRollTemplate = `{{dmg1=[[${damage} + ${abilityModifier}[${shortAbility}]]]}} {{dmg1type=${weapon.damageType}}}`
       return {
         [header + 'atkname']: weapon.name,
         [header + 'options-flag']: '0',
         [header + 'atkbonus']: weapon.attackBonus,
+        [header + 'atkattr_base']: '@{' + weapon.ability.toLowerCase() + '_mod}',
         [header + 'dmgtype']: weapon.damageType,
         [header + 'dmgbase']: damage,
+        [header + 'dmgattr']: '@{' + weapon.ability.toLowerCase() + '_mod}',
         [header + 'atkrange']: range ? range.replace('Ammunition (range ', '').replace(')', '') : '',
         [header + 'atk_desc']: weapon.properties.join(', '),
-        [header + 'saveeffect']: ' '
+        [header + 'saveeffect']: ' ',
+        [header + 'atkdmgtype']: `${damage}+${abilityModifier} ${weapon.damageType}`,
+        [header + 'rollbase_dmg']: '@{wtype}&{template:dmg} {{rname=@{atkname}}} @{atkflag} {{range=@{atkrange}}} ' +
+          '@{dmgflag} ' + damageRollTemplate + '@{dmg2flag} {{dmg2=[[0]]}} {{dmg2type=}} @{saveflag} {{desc=@{atk_desc}}} ' +
+          '@{hldmg} {{powerlevel=@{powerlevel}}} {{innate=@{power_innate}}} {{globaldamage=[[0]]}} ' +
+          '{{globaldamagetype=@{global_damage_mod_type}}} @{charname_output}',
+        [header + 'rollbase_crit']: '@{wtype}&{template:dmg} {{crit=1}} {{rname=@{atkname}}} @{atkflag} ' +
+          '{{range=@{atkrange}}} @{dmgflag}' + damageRollTemplate + '@{dmg2flag} {{dmg2=[[0]]}} {{dmg2type=}} ' +
+          '{{crit1=[[' + damage + ']]}} {{crit2=[[0]]}} @{saveflag} {{desc=@{atk_desc}}} @{hldmg} ' +
+          '{{powerlevel=@{powerlevel}}} {{innate=@{power_innate}}}' + '{{globaldamage=[[0]]}} {{globaldamagecrit=[[0]]}}' +
+          '{{globaldamagetype=@{global_damage_mod_type}}} @{charname_output}',
+        [header + 'rollbase']: '@{wtype}&{template:atk} {{mod=@{atkbonus}}} {{rname=[@{atkname}](~repeating_attack_attack_dmg)}} ' +
+          '{{rnamec=[@{atkname}](~repeating_attack_attack_crit)}} {{r1=[[@{d20}cs>@{atkcritrange} + ' +
+          attackRollTemplate + ']]}} @{rtype}cs>@{atkcritrange} + ' + attackRollTemplate + ']]}} {{range=@{atkrange}}} ' +
+          '{{desc=@{atk_desc}}} {{powerlevel=@{powerlevel}}} {{innate=@{power_innate}}} {{globalattack=@{global_attack_mod}}} ' +
+          'ammo=@{ammo} @{charname_output}'
       }
     })
 

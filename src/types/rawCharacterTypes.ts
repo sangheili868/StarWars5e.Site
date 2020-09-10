@@ -8,9 +8,6 @@ export interface RawSpeciesType {
   abilityScoreImprovement: {
     [abilityScore: string]: number
   },
-  toolProficiency?: string,
-  skillProficiency?: string,
-  weaponProficiency?: string,
   language?: string
 }
 
@@ -41,7 +38,6 @@ export interface RawClassType {
   name: string,
   levels: number,
   hitPoints: number[],
-  toolProficiency?: string,
   skills: string[],
   fightingStyle?: string,
   techPowers?: string[],
@@ -58,7 +54,6 @@ export interface RawClassType {
 export interface RawBackgroundType {
   name: string,
   skills?: string[],
-  toolProficiencies?: string[],
   languages?: string[],
   feat: RawFeatType
 }
@@ -164,8 +159,11 @@ export interface TweaksType {
   }
 }
 
+export type ProficiencyType = 'armor' | 'weapon' | 'tool' | 'other'
+
 export interface CustomProficiencyType {
   name: string,
+  type: ProficiencyType
   proficiencyLevel: 'proficiency' | 'expertise'
 }
 

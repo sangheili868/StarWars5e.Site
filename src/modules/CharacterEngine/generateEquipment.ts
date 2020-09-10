@@ -1,7 +1,7 @@
 import { RawCharacterType, EquipmentTweakType } from '@/types/rawCharacterTypes'
 import { EquipmentType, EnhancedItemType, isWeaponType, isArmorType, WeaponType, damageDieTypes } from '@/types/lootTypes'
 import { isEmpty, intersection, camelCase, get } from 'lodash'
-import { AbilityScoresType, CharacterLootType } from '@/types/completeCharacterTypes'
+import { AbilityScoresType, CharacterLootType, CharacterWeaponType } from '@/types/completeCharacterTypes'
 import applyTweak, { applyCustomTweak } from '@/utilities/applyTweak'
 
 function isProficientWithWeapon (weapon: WeaponType, proficiencies: string[]) {
@@ -19,22 +19,22 @@ function isProficientWithWeapon (weapon: WeaponType, proficiencies: string[]) {
 
 function getWeaponStats (
   rawCharacter: RawCharacterType,
-  abilityScores: AbilityScoresType,
+  abilityScores: AbilityScoresType | undefined,
   weaponData: WeaponType,
   proficiencyBonus: number,
   proficiencies: string[],
-  tweaks: EquipmentTweakType | undefined
-) {
+  tweaks: EquipmentTweakType | undefined,
+  equipped: boolean,
+  quantity: number,
+  index: number
+): CharacterWeaponType {
   const damageDieType: damageDieTypes = get(tweaks, 'damageDice.dieSize') || weaponData.damageDieType
-  const dexModifier = abilityScores['Dexterity'].modifier
-  const strModifier = abilityScores['Strength'].modifier
+  const dexModifier = abilityScores ? abilityScores.Dexterity.modifier : 0
+  const strModifier = abilityScores ? abilityScores.Strength.modifier : 0
   const isFinesse = weaponData.properties && intersection(weaponData.properties, ['finesse', 'Finesse']).length > 0
   const isBlaster = ['SimpleBlaster', 'MartialBlaster'].includes(weaponData.weaponClassification)
-
-  let weaponModifier
-  if (isFinesse) weaponModifier = Math.max(dexModifier, strModifier)
-  else if (isBlaster) weaponModifier = dexModifier
-  else weaponModifier = strModifier
+  const ability = ((isFinesse && dexModifier > strModifier) || isBlaster) ? 'Dexterity' : 'Strength'
+  const weaponModifier = ability === 'Dexterity' ? dexModifier : strModifier
 
   const isProficient = isProficientWithWeapon(weaponData, proficiencies) || get(tweaks, 'toHit.proficiency') === 'proficient'
   let attackBonus = weaponModifier + (isProficient ? proficiencyBonus : 0)
@@ -45,7 +45,18 @@ function getWeaponStats (
   damageBonus = applyTweak(rawCharacter, 'weapon.damage', damageBonus)
   damageBonus = applyCustomTweak(tweaks && tweaks.damage, damageBonus)
 
-  return { attackBonus, damageBonus, damageDieType, isCustom: false }
+  return {
+    ...weaponData,
+    attackBonus,
+    damageBonus,
+    damageDieType,
+    ability,
+    isCustom: false,
+    equipped,
+    quantity,
+    index,
+    isFound: true
+  }
 }
 
 export function generateEquipment (
@@ -81,15 +92,17 @@ export default function generateEquipment (
         return { name, quantity, index, isFound: false }
       } else if (isWeaponType(equipmentData)) {
         // Weapon
-        const weaponStats = abilityScores && getWeaponStats(
+        return getWeaponStats(
           rawCharacter,
           abilityScores,
           equipmentData,
           proficiencyBonus || 0,
           allProficiencies,
-          tweaks
+          tweaks,
+          Boolean(equipped),
+          quantity,
+          index
         )
-        return { ...equipmentData, ...weaponStats, equipped, quantity, index, isFound: true }
       } else if (isArmorType(equipmentData)) {
         // Armor
         return { ...equipmentData, equipped, quantity, index, isFound: true }

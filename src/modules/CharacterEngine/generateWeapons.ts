@@ -34,6 +34,7 @@ function getUnarmedStrike (
     equipped: true,
     attackBonus,
     damageBonus,
+    ability: 'Strength',
     isCustom: false
   }
 }
@@ -55,6 +56,7 @@ function getCustomWeaponStats (
     ...customEquipment,
     attackBonus,
     damageBonus,
+    ability: 'Strength',
     index,
     properties: [],
     isCustom: true,

@@ -35,7 +35,6 @@ function getProficientSkills (rawCharacter: RawCharacterType, skillsList: Skills
         tweak === 'Expertise'
       const isProficient = rawCharacter.classes.some(myClass => myClass.skills && myClass.skills.includes(skill)) ||
         (rawCharacter.background.skills && rawCharacter.background.skills.includes(skill)) ||
-        rawCharacter.species.skillProficiency === skill ||
         tweak === 'Proficient'
       return (isExpertise && 'expertise') || (isProficient && 'proficient') || 'none'
     }).value())

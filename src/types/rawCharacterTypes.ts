@@ -2,6 +2,8 @@
 // IF YOU CHANGE THIS FILE, INCREMENT BUILDER VERSION IN src/version.ts
 /// ////////////////////////////////////////////////////////
 
+import { CharacterProficiency } from './completeCharacterTypes'
+
 export interface RawSpeciesType {
   name: string,
   abilityScoreImprovementSelectedOption: number,
@@ -163,7 +165,7 @@ export type ProficiencyType = 'armor' | 'weapon' | 'tool' | 'other'
 
 export interface CustomProficiencyType {
   name: string,
-  type: ProficiencyType
+  type?: ProficiencyType
   proficiencyLevel: 'proficiency' | 'expertise'
 }
 
@@ -243,4 +245,8 @@ export interface RawCharacterType {
   customForcePowers: string[],
   settings: SettingsType,
   customEquipment: CustomEquipmentType[]
+}
+
+export function isCustomProficiency (proficiency: CustomProficiencyType | CharacterProficiency): proficiency is CustomProficiencyType {
+  return ['proficiency', 'expertise'].includes((proficiency as CustomProficiencyType).proficiencyLevel)
 }

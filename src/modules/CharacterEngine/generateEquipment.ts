@@ -1,7 +1,7 @@
 import { RawCharacterType, EquipmentTweakType } from '@/types/rawCharacterTypes'
 import { EquipmentType, EnhancedItemType, isWeaponType, isArmorType, WeaponType, damageDieTypes } from '@/types/lootTypes'
 import { isEmpty, intersection, camelCase, get } from 'lodash'
-import { AbilityScoresType, CharacterLootType, CharacterWeaponType } from '@/types/completeCharacterTypes'
+import { AbilityScoresType, CharacterLootType, CharacterWeaponType, CharacterProficiency } from '@/types/completeCharacterTypes'
 import applyTweak, { applyCustomTweak } from '@/utilities/applyTweak'
 
 function isProficientWithWeapon (weapon: WeaponType, proficiencies: string[]) {
@@ -70,9 +70,9 @@ export default function generateEquipment (
   enhancedItems: EnhancedItemType[],
   abilityScores?: AbilityScoresType,
   proficiencyBonus?: number,
-  proficiencies?: string[]
+  proficiencies?: CharacterProficiency[]
 ): CharacterLootType[] {
-  const allProficiencies = [...(proficiencies || []), ...rawCharacter.customProficiencies.map(({ name }) => name)]
+  const allProficiencies = [...(proficiencies || []), ...rawCharacter.customProficiencies].map(({ name }) => name)
   return rawCharacter.equipment.map(({ name, category, quantity, equipped, tweaks, attuned }, index) => {
     if (category === 'EnhancedItem') {
       const enhancedItemData = enhancedItems.find(enhancedItem => name === enhancedItem.name)

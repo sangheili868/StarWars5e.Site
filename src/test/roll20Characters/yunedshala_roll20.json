@@ -17,6 +17,12 @@
       "id": ""
     },
     {
+      "name": "options-class-selection",
+      "current": "0",
+      "max": "",
+      "id": ""
+    },
+    {
       "name": "class",
       "current": "Consular",
       "max": "",
@@ -30,19 +36,25 @@
     },
     {
       "name": "class_display",
-      "current": "Way of Telekinetics Consular 7",
+      "current": "Way of Telekinetics Consular 3",
       "max": "",
       "id": ""
     },
     {
       "name": "base_level",
-      "current": "7",
+      "current": "3",
+      "max": "",
+      "id": ""
+    },
+    {
+      "name": "level",
+      "current": 3,
       "max": "",
       "id": ""
     },
     {
       "name": "pb",
-      "current": "3",
+      "current": "2",
       "max": "",
       "id": ""
     },
@@ -78,7 +90,7 @@
     },
     {
       "name": "experience",
-      "current": "23000",
+      "current": "900",
       "max": "",
       "id": ""
     },
@@ -306,7 +318,7 @@
     },
     {
       "name": "lore_bonus",
-      "current": 5,
+      "current": 4,
       "max": "",
       "id": ""
     },
@@ -396,7 +408,7 @@
     },
     {
       "name": "wisdom_save_bonus",
-      "current": 1,
+      "current": 0,
       "max": "",
       "id": ""
     },
@@ -426,7 +438,7 @@
     },
     {
       "name": "insight_bonus",
-      "current": 1,
+      "current": 0,
       "max": "",
       "id": ""
     },
@@ -462,7 +474,7 @@
     },
     {
       "name": "perception_bonus",
-      "current": 1,
+      "current": 0,
       "max": "",
       "id": ""
     },
@@ -498,13 +510,13 @@
     },
     {
       "name": "charisma",
-      "current": 20,
+      "current": 21,
       "max": "",
       "id": ""
     },
     {
       "name": "charisma_base",
-      "current": "20",
+      "current": "21",
       "max": "",
       "id": ""
     },
@@ -516,7 +528,7 @@
     },
     {
       "name": "charisma_save_bonus",
-      "current": 8,
+      "current": 7,
       "max": "",
       "id": ""
     },
@@ -528,7 +540,7 @@
     },
     {
       "name": "deception_bonus",
-      "current": 8,
+      "current": 7,
       "max": "",
       "id": ""
     },
@@ -564,7 +576,7 @@
     },
     {
       "name": "performance_bonus",
-      "current": 8,
+      "current": 7,
       "max": "",
       "id": ""
     },
@@ -599,1954 +611,1502 @@
       "id": ""
     },
     {
-      "name": "repeating_power-cantrip_-MnJ2mj83LBXiCQQlThr_powername",
+      "name": "repeating_power-cantrip_-MYnoNUJ163bhjeJ9nAZ_powername",
       "current": "Force Push/Pull",
       "max": "",
       "id": ""
     },
     {
-      "name": "repeating_power-cantrip_-MnJ2mj83LBXiCQQlThr_powerschool",
+      "name": "repeating_power-cantrip_-MYnoNUJ163bhjeJ9nAZ_powerschool",
       "current": "force",
       "max": "",
       "id": ""
     },
     {
-      "name": "repeating_power-cantrip_-MnJ2mj83LBXiCQQlThr_powercastingtime",
+      "name": "repeating_power-cantrip_-MYnoNUJ163bhjeJ9nAZ_powercastingtime",
       "current": "1 action",
       "max": "",
       "id": ""
     },
     {
-      "name": "repeating_power-cantrip_-MnJ2mj83LBXiCQQlThr_powerrange",
+      "name": "repeating_power-cantrip_-MYnoNUJ163bhjeJ9nAZ_powerrange",
       "current": "60 feet",
       "max": "",
       "id": ""
     },
     {
-      "name": "repeating_power-cantrip_-MnJ2mj83LBXiCQQlThr_powerconcentration",
+      "name": "repeating_power-cantrip_-MYnoNUJ163bhjeJ9nAZ_powerconcentration",
       "current": "0",
       "max": "",
       "id": ""
     },
     {
-      "name": "repeating_power-cantrip_-MnJ2mj83LBXiCQQlThr_powerduration",
+      "name": "repeating_power-cantrip_-MYnoNUJ163bhjeJ9nAZ_powerduration",
       "current": "Instantaneous",
       "max": "",
       "id": ""
     },
     {
-      "name": "repeating_power-cantrip_-MnJ2mj83LBXiCQQlThr_power_ability",
+      "name": "repeating_power-cantrip_-MYnoNUJ163bhjeJ9nAZ_power_ability",
       "current": "power",
       "max": "",
       "id": ""
     },
     {
-      "name": "repeating_power-cantrip_-MnJ2mj83LBXiCQQlThr_rollcontent",
+      "name": "repeating_power-cantrip_-MYnoNUJ163bhjeJ9nAZ_rollcontent",
       "current": "@{wtype}&{template:power} {{level=@{powerschool} @{powerlevel}}} {{name=@{powername}}} {{castingtime=@{powercastingtime}}} {{range=@{powerrange}}} {{target=@{powertarget}}} {{duration=@{powerduration}}} {{description=@{powerdescription}}} {{athigherlevels=@{powerathigherlevels}}}  {{innate=@{innate}}} @{powerconcentration} @{charname_output}",
       "max": "",
       "id": ""
     },
     {
-      "name": "repeating_power-cantrip_-MnJ2mj83LBXiCQQlThr_powerdescription",
+      "name": "repeating_power-cantrip_-MYnoNUJ163bhjeJ9nAZ_powerdescription",
       "current": "You gain the minor ability to move or manipulate creatures and objects with the Force. You can exert fine control on objects with your telekinetic grip, such as manipulating a simple tool, opening a door or a container, stowing or retrieving an item from an open container, or pouring the contents from a vial. Alternatively, you can push or pull a creature or object you can see. \r\n\r\nYou use the Force to move a Medium or smaller creature or object not being worn or carried within range. The target must make a Strength saving throw. An object automatically fails this saving throw. On a failed save, the creature or object moves a number of feet in a direction of your choice based on its size. A Tiny creature or object can be moved up to 20 feet, a Small creature or object can be moved up to 10 feet, and a Medium creature or object can be moved up to 5 feet. If at the end of this movement the creature or object strikes another creature or object, they both take 1d4 kinetic damage.\r\n\r\nThis power improves when you reach higher levels. At 5th level, you can move a Tiny creature or object up to 30 feet, a Small creature or object up to 20 feet, a Medium creature or object up to 10 feet, and the power's damage increases to 2d4 kinetic damage. At 11th level, you can move a Small creature or object up to 30 feet, a Medium creature up to 20 feet, and the power's damage increases to 3d4 kinetic damage. At 17th level, you can move a Medium creature to up 30 feet, and the power's damage increases to 4d4 kinetic damage.",
       "max": "",
       "id": ""
     },
     {
-      "name": "repeating_power-cantrip_-MnJ2mj83LBXiCQQlThr_options-flag",
+      "name": "repeating_power-cantrip_-MYnoNUJ163bhjeJ9nAZ_options-flag",
       "current": "0",
       "max": "",
       "id": ""
     },
     {
-      "name": "repeating_power-1_-MWM3V0jIrU1Yl86x0ov_powername",
+      "name": "repeating_power-1_-MwsQbEpXfhtwZHp18Vd_powername",
       "current": "Force Propel",
       "max": "",
       "id": ""
     },
     {
-      "name": "repeating_power-1_-MWM3V0jIrU1Yl86x0ov_powerschool",
+      "name": "repeating_power-1_-MwsQbEpXfhtwZHp18Vd_powerschool",
       "current": "force",
       "max": "",
       "id": ""
     },
     {
-      "name": "repeating_power-1_-MWM3V0jIrU1Yl86x0ov_powercastingtime",
+      "name": "repeating_power-1_-MwsQbEpXfhtwZHp18Vd_powercastingtime",
       "current": "1 action",
       "max": "",
       "id": ""
     },
     {
-      "name": "repeating_power-1_-MWM3V0jIrU1Yl86x0ov_powerrange",
+      "name": "repeating_power-1_-MwsQbEpXfhtwZHp18Vd_powerrange",
       "current": "60 feet",
       "max": "",
       "id": ""
     },
     {
-      "name": "repeating_power-1_-MWM3V0jIrU1Yl86x0ov_powerconcentration",
+      "name": "repeating_power-1_-MwsQbEpXfhtwZHp18Vd_powerconcentration",
       "current": "0",
       "max": "",
       "id": ""
     },
     {
-      "name": "repeating_power-1_-MWM3V0jIrU1Yl86x0ov_powerduration",
+      "name": "repeating_power-1_-MwsQbEpXfhtwZHp18Vd_powerduration",
       "current": "Instantaneous",
       "max": "",
       "id": ""
     },
     {
-      "name": "repeating_power-1_-MWM3V0jIrU1Yl86x0ov_power_ability",
+      "name": "repeating_power-1_-MwsQbEpXfhtwZHp18Vd_power_ability",
       "current": "power",
       "max": "",
       "id": ""
     },
     {
-      "name": "repeating_power-1_-MWM3V0jIrU1Yl86x0ov_rollcontent",
+      "name": "repeating_power-1_-MwsQbEpXfhtwZHp18Vd_rollcontent",
       "current": "@{wtype}&{template:power} {{level=@{powerschool} @{powerlevel}}} {{name=@{powername}}} {{castingtime=@{powercastingtime}}} {{range=@{powerrange}}} {{target=@{powertarget}}} {{duration=@{powerduration}}} {{description=@{powerdescription}}} {{athigherlevels=@{powerathigherlevels}}}  {{innate=@{innate}}} @{powerconcentration} @{charname_output}",
       "max": "",
       "id": ""
     },
     {
-      "name": "repeating_power-1_-MWM3V0jIrU1Yl86x0ov_powerdescription",
+      "name": "repeating_power-1_-MwsQbEpXfhtwZHp18Vd_powerdescription",
       "current": "Choose one or more creatures or objects not being worn or carried within 60 feet that weigh up to a combined total of 15 pounds. The creatures or objects immediately move 60 feet in a direction of your choice. If the creatures or objects end this movement in the air, they immediately fall to the ground. If the creatures or objects collide with any one target during its travel, both the creatures or objects and the target take 3d8 kinetic damage. If the target is a creature, it must make a Dexterity saving throw. On a failed save, it takes 3d8 kinetic damage, or half as much on a successful one.\r\n\r\n***Force Potency.*** When you cast this power using a force slot of 2nd level or higher, the maximum weight increases by 15 pounds and the damage increases by 1d8 for each slot level above 1st.",
       "max": "",
       "id": ""
     },
     {
-      "name": "repeating_power-1_-MWM3V0jIrU1Yl86x0ov_options-flag",
+      "name": "repeating_power-1_-MwsQbEpXfhtwZHp18Vd_options-flag",
       "current": "0",
       "max": "",
       "id": ""
     },
     {
-      "name": "repeating_power-1_-My0UuY7vlnne7nUpJrs_powername",
+      "name": "repeating_power-1_-MVOSo5pFSgq7YUHfahm_powername",
       "current": "Phasestrike",
       "max": "",
       "id": ""
     },
     {
-      "name": "repeating_power-1_-My0UuY7vlnne7nUpJrs_powerschool",
+      "name": "repeating_power-1_-MVOSo5pFSgq7YUHfahm_powerschool",
       "current": "force",
       "max": "",
       "id": ""
     },
     {
-      "name": "repeating_power-1_-My0UuY7vlnne7nUpJrs_powercastingtime",
+      "name": "repeating_power-1_-MVOSo5pFSgq7YUHfahm_powercastingtime",
       "current": "1 bonus action",
       "max": "",
       "id": ""
     },
     {
-      "name": "repeating_power-1_-My0UuY7vlnne7nUpJrs_powerrange",
+      "name": "repeating_power-1_-MVOSo5pFSgq7YUHfahm_powerrange",
       "current": "Self",
       "max": "",
       "id": ""
     },
     {
-      "name": "repeating_power-1_-My0UuY7vlnne7nUpJrs_powerconcentration",
+      "name": "repeating_power-1_-MVOSo5pFSgq7YUHfahm_powerconcentration",
       "current": "{{concentration=1}}",
       "max": "",
       "id": ""
     },
     {
-      "name": "repeating_power-1_-My0UuY7vlnne7nUpJrs_powerduration",
+      "name": "repeating_power-1_-MVOSo5pFSgq7YUHfahm_powerduration",
       "current": "up to 1 minute",
       "max": "",
       "id": ""
     },
     {
-      "name": "repeating_power-1_-My0UuY7vlnne7nUpJrs_power_ability",
+      "name": "repeating_power-1_-MVOSo5pFSgq7YUHfahm_power_ability",
       "current": "power",
       "max": "",
       "id": ""
     },
     {
-      "name": "repeating_power-1_-My0UuY7vlnne7nUpJrs_rollcontent",
+      "name": "repeating_power-1_-MVOSo5pFSgq7YUHfahm_rollcontent",
       "current": "@{wtype}&{template:power} {{level=@{powerschool} @{powerlevel}}} {{name=@{powername}}} {{castingtime=@{powercastingtime}}} {{range=@{powerrange}}} {{target=@{powertarget}}} {{duration=@{powerduration}}} {{description=@{powerdescription}}} {{athigherlevels=@{powerathigherlevels}}}  {{innate=@{innate}}} @{powerconcentration} @{charname_output}",
       "max": "",
       "id": ""
     },
     {
-      "name": "repeating_power-1_-My0UuY7vlnne7nUpJrs_powerdescription",
+      "name": "repeating_power-1_-MVOSo5pFSgq7YUHfahm_powerdescription",
       "current": "Until the power ends, your movement doesn't provoke opportunity attacks.\r\n\r\nOnce before the power ends, you can give yourself advantage on one weapon attack roll on your turn. That attack deals an extra 1d8 force damage on a hit. Whether you hit or miss, your walking speed increases by 30 feet until the end of that turn.",
       "max": "",
       "id": ""
     },
     {
-      "name": "repeating_power-1_-My0UuY7vlnne7nUpJrs_options-flag",
+      "name": "repeating_power-1_-MVOSo5pFSgq7YUHfahm_options-flag",
       "current": "0",
       "max": "",
       "id": ""
     },
     {
-      "name": "repeating_power-1_-Mq8tO2h5LgrcEg5CME9_powername",
+      "name": "repeating_power-1_-My7bTlvzpRJCw9rRuNt_powername",
       "current": "Battle Precognition",
       "max": "",
       "id": ""
     },
     {
-      "name": "repeating_power-1_-Mq8tO2h5LgrcEg5CME9_powerschool",
+      "name": "repeating_power-1_-My7bTlvzpRJCw9rRuNt_powerschool",
       "current": "force",
       "max": "",
       "id": ""
     },
     {
-      "name": "repeating_power-1_-Mq8tO2h5LgrcEg5CME9_powercastingtime",
+      "name": "repeating_power-1_-My7bTlvzpRJCw9rRuNt_powercastingtime",
       "current": "1 action",
       "max": "",
       "id": ""
     },
     {
-      "name": "repeating_power-1_-Mq8tO2h5LgrcEg5CME9_powerrange",
+      "name": "repeating_power-1_-My7bTlvzpRJCw9rRuNt_powerrange",
       "current": "Self",
       "max": "",
       "id": ""
     },
     {
-      "name": "repeating_power-1_-Mq8tO2h5LgrcEg5CME9_powerconcentration",
+      "name": "repeating_power-1_-My7bTlvzpRJCw9rRuNt_powerconcentration",
       "current": "0",
       "max": "",
       "id": ""
     },
     {
-      "name": "repeating_power-1_-Mq8tO2h5LgrcEg5CME9_powerduration",
+      "name": "repeating_power-1_-My7bTlvzpRJCw9rRuNt_powerduration",
       "current": "8 hours",
       "max": "",
       "id": ""
     },
     {
-      "name": "repeating_power-1_-Mq8tO2h5LgrcEg5CME9_power_ability",
+      "name": "repeating_power-1_-My7bTlvzpRJCw9rRuNt_power_ability",
       "current": "power",
       "max": "",
       "id": ""
     },
     {
-      "name": "repeating_power-1_-Mq8tO2h5LgrcEg5CME9_rollcontent",
+      "name": "repeating_power-1_-My7bTlvzpRJCw9rRuNt_rollcontent",
       "current": "@{wtype}&{template:power} {{level=@{powerschool} @{powerlevel}}} {{name=@{powername}}} {{castingtime=@{powercastingtime}}} {{range=@{powerrange}}} {{target=@{powertarget}}} {{duration=@{powerduration}}} {{description=@{powerdescription}}} {{athigherlevels=@{powerathigherlevels}}}  {{innate=@{innate}}} @{powerconcentration} @{charname_output}",
       "max": "",
       "id": ""
     },
     {
-      "name": "repeating_power-1_-Mq8tO2h5LgrcEg5CME9_powerdescription",
+      "name": "repeating_power-1_-My7bTlvzpRJCw9rRuNt_powerdescription",
       "current": "Your attunement to the Force warns you when you are about to enter danger. Until the power ends, your base AC becomes 13 + your Dexterity modifier. This power has no effect if you are wearing armor.",
       "max": "",
       "id": ""
     },
     {
-      "name": "repeating_power-1_-Mq8tO2h5LgrcEg5CME9_options-flag",
+      "name": "repeating_power-1_-My7bTlvzpRJCw9rRuNt_options-flag",
       "current": "0",
       "max": "",
       "id": ""
     },
     {
-      "name": "repeating_power-cantrip_-MXJJ4wDek0nTg0n1XRT_powername",
+      "name": "repeating_power-cantrip_-MjGjD3ccXtCV542XJwh_powername",
       "current": "Saber Reflect",
       "max": "",
       "id": ""
     },
     {
-      "name": "repeating_power-cantrip_-MXJJ4wDek0nTg0n1XRT_powerschool",
+      "name": "repeating_power-cantrip_-MjGjD3ccXtCV542XJwh_powerschool",
       "current": "force",
       "max": "",
       "id": ""
     },
     {
-      "name": "repeating_power-cantrip_-MXJJ4wDek0nTg0n1XRT_powercastingtime",
+      "name": "repeating_power-cantrip_-MjGjD3ccXtCV542XJwh_powercastingtime",
       "current": "1 reaction, which you take in response to being hit by a ranged attack",
       "max": "",
       "id": ""
     },
     {
-      "name": "repeating_power-cantrip_-MXJJ4wDek0nTg0n1XRT_powerrange",
+      "name": "repeating_power-cantrip_-MjGjD3ccXtCV542XJwh_powerrange",
       "current": "Self",
       "max": "",
       "id": ""
     },
     {
-      "name": "repeating_power-cantrip_-MXJJ4wDek0nTg0n1XRT_powerconcentration",
+      "name": "repeating_power-cantrip_-MjGjD3ccXtCV542XJwh_powerconcentration",
       "current": "0",
       "max": "",
       "id": ""
     },
     {
-      "name": "repeating_power-cantrip_-MXJJ4wDek0nTg0n1XRT_powerduration",
+      "name": "repeating_power-cantrip_-MjGjD3ccXtCV542XJwh_powerduration",
       "current": "Instantaneous",
       "max": "",
       "id": ""
     },
     {
-      "name": "repeating_power-cantrip_-MXJJ4wDek0nTg0n1XRT_power_ability",
+      "name": "repeating_power-cantrip_-MjGjD3ccXtCV542XJwh_power_ability",
       "current": "power",
       "max": "",
       "id": ""
     },
     {
-      "name": "repeating_power-cantrip_-MXJJ4wDek0nTg0n1XRT_rollcontent",
+      "name": "repeating_power-cantrip_-MjGjD3ccXtCV542XJwh_rollcontent",
       "current": "@{wtype}&{template:power} {{level=@{powerschool} @{powerlevel}}} {{name=@{powername}}} {{castingtime=@{powercastingtime}}} {{range=@{powerrange}}} {{target=@{powertarget}}} {{duration=@{powerduration}}} {{description=@{powerdescription}}} {{athigherlevels=@{powerathigherlevels}}}  {{innate=@{innate}}} @{powerconcentration} @{charname_output}",
       "max": "",
       "id": ""
     },
     {
-      "name": "repeating_power-cantrip_-MXJJ4wDek0nTg0n1XRT_powerdescription",
+      "name": "repeating_power-cantrip_-MjGjD3ccXtCV542XJwh_powerdescription",
       "current": "In response to being attacked, you raise your weapon to attempt to deflect. When you you use this power, the damage you take from the attack is reduced by 1d6. If you reduce the damage to 0, you're wielding a lightweapon or vibroweapon, and the damage is energy or ion, you can reflect the attack at a target within range as part of the same reaction. Make a ranged force attack at a target you can see. The attack has a normal range of 20 feet and a long range of 60 feet. On a hit, the target takes the triggering attack's normal damage. \r\n\r\nIf you would have resistance to the triggering damage, resistance is applied before the damage reduction.\r\n\r\nThe power's damage reduction increases by 1d6 when you reach 5th level (2d6), 11th level (3d6), and 17th level (4d6).",
       "max": "",
       "id": ""
     },
     {
-      "name": "repeating_power-cantrip_-MXJJ4wDek0nTg0n1XRT_options-flag",
+      "name": "repeating_power-cantrip_-MjGjD3ccXtCV542XJwh_options-flag",
       "current": "0",
       "max": "",
       "id": ""
     },
     {
-      "name": "repeating_power-cantrip_-MBs2TQgfOSkDkpgz4sG_powername",
+      "name": "repeating_power-cantrip_-M5uyxVfsiOVbqa5Ugqi_powername",
       "current": "Force Technique",
       "max": "",
       "id": ""
     },
     {
-      "name": "repeating_power-cantrip_-MBs2TQgfOSkDkpgz4sG_powerschool",
+      "name": "repeating_power-cantrip_-M5uyxVfsiOVbqa5Ugqi_powerschool",
       "current": "force",
       "max": "",
       "id": ""
     },
     {
-      "name": "repeating_power-cantrip_-MBs2TQgfOSkDkpgz4sG_powercastingtime",
+      "name": "repeating_power-cantrip_-M5uyxVfsiOVbqa5Ugqi_powercastingtime",
       "current": "1 action",
       "max": "",
       "id": ""
     },
     {
-      "name": "repeating_power-cantrip_-MBs2TQgfOSkDkpgz4sG_powerrange",
+      "name": "repeating_power-cantrip_-M5uyxVfsiOVbqa5Ugqi_powerrange",
       "current": "Varies",
       "max": "",
       "id": ""
     },
     {
-      "name": "repeating_power-cantrip_-MBs2TQgfOSkDkpgz4sG_powerconcentration",
+      "name": "repeating_power-cantrip_-M5uyxVfsiOVbqa5Ugqi_powerconcentration",
       "current": "0",
       "max": "",
       "id": ""
     },
     {
-      "name": "repeating_power-cantrip_-MBs2TQgfOSkDkpgz4sG_powerduration",
+      "name": "repeating_power-cantrip_-M5uyxVfsiOVbqa5Ugqi_powerduration",
       "current": "1 round",
       "max": "",
       "id": ""
     },
     {
-      "name": "repeating_power-cantrip_-MBs2TQgfOSkDkpgz4sG_power_ability",
+      "name": "repeating_power-cantrip_-M5uyxVfsiOVbqa5Ugqi_power_ability",
       "current": "@{wisdom_mod}+",
       "max": "",
       "id": ""
     },
     {
-      "name": "repeating_power-cantrip_-MBs2TQgfOSkDkpgz4sG_rollcontent",
+      "name": "repeating_power-cantrip_-M5uyxVfsiOVbqa5Ugqi_rollcontent",
       "current": "@{wtype}&{template:power} {{level=@{powerschool} @{powerlevel}}} {{name=@{powername}}} {{castingtime=@{powercastingtime}}} {{range=@{powerrange}}} {{target=@{powertarget}}} {{duration=@{powerduration}}} {{description=@{powerdescription}}} {{athigherlevels=@{powerathigherlevels}}}  {{innate=@{innate}}} @{powerconcentration} @{charname_output}",
       "max": "",
       "id": ""
     },
     {
-      "name": "repeating_power-cantrip_-MBs2TQgfOSkDkpgz4sG_powerdescription",
+      "name": "repeating_power-cantrip_-M5uyxVfsiOVbqa5Ugqi_powerdescription",
       "current": "You imbue your weapon with the purifying light of the Force. As part of the action used to cast this power, you must make a melee attack with a weapon against one creature within your weapon's reach, otherwise the power fails. On a hit, the target suffers the attack's normal effects, and it becomes wreathed in a glowing barrier of force energy until the start of your next turn. If the target willingly moves before then, it immediately takes 1d8 force damage, and the power ends.\r\n\r\nThis power's damage increases when you reach higher levels. At 5th level, the melee attack deals an extra 1d8 force damage to the target, and the damage the target takes for moving increases to 2d8. Both damage rolls increase by 1d8 at 11th level and 17th level.",
       "max": "",
       "id": ""
     },
     {
-      "name": "repeating_power-cantrip_-MBs2TQgfOSkDkpgz4sG_options-flag",
+      "name": "repeating_power-cantrip_-M5uyxVfsiOVbqa5Ugqi_options-flag",
       "current": "0",
       "max": "",
       "id": ""
     },
     {
-      "name": "repeating_power-1_-MUclWclNMjBzgulbAHV_powername",
+      "name": "repeating_power-1_-MMKkNb6VavpaszmcC82_powername",
       "current": "Project",
       "max": "",
       "id": ""
     },
     {
-      "name": "repeating_power-1_-MUclWclNMjBzgulbAHV_powerschool",
+      "name": "repeating_power-1_-MMKkNb6VavpaszmcC82_powerschool",
       "current": "force",
       "max": "",
       "id": ""
     },
     {
-      "name": "repeating_power-1_-MUclWclNMjBzgulbAHV_powercastingtime",
+      "name": "repeating_power-1_-MMKkNb6VavpaszmcC82_powercastingtime",
       "current": "1 action",
       "max": "",
       "id": ""
     },
     {
-      "name": "repeating_power-1_-MUclWclNMjBzgulbAHV_powerrange",
+      "name": "repeating_power-1_-MMKkNb6VavpaszmcC82_powerrange",
       "current": "120 feet",
       "max": "",
       "id": ""
     },
     {
-      "name": "repeating_power-1_-MUclWclNMjBzgulbAHV_powerconcentration",
+      "name": "repeating_power-1_-MMKkNb6VavpaszmcC82_powerconcentration",
       "current": "0",
       "max": "",
       "id": ""
     },
     {
-      "name": "repeating_power-1_-MUclWclNMjBzgulbAHV_powerduration",
+      "name": "repeating_power-1_-MMKkNb6VavpaszmcC82_powerduration",
       "current": "Instantaneous",
       "max": "",
       "id": ""
     },
     {
-      "name": "repeating_power-1_-MUclWclNMjBzgulbAHV_power_ability",
+      "name": "repeating_power-1_-MMKkNb6VavpaszmcC82_power_ability",
       "current": "@{wisdom_mod}+",
       "max": "",
       "id": ""
     },
     {
-      "name": "repeating_power-1_-MUclWclNMjBzgulbAHV_rollcontent",
+      "name": "repeating_power-1_-MMKkNb6VavpaszmcC82_rollcontent",
       "current": "@{wtype}&{template:power} {{level=@{powerschool} @{powerlevel}}} {{name=@{powername}}} {{castingtime=@{powercastingtime}}} {{range=@{powerrange}}} {{target=@{powertarget}}} {{duration=@{powerduration}}} {{description=@{powerdescription}}} {{athigherlevels=@{powerathigherlevels}}}  {{innate=@{innate}}} @{powerconcentration} @{charname_output}",
       "max": "",
       "id": ""
     },
     {
-      "name": "repeating_power-1_-MUclWclNMjBzgulbAHV_powerdescription",
+      "name": "repeating_power-1_-MMKkNb6VavpaszmcC82_powerdescription",
       "current": "You lift three piles of debris or small objects from the ground and hurl them. Each pile hits a creature of your choice that you can see within range. The pile deals 1d4+1 force damage to its target. The piles all strike simultaneously and you can direct them to hit one creature or several.\r\n\r\n***Force Potency.*** When you cast this power using a force slot of 2nd level or higher, you lift and throw an additional pile of debris for each slot level above 1st.",
       "max": "",
       "id": ""
     },
     {
-      "name": "repeating_power-1_-MUclWclNMjBzgulbAHV_options-flag",
+      "name": "repeating_power-1_-MMKkNb6VavpaszmcC82_options-flag",
       "current": "0",
       "max": "",
       "id": ""
     },
     {
-      "name": "repeating_power-2_-MMdStG8o835zPo4dA0Q_powername",
+      "name": "repeating_power-2_-Mb5sAP9bpgLLcIEXvmX_powername",
       "current": "Phasewalk",
       "max": "",
       "id": ""
     },
     {
-      "name": "repeating_power-2_-MMdStG8o835zPo4dA0Q_powerschool",
+      "name": "repeating_power-2_-Mb5sAP9bpgLLcIEXvmX_powerschool",
       "current": "force",
       "max": "",
       "id": ""
     },
     {
-      "name": "repeating_power-2_-MMdStG8o835zPo4dA0Q_powercastingtime",
+      "name": "repeating_power-2_-Mb5sAP9bpgLLcIEXvmX_powercastingtime",
       "current": "1 bonus action",
       "max": "",
       "id": ""
     },
     {
-      "name": "repeating_power-2_-MMdStG8o835zPo4dA0Q_powerrange",
+      "name": "repeating_power-2_-Mb5sAP9bpgLLcIEXvmX_powerrange",
       "current": "Self",
       "max": "",
       "id": ""
     },
     {
-      "name": "repeating_power-2_-MMdStG8o835zPo4dA0Q_powerconcentration",
+      "name": "repeating_power-2_-Mb5sAP9bpgLLcIEXvmX_powerconcentration",
       "current": "0",
       "max": "",
       "id": ""
     },
     {
-      "name": "repeating_power-2_-MMdStG8o835zPo4dA0Q_powerduration",
+      "name": "repeating_power-2_-Mb5sAP9bpgLLcIEXvmX_powerduration",
       "current": "Instantaneous",
       "max": "",
       "id": ""
     },
     {
-      "name": "repeating_power-2_-MMdStG8o835zPo4dA0Q_power_ability",
+      "name": "repeating_power-2_-Mb5sAP9bpgLLcIEXvmX_power_ability",
       "current": "power",
       "max": "",
       "id": ""
     },
     {
-      "name": "repeating_power-2_-MMdStG8o835zPo4dA0Q_rollcontent",
+      "name": "repeating_power-2_-Mb5sAP9bpgLLcIEXvmX_rollcontent",
       "current": "@{wtype}&{template:power} {{level=@{powerschool} @{powerlevel}}} {{name=@{powername}}} {{castingtime=@{powercastingtime}}} {{range=@{powerrange}}} {{target=@{powertarget}}} {{duration=@{powerduration}}} {{description=@{powerdescription}}} {{athigherlevels=@{powerathigherlevels}}}  {{innate=@{innate}}} @{powerconcentration} @{charname_output}",
       "max": "",
       "id": ""
     },
     {
-      "name": "repeating_power-2_-MMdStG8o835zPo4dA0Q_powerdescription",
+      "name": "repeating_power-2_-Mb5sAP9bpgLLcIEXvmX_powerdescription",
       "current": "You teleport up to 30 feet to an unoccupied space that you can see.",
       "max": "",
       "id": ""
     },
     {
-      "name": "repeating_power-2_-MMdStG8o835zPo4dA0Q_options-flag",
+      "name": "repeating_power-2_-Mb5sAP9bpgLLcIEXvmX_options-flag",
       "current": "0",
       "max": "",
       "id": ""
     },
     {
-      "name": "repeating_power-2_-M4nbsk6VyonJbH0L2gY_powername",
+      "name": "repeating_power-2_-MrPMTcVzPDMF67QAE9O_powername",
       "current": "Force Throw",
       "max": "",
       "id": ""
     },
     {
-      "name": "repeating_power-2_-M4nbsk6VyonJbH0L2gY_powerschool",
+      "name": "repeating_power-2_-MrPMTcVzPDMF67QAE9O_powerschool",
       "current": "force",
       "max": "",
       "id": ""
     },
     {
-      "name": "repeating_power-2_-M4nbsk6VyonJbH0L2gY_powercastingtime",
+      "name": "repeating_power-2_-MrPMTcVzPDMF67QAE9O_powercastingtime",
       "current": "1 action",
       "max": "",
       "id": ""
     },
     {
-      "name": "repeating_power-2_-M4nbsk6VyonJbH0L2gY_powerrange",
+      "name": "repeating_power-2_-MrPMTcVzPDMF67QAE9O_powerrange",
       "current": "90 feet",
       "max": "",
       "id": ""
     },
     {
-      "name": "repeating_power-2_-M4nbsk6VyonJbH0L2gY_powerconcentration",
+      "name": "repeating_power-2_-MrPMTcVzPDMF67QAE9O_powerconcentration",
       "current": "0",
       "max": "",
       "id": ""
     },
     {
-      "name": "repeating_power-2_-M4nbsk6VyonJbH0L2gY_powerduration",
+      "name": "repeating_power-2_-MrPMTcVzPDMF67QAE9O_powerduration",
       "current": "Instantaneous",
       "max": "",
       "id": ""
     },
     {
-      "name": "repeating_power-2_-M4nbsk6VyonJbH0L2gY_power_ability",
+      "name": "repeating_power-2_-MrPMTcVzPDMF67QAE9O_power_ability",
       "current": "power",
       "max": "",
       "id": ""
     },
     {
-      "name": "repeating_power-2_-M4nbsk6VyonJbH0L2gY_rollcontent",
+      "name": "repeating_power-2_-MrPMTcVzPDMF67QAE9O_rollcontent",
       "current": "@{wtype}&{template:power} {{level=@{powerschool} @{powerlevel}}} {{name=@{powername}}} {{castingtime=@{powercastingtime}}} {{range=@{powerrange}}} {{target=@{powertarget}}} {{duration=@{powerduration}}} {{description=@{powerdescription}}} {{athigherlevels=@{powerathigherlevels}}}  {{innate=@{innate}}} @{powerconcentration} @{charname_output}",
       "max": "",
       "id": ""
     },
     {
-      "name": "repeating_power-2_-M4nbsk6VyonJbH0L2gY_powerdescription",
+      "name": "repeating_power-2_-MrPMTcVzPDMF67QAE9O_powerdescription",
       "current": "You use the Force to move a Large or smaller creature or object not being worn or carried within range. The target must make a Strength saving throw. An object automatically fails this saving throw. On a failed save, the creature or object moves a number of feet in a direction of your choice based on its size. A Tiny creature or object can be moved up to 90 feet, a Small creature or object can be moved up to 60 feet, a Medium creature or object can be moved up to 30 feet, and a Large creature or object can be moved up to 10 feet. If at the end of this movement the creature or object strikes another creature or object, they both take 2d8 force damage.\r\n\r\n***Force Potency.*** When you cast this power using a force slot of 3rd level or higher, the range you can throw a creature or object increases by 10 feet, to a maximum of 90 feet, and the power's damage increases by 1d8.",
       "max": "",
       "id": ""
     },
     {
-      "name": "repeating_power-2_-M4nbsk6VyonJbH0L2gY_options-flag",
+      "name": "repeating_power-2_-MrPMTcVzPDMF67QAE9O_options-flag",
       "current": "0",
       "max": "",
       "id": ""
     },
     {
-      "name": "repeating_power-cantrip_-MWBFphkrz6dBVRrZjMJ_powername",
+      "name": "repeating_power-cantrip_-MRqnEkYaXxWi6HVkUsr_powername",
       "current": "Slow",
       "max": "",
       "id": ""
     },
     {
-      "name": "repeating_power-cantrip_-MWBFphkrz6dBVRrZjMJ_powerschool",
+      "name": "repeating_power-cantrip_-MRqnEkYaXxWi6HVkUsr_powerschool",
       "current": "force",
       "max": "",
       "id": ""
     },
     {
-      "name": "repeating_power-cantrip_-MWBFphkrz6dBVRrZjMJ_powercastingtime",
+      "name": "repeating_power-cantrip_-MRqnEkYaXxWi6HVkUsr_powercastingtime",
       "current": "1 action",
       "max": "",
       "id": ""
     },
     {
-      "name": "repeating_power-cantrip_-MWBFphkrz6dBVRrZjMJ_powerrange",
+      "name": "repeating_power-cantrip_-MRqnEkYaXxWi6HVkUsr_powerrange",
       "current": "15 feet",
       "max": "",
       "id": ""
     },
     {
-      "name": "repeating_power-cantrip_-MWBFphkrz6dBVRrZjMJ_powerconcentration",
+      "name": "repeating_power-cantrip_-MRqnEkYaXxWi6HVkUsr_powerconcentration",
       "current": "0",
       "max": "",
       "id": ""
     },
     {
-      "name": "repeating_power-cantrip_-MWBFphkrz6dBVRrZjMJ_powerduration",
+      "name": "repeating_power-cantrip_-MRqnEkYaXxWi6HVkUsr_powerduration",
       "current": "1 hour",
       "max": "",
       "id": ""
     },
     {
-      "name": "repeating_power-cantrip_-MWBFphkrz6dBVRrZjMJ_power_ability",
+      "name": "repeating_power-cantrip_-MRqnEkYaXxWi6HVkUsr_power_ability",
       "current": "@{charisma_mod}+",
       "max": "",
       "id": ""
     },
     {
-      "name": "repeating_power-cantrip_-MWBFphkrz6dBVRrZjMJ_rollcontent",
+      "name": "repeating_power-cantrip_-MRqnEkYaXxWi6HVkUsr_rollcontent",
       "current": "@{wtype}&{template:power} {{level=@{powerschool} @{powerlevel}}} {{name=@{powername}}} {{castingtime=@{powercastingtime}}} {{range=@{powerrange}}} {{target=@{powertarget}}} {{duration=@{powerduration}}} {{description=@{powerdescription}}} {{athigherlevels=@{powerathigherlevels}}}  {{innate=@{innate}}} @{powerconcentration} @{charname_output}",
       "max": "",
       "id": ""
     },
     {
-      "name": "repeating_power-cantrip_-MWBFphkrz6dBVRrZjMJ_powerdescription",
+      "name": "repeating_power-cantrip_-MRqnEkYaXxWi6HVkUsr_powerdescription",
       "current": "A hostile creature of your choice must make a Constitution saving throw. On a failed save, the target's speed decreases by 10 feet until the power ends.\r\n\r\nThe target's speed decreases by 5 more feet when you reach 5th level (15 feet), 11th level (20 feet), and 17th level (25 feet).",
       "max": "",
       "id": ""
     },
     {
-      "name": "repeating_power-cantrip_-MWBFphkrz6dBVRrZjMJ_options-flag",
+      "name": "repeating_power-cantrip_-MRqnEkYaXxWi6HVkUsr_options-flag",
       "current": "0",
       "max": "",
       "id": ""
     },
     {
-      "name": "repeating_power-2_-Mo40t0c2JZUTv4RbUFI_powername",
+      "name": "repeating_power-2_-M7LKSKT1RhyKmbmT8oA_powername",
       "current": "Affliction",
       "max": "",
       "id": ""
     },
     {
-      "name": "repeating_power-2_-Mo40t0c2JZUTv4RbUFI_powerschool",
+      "name": "repeating_power-2_-M7LKSKT1RhyKmbmT8oA_powerschool",
       "current": "force",
       "max": "",
       "id": ""
     },
     {
-      "name": "repeating_power-2_-Mo40t0c2JZUTv4RbUFI_powercastingtime",
+      "name": "repeating_power-2_-M7LKSKT1RhyKmbmT8oA_powercastingtime",
       "current": "1 action",
       "max": "",
       "id": ""
     },
     {
-      "name": "repeating_power-2_-Mo40t0c2JZUTv4RbUFI_powerrange",
+      "name": "repeating_power-2_-M7LKSKT1RhyKmbmT8oA_powerrange",
       "current": "30 feet",
       "max": "",
       "id": ""
     },
     {
-      "name": "repeating_power-2_-Mo40t0c2JZUTv4RbUFI_powerconcentration",
+      "name": "repeating_power-2_-M7LKSKT1RhyKmbmT8oA_powerconcentration",
       "current": "{{concentration=1}}",
       "max": "",
       "id": ""
     },
     {
-      "name": "repeating_power-2_-Mo40t0c2JZUTv4RbUFI_powerduration",
+      "name": "repeating_power-2_-M7LKSKT1RhyKmbmT8oA_powerduration",
       "current": "up to 1 minute",
       "max": "",
       "id": ""
     },
     {
-      "name": "repeating_power-2_-Mo40t0c2JZUTv4RbUFI_power_ability",
+      "name": "repeating_power-2_-M7LKSKT1RhyKmbmT8oA_power_ability",
       "current": "@{charisma_mod}+",
       "max": "",
       "id": ""
     },
     {
-      "name": "repeating_power-2_-Mo40t0c2JZUTv4RbUFI_rollcontent",
+      "name": "repeating_power-2_-M7LKSKT1RhyKmbmT8oA_rollcontent",
       "current": "@{wtype}&{template:power} {{level=@{powerschool} @{powerlevel}}} {{name=@{powername}}} {{castingtime=@{powercastingtime}}} {{range=@{powerrange}}} {{target=@{powertarget}}} {{duration=@{powerduration}}} {{description=@{powerdescription}}} {{athigherlevels=@{powerathigherlevels}}}  {{innate=@{innate}}} @{powerconcentration} @{charname_output}",
       "max": "",
       "id": ""
     },
     {
-      "name": "repeating_power-2_-Mo40t0c2JZUTv4RbUFI_powerdescription",
+      "name": "repeating_power-2_-M7LKSKT1RhyKmbmT8oA_powerdescription",
       "current": "Choose a creature that you can see within range. That creature must make a Constitution saving throw. On a failed save, the target's speed is halved, it takes a -2 penalty to AC and Dexterity saving throws, and it can't use reactions. On its turn, it can use either an action or a bonus action, not both. Regardless of the creature's abilities or items, it can't make more than one melee or ranged attack during its turn.\r\n\r\nIf the creature attempts to cast a power with a casting time of 1 action, roll a d20. On an 11 or higher, the power doesn't take effect until the creature's next turn, and the creature must use its action on that turn to complete the power. If it can't, the power is wasted.\t\r\n\r\nThe creatures makes another Constitution saving throw at the end of its turn. On a successful save, the effect ends.",
       "max": "",
       "id": ""
     },
     {
-      "name": "repeating_power-2_-Mo40t0c2JZUTv4RbUFI_options-flag",
+      "name": "repeating_power-2_-M7LKSKT1RhyKmbmT8oA_options-flag",
       "current": "0",
       "max": "",
       "id": ""
     },
     {
-      "name": "repeating_power-cantrip_-MPgFceXFY92TY1BWB0v_powername",
-      "current": "Force Disarm",
-      "max": "",
-      "id": ""
-    },
-    {
-      "name": "repeating_power-cantrip_-MPgFceXFY92TY1BWB0v_powerschool",
-      "current": "force",
-      "max": "",
-      "id": ""
-    },
-    {
-      "name": "repeating_power-cantrip_-MPgFceXFY92TY1BWB0v_powercastingtime",
-      "current": "1 action",
-      "max": "",
-      "id": ""
-    },
-    {
-      "name": "repeating_power-cantrip_-MPgFceXFY92TY1BWB0v_powerrange",
-      "current": "30 feet",
-      "max": "",
-      "id": ""
-    },
-    {
-      "name": "repeating_power-cantrip_-MPgFceXFY92TY1BWB0v_powerconcentration",
-      "current": "0",
-      "max": "",
-      "id": ""
-    },
-    {
-      "name": "repeating_power-cantrip_-MPgFceXFY92TY1BWB0v_powerduration",
-      "current": "Instantaneous",
-      "max": "",
-      "id": ""
-    },
-    {
-      "name": "repeating_power-cantrip_-MPgFceXFY92TY1BWB0v_power_ability",
-      "current": "power",
-      "max": "",
-      "id": ""
-    },
-    {
-      "name": "repeating_power-cantrip_-MPgFceXFY92TY1BWB0v_rollcontent",
-      "current": "@{wtype}&{template:power} {{level=@{powerschool} @{powerlevel}}} {{name=@{powername}}} {{castingtime=@{powercastingtime}}} {{range=@{powerrange}}} {{target=@{powertarget}}} {{duration=@{powerduration}}} {{description=@{powerdescription}}} {{athigherlevels=@{powerathigherlevels}}}  {{innate=@{innate}}} @{powerconcentration} @{charname_output}",
-      "max": "",
-      "id": ""
-    },
-    {
-      "name": "repeating_power-cantrip_-MPgFceXFY92TY1BWB0v_powerdescription",
-      "current": "You select a weapon or object being worn or carried by a Large or smaller creature within range. The creature must make a Strength or Dexterity saving throw (the creature chooses the ability to use). If the item is being worn, this save is made with disadvantage. On a failed save, the creature takes 1d4 force damage and the item is pulled directly to you. If you have a free hand, you catch the weapon. Otherwise, it lands at your feet.\r\n\r\nThis power's damage increases by 1d4 when you reach 5th level (2d4), 11th level (3d4), and 17th level (4d4).",
-      "max": "",
-      "id": ""
-    },
-    {
-      "name": "repeating_power-cantrip_-MPgFceXFY92TY1BWB0v_options-flag",
-      "current": "0",
-      "max": "",
-      "id": ""
-    },
-    {
-      "name": "repeating_power-3_-MJ1SNNXUdpHdWIdwUhs_powername",
-      "current": "Plague",
-      "max": "",
-      "id": ""
-    },
-    {
-      "name": "repeating_power-3_-MJ1SNNXUdpHdWIdwUhs_powerschool",
-      "current": "force",
-      "max": "",
-      "id": ""
-    },
-    {
-      "name": "repeating_power-3_-MJ1SNNXUdpHdWIdwUhs_powercastingtime",
-      "current": "1 action",
-      "max": "",
-      "id": ""
-    },
-    {
-      "name": "repeating_power-3_-MJ1SNNXUdpHdWIdwUhs_powerrange",
-      "current": "30 feet",
-      "max": "",
-      "id": ""
-    },
-    {
-      "name": "repeating_power-3_-MJ1SNNXUdpHdWIdwUhs_powerconcentration",
-      "current": "{{concentration=1}}",
-      "max": "",
-      "id": ""
-    },
-    {
-      "name": "repeating_power-3_-MJ1SNNXUdpHdWIdwUhs_powerduration",
-      "current": "up to 1 minute",
-      "max": "",
-      "id": ""
-    },
-    {
-      "name": "repeating_power-3_-MJ1SNNXUdpHdWIdwUhs_power_ability",
-      "current": "@{charisma_mod}+",
-      "max": "",
-      "id": ""
-    },
-    {
-      "name": "repeating_power-3_-MJ1SNNXUdpHdWIdwUhs_rollcontent",
-      "current": "@{wtype}&{template:power} {{level=@{powerschool} @{powerlevel}}} {{name=@{powername}}} {{castingtime=@{powercastingtime}}} {{range=@{powerrange}}} {{target=@{powertarget}}} {{duration=@{powerduration}}} {{description=@{powerdescription}}} {{athigherlevels=@{powerathigherlevels}}}  {{innate=@{innate}}} @{powerconcentration} @{charname_output}",
-      "max": "",
-      "id": ""
-    },
-    {
-      "name": "repeating_power-3_-MJ1SNNXUdpHdWIdwUhs_powerdescription",
-      "current": "Choose up to six creatures of your choice in a 40-foot cube within range. Each target must succeed on a Constitution saving throw or be affected by this power for the duration.\r\n\r\nAn affected target's speed is halved, it takes a -2 penalty to AC and Dexterity saving throws, and it can't use reactions. On its turn, it can use either an action or a bonus action, not both. Regardless of the creature's abilities or items, it can't make more than one melee or ranged attack during its turn.\r\n\r\nIf the creature attempts to cast a power with a casting time of 1 action, roll a d20. On an 11 or higher, the power doesn't take effect until the creature's next turn, and the creature must use its action on that turn to complete the power. If it can't, the power is wasted.\t\r\n\r\nA creature affected by this power makes another Constitution saving throw at the end of its turn. On a successful save, the effect ends for it.",
-      "max": "",
-      "id": ""
-    },
-    {
-      "name": "repeating_power-3_-MJ1SNNXUdpHdWIdwUhs_options-flag",
-      "current": "0",
-      "max": "",
-      "id": ""
-    },
-    {
-      "name": "repeating_power-3_-MfQKH0KitEyizrqD5s5_powername",
-      "current": "Sever Force",
-      "max": "",
-      "id": ""
-    },
-    {
-      "name": "repeating_power-3_-MfQKH0KitEyizrqD5s5_powerschool",
-      "current": "force",
-      "max": "",
-      "id": ""
-    },
-    {
-      "name": "repeating_power-3_-MfQKH0KitEyizrqD5s5_powercastingtime",
-      "current": "1 reaction",
-      "max": "",
-      "id": ""
-    },
-    {
-      "name": "repeating_power-3_-MfQKH0KitEyizrqD5s5_powerrange",
-      "current": "60 feet",
-      "max": "",
-      "id": ""
-    },
-    {
-      "name": "repeating_power-3_-MfQKH0KitEyizrqD5s5_powerconcentration",
-      "current": "0",
-      "max": "",
-      "id": ""
-    },
-    {
-      "name": "repeating_power-3_-MfQKH0KitEyizrqD5s5_powerduration",
-      "current": "Instantaneous",
-      "max": "",
-      "id": ""
-    },
-    {
-      "name": "repeating_power-3_-MfQKH0KitEyizrqD5s5_power_ability",
-      "current": "power",
-      "max": "",
-      "id": ""
-    },
-    {
-      "name": "repeating_power-3_-MfQKH0KitEyizrqD5s5_rollcontent",
-      "current": "@{wtype}&{template:power} {{level=@{powerschool} @{powerlevel}}} {{name=@{powername}}} {{castingtime=@{powercastingtime}}} {{range=@{powerrange}}} {{target=@{powertarget}}} {{duration=@{powerduration}}} {{description=@{powerdescription}}} {{athigherlevels=@{powerathigherlevels}}}  {{innate=@{innate}}} @{powerconcentration} @{charname_output}",
-      "max": "",
-      "id": ""
-    },
-    {
-      "name": "repeating_power-3_-MfQKH0KitEyizrqD5s5_powerdescription",
-      "current": "You attempt to interrupt a creature in the process of casting a force power. If the creature is casting a power of 3rd level or lower, its power fails and has no effect. If it is casting a power of 4th level or higher, make an ability check using your forcecasting ability. The DC equals 10 + the power's level. On a success, the creature's power fails and has no effect.\r\n\r\n***Force Potency.*** When you cast this power using a force slot of 4th level or higher, the interrupted power has no effect if its level is less than or equal to the level of the force slot you used.",
-      "max": "",
-      "id": ""
-    },
-    {
-      "name": "repeating_power-3_-MfQKH0KitEyizrqD5s5_options-flag",
-      "current": "0",
-      "max": "",
-      "id": ""
-    },
-    {
-      "name": "repeating_power-3_-MhMTqo6Qg7sc96XXMxi_powername",
-      "current": "Force Repulse",
-      "max": "",
-      "id": ""
-    },
-    {
-      "name": "repeating_power-3_-MhMTqo6Qg7sc96XXMxi_powerschool",
-      "current": "force",
-      "max": "",
-      "id": ""
-    },
-    {
-      "name": "repeating_power-3_-MhMTqo6Qg7sc96XXMxi_powercastingtime",
-      "current": "1 action",
-      "max": "",
-      "id": ""
-    },
-    {
-      "name": "repeating_power-3_-MhMTqo6Qg7sc96XXMxi_powerrange",
-      "current": "Self (20-foot radius)",
-      "max": "",
-      "id": ""
-    },
-    {
-      "name": "repeating_power-3_-MhMTqo6Qg7sc96XXMxi_powerconcentration",
-      "current": "0",
-      "max": "",
-      "id": ""
-    },
-    {
-      "name": "repeating_power-3_-MhMTqo6Qg7sc96XXMxi_powerduration",
-      "current": "Instantaneous",
-      "max": "",
-      "id": ""
-    },
-    {
-      "name": "repeating_power-3_-MhMTqo6Qg7sc96XXMxi_power_ability",
-      "current": "power",
-      "max": "",
-      "id": ""
-    },
-    {
-      "name": "repeating_power-3_-MhMTqo6Qg7sc96XXMxi_rollcontent",
-      "current": "@{wtype}&{template:power} {{level=@{powerschool} @{powerlevel}}} {{name=@{powername}}} {{castingtime=@{powercastingtime}}} {{range=@{powerrange}}} {{target=@{powertarget}}} {{duration=@{powerduration}}} {{description=@{powerdescription}}} {{athigherlevels=@{powerathigherlevels}}}  {{innate=@{innate}}} @{powerconcentration} @{charname_output}",
-      "max": "",
-      "id": ""
-    },
-    {
-      "name": "repeating_power-3_-MhMTqo6Qg7sc96XXMxi_powerdescription",
-      "current": "You release an omnidirectional telekinetic burst. Each creature within 20 feet must make a Dexterity saving throw. On a failed save, a creature takes 8d6 force damage and is pushed back 5 feet. On a successful save, a creature takes half damage and isn't pushed.\r\n\r\nAll small objects that are not worn or carried are also pushed 5 feet back.\r\n\r\n***Force Potency.*** When you cast this power using a force slot of 4th level or higher, the damage increases by 1d6 for each slot level above 3rd.",
-      "max": "",
-      "id": ""
-    },
-    {
-      "name": "repeating_power-3_-MhMTqo6Qg7sc96XXMxi_options-flag",
-      "current": "0",
-      "max": "",
-      "id": ""
-    },
-    {
-      "name": "repeating_power-2_-MJmAbse4Qcf1KdqzteN_powername",
-      "current": "Animate Weapon",
-      "max": "",
-      "id": ""
-    },
-    {
-      "name": "repeating_power-2_-MJmAbse4Qcf1KdqzteN_powerschool",
-      "current": "force",
-      "max": "",
-      "id": ""
-    },
-    {
-      "name": "repeating_power-2_-MJmAbse4Qcf1KdqzteN_powercastingtime",
-      "current": "1 bonus action",
-      "max": "",
-      "id": ""
-    },
-    {
-      "name": "repeating_power-2_-MJmAbse4Qcf1KdqzteN_powerrange",
-      "current": "60 feet",
-      "max": "",
-      "id": ""
-    },
-    {
-      "name": "repeating_power-2_-MJmAbse4Qcf1KdqzteN_powerconcentration",
-      "current": "0",
-      "max": "",
-      "id": ""
-    },
-    {
-      "name": "repeating_power-2_-MJmAbse4Qcf1KdqzteN_powerduration",
-      "current": "1 minute",
-      "max": "",
-      "id": ""
-    },
-    {
-      "name": "repeating_power-2_-MJmAbse4Qcf1KdqzteN_power_ability",
-      "current": "power",
-      "max": "",
-      "id": ""
-    },
-    {
-      "name": "repeating_power-2_-MJmAbse4Qcf1KdqzteN_rollcontent",
-      "current": "@{wtype}&{template:power} {{level=@{powerschool} @{powerlevel}}} {{name=@{powername}}} {{castingtime=@{powercastingtime}}} {{range=@{powerrange}}} {{target=@{powertarget}}} {{duration=@{powerduration}}} {{description=@{powerdescription}}} {{athigherlevels=@{powerathigherlevels}}}  {{innate=@{innate}}} @{powerconcentration} @{charname_output}",
-      "max": "",
-      "id": ""
-    },
-    {
-      "name": "repeating_power-2_-MJmAbse4Qcf1KdqzteN_powerdescription",
-      "current": "You select a melee weapon you wield, or one melee weapon within range that is not worn or carried by a conscious creature, and use the Force to cause it to levitate, acting as an extension of your will for the duration or until you cast this power again. When you use this power, you can cause the weapon to move up to 20 feet and make a melee force attack against a creature within 5 feet of it. On a hit, the target takes 1d8 + your forcecasting ability modifier damage. The type is of the normal damage dealt by the weapon.\r\n\r\nWhile the weapon is animated, on each of your turns you can use a bonus action to move the weapon up to 20 feet and repeat the attack against a creature within 5 feet of it. At any time, you can end this force power to return the animated weapon to your hand.\r\n\r\nAn enemy can attempt to gain control of the weapon by using its action to make a Strength (Athletics) check against your force save DC. On a success, the creature gains control of the weapon and the power ends.\r\n\r\n***Force Potency.*** When you cast this power using a force slot of 3rd level or higher, the weapon's damage increases by 1d8 for every two slot levels above 2nd.",
-      "max": "",
-      "id": ""
-    },
-    {
-      "name": "repeating_power-2_-MJmAbse4Qcf1KdqzteN_options-flag",
-      "current": "0",
-      "max": "",
-      "id": ""
-    },
-    {
-      "name": "repeating_power-1_-M49xM38ceBcL5Tz4iJp_powername",
-      "current": "Heroism",
-      "max": "",
-      "id": ""
-    },
-    {
-      "name": "repeating_power-1_-M49xM38ceBcL5Tz4iJp_powerschool",
-      "current": "force",
-      "max": "",
-      "id": ""
-    },
-    {
-      "name": "repeating_power-1_-M49xM38ceBcL5Tz4iJp_powercastingtime",
-      "current": "1 action",
-      "max": "",
-      "id": ""
-    },
-    {
-      "name": "repeating_power-1_-M49xM38ceBcL5Tz4iJp_powerrange",
-      "current": "Touch",
-      "max": "",
-      "id": ""
-    },
-    {
-      "name": "repeating_power-1_-M49xM38ceBcL5Tz4iJp_powerconcentration",
-      "current": "{{concentration=1}}",
-      "max": "",
-      "id": ""
-    },
-    {
-      "name": "repeating_power-1_-M49xM38ceBcL5Tz4iJp_powerduration",
-      "current": "up to 1 minute",
-      "max": "",
-      "id": ""
-    },
-    {
-      "name": "repeating_power-1_-M49xM38ceBcL5Tz4iJp_power_ability",
-      "current": "@{wisdom_mod}+",
-      "max": "",
-      "id": ""
-    },
-    {
-      "name": "repeating_power-1_-M49xM38ceBcL5Tz4iJp_rollcontent",
-      "current": "@{wtype}&{template:power} {{level=@{powerschool} @{powerlevel}}} {{name=@{powername}}} {{castingtime=@{powercastingtime}}} {{range=@{powerrange}}} {{target=@{powertarget}}} {{duration=@{powerduration}}} {{description=@{powerdescription}}} {{athigherlevels=@{powerathigherlevels}}}  {{innate=@{innate}}} @{powerconcentration} @{charname_output}",
-      "max": "",
-      "id": ""
-    },
-    {
-      "name": "repeating_power-1_-M49xM38ceBcL5Tz4iJp_powerdescription",
-      "current": "A willing creature you touch is imbued with bravery. Until the power ends, the creature is immune to being frightened and gains temporary hit points equal to your forcecasting ability modifier at the start of each of its turns. When the power ends, the target loses any remaining temporary hit points from this power.\r\n\r\n***Force Potency.*** When you cast this power using a force slot of 2nd level or higher, you can target one additional creature for each slot level above 1st.",
-      "max": "",
-      "id": ""
-    },
-    {
-      "name": "repeating_power-1_-M49xM38ceBcL5Tz4iJp_options-flag",
-      "current": "0",
-      "max": "",
-      "id": ""
-    },
-    {
-      "name": "repeating_power-cantrip_-MeS5JKrPFpVo8bnHcOS_powername",
-      "current": "Affect Mind",
-      "max": "",
-      "id": ""
-    },
-    {
-      "name": "repeating_power-cantrip_-MeS5JKrPFpVo8bnHcOS_powerschool",
-      "current": "force",
-      "max": "",
-      "id": ""
-    },
-    {
-      "name": "repeating_power-cantrip_-MeS5JKrPFpVo8bnHcOS_powercastingtime",
-      "current": "1 action",
-      "max": "",
-      "id": ""
-    },
-    {
-      "name": "repeating_power-cantrip_-MeS5JKrPFpVo8bnHcOS_powerrange",
-      "current": "30 feet",
-      "max": "",
-      "id": ""
-    },
-    {
-      "name": "repeating_power-cantrip_-MeS5JKrPFpVo8bnHcOS_powerconcentration",
-      "current": "{{concentration=1}}",
-      "max": "",
-      "id": ""
-    },
-    {
-      "name": "repeating_power-cantrip_-MeS5JKrPFpVo8bnHcOS_powerduration",
-      "current": "up to 1 minute",
-      "max": "",
-      "id": ""
-    },
-    {
-      "name": "repeating_power-cantrip_-MeS5JKrPFpVo8bnHcOS_power_ability",
-      "current": "power",
-      "max": "",
-      "id": ""
-    },
-    {
-      "name": "repeating_power-cantrip_-MeS5JKrPFpVo8bnHcOS_rollcontent",
-      "current": "@{wtype}&{template:power} {{level=@{powerschool} @{powerlevel}}} {{name=@{powername}}} {{castingtime=@{powercastingtime}}} {{range=@{powerrange}}} {{target=@{powertarget}}} {{duration=@{powerduration}}} {{description=@{powerdescription}}} {{athigherlevels=@{powerathigherlevels}}}  {{innate=@{innate}}} @{powerconcentration} @{charname_output}",
-      "max": "",
-      "id": ""
-    },
-    {
-      "name": "repeating_power-cantrip_-MeS5JKrPFpVo8bnHcOS_powerdescription",
-      "current": "Choose a target within range that isn't hostile toward you. The target must make a Wisdom saving throw. On a failed save, you have advantage on all Charisma checks directed at that target. \r\n\r\nOn a successful save, the creature does not realize that you tried to use the Force to influence its mood, but it becomes immune to this power for one day. This power has no effect on droids or constructs.",
-      "max": "",
-      "id": ""
-    },
-    {
-      "name": "repeating_power-cantrip_-MeS5JKrPFpVo8bnHcOS_options-flag",
-      "current": "0",
-      "max": "",
-      "id": ""
-    },
-    {
-      "name": "repeating_inventory_-MUkB8Ig6nQ2GPbDdlCW_itemname",
+      "name": "repeating_inventory_-Ms6QCIz24SCmBl0HGsC_itemname",
       "current": "Clothes, common",
       "max": "",
       "id": ""
     },
     {
-      "name": "repeating_inventory_-MUkB8Ig6nQ2GPbDdlCW_itemweight",
+      "name": "repeating_inventory_-Ms6QCIz24SCmBl0HGsC_itemweight",
       "current": "3",
       "max": "",
       "id": ""
     },
     {
-      "name": "repeating_inventory_-MUkB8Ig6nQ2GPbDdlCW_itemcount",
+      "name": "repeating_inventory_-Ms6QCIz24SCmBl0HGsC_itemcount",
       "current": 1,
       "max": "",
       "id": ""
     },
     {
-      "name": "repeating_inventory_-MA2KFLPPQPGhQgmKxGb_itemname",
+      "name": "repeating_inventory_-Mv003OgKDa723h0BWXa_itemname",
+      "current": "Holochess set",
+      "max": "",
+      "id": ""
+    },
+    {
+      "name": "repeating_inventory_-Mv003OgKDa723h0BWXa_itemweight",
+      "current": 0,
+      "max": "",
+      "id": ""
+    },
+    {
+      "name": "repeating_inventory_-Mv003OgKDa723h0BWXa_itemcount",
+      "current": 1,
+      "max": "",
+      "id": ""
+    },
+    {
+      "name": "repeating_inventory_-MIsfvRyojrncM5z3jQ1_itemname",
       "current": "Shotosaber",
       "max": "",
       "id": ""
     },
     {
-      "name": "repeating_inventory_-MA2KFLPPQPGhQgmKxGb_itemweight",
+      "name": "repeating_inventory_-MIsfvRyojrncM5z3jQ1_itemweight",
       "current": "2",
       "max": "",
       "id": ""
     },
     {
-      "name": "repeating_inventory_-MA2KFLPPQPGhQgmKxGb_itemcount",
+      "name": "repeating_inventory_-MIsfvRyojrncM5z3jQ1_itemcount",
       "current": 1,
       "max": "",
       "id": ""
     },
     {
-      "name": "repeating_inventory_-Mt9PdypsCmmiT0bdWPS_itemname",
+      "name": "repeating_inventory_-MtHaRjyoYIMlqFZqUqJ_itemname",
       "current": "Backpack",
       "max": "",
       "id": ""
     },
     {
-      "name": "repeating_inventory_-Mt9PdypsCmmiT0bdWPS_itemweight",
+      "name": "repeating_inventory_-MtHaRjyoYIMlqFZqUqJ_itemweight",
       "current": "5",
       "max": "",
       "id": ""
     },
     {
-      "name": "repeating_inventory_-Mt9PdypsCmmiT0bdWPS_itemcount",
+      "name": "repeating_inventory_-MtHaRjyoYIMlqFZqUqJ_itemcount",
       "current": 1,
       "max": "",
       "id": ""
     },
     {
-      "name": "repeating_inventory_-MvadUT2Nr9Ib1u0mZ2n_itemname",
+      "name": "repeating_inventory_-Mv7MYOhpEcJYTpP2raH_itemname",
       "current": "Datacard",
       "max": "",
       "id": ""
     },
     {
-      "name": "repeating_inventory_-MvadUT2Nr9Ib1u0mZ2n_itemweight",
+      "name": "repeating_inventory_-Mv7MYOhpEcJYTpP2raH_itemweight",
       "current": "0",
       "max": "",
       "id": ""
     },
     {
-      "name": "repeating_inventory_-MvadUT2Nr9Ib1u0mZ2n_itemcount",
+      "name": "repeating_inventory_-Mv7MYOhpEcJYTpP2raH_itemcount",
       "current": "5",
       "max": "",
       "id": ""
     },
     {
-      "name": "repeating_inventory_-M7Jl1vQLrXvyltTbl0B_itemname",
+      "name": "repeating_inventory_-Mhmb2i0YfGNgWlGovNa_itemname",
       "current": "Datapad",
       "max": "",
       "id": ""
     },
     {
-      "name": "repeating_inventory_-M7Jl1vQLrXvyltTbl0B_itemweight",
+      "name": "repeating_inventory_-Mhmb2i0YfGNgWlGovNa_itemweight",
       "current": "1/2",
       "max": "",
       "id": ""
     },
     {
-      "name": "repeating_inventory_-M7Jl1vQLrXvyltTbl0B_itemcount",
+      "name": "repeating_inventory_-Mhmb2i0YfGNgWlGovNa_itemcount",
       "current": 1,
       "max": "",
       "id": ""
     },
     {
-      "name": "repeating_inventory_-MnaG33IVqyxhAPBUTMe_itemname",
+      "name": "repeating_inventory_-Mdf42jZ7h5QrMO1TvYm_itemname",
       "current": "Stylus pen",
       "max": "",
       "id": ""
     },
     {
-      "name": "repeating_inventory_-MnaG33IVqyxhAPBUTMe_itemweight",
+      "name": "repeating_inventory_-Mdf42jZ7h5QrMO1TvYm_itemweight",
       "current": "1/2",
       "max": "",
       "id": ""
     },
     {
-      "name": "repeating_inventory_-MnaG33IVqyxhAPBUTMe_itemcount",
+      "name": "repeating_inventory_-Mdf42jZ7h5QrMO1TvYm_itemcount",
       "current": 1,
       "max": "",
       "id": ""
     },
     {
-      "name": "repeating_inventory_-Myy8ekmUUGckTEroFdi_itemname",
+      "name": "repeating_inventory_-MirWqKaelxAwscMBQI2_itemname",
       "current": "Holorecorder",
       "max": "",
       "id": ""
     },
     {
-      "name": "repeating_inventory_-Myy8ekmUUGckTEroFdi_itemweight",
+      "name": "repeating_inventory_-MirWqKaelxAwscMBQI2_itemweight",
       "current": "1",
       "max": "",
       "id": ""
     },
     {
-      "name": "repeating_inventory_-Myy8ekmUUGckTEroFdi_itemcount",
+      "name": "repeating_inventory_-MirWqKaelxAwscMBQI2_itemcount",
       "current": 1,
       "max": "",
       "id": ""
     },
     {
-      "name": "repeating_inventory_-MViNA0E5h3SR0EO3R1N_itemname",
+      "name": "repeating_inventory_-Mmw0pcIS83r8DavX3yh_itemname",
       "current": "Field rations (one day's)",
       "max": "",
       "id": ""
     },
     {
-      "name": "repeating_inventory_-MViNA0E5h3SR0EO3R1N_itemweight",
+      "name": "repeating_inventory_-Mmw0pcIS83r8DavX3yh_itemweight",
       "current": "1",
       "max": "",
       "id": ""
     },
     {
-      "name": "repeating_inventory_-MViNA0E5h3SR0EO3R1N_itemcount",
+      "name": "repeating_inventory_-Mmw0pcIS83r8DavX3yh_itemcount",
       "current": "5",
       "max": "",
       "id": ""
     },
     {
-      "name": "repeating_inventory_-MJr99vhG4lpqGqe1SBf_itemname",
+      "name": "repeating_inventory_-MrDVb5eicePVe5qA3oo_itemname",
       "current": "Canteen",
       "max": "",
       "id": ""
     },
     {
-      "name": "repeating_inventory_-MJr99vhG4lpqGqe1SBf_itemweight",
+      "name": "repeating_inventory_-MrDVb5eicePVe5qA3oo_itemweight",
       "current": "3",
       "max": "",
       "id": ""
     },
     {
-      "name": "repeating_inventory_-MJr99vhG4lpqGqe1SBf_itemcount",
+      "name": "repeating_inventory_-MrDVb5eicePVe5qA3oo_itemcount",
       "current": 1,
       "max": "",
       "id": ""
     },
     {
-      "name": "repeating_inventory_-MZdJY53ICp9jra6rHne_itemname",
-      "current": "Darksaber",
+      "name": "repeating_proficiencies_-MtGWmH5KFinRf1gF679_name",
+      "current": "Galactic Basic",
       "max": "",
       "id": ""
     },
     {
-      "name": "repeating_inventory_-MZdJY53ICp9jra6rHne_itemweight",
-      "current": 0,
-      "max": "",
-      "id": ""
-    },
-    {
-      "name": "repeating_inventory_-MZdJY53ICp9jra6rHne_itemcount",
-      "current": 1,
-      "max": "",
-      "id": ""
-    },
-    {
-      "name": "repeating_inventory_-MTiebCDa8pyypRicIz6_itemname",
-      "current": "Darksaber",
-      "max": "",
-      "id": ""
-    },
-    {
-      "name": "repeating_inventory_-MTiebCDa8pyypRicIz6_itemweight",
-      "current": 0,
-      "max": "",
-      "id": ""
-    },
-    {
-      "name": "repeating_inventory_-MTiebCDa8pyypRicIz6_itemcount",
-      "current": 1,
-      "max": "",
-      "id": ""
-    },
-    {
-      "name": "repeating_inventory_-M6JsKeHbfHiop6lJhqv_itemname",
-      "current": "Disruptor rifle",
-      "max": "",
-      "id": ""
-    },
-    {
-      "name": "repeating_inventory_-M6JsKeHbfHiop6lJhqv_itemweight",
-      "current": "12",
-      "max": "",
-      "id": ""
-    },
-    {
-      "name": "repeating_inventory_-M6JsKeHbfHiop6lJhqv_itemcount",
-      "current": 1,
-      "max": "",
-      "id": ""
-    },
-    {
-      "name": "repeating_proficiencies_-MzLStc7xD1GM4qTfe1o_name",
-      "current": [
-        "Galactic Basic"
-      ],
-      "max": "",
-      "id": ""
-    },
-    {
-      "name": "repeating_proficiencies_-MzLStc7xD1GM4qTfe1o_options-flag",
+      "name": "repeating_proficiencies_-MtGWmH5KFinRf1gF679_options-flag",
       "current": "0",
       "max": "",
       "id": ""
     },
     {
-      "name": "repeating_proficiencies_-M2pzhjHnDzrRJeMWbqq_name",
+      "name": "repeating_proficiencies_-McBRMxnZP8hJjtA8luk_name",
       "current": "Twi’leki",
       "max": "",
       "id": ""
     },
     {
-      "name": "repeating_proficiencies_-M2pzhjHnDzrRJeMWbqq_options-flag",
+      "name": "repeating_proficiencies_-McBRMxnZP8hJjtA8luk_options-flag",
       "current": "0",
       "max": "",
       "id": ""
     },
     {
-      "name": "repeating_proficiencies_-MdTrGd8FBOEaxxhsmY5_name",
+      "name": "repeating_proficiencies_-MB5Ab9M94JD2FARhqdX_name",
       "current": "Durese",
       "max": "",
       "id": ""
     },
     {
-      "name": "repeating_proficiencies_-MdTrGd8FBOEaxxhsmY5_options-flag",
+      "name": "repeating_proficiencies_-MB5Ab9M94JD2FARhqdX_options-flag",
       "current": "0",
       "max": "",
       "id": ""
     },
     {
-      "name": "repeating_attack_-M1KjcyTv47SRFot7NdC_atkname",
+      "name": "repeating_attack_-MayNRjkH1rMGjHnuRE8_atkname",
       "current": "Shotosaber",
       "max": "",
       "id": ""
     },
     {
-      "name": "repeating_attack_-M1KjcyTv47SRFot7NdC_options-flag",
+      "name": "repeating_attack_-MayNRjkH1rMGjHnuRE8_options-flag",
       "current": "0",
       "max": "",
       "id": ""
     },
     {
-      "name": "repeating_attack_-M1KjcyTv47SRFot7NdC_atkbonus",
-      "current": 6,
-      "max": "",
-      "id": ""
-    },
-    {
-      "name": "repeating_attack_-M1KjcyTv47SRFot7NdC_atkattr_base",
-      "current": "@{dexterity_mod}",
-      "max": "",
-      "id": ""
-    },
-    {
-      "name": "repeating_attack_-M1KjcyTv47SRFot7NdC_dmgtype",
-      "current": "Energy",
-      "max": "",
-      "id": ""
-    },
-    {
-      "name": "repeating_attack_-M1KjcyTv47SRFot7NdC_dmgbase",
-      "current": "1d6",
-      "max": "",
-      "id": ""
-    },
-    {
-      "name": "repeating_attack_-M1KjcyTv47SRFot7NdC_dmgattr",
-      "current": "@{dexterity_mod}",
-      "max": "",
-      "id": ""
-    },
-    {
-      "name": "repeating_attack_-M1KjcyTv47SRFot7NdC_atkrange",
-      "current": "",
-      "max": "",
-      "id": ""
-    },
-    {
-      "name": "repeating_attack_-M1KjcyTv47SRFot7NdC_atk_desc",
-      "current": "Finesse, hidden, light, luminous",
-      "max": "",
-      "id": ""
-    },
-    {
-      "name": "repeating_attack_-M1KjcyTv47SRFot7NdC_saveeffect",
-      "current": " ",
-      "max": "",
-      "id": ""
-    },
-    {
-      "name": "repeating_attack_-M1KjcyTv47SRFot7NdC_rollbase_dmg",
-      "current": "@{wtype}&{template:dmg} {{rname=@{atkname}}} @{atkflag} {{range=@{atkrange}}} @{dmgflag} {{dmg1=[[1d6 + 3[DEX]]]}} {{dmg1type=Energy}}@{dmg2flag} {{dmg2=[[0]]}} {{dmg2type=}} @{saveflag} {{desc=@{atk_desc}}} @{hldmg} {{powerlevel=@{powerlevel}}} {{innate=@{power_innate}}} {{globaldamage=[[0]]}} {{globaldamagetype=@{global_damage_mod_type}}} @{charname_output}",
-      "max": "",
-      "id": ""
-    },
-    {
-      "name": "repeating_attack_-M1KjcyTv47SRFot7NdC_rollbase_crit",
-      "current": "@{wtype}&{template:dmg} {{crit=1}} {{rname=@{atkname}}} @{atkflag} {{range=@{atkrange}}} @{dmgflag}{{dmg1=[[1d6 + 3[DEX]]]}} {{dmg1type=Energy}}@{dmg2flag} {{dmg2=[[0]]}} {{dmg2type=}} {{crit1=[[1d6]]}} {{crit2=[[0]]}} @{saveflag} {{desc=@{atk_desc}}} @{hldmg} {{powerlevel=@{powerlevel}}} {{innate=@{power_innate}}}{{globaldamage=[[0]]}} {{globaldamagecrit=[[0]]}}{{globaldamagetype=@{global_damage_mod_type}}} @{charname_output}",
-      "max": "",
-      "id": ""
-    },
-    {
-      "name": "repeating_attack_-M1KjcyTv47SRFot7NdC_atkdmgtype",
-      "current": "1d6+3 Energy",
-      "max": "",
-      "id": ""
-    },
-    {
-      "name": "repeating_attack_-M1KjcyTv47SRFot7NdC_rollbase",
-      "current": "@{wtype}&{template:atk} {{mod=@{atkbonus}}} {{rname=[@{atkname}](~repeating_attack_attack_dmg)}}{{rnamec=[@{atkname}](~repeating_attack_attack_crit)}} {{r1=[[@{d20}cs>@{atkcritrange} + 3[DEX] + 3[PROF]]]}}@{rtype}cs>@{atkcritrange} + 3[DEX] + 3[PROF]]]}} {{range=@{atkrange}}} {{desc=@{atk_desc}}}{{powerlevel=@{powerlevel}}} {{innate=@{power_innate}}} {{globalattack=@{global_attack_mod}}} ammo=@{ammo}@{charname_output}",
-      "max": "",
-      "id": ""
-    },
-    {
-      "name": "repeating_attack_-MaETqYwkTptSOq1hruC_atkname",
-      "current": "Disruptor rifle",
-      "max": "",
-      "id": ""
-    },
-    {
-      "name": "repeating_attack_-MaETqYwkTptSOq1hruC_options-flag",
-      "current": "0",
-      "max": "",
-      "id": ""
-    },
-    {
-      "name": "repeating_attack_-MaETqYwkTptSOq1hruC_atkbonus",
-      "current": 3,
-      "max": "",
-      "id": ""
-    },
-    {
-      "name": "repeating_attack_-MaETqYwkTptSOq1hruC_atkattr_base",
-      "current": "@{dexterity_mod}",
-      "max": "",
-      "id": ""
-    },
-    {
-      "name": "repeating_attack_-MaETqYwkTptSOq1hruC_dmgtype",
-      "current": "Acid",
-      "max": "",
-      "id": ""
-    },
-    {
-      "name": "repeating_attack_-MaETqYwkTptSOq1hruC_dmgbase",
-      "current": "1d10",
-      "max": "",
-      "id": ""
-    },
-    {
-      "name": "repeating_attack_-MaETqYwkTptSOq1hruC_dmgattr",
-      "current": "@{dexterity_mod}",
-      "max": "",
-      "id": ""
-    },
-    {
-      "name": "repeating_attack_-MaETqYwkTptSOq1hruC_atkrange",
-      "current": "100/400",
-      "max": "",
-      "id": ""
-    },
-    {
-      "name": "repeating_attack_-MaETqYwkTptSOq1hruC_atk_desc",
-      "current": "Ammunition (range 100/400), disintegrate 13, reload 1, strength 11, two-handed",
-      "max": "",
-      "id": ""
-    },
-    {
-      "name": "repeating_attack_-MaETqYwkTptSOq1hruC_saveeffect",
-      "current": " ",
-      "max": "",
-      "id": ""
-    },
-    {
-      "name": "repeating_attack_-MaETqYwkTptSOq1hruC_rollbase_dmg",
-      "current": "@{wtype}&{template:dmg} {{rname=@{atkname}}} @{atkflag} {{range=@{atkrange}}} @{dmgflag} {{dmg1=[[1d10 + 3[DEX]]]}} {{dmg1type=Acid}}@{dmg2flag} {{dmg2=[[0]]}} {{dmg2type=}} @{saveflag} {{desc=@{atk_desc}}} @{hldmg} {{powerlevel=@{powerlevel}}} {{innate=@{power_innate}}} {{globaldamage=[[0]]}} {{globaldamagetype=@{global_damage_mod_type}}} @{charname_output}",
-      "max": "",
-      "id": ""
-    },
-    {
-      "name": "repeating_attack_-MaETqYwkTptSOq1hruC_rollbase_crit",
-      "current": "@{wtype}&{template:dmg} {{crit=1}} {{rname=@{atkname}}} @{atkflag} {{range=@{atkrange}}} @{dmgflag}{{dmg1=[[1d10 + 3[DEX]]]}} {{dmg1type=Acid}}@{dmg2flag} {{dmg2=[[0]]}} {{dmg2type=}} {{crit1=[[1d10]]}} {{crit2=[[0]]}} @{saveflag} {{desc=@{atk_desc}}} @{hldmg} {{powerlevel=@{powerlevel}}} {{innate=@{power_innate}}}{{globaldamage=[[0]]}} {{globaldamagecrit=[[0]]}}{{globaldamagetype=@{global_damage_mod_type}}} @{charname_output}",
-      "max": "",
-      "id": ""
-    },
-    {
-      "name": "repeating_attack_-MaETqYwkTptSOq1hruC_atkdmgtype",
-      "current": "1d10+3 Acid",
-      "max": "",
-      "id": ""
-    },
-    {
-      "name": "repeating_attack_-MaETqYwkTptSOq1hruC_rollbase",
-      "current": "@{wtype}&{template:atk} {{mod=@{atkbonus}}} {{rname=[@{atkname}](~repeating_attack_attack_dmg)}}{{rnamec=[@{atkname}](~repeating_attack_attack_crit)}} {{r1=[[@{d20}cs>@{atkcritrange} + 3[DEX] + 3[PROF]]]}}@{rtype}cs>@{atkcritrange} + 3[DEX] + 3[PROF]]]}} {{range=@{atkrange}}} {{desc=@{atk_desc}}}{{powerlevel=@{powerlevel}}} {{innate=@{power_innate}}} {{globalattack=@{global_attack_mod}}} ammo=@{ammo}@{charname_output}",
-      "max": "",
-      "id": ""
-    },
-    {
-      "name": "repeating_attack_-MmNcWVvfJMMKodCmSQF_atkname",
-      "current": "Unarmed Strike",
-      "max": "",
-      "id": ""
-    },
-    {
-      "name": "repeating_attack_-MmNcWVvfJMMKodCmSQF_options-flag",
-      "current": "0",
-      "max": "",
-      "id": ""
-    },
-    {
-      "name": "repeating_attack_-MmNcWVvfJMMKodCmSQF_atkbonus",
+      "name": "repeating_attack_-MayNRjkH1rMGjHnuRE8_atkbonus",
       "current": 5,
       "max": "",
       "id": ""
     },
     {
-      "name": "repeating_attack_-MmNcWVvfJMMKodCmSQF_atkattr_base",
-      "current": "@{strength_mod}",
+      "name": "repeating_attack_-MayNRjkH1rMGjHnuRE8_atkattr_base",
+      "current": "@{dexterity_mod}",
       "max": "",
       "id": ""
     },
     {
-      "name": "repeating_attack_-MmNcWVvfJMMKodCmSQF_dmgtype",
-      "current": "Kinetic",
+      "name": "repeating_attack_-MayNRjkH1rMGjHnuRE8_dmgtype",
+      "current": "Energy",
       "max": "",
       "id": ""
     },
     {
-      "name": "repeating_attack_-MmNcWVvfJMMKodCmSQF_dmgbase",
-      "current": "1d4",
+      "name": "repeating_attack_-MayNRjkH1rMGjHnuRE8_dmgbase",
+      "current": "1d6",
       "max": "",
       "id": ""
     },
     {
-      "name": "repeating_attack_-MmNcWVvfJMMKodCmSQF_dmgattr",
-      "current": "@{strength_mod}",
+      "name": "repeating_attack_-MayNRjkH1rMGjHnuRE8_dmgattr",
+      "current": "@{dexterity_mod}",
       "max": "",
       "id": ""
     },
     {
-      "name": "repeating_attack_-MmNcWVvfJMMKodCmSQF_atkrange",
+      "name": "repeating_attack_-MayNRjkH1rMGjHnuRE8_atkrange",
       "current": "",
       "max": "",
       "id": ""
     },
     {
-      "name": "repeating_attack_-MmNcWVvfJMMKodCmSQF_atk_desc",
-      "current": "",
+      "name": "repeating_attack_-MayNRjkH1rMGjHnuRE8_atk_desc",
+      "current": "Finesse, hidden, light, luminous",
       "max": "",
       "id": ""
     },
     {
-      "name": "repeating_attack_-MmNcWVvfJMMKodCmSQF_saveeffect",
+      "name": "repeating_attack_-MayNRjkH1rMGjHnuRE8_saveeffect",
       "current": " ",
       "max": "",
       "id": ""
     },
     {
-      "name": "repeating_attack_-MmNcWVvfJMMKodCmSQF_rollbase_dmg",
-      "current": "@{wtype}&{template:dmg} {{rname=@{atkname}}} @{atkflag} {{range=@{atkrange}}} @{dmgflag} {{dmg1=[[1d4 + 1[STR]]]}} {{dmg1type=Kinetic}}@{dmg2flag} {{dmg2=[[0]]}} {{dmg2type=}} @{saveflag} {{desc=@{atk_desc}}} @{hldmg} {{powerlevel=@{powerlevel}}} {{innate=@{power_innate}}} {{globaldamage=[[0]]}} {{globaldamagetype=@{global_damage_mod_type}}} @{charname_output}",
+      "name": "repeating_attack_-MayNRjkH1rMGjHnuRE8_atkdmgtype",
+      "current": "1d6+3 Energy",
       "max": "",
       "id": ""
     },
     {
-      "name": "repeating_attack_-MmNcWVvfJMMKodCmSQF_rollbase_crit",
-      "current": "@{wtype}&{template:dmg} {{crit=1}} {{rname=@{atkname}}} @{atkflag} {{range=@{atkrange}}} @{dmgflag}{{dmg1=[[1d4 + 1[STR]]]}} {{dmg1type=Kinetic}}@{dmg2flag} {{dmg2=[[0]]}} {{dmg2type=}} {{crit1=[[1d4]]}} {{crit2=[[0]]}} @{saveflag} {{desc=@{atk_desc}}} @{hldmg} {{powerlevel=@{powerlevel}}} {{innate=@{power_innate}}}{{globaldamage=[[0]]}} {{globaldamagecrit=[[0]]}}{{globaldamagetype=@{global_damage_mod_type}}} @{charname_output}",
+      "name": "repeating_attack_-MayNRjkH1rMGjHnuRE8_rollbase_dmg",
+      "current": "@{wtype}&{template:dmg} {{rname=@{atkname}}} @{atkflag} {{range=@{atkrange}}} @{dmgflag} {{dmg1=[[1d6 + 3[DEX]]]}} {{dmg1type=Energy}}@{dmg2flag} {{dmg2=[[0]]}} {{dmg2type=}} @{saveflag} {{desc=@{atk_desc}}} @{hldmg} {{powerlevel=@{powerlevel}}} {{innate=@{power_innate}}} {{globaldamage=[[0]]}} {{globaldamagetype=@{global_damage_mod_type}}} @{charname_output}",
       "max": "",
       "id": ""
     },
     {
-      "name": "repeating_attack_-MmNcWVvfJMMKodCmSQF_atkdmgtype",
+      "name": "repeating_attack_-MayNRjkH1rMGjHnuRE8_rollbase_crit",
+      "current": "@{wtype}&{template:dmg} {{crit=1}} {{rname=@{atkname}}} @{atkflag} {{range=@{atkrange}}} @{dmgflag}{{dmg1=[[1d6 + 3[DEX]]]}} {{dmg1type=Energy}}@{dmg2flag} {{dmg2=[[0]]}} {{dmg2type=}} {{crit1=[[1d6]]}} {{crit2=[[0]]}} @{saveflag} {{desc=@{atk_desc}}} @{hldmg} {{powerlevel=@{powerlevel}}} {{innate=@{power_innate}}}{{globaldamage=[[0]]}} {{globaldamagecrit=[[0]]}}{{globaldamagetype=@{global_damage_mod_type}}} @{charname_output}",
+      "max": "",
+      "id": ""
+    },
+    {
+      "name": "repeating_attack_-MayNRjkH1rMGjHnuRE8_rollbase",
+      "current": "@{wtype}&{template:atk} {{mod=@{atkbonus}}} {{rname=[@{atkname}](~repeating_attack_attack_dmg)}} {{rnamec=[@{atkname}](~repeating_attack_attack_crit)}} {{r1=[[@{d20}cs>@{atkcritrange} + 3[DEX] + 2[PROF]]]}} @{rtype}cs>@{atkcritrange} + 3[DEX] + 2[PROF]]]}} {{range=@{atkrange}}} {{desc=@{atk_desc}}} {{powerlevel=@{powerlevel}}} {{innate=@{power_innate}}} {{globalattack=@{global_attack_mod}}} ammo=@{ammo} @{charname_output}",
+      "max": "",
+      "id": ""
+    },
+    {
+      "name": "repeating_attack_-MPPv4GbNpZxeWhzReTF_atkname",
+      "current": "Unarmed Strike",
+      "max": "",
+      "id": ""
+    },
+    {
+      "name": "repeating_attack_-MPPv4GbNpZxeWhzReTF_options-flag",
+      "current": "0",
+      "max": "",
+      "id": ""
+    },
+    {
+      "name": "repeating_attack_-MPPv4GbNpZxeWhzReTF_atkbonus",
+      "current": 5,
+      "max": "",
+      "id": ""
+    },
+    {
+      "name": "repeating_attack_-MPPv4GbNpZxeWhzReTF_atkattr_base",
+      "current": "@{strength_mod}",
+      "max": "",
+      "id": ""
+    },
+    {
+      "name": "repeating_attack_-MPPv4GbNpZxeWhzReTF_dmgtype",
+      "current": "Kinetic",
+      "max": "",
+      "id": ""
+    },
+    {
+      "name": "repeating_attack_-MPPv4GbNpZxeWhzReTF_dmgbase",
+      "current": "1d4",
+      "max": "",
+      "id": ""
+    },
+    {
+      "name": "repeating_attack_-MPPv4GbNpZxeWhzReTF_dmgattr",
+      "current": "@{strength_mod}",
+      "max": "",
+      "id": ""
+    },
+    {
+      "name": "repeating_attack_-MPPv4GbNpZxeWhzReTF_atkrange",
+      "current": "",
+      "max": "",
+      "id": ""
+    },
+    {
+      "name": "repeating_attack_-MPPv4GbNpZxeWhzReTF_atk_desc",
+      "current": "",
+      "max": "",
+      "id": ""
+    },
+    {
+      "name": "repeating_attack_-MPPv4GbNpZxeWhzReTF_saveeffect",
+      "current": " ",
+      "max": "",
+      "id": ""
+    },
+    {
+      "name": "repeating_attack_-MPPv4GbNpZxeWhzReTF_atkdmgtype",
       "current": "1d4+1 Kinetic",
       "max": "",
       "id": ""
     },
     {
-      "name": "repeating_attack_-MmNcWVvfJMMKodCmSQF_rollbase",
-      "current": "@{wtype}&{template:atk} {{mod=@{atkbonus}}} {{rname=[@{atkname}](~repeating_attack_attack_dmg)}}{{rnamec=[@{atkname}](~repeating_attack_attack_crit)}} {{r1=[[@{d20}cs>@{atkcritrange} + 1[STR] + 3[PROF]]]}}@{rtype}cs>@{atkcritrange} + 1[STR] + 3[PROF]]]}} {{range=@{atkrange}}} {{desc=@{atk_desc}}}{{powerlevel=@{powerlevel}}} {{innate=@{power_innate}}} {{globalattack=@{global_attack_mod}}} ammo=@{ammo}@{charname_output}",
+      "name": "repeating_attack_-MPPv4GbNpZxeWhzReTF_rollbase_dmg",
+      "current": "@{wtype}&{template:dmg} {{rname=@{atkname}}} @{atkflag} {{range=@{atkrange}}} @{dmgflag} {{dmg1=[[1d4 + 1[STR]]]}} {{dmg1type=Kinetic}}@{dmg2flag} {{dmg2=[[0]]}} {{dmg2type=}} @{saveflag} {{desc=@{atk_desc}}} @{hldmg} {{powerlevel=@{powerlevel}}} {{innate=@{power_innate}}} {{globaldamage=[[0]]}} {{globaldamagetype=@{global_damage_mod_type}}} @{charname_output}",
       "max": "",
       "id": ""
     },
     {
-      "name": "repeating_traits_-MX0Gs9YQegHkLqXWqJ3_name",
+      "name": "repeating_attack_-MPPv4GbNpZxeWhzReTF_rollbase_crit",
+      "current": "@{wtype}&{template:dmg} {{crit=1}} {{rname=@{atkname}}} @{atkflag} {{range=@{atkrange}}} @{dmgflag}{{dmg1=[[1d4 + 1[STR]]]}} {{dmg1type=Kinetic}}@{dmg2flag} {{dmg2=[[0]]}} {{dmg2type=}} {{crit1=[[1d4]]}} {{crit2=[[0]]}} @{saveflag} {{desc=@{atk_desc}}} @{hldmg} {{powerlevel=@{powerlevel}}} {{innate=@{power_innate}}}{{globaldamage=[[0]]}} {{globaldamagecrit=[[0]]}}{{globaldamagetype=@{global_damage_mod_type}}} @{charname_output}",
+      "max": "",
+      "id": ""
+    },
+    {
+      "name": "repeating_attack_-MPPv4GbNpZxeWhzReTF_rollbase",
+      "current": "@{wtype}&{template:atk} {{mod=@{atkbonus}}} {{rname=[@{atkname}](~repeating_attack_attack_dmg)}} {{rnamec=[@{atkname}](~repeating_attack_attack_crit)}} {{r1=[[@{d20}cs>@{atkcritrange} + 1[STR] + 2[PROF]]]}} @{rtype}cs>@{atkcritrange} + 1[STR] + 2[PROF]]]}} {{range=@{atkrange}}} {{desc=@{atk_desc}}} {{powerlevel=@{powerlevel}}} {{innate=@{power_innate}}} {{globalattack=@{global_attack_mod}}} ammo=@{ammo} @{charname_output}",
+      "max": "",
+      "id": ""
+    },
+    {
+      "name": "repeating_traits_-MulvmngxTA4sw1YMD5S_name",
       "current": "Feigned Confidence",
       "max": "",
       "id": ""
     },
     {
-      "name": "repeating_traits_-MX0Gs9YQegHkLqXWqJ3_source",
+      "name": "repeating_traits_-MulvmngxTA4sw1YMD5S_source",
       "current": "Feat",
       "max": "",
       "id": ""
     },
     {
-      "name": "repeating_traits_-MX0Gs9YQegHkLqXWqJ3_description",
+      "name": "repeating_traits_-MulvmngxTA4sw1YMD5S_description",
       "current": "You've spent years pretending you know what you're doing, gaining the following benefits:\r\n- Increase your Charisma score by 1, to a maximum of 20.\r\n- When you would make an ability check that doesn't add your proficiency bonus, you can first make a DC 15 (Charisma) Deception check. On a success, you can add your proficiency bonus to the check. You can use this feature a number of times equal to your Charisma modifier (a minimum of once). You regain all expended uses when you finish a short or long rest.\r\n",
       "max": "",
       "id": ""
     },
     {
-      "name": "repeating_traits_-MX0Gs9YQegHkLqXWqJ3_options-flag",
+      "name": "repeating_traits_-MulvmngxTA4sw1YMD5S_options-flag",
       "current": "0",
       "max": "",
       "id": ""
     },
     {
-      "name": "repeating_traits_-MX0Gs9YQegHkLqXWqJ3_display_flag",
+      "name": "repeating_traits_-MulvmngxTA4sw1YMD5S_display_flag",
       "current": "on",
       "max": "",
       "id": ""
     },
     {
-      "name": "repeating_traits_-M62802xQ93ioz9DBhM0_name",
+      "name": "repeating_traits_-MliOWLn49U3I7oLNQGU_name",
       "current": "Clerical Augur",
       "max": "",
       "id": ""
     },
     {
-      "name": "repeating_traits_-M62802xQ93ioz9DBhM0_source",
+      "name": "repeating_traits_-MliOWLn49U3I7oLNQGU_source",
       "current": "Background",
       "max": "",
       "id": ""
     },
     {
-      "name": "repeating_traits_-M62802xQ93ioz9DBhM0_description",
+      "name": "repeating_traits_-MliOWLn49U3I7oLNQGU_description",
       "current": "You have an intuitive understanding of how offices work and can readily fit in to an office environment as if you were meant to be there, as long as no one looks too carefully. Additionally, you know where the true power lies in the office: you know who is likely to know the local gossip and you know who to sweet talk into getting things done for you.\r\n",
       "max": "",
       "id": ""
     },
     {
-      "name": "repeating_traits_-M62802xQ93ioz9DBhM0_options-flag",
+      "name": "repeating_traits_-MliOWLn49U3I7oLNQGU_options-flag",
       "current": "0",
       "max": "",
       "id": ""
     },
     {
-      "name": "repeating_traits_-M62802xQ93ioz9DBhM0_display_flag",
+      "name": "repeating_traits_-MliOWLn49U3I7oLNQGU_display_flag",
       "current": "on",
       "max": "",
       "id": ""
     },
     {
-      "name": "repeating_traits_-MO952K7tXOjBWmlZO3a_name",
-      "current": "Staggering Stratagem",
-      "max": "",
-      "id": ""
-    },
-    {
-      "name": "repeating_traits_-MO952K7tXOjBWmlZO3a_source",
-      "current": "Other",
-      "max": "",
-      "id": ""
-    },
-    {
-      "name": "repeating_traits_-MO952K7tXOjBWmlZO3a_description",
-      "current": "When you choose this tradition at 3rd level, your potency with the telekinetic power of the Force heightens. You can manipulate creatures of Large size or smaller with your force powers and Way of Telekinetics features. Additionally, once per turn, when you deal force or kinetic damage to a Large or smaller creature with a force power or class feature, you can choose to either push it up to 10 feet away from you or pull it up to 10 feet closer to you.",
-      "max": "",
-      "id": ""
-    },
-    {
-      "name": "repeating_traits_-MO952K7tXOjBWmlZO3a_options-flag",
-      "current": "0",
-      "max": "",
-      "id": ""
-    },
-    {
-      "name": "repeating_traits_-MO952K7tXOjBWmlZO3a_display_flag",
-      "current": "on",
-      "max": "",
-      "id": ""
-    },
-    {
-      "name": "repeating_traits_-MLQTfD57FOJ5mDetHiP_name",
-      "current": "Mighty Blast",
-      "max": "",
-      "id": ""
-    },
-    {
-      "name": "repeating_traits_-MLQTfD57FOJ5mDetHiP_source",
-      "current": "Other",
-      "max": "",
-      "id": ""
-    },
-    {
-      "name": "repeating_traits_-MLQTfD57FOJ5mDetHiP_description",
-      "current": "At 6th level, your force powers batter and blast your enemies with the strength of a hurricane. When you cast a force power of 1st level or higher that deals force or kinetic damage, one creature of your choice damaged by that power must make a Strength saving throw against your universal force save DC or be knocked prone.\n\nThis feature can affect additional creatures when you reach higher levels: two creatures at 11th level and three creatures at 17th level.",
-      "max": "",
-      "id": ""
-    },
-    {
-      "name": "repeating_traits_-MLQTfD57FOJ5mDetHiP_options-flag",
-      "current": "0",
-      "max": "",
-      "id": ""
-    },
-    {
-      "name": "repeating_traits_-MLQTfD57FOJ5mDetHiP_display_flag",
-      "current": "on",
-      "max": "",
-      "id": ""
-    },
-    {
-      "name": "repeating_traits_-MaCTUHx3dwdH4pzlFWY_name",
+      "name": "repeating_traits_-MlaYSHCaARNm8teK5NT_name",
       "current": "Force Recovery",
       "max": "",
       "id": ""
     },
     {
-      "name": "repeating_traits_-MaCTUHx3dwdH4pzlFWY_source",
+      "name": "repeating_traits_-MlaYSHCaARNm8teK5NT_source",
       "current": "Other",
       "max": "",
       "id": ""
     },
     {
-      "name": "repeating_traits_-MaCTUHx3dwdH4pzlFWY_description",
+      "name": "repeating_traits_-MlaYSHCaARNm8teK5NT_description",
       "current": "Also at 1st level, you have learned to regain some of your energy by briefly meditating. When you finish a short rest, you can regain a number of force points equal to half your consular level (rounded down) + your Wisdom or Charisma modifier (your choice, minimum of one). Once you’ve used this feature, you must complete a long rest before you can use it again.\n\n**Uses:** 1/1",
       "max": "",
       "id": ""
     },
     {
-      "name": "repeating_traits_-MaCTUHx3dwdH4pzlFWY_options-flag",
+      "name": "repeating_traits_-MlaYSHCaARNm8teK5NT_options-flag",
       "current": "0",
       "max": "",
       "id": ""
     },
     {
-      "name": "repeating_traits_-MaCTUHx3dwdH4pzlFWY_display_flag",
+      "name": "repeating_traits_-MlaYSHCaARNm8teK5NT_display_flag",
       "current": "on",
       "max": "",
       "id": ""
     },
     {
-      "name": "repeating_traits_-MRbnQjEQLn7DjRkHsK3_name",
+      "name": "repeating_traits_-MOgcsGZPCszsQQreVZ2_name",
       "current": "Force Shield",
       "max": "",
       "id": ""
     },
     {
-      "name": "repeating_traits_-MRbnQjEQLn7DjRkHsK3_source",
+      "name": "repeating_traits_-MOgcsGZPCszsQQreVZ2_source",
       "current": "Other",
       "max": "",
       "id": ""
     },
     {
-      "name": "repeating_traits_-MRbnQjEQLn7DjRkHsK3_description",
+      "name": "repeating_traits_-MOgcsGZPCszsQQreVZ2_description",
       "current": "Also at 2nd level, you learn how to defend yourself purely through your strength with the Force. When you are hit by an attack, you can use your reaction to shroud yourself in Force energy. Until the start of your next turn, you have a bonus to AC equal to your Wisdom or Charisma modifier (your choice, a minimum of +1). This includes the triggering attack.\n\nYou can use this feature twice. You gain an additional use at 5th, 11th, and 17th level in this class. You regain all expended uses when you finish a long rest.\n\n**Uses:** 2/2",
       "max": "",
       "id": ""
     },
     {
-      "name": "repeating_traits_-MRbnQjEQLn7DjRkHsK3_options-flag",
+      "name": "repeating_traits_-MOgcsGZPCszsQQreVZ2_options-flag",
       "current": "0",
       "max": "",
       "id": ""
     },
     {
-      "name": "repeating_traits_-MRbnQjEQLn7DjRkHsK3_display_flag",
+      "name": "repeating_traits_-MOgcsGZPCszsQQreVZ2_display_flag",
       "current": "on",
       "max": "",
       "id": ""
     },
     {
-      "name": "repeating_traits_-MJj131wfowsfZ8yhq6Z_name",
+      "name": "repeating_traits_-M75Jva5R0TZI9SpYRcl_name",
       "current": "Hidden Force",
       "max": "",
       "id": ""
     },
     {
-      "name": "repeating_traits_-MJj131wfowsfZ8yhq6Z_source",
+      "name": "repeating_traits_-M75Jva5R0TZI9SpYRcl_source",
       "current": "Other",
       "max": "",
       "id": ""
     },
     {
-      "name": "repeating_traits_-MJj131wfowsfZ8yhq6Z_description",
+      "name": "repeating_traits_-M75Jva5R0TZI9SpYRcl_description",
       "current": "Also at 3rd level, you learn how to conceal the casting of your force powers. When you cast a force power, you can choose to conceal the presence of that casting from others. A creature that sees you cast the force power can make an Investigation (Intelligence) check against your universal force save DC. On a success, they can determine that you used the Force in some way. If a creature has the force sight force power active, they automatically succeed on this check. A creature that can not see you automatically fails this check.\n\nYou can use this feature a number of times equal to your Wisdom or Charisma modifier (your choice, a minimum of once). You regain all expended uses when you finish a long rest.\n\n**Uses**: 4/4",
       "max": "",
       "id": ""
     },
     {
-      "name": "repeating_traits_-MJj131wfowsfZ8yhq6Z_options-flag",
+      "name": "repeating_traits_-M75Jva5R0TZI9SpYRcl_options-flag",
       "current": "0",
       "max": "",
       "id": ""
     },
     {
-      "name": "repeating_traits_-MJj131wfowsfZ8yhq6Z_display_flag",
+      "name": "repeating_traits_-M75Jva5R0TZI9SpYRcl_display_flag",
       "current": "on",
       "max": "",
       "id": ""
     },
     {
-      "name": "repeating_traits_-Mp32Tl4upo8q08t1mkt_name",
+      "name": "repeating_traits_-M11Xd4CG1NHKjIrnjd6_name",
       "current": "Heightened Power",
       "max": "",
       "id": ""
     },
     {
-      "name": "repeating_traits_-Mp32Tl4upo8q08t1mkt_source",
+      "name": "repeating_traits_-M11Xd4CG1NHKjIrnjd6_source",
       "current": "Other",
       "max": "",
       "id": ""
     },
     {
-      "name": "repeating_traits_-Mp32Tl4upo8q08t1mkt_description",
+      "name": "repeating_traits_-M11Xd4CG1NHKjIrnjd6_description",
       "current": "When you cast a power that forces a creature to make a saving throw to resist its effects, you can spend 3 additional force points to give one target of the power disadvantage on its first saving throw made against the power.",
       "max": "",
       "id": ""
     },
     {
-      "name": "repeating_traits_-Mp32Tl4upo8q08t1mkt_options-flag",
+      "name": "repeating_traits_-M11Xd4CG1NHKjIrnjd6_options-flag",
       "current": "0",
       "max": "",
       "id": ""
     },
     {
-      "name": "repeating_traits_-Mp32Tl4upo8q08t1mkt_display_flag",
+      "name": "repeating_traits_-M11Xd4CG1NHKjIrnjd6_display_flag",
       "current": "on",
       "max": "",
       "id": ""
     },
     {
-      "name": "repeating_traits_-MN2qQICdfAKe8LmMXmt_name",
+      "name": "repeating_traits_-MatQ2sZK30o3e1F6Qnh_name",
       "current": "Quickened Power",
       "max": "",
       "id": ""
     },
     {
-      "name": "repeating_traits_-MN2qQICdfAKe8LmMXmt_source",
+      "name": "repeating_traits_-MatQ2sZK30o3e1F6Qnh_source",
       "current": "Other",
       "max": "",
       "id": ""
     },
     {
-      "name": "repeating_traits_-MN2qQICdfAKe8LmMXmt_description",
+      "name": "repeating_traits_-MatQ2sZK30o3e1F6Qnh_description",
       "current": "When you cast a power that has a casting time of 1 action, you can spend 2 additional force points to change the casting time to 1 bonus action for this casting.",
       "max": "",
       "id": ""
     },
     {
-      "name": "repeating_traits_-MN2qQICdfAKe8LmMXmt_options-flag",
+      "name": "repeating_traits_-MatQ2sZK30o3e1F6Qnh_options-flag",
       "current": "0",
       "max": "",
       "id": ""
     },
     {
-      "name": "repeating_traits_-MN2qQICdfAKe8LmMXmt_display_flag",
+      "name": "repeating_traits_-MatQ2sZK30o3e1F6Qnh_display_flag",
       "current": "on",
       "max": "",
       "id": ""
     },
     {
-      "name": "repeating_traits_-MJWjKIWxRVVTGRwowqj_name",
+      "name": "repeating_traits_-MBZ1mF0dEC8CRbe1J7E_name",
+      "current": "Staggering Stratagem",
+      "max": "",
+      "id": ""
+    },
+    {
+      "name": "repeating_traits_-MBZ1mF0dEC8CRbe1J7E_source",
+      "current": "Other",
+      "max": "",
+      "id": ""
+    },
+    {
+      "name": "repeating_traits_-MBZ1mF0dEC8CRbe1J7E_description",
+      "current": "When you choose this tradition at 3rd level, your potency with the telekinetic power of the Force heightens. You can manipulate creatures of Large size or smaller with your force powers and Way of Telekinetics features. Additionally, once per turn, when you deal force or kinetic damage to a Large or smaller creature with a force power or class feature, you can choose to either push it up to 10 feet away from you or pull it up to 10 feet closer to you.",
+      "max": "",
+      "id": ""
+    },
+    {
+      "name": "repeating_traits_-MBZ1mF0dEC8CRbe1J7E_options-flag",
+      "current": "0",
+      "max": "",
+      "id": ""
+    },
+    {
+      "name": "repeating_traits_-MBZ1mF0dEC8CRbe1J7E_display_flag",
+      "current": "on",
+      "max": "",
+      "id": ""
+    },
+    {
+      "name": "repeating_traits_-MYWlq3OltnM6bbFLC0V_name",
       "current": "Darkvision",
       "max": "",
       "id": ""
     },
     {
-      "name": "repeating_traits_-MJWjKIWxRVVTGRwowqj_source",
+      "name": "repeating_traits_-MYWlq3OltnM6bbFLC0V_source",
       "current": "Other",
       "max": "",
       "id": ""
     },
     {
-      "name": "repeating_traits_-MJWjKIWxRVVTGRwowqj_description",
+      "name": "repeating_traits_-MYWlq3OltnM6bbFLC0V_description",
       "current": "Your vision can easily cut through darkness. You can see in dim light within 60 feet of you as if it were bright light, and in darkness as if it were dim light. You can’t discern color in darkness, only shades of gray.",
       "max": "",
       "id": ""
     },
     {
-      "name": "repeating_traits_-MJWjKIWxRVVTGRwowqj_options-flag",
+      "name": "repeating_traits_-MYWlq3OltnM6bbFLC0V_options-flag",
       "current": "0",
       "max": "",
       "id": ""
     },
     {
-      "name": "repeating_traits_-MJWjKIWxRVVTGRwowqj_display_flag",
+      "name": "repeating_traits_-MYWlq3OltnM6bbFLC0V_display_flag",
       "current": "on",
       "max": "",
       "id": ""
     },
     {
-      "name": "repeating_traits_-MF8tpmtfSngPLaPv03h_name",
+      "name": "repeating_traits_-MLImLa17WyqBu043xYw_name",
       "current": "Natural Antitoxins",
       "max": "",
       "id": ""
     },
     {
-      "name": "repeating_traits_-MF8tpmtfSngPLaPv03h_source",
+      "name": "repeating_traits_-MLImLa17WyqBu043xYw_source",
       "current": "Other",
       "max": "",
       "id": ""
     },
     {
-      "name": "repeating_traits_-MF8tpmtfSngPLaPv03h_description",
+      "name": "repeating_traits_-MLImLa17WyqBu043xYw_description",
       "current": "You have advantage on saving throws against poison and disease, and you have resistance against poison damage (explained in Chapter 9).",
       "max": "",
       "id": ""
     },
     {
-      "name": "repeating_traits_-MF8tpmtfSngPLaPv03h_options-flag",
+      "name": "repeating_traits_-MLImLa17WyqBu043xYw_options-flag",
       "current": "0",
       "max": "",
       "id": ""
     },
     {
-      "name": "repeating_traits_-MF8tpmtfSngPLaPv03h_display_flag",
+      "name": "repeating_traits_-MLImLa17WyqBu043xYw_display_flag",
       "current": "on",
       "max": "",
       "id": ""
     },
     {
-      "name": "repeating_traits_-MWvNX9358NPveVlNxSy_name",
+      "name": "repeating_traits_-MbhzDoKHIwV5eSPoC9L_name",
       "current": "Unarmed Combatant",
       "max": "",
       "id": ""
     },
     {
-      "name": "repeating_traits_-MWvNX9358NPveVlNxSy_source",
+      "name": "repeating_traits_-MbhzDoKHIwV5eSPoC9L_source",
       "current": "Other",
       "max": "",
       "id": ""
     },
     {
-      "name": "repeating_traits_-MWvNX9358NPveVlNxSy_description",
+      "name": "repeating_traits_-MbhzDoKHIwV5eSPoC9L_description",
       "current": "Your unarmed strikes deal 1d4 kinetic damage. You can use your choice of your Strength or Dexterity modifier for the attack and damage rolls. You must use the same modifier for both rolls.",
       "max": "",
       "id": ""
     },
     {
-      "name": "repeating_traits_-MWvNX9358NPveVlNxSy_options-flag",
+      "name": "repeating_traits_-MbhzDoKHIwV5eSPoC9L_options-flag",
       "current": "0",
       "max": "",
       "id": ""
     },
     {
-      "name": "repeating_traits_-MWvNX9358NPveVlNxSy_display_flag",
+      "name": "repeating_traits_-MbhzDoKHIwV5eSPoC9L_display_flag",
       "current": "on",
       "max": "",
       "id": ""
     },
     {
+      "name": "repeating_proficiencies_-M2rqLp19wVAiAZ9XMj8_name",
+      "current": "Simple lightweapons",
+      "max": "",
+      "id": ""
+    },
+    {
+      "name": "repeating_proficiencies_-M2rqLp19wVAiAZ9XMj8_prof_type",
+      "current": "WEAPON",
+      "max": "",
+      "id": ""
+    },
+    {
+      "name": "repeating_proficiencies_-M2rqLp19wVAiAZ9XMj8_options-flag",
+      "current": "0",
+      "max": "",
+      "id": ""
+    },
+    {
+      "name": "repeating_proficiencies_-MSK6GWLw9HOKha0OQ4z_name",
+      "current": "simple vibroweapons",
+      "max": "",
+      "id": ""
+    },
+    {
+      "name": "repeating_proficiencies_-MSK6GWLw9HOKha0OQ4z_prof_type",
+      "current": "WEAPON",
+      "max": "",
+      "id": ""
+    },
+    {
+      "name": "repeating_proficiencies_-MSK6GWLw9HOKha0OQ4z_options-flag",
+      "current": "0",
+      "max": "",
+      "id": ""
+    },
+    {
+      "name": "repeating_proficiencies_-MuK8SrpvQZqvHUPyQFR_name",
+      "current": "None",
+      "max": "",
+      "id": ""
+    },
+    {
+      "name": "repeating_proficiencies_-MuK8SrpvQZqvHUPyQFR_prof_type",
+      "current": "ARMOR",
+      "max": "",
+      "id": ""
+    },
+    {
+      "name": "repeating_proficiencies_-MuK8SrpvQZqvHUPyQFR_options-flag",
+      "current": "0",
+      "max": "",
+      "id": ""
+    },
+    {
+      "name": "repeating_tool_-MT8zGI0uJDDomh6kcWr_toolname",
+      "current": "One type of gaming set",
+      "max": "",
+      "id": ""
+    },
+    {
+      "name": "repeating_tool_-MT8zGI0uJDDomh6kcWr_toolattr",
+      "current": "QUERY",
+      "max": "",
+      "id": ""
+    },
+    {
+      "name": "repeating_tool_-MT8zGI0uJDDomh6kcWr_toolbonus",
+      "current": "?{Attribute?|Strength,@{strength_mod}|Dexterity,@{dexterity_mod}|Constitution,@{constitution_mod}|Intelligence,@{intelligence_mod}|Wisdom,@{wisdom_mod}|Charisma,@{charisma_mod}}+0+2",
+      "max": "",
+      "id": ""
+    },
+    {
+      "name": "repeating_tool_-MT8zGI0uJDDomh6kcWr_toolbonus_display",
+      "current": "?",
+      "max": "",
+      "id": ""
+    },
+    {
+      "name": "repeating_tool_-MT8zGI0uJDDomh6kcWr_toolattr_base",
+      "current": "?{Attribute?|Strength,@{strength_mod}|Dexterity,@{dexterity_mod}|Constitution,@{constitution_mod}|Intelligence,@{intelligence_mod}|Wisdom,@{wisdom_mod}|Charisma,@{charisma_mod}}",
+      "max": "",
+      "id": ""
+    },
+    {
+      "name": "repeating_tool_-MT8zGI0uJDDomh6kcWr_toolbonus_base",
+      "current": "(@{pb})",
+      "max": "",
+      "id": ""
+    },
+    {
+      "name": "repeating_tool_-MT8zGI0uJDDomh6kcWr_tool_mod",
+      "current": "0",
+      "max": "",
+      "id": ""
+    },
+    {
+      "name": "repeating_tool_-MT8zGI0uJDDomh6kcWr_options-flag",
+      "current": "0",
+      "max": "",
+      "id": ""
+    },
+    {
+      "name": "repeating_proficiencies_-MlkRqH59s9iofACkU4o_name",
+      "current": "Holochess set",
+      "max": "",
+      "id": ""
+    },
+    {
+      "name": "repeating_proficiencies_-MlkRqH59s9iofACkU4o_prof_type",
+      "current": "OTHER",
+      "max": "",
+      "id": ""
+    },
+    {
+      "name": "repeating_proficiencies_-MlkRqH59s9iofACkU4o_options-flag",
+      "current": "0",
+      "max": "",
+      "id": ""
+    },
+    {
       "name": "hitdietype",
-      "current": null,
+      "current": 6,
       "max": "",
       "id": ""
     },
@@ -2654,7 +2214,7 @@
     },
     {
       "name": "passive_wisdom",
-      "current": "11",
+      "current": "10",
       "max": "",
       "id": ""
     },
@@ -2666,13 +2226,13 @@
     },
     {
       "name": "force_power_points_total",
-      "current": 33,
+      "current": 17,
       "max": "",
       "id": ""
     },
     {
       "name": "force_power_points_expended",
-      "current": 25,
+      "current": 17,
       "max": "",
       "id": ""
     },
@@ -2690,14 +2250,14 @@
     },
     {
       "name": "hp",
-      "current": "44",
-      "max": "44",
+      "current": "20",
+      "max": "20",
       "id": ""
     },
     {
       "name": "hit_dice",
-      "current": 7,
-      "max": 7,
+      "current": 3,
+      "max": "3d6",
       "id": ""
     }
   ],

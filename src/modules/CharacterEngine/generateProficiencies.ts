@@ -1,12 +1,12 @@
 import { RawCharacterType, ProficiencyType } from '@/types/rawCharacterTypes'
-import { ClassType } from '@/types/characterTypes'
+import { ClassType, BackgroundType } from '@/types/characterTypes'
 import { CompletedFeatureType, CharacterProficiency } from '@/types/completeCharacterTypes'
 import { compact, uniqBy, lowerCase, toUpper } from 'lodash'
 
 export default function generateProficiencies (
   rawCharacter: RawCharacterType,
   classes: ClassType[],
-  feats: CompletedFeatureType[]
+  background: BackgroundType | undefined
 ): CharacterProficiency[] {
   const startingClass = rawCharacter.classes[0]
   const startingClassData = startingClass && classes.find(({ name }) => name === startingClass.name)
@@ -17,7 +17,7 @@ export default function generateProficiencies (
     })),
     startingClassData.armorProficiencies.map(name => ({
       name,
-      type: 'armor'
+      type: 'armor' as ProficiencyType
     }))
   ].flat()
   const fromOtherClasses = rawCharacter.classes.slice(1)
@@ -25,13 +25,18 @@ export default function generateProficiencies (
       const myClass = classes.find(({ name: className }) => className === name)
       return myClass ? myClass.multiClassProficiencies.map(name => ({
         name,
-        type: 'other'
+        type: 'other' as ProficiencyType
       })) : []
     })
     .flat()
+  const fromBackground = background && background.toolProficiencies ? [{
+    name: background.toolProficiencies,
+    type: 'tool' as ProficiencyType
+  }] : []
 
   return uniqBy([
     ...(fromStartingClass || []),
     ...fromOtherClasses,
+    ...fromBackground
   ], proficiency => lowerCase(proficiency.name))
 }

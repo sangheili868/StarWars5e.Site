@@ -1,7 +1,7 @@
 <script lang="ts">
   import { Component, Prop, Vue } from 'vue-property-decorator'
   import { CustomProficiencyType } from '@/types/rawCharacterTypes'
-  import { CompletedFeatureType } from '@/types/completeCharacterTypes'
+  import { CharacterProficiency, CompletedFeatureType } from '@/types/completeCharacterTypes'
   import CharacterSheetExpansionFeatures from './CharacterSheetExpansionFeatures.vue'
   import CharacterSheetProficienciesLanguages from './CharacterSheetProficienciesLanguages.vue'
   import CharacterSheetProficienciesList from './CharacterSheetProficienciesList.vue'
@@ -18,7 +18,7 @@
     @Prop(Object) readonly backgroundFeature!: CompletedFeatureType
     @Prop(Array) readonly customLanguages!: string[]
     @Prop(Array) readonly languages!: string[]
-    @Prop(Array) readonly proficiencies!: string[]
+    @Prop(Array) readonly proficiencies!: CharacterProficiency[]
     @Prop(Array) readonly skillAndSaveProficiencies!: string[]
     @Prop(Array) readonly customProficiencies!: CustomProficiencyType[]
   }

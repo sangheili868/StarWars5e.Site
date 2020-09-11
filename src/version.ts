@@ -2,6 +2,9 @@ export default '0.4.23'
 
 /*
 
+0.4.26
+- Added Notes to character sheet (by James WR)
+
 0.4.25
 - Added Export to Roll20 button in Character Sheet settings
 

@@ -18,6 +18,6 @@
     TextEditor(
       :value="notes",
       hasOwnState
-      @input="newValue => $emit('updateCharacter', { notes: newValue })",
+      @input="notes => $emit('updateCharacter', { notes })",
     ).pt-1
 </template>

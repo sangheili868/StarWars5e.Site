@@ -1,6 +1,9 @@
-export default '0.4.23'
+export default '0.4.27'
 
 /*
+
+0.4.27
+- Added Heresy's Species to sponsored content
 
 0.4.26
 - Added Notes to character sheet (by James WR)

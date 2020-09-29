@@ -65,6 +65,10 @@
             {
               href: 'https://www.gmbinder.com/share/-MDosNzOCLn0_ColYfBf',
               title: 'Hugehuman\'s Force Powers'
+            },
+            {
+              href: 'https://www.gmbinder.com/share/-M815p5BfQ0wbdKY7zqN',
+              title: 'Heresy\'s Species'
             }
           ]
         },

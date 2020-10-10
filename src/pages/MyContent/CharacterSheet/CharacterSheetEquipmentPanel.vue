@@ -5,12 +5,14 @@
   import LootWeaponsProperties from '@/pages/Loot/LootWeaponsProperties.vue'
   import VueMarkdown from 'vue-markdown'
   import { CustomEquipmentType } from '@/types/rawCharacterTypes'
+  import TextEditor from '@/components/TextEditor.vue'
   import { CharacterWeaponType, CharacterLootType, isCharacterWeaponType, isCharacterArmorType, isCharacterEnhancedItem, AttunementType } from '@/types/completeCharacterTypes'
 
   @Component({
     components: {
       LootWeaponsProperties,
-      VueMarkdown
+      VueMarkdown,
+      TextEditor
     }
   })
   export default class CharacterSheetEquipmentPanel extends Vue {
@@ -19,17 +21,17 @@
     @Prop(Object) readonly attunement!: AttunementType
     @Prop(Boolean) readonly isCustomEquipment!: boolean
 
-    get isEquippable () {
-      return this.isNotCustom(this.item) && (isCharacterWeaponType(this.item) || isCharacterArmorType(this.item))// || (
-        // isCharacterEnhancedItem(this.item) && ['Weapon', 'Armor', 'Shield', 'Focus'].includes(this.item.type)
-      // ))
+    get isEquippable (): boolean {
+      return this.isNotCustom(this.item)
+        ? (isCharacterWeaponType(this.item) || isCharacterArmorType(this.item))
+        : this.item.equipmentCategory !== 'Gear'
     }
 
-    get equipmentPath () {
+    get equipmentPath (): 'customEquipment' | 'equipment' {
       return this.isCustomEquipment ? 'customEquipment' : 'equipment'
     }
 
-    get atAttunementLimit () {
+    get atAttunementLimit (): boolean {
       return this.isNotCustom(this.item) &&
         isCharacterEnhancedItem(this.item) &&
         !this.item.attuned &&
@@ -115,8 +117,14 @@
               strong Properties:
               LootWeaponsProperties(:propertyList="item.properties")
         div(v-else) Warning: No data found for this item. It may have been renamed or removed from the core rules. Consider changing it to a custom item.
-      VueMarkdown(v-if="item.description", :source="item.description")
-      VueMarkdown(v-if="item.text", :source="item.text")
+        VueMarkdown(v-if="item.description", :source="item.description")
+        VueMarkdown(v-if="item.text", :source="item.text")
+      TextEditor(
+        v-else
+        :value="item.description",
+        hasOwnState
+        @input="description => $emit('updateCharacter', { [equipmentPath]: { [index]: { description } } })"
+      ).pt-1
 </template>
 
 <style lang="scss">

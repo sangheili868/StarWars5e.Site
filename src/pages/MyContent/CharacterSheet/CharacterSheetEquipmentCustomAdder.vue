@@ -23,7 +23,7 @@
     description = ''
     weight = 1
     damageType = 'Kinetic'
-    diceSize = 4
+    dieSize = 4
     toHit = 0
     damage = 0
     equipped = false
@@ -33,7 +33,7 @@
       return ['Weapon', 'Armor'].includes(this.equipmentCategory)
     }
 
-    get diceSizes () {
+    get dieSizes () {
       return [4, 6, 8, 10, 12].map(value => ({ text: 'd' + value, value }))
     }
 
@@ -49,7 +49,7 @@
       this.toHit = 0
       this.damage = 0
       this.damageNumberOfDice = 1
-      this.diceSize = 4
+      this.dieSize = 4
     }
 
     addItem () {
@@ -65,7 +65,7 @@
           damageNumberOfDice: this.damageNumberOfDice,
           tweaks: {
             toHit: { override: this.toHit },
-            damageDice: { diceSize: this.diceSize },
+            damageDice: { dieSize: this.dieSize },
             damage: { override: this.damage }
           }
         } : {}),
@@ -119,7 +119,7 @@
               v-text-field(v-model.number="damageNumberOfDice", outlined, type="number", hide-details)
             v-col(cols="3").font-weight-bold.d-flex.align-center Damage Dice Size
             v-col(cols="3")
-              v-select(v-model.number="diceSize", outlined, :items="diceSizes", hide-details)
+              v-select(v-model.number="dieSize", outlined, :items="dieSizes", hide-details)
           v-row
             v-col(cols="4").font-weight-bold.d-flex.align-center Damage Type
             v-col(cols="8")

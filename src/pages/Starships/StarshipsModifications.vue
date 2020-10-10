@@ -4,8 +4,8 @@
   import SearchTable from '@/components/SearchTable.vue'
   import { StarshipModificationType } from '@/types/starshipTypes'
   import _ from 'lodash'
-  import VueMarkdownWithAnchors from '@/components/VueMarkdownWithAnchors.vue'
   import BackButton from '@/components/BackButton.vue'
+  import VueMarkdown from 'vue-markdown'
 
   const starshipModificationsModule = namespace('starshipModifications')
 
@@ -13,7 +13,7 @@
     components: {
       SearchTable,
       BackButton,
-      VueMarkdownWithAnchors
+      VueMarkdown
     }
   })
   export default class StarshipsModifications extends Vue {
@@ -64,5 +64,5 @@
     br
     SearchTable(name="starshipModifications", v-bind="{ headers, items, initialSearch, tableType }")
       template(v-slot:default="props")
-        VueMarkdownWithAnchors(:source="props.item.content")
+        VueMarkdown(:source="props.item.content")
 </template>

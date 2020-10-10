@@ -2,6 +2,14 @@ export default '0.4.27'
 
 /*
 
+0.4.28
+- Add ability to change the description of a custom item after it is created (suggested by @vegcethepilot)
+- Fix bug where custom weapons and armor are not equippable
+- Fix bug where custom armor does not get listed under AC when equipped
+- Fix bug where all custom weapons use d4 damage dice
+- Fix bug where global and individual weapon tweaks were not applied to custom weapons (found by @vegcepilot)
+- Fix bug where opening a starship modification description in the SOTG chapter page causes the page to jump to the top (found by @bear)
+
 0.4.27
 - Added Heresy's Species to sponsored content
 

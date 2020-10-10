@@ -45,7 +45,11 @@ export default function generateCombatStats (
   proficiencyBonus: number
 ) {
   const equippedArmor = equipment.filter(isCharacterArmorType).filter(armor => armor.equipped)
-  const armorList = equippedArmor.map(({ name }) => name)
+  const armorList = [
+    ...equippedArmor,
+    ...rawCharacter.customEquipment.filter(({ equipmentCategory }) => equipmentCategory === 'Armor')
+  ].map(({ name }) => name)
+
   const perceptionModifier = abilityScores.Wisdom.skills.find(({ name }) => name === 'Perception')
   const isScout = rawCharacter.classes.find(({ name }) => name === 'Scout')
   const initiative = abilityScores.Dexterity.modifier + (isScout ? proficiencyBonus : 0)

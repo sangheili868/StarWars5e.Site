@@ -1,7 +1,7 @@
 import { RawCharacterType, CustomEquipmentType } from '@/types/rawCharacterTypes'
 import { damageDieTypes } from '@/types/lootTypes'
 import { AbilityScoresType, CustomWeaponType, isCharacterWeaponType, CharacterLootType, CharacterWeaponType } from '@/types/completeCharacterTypes'
-import { get } from 'lodash'
+import { get, chain } from 'lodash'
 import applyTweak, { applyCustomTweak } from '@/utilities/applyTweak'
 
 function getUnarmedStrike (
@@ -71,9 +71,13 @@ export default function generateWeapons (
   proficiencyBonus: number
 ): (CharacterWeaponType | CustomWeaponType)[] {
   const equippedWeapons = equipment.filter(isCharacterWeaponType).filter(({ equipped }) => equipped)
-  const equippedCustomWeapons: CustomWeaponType[] = rawCharacter.customEquipment
-    .filter(({ equipped, equipmentCategory }) => equipped && equipmentCategory === 'Weapon')
-    .map((customEquipment, index) => getCustomWeaponStats(customEquipment, rawCharacter, index))
+  const equippedCustomWeapons: CustomWeaponType[] = chain(rawCharacter.customEquipment)
+    .map((customEquipment, index) => {
+      const isEquippedWeapon = customEquipment.equipped && customEquipment.equipmentCategory === 'Weapon'
+      return isEquippedWeapon ? getCustomWeaponStats(customEquipment, rawCharacter, index) : false
+    })
+    .compact()
+    .value()
   return [
     ...equippedWeapons,
     ...equippedCustomWeapons,

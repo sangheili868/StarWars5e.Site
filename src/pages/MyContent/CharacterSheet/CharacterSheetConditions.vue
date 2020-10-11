@@ -6,6 +6,7 @@
   import VueMarkdown from 'vue-markdown'
   import { range } from 'lodash'
   import MySelect from '@/components/MySelect.vue'
+  import CharacterSheetMenuButton from './CharacterSheetMenuButton.vue'
 
   const conditionsModule = namespace('conditions')
 
@@ -13,7 +14,8 @@
     components: {
       MyDialog,
       VueMarkdown,
-      MySelect
+      MySelect,
+      CharacterSheetMenuButton
     }
   })
   export default class CharacterSheetConditions extends Vue {
@@ -53,7 +55,12 @@
   div
     MyDialog(v-model="isOpen")
       template(v-slot:activator="{ on }")
-        v-btn(v-on="on", block, :color="myConditions.length ? 'primary' : ''").mb-2 Conditions ({{ myConditions.length }})
+        CharacterSheetMenuButton(
+          :text="'Conditions (' + myConditions.length + ')'",
+          icon="frown",
+          :color="myConditions.length ? 'primary' : ''"
+          :on="on"
+        )
       template(#title) Active Conditions
       template(#text)
         MySelect(

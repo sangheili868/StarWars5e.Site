@@ -6,13 +6,15 @@
   import CharacterSheetExperience from './CharacterSheetExperience.vue'
   import CharacterSheetConditions from './CharacterSheetConditions.vue'
   import CharacterSheetSettings from './CharacterSheetSettings.vue'
+  import CharacterSheetMenu from './CharacterSheetMenu.vue'
 
   @Component({
     components: {
       CharacterSheetHealth,
       CharacterSheetExperience,
       CharacterSheetConditions,
-      CharacterSheetSettings
+      CharacterSheetSettings,
+      CharacterSheetMenu
     }
   })
   export default class CharacterSheetTop extends Vue {
@@ -37,7 +39,14 @@
       @updateCharacter="newCharacter => $emit('updateCharacter', newCharacter)",
       @replaceCharacterProperty="payload => $emit('replaceCharacterProperty', payload)"
     )
-    div
+    v-card.d-flex.flex-column.align-start.mb-2.mx-3
+      CharacterSheetMenu(
+        v-bind="{ completeCharacter, rawCharacter }"
+        @handleCreateNew="$emit('handleCreateNew')"
+        @handleCharacterUpload="(newCharacter, newFilename) => $emit('handleCharacterUpload', newCharacter, newFilename)"
+        @goToStep="step => $emit('goToStep', step)"
+        @setClean="$emit('setClean')"
+      )
       CharacterSheetSettings(
         v-bind="{ completeCharacter, rawCharacter }",
         @replaceCharacterProperty="payload => $emit('replaceCharacterProperty', payload)"

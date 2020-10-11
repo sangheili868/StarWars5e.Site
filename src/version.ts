@@ -1,6 +1,10 @@
 export default '0.4.27'
 
 /*
+0.4.29
+- Added Menu button above Settings and Conditions in character sheet
+- Moved Print Character Sheet and Export to Roll20 buttons from Settings into Menu
+- Moved Create, Edit, Load, and Save Character buttons from the top of the character sheet into Menu button
 
 0.4.28
 - Add ability to change the description of a custom item after it is created (suggested by @vegcethepilot)

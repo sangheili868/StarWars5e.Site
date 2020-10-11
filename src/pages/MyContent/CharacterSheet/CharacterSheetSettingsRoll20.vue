@@ -297,7 +297,7 @@
 <template lang="pug">
   MyDialog(v-model="isOpen")
     template(v-slot:activator="{ on }")
-      v-btn(v-on="on").ma-2 Export to Roll20
+      v-btn(v-on="on") Export to Roll20
     template(#title) Export Character to Roll 20
     template(#text)
       h2.mt-3 Instructions

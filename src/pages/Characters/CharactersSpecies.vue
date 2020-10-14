@@ -73,7 +73,7 @@
           text: 'Source',
           value: 'contentSource',
           render: _.startCase,
-          filterChoices: ['PHB', 'EC'],
+          filterChoices: this.isInHandbook ? ['PHB'] : ['PHB', 'EC'],
           filterFunction: ({ contentSource }: SpeciesType, filterValue: string) => _.startCase(contentSource) === filterValue
         }
       ]

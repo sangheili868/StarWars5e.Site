@@ -40,7 +40,7 @@
     @backgroundModule.Action fetchBackgrounds!: () => void
     @Prop({ type: Boolean, default: false }) readonly isInHandbook!: boolean
     initialSearch: string | (string | null)[] = ''
-    tableType: string = 'Backgrounds'
+    tableType: string = this.isInHandbook ? 'Backgrounds | Handbook' : 'Backgrounds'
 
     created () {
       this.fetchBackgrounds()
@@ -75,7 +75,7 @@
           text: 'Source',
           value: 'contentSource',
           render: _.startCase,
-          filterChoices: ['PHB', 'EC'],
+          filterChoices: this.isInHandbook ? ['PHB'] : ['PHB', 'EC'],
           filterFunction: ({ contentSource }: BackgroundType, filterValue: string) => _.startCase(contentSource) === filterValue
         }
       ]

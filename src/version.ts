@@ -5,6 +5,7 @@ export default '0.4.30'
 - Added PHB (Printable) to Assets
 - Added buttons to navigate to relavant PHB sections from the top of customization option tables
 - Added button to navigate to Archetypes from bottom of class details
+- Changed PHB backgrounds page to tabular list of backgrounds below rules
 
 0.4.29
 - Added Menu button above Settings and Conditions in character sheet

@@ -34,4 +34,5 @@
   div
     vue-headful(:title="title")
     ClassDetail(v-bind="{ classData }")
+    v-btn(to="/characters/archetypes", color="primary") {{this.className}} Archetypes
 </template>

@@ -13,6 +13,10 @@
               title: 'Player\'s Handbook'
             },
             {
+              href: 'https://drive.google.com/file/d/1JINdHzbcb4kv5QrDnirHbZXV-ZEjIaEk/view?usp=sharing',
+              title: 'Player\'s Handbook (Print Friendly)'
+            },
+            {
               href: 'https://drive.google.com/file/d/18NDEJLTtfkVt4kqqj204KJpub0l7A9MX/view?usp=sharing',
               title: 'Scum & Villainy'
             },

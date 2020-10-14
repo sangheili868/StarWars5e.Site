@@ -62,6 +62,7 @@
     template(v-if="!isInHandbook")
       BackButton
       h1 Fighting Masteries
+      v-btn(color="primary", to="/rules/phb/customization#fighting-masteries", target="_blank").mx-2.my-2 Fighting Masteries Rules
     br
     SearchTable(name="FightingMasteries", v-bind="{ headers, items, initialSearch, tableType }")
       template(v-slot:default="props")

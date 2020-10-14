@@ -62,6 +62,7 @@
     template(v-if="!isInHandbook")
       BackButton
       h1 Lightsaber Forms
+      v-btn(color="primary", to="/rules/phb/customization#lightsaber-forms", target="_blank").mx-2.my-2 Lightsaber Forms Rules
     br
     SearchTable(name="LightsaberForms", v-bind="{ headers, items, initialSearch, tableType }")
       template(v-slot:default="props")

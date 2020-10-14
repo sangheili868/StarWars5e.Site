@@ -62,6 +62,7 @@
     template(v-if="!isInHandbook")
       BackButton
       h1 Fighting Styles
+      v-btn(color="primary", to="/rules/phb/customization#fighting-styles", target="_blank").mx-2.my-2 Fighting Styles Rules
     br
     SearchTable(name="FightingStyles", v-bind="{ headers, items, initialSearch, tableType }")
       template(v-slot:default="props")

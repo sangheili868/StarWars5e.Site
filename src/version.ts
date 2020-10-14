@@ -1,6 +1,11 @@
-export default '0.4.27'
+export default '0.4.30'
 
 /*
+0.4.30
+- Added PHB (Printable) to Assets
+- Added buttons to navigate to relavant PHB sections from the top of customization option tables
+- Added button to navigate to Archetypes from bottom of class details
+
 0.4.29
 - Added Menu button above Settings and Conditions in character sheet
 - Moved Print Character Sheet and Export to Roll20 buttons from Settings into Menu

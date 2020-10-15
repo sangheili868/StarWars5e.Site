@@ -47,6 +47,8 @@ export default function generateCharacter (
   const myClasses = rawCharacter.classes.map(({ name }) => classes.find(myClass => name === myClass.name))
   if (myClasses.includes(undefined)) console.error('Class not found from ' + rawCharacter.classes.map(({ name }) => name))
   const myFoundClasses = compact(myClasses)
+  const consular = classes.find(myClass => myClass.name === 'Consular') // Used in place of Multiclass Max Power Level Table for now
+  if (!consular) console.error('Class not found: consular')
   const myArchetypes = compact(rawCharacter.classes.map(({ archetype }) => archetype && archetypes.find(myArchetype => archetype.name === myArchetype.name)))
   const skillsMap = chain(['Strength', 'Dexterity', 'Constitution', 'Intelligence', 'Wisdom', 'Charisma'])
     .keyBy()
@@ -74,7 +76,7 @@ export default function generateCharacter (
   if (!myBackground) console.error('Background not found: ', rawCharacter.background.name)
   const proficiencies = generateProficiencies(rawCharacter, myFoundClasses, myBackground)
   const myEquipment = generateEquipment(rawCharacter, equipment, enhancedItems, abilityScores, proficiencyBonus, proficiencies)
-  const casting = generateCasting(rawCharacter, abilityScores, powers, proficiencyBonus, myFoundClasses, myArchetypes)
+  const casting = generateCasting(rawCharacter, abilityScores, powers, proficiencyBonus, myFoundClasses, consular, myArchetypes)
   const superiority = generateSuperiorty(rawCharacter, myFoundClasses, myArchetypes, abilityScores, proficiencyBonus, maneuvers)
   const features = generateFeatures(
     rawCharacter,

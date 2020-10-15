@@ -1,6 +1,9 @@
 export default '0.4.30'
 
 /*
+0.4.31
+- Fix bug with Multiclass Max Power Level calculation (found by @Adriel Wattson)
+
 0.4.30
 - Added PHB (Printable) to Assets
 - Added buttons to navigate to relavant PHB sections from the top of customization option tables

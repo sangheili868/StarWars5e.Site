@@ -156,7 +156,7 @@
             span(v-if="level > 5") (1/long rest)
         CharacterSheetExpansionFeatures(:features="powers")
       div(v-if="techCasting.powersKnown.length <= 0").mt-5
-        div Click Edit Character above to choose tech powers
+        div Click Menu then Edit Character above to choose tech powers
     div.d-flex.justify-space-between.align-center
       h2 Force Casting
       CharacterSheetCastingAddPower(

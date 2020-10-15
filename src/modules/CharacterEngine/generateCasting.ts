@@ -34,9 +34,8 @@ function getCastingLevel (
   ) || 0), 0)
 }
 
-function getMaxPowerLevelForClass (
+function getMaxPowerLevelPotential (
   className: string,
-  levels: number,
   myClasses: ClassType[],
   archetypeName: string | undefined,
   myArchetypes: ArchetypeType[],
@@ -49,28 +48,34 @@ function getMaxPowerLevelForClass (
   if (myArchetype) {
     const leveledTable = myArchetype.leveledTable
     if (leveledTable) {
-      const maxPowerLevelValue = leveledTable[levels].find(({ key }) => key === 'Max Power Level')
+      const maxPowerLevelValue = leveledTable[20].find(({ key }) => key === 'Max Power Level')
       return maxPowerLevelValue ? parseInt(maxPowerLevelValue.value) : 0
     }
   }
-  return myClass ? parseInt(myClass.levelChanges[levels]['Max Power Level']) : 0
+  return myClass ? parseInt(myClass.levelChanges[20]['Max Power Level']) : 0
 }
 
 function getMaxPowerLevel (
   rawCharacter: RawCharacterType,
   myClasses: ClassType[],
+  consular: ClassType | undefined,
   myArchetypes: ArchetypeType[],
   castingType: 'Tech' | 'Force'
 ) {
-  const maxPowerLevel = reduce(rawCharacter.classes, (acc, myClass) => Math.max(acc, getMaxPowerLevelForClass(
-    myClass.name,
-    myClass.levels,
-    myClasses,
-    myClass.archetype && myClass.archetype.name,
-    myArchetypes,
-    castingType
-  )), 0)
-  return applyTweak(rawCharacter, lowerCase(castingType) + 'Casting.maxPowerLevel', maxPowerLevel)
+  const maxPowerLevel = reduce(rawCharacter.classes, (acc, myClass) => {
+    const potential = getMaxPowerLevelPotential(
+      myClass.name,
+      myClasses,
+      myClass.archetype && myClass.archetype.name,
+      myArchetypes,
+      castingType
+    )
+    const levels = myClass.levels * potential / 9
+    return Math.max(levels, 0) + acc
+  }, 0)
+  let maxPower = 0
+  if (consular && maxPowerLevel > 0) maxPower = parseInt(consular.levelChanges[Math.floor(maxPowerLevel)]['Max Power Level'])
+  return applyTweak(rawCharacter, lowerCase(castingType) + 'Casting.maxPowerLevel', maxPower)
 }
 
 function getPowerPoints (
@@ -123,6 +128,7 @@ export default function generateCasting (
   powers: PowerType[],
   proficiencyBonus: number,
   myClasses: ClassType[],
+  consular: ClassType | undefined,
   myArchetypes: ArchetypeType[]
 ): {
   techCasting: false | TechCastingType,
@@ -137,7 +143,7 @@ export default function generateCasting (
     maxPoints: getPowerPoints(rawCharacter, myClasses, myArchetypes, techCastingBonus, 'Tech'),
     attackModifier: applyTweak(rawCharacter, 'techCasting.attackModifier', techCastingBonus + proficiencyBonus),
     saveDC: applyTweak(rawCharacter, 'techCasting.saveDC', 8 + techCastingBonus + proficiencyBonus),
-    maxPowerLevel: getMaxPowerLevel(rawCharacter, myClasses, myArchetypes, 'Tech'),
+    maxPowerLevel: getMaxPowerLevel(rawCharacter, myClasses, consular, myArchetypes, 'Tech'),
     powersKnown: getPowersKnown(rawCharacter, powers, 'Tech')
   }
   const hasTechCasting = techCastingLevel > 0 || techCasting.powersKnown.length > 0
@@ -159,7 +165,7 @@ export default function generateCasting (
     darkSaveDC: applyTweak(rawCharacter, 'forceCasting.darkSaveDC', 8 + forceCastingBonus.dark + proficiencyBonus),
     universalAttackModifier: applyTweak(rawCharacter, 'forceCasting.universalAttackModifier', forceCastingBonus.universal + proficiencyBonus),
     universalSaveDC: applyTweak(rawCharacter, 'forceCasting.universalSaveDC', 8 + forceCastingBonus.universal + proficiencyBonus),
-    maxPowerLevel: getMaxPowerLevel(rawCharacter, myClasses, myArchetypes, 'Force'),
+    maxPowerLevel: getMaxPowerLevel(rawCharacter, myClasses, consular, myArchetypes, 'Force'),
     powersKnown: forcePowersKnown
   }
   const hasForceCasting = forceCastingLevel > 0 || forceCasting.powersKnown.length > 0

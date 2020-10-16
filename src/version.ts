@@ -1,6 +1,9 @@
 export default '0.4.30'
 
 /*
+0.4.32
+- Fix bug where character sheet doesn't load if you are a casting class that hasn't gotten casting yet (level 1 scout, etc)(found by @kschulze and @N1majneb)
+
 0.4.31
 - Fix bug with Multiclass Max Power Level calculation (found by @Adriel Wattson)
 

@@ -25,6 +25,12 @@ function getCastingLevel (
   myArchetypes: ArchetypeType[],
   castingType: 'Tech' | 'Force'
 ): number {
+  if (
+    castingType === 'Force' &&
+    rawCharacter.classes.length === 1 &&
+    rawCharacter.classes[0].name === 'Guardian' &&
+    rawCharacter.classes[0].levels === 1
+  ) return 1
   return rawCharacter.classes.reduce((acc, { name, archetype, levels }) => acc + (levels * getMultiplier(
     name,
     myClasses,
@@ -62,7 +68,7 @@ function getMaxPowerLevel (
   myArchetypes: ArchetypeType[],
   castingType: 'Tech' | 'Force'
 ) {
-  const maxPowerLevel = reduce(rawCharacter.classes, (acc, myClass) => {
+  let maxPowerLevel = reduce(rawCharacter.classes, (acc, myClass) => {
     const potential = getMaxPowerLevelPotential(
       myClass.name,
       myClasses,
@@ -74,7 +80,10 @@ function getMaxPowerLevel (
     return Math.max(levels, 0) + acc
   }, 0)
   let maxPower = 0
-  if (consular && maxPowerLevel > 0) maxPower = parseInt(consular.levelChanges[Math.floor(maxPowerLevel)]['Max Power Level'])
+  if (consular && maxPowerLevel > 0) {
+    const effectiveLevel = Math.max(1, Math.floor(maxPowerLevel))
+    maxPower = parseInt(consular.levelChanges[effectiveLevel]['Max Power Level'])
+  }
   return applyTweak(rawCharacter, lowerCase(castingType) + 'Casting.maxPowerLevel', maxPower)
 }
 
@@ -146,7 +155,7 @@ export default function generateCasting (
     maxPowerLevel: getMaxPowerLevel(rawCharacter, myClasses, consular, myArchetypes, 'Tech'),
     powersKnown: getPowersKnown(rawCharacter, powers, 'Tech')
   }
-  const hasTechCasting = techCastingLevel > 0 || techCasting.powersKnown.length > 0
+  const hasTechCasting = techCastingLevel >= 0.6 || techCasting.powersKnown.length > 0
 
   const forceCastingBonus = {
     light: abilityScores.Wisdom.modifier,
@@ -168,7 +177,7 @@ export default function generateCasting (
     maxPowerLevel: getMaxPowerLevel(rawCharacter, myClasses, consular, myArchetypes, 'Force'),
     powersKnown: forcePowersKnown
   }
-  const hasForceCasting = forceCastingLevel > 0 || forceCasting.powersKnown.length > 0
+  const hasForceCasting = forceCastingLevel >= 0.6 || forceCasting.powersKnown.length > 0
   const allForcePowers = [
     ...rawCharacter.customForcePowers,
     ...rawCharacter.classes.map(({ forcePowers }) => forcePowers || []).flat()

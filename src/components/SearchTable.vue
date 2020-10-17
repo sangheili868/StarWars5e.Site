@@ -126,8 +126,9 @@
         template(v-slot:item="{ isExpanded, item, expand }")
           tr(v-if="item.isExpandable", :class="$style.clickableRow", @click="expand(!isExpanded)")
             td(v-for="{ value, render } in alignedHeaders", :to="item.to") {{ render(item[value], item) }}
-          router-link(v-else-if="item.to", tag="tr", :class="$style.clickableRow", :to="item.to")
-            td(v-for="{ value, render } in alignedHeaders", :to="item.to") {{ render(item[value], item) }}
+          tr(v-else-if="item.to", :class="$style.clickableRow")
+            td(v-for="{ value, render } in alignedHeaders", :class="$style.clickableCell")
+              router-link(:to="item.to", :class="$style.clickableAnchor") {{ render(item[value], item) }}
           tr(v-else)
             td(v-for="{ value, render } in alignedHeaders", :to="item.to") {{ render(item[value], item) }}
         template(v-slot:expanded-item="{ item, headers }")
@@ -139,5 +140,16 @@
 <style module lang="scss">
   .clickableRow {
     cursor: pointer;
+
+    .clickableCell {
+      line-height: 48px;
+      padding: 0;
+
+      .clickableAnchor {
+        display: block;
+        color: inherit;
+      }
+    }
+
   }
 </style>

@@ -147,7 +147,7 @@
 
       .clickableAnchor {
         display: block;
-        color: inherit;
+        color: inherit !important;
       }
     }
 

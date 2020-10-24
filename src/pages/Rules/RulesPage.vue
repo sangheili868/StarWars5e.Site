@@ -16,7 +16,8 @@
             { to: '/rules/snv', title: 'Scum and Villainy' },
             { to: '/rules/sotg', title: 'Starships of the Galaxy' },
             { to: '/rules/wh', title: 'Wretched Hives' },
-            { to: '/rules/variantRules', title: 'Variant Rules' }
+            { to: '/rules/variantRules', title: 'Variant Rules' },
+            { to: '/rules/expandedContent', title: 'Expanded Content' }
           ]
         }
       ]

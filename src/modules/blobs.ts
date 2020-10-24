@@ -2,13 +2,14 @@ import axios from 'axios'
 import { fetchBlobFromCache, fetchBlobsFromCache } from '@/utilities/fetchFromCache'
 import _ from 'lodash'
 import { Module, VuexModule, MutationAction } from 'vuex-module-decorators'
-import { VariantRuleBlobType } from '@/types/referenceTypes'
+import { VariantRuleBlobType, ExpandedContentBlobType } from '@/types/referenceTypes'
 
 @Module({ namespaced: true, name: 'blobs' })
 export default class Blobs extends VuexModule {
   handbookBlobs: { [blob: string]: string } = {}
   starshipBlobs: { [blob: string]: string } = {}
   variantRuleBlobs: VariantRuleBlobType[] = []
+  expandedContentBlobs: ExpandedContentBlobType[] = []
   monsterBlobs: { [blob: string]: string } = {}
   hivesBlobs: { [blob: string]: string } = {}
   creditsBlob: string = ''
@@ -39,6 +40,17 @@ export default class Blobs extends VuexModule {
     return {
       variantRuleBlobs: data.map((variantRuleBlob: VariantRuleBlobType) =>
         _.pick(variantRuleBlob, ['chapterName', 'contentMarkdown'])
+      ),
+      cachedVersions
+    }
+  }
+
+  @MutationAction({ mutate: ['expandedContentBlobs', 'cachedVersions'] })
+  async fetchExpandedContentBlobs () {
+    const { data, cachedVersions } = await fetchBlobsFromCache(this, 'expandedContentBlobs', 'expanded-content', 'ExpandedContent')
+    return {
+      expandedContentBlobs: data.map((expandedContentBlob: ExpandedContentBlobType) =>
+        _.pick(expandedContentBlob, ['chapterName', 'contentMarkdown'])
       ),
       cachedVersions
     }

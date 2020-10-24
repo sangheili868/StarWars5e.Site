@@ -56,6 +56,11 @@ export interface VariantRuleBlobType {
   contentMarkdown: string
 }
 
+export interface ExpandedContentBlobType {
+  chapterName: string,
+  contentMarkdown: string
+}
+
 export interface SkillsType {
   [ ability: string ]: string[]
 }

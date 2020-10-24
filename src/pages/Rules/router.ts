@@ -7,6 +7,8 @@ import hivesRoutes from './Hives/router'
 import RulesPage from './RulesPage.vue'
 import VariantRules from './VariantRules.vue'
 import VariantRulesDetail from './VariantRulesDetail.vue'
+import ExpandedContent from './ExpandedContent.vue'
+import ExpandedContentDetail from './ExpandedContentDetail.vue'
 
 export default {
   path: '/rules',
@@ -38,6 +40,21 @@ export default {
       props: true,
       meta: {
         title: 'Variant Rules'
+      }
+    },
+    {
+      path: '/rules/expandedContent',
+      component: ExpandedContent,
+      meta: {
+        title: 'Expanded Content'
+      }
+    },
+    {
+      path: '/rules/expandedContent/:expandedContentName',
+      component: ExpandedContentDetail,
+      props: true,
+      meta: {
+        title: 'Expanded Content'
       }
     },
     handbookRoutes,

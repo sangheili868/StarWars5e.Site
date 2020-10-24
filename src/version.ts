@@ -1,6 +1,9 @@
-export default '0.4.30'
+export default '0.4.34'
 
 /*
+0.4.34
+- Added raw view of Expanded Content files. Can be found under Rules -> Expanded Content
+
 0.4.33
 - Allowed right click -> open in new tab for species table (requested by @Unicorn up, boys and @Adriel Wattson)
 

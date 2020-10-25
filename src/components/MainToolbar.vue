@@ -90,6 +90,10 @@
         {
           to: '/credits',
           title: 'Credits'
+        },
+        {
+          to: '/login',
+          title: 'Login'
         }
       ]
     }

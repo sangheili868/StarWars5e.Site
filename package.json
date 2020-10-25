@@ -11,6 +11,7 @@
     "lint": "vue-cli-service lint"
   },
   "dependencies": {
+    "@azure/msal-browser": "^2.4.0",
     "@types/axios": "^0.14.0",
     "@types/file-saver": "^2.0.1",
     "@types/lodash": "^4.14.123",
@@ -66,7 +67,7 @@
     "fibers": "^4.0.1",
     "sass": "^1.22.12",
     "sass-loader": "^7.1.0",
-    "typescript": "^3.4.3",
+    "typescript": "^3.9.7",
     "vue-cli-plugin-vuetify": "^0.6.3",
     "vue-template-compiler": "^2.5.21",
     "vuetify-loader": "^1.2.2"

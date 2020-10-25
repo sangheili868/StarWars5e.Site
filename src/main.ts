@@ -9,6 +9,7 @@ import '@fortawesome/fontawesome-free/css/all.css'
 import vueHeadful from 'vue-headful'
 import VueSessionStorage from 'vue-sessionstorage'
 import VueAppInsights from 'vue-application-insights'
+import * as msal from '@azure/msal-browser'
 
 Vue.use(VueSessionStorage)
 
@@ -28,6 +29,18 @@ Vue.use(VueAppInsights, {
   id: 'b5b30062-61c2-4ad6-9c52-277f91a16734',
   router
 })
+
+const msalConfig = {
+    auth: {
+    clientId: '1f7c8796-8518-4a07-8545-ec007a6ac043',
+    redirectUri: 'http://localhost:8080/login',
+    authority: 'https://login.microsoftonline.com/14a71a66-1f96-4e98-aca0-42f18f0dc783/',
+    postLogoutRedirectUri: 'http://localhost:8080/login',
+    requireAuthOnInitialize: false
+  }
+}
+
+Vue.prototype.$msal = new msal.PublicClientApplication(msalConfig)
 
 new Vue({
   vuetify,

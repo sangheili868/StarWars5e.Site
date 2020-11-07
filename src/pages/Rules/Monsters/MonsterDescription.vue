@@ -5,12 +5,14 @@
   import Loading from '@/components/Loading.vue'
   import _ from 'lodash'
   import MonsterPower from './MonsterPower.vue'
+  import MonsterRoll20 from './MonsterRoll20.vue'
 
   @Component({
     components: {
       VueMarkdown,
       Loading,
-      MonsterPower
+      MonsterPower,
+      MonsterRoll20
     }
   })
   export default class MonsterDescription extends Vue {
@@ -54,10 +56,12 @@
 
 <template lang="pug">
   div( v-if="monster" ).text-left
-    h1 {{ monster.name }}
-      a(:href="`/rules/snv/monsters/${monster.name}`", target="_blank")
-        v-btn(v-if="!isAtDetail", text, icon, color="secondary")
-          v-icon fa-external-link-alt
+    div.d-flex.justify-space-between
+      h1 {{ monster.name }}
+        a(:href="`/rules/snv/monsters/${monster.name}`", target="_blank")
+            v-btn(v-if="!isAtDetail", text, icon, color="secondary")
+              v-icon fa-external-link-alt
+      MonsterRoll20(v-bind="{ monster }")
     i {{ monster.size }} {{ monster.types.join(', ')}}, {{ monster.alignment }}
     hr.mt-2
     div #[strong Armor Class] {{ monster.armorClass }} ({{ monster.armorType }})

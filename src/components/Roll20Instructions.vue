@@ -16,7 +16,7 @@
         li Install #[strong Firefox] and the
           u.pl-1
             a(href="https://addons.mozilla.org/en-US/firefox/addon/roll20-enhancement-suite/", target="_blank") VTT Enhancement Suite
-        li Click #[span.primary--text Save File] below to download the character File
+        li Click #[span.primary--text Save File] below to download the file
         li Go to the Roll 20 campaign and open the journal tab
         li At the top of the journal tab, under "Import Character", click "Browse"
         li Open the file you downloaded from this pop-up

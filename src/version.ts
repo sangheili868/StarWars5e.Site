@@ -1,6 +1,11 @@
 export default '0.4.34'
 
 /*
+
+0.4.35
+- Added button to export monster to roll20
+- Fixed bug where backgrounds in the PHB chapter open to a blank page found by @SirFallout
+
 0.4.34
 - Added raw view of Expanded Content files. Can be found under Rules -> Expanded Content
 

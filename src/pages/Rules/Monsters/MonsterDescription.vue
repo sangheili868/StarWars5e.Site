@@ -64,7 +64,7 @@
       MonsterRoll20(v-bind="{ monster }")
     i {{ monster.size }} {{ monster.types.join(', ')}}, {{ monster.alignment }}
     hr.mt-2
-    div #[strong Armor Class] {{ monster.armorClass }} ({{ monster.armorType }})
+    div #[strong Armor Class] {{ monster.armorClass }}{{ monster.armorType ? ' (' + monster.armorType + ')' : '' }}
     div #[strong Hit Points] {{ monster.hitPoints }} ({{ monster.hitPointRoll }})
     div #[strong Speed] {{ monster.speeds }}
     hr

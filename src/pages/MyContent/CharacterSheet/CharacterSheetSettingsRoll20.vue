@@ -8,6 +8,7 @@
   import { camelCase, map, mapValues, chain, snakeCase } from 'lodash'
   import { isEnhancedItem } from '@/types/lootTypes'
   import Roll20Instructions from '@/components/Roll20Instructions.vue'
+  import makeRoll20ID from '@/utilities/makeRoll20ID'
 
   @Component({
     components: {
@@ -48,7 +49,7 @@
 
       const powers = allPowers.map(power => {
         const levelText = power.level ? power.level : 'cantrip'
-        const header = `repeating_power-${levelText}_${this.makeId()}_`
+        const header = `repeating_power-${levelText}_${makeRoll20ID()}_`
         const ability = power.powerType === 'Force' ? ({
             Universal: 'power',
             Light: '@{wisdom_mod}+',
@@ -69,7 +70,7 @@
       })
 
       const equipment = c.equipment.map(equipment => {
-        const header = 'repeating_inventory_' + this.makeId() + '_item'
+        const header = 'repeating_inventory_' + makeRoll20ID() + '_item'
         return {
           [header + 'name']: equipment.name,
           [header + 'weight']: !isCharacterEnhancedItem(equipment) && isCharacterValidLootType(equipment) ? equipment.weight : 0,
@@ -78,7 +79,7 @@
       })
 
       const languages = [ ...c.languages, ...c.customLanguages ].map(proficiency => {
-        const header = 'repeating_proficiencies_' + this.makeId() + '_'
+        const header = 'repeating_proficiencies_' + makeRoll20ID() + '_'
         return {
           [header + 'name']: proficiency,
           [header + 'options-flag']: '0'
@@ -87,7 +88,7 @@
 
       const proficiencies = [ ...c.proficiencies, ...c.customProficiencies ].map(proficiency => {
         if (proficiency.type === 'tool') {
-          const header = 'repeating_tool_' + this.makeId() + '_'
+          const header = 'repeating_tool_' + makeRoll20ID() + '_'
           const proficiencyLevel = isCustomProficiency(proficiency) ? proficiency.proficiencyLevel : 'proficiency'
           return {
             [header + 'toolname']: proficiency.name,
@@ -101,7 +102,7 @@
             [header + 'options-flag']: '0'
           }
         } else {
-          const header = 'repeating_proficiencies_' + this.makeId() + '_'
+          const header = 'repeating_proficiencies_' + makeRoll20ID() + '_'
           return {
             [header + 'name']: proficiency.name,
             [header + 'prof_type']: proficiency.type ? proficiency.type.toUpperCase() : 'OTHER',
@@ -110,10 +111,10 @@
         }
       })
 
-      const bgheader = 'repeating_traits_' + this.makeId() + '_'
+      const bgheader = 'repeating_traits_' + makeRoll20ID() + '_'
       const traits = [
         ...c.combatFeatures.map(combatFeature => {
-          const header = 'repeating_traits_' + this.makeId() + '_'
+          const header = 'repeating_traits_' + makeRoll20ID() + '_'
           return {
             [header + 'name']: combatFeature.name,
             [header + 'source']: 'Feat',
@@ -130,7 +131,7 @@
           [bgheader + 'display_flag']: 'on'
         },
         ...c.customFeatures.map(customFeature => {
-          const header = 'repeating_traits_' + this.makeId() + '_'
+          const header = 'repeating_traits_' + makeRoll20ID() + '_'
           return {
             [header + 'name']: customFeature.name,
             [header + 'source']: 'Other',
@@ -142,7 +143,7 @@
       ]
 
       const attacks = c.weapons.map(weapon => {
-        const header = 'repeating_attack_' + this.makeId() + '_'
+        const header = 'repeating_attack_' + makeRoll20ID() + '_'
         const hasDice = weapon.damageNumberOfDice && weapon.damageDieType
         const damage = hasDice ? weapon.damageNumberOfDice + 'd' + weapon.damageDieType : '1'
         const range = weapon.properties[0] !== null && (weapon.properties as string[]).find(property => property.includes('range'))
@@ -267,16 +268,6 @@
         ],
         abilities: []
       }
-    }
-
-    makeId (): string {
-      let result = '-M'
-      const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789'
-      const charactersLength = characters.length
-      for (var i = 0; i < 18; i++) {
-          result += characters.charAt(Math.floor(Math.random() * charactersLength))
-      }
-      return result
     }
 
     saveToFile () {

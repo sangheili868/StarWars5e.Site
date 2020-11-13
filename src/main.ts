@@ -32,7 +32,6 @@ Vue.use(VueAppInsights, {
 })
 
 Vue.prototype.$msal = new AuthenticationService()
-Vue.prototype.$msal.createMSAL()
 
 Vue.prototype.$http = async (requiresAuth = false) => {
   const options = {

@@ -1,25 +1,22 @@
 import * as msal from '@azure/msal-browser'
-import { Component, Vue } from 'vue-property-decorator'
-import { namespace } from 'vuex-class'
-
-// import AuthenticationModule from '@/modules/authentication'
+import store from './store'
 
 const authConfig = {
   names: {
-      signUpSignIn: 'B2C_1_signupin'
-      // forgotPassword: "B2C_1_reset",
-      // editProfile: "B2C_1_edit_profile"
+    signUpSignIn: 'B2C_1_signupin'
+    // forgotPassword: "B2C_1_reset",
+    // editProfile: "B2C_1_edit_profile"
   },
   authorities: {
-      signUpSignIn: {
-          authority: 'https://sw5edev.b2clogin.com/sw5edev.onmicrosoft.com/B2C_1_signupin'
-      }
-      // forgotPassword: {
-      //     authority: "https://fabrikamb2c.b2clogin.com/fabrikamb2c.onmicrosoft.com/B2C_1_reset",
-      // },
-      // editProfile: {
-      //     authority: "https://fabrikamb2c.b2clogin.com/fabrikamb2c.onmicrosoft.com/B2C_1_edit_profile"
-      // }
+    signUpSignIn: {
+      authority: 'https://sw5edev.b2clogin.com/sw5edev.onmicrosoft.com/B2C_1_signupin'
+    }
+    // forgotPassword: {
+    //     authority: "https://fabrikamb2c.b2clogin.com/fabrikamb2c.onmicrosoft.com/B2C_1_reset",
+    // },
+    // editProfile: {
+    //     authority: "https://fabrikamb2c.b2clogin.com/fabrikamb2c.onmicrosoft.com/B2C_1_edit_profile"
+    // }
   },
   authorityDomain: 'sw5edev.b2clogin.com',
   scopes: [
@@ -40,22 +37,17 @@ const msalConfig = {
   }
 }
 
-const authenticationModule = namespace('authentication')
-
-@Component
-export default class AuthenticationService extends Vue {
-  @authenticationModule.Action updateAccessToken!: (accessToken: string) => void
-  @authenticationModule.State accessToken!: string
-
+export default class AuthenticationService {
   public msal: msal.PublicClientApplication
 
-  public createMSAL () {
+  constructor () {
     this.msal = new msal.PublicClientApplication(msalConfig)
 
-    this.updateAccessToken('test')
     this.msal.handleRedirectPromise().then((tokenResponse: any) => {
       if (tokenResponse && tokenResponse.accessToken) {
-        this.updateAccessToken(tokenResponse.accessToken)
+        store.commit('authentication/updateAccessToken', tokenResponse.accessToken)
+      } else {
+        store.commit('authentication/updateAccessToken', '')
       }
     }).catch((error: any) => {
       console.log('Token failure: ' + JSON.stringify(error))
@@ -71,8 +63,8 @@ export default class AuthenticationService extends Vue {
     }
 
     try {
-      // Vue.prototype.$msal.accessToken = (await this.msal.acquireTokenSilent(tokenRequest)).accessToken
-      this.updateAccessToken((await this.msal.acquireTokenSilent(tokenRequest)).accessToken)
+      var accessToken = (await this.msal.acquireTokenSilent(tokenRequest)).accessToken
+      store.commit('authentication/updateAccessToken', accessToken)
     } catch (tokenError) {
       try {
         await this.msal.acquireTokenRedirect(tokenRequest)
@@ -86,36 +78,3 @@ export default class AuthenticationService extends Vue {
     this.msal.logout()
   }
 }
-
-// const msalApplication: Msal = new msal.PublicClientApplication(msalConfig)
-
-// msalApplication.signIn = async () => {
-//   var currentAccount = msalApplication.getAllAccounts()[0]
-
-//   var tokenRequest = {
-//     account: currentAccount,
-//     scopes: authConfig.scopes
-//   }
-
-//   try {
-//     Vue.prototype.$msal.accessToken = (await msalApplication.acquireTokenSilent(tokenRequest)).accessToken
-//   } catch (tokenError) {
-//     try {
-//       await msalApplication.acquireTokenRedirect(tokenRequest)
-//     } catch (tokenRedirectError) {
-//       console.log('Problem getting token with redirect flow: ' + tokenRedirectError)
-//     }
-//   }
-// }
-
-// msalApplication.signOut = () => {
-//   msalApplication.logout()
-// }
-
-// msalApplication.handleRedirectPromise().then((tokenResponse: any) => {
-//   if (tokenResponse && tokenResponse.accessToken) authenticationModule. = tokenResponse.accessToken
-// }).catch((error: any) => {
-//   console.log('Token failure: ' + JSON.stringify(error))
-// })
-
-// export default msalApplication

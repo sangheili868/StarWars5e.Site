@@ -1,11 +1,11 @@
-import { Module, VuexModule, MutationAction } from 'vuex-module-decorators'
+import { Module, VuexModule, Mutation } from 'vuex-module-decorators'
 
 @Module({ namespaced: true, name: 'authentication' })
 export default class Authentication extends VuexModule {
   accessToken: string = ''
 
-  @MutationAction({ mutate: ['accessToken'] })
+  @Mutation
   async updateAccessToken (accessToken: string) {
-    return { accessToken }
+    this.accessToken = accessToken
   }
 }

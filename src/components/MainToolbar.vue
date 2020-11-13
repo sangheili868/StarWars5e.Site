@@ -15,47 +15,19 @@
   export default class MainToolbar extends Vue {
     @uiModule.State isSideBarOpen!: boolean
     @uiModule.Action updateSideBar!: (value: boolean) => void
-    @authenticationModule.Action updateAccessToken!: (accessToken: string) => void
     @authenticationModule.State accessToken!: string
 
     isSearchOpen = false
     isLoggedIn = false
-
-    created () {
-      this.updateAccessToken('test')
-      var x = authenticationModule
-      var y = uiModule
-      var z = this.accessToken
-    }
 
     @Watch('$route')
     resetSearch () {
       this.isSearchOpen = false
     }
 
-    // @Watch('$accessToken')
-    // resetLogin () {
-    //   this.isLoggedIn = this.$data.accessToken
-    // }
-
     get getAccessToken () {
-      // var y:string = accessToken
       return !_.isNil(this.accessToken) && !_.isEmpty(this.accessToken)
     }
-
-    // @Watch('$msal.accessToken')
-    // resetLogin () {
-    //   this.isLoggedIn = this.accessToken
-    // }
-
-    // async created () {
-    //   this.isLoggedIn = await this.checkAccessToken()
-    // }
-
-    // checkAccessToken (): boolean {
-    //   var y:string = Vue.prototype.$msal.accessToken
-    //   return !_.isNil(y) && !_.isEmpty(y)
-    // }
 
     get routes () {
       return [

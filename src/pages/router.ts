@@ -8,8 +8,9 @@ import rulesRoutes from './Rules/router'
 import charactersRoutes from './Characters/router'
 import lootRoutes from './Loot/router'
 import starshipsRoutes from './Starships/router'
-import myContentRoutes from './MyContent/router'
+import toolsRoutes from './Tools/router'
 import LoginPage from './Login.vue'
+import ProfilePage from './Profile.vue'
 
 Vue.use(Router)
 
@@ -26,7 +27,7 @@ export default new Router({
     charactersRoutes,
     lootRoutes,
     starshipsRoutes,
-    myContentRoutes,
+    toolsRoutes,
     {
       path: '/credits',
       component: CreditsPage,
@@ -54,6 +55,13 @@ export default new Router({
       component: LoginPage,
       meta: {
         title: 'Login'
+      }
+    },
+    {
+      path: '/profile',
+      component: ProfilePage,
+      meta: {
+        title: 'Profile'
       }
     }
   ],

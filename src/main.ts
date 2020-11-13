@@ -9,7 +9,8 @@ import '@fortawesome/fontawesome-free/css/all.css'
 import vueHeadful from 'vue-headful'
 import VueSessionStorage from 'vue-sessionstorage'
 import VueAppInsights from 'vue-application-insights'
-import * as msal from '@azure/msal-browser'
+import axios from 'axios'
+import AuthenticationService from './authenticationService'
 
 Vue.use(VueSessionStorage)
 
@@ -30,17 +31,25 @@ Vue.use(VueAppInsights, {
   router
 })
 
-const msalConfig = {
-    auth: {
-    clientId: '1f7c8796-8518-4a07-8545-ec007a6ac043',
-    redirectUri: 'http://localhost:8080/login',
-    authority: 'https://login.microsoftonline.com/14a71a66-1f96-4e98-aca0-42f18f0dc783/',
-    postLogoutRedirectUri: 'http://localhost:8080/login',
-    requireAuthOnInitialize: false
-  }
-}
+Vue.prototype.$msal = new AuthenticationService()
+Vue.prototype.$msal.createMSAL()
 
-Vue.prototype.$msal = new msal.PublicClientApplication(msalConfig)
+Vue.prototype.$http = async (requiresAuth = false) => {
+  const options = {
+    headers: {
+      Authorization: ''
+    }
+  }
+
+  if (requiresAuth) {
+    var accessToken = await Vue.prototype.$msal.signIn()
+
+    options.headers.Authorization = `Bearer ${accessToken}`
+  }
+
+  const instance = axios.create(options)
+  return instance
+}
 
 new Vue({
   vuetify,

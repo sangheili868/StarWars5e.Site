@@ -29,6 +29,7 @@ import createPersistedState from 'vuex-persistedstate'
 import characterAdvancements from './modules/characterAdvancements'
 import conditions from './modules/conditions'
 import skills from './modules/skills'
+import authentication from './modules/authentication'
 
 Vue.use(Vuex)
 
@@ -36,6 +37,7 @@ export default new Vuex.Store({
   plugins: [createPersistedState()],
   modules: {
     archetypes,
+    authentication,
     dataVersions,
     armorProperties,
     backgrounds,
@@ -63,5 +65,5 @@ export default new Vuex.Store({
     ui,
     ventures,
     weaponProperties
-  }
+    }
 })

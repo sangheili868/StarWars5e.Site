@@ -1,3 +1,5 @@
+import * as msal from '@azure/msal-browser'
+
 export interface ReferenceTableType {
   content: string,
   contentType: string,
@@ -31,4 +33,10 @@ export interface printFieldType {
   fontSize?: Number,
   myClass?: String,
   text?: String | Number
+}
+
+export interface Msal extends msal.PublicClientApplication {
+  signIn?: Function,
+  signOut?: Function,
+  accessToken?: string
 }

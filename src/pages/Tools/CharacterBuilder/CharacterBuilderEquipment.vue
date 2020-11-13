@@ -1,7 +1,7 @@
 <script lang="ts">
   import { Component, Prop, Vue } from 'vue-property-decorator'
   import { namespace } from 'vuex-class'
-  import CharacterSheetEquipment from '@/pages/MyContent/CharacterSheet/CharacterSheetEquipment.vue'
+  import CharacterSheetEquipment from '@/pages/Tools/CharacterSheet/CharacterSheetEquipment.vue'
   import generateEquipment from '@/modules/CharacterEngine/generateEquipment'
   import { RawCharacterType } from '@/types/rawCharacterTypes'
   import { EquipmentType, EnhancedItemType } from '@/types/lootTypes'

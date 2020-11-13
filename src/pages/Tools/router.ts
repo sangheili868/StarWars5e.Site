@@ -1,30 +1,30 @@
 import PageNester from '@/components/PageNester.vue'
-import MyContentPage from './MyContentPage.vue'
+import ToolsPage from './ToolsPage.vue'
 import Characters from './Characters.vue'
 import CharacterPrint from './CharacterSheet/CharacterPrint/CharacterPrint.vue'
 import { Route } from 'vue-router'
 
 export default {
-  path: '/myContent',
+  path: '/tools',
   component: PageNester,
   children: [
     {
-      path: '/myContent',
-      component: MyContentPage,
+      path: '/tools',
+      component: ToolsPage,
       meta: {
-        title: 'MyContent'
+        title: 'Tools'
       }
     },
     {
-      path: '/myContent/characters',
+      path: '/tools/characters',
       component: Characters,
       props: ({ query }: Route) => query,
       meta: {
-        title: 'Characters'
+        title: 'Character Creator'
       }
     },
     {
-      path: '/myContent/characters/print',
+      path: '/tools/characters/print',
       component: CharacterPrint
     }
   ]

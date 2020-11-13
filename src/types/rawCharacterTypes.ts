@@ -197,6 +197,8 @@ export interface CustomEquipmentType extends RawEquipmentType {
 
 export interface RawCharacterType {
   name: string,
+  id: string,
+  userId: string,
   builderVersion: string,
   image: string,
   experiencePoints: number,

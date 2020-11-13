@@ -2,8 +2,10 @@
   import { Component, Prop, Vue, Watch } from 'vue-property-decorator'
   import { namespace } from 'vuex-class'
   import SearchBox from '@/components/SearchBox.vue'
+  import _ from 'lodash'
 
   const uiModule = namespace('ui')
+  const authenticationModule = namespace('authentication')
 
   @Component({
     components: {
@@ -13,13 +15,47 @@
   export default class MainToolbar extends Vue {
     @uiModule.State isSideBarOpen!: boolean
     @uiModule.Action updateSideBar!: (value: boolean) => void
+    @authenticationModule.Action updateAccessToken!: (accessToken: string) => void
+    @authenticationModule.State accessToken!: string
 
     isSearchOpen = false
+    isLoggedIn = false
+
+    created () {
+      this.updateAccessToken('test')
+      var x = authenticationModule
+      var y = uiModule
+      var z = this.accessToken
+    }
 
     @Watch('$route')
     resetSearch () {
       this.isSearchOpen = false
     }
+
+    // @Watch('$accessToken')
+    // resetLogin () {
+    //   this.isLoggedIn = this.$data.accessToken
+    // }
+
+    get getAccessToken () {
+      // var y:string = accessToken
+      return !_.isNil(this.accessToken) && !_.isEmpty(this.accessToken)
+    }
+
+    // @Watch('$msal.accessToken')
+    // resetLogin () {
+    //   this.isLoggedIn = this.accessToken
+    // }
+
+    // async created () {
+    //   this.isLoggedIn = await this.checkAccessToken()
+    // }
+
+    // checkAccessToken (): boolean {
+    //   var y:string = Vue.prototype.$msal.accessToken
+    //   return !_.isNil(y) && !_.isEmpty(y)
+    // }
 
     get routes () {
       return [
@@ -77,10 +113,10 @@
           ]
         },
         {
-          to: '/myContent',
-          title: 'My Content',
+          to: '/tools',
+          title: 'Tools',
           nested: [
-            { to: '/characters', title: 'Characters' }
+            { to: '/characters', title: 'Character Creator' }
           ]
         },
         {
@@ -90,12 +126,16 @@
         {
           to: '/credits',
           title: 'Credits'
-        },
-        {
-          to: '/login',
-          title: 'Login'
         }
       ]
+    }
+
+    async login () {
+      await Vue.prototype.$msal.signIn()
+    }
+
+    async logout () {
+      Vue.prototype.$msal.signOut()
     }
 
     get isPageWithNavigation () {
@@ -138,12 +178,15 @@
       template(v-if="!isSearchOpen")
         component(v-for="({ to, title, nested }) in routes", :key="title", v-bind="buildComponentProps(to, nested)")
           template(v-if="nested && nested.length", v-slot:activator="{ on }")
-            v-btn(text, :color="darkColor", v-on="on" :to="to") {{ title }}
+            v-btn(text, :color="darkColor", v-on="on", :to="to") {{ title }}
               v-icon.pl-2 fa-caret-down
           v-list(v-for="nestedRoute in nested", :key="nestedRoute.title", dense)
             v-list-item(:to="to + nestedRoute.to")
               v-list-item-title {{ nestedRoute.title }}
           template(v-if="!nested || !nested.length") {{ title }}
+        v-btn(v-if="getAccessToken", text, :color="darkColor" to="/profile")
+          v-icon(:color="darkColor") fa-user
+        v-btn(v-if="!getAccessToken", text, :color="darkColor" @click="login") Login
       v-btn(icon, @click="isSearchOpen = !isSearchOpen")
         v-icon(:color="darkColor") {{ isSearchOpen ? 'fa-times' : 'fa-search' }}
     v-toolbar-items.hidden-md-and-up

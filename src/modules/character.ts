@@ -1,17 +1,19 @@
-import { Module, VuexModule, MutationAction } from 'vuex-module-decorators'
+import { Module, VuexModule, MutationAction, Action, Mutation } from 'vuex-module-decorators'
 import { RawCharacterType } from '@/types/rawCharacterTypes'
 import baseCharacter from './CharacterEngine/baseCharacter.json'
-import { merge, get, set, omit } from 'lodash'
+import { merge, get, set, omit, each } from 'lodash'
 import generateCharacter from './CharacterEngine/generateCharacter'
 import { CharacterValidationType } from '@/types/utilityTypes'
 import validateCharacter from './CharacterEngine/validateCharacter'
 import builderVersion from '@/version'
+import { Vue } from 'vue-property-decorator'
 
 function stateOf (context: any) {
   // Vuex-module-decorator changes 'this' when it converts into a module.
   return (context as {
     state: {
-      character: RawCharacterType
+      character: RawCharacterType,
+      characters: RawCharacterType[]
     }
   }).state
 }
@@ -19,6 +21,7 @@ function stateOf (context: any) {
 @Module({ namespaced: true, name: 'character' })
 export default class Character extends VuexModule {
   public character: RawCharacterType = baseCharacter
+  public characters: RawCharacterType[] = []
   public isDirty: boolean = false
 
   get characterValidation (): CharacterValidationType {
@@ -119,5 +122,44 @@ export default class Character extends VuexModule {
       isDirty: true,
       character: characterCopy
     }
+  }
+
+  @MutationAction({ mutate: ['characters'] })
+  async fetchCharacters () {
+    var http = await Vue.prototype.$http(true)
+
+    const characterResults: any[] = await (http.get(`${process.env.VUE_APP_sw5eapiurl}/api/character`)).data
+
+    var characters: RawCharacterType[] = []
+    each(characterResults, (characterResult: any) => {
+      var newCharacter = JSON.parse(characterResult.jsonData) as RawCharacterType
+      newCharacter.userId = characterResult.userId
+      newCharacter.id = characterResult.id
+      characters.push(newCharacter)
+    })
+
+    return { characters }
+  }
+
+  @MutationAction({ mutate: ['characters'] })
+  async addCharacter (character: RawCharacterType) {
+    const characterPostData = {
+      jsonData: JSON.stringify(character),
+      id: character.id
+    }
+
+    var http = await Vue.prototype.$http(true)
+
+    const characterResult: any = (await http.post(`${process.env.VUE_APP_sw5eapiurl}/api/character`, characterPostData)).data
+
+    var newCharacter = JSON.parse(characterResult.jsonData) as RawCharacterType
+    newCharacter.userId = characterResult.userId
+    newCharacter.id = characterResult.id
+
+    var characters = stateOf(this).characters
+
+    characters.push(newCharacter)
+
+    return { characters }
   }
 }

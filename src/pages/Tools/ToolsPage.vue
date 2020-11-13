@@ -7,13 +7,13 @@
       RoutesList
     }
   })
-  export default class StarshipsPage extends Vue {
+  export default class ToolsPage extends Vue {
     get categories () {
       return [
         {
           category: '',
           routes: [
-            { to: '/myContent/characters', title: 'Characters' }
+            { to: '/tools/characters', title: 'Character Creator' }
           ]
         }
       ]
@@ -23,7 +23,7 @@
 
 <template lang="pug">
   div
-    h1 My Content
+    h1 Tools
     RoutesList(:categories="categories")
     div More Coming Soon!
 </template>

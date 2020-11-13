@@ -22,16 +22,16 @@
   integrity sha512-8GqG48m1XqyXh4mIZrtB5xOhUwSsh1WsrrsaZQOEYYql3YN9DEu9OOSg0ILzXHZo/h2Q74777YE4YzlArQzQEQ==
 
 "@azure/msal-browser@^2.4.0":
-  version "2.4.0"
-  resolved "https://registry.yarnpkg.com/@azure/msal-browser/-/msal-browser-2.4.0.tgz#e2e34346331db9503bf5547484259d3b2efdba46"
-  integrity sha512-zZk9hPts3GtRIAf3Iny9CR3GVQgbHQXPBN3lsrqINcKL7hs4CTWClDTsKSWWjkBvZ2epZvqWIBudPVKR64kilg==
+  version "2.6.1"
+  resolved "https://registry.yarnpkg.com/@azure/msal-browser/-/msal-browser-2.6.1.tgz#7c8651cd31fd0cfa8b1103fd71c593ac361df99b"
+  integrity sha512-81QE7YlNjlHUBt6EX+raXHc6MwNsD31fObf27Gk4QiEz1qAOnq/4TA7qJqKIIolVJJquMSf6nOR6Z4he4QVKjQ==
   dependencies:
-    "@azure/msal-common" "^1.6.2"
+    "@azure/msal-common" "^1.7.1"
 
-"@azure/msal-common@^1.6.2":
-  version "1.6.2"
-  resolved "https://registry.yarnpkg.com/@azure/msal-common/-/msal-common-1.6.2.tgz#91f3732866d727e20f1e142e6e88a981268fbff2"
-  integrity sha512-GShzp1q7Ld8SwYiDEjQZ9PmFOY4x+2stE86maiguylE9/d/c2muqKjc8aepmEqyjbV7o/omDvEf2Sr9QcIqkSA==
+"@azure/msal-common@^1.7.1":
+  version "1.7.1"
+  resolved "https://registry.yarnpkg.com/@azure/msal-common/-/msal-common-1.7.1.tgz#720f74c370d54982a043c0e6ee6113a238ce86ef"
+  integrity sha512-FYo2PX8c9vV8QoE201O1drMgWjs2f8bZjC8aWX1/fcVLOwrLXQlOtdx75ft55UYW1k9YWV7pYsgGDRZHZrOl/A==
   dependencies:
     debug "^4.1.1"
 
@@ -4376,12 +4376,19 @@ debug@^3.1.0, debug@^3.2.5:
   dependencies:
     ms "^2.1.1"
 
-debug@^4.0.1, debug@^4.1.0, debug@^4.1.1:
+debug@^4.0.1, debug@^4.1.0:
   version "4.1.1"
   resolved "https://registry.yarnpkg.com/debug/-/debug-4.1.1.tgz#3b72260255109c6b589cee050f1d516139664791"
   integrity sha512-pYAIzeRo8J6KPEaJ0VWOh5Pzkbw/RetuzehGM7QRRX5he4fPHx2rdKMB256ehJCkX+XRQm16eZLqLNS8RSZXZw==
   dependencies:
     ms "^2.1.1"
+
+debug@^4.1.1:
+  version "4.2.0"
+  resolved "https://registry.yarnpkg.com/debug/-/debug-4.2.0.tgz#7f150f93920e94c58f5574c2fd01a3110effe7f1"
+  integrity sha512-IX2ncY78vDTjZMFUdmsvIRFY2Cf4FnD0wRs+nQwJU8Lu99/tPFdb0VybiiMTPe3I6rQmwsqQqRBvxU+bZ/I8sg==
+  dependencies:
+    ms "2.1.2"
 
 decamelize@^1.0.0, decamelize@^1.2.0:
   version "1.2.0"
@@ -8025,10 +8032,15 @@ ms@2.0.0:
   resolved "https://registry.yarnpkg.com/ms/-/ms-2.0.0.tgz#5608aeadfc00be6c2901df5f9861788de0d597c8"
   integrity sha1-VgiurfwAvmwpAd9fmGF4jeDVl8g=
 
-ms@2.1.1, ms@^2.1.1:
+ms@2.1.1:
   version "2.1.1"
   resolved "https://registry.yarnpkg.com/ms/-/ms-2.1.1.tgz#30a5864eb3ebb0a66f2ebe6d727af06a09d86e0a"
   integrity sha512-tgp+dl5cGk28utYktBsrFqA7HKgrhgPsg6Z/EfhWI4gl1Hwq8B/GmY/0oXZ6nF8hDVesS/FpnYaD/kOWhYQvyg==
+
+ms@2.1.2, ms@^2.1.1:
+  version "2.1.2"
+  resolved "https://registry.yarnpkg.com/ms/-/ms-2.1.2.tgz#d09d1f357b443f493382a8eb3ccd183872ae6009"
+  integrity sha512-sGkPx+VjMtmA6MX27oA4FBFELFCZZ4S4XqeGOXCv68tT+jb3vk/RyaKWP0PTKyWtmLSM0b+adUTEvbs1PEaH2w==
 
 multicast-dns-service-types@^1.1.0:
   version "1.1.0"

@@ -27,7 +27,9 @@
     }
 
     get content () {
-      const data = this.hash && this.referenceTables.find(({ name }) => name === this.hash)
+      var tableData = this.referenceTables.find(({ name }) => name === this.hash)
+      const data = this.hash && tableData
+
       return data && data.content
     }
 

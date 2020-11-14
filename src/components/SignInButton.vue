@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { PublicClientApplication, AccountInfo } from '@azure/msal-browser'
+  import { PublicClientApplication, AccountInfo, SilentRequest } from '@azure/msal-browser'
   import { Component, Prop, Vue } from 'vue-property-decorator'
   import { namespace } from 'vuex-class'
   import { authConfig } from '@/modules/authentication'
@@ -22,9 +22,7 @@
         const tokenRequest = { account: this.account, scopes: authConfig.scopes }
 
         try {
-          console.log('Fetching access token')
-          window.msal.acquireTokenSilent(tokenRequest).then(tokenResponse => {
-            console.log('Retrieved access token: ' + tokenResponse)
+          await window.msal.acquireTokenSilent(tokenRequest).then(tokenResponse => {
             this.setAccessToken(tokenResponse.accessToken)
             this.$emit('setAuthLoading', false)
           })

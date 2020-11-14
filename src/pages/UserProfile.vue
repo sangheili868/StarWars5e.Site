@@ -28,7 +28,7 @@
 <template lang="pug">
   div
     v-progress-circular(v-if="isAuthLoading", indeterminate, color="primary", size="100").ma-5
-    template(v-else)
-      SignInButton(@setAuthLoading="newIsAuthLoading => isAuthLoading = newIsAuthLoading")
+    div(v-show="!isAuthLoading")
+      SignInButton(@setAuthLoading="newIsLoading => isAuthLoading = newIsLoading").mx-2.mt-2
       v-btn(color="primary", @click="signOut").mx-2.mt-2 Logout
 </template>

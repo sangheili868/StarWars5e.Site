@@ -2,6 +2,7 @@
   import { Component, Prop, Vue, Watch } from 'vue-property-decorator'
   import { namespace } from 'vuex-class'
   import SearchBox from '@/components/SearchBox.vue'
+  import SignInButton from '@/components/SignInButton.vue'
   import _ from 'lodash'
 
   const uiModule = namespace('ui')
@@ -9,7 +10,8 @@
 
   @Component({
     components: {
-      SearchBox
+      SearchBox,
+      SignInButton
     }
   })
   export default class MainToolbar extends Vue {
@@ -17,22 +19,19 @@
     @uiModule.State isDarkSide!: boolean
     @uiModule.Action updateSideBar!: (value: boolean) => void
     @authenticationModule.State accessToken!: string
+    @authenticationModule.Action initMSAL!: any
 
     isSearchOpen = false
     isLoggedIn = false
 
     async created () {
-      await Vue.prototype.$msal.getAccessTokenQuietly()
+      this.initMSAL()
     }
 
     @Watch('$route')
     resetSearch () {
       this.isSearchOpen = false
     }
-
-    // get getAccessToken () {
-    //   return !_.isNil(this.accessToken) && !_.isEmpty(this.accessToken)
-    // }
 
     get routes () {
       return [
@@ -107,14 +106,6 @@
       ]
     }
 
-    async login () {
-      await Vue.prototype.$msal.signIn()
-    }
-
-    async logout () {
-      await Vue.prototype.$msal.signOut()
-    }
-
     get isPageWithNavigation () {
       return ['phb', 'wh', 'sotg', 'snv'].some(page => this.$route.path.includes(page))
     }
@@ -163,7 +154,7 @@
           template(v-if="!nested || !nested.length") {{ title }}
         v-btn(v-if="accessToken", text, :color="darkColor" to="/profile")
           v-icon(:color="darkColor") fa-user
-        v-btn(v-if="!accessToken", text, :color="darkColor" @click="login") Login
+        SignInButton(v-else) Login
       v-btn(icon, @click="isSearchOpen = !isSearchOpen")
         v-icon(:color="darkColor") {{ isSearchOpen ? 'fa-times' : 'fa-search' }}
     v-toolbar-items.hidden-md-and-up

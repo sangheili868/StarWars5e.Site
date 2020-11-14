@@ -9,8 +9,6 @@ import '@fortawesome/fontawesome-free/css/all.css'
 import vueHeadful from 'vue-headful'
 import VueSessionStorage from 'vue-sessionstorage'
 import VueAppInsights from 'vue-application-insights'
-import axios from 'axios'
-import AuthenticationService from './authenticationService'
 
 Vue.use(VueSessionStorage)
 
@@ -31,24 +29,6 @@ Vue.use(VueAppInsights, {
   id: 'b5b30062-61c2-4ad6-9c52-277f91a16734',
   router
 })
-
-Vue.prototype.$msal = new AuthenticationService()
-
-Vue.prototype.$http = async (requiresAuth = false) => {
-  const options = {
-    headers: {
-      Authorization: ''
-    }
-  }
-
-  if (requiresAuth) {
-    var accessToken = (store as any).state.authentication.accessToken
-    options.headers.Authorization = `Bearer ${accessToken}`
-  }
-
-  const instance = axios.create(options)
-  return instance
-}
 
 new Vue({
   vuetify,

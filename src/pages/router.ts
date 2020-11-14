@@ -9,7 +9,7 @@ import charactersRoutes from './Characters/router'
 import lootRoutes from './Loot/router'
 import starshipsRoutes from './Starships/router'
 import toolsRoutes from './Tools/router'
-import ProfilePage from './Profile/Profile.vue'
+import UserProfile from './UserProfile.vue'
 
 Vue.use(Router)
 
@@ -51,7 +51,7 @@ export default new Router({
     },
     {
       path: '/profile',
-      component: ProfilePage,
+      component: UserProfile,
       meta: {
         title: 'Profile'
       }

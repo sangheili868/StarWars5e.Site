@@ -9,7 +9,8 @@ export default class Characters extends VuexModule {
 
   @MutationAction({ mutate: ['characters'] })
   async fetchCharacters () {
-    const characterResults: any[] = await (await Vue.prototype.$http(true)).get(`${process.env.VUE_APP_sw5eapiurl}/api/character`).data
+    const http = this.context.rootState.authentication.authedAxios
+    const characterResults: any[] = await http.get(`${process.env.VUE_APP_sw5eapiurl}/api/character`).data
 
     var characters: RawCharacterType[] = []
     _.each(characterResults, (characterResult: any) => {
@@ -24,7 +25,8 @@ export default class Characters extends VuexModule {
 
   @MutationAction({ mutate: ['characters'] })
   async addCharacter () {
-    const character = await (await Vue.prototype.$http(true)).post(`${process.env.VUE_APP_sw5eapiurl}/api/character`).data
+    const http = this.context.rootState.authentication.authedAxios
+    const character = await http.post(`${process.env.VUE_APP_sw5eapiurl}/api/character`).data
     this.characters.push(character)
 
     return { characters: this.characters }

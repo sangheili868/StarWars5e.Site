@@ -21,7 +21,7 @@ const authConfig = {
   authorityDomain: 'sw5edev.b2clogin.com',
   scopes: [
     'https://sw5edev.onmicrosoft.com/api/api.readCharacterData',
-    'https://sw5edev.onmicrosoft.com/api/api.readCharacterData',
+    'https://sw5edev.onmicrosoft.com/api/api.writeCharacterData',
     'offline_access'
   ]
 }
@@ -46,15 +46,41 @@ export default class AuthenticationService {
     this.msal.handleRedirectPromise().then((tokenResponse: any) => {
       if (tokenResponse && tokenResponse.accessToken) {
         store.commit('authentication/updateAccessToken', tokenResponse.accessToken)
-      } else {
-        store.commit('authentication/updateAccessToken', '')
       }
+      store.commit('ui/updateAuthLoading', false)
     }).catch((error: any) => {
       console.log('Token failure: ' + JSON.stringify(error))
     })
   }
 
   public async signIn () {
+    store.commit('ui/updateAuthLoading', true)
+    var currentAccount = this.msal.getAllAccounts()[0]
+
+    var tokenRequest = {
+      account: currentAccount,
+      scopes: authConfig.scopes
+    }
+
+    try {
+      var accessToken = (await this.msal.acquireTokenSilent(tokenRequest)).accessToken
+      store.commit('authentication/updateAccessToken', accessToken)
+      store.commit('ui/updateAuthLoading', false)
+    } catch (tokenError) {
+      try {
+        await this.msal.acquireTokenRedirect(tokenRequest)
+      } catch (tokenRedirectError) {
+        console.log('Problem getting token with redirect flow: ' + tokenRedirectError)
+      }
+    }
+  }
+
+  public async signOut () {
+    store.commit('ui/updateAuthLoading', true)
+    await this.msal.logout()
+  }
+
+  public async getAccessTokenQuietly () {
     var currentAccount = this.msal.getAllAccounts()[0]
 
     var tokenRequest = {
@@ -66,15 +92,7 @@ export default class AuthenticationService {
       var accessToken = (await this.msal.acquireTokenSilent(tokenRequest)).accessToken
       store.commit('authentication/updateAccessToken', accessToken)
     } catch (tokenError) {
-      try {
-        await this.msal.acquireTokenRedirect(tokenRequest)
-      } catch (tokenRedirectError) {
-        console.log('Problem getting token with redirect flow: ' + tokenRedirectError)
-      }
+      store.commit('authentication/updateAccessToken', '')
     }
-  }
-
-  public signOut () {
-    this.msal.logout()
   }
 }

@@ -18,7 +18,7 @@ const theme = {
 
 export default new Vuetify({
   theme: {
-    dark: store.state.ui.isDarkSide,
+    dark: (store as any).state.ui.isDarkSide,
     themes: {
       light: theme,
       dark: {

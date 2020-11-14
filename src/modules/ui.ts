@@ -1,9 +1,10 @@
-import { Module, VuexModule, MutationAction } from 'vuex-module-decorators'
+import { Module, VuexModule, MutationAction, Mutation } from 'vuex-module-decorators'
 
 @Module({ namespaced: true, name: 'ui' })
 export default class Ui extends VuexModule {
   isSideBarOpen: boolean | null = null
   isDarkSide: boolean | null = false
+  authLoading: boolean | null = false
 
   @MutationAction({ mutate: ['isSideBarOpen'] })
   async updateSideBar (value: boolean) {
@@ -17,5 +18,10 @@ export default class Ui extends VuexModule {
     return {
       isDarkSide: value
     }
+  }
+
+  @Mutation
+  async updateAuthLoading (authLoading: boolean) {
+    this.authLoading = authLoading
   }
 }

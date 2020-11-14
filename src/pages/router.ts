@@ -9,8 +9,7 @@ import charactersRoutes from './Characters/router'
 import lootRoutes from './Loot/router'
 import starshipsRoutes from './Starships/router'
 import toolsRoutes from './Tools/router'
-import LoginPage from './Login.vue'
-import ProfilePage from './Profile.vue'
+import ProfilePage from './Profile/Profile.vue'
 
 Vue.use(Router)
 
@@ -48,13 +47,6 @@ export default new Router({
       props: ({ query }) => query,
       meta: {
         title: 'Search'
-      }
-    },
-    {
-      path: '/login',
-      component: LoginPage,
-      meta: {
-        title: 'Login'
       }
     },
     {

@@ -19,10 +19,11 @@ Vue.prototype.$titleSuffix = ' | SW5E'
 
 Vue.config.productionTip = false
 
-router.beforeEach((to, from, next) => {
+router.beforeEach(async (to, from, next) => {
   document.title = to.meta.title
     ? to.meta.title + Vue.prototype.$titleSuffix
     : 'SW5E'
+  await (store as any).restored
   next()
 })
 
@@ -41,8 +42,7 @@ Vue.prototype.$http = async (requiresAuth = false) => {
   }
 
   if (requiresAuth) {
-    var accessToken = await Vue.prototype.$msal.signIn()
-
+    var accessToken = (store as any).state.authentication.accessToken
     options.headers.Authorization = `Bearer ${accessToken}`
   }
 

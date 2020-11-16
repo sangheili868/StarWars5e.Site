@@ -6,6 +6,7 @@ export interface MonsterType {
     name: string,
     monsterBehaviorType: string,
     description: string,
+    descriptionWithLinks: string,
     attackType: string,
     restrictions: string,
     attackBonus: number,

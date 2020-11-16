@@ -85,19 +85,19 @@
     hr
     div(v-if="behaviors('Trait').length")
       h3 Traits
-      p(v-for="{ name, description, restrictions } in behaviors('Trait')", :key="name")
+      p(v-for="{ name, description, descriptionWithLinks, restrictions } in behaviors('Trait')", :key="name")
         strong {{ name }}
         span(v-if="restrictions")  ({{ restrictions }})
-        span . {{ description }}
+        VueMarkdown(:source="descriptionWithLinks || description")
     div(v-if="behaviors('Action').length")
       h3 Actions
-      p(v-for="{ name, description, restrictions } in behaviors('Action')", :key="name")
+      p(v-for="{ name, description, descriptionWithLinks, restrictions } in behaviors('Action')", :key="name")
         strong {{ name }}
         span(v-if="restrictions")  ({{ restrictions }})
         span . {{ description }}
     div(v-if="behaviors('Reaction').length")
       h3 Reactions
-      p(v-for="{ name, description, restrictions } in behaviors('Reaction')", :key="name")
+      p(v-for="{ name, description, descriptionWithLinks, restrictions } in behaviors('Reaction')", :key="name")
         strong {{ name }}
         span(v-if="restrictions")  ({{ restrictions }})
         span . {{ description }}

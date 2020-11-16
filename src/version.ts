@@ -1,6 +1,8 @@
 export default '0.4.34'
 
 /*
+0.4.36
+- Added links that open modals for each power in monster spellcasting blocks.
 
 0.4.35
 - Added button to export monster to roll20

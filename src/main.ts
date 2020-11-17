@@ -42,7 +42,7 @@ Vue.prototype.$http = async (requiresAuth = false) => {
   }
 
   if (requiresAuth) {
-    var accessToken = (store as any).state.authentication.accessToken
+    var accessToken = await Vue.prototype.$msal.getAccessTokenQuietly()
     options.headers.Authorization = `Bearer ${accessToken}`
   }
 

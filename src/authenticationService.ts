@@ -34,6 +34,9 @@ const msalConfig = {
     authority: authConfig.authorities.signUpSignIn.authority,
     // postLogoutRedirectUri: 'http://localhost:8080/login',
     requireAuthOnInitialize: false
+  },
+  cache: {
+    cacheLocation: 'localStorage'
   }
 }
 
@@ -45,7 +48,7 @@ export default class AuthenticationService {
 
     this.msal.handleRedirectPromise().then((tokenResponse: any) => {
       if (tokenResponse && tokenResponse.accessToken) {
-        store.commit('authentication/updateAccessToken', tokenResponse.accessToken)
+        store.commit('ui/updateIsLoggedIn', true)
       }
       store.commit('ui/updateAuthLoading', false)
     }).catch((error: any) => {
@@ -63,8 +66,8 @@ export default class AuthenticationService {
     }
 
     try {
-      var accessToken = (await this.msal.acquireTokenSilent(tokenRequest)).accessToken
-      store.commit('authentication/updateAccessToken', accessToken)
+      await this.msal.acquireTokenSilent(tokenRequest)
+      store.commit('ui/updateIsLoggedIn', true)
       store.commit('ui/updateAuthLoading', false)
     } catch (tokenError) {
       try {
@@ -76,12 +79,15 @@ export default class AuthenticationService {
   }
 
   public async signOut () {
+    store.commit('ui/updateIsLoggedIn', false)
     store.commit('ui/updateAuthLoading', true)
     await this.msal.logout()
   }
 
-  public async getAccessTokenQuietly () {
+  public async getAccessTokenQuietly (): Promise<string> {
     var currentAccount = this.msal.getAllAccounts()[0]
+
+    if (!currentAccount) return ''
 
     var tokenRequest = {
       account: currentAccount,
@@ -90,9 +96,11 @@ export default class AuthenticationService {
 
     try {
       var accessToken = (await this.msal.acquireTokenSilent(tokenRequest)).accessToken
-      store.commit('authentication/updateAccessToken', accessToken)
+      store.commit('ui/updateIsLoggedIn', true)
+      return accessToken
     } catch (tokenError) {
-      store.commit('authentication/updateAccessToken', '')
+      store.commit('ui/updateIsLoggedIn', false)
+      return ''
     }
   }
 }

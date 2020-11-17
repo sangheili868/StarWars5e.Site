@@ -5,7 +5,6 @@
   import _ from 'lodash'
 
   const uiModule = namespace('ui')
-  const authenticationModule = namespace('authentication')
 
   @Component({
     components: {
@@ -16,10 +15,9 @@
     @uiModule.State isSideBarOpen!: boolean
     @uiModule.State isDarkSide!: boolean
     @uiModule.Action updateSideBar!: (value: boolean) => void
-    @authenticationModule.State accessToken!: string
+    @uiModule.State isLoggedIn!: boolean
 
     isSearchOpen = false
-    isLoggedIn = false
 
     async created () {
       await Vue.prototype.$msal.getAccessTokenQuietly()
@@ -29,10 +27,6 @@
     resetSearch () {
       this.isSearchOpen = false
     }
-
-    // get getAccessToken () {
-    //   return !_.isNil(this.accessToken) && !_.isEmpty(this.accessToken)
-    // }
 
     get routes () {
       return [
@@ -161,9 +155,9 @@
             v-list-item(:to="to + nestedRoute.to")
               v-list-item-title {{ nestedRoute.title }}
           template(v-if="!nested || !nested.length") {{ title }}
-        v-btn(v-if="accessToken", text, :color="darkColor" to="/profile")
+        v-btn(v-if="isLoggedIn", text, :color="darkColor" to="/profile")
           v-icon(:color="darkColor") fa-user
-        v-btn(v-if="!accessToken", text, :color="darkColor" @click="login") Login
+        v-btn(v-if="!isLoggedIn", text, :color="darkColor" @click="login") Login
       v-btn(icon, @click="isSearchOpen = !isSearchOpen")
         v-icon(:color="darkColor") {{ isSearchOpen ? 'fa-times' : 'fa-search' }}
     v-toolbar-items.hidden-md-and-up

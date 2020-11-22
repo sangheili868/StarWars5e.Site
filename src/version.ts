@@ -1,6 +1,10 @@
 export default '0.4.34'
 
 /*
+
+0.4.37
+- Minor visual improvements to monster power modal
+
 0.4.36
 - Added links that open modals for each power in monster spellcasting blocks.
 

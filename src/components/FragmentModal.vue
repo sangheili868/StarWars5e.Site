@@ -5,6 +5,7 @@
   import { ReferenceTableType } from '@/types/utilityTypes'
   import MyDialog from '@/components/MyDialog.vue'
   import { PowerType } from '@/types/characterTypes'
+  import { startCase } from 'lodash'
 
   const referenceTableModules = namespace('referenceTables')
   const powersModule = namespace('powers')
@@ -21,7 +22,7 @@
     @referenceTableModules.Action fetchReferenceTables!: () => void
     @powersModule.State powers!: PowerType[]
     @powersModule.Action fetchPowers!: () => void
-    power!: PowerType | undefined
+    startCase = startCase
 
     created () {
       this.fetchReferenceTables()
@@ -32,16 +33,14 @@
       return decodeURI(this.$route.hash).substring(1)
     }
 
-    get content () {
-      this.power = this.powers.find(({ name }) => name.toLowerCase() === this.hash.toLowerCase())
-      if (this.power) {
-        var data = this.hash && this.power
-        return data && data.description
-      }
+    get power () {
+      return this.powers.find(({ name }) => name.toLowerCase() === this.hash.toLowerCase())
+    }
 
-      var tableData = this.referenceTables.find(({ name }) => name === this.hash)
-      var data1 = this.hash && tableData
-      return data1 && data1.content
+    get content () {
+      if (!this.hash) return ''
+      const tableData = this.referenceTables.find(({ name }) => name === this.hash)
+      return this.power ? this.power.description : tableData ? tableData.content : ''
     }
 
     get hasContent () {
@@ -67,16 +66,17 @@
 
 <template lang="pug">
   MyDialog(v-if="content", :value="hasContent" :onClose="onCloseCallBack")
-    template(#title) {{ hash }}
+    template(#title) {{ startCase(hash) }}
     template(#text)
-      div(v-if="power")
-        p #[strong Level:] {{(power.level || 'At-will').toString()}}
-        p #[strong Casting Period:] {{power.castingPeriodText}}
-        p #[strong Range:] {{power.range}}
-        p #[strong Duration:] {{power.duration}}
-        p #[strong Concentration:] {{power.concentration}}
+      div(v-if="power").mt-3
+        div #[strong Level:] {{ (power.level || 'At-will').toString() }}
+        div #[strong Casting Period:] {{ power.castingPeriodText }}
+        div #[strong Range:] {{ power.range }}
+        div #[strong Duration:] {{ power.duration }}
+        div #[strong Concentration:] {{ power.concentration }}
+        br
         VueMarkdown(:source="content")
-      VueMarkdown(v-if="!power", :source="content")
+      VueMarkdown(v-else, :source="content")
     template(#actions)
       v-spacer
       v-btn(color="primary", text, :to="route") Close

@@ -17,6 +17,8 @@ Vue.prototype.$titleSuffix = ' | SW5E'
 
 Vue.config.productionTip = false
 
+Vue.prototype.$msal = undefined
+
 router.beforeEach(async (to, from, next) => {
   document.title = to.meta.title
     ? to.meta.title + Vue.prototype.$titleSuffix

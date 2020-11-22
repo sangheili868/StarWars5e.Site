@@ -1,12 +1,12 @@
 import { Module, VuexModule, MutationAction, Action, Mutation } from 'vuex-module-decorators'
-import { RawCharacterType } from '@/types/rawCharacterTypes'
+import { CharacterResult, RawCharacterType } from '@/types/rawCharacterTypes'
 import baseCharacter from './CharacterEngine/baseCharacter.json'
 import { merge, get, set, omit, each } from 'lodash'
 import generateCharacter from './CharacterEngine/generateCharacter'
 import { CharacterValidationType } from '@/types/utilityTypes'
 import validateCharacter from './CharacterEngine/validateCharacter'
 import builderVersion from '@/version'
-import { Vue } from 'vue-property-decorator'
+import axios, { AxiosRequestConfig } from 'axios'
 
 function stateOf (context: any) {
   // Vuex-module-decorator changes 'this' when it converts into a module.
@@ -16,6 +16,19 @@ function stateOf (context: any) {
       characters: RawCharacterType[]
     }
   }).state
+}
+
+function rootOf (myThis: any) {
+  return (myThis as {
+    rootGetters: {
+      'authentication/axiosHeader': AxiosRequestConfig
+    },
+    rootState: {
+      authentication: {
+        accessToken: string
+      }
+    }
+  })
 }
 
 @Module({ namespaced: true, name: 'character' })
@@ -124,40 +137,43 @@ export default class Character extends VuexModule {
     }
   }
 
-  @MutationAction({ mutate: ['characters'] })
-  async fetchCharacters () {
-    const http = this.context.rootState.authentication.authedAxios
-    const characterResults: any[] = await (http.get(`${process.env.VUE_APP_sw5eapiurl}/api/character`)).data
-
-    var characters: RawCharacterType[] = []
-    each(characterResults, (characterResult: any) => {
-      var newCharacter = JSON.parse(characterResult.jsonData) as RawCharacterType
-      newCharacter.userId = characterResult.userId
-      newCharacter.id = characterResult.id
-      characters.push(newCharacter)
-    })
-
-    return { characters }
+  @MutationAction({ mutate: ['character'] })
+  async loadCharacter (characterId: string) {
+    return { character: stateOf(this).characters.find(({ id }) => id === characterId) }
   }
 
   @MutationAction({ mutate: ['characters'] })
-  async addCharacter (character: RawCharacterType) {
-    const characterPostData = {
-      jsonData: JSON.stringify(character),
-      id: character.id
+  async fetchCharacters () {
+    if (rootOf(this).rootState.authentication.accessToken) {
+      const characterResults: CharacterResult[] = (await axios.get(
+        `${process.env.VUE_APP_sw5eapiurl}/api/character`,
+        rootOf(this).rootGetters['authentication/axiosHeader']
+      )).data
+
+      return { characters: characterResults.map(({ id, userId, jsonData }) => ({
+        ...JSON.parse(jsonData) as RawCharacterType,
+        id,
+        userId
+      })) }
+    } else {
+      return { characters: stateOf(this).characters }
     }
+  }
 
-    const http = this.context.rootState.authentication.authedAxios
-    const characterResult: any = (await http.post(`${process.env.VUE_APP_sw5eapiurl}/api/character`, characterPostData)).data
+  @MutationAction({ mutate: ['characters'] })
+  async saveCharacter (character: RawCharacterType) {
+    const characterResult: CharacterResult = (await axios.post(
+      `${process.env.VUE_APP_sw5eapiurl}/api/character`,
+      { jsonData: JSON.stringify(character), id: character.id },
+      rootOf(this).rootGetters['authentication/axiosHeader']
+    )).data
 
-    var newCharacter = JSON.parse(characterResult.jsonData) as RawCharacterType
+    let newCharacter = JSON.parse(characterResult.jsonData) as RawCharacterType
     newCharacter.userId = characterResult.userId
     newCharacter.id = characterResult.id
 
-    var characters = stateOf(this).characters
+    const characters = stateOf(this).characters
 
-    characters.push(newCharacter)
-
-    return { characters }
+    return { characters: [ ...characters, newCharacter ] }
   }
 }

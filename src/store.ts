@@ -29,6 +29,7 @@ import { VuexPersistence } from 'vuex-persist'
 import characterAdvancements from './modules/characterAdvancements'
 import conditions from './modules/conditions'
 import skills from './modules/skills'
+import authentication from './modules/authentication'
 import localforage from 'localforage'
 import _ from 'lodash'
 
@@ -36,6 +37,7 @@ Vue.use(Vuex)
 
 const modules = {
   archetypes,
+  authentication,
   dataVersions,
   armorProperties,
   backgrounds,

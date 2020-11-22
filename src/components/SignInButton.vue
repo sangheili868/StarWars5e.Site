@@ -9,26 +9,26 @@
   @Component
   export default class SignInButton extends Vue {
     @authenticationModule.Getter account!: AccountInfo
-    @authenticationModule.Action initMSAL!: any
-    @authenticationModule.Action setAccessToken!: any
+    @authenticationModule.Action initMSAL!: () => {}
+    @authenticationModule.Action setAccessToken!: (accessToken: string) => {}
 
     created () {
       this.initMSAL()
     }
 
     async signIn () {
-      if (window.msal) {
+      if (Vue.prototype.$msal) {
         this.$emit('setAuthLoading', true)
         const tokenRequest = { account: this.account, scopes: authConfig.scopes }
 
         try {
-          await window.msal.acquireTokenSilent(tokenRequest).then(tokenResponse => {
+          await (Vue.prototype.$msal as PublicClientApplication).acquireTokenSilent(tokenRequest).then(tokenResponse => {
             this.setAccessToken(tokenResponse.accessToken)
             this.$emit('setAuthLoading', false)
           })
         } catch (tokenError) {
           try {
-            window.msal.acquireTokenRedirect(tokenRequest).then(() => this.$emit('setAuthLoading', false))
+            Vue.prototype.$msal.acquireTokenRedirect(tokenRequest).then(() => this.$emit('setAuthLoading', false))
           } catch (tokenRedirectError) {
             console.error('Problem getting token with redirect flow: ' + tokenRedirectError)
             this.$emit('setAuthLoading', false)

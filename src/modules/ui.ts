@@ -4,8 +4,6 @@ import { Module, VuexModule, MutationAction, Mutation } from 'vuex-module-decora
 export default class Ui extends VuexModule {
   isSideBarOpen: boolean | null = null
   isDarkSide: boolean | null = false
-  authLoading: boolean | null = false
-  isLoggedIn: boolean | null = false
 
   @MutationAction({ mutate: ['isSideBarOpen'] })
   async updateSideBar (value: boolean) {
@@ -19,15 +17,5 @@ export default class Ui extends VuexModule {
     return {
       isDarkSide: value
     }
-  }
-
-  @Mutation
-  async updateAuthLoading (authLoading: boolean) {
-    this.authLoading = authLoading
-  }
-
-  @Mutation
-  async updateIsLoggedIn (isLoggedIn: boolean) {
-    this.isLoggedIn = isLoggedIn
   }
 }

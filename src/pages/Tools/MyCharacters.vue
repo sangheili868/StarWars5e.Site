@@ -1,0 +1,40 @@
+<script lang="ts">
+  import { RawCharacterType } from '@/types/rawCharacterTypes'
+  import { Component, Prop, Vue } from 'vue-property-decorator'
+  import { namespace } from 'vuex-class'
+
+  const characterModule = namespace('character')
+
+  @Component
+  export default class MyCharacters extends Vue {
+    @characterModule.State characters!: RawCharacterType[]
+    @characterModule.Action fetchCharacters!: () => void
+
+    created () {
+      this.fetchCharacters()
+    }
+
+    getClassText (character: RawCharacterType): string {
+      return character.classes
+        .map(({ name, levels, archetype }) => `${name}${archetype ? ` (${archetype.name})` : ''} ${levels}`)
+        .join(', ')
+    }
+  }
+</script>
+
+<template lang="pug">
+  div
+    v-btn(color="primary", fab, x-large, fixed, bottom, right)
+      v-icon fa-plus
+    div.d-flex.justify-center
+      v-card(
+        v-for="(character, index) in characters",
+        :key="index",
+        max-width="500",
+        :to="'characters/' + encodeURIComponent(character.id)"
+      ).d-flex.pa-3.ma-3
+        v-img(:src="character.image", contain, max-height="90", max-width="100", min-width="100")
+        div.text-left.pa-3
+          h1 {{ character.name }}
+          h5 {{ character.species.name }} {{ getClassText(character) }}
+</template>

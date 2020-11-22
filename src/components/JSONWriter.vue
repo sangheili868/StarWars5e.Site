@@ -18,7 +18,7 @@
     @Prop(Object) readonly jsonData!: object
     @Prop(String) readonly filename!: string
     @Prop(Boolean) readonly disabled!: boolean
-    @characterModule.Action addCharacter!: (character: RawCharacterType) => void
+    @characterModule.Action saveCharacter!: (character: RawCharacterType) => void
 
     isOpen = false
     hasCopied = false
@@ -29,7 +29,7 @@
     }
 
     async saveToAccount () {
-      await this.addCharacter(this.jsonData as RawCharacterType)
+      await this.saveCharacter(this.jsonData as RawCharacterType)
     }
 
     copyCharacter () {

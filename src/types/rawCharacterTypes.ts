@@ -1,7 +1,3 @@
-/// ////////////////////////////////////////////////////////
-// IF YOU CHANGE THIS FILE, INCREMENT BUILDER VERSION IN src/version.ts
-/// ////////////////////////////////////////////////////////
-
 import { CharacterProficiency } from './completeCharacterTypes'
 
 export interface RawSpeciesType {
@@ -193,6 +189,12 @@ export interface CustomEquipmentType extends RawEquipmentType {
   weight: number,
   damageType?: string,
   damageNumberOfDice?: number
+}
+
+export interface CharacterResult {
+  id: string,
+  userId: string,
+  jsonData: string
 }
 
 export interface RawCharacterType {

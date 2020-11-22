@@ -1,6 +1,7 @@
+import Vue from 'vue'
 import { Module, VuexModule, Mutation, MutationAction } from 'vuex-module-decorators'
 import * as msalBrowser from '@azure/msal-browser'
-import axios, { AxiosInstance } from 'axios'
+import axios, { AxiosInstance, AxiosRequestConfig } from 'axios'
 
 export const authConfig = {
   names: {
@@ -41,31 +42,28 @@ const msalConfig = {
   }
 }
 
-declare global {
-    interface Window { msal: msalBrowser.PublicClientApplication; }
-}
-
 @Module({ namespaced: true, name: 'authentication' })
 export default class Authentication extends VuexModule {
   accessToken: string | null = null
 
-  get authedAxios (): AxiosInstance {
-    return axios.create({
+  get axiosHeader (): AxiosRequestConfig {
+    console.log(this.accessToken)
+    return {
       headers: {
         Authorization: `Bearer ${this.accessToken}`
       }
-    })
+    }
   }
 
   get account (): msalBrowser.AccountInfo {
-    return window.msal.getAllAccounts()[0]
+    return Vue.prototype.$msal.getAllAccounts()[0]
   }
 
   @MutationAction({ mutate: ['accessToken'] })
   async initMSAL () {
-      if (!window.msal) window.msal = new msalBrowser.PublicClientApplication(msalConfig)
+      if (!Vue.prototype.$msal) Vue.prototype.$msal = new msalBrowser.PublicClientApplication(msalConfig)
       let accessToken: string | null = null
-      await window.msal.handleRedirectPromise().then(tokenResponse => {
+      await (Vue.prototype.$msal as msalBrowser.PublicClientApplication).handleRedirectPromise().then(tokenResponse => {
         if (tokenResponse && tokenResponse.accessToken) {
           accessToken = tokenResponse.accessToken
         }

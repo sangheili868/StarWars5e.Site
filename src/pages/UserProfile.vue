@@ -20,7 +20,7 @@
 
     signOut () {
       this.isAuthLoading = true
-      window.msal && window.msal.logout()
+      Vue.prototype.$msal && Vue.prototype.$msal.logout()
     }
   }
 </script>

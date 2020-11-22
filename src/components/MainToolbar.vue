@@ -151,7 +151,7 @@
             v-list-item(:to="to + nestedRoute.to")
               v-list-item-title {{ nestedRoute.title }}
           template(v-if="!nested || !nested.length") {{ title }}
-        v-btn(v-if="isLoggedIn", text, :color="darkColor" to="/profile")
+        v-btn(v-if="accessToken", text, :color="darkColor" to="/profile")
           v-icon(:color="darkColor") fa-user
         SignInButton(v-else) Login
       v-btn(icon, @click="isSearchOpen = !isSearchOpen")

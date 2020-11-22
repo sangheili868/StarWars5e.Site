@@ -42,12 +42,14 @@
     }
   })
   export default class Characters extends Vue {
+    @Prop(String) readonly characterId!: string
     @characterModule.State character!: RawCharacterType
     @characterModule.State isDirty!: boolean
     @characterModule.Getter characterValidation!: CharacterValidationType
     @characterModule.Getter completeCharacter!: CompleteCharacterType
     @characterModule.Action setClean!: () => void
     @characterModule.Action createCharacter!: () => void
+    @characterModule.Action loadCharacter!: (characterId: string) => void
     @characterModule.Action setCharacter!: (newCharacter: RawCharacterType) => Promise<any>
     @characterModule.Action updateCharacter!: (newCharacter: RawCharacterType) => void
     @characterModule.Action deleteCharacterProperty!: (payload: { path: string, index: number }) => void
@@ -89,7 +91,8 @@
         this.fetchCharacterAdvancements(),
         this.fetchSkills(),
         this.fetchConditions(),
-        this.fetchEnhancedItems()
+        this.fetchEnhancedItems(),
+        this.loadCharacter(this.characterId)
       ]).then(() => {
         this.hasFetchedData = true
         this.isEditing = this.characterValidation.code > 0

@@ -29,16 +29,13 @@ import { VuexPersistence } from 'vuex-persist'
 import characterAdvancements from './modules/characterAdvancements'
 import conditions from './modules/conditions'
 import skills from './modules/skills'
-import authentication from './modules/authentication'
 import localforage from 'localforage'
 import _ from 'lodash'
-import Cookies from 'js-cookie'
 
 Vue.use(Vuex)
 
 const modules = {
   archetypes,
-  authentication,
   dataVersions,
   armorProperties,
   backgrounds,
@@ -68,16 +65,6 @@ const modules = {
   weaponProperties
   }
 
-const persistToCookie = new VuexPersistence({
-  restoreState: (key, storage) => Cookies.getJSON(key),
-  saveState: (key, state, storage) => {
-    Cookies.set(key, state, {
-      expires: 3
-    })
-  },
-  modules: ['authentication']
-})
-
 const persistToLocalStorage = new VuexPersistence({
   storage: window.localStorage,
   modules: ['ui']
@@ -86,10 +73,10 @@ const persistToLocalStorage = new VuexPersistence({
 const persistToIndexedDB = new VuexPersistence({
   storage: localforage,
   asyncStorage: true,
-  modules: _.pull(Object.getOwnPropertyNames(modules), 'ui', 'authentication')
+  modules: _.pull(Object.getOwnPropertyNames(modules), 'ui')
 })
 
 export default new Vuex.Store({
-  plugins: [persistToIndexedDB.plugin, persistToLocalStorage.plugin, persistToCookie.plugin],
+  plugins: [persistToIndexedDB.plugin, persistToLocalStorage.plugin],
   modules: modules
 })

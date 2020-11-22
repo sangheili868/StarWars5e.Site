@@ -35,6 +35,9 @@ const msalConfig = {
     authority: authConfig.authorities.signUpSignIn.authority,
     // postLogoutRedirectUri: 'http://localhost:8080/login',
     requireAuthOnInitialize: false
+  },
+  cache: {
+    cacheLocation: 'localStorage'
   }
 }
 

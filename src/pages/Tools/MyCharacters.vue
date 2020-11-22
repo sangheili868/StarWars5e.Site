@@ -26,7 +26,7 @@
   div
     v-btn(color="primary", fab, x-large, fixed, bottom, right)
       v-icon fa-plus
-    div.d-flex.justify-center
+    div.d-flex.justify-center.flex-wrap
       v-card(
         v-for="(character, index) in characters",
         :key="index",

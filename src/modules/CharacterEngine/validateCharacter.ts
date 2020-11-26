@@ -11,7 +11,8 @@ const abilityScores = [
   'Charisma'
 ]
 
-export default function (character: RawCharacterType): CharacterValidationType {
+export default function (character: RawCharacterType | undefined): CharacterValidationType {
+  if (!character) return { code: 0, message: 'No Character Found', isValid: false }
   return [
     { message: 'No character found', isValid: !isEmpty(character) },
     { message: 'Missing a name', isValid: character.name !== '' },

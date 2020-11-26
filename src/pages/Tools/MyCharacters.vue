@@ -2,6 +2,7 @@
   import { RawCharacterType } from '@/types/rawCharacterTypes'
   import { Component, Prop, Vue } from 'vue-property-decorator'
   import { namespace } from 'vuex-class'
+  import generateID from '@/utilities/generateID'
 
   const characterModule = namespace('character')
 
@@ -9,6 +10,7 @@
   export default class MyCharacters extends Vue {
     @characterModule.State characters!: RawCharacterType[]
     @characterModule.Action fetchCharacters!: () => void
+    @characterModule.Action createCharacter!: (localId: string) => Promise<void>
 
     created () {
       this.fetchCharacters()
@@ -19,12 +21,17 @@
         .map(({ name, levels, archetype }) => `${name}${archetype ? ` (${archetype.name})` : ''} ${levels}`)
         .join(', ')
     }
+
+    handleCreateCharacter () {
+      const localId = 'temp-' + generateID()
+      this.createCharacter(localId).then(() => this.$router.push('characters/' + encodeURIComponent(localId)))
+    }
   }
 </script>
 
 <template lang="pug">
   div
-    v-btn(color="primary", fab, x-large, fixed, bottom, right)
+    v-btn(color="primary", fab, x-large, fixed, bottom, right, @click="handleCreateCharacter")
       v-icon fa-plus
     div.d-flex.justify-center.flex-wrap
       v-card(

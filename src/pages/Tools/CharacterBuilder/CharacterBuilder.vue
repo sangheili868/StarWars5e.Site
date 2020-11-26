@@ -121,7 +121,7 @@
   div
     h1.pb-3.d-flex.justify-center Character Builder (BETA)
       CharacterBuilderSettings(
-        :rawCharacter="this.character",
+        :rawCharacter="character",
         @updateCharacter="newCharacter => $emit('updateCharacter', newCharacter)",
       )
     div.d-flex.justify-center

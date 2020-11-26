@@ -47,7 +47,6 @@ export default class Authentication extends VuexModule {
   accessToken: string | null = null
 
   get axiosHeader (): AxiosRequestConfig {
-    console.log(this.accessToken)
     return {
       headers: {
         Authorization: `Bearer ${this.accessToken}`

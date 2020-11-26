@@ -14,7 +14,6 @@
   import { CharacterValidationType } from '@/types/utilityTypes'
   import { range, isEmpty, isEqual, merge, get, set, camelCase } from 'lodash'
   import baseCharacter from '@/modules/CharacterEngine/baseCharacter.json'
-  import validateCharacter from '@/modules/CharacterEngine/validateCharacter'
   import builderVersion from '@/version'
   import semver from 'semver'
 
@@ -43,10 +42,12 @@
   })
   export default class Characters extends Vue {
     @Prop(String) readonly characterId!: string
-    @characterModule.State character!: RawCharacterType
+    @characterModule.State characters!: RawCharacterType[]
     @characterModule.State isDirty!: boolean
-    @characterModule.Getter characterValidation!: CharacterValidationType
-    @characterModule.Getter completeCharacter!: CompleteCharacterType
+    @characterModule.Getter generateCompleteCharacter!: (rawCharacter: RawCharacterType) => CompleteCharacterType
+    @characterModule.Getter getCharacterById!: (characterId: string) => RawCharacterType | undefined
+    @characterModule.Getter getIsEmptyCharacter!: (character: RawCharacterType | undefined) => boolean
+    @characterModule.Getter getCharacterValidation!: (character: RawCharacterType | undefined) => CharacterValidationType
     @characterModule.Action setClean!: () => void
     @characterModule.Action createCharacter!: () => void
     @characterModule.Action loadCharacter!: (characterId: string) => void
@@ -78,6 +79,7 @@
     hasFetchedData = false
     isEditing = true
     currentStep = 0
+    character: RawCharacterType | undefined = undefined
 
     created () {
       Promise.all([
@@ -91,13 +93,17 @@
         this.fetchCharacterAdvancements(),
         this.fetchSkills(),
         this.fetchConditions(),
-        this.fetchEnhancedItems(),
-        this.loadCharacter(this.characterId)
+        this.fetchEnhancedItems()
       ]).then(() => {
+        this.character = this.getCharacterById(this.characterId)
         this.hasFetchedData = true
-        this.isEditing = this.characterValidation.code > 0
+        this.isEditing = !this.characterValidation.isValid
         this.currentStep = this.isEmptyCharacter ? 0 : 1
       })
+    }
+
+    get completeCharacter () {
+      return this.character ? this.generateCompleteCharacter(this.character) : null
     }
 
     get filename () {
@@ -105,11 +111,15 @@
     }
 
     get isEmptyCharacter () {
-      return isEmpty(this.character) || isEqual(this.character, baseCharacter)
+      return this.getIsEmptyCharacter(this.character)
     }
 
     get title () {
-      return (this.character.name || 'Characters') + Vue.prototype.$titleSuffix
+      return ((this.character && this.character.name) || 'Characters') + Vue.prototype.$titleSuffix
+    }
+
+    get characterValidation () {
+      return this.getCharacterValidation(this.character)
     }
 
     goToStep (step: number) {
@@ -124,11 +134,11 @@
     }
 
     checkBuilderVersion () {
-      if (validateCharacter(this.character).isValid) {
+      if (this.characterValidation.isValid && this.completeCharacter) {
         const isValidBuilderVersion = semver.valid(this.completeCharacter.builderVersion)
         const isCurrentBuilderVersion = isValidBuilderVersion && !semver.gt(builderVersion, this.completeCharacter.builderVersion)
         if (!isCurrentBuilderVersion) {
-          console.log(`Upgrading character from builderVersion ${this.completeCharacter.builderVersion} to builderVersion ${builderVersion}`)
+          console.info(`Upgrading character from builderVersion ${this.completeCharacter.builderVersion} to builderVersion ${builderVersion}`)
           this.updateCharacter({ builderVersion } as RawCharacterType)
         }
       }
@@ -136,7 +146,7 @@
 
     handleCharacterUpload (newCharacter: any, newFilename: string) {
       this.setCharacter(newCharacter).then(this.checkBuilderVersion)
-      this.isEditing = !validateCharacter(newCharacter).isValid
+      this.isEditing = !this.getCharacterValidation(newCharacter).isValid
       this.currentStep = this.isEmptyCharacter ? 0 : 1
     }
   }

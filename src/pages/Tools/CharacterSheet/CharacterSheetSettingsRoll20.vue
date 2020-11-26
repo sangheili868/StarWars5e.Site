@@ -248,7 +248,6 @@
           max: c.hitPoints.hitDice.map(({ size, maximum }) => maximum + size).join(' ')
         }
       ]
-      console.log(attribs)
       return {
         schema_version: 2,
         name: c.name,

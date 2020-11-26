@@ -200,6 +200,7 @@ export interface CharacterResult {
 export interface RawCharacterType {
   name: string,
   id: string,
+  localId?: string,
   userId: string,
   builderVersion: string,
   image: string,

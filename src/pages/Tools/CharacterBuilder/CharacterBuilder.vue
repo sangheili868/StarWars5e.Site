@@ -141,20 +141,11 @@
           choose expertise skills in the character builder or see sneak attack in your list of features. However, in the
           proficiencies tab, you can give yourself expertise in the skills you choose. Then you can add a custom
           feature for Sneak Attack, copying the description from the operative page on this site.
-        h2.mt-5 Saving Your Character
-        div.
-          We also have not yet implemented account management, so you cannot store characters on our servers. Until then, you will
-          have to save your character to a #[span.primary--text file on your computer], and upload it to this site
-          whenever you want to view it. #[span.primary--text No changes to your character are permanently saved] unless
-          you download an updated file, including changes to hit points, force points, etc. Your character can be saved as a
-          #[span.primary--text file] or #[span.primary--text text]. If you choose text, it is copied to your clipboard, and
-          it must then be pasted somewhere you can access later.
         h2.mt-5 Feedback
         div.
           Because of the complexity and depth of SW5e, there is no way we can test every possible character. There are also
-          lots of other features we plan to implement, like a dice roller and custom weapons and armor.
-          Please report any bugs you find, or additional features you want to see, at the
-          #[span.primary--text #website-character-builder] channel in our Discord server.
+          lots of other features we plan to implement. Please report any bugs you find, or additional features you want to
+          see, at the #[span.primary--text #website-character-builder] channel in our Discord server.
         div.mt-5.d-flex.flex-wrap.justify-space-around
           a(href="https://discord.gg/zYcPYTu", target="_blank").mb-5
             v-btn(light)

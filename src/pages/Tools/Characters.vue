@@ -16,6 +16,7 @@
   import baseCharacter from '@/modules/CharacterEngine/baseCharacter.json'
   import builderVersion from '@/version'
   import semver from 'semver'
+  import BackButton from '@/components/BackButton.vue'
 
   const characterModule = namespace('character')
   const classesModule = namespace('classes')
@@ -37,6 +38,7 @@
       CharacterSheet,
       JSONReader,
       JSONWriter,
+      BackButton,
       Loading
     }
   })
@@ -167,13 +169,12 @@
       div.d-flex.align-center.justify-space-around
         div Character has unsaved changes!
         JSONWriter(:jsonData="character", v-bind="{ filename }", @save="setClean").ml-1 Save
+    BackButton(label="My Characters")
     template(v-if="isEditing")
-      div.d-flex.align-center.justify-center.flex-wrap
-        v-btn(color="primary", @click="handleCreateNew").ma-2 Create Character
-        JSONReader(label="Load Character From File", @input="handleCharacterUpload")
-        CharactersViewSheet(v-if="isEditing", v-bind="{ characterValidation }", @click="isEditing=false")
-        v-btn(v-else, :disabled="isEmptyCharacter", color="primary", @click="goToStep(1)").ma-2 Edit Character
-        JSONWriter(:jsonData="character", :disabled="isEmptyCharacter", v-bind="{ filename }", @save="setClean") Save Character
+      //- div.d-flex.align-center.justify-center.flex-wrap
+        //- CharactersViewSheet(v-if="isEditing", v-bind="{ characterValidation }", @click="isEditing=false")
+        //- v-btn(v-else, :disabled="isEmptyCharacter", color="primary", @click="goToStep(1)").ma-2 Edit Character
+        //- JSONWriter(:jsonData="character", :disabled="isEmptyCharacter", v-bind="{ filename }", @save="setClean") Save Character
       CharacterBuilder(
         v-bind="{ character, characterValidation, currentStep, classes, archetypes, equipment, powers, feats, backgrounds, species }",
         v-on="{ updateCharacter, deleteCharacterProperty, replaceCharacterProperty, replaceCharacterProperties, goToStep }"

@@ -91,7 +91,7 @@
           to: '/tools',
           title: 'Tools',
           nested: [
-            { to: '/characters', title: 'Character Creator' }
+            { to: '/mycharacters', title: 'Character Creator' }
           ]
         },
         {

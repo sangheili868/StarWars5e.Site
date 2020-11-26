@@ -13,7 +13,7 @@
         {
           category: '',
           routes: [
-            { to: '/tools/characters', title: 'Character Creator' }
+            { to: '/tools/mycharacters', title: 'Character Creator' }
           ]
         }
       ]

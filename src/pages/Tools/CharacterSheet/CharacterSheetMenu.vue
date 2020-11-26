@@ -40,7 +40,7 @@
         JSONReader(label="Load Character From File", @input="(newCharacter, newFilename) => $emit('handleCharacterUpload', newCharacter, newFilename)")
         v-btn(@click="$emit('goToStep', 1)").my-2 Edit Character
         JSONWriter(:jsonData="rawCharacter" v-bind="{ filename }", @save="$emit('setClean')") Save Character
-        v-btn(to="/tools/characters/print").my-2 Print Character Sheet
+        v-btn(to="/tools/mycharacters/print").my-2 Print Character Sheet
         CharacterSheetSettingsRoll20(v-bind="{ completeCharacter, rawCharacter }")
     template(#actions)
       v-spacer

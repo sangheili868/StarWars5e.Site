@@ -17,7 +17,7 @@ export default {
       }
     },
     {
-      path: '/tools/characters',
+      path: '/tools/mycharacters',
       component: MyCharacters,
       props: ({ query }: Route) => query,
       meta: {
@@ -25,7 +25,7 @@ export default {
       }
     },
     {
-      path: '/tools/characters/:characterId',
+      path: '/tools/mycharacters/:characterId',
       component: Characters,
       props: true,
       meta: {
@@ -33,7 +33,7 @@ export default {
       }
     },
     {
-      path: '/tools/characters/print',
+      path: '/tools/mycharacters/print',
       component: CharacterPrint
     }
   ]

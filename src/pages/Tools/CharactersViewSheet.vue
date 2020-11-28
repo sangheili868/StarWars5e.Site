@@ -9,13 +9,14 @@
 </script>
 
 <template lang="pug">
-  v-tooltip(top, :disabled="characterValidation.code === 0")
-    template(v-slot:activator="{ on }")
-      span(v-on="on")
-        v-btn(
-          color="primary",
-          :disabled="characterValidation.code > 0",
-          @click="$emit('click')"
-        ).ma-2 Character Sheet
-    div {{ characterValidation.message }}
+  div
+    v-tooltip(top, :disabled="characterValidation.code === 0")
+      template(v-slot:activator="{ on }")
+        span(v-on="on")
+          v-btn(
+            color="primary",
+            :disabled="characterValidation.code > 0",
+            @click="$emit('click')"
+          ) Character Sheet
+      div {{ characterValidation.message }}
 </template>

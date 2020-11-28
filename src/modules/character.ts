@@ -1,10 +1,9 @@
-import { Module, VuexModule, MutationAction, Action, Mutation } from 'vuex-module-decorators'
+import { Module, VuexModule, MutationAction } from 'vuex-module-decorators'
 import { CharacterResult, RawCharacterType } from '@/types/rawCharacterTypes'
 import baseCharacter from './CharacterEngine/baseCharacter.json'
-import { merge, get, set, omit, findIndex, isEmpty, isEqual } from 'lodash'
+import { findIndex, isEmpty, isEqual } from 'lodash'
 import generateCharacter from './CharacterEngine/generateCharacter'
 import { CharacterValidationType } from '@/types/utilityTypes'
-import validateCharacter from './CharacterEngine/validateCharacter'
 import builderVersion from '@/version'
 import axios, { AxiosRequestConfig } from 'axios'
 
@@ -47,6 +46,7 @@ async function dispatch (myThis: any, mutation: string, payload: any) {
 @Module({ namespaced: true, name: 'character' })
 export default class Character extends VuexModule {
   public characters: RawCharacterType[] = []
+  public isDirty: boolean = false
 
   get getCharacterById () {
     return (characterId: string) => {
@@ -66,11 +66,10 @@ export default class Character extends VuexModule {
 
   get generateCompleteCharacter () {
     return (rawCharacter: RawCharacterType) => {
-      if (validateCharacter(rawCharacter)) {
-        const rootState = this.context.rootState
-        let character = null
+      if (this.getCharacterValidation(rawCharacter).code === 0) {
         try {
-          character = generateCharacter(
+          const rootState = this.context.rootState
+          return generateCharacter(
             rawCharacter,
             rootState.classes.classes,
             rootState.archetypes.archetypes,
@@ -87,9 +86,8 @@ export default class Character extends VuexModule {
         } catch (e) {
           console.error('Character Generation failed. Character built with builder version ' + rawCharacter.builderVersion)
           console.error(e)
-          character = null
+          return null
         }
-        return character
       }
     }
   }
@@ -130,7 +128,13 @@ export default class Character extends VuexModule {
     if (rootOf(this).rootState.authentication.accessToken) {
       const characterResult = (await axios.post(
         `${process.env.VUE_APP_sw5eapiurl}/api/character`,
-        { jsonData: JSON.stringify(newCharacter), id: newCharacter.id },
+        {
+          jsonData: JSON.stringify({
+            ...newCharacter,
+            builderVersion
+          }),
+          id: newCharacter.id
+        },
         rootOf(this).rootGetters['authentication/axiosHeader']
       )).data
       newCharacter = {
@@ -153,76 +157,20 @@ export default class Character extends VuexModule {
   async createCharacter (localId: string) {
     const newCharacter: RawCharacterType = {
       ...baseCharacter,
-      localId,
-      builderVersion
+      localId
     }
     await dispatch(this, 'saveCharacter', newCharacter)
     return { isDirty: false }
   }
 
-  // ///////////
-
-  get characterValidation (): CharacterValidationType {
-    return validateCharacter(stateOf(this.context).character)
-  }
-
-  public character: RawCharacterType = baseCharacter
-  public isDirty: boolean = false
-
-  @MutationAction({ mutate: ['character', 'isDirty'] })
-  async setCharacter (newCharacter: RawCharacterType) {
-    return {
-      isDirty: false,
-      character: merge({}, baseCharacter, newCharacter)
+  @MutationAction({ mutate: [ 'isDirty' ] })
+  async importCharacter (newCharacter: RawCharacterType) {
+    const character: RawCharacterType = {
+      ...baseCharacter,
+      ...newCharacter
     }
-  }
-
-  @MutationAction({ mutate: ['isDirty'] })
-  async setClean () {
-    return {
-      isDirty: false
-    }
-  }
-
-  @MutationAction({ mutate: ['character', 'isDirty'] })
-  async updateCharacter (newCharacter: RawCharacterType) {
-    return {
-      isDirty: true,
-      character: merge({}, stateOf(this).character, newCharacter)
-    }
-  }
-
-  @MutationAction({ mutate: ['character', 'isDirty'] })
-  async deleteCharacterProperty ({ path, index }: { path: string, index: number | string }) {
-    const property = get(stateOf(this).character, path)
-    let updatedProperty = omit(property, index)
-    if (Array.isArray(property)) updatedProperty = Object.values(updatedProperty)
-    let characterCopy = merge({}, stateOf(this).character)
-    set(characterCopy, path, updatedProperty)
-    return {
-      isDirty: true,
-      character: characterCopy
-    }
-  }
-
-  @MutationAction({ mutate: ['character', 'isDirty'] })
-  async replaceCharacterProperty ({ path, property }: { path: string, property: any }) {
-    let characterCopy = merge({}, stateOf(this).character)
-    set(characterCopy, path, property)
-    return {
-      isDirty: true,
-      character: characterCopy
-    }
-  }
-
-  @MutationAction({ mutate: ['character', 'isDirty'] })
-  async replaceCharacterProperties (replacements: { path: string, property: any }[]) {
-    let characterCopy = merge({}, stateOf(this).character)
-    replacements.forEach(({ path, property }) => set(characterCopy, path, property))
-    return {
-      isDirty: true,
-      character: characterCopy
-    }
+    await dispatch(this, 'saveCharacter', character)
+    return { isDirty: false }
   }
 
   @MutationAction({ mutate: ['characters'] })

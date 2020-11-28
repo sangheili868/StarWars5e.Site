@@ -12,7 +12,7 @@
   import { EquipmentType } from '@/types/lootTypes'
   import { RawCharacterType, RawCharacteristicsType } from '@/types/rawCharacterTypes'
   import { CharacterValidationType } from '@/types/utilityTypes'
-  import { range, isEmpty, isEqual, merge, get, set, camelCase } from 'lodash'
+  import { range, isEmpty, isEqual, merge, get, set, camelCase, omit } from 'lodash'
   import baseCharacter from '@/modules/CharacterEngine/baseCharacter.json'
   import builderVersion from '@/version'
   import semver from 'semver'
@@ -50,14 +50,9 @@
     @characterModule.Getter getCharacterById!: (characterId: string) => RawCharacterType | undefined
     @characterModule.Getter getIsEmptyCharacter!: (character: RawCharacterType | undefined) => boolean
     @characterModule.Getter getCharacterValidation!: (character: RawCharacterType | undefined) => CharacterValidationType
+    @characterModule.Action saveCharacter!: (newCharacter: RawCharacterType) => void
+
     @characterModule.Action setClean!: () => void
-    @characterModule.Action createCharacter!: () => void
-    @characterModule.Action loadCharacter!: (characterId: string) => void
-    @characterModule.Action setCharacter!: (newCharacter: RawCharacterType) => Promise<any>
-    @characterModule.Action updateCharacter!: (newCharacter: RawCharacterType) => void
-    @characterModule.Action deleteCharacterProperty!: (payload: { path: string, index: number }) => void
-    @characterModule.Action replaceCharacterProperty!: (payload: { path: string, property: any[] }) => void
-    @characterModule.Action replaceCharacterProperties!: (replacements: { path: string, property: any }[]) => void
 
     @classesModule.State classes!: ClassType[]
     @classesModule.Action fetchClasses!: () => void
@@ -81,7 +76,6 @@
     hasFetchedData = false
     isEditing = true
     currentStep = 0
-    character: RawCharacterType | undefined = undefined
 
     created () {
       Promise.all([
@@ -97,11 +91,15 @@
         this.fetchConditions(),
         this.fetchEnhancedItems()
       ]).then(() => {
-        this.character = this.getCharacterById(this.characterId)
+        if (!this.character) window.alert('Character not found: ' + this.characterId)
         this.hasFetchedData = true
         this.isEditing = !this.characterValidation.isValid
         this.currentStep = this.isEmptyCharacter ? 0 : 1
       })
+    }
+
+    get character () {
+      return this.getCharacterById(this.characterId)
     }
 
     get completeCharacter () {
@@ -130,9 +128,27 @@
       window.scrollTo(0, 0)
     }
 
-    handleCreateNew () {
-      this.goToStep(0)
-      this.createCharacter()
+    updateCharacter (newCharacter: RawCharacterType) {
+      this.saveCharacter(merge({}, this.character, newCharacter))
+    }
+
+    replaceCharacterProperty ({ path, property }: { path: string, property: any }) {
+      let characterCopy = merge({}, this.character)
+      set(characterCopy, path, property)
+      this.saveCharacter(characterCopy)
+    }
+
+    replaceCharacterProperties (replacements: { path: string, property: any }[]) {
+      let characterCopy = merge({}, this.character)
+      replacements.forEach(({ path, property }) => set(characterCopy, path, property))
+      this.saveCharacter(characterCopy)
+    }
+
+    deleteCharacterProperty ({ path, index }: { path: string, index: number | string }) {
+      const oldProperty = get(this.character, path)
+      let property = omit(oldProperty, index)
+      if (Array.isArray(oldProperty)) property = Object.values(property)
+      this.replaceCharacterProperty({ path, property })
     }
 
     checkBuilderVersion () {
@@ -144,12 +160,6 @@
           this.updateCharacter({ builderVersion } as RawCharacterType)
         }
       }
-    }
-
-    handleCharacterUpload (newCharacter: any, newFilename: string) {
-      this.setCharacter(newCharacter).then(this.checkBuilderVersion)
-      this.isEditing = !this.getCharacterValidation(newCharacter).isValid
-      this.currentStep = this.isEmptyCharacter ? 0 : 1
     }
   }
 </script>
@@ -184,7 +194,7 @@
       v-else,
       v-bind="{ completeCharacter }",
       :rawCharacter="character",
-      v-on="{ updateCharacter, deleteCharacterProperty, replaceCharacterProperty, goToStep, handleCreateNew, handleCharacterUpload, setClean }"
+      v-on="{ updateCharacter, deleteCharacterProperty, replaceCharacterProperty, goToStep, handleCharacterUpload, setClean }"
     )
   Loading(v-else)
 </template>

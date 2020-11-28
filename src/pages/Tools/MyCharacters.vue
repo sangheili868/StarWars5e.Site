@@ -16,6 +16,7 @@
     @characterModule.State characters!: RawCharacterType[]
     @characterModule.Action fetchCharacters!: () => void
     @characterModule.Action createCharacter!: (localId: string) => Promise<void>
+    @characterModule.Action importCharacter!: (newCharacter: RawCharacterType) => Promise<void>
 
     searchText = ''
     isFabOpen = false
@@ -42,8 +43,9 @@
       this.createCharacter(localId).then(() => this.$router.push('mycharacters/' + encodeURIComponent(localId)))
     }
 
-    handleCharacterUpload () {
-
+    handleCharacterUpload (newCharacter: RawCharacterType) {
+      const localId = 'temp-' + generateID()
+      this.importCharacter({ ...newCharacter, localId }).then(() => this.$router.push('mycharacters/' + encodeURIComponent(localId)))
     }
   }
 </script>
@@ -51,7 +53,7 @@
 <template lang="pug">
   div
     JSONReader(v-model="isImportOpen" @import="handleCharacterUpload")
-    v-speed-dial(v-model="isFabOpen", fixed, bottom, right, open-on-hover)
+    v-speed-dial(v-model="isFabOpen", fixed, bottom, right)
       template(#activator)
         v-btn(v-model="isFabOpen", color="primary", fab, x-large)
           v-icon(v-if="!isFabOpen") fa-plus
@@ -73,7 +75,7 @@
         :class="$style.searchBox",
       ).flex-grow-1
     div.d-flex.justify-center.flex-wrap
-      div(v-if="!characters.length").ma-3 Create a new character by hovering the
+      div(v-if="!characters.length").ma-3 Create a new character by clicking the
         v-btn(color="primary", fab, x-small).ma-2
             v-icon fa-plus
         | button below, and then clicking

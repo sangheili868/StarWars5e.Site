@@ -99,7 +99,6 @@
           :value="selectedAbilityScores[0]",
           :items="asiOptions",
           dense,
-          filled,
           hide-details,
           placeholder="Choose an ability score to increase",
           @input="newAbility => handleUpdateASI(newAbility, 0)"
@@ -110,7 +109,6 @@
           :value="selectedAbilityScores[1]",
           :items="asiOptions",
           dense,
-          filled,
           hide-details,
           placeholder="Choose an ability score to increase",
           @input="newAbility => handleUpdateASI(newAbility, 1)"
@@ -122,7 +120,6 @@
           :value="asi.name",
           :items="featOptions",
           dense,
-          filled,
           hide-details,
           placeholder="Choose a feat",
           @input="handleUpdateFeat"

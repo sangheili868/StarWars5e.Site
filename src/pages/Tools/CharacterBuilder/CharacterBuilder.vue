@@ -174,12 +174,13 @@
               @replaceCharacterProperties="payload => $emit('replaceCharacterProperties', payload)"
             )
             div.d-flex.justify-space-around.flex-wrap.mt-5
-              v-btn(v-if="currentStep > 0", outlined, @click="prevStep")
+              v-btn(v-if="currentStep > 0", outlined, width="150", @click="prevStep")
                 v-icon.mr-2 fa-chevron-left
                 | Back
-              v-btn(v-if="currentStep < numSteps", color="primary", @click="nextStep") Continue
+              CharactersViewSheet(v-bind="{ characterValidation }", @click="$emit('viewSheet')").d-none.d-sm-flex
+              v-btn(v-if="currentStep < numSteps", color="primary", width="150", @click="nextStep") Continue
                 v-icon.ml-2 fa-chevron-right
-              CharactersViewSheet(v-else, v-bind="{ characterValidation }", @click="$emit('viewSheet')")
+            CharactersViewSheet(v-bind="{ characterValidation }", @click="$emit('viewSheet')").d-flex.d-sm-none.justify-center.mt-5
 </template>
 
 <style module lang="scss">

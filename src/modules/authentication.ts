@@ -71,7 +71,7 @@ export default class Authentication extends VuexModule {
     }
 
   @MutationAction({ mutate: ['accessToken'] })
-  async setAccessToken (accessToken?: string ) {
+  async setAccessToken (accessToken?: string) {
     return { accessToken }
   }
 }

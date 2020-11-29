@@ -1,6 +1,7 @@
 <script lang="ts">
   import { Component, Prop, Vue } from 'vue-property-decorator'
   import CharacterSheetTweaker from './CharacterSheetTweaker.vue'
+  import { TweaksType } from '@/types/rawCharacterTypes'
 
   @Component({
     components: {
@@ -11,11 +12,13 @@
     @Prop(Number) readonly current!: number
     @Prop(Number) readonly temporary!: number
     @Prop(Number) readonly maximum!: number
+    @Prop(Object) readonly tweaks!: TweaksType
   }
 </script>
 
 <template lang="pug">
   CharacterSheetTweaker(
+    v-bind="{ tweaks }",
     title="Maximum Hit Points"
     :tweakPaths="[{ name: 'Maximum Hit Points', path: 'hitPoints.maximum' }]",
     @replaceCharacterProperty="payload => $emit('replaceCharacterProperty', payload)"

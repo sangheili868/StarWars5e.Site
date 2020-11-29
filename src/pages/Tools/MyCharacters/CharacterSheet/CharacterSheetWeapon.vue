@@ -45,6 +45,7 @@
   div.d-flex.flex-column
     CharacterSheetTweaker(
       v-bind="{ tweakPaths, rootPath }",
+      :tweaks="weapon.tweaks",
       :title="weapon.name",
       @replaceCharacterProperty="payload => $emit('replaceCharacterProperty', payload)"
     )

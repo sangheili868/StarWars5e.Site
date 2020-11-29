@@ -36,14 +36,13 @@
       )
     CharacterSheetHealth(
       :hitPoints="completeCharacter.hitPoints",
+      :tweaks="completeCharacter.tweaks",
       @updateCharacter="newCharacter => $emit('updateCharacter', newCharacter)",
       @replaceCharacterProperty="payload => $emit('replaceCharacterProperty', payload)"
     )
     v-card.d-flex.flex-column.align-start.mb-2.mx-3
       CharacterSheetMenu(
         v-bind="{ completeCharacter, rawCharacter }"
-        @handleCreateNew="$emit('handleCreateNew')"
-        @handleCharacterUpload="(newCharacter, newFilename) => $emit('handleCharacterUpload', newCharacter, newFilename)"
         @goToStep="step => $emit('goToStep', step)"
         @setClean="$emit('setClean')"
       )

@@ -1,7 +1,6 @@
 <script lang="ts">
   import { Component, Prop, Vue } from 'vue-property-decorator'
-  import { namespace } from 'vuex-class'
-  import CharactersViewSheet from '../CharactersViewSheet.vue'
+  import CharacterBuilderViewSheet from './CharacterBuilderViewSheet.vue'
   import CharacterBuilderSpecies from './CharacterBuilderSpecies.vue'
   import CharacterBuilderClasses from './CharacterBuilderClasses.vue'
   import CharacterBuilderAbilityScores from './CharacterBuilderAbilityScores.vue'
@@ -14,21 +13,9 @@
   import { every } from 'lodash'
   import CharacterBuilderSettings from './CharacterBuilderSettings.vue'
 
-  const characterModule = namespace('character')
-  const classesModule = namespace('classes')
-  const archetypesModule = namespace('archetypes')
-  const speciesModule = namespace('species')
-  const equipmentModule = namespace('equipment')
-  const powersModule = namespace('powers')
-  const featsModule = namespace('feats')
-  const backgroundsModule = namespace('backgrounds')
-  const characterAdvancementsModule = namespace('characterAdvancements')
-  const skillsModule = namespace('skills')
-  const conditionsModule = namespace('conditions')
-
 @Component({
   components: {
-      CharactersViewSheet,
+      CharacterBuilderViewSheet,
       CharacterBuilderSettings,
       CharacterBuilderSpecies,
       CharacterBuilderClasses,
@@ -177,10 +164,10 @@
               v-btn(v-if="currentStep > 0", outlined, width="150", @click="prevStep")
                 v-icon.mr-2 fa-chevron-left
                 | Back
-              CharactersViewSheet(v-bind="{ characterValidation }", @click="$emit('viewSheet')").d-none.d-sm-flex
+              CharacterBuilderViewSheet(v-bind="{ characterValidation }", @click="$emit('viewSheet')").d-none.d-sm-flex
               v-btn(v-if="currentStep < numSteps", color="primary", width="150", @click="nextStep") Continue
                 v-icon.ml-2 fa-chevron-right
-            CharactersViewSheet(v-bind="{ characterValidation }", @click="$emit('viewSheet')").d-flex.d-sm-none.justify-center.mt-5
+            CharacterBuilderViewSheet(v-bind="{ characterValidation }", @click="$emit('viewSheet')").d-flex.d-sm-none.justify-center.mt-5
 </template>
 
 <style module lang="scss">

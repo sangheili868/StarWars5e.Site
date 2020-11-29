@@ -1,9 +1,10 @@
 <script lang="ts">
-  import { RawCharacterType } from '@/types/rawCharacterTypes'
   import { Component, Prop, Vue } from 'vue-property-decorator'
   import { namespace } from 'vuex-class'
   import generateID from '@/utilities/generateID'
   import JSONReader from '@/components/JSONReader.vue'
+  import baseCharacter from '@/modules/CharacterEngine/baseCharacter.json'
+  import { RawCharacterType } from '@/types/rawCharacterTypes'
 
   const characterModule = namespace('character')
 
@@ -15,8 +16,7 @@
   export default class MyCharacters extends Vue {
     @characterModule.State characters!: RawCharacterType[]
     @characterModule.Action fetchCharacters!: () => void
-    @characterModule.Action createCharacter!: (localId: string) => Promise<void>
-    @characterModule.Action importCharacter!: (newCharacter: RawCharacterType) => Promise<void>
+    @characterModule.Action saveCharacter!: (newCharacter: RawCharacterType) => Promise<any>
 
     searchText = ''
     isFabOpen = false
@@ -27,38 +27,40 @@
     }
 
     get filteredCharacters () {
-      return this.characters.filter(({ name }) => (name.toLowerCase() || 'unnamed character').includes(this.searchText.toLowerCase()))
+      return this.characters
+        .filter(({ name }) => (name.toLowerCase() || 'unnamed character').includes(this.searchText.toLowerCase()))
+        .sort((char1, char2) => char1.name && (char1.name < char2.name) ? -1 : 1)
     }
 
     getClassText (character: RawCharacterType): string {
-      return character.species.name || character.classes.length
-        ? character.species.name + ' ' + character.classes
-          .map(({ name, levels, archetype }) => `${name}${archetype && character.classes.length < 3 ? ` (${archetype.name})` : ''} ${levels}`)
+      const { species, classes } = character
+      return species.name || classes.length
+        ? species.name + ' ' + classes
+          .map(({ name, levels, archetype }) => `${name}${archetype && classes.length < 3 ? ` (${archetype.name})` : ''} ${levels}`)
           .join(', ')
         : 'No species or classes chosen.'
     }
 
-    handleCreateCharacter () {
+    handleCreateCharacter (newCharacter: RawCharacterType) {
       const localId = 'temp-' + generateID()
-      this.createCharacter(localId).then(() => this.$router.push('mycharacters/' + encodeURIComponent(localId)))
-    }
-
-    handleCharacterUpload (newCharacter: RawCharacterType) {
-      const localId = 'temp-' + generateID()
-      this.importCharacter({ ...newCharacter, localId }).then(() => this.$router.push('mycharacters/' + encodeURIComponent(localId)))
+      this.saveCharacter({
+        ...baseCharacter,
+        ...newCharacter,
+        localId
+      }).then(() => this.$router.push('mycharacters/' + encodeURIComponent(localId)))
     }
   }
 </script>
 
 <template lang="pug">
   div
-    JSONReader(v-model="isImportOpen" @import="handleCharacterUpload")
+    JSONReader(v-model="isImportOpen" @import="handleCreateCharacter")
     v-speed-dial(v-model="isFabOpen", fixed, bottom, right)
       template(#activator)
         v-btn(v-model="isFabOpen", color="primary", fab, x-large)
           v-icon(v-if="!isFabOpen") fa-plus
           v-icon(v-else) fa-times
-      v-btn(color="secondary", fab, @click="handleCreateCharacter")
+      v-btn(color="secondary", fab, @click="handleCreateCharacter()")
         v-icon fa-plus
       v-btn(color="secondary", fab, @click="isImportOpen=true")
         v-icon fa-download

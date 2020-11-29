@@ -35,7 +35,8 @@ function getUnarmedStrike (
     attackBonus,
     damageBonus,
     ability: 'Strength',
-    isCustom: false
+    isCustom: false,
+    tweaks: rawCharacter.tweaks.unarmed || {}
   }
 }
 

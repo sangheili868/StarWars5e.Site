@@ -1,13 +1,11 @@
 
 <script lang="ts">
   import { Component, Prop, Vue } from 'vue-property-decorator'
-  import { RawCharacterType, TweakPathType } from '@/types/rawCharacterTypes'
+  import { TweaksType, TweakPathType, EquipmentTweakType } from '@/types/rawCharacterTypes'
   import MyDialog from '@/components/MyDialog.vue'
   import { get, set, parseInt as _parseInt, cloneDeep } from 'lodash'
   import vueSetPath from '@/utilities/vueSetPath'
   import { namespace } from 'vuex-class'
-
-  const characterModule = namespace('character')
 
   @Component({
     components: {
@@ -15,12 +13,11 @@
     }
   })
   export default class CharacterSheetTweaker extends Vue {
+    @Prop(Object) readonly tweaks!: TweaksType | EquipmentTweakType
     @Prop(Array) readonly tweakPaths!: TweakPathType[]
     @Prop(String) readonly title!: string
     @Prop({ default: 'tweaks', type: String }) readonly rootPath!: string
     @Prop(Boolean) readonly noStyle!: boolean
-
-    @characterModule.State character!: RawCharacterType
 
     isOpen = false
     myGet = get
@@ -31,7 +28,7 @@
     }
 
     resetValues () {
-      this.myTweaks = cloneDeep(get(this.character, this.rootPath) || {})
+      this.myTweaks = Object.assign({}, this.tweaks)
     }
 
     sanitize (value: string) {
@@ -41,7 +38,6 @@
 
     updateTweak (newValue: string, tweakType: string, path: string) {
       vueSetPath(this.myTweaks, `${path}.${tweakType}`, this.sanitize(newValue))
-
       if (tweakType !== 'dieSize') {
         const otherTweakType = tweakType === 'override' ? 'bonus' : 'override'
         vueSetPath(this.myTweaks, `${path}.${otherTweakType}`, null)

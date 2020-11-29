@@ -36,12 +36,11 @@
     template(#title) Character Sheet Menu
     template(#text)
       div.d-flex.flex-column
-        v-btn(@click="$emit('handleCreateNew')").my-2 Create Character
-        JSONReader(label="Load Character From File", @input="(newCharacter, newFilename) => $emit('handleCharacterUpload', newCharacter, newFilename)")
-        v-btn(@click="$emit('goToStep', 1)").my-2 Edit Character
-        JSONWriter(:jsonData="rawCharacter" v-bind="{ filename }", @save="$emit('setClean')") Save Character
-        v-btn(to="/tools/mycharacters/print").my-2 Print Character Sheet
-        CharacterSheetSettingsRoll20(v-bind="{ completeCharacter, rawCharacter }")
+        v-btn(@click="$emit('goToStep', 1)").mt-2 Edit Character
+        JSONWriter(:jsonData="rawCharacter" v-bind="{ filename }", @save="$emit('setClean')").mt-2 Export Character to File
+        JSONWriter(:jsonData="rawCharacter" v-bind="{ filename }", @save="$emit('setClean')").mt-2 Copy Character Text
+        v-btn(to="/tools/mycharacters/print").mt-2 Print Character Sheet
+        CharacterSheetSettingsRoll20(v-bind="{ completeCharacter, rawCharacter }").mt-2
     template(#actions)
       v-spacer
       v-btn(color="primary", text, @click="isOpen=false") Close

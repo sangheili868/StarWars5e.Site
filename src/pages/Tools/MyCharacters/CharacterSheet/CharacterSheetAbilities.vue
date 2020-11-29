@@ -5,6 +5,7 @@
   import { startCase, upperCase } from 'lodash'
   import ProficiencyDots from '@/components/ProficiencyDots.vue'
   import CharacterSheetTweaker from './CharacterSheetTweaker.vue'
+  import { TweaksType } from '@/types/rawCharacterTypes'
 
   @Component({
     components: {
@@ -14,6 +15,7 @@
   })
   export default class CharacterSheetAbilities extends Vue {
     @Prop(Object) readonly abilityScores!: AbilityScoreType
+    @Prop(Object) readonly tweaks!: TweaksType
 
     addPlus = addPlus
     startCase = startCase
@@ -28,6 +30,7 @@
       :class="$style.ability",
     ).flex-grow-1
       CharacterSheetTweaker(
+        v-bind="{ tweaks }",
         :title="ability + ' Score'"
         :tweakPaths="[{ name: ability + ' Score', path: `abilityScores.${ability}.score` }]",
         @replaceCharacterProperty="payload => $emit('replaceCharacterProperty', payload)"
@@ -39,6 +42,7 @@
         h5(:class="$style.modifier") {{ value }}
         div
           CharacterSheetTweaker(
+            v-bind="{ tweaks }",
             :title="ability + ' Saving Throw'",
             :tweakPaths="[{ name: ability + ' Saving Throw', path: `abilityScores.${ability}.savingThrowModifier`, type: 'savingThrow' }]",
             @replaceCharacterProperty="payload => $emit('replaceCharacterProperty', payload)"
@@ -49,6 +53,7 @@
           CharacterSheetTweaker(
             v-for="{ name, proficiency, modifier } in skills",
             :key="name",
+            v-bind="{ tweaks }",
             :title="name",
             :tweakPaths="[{ name, path: `abilityScores.${ability}.skills.${name}`, type: 'proficiency' }]",
             @replaceCharacterProperty="payload => $emit('replaceCharacterProperty', payload)"

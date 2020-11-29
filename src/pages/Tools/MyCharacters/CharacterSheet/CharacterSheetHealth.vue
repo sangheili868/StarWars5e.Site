@@ -4,6 +4,7 @@
   import CharacterSheetRest from './CharacterSheetRest.vue'
   import CharacterSheetHealthCircle from './CharacterSheetHealthCircle.vue'
   import CheckList from '@/components/CheckList.vue'
+  import { TweaksType } from '@/types/rawCharacterTypes'
 
   @Component({
     components: {
@@ -14,6 +15,7 @@
   })
   export default class CharacterSheetHealth extends Vue {
     @Prop(Object) readonly hitPoints!: HitPointsType
+    @Prop(Object) readonly tweaks!: TweaksType
 
     healthMod = 0
 
@@ -52,7 +54,7 @@
     div(:class="$style.controlDiv").d-flex.flex-column.align-center.mx-4.mt-1
       CharacterSheetHealthCircle(
         v-if="hitPoints.current",
-        v-bind="hitPoints",
+        v-bind="{ ...hitPoints, tweaks }",
         @replaceCharacterProperty="payload => $emit('replaceCharacterProperty', payload)"
       )
       div(v-else)

@@ -20,7 +20,6 @@ function stateOf (context: any) {
   // Vuex-module-decorator changes 'this' when it converts into a module.
   return (context as {
     state: {
-      character: RawCharacterType,
       characters: RawCharacterType[]
     }
   }).state
@@ -39,14 +38,9 @@ function rootOf (myThis: any) {
   })
 }
 
-async function dispatch (myThis: any, mutation: string, payload: any) {
-  (myThis as { dispatch: (mutation: string, payload: any) => void}).dispatch(mutation, payload)
-}
-
 @Module({ namespaced: true, name: 'character' })
 export default class Character extends VuexModule {
   public characters: RawCharacterType[] = []
-  public isDirty: boolean = false
 
   get getCharacterById () {
     return (characterId: string) => {
@@ -151,26 +145,6 @@ export default class Character extends VuexModule {
         characters.splice(index, 1, newCharacter)
         return { characters }
     }
-  }
-
-  @MutationAction({ mutate: [ 'isDirty' ] })
-  async createCharacter (localId: string) {
-    const newCharacter: RawCharacterType = {
-      ...baseCharacter,
-      localId
-    }
-    await dispatch(this, 'saveCharacter', newCharacter)
-    return { isDirty: false }
-  }
-
-  @MutationAction({ mutate: [ 'isDirty' ] })
-  async importCharacter (newCharacter: RawCharacterType) {
-    const character: RawCharacterType = {
-      ...baseCharacter,
-      ...newCharacter
-    }
-    await dispatch(this, 'saveCharacter', character)
-    return { isDirty: false }
   }
 
   @MutationAction({ mutate: ['characters'] })

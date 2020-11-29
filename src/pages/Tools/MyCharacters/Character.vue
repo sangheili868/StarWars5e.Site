@@ -1,22 +1,19 @@
 <script lang="ts">
   import { Component, Prop, Vue } from 'vue-property-decorator'
-  import CharactersViewSheet from './CharactersViewSheet.vue'
   import CharacterBuilder from './CharacterBuilder/CharacterBuilder.vue'
   import CharacterSheet from './CharacterSheet/CharacterSheet.vue'
-  import JSONReader from '@/components/JSONReader.vue'
-  import JSONWriter from '@/components/JSONWriter.vue'
   import Loading from '@/components/Loading.vue'
   import { namespace } from 'vuex-class'
-  import { ClassType, ArchetypeType, PowerType, FeatType, BackgroundType, SpeciesType } from '@/types/characterTypes'
-  import { CompleteCharacterType } from '@/types/completeCharacterTypes'
-  import { EquipmentType } from '@/types/lootTypes'
-  import { RawCharacterType, RawCharacteristicsType } from '@/types/rawCharacterTypes'
-  import { CharacterValidationType } from '@/types/utilityTypes'
-  import { range, isEmpty, isEqual, merge, get, set, camelCase, omit } from 'lodash'
+  import { merge, get, set, camelCase, omit } from 'lodash'
   import baseCharacter from '@/modules/CharacterEngine/baseCharacter.json'
   import builderVersion from '@/version'
-  import semver from 'semver'
   import BackButton from '@/components/BackButton.vue'
+
+  import { ClassType, ArchetypeType, PowerType, FeatType, BackgroundType, SpeciesType } from '@/types/characterTypes'
+  import { EquipmentType } from '@/types/lootTypes'
+  import { CompleteCharacterType } from '@/types/completeCharacterTypes'
+  import { RawCharacterType } from '@/types/rawCharacterTypes'
+  import { CharacterValidationType } from '@/types/utilityTypes'
 
   const characterModule = namespace('character')
   const classesModule = namespace('classes')
@@ -33,11 +30,8 @@
 
   @Component({
     components: {
-      CharactersViewSheet,
       CharacterBuilder,
       CharacterSheet,
-      JSONReader,
-      JSONWriter,
       BackButton,
       Loading
     }
@@ -45,14 +39,11 @@
   export default class Characters extends Vue {
     @Prop(String) readonly characterId!: string
     @characterModule.State characters!: RawCharacterType[]
-    @characterModule.State isDirty!: boolean
-    @characterModule.Getter generateCompleteCharacter!: (rawCharacter: RawCharacterType) => CompleteCharacterType
+    @characterModule.Getter generateCompleteCharacter!: (rawCharacter: RawCharacterType) => CompleteCharacterType | null
     @characterModule.Getter getCharacterById!: (characterId: string) => RawCharacterType | undefined
     @characterModule.Getter getIsEmptyCharacter!: (character: RawCharacterType | undefined) => boolean
     @characterModule.Getter getCharacterValidation!: (character: RawCharacterType | undefined) => CharacterValidationType
     @characterModule.Action saveCharacter!: (newCharacter: RawCharacterType) => void
-
-    @characterModule.Action setClean!: () => void
 
     @classesModule.State classes!: ClassType[]
     @classesModule.Action fetchClasses!: () => void
@@ -75,6 +66,7 @@
 
     hasFetchedData = false
     isEditing = true
+    isDirty = false
     currentStep = 0
 
     created () {
@@ -94,7 +86,7 @@
         if (!this.character) window.alert('Character not found: ' + this.characterId)
         this.hasFetchedData = true
         this.isEditing = !this.characterValidation.isValid
-        this.currentStep = this.isEmptyCharacter ? 0 : 1
+        this.currentStep = this.getIsEmptyCharacter(this.character) ? 0 : 1
       })
     }
 
@@ -106,20 +98,12 @@
       return this.character ? this.generateCompleteCharacter(this.character) : null
     }
 
-    get filename () {
-      return (this.character && this.character.name) ? camelCase(this.character.name) : 'incompleteCharacter'
-    }
-
-    get isEmptyCharacter () {
-      return this.getIsEmptyCharacter(this.character)
+    get characterValidation () {
+      return this.getCharacterValidation(this.character)
     }
 
     get title () {
       return ((this.character && this.character.name) || 'Characters') + Vue.prototype.$titleSuffix
-    }
-
-    get characterValidation () {
-      return this.getCharacterValidation(this.character)
     }
 
     goToStep (step: number) {
@@ -150,23 +134,12 @@
       if (Array.isArray(oldProperty)) property = Object.values(property)
       this.replaceCharacterProperty({ path, property })
     }
-
-    checkBuilderVersion () {
-      if (this.characterValidation.isValid && this.completeCharacter) {
-        const isValidBuilderVersion = semver.valid(this.completeCharacter.builderVersion)
-        const isCurrentBuilderVersion = isValidBuilderVersion && !semver.gt(builderVersion, this.completeCharacter.builderVersion)
-        if (!isCurrentBuilderVersion) {
-          console.info(`Upgrading character from builderVersion ${this.completeCharacter.builderVersion} to builderVersion ${builderVersion}`)
-          this.updateCharacter({ builderVersion } as RawCharacterType)
-        }
-      }
-    }
   }
 </script>
 
 <template lang="pug">
   div(v-if="hasFetchedData")
-    vue-headful(:title="title")
+    vue-headful(v-bind="{ title }")
     v-banner(
       :value="isDirty",
       sticky,
@@ -178,23 +151,19 @@
     ).white--text.mb-3
       div.d-flex.align-center.justify-space-around
         div Character has unsaved changes!
-        JSONWriter(:jsonData="character", v-bind="{ filename }", @save="setClean").ml-1 Save
     BackButton(label="My Characters")
-    template(v-if="isEditing")
-      //- div.d-flex.align-center.justify-center.flex-wrap
-        //- CharactersViewSheet(v-if="isEditing", v-bind="{ characterValidation }", @click="isEditing=false")
-        //- v-btn(v-else, :disabled="isEmptyCharacter", color="primary", @click="goToStep(1)").ma-2 Edit Character
-        //- JSONWriter(:jsonData="character", :disabled="isEmptyCharacter", v-bind="{ filename }", @save="setClean") Save Character
-      CharacterBuilder(
-        v-bind="{ character, characterValidation, currentStep, classes, archetypes, equipment, powers, feats, backgrounds, species }",
-        v-on="{ updateCharacter, deleteCharacterProperty, replaceCharacterProperty, replaceCharacterProperties, goToStep }"
-        @viewSheet="isEditing=false"
-      )
+    CharacterBuilder(
+      v-if="isEditing",
+      v-bind="{ character, characterValidation, currentStep, classes, archetypes, equipment, powers, feats, backgrounds, species }",
+      v-on="{ updateCharacter, deleteCharacterProperty, replaceCharacterProperty, replaceCharacterProperties, goToStep }"
+      @viewSheet="isEditing=false"
+    )
     CharacterSheet(
-      v-else,
+      v-else-if="completeCharacter",
       v-bind="{ completeCharacter }",
       :rawCharacter="character",
-      v-on="{ updateCharacter, deleteCharacterProperty, replaceCharacterProperty, goToStep, handleCharacterUpload, setClean }"
+      v-on="{ updateCharacter, deleteCharacterProperty, replaceCharacterProperty, goToStep }"
+      @setClean="isDirty=false"
     )
   Loading(v-else)
 </template>

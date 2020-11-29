@@ -119,11 +119,7 @@ export interface TweaksType {
     toHit?: TweakType,
     damage?: TweakType
   }
-  unarmed?: {
-    damageDice?: TweakType,
-    toHit?: TweakType,
-    damage?: TweakType
-  }
+  unarmed?: EquipmentTweakType
   hitPoints?: {
     maximum?: TweakType,
     hitDice?: {

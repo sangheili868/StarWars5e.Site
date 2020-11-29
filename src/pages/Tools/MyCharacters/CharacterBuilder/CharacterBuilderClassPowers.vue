@@ -2,8 +2,8 @@
   import { Component, Prop, Vue } from 'vue-property-decorator'
   import { ClassType, PowerType, ArchetypeType } from '@/types/characterTypes'
   import { RawClassType, SettingsType } from '@/types/rawCharacterTypes'
-  import CharacterSheetExpansionFeatures from '@/pages/Tools/CharacterSheet/CharacterSheetExpansionFeatures.vue'
-  import CharacterSheetCastingAddPower from '@/pages/Tools/CharacterSheet/CharacterSheetCastingAddPower.vue'
+  import CharacterSheetExpansionFeatures from '@/pages/Tools/MyCharacters/CharacterSheet/CharacterSheetExpansionFeatures.vue'
+  import CharacterSheetCastingAddPower from '@/pages/Tools/MyCharacters/CharacterSheet/CharacterSheetCastingAddPower.vue'
   import { namespace } from 'vuex-class'
 
   const powersModule = namespace('powers')

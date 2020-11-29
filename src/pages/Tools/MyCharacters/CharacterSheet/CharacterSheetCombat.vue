@@ -10,7 +10,7 @@
   import CharacterSheetExpansionFeatures from './CharacterSheetExpansionFeatures.vue'
   import CharacterSheetCustomFeatures from './CharacterSheetCustomFeatures.vue'
   import CharacterSheetCustomFeats from './CharacterSheetCustomFeats.vue'
-  import { CustomEquipmentType } from '@/types/rawCharacterTypes'
+  import { CustomEquipmentType, TweaksType } from '@/types/rawCharacterTypes'
 
   @Component({
     components: {
@@ -37,6 +37,7 @@
     @Prop(Array) readonly combatFeatures!: CompletedFeatureType[]
     @Prop(Array) readonly customFeatures!: { name: string, content: string }[]
     @Prop(Number) readonly numCustomFeats!: number
+    @Prop(Object) readonly tweaks!: TweaksType
 
     weaponTweakPaths = [
       { name: 'To Hit', path: 'weapon.toHit' },
@@ -51,6 +52,7 @@
       :value="proficiencyBonus",
       label="Proficiency Bonus",
       addPlus,
+      v-bind="{ tweaks }",
       tweakPath="proficiencyBonus",
       @replaceCharacterProperty="payload => $emit('replaceCharacterProperty', payload)"
     )
@@ -58,12 +60,14 @@
       :value="initiative",
       label="Initiative",
       addPlus,
+      v-bind="{ tweaks }",
       tweakPath="initiative",
       @replaceCharacterProperty="payload => $emit('replaceCharacterProperty', payload)"
     )
     CharacterSheetModifier(
       :value="armorClass",
       label="Armor Class",
+      v-bind="{ tweaks }",
       tweakPath="armorClass",
       @replaceCharacterProperty="payload => $emit('replaceCharacterProperty', payload)"
     )
@@ -71,17 +75,20 @@
     CharacterSheetModifier(
       :value="parseInt(speed.base)"
       label="Speed",
+      v-bind="{ tweaks }",
       tweakPath="speed.base",
       @replaceCharacterProperty="payload => $emit('replaceCharacterProperty', payload)"
     )
     CharacterSheetModifier(
       :value="passivePerception",
       label="Passive Perception",
+      v-bind="{ tweaks }",
       tweakPath="passivePerception",
       @replaceCharacterProperty="payload => $emit('replaceCharacterProperty', payload)"
     )
     h3.mt-2.d-flex.justify-space-between.align-end Weapons
       CharacterSheetTweaker(
+        v-bind="{ tweaks }",
         title="Global Weapon Modifiers",
         noStyle,
         :tweakPaths="weaponTweakPaths",
@@ -98,7 +105,7 @@
     div(v-if="!weapons.length").caption Equip weapons by selecting them in the Equipment section
     CharacterSheetSuperiority(
       v-if="superiority"
-      v-bind="{ superiority }"
+      v-bind="{ superiority, tweaks }"
       @updateCharacter="newCharacter => $emit('updateCharacter', newCharacter)",
       @replaceCharacterProperty="payload => $emit('replaceCharacterProperty', payload)"
     )

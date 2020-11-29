@@ -46,8 +46,6 @@
       @updateCharacter="newCharacter => $emit('updateCharacter', newCharacter)",
       @replaceCharacterProperty="payload => $emit('replaceCharacterProperty', payload)",
       @goToStep="step => $emit('goToStep', step)"
-      @handleCreateNew="$emit('handleCreateNew')"
-      @handleCharacterUpload="(newCharacter, newFilename) => $emit('handleCharacterUpload', newCharacter, newFilename)"
       @setClean="$emit('setClean')"
     ).mt-2
     v-row(v-if="completeCharacter", justify-space-around).nx-2

@@ -3,6 +3,7 @@
   import addPlus from '@/utilities/addPlus'
   import ordinal from 'ordinal'
   import CharacterSheetTweaker from './CharacterSheetTweaker.vue'
+  import { TweaksType } from '@/types/rawCharacterTypes'
 
   @Component({
     components: {
@@ -16,6 +17,7 @@
     @Prop(Boolean) readonly addPlus!: boolean
     @Prop(Boolean) readonly ordinal!: boolean
     @Prop(String) readonly tweakPath!: string
+    @Prop(Object) readonly tweaks!: TweaksType
 
     get valueToShow (): string {
       if (this.addPlus) return addPlus(this.value)
@@ -27,6 +29,7 @@
 
 <template lang="pug">
   CharacterSheetTweaker(
+    v-bind="{ tweaks }",
     :title="title || label",
     :tweakPaths="[{ name: title || label, path: tweakPath }]",
     @replaceCharacterProperty="payload => $emit('replaceCharacterProperty', payload)"

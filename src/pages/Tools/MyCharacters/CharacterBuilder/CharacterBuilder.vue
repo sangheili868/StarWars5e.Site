@@ -110,6 +110,7 @@
       CharacterBuilderSettings(
         :rawCharacter="character",
         @updateCharacter="newCharacter => $emit('updateCharacter', newCharacter)",
+        @deleteCharacter="$emit('deleteCharacter')"
       )
     div.d-flex.justify-center
       div(v-if="currentStep === 0", :class="$style.page").text-left
@@ -161,11 +162,11 @@
               @replaceCharacterProperties="payload => $emit('replaceCharacterProperties', payload)"
             )
             div.d-flex.justify-space-around.flex-wrap.mt-5
-              v-btn(v-if="currentStep > 0", outlined, width="150", @click="prevStep")
+              v-btn(v-if="currentStep > 0", outlined, width="140", @click="prevStep")
                 v-icon.mr-2 fa-chevron-left
                 | Back
               CharacterBuilderViewSheet(v-bind="{ characterValidation }", @click="$emit('viewSheet')").d-none.d-sm-flex
-              v-btn(v-if="currentStep < numSteps", color="primary", width="150", @click="nextStep") Continue
+              v-btn(v-if="currentStep < numSteps", color="primary", width="140", @click="nextStep") Continue
                 v-icon.ml-2 fa-chevron-right
             CharacterBuilderViewSheet(v-bind="{ characterValidation }", @click="$emit('viewSheet')").d-flex.d-sm-none.justify-center.mt-5
 </template>

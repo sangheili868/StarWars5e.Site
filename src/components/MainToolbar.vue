@@ -7,6 +7,7 @@
 
   const uiModule = namespace('ui')
   const authenticationModule = namespace('authentication')
+  const characterModule = namespace('character')
 
   @Component({
     components: {
@@ -20,6 +21,8 @@
     @uiModule.Action updateSideBar!: (value: boolean) => void
     @authenticationModule.State accessToken!: string
     @authenticationModule.Action initMSAL!: any
+    @authenticationModule.Action setAccessToken!: (accessToken?: string) => Promise<any>
+    @characterModule.Action clearLocalCharacters!: () => Promise<any>
 
     isSearchOpen = false
 
@@ -130,6 +133,15 @@
     handleSideIconClick () {
       this.updateSideBar(true)
     }
+
+    logOut () {
+      Promise.all([
+        this.setAccessToken(),
+        this.clearLocalCharacters()
+      ]).then(() => {
+        Vue.prototype.$msal && Vue.prototype.$msal.logout()
+      })
+    }
   }
 </script>
 
@@ -151,14 +163,27 @@
             v-list-item(:to="to + nestedRoute.to")
               v-list-item-title {{ nestedRoute.title }}
           template(v-if="!nested || !nested.length") {{ title }}
-        v-btn(v-if="accessToken", text, :color="darkColor" to="/profile")
-          v-icon(:color="darkColor") fa-user
+        v-menu(v-if="accessToken", offset-y)
+          template(v-slot:activator="{ on }")
+            v-btn(text, :color="darkColor", v-on="on")
+              v-icon(:color="darkColor") fa-user
+          v-list(dense)
+            v-list-item(@click="logOut")
+              v-list-item-title Logout
         SignInButton(v-else) Login
       v-btn(icon, @click="isSearchOpen = !isSearchOpen")
         v-icon(:color="darkColor") {{ isSearchOpen ? 'fa-times' : 'fa-search' }}
     v-toolbar-items.hidden-md-and-up
       v-btn(icon, @click="isSearchOpen = !isSearchOpen")
         v-icon {{ isSearchOpen ? 'fa-times' : 'fa-search' }}
+      v-menu(v-if="accessToken", offset-y)
+        template(v-slot:activator="{ on }")
+          v-btn(text, :color="darkColor", v-on="on")
+            v-icon(:color="darkColor") fa-user
+        v-list(dense)
+          v-list-item(@click="logOut")
+            v-list-item-title Logout
+      SignInButton(v-else) Login
       v-menu(v-if="!isSearchOpen", bottom, left, offset-y, attach)
         template(v-slot:activator="{ on }")
           v-btn(icon, v-on="on")

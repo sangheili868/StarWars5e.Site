@@ -33,8 +33,12 @@ export default {
       }
     },
     {
-      path: '/tools/mycharacters/print',
-      component: CharacterPrint
+      path: '/tools/mycharacters/:characterId/print',
+      component: CharacterPrint,
+      props: true,
+      meta: {
+        title: 'Print Character Sheet'
+      }
     }
   ]
 }

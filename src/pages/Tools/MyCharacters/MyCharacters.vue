@@ -80,16 +80,15 @@
       div(v-if="!characters.length").ma-3 Create a new character by clicking the
         v-btn(color="primary", fab, x-small).ma-2
             v-icon fa-plus
-        | button below, and then clicking
+        | button below, and then click
         v-btn(color="secondary", fab, x-small).ma-2
             v-icon fa-plus
       div(v-if="characters.length && !filteredCharacters.length").ma-3 No characters found with filter.
       v-card(
         v-for="(character, index) in filteredCharacters",
         :key="index",
-        width="400",
-        height="130",
-        hover
+        hover,
+        :class="$style.characterCard"
         :to="'mycharacters/' + encodeURIComponent(character.id)"
       ).d-flex.pa-3.ma-3.align-start
         v-img(
@@ -100,17 +99,18 @@
           max-width="100",
           min-width="100"
         ).align-self-center
-        div(:class="$style.characterText").text-left.pa-3
-          h1 {{ character.name || 'Unnamed Character' }}
+        div.text-left.pa-3
+          h2 {{ character.name || 'Unnamed Character' }}
           h5.primary--text {{ getClassText(character) }}
 </template>
 
 <style lang="scss" module>
-  .searchBox {
-    max-width: 600px !important;
+  .characterCard {
+    width: 400px;
+    min-height: 130px;
   }
 
-  .characterText {
-    overflow: hidden;
+  .searchBox {
+    max-width: 600px !important;
   }
 </style>

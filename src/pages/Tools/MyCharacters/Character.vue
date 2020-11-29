@@ -44,6 +44,7 @@
     @characterModule.Getter getIsEmptyCharacter!: (character: RawCharacterType | undefined) => boolean
     @characterModule.Getter getCharacterValidation!: (character: RawCharacterType | undefined) => CharacterValidationType
     @characterModule.Action saveCharacter!: (newCharacter: RawCharacterType) => void
+    @characterModule.Action deleteCharacter!: (character: RawCharacterType) => Promise<any>
 
     @classesModule.State classes!: ClassType[]
     @classesModule.Action fetchClasses!: () => void
@@ -112,6 +113,11 @@
       window.scrollTo(0, 0)
     }
 
+    goToSheet () {
+      this.isEditing = false
+      window.scrollTo(0, 0)
+    }
+
     updateCharacter (newCharacter: RawCharacterType) {
       this.saveCharacter(merge({}, this.character, newCharacter))
     }
@@ -134,6 +140,12 @@
       if (Array.isArray(oldProperty)) property = Object.values(property)
       this.replaceCharacterProperty({ path, property })
     }
+
+    handleDeleteCharacter () {
+      if (this.character) {
+        this.deleteCharacter(this.character).then(() => this.$router.push('/tools/mycharacters'))
+      }
+    }
   }
 </script>
 
@@ -155,14 +167,16 @@
     CharacterBuilder(
       v-if="isEditing",
       v-bind="{ character, characterValidation, currentStep, classes, archetypes, equipment, powers, feats, backgrounds, species }",
-      v-on="{ updateCharacter, deleteCharacterProperty, replaceCharacterProperty, replaceCharacterProperties, goToStep }"
-      @viewSheet="isEditing=false"
+      v-on="{ updateCharacter, deleteCharacterProperty, replaceCharacterProperty, replaceCharacterProperties, goToStep }",
+      @deleteCharacter="handleDeleteCharacter",
+      @viewSheet="goToSheet"
     )
     CharacterSheet(
       v-else-if="completeCharacter",
       v-bind="{ completeCharacter }",
       :rawCharacter="character",
-      v-on="{ updateCharacter, deleteCharacterProperty, replaceCharacterProperty, goToStep }"
+      v-on="{ updateCharacter, deleteCharacterProperty, replaceCharacterProperty, replaceCharacterProperties, goToStep }",
+      @deleteCharacter="handleDeleteCharacter",
       @setClean="isDirty=false"
     )
   Loading(v-else)

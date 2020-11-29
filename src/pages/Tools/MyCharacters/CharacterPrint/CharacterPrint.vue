@@ -8,6 +8,7 @@
   import CharacterPrintPage3 from './CharacterPrintPage3'
   import CharacterPrintPage4 from './CharacterPrintPage4'
   import { printFieldType } from '@/types/utilityTypes'
+  import { RawCharacterType } from '@/types/rawCharacterTypes'
 
   const characterModule = namespace('character')
 
@@ -17,7 +18,9 @@
     }
   })
   export default class CharacterPrint extends Vue {
-    @characterModule.Getter completeCharacter!: CompleteCharacterType
+    @Prop(String) readonly characterId!: string
+    @characterModule.Getter generateCompleteCharacter!: (rawCharacter: RawCharacterType) => CompleteCharacterType | null
+    @characterModule.Getter getCharacterById!: (characterId: string) => RawCharacterType | undefined
 
     playerName = ''
 
@@ -25,13 +28,18 @@
       return ((this as any).$style) as { [key: string]: string }
     }
 
+    get completeCharacter (): CompleteCharacterType | null {
+      const rawCharacter = this.getCharacterById(this.characterId)
+      return rawCharacter ? this.generateCompleteCharacter(rawCharacter) : null
+    }
+
     get pages (): printFieldType[][] {
-      return [
+      return this.completeCharacter ? [
         CharacterPrintPage1(this.completeCharacter, this.myClasses, this.playerName),
         CharacterPrintPage2(this.completeCharacter, this.myClasses),
         CharacterPrintPage3(this.completeCharacter, this.myClasses),
         ...CharacterPrintPage4(this.completeCharacter)
-      ]
+      ] : []
     }
 
     setStyle ({ top, left, width, height, fontSize }: printFieldType) {

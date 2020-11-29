@@ -22,31 +22,18 @@
     @Prop(Array) readonly myConditions!: ConditionType[]
     @Prop(Number) readonly exhaustion!: number
     @conditionsModule.State conditions!: ConditionType[]
-    @conditionsModule.Action fetchConditions!: () => void
 
     isOpen = false
     range = range
 
-    created () {
-      this.fetchConditions()
-    }
-
-    get items () {
-      return this.conditions.map(({ name }) => name)
-    }
-
-    get hasExhaustion () {
-      return this.myConditions.some(({ name }) => name === 'Exhaustion')
-    }
-
     updateConditions (newConditions: string[]) {
-      if (newConditions.includes('Exhaustion') && !this.exhaustion) this.updateExhaustion(1)
-      if (!newConditions.includes('Exhaustion')) this.updateExhaustion(0)
-      this.$emit('replaceCharacterProperty', { path: 'currentStats.conditions', property: newConditions })
-    }
-
-    updateExhaustion (newExhaustion: number) {
-      this.$emit('updateCharacter', { currentStats: { exhaustion: newExhaustion } })
+      let newExhaustion
+      if (newConditions.includes('Exhaustion') && !this.exhaustion) newExhaustion = 1
+      if (!newConditions.includes('Exhaustion')) newExhaustion = 0
+      this.$emit('replaceCharacterProperties', [
+        { path: 'currentStats.conditions', property: newConditions },
+        { path: 'currentStats.exhausion', property: newExhaustion }
+      ])
     }
   }
 </script>
@@ -57,7 +44,7 @@
       template(v-slot:activator="{ on }")
         CharacterSheetMenuButton(
           :text="'Conditions (' + myConditions.length + ')'",
-          icon="frown",
+          :icon="myConditions.length ? 'frown' : 'smile'"
           :color="myConditions.length ? 'primary' : ''"
           :on="on"
         )
@@ -65,7 +52,7 @@
       template(#text)
         MySelect(
           :value="myConditions.map(({ name }) => name)",
-          v-bind="{ items }",
+          :items="conditions.map(({ name }) => name)",
           placeholder="Choose a condition",
           multiple,
           clearable,
@@ -77,14 +64,14 @@
       template(#actions)
         v-spacer
         v-btn(color="primary", text, @click="isOpen=false") Close
-    div(v-if="hasExhaustion").d-flex.align-center.justify-space-around
+    div(v-if="myConditions.some(({ name }) => name === 'Exhaustion')").d-flex.align-center.justify-space-around
       h4.pa-2 Levels of Exhaustion:
       MySelect(
         :class="$style.exhaustion",
         :value="exhaustion",
         :items="range(0,6)",
         hide-details,
-        :change="updateExhaustion"
+        :change="newExhaustion => $emit('replaceCharacterProperties', [{ path: 'currentStats.exhaustion', property: newExhaustion }])"
       ).px-2.pb-2.mt-0
 </template>
 

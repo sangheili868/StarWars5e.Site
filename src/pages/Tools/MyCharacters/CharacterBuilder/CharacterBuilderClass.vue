@@ -10,7 +10,9 @@
   import CharacterBuilderClassPowers from './CharacterBuilderClassPowers.vue'
   import ConfirmDelete from '@/components/ConfirmDelete.vue'
   import MySelect from '@/components/MySelect.vue'
-  import CharacterBuilderClassDetail from './CharacterBuilderClassDetail.vue'
+  import ClassDetail from '@/components/ClassDetail.vue'
+  import CharactersArchetypeDetail from '@/pages/Characters/CharactersArchetypeDetail.vue'
+  import MyDialog from '@/components/MyDialog.vue'
 
   const archetypesModule = namespace('archetypes')
 
@@ -19,8 +21,10 @@
       CharacterBuilderClassHitPoints,
       CharacterBuilderClassASI,
       CharacterBuilderClassPowers,
-      CharacterBuilderClassDetail,
       ConfirmDelete,
+      ClassDetail,
+      CharactersArchetypeDetail,
+      MyDialog,
       MySelect
     }
   })
@@ -35,6 +39,9 @@
     @archetypesModule.State archetypes!: ArchetypeType[]
     @archetypesModule.Action fetchArchetypes!: () => void
     range = range
+
+    isClassOpen = false
+    isArchetypeOpen = false
 
     created () {
       this.fetchArchetypes()
@@ -146,19 +153,36 @@
 
 <template lang="pug">
   div
-    CharacterBuilderClassDetail(:classData="classData", :archetypeName="myClass.archetype && myClass.archetype.name")
-    div.d-flex.align-center
+    div.d-flex.align-center.flex-wrap
+      MyDialog(v-model="isClassOpen", wide)
+        template(v-slot:activator="{ on }")
+          v-btn(v-on="on") View Class Details
+        template(#title) {{ classData.name }}
+        template(#text)
+          ClassDetail(v-bind="{ classData }", isHidingBack).mt-5
+        template(#actions)
+          v-spacer
+          v-btn(color="primary", text, @click="isClassOpen=false") Close
+      MyDialog(v-if="myClass.archetype", v-model="isArchetypeOpen", wide).ml-3
+        template(v-slot:activator="{ on }")
+          v-btn(v-on="on") View Archetype Details
+        template(#title) {{ myClass.archetype.name}}
+        template(#text)
+          CharactersArchetypeDetail(:archetypeName="myClass.archetype.name", isHidingBack).mt-5
+        template(#actions)
+          v-spacer
+          v-btn(color="primary", text, @click="isArchetypeOpen=false") Close
       MySelect(
         :value="myClass.levels",
         :items="range(1, 21 - totalOtherClassesLevels)",
         label="Number of levels in this class",
         @change="levels => handleUpdateLevels(levels)"
-      ).mr-3.mt-3
+      ).ml-3.mt-3
       ConfirmDelete(
         label="Class",
         :item="myClass.name",
         @delete="handleDeleteClass"
-      )
+      ).ml-3.mt-3
     div(v-if="!isFixedHitPoints")
       h3 Hit Points
       CharacterBuilderClassHitPoints(

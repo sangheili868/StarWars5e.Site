@@ -5,7 +5,7 @@
   import { PublicClientApplication } from '@azure/msal-browser'
 
   const authenticationModule = namespace('authentication')
-  const uiModule = namespace('ui')
+  const characterModule = namespace('character')
 
   @Component({
     components: {
@@ -14,13 +14,19 @@
   })
   export default class UserProfile extends Vue {
     @authenticationModule.State accessToken!: string
-    @authenticationModule.Action initMSAL!: any
+    @authenticationModule.Action setAccessToken!: (accessToken?: string) => Promise<any>
+    @characterModule.Action clearLocalCharacters!: () => Promise<any>
 
     isAuthLoading = false
 
     signOut () {
       this.isAuthLoading = true
-      Vue.prototype.$msal && Vue.prototype.$msal.logout()
+      Promise.all([
+        this.setAccessToken(),
+        this.clearLocalCharacters()
+      ]).then(() => {
+        Vue.prototype.$msal && Vue.prototype.$msal.logout()
+      })
     }
   }
 </script>
@@ -29,6 +35,6 @@
   div
     v-progress-circular(v-if="isAuthLoading", indeterminate, color="primary", size="100").ma-5
     div(v-show="!isAuthLoading")
-      SignInButton(@setAuthLoading="newIsLoading => isAuthLoading = newIsLoading").mx-2.mt-2
-      v-btn(color="primary", @click="signOut").mx-2.mt-2 Logout
+      SignInButton(v-if="!accessToken", @setAuthLoading="newIsLoading => isAuthLoading = newIsLoading").mx-2.mt-2
+      v-btn(v-else, color="primary", @click="signOut").mx-2.mt-2 Logout
 </template>

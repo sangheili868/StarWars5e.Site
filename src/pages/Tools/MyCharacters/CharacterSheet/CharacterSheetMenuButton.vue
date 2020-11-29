@@ -11,7 +11,7 @@
 </script>
 
 <template lang="pug">
-  v-btn(text, :color="color", :class="$style.fullWidth", v-on="on").pa-3
+  v-btn(text, :color="color", :class="$style.fullWidth", v-on="on", @click="$emit('click')").pa-3
     div.flex-grow-1.text-left
       v-icon.mr-3 fa-{{ icon }}
       | {{ text }}

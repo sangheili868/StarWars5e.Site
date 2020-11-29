@@ -45,6 +45,8 @@
       v-bind="{ completeCharacter, rawCharacter }",
       @updateCharacter="newCharacter => $emit('updateCharacter', newCharacter)",
       @replaceCharacterProperty="payload => $emit('replaceCharacterProperty', payload)",
+      @replaceCharacterProperties="payload => $emit('replaceCharacterProperties', payload)",
+      @deleteCharacter="$emit('deleteCharacter')"
       @goToStep="step => $emit('goToStep', step)"
       @setClean="$emit('setClean')"
     ).mt-2

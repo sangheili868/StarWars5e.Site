@@ -3,10 +3,12 @@
   import MyDialog from '@/components/MyDialog.vue'
   import { RawCharacterType, AbilityScoreMethodType } from '@/types/rawCharacterTypes'
   import BooleanSelect from '@/components/BooleanSelect.vue'
+  import ConfirmDelete from '@/components/ConfirmDelete.vue'
 
   @Component({
     components: {
       MyDialog,
+      ConfirmDelete,
       BooleanSelect
     }
   })
@@ -70,6 +72,16 @@
               falseValue="Ignore"
               @input="isEnforcingForcePrerequisites => $emit('updateCharacter', { settings: { isEnforcingForcePrerequisites } })"
             )
+        v-row(align="center", no-gutters).mb-2
+          ConfirmDelete(
+            :label="rawCharacter.name || 'Unnamed Character'",
+            :item="rawCharacter.name || 'Unnamed Character'",
+            @delete="$emit('deleteCharacter')"
+          )
+            template(v-slot="{ on }")
+              v-btn(color="red", v-on="on").white--text.mt-5
+                v-icon.mr-3 fa-skull-crossbones
+                | Delete Character
     template(#actions)
       v-spacer
       v-btn(color="primary", text, @click="isOpen=false") Close

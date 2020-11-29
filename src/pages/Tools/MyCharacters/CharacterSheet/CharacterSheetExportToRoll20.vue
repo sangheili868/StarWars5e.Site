@@ -13,7 +13,7 @@
       MyDialog
     }
   })
-  export default class CharacterSheetSettingsRoll20 extends Vue {
+  export default class CharacterSheetExportToRoll20 extends Vue {
     @Prop(Object) readonly completeCharacter!: CompleteCharacterType;
     @Prop(Object) readonly rawCharacter!: RawCharacterType
     isOpen = false

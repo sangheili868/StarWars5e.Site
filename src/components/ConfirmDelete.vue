@@ -23,8 +23,9 @@
 <template lang="pug">
   MyDialog(v-model="isOpen")
     template(v-slot:activator="{ on }")
-      v-btn(icon, v-on="on").right
-        v-icon fa-trash
+      slot(:on="on")
+        v-btn(icon, v-on="on").right
+          v-icon fa-trash
     template(#title) Delete {{ label }}
     template(#text)
       div.mt-3 Are you sure you want to delete {{ item }}?

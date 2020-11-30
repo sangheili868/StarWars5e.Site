@@ -168,10 +168,10 @@ export default class Character extends VuexModule {
   @MutationAction({ mutate: ['characters'] })
   async deleteCharacter (character: RawCharacterType) {
     if (rootOf(this).rootState.authentication.accessToken) {
-      // await axios.delete(
-      //   `${process.env.VUE_APP_sw5eapiurl}/api/character/${character.id}`,
-      //   rootOf(this).rootGetters['authentication/axiosHeader']
-      // )
+      await axios.delete(
+        `${process.env.VUE_APP_sw5eapiurl}/api/character/${character.id}`,
+        rootOf(this).rootGetters['authentication/axiosHeader']
+      )
     }
     return { characters: stateOf(this).characters.filter(({ localId, id }) => localId !== character.localId && id !== character.id) }
   }

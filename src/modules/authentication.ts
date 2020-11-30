@@ -1,7 +1,7 @@
 import Vue from 'vue'
-import { Module, VuexModule, Mutation, MutationAction } from 'vuex-module-decorators'
+import { Module, VuexModule, MutationAction } from 'vuex-module-decorators'
 import * as msalBrowser from '@azure/msal-browser'
-import axios, { AxiosInstance, AxiosRequestConfig } from 'axios'
+import { AxiosRequestConfig } from 'axios'
 
 export const authConfig = {
   names: {
@@ -14,10 +14,10 @@ export const authConfig = {
       authority: 'https://sw5edev.b2clogin.com/sw5edev.onmicrosoft.com/B2C_1_signupin'
     }
     // forgotPassword: {
-    //     authority: "https://fabrikamb2c.b2clogin.com/fabrikamb2c.onmicrosoft.com/B2C_1_reset",
+    //     authority: "https://sw5edev.b2clogin.com/sw5edev.onmicrosoft.com/B2C_1_reset",
     // },
     // editProfile: {
-    //     authority: "https://fabrikamb2c.b2clogin.com/fabrikamb2c.onmicrosoft.com/B2C_1_edit_profile"
+    //     authority: "https://sw5edev.b2clogin.com/sw5edev.onmicrosoft.com/B2C_1_edit_profile"
     // }
   },
   authorityDomain: 'sw5edev.b2clogin.com',
@@ -34,7 +34,6 @@ const msalConfig = {
     redirectUri: 'http://localhost:8080/profile',
     knownAuthorities: [authConfig.authorityDomain],
     authority: authConfig.authorities.signUpSignIn.authority,
-    // postLogoutRedirectUri: 'http://localhost:8080/login',
     requireAuthOnInitialize: false
   },
   cache: {

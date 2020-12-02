@@ -44,6 +44,7 @@
     @characterModule.Getter getIsEmptyCharacter!: (character: RawCharacterType | undefined) => boolean
     @characterModule.Getter getCharacterValidation!: (character: RawCharacterType | undefined) => CharacterValidationType
     @characterModule.Action saveCharacter!: (newCharacter: RawCharacterType) => void
+    @characterModule.Action saveCharacterLocally!: (newCharacter: RawCharacterType) => void
     @characterModule.Action deleteCharacter!: (character: RawCharacterType) => Promise<any>
 
     @classesModule.State classes!: ClassType[]
@@ -115,23 +116,34 @@
 
     goToSheet () {
       this.isEditing = false
+      this.handleSaveCharacter()
       window.scrollTo(0, 0)
     }
 
+    saveCharacterIfDone (newCharacter: RawCharacterType) {
+      if (this.isEditing) {
+        this.isDirty = true
+        this.saveCharacterLocally(newCharacter)
+      } else {
+        this.isDirty = false
+        this.saveCharacter(newCharacter)
+      }
+    }
+
     updateCharacter (newCharacter: RawCharacterType) {
-      this.saveCharacter(merge({}, this.character, newCharacter))
+      this.saveCharacterIfDone(merge({}, this.character, newCharacter))
     }
 
     replaceCharacterProperty ({ path, property }: { path: string, property: any }) {
       let characterCopy = merge({}, this.character)
       set(characterCopy, path, property)
-      this.saveCharacter(characterCopy)
+      this.saveCharacterIfDone(characterCopy)
     }
 
     replaceCharacterProperties (replacements: { path: string, property: any }[]) {
       let characterCopy = merge({}, this.character)
       replacements.forEach(({ path, property }) => set(characterCopy, path, property))
-      this.saveCharacter(characterCopy)
+      this.saveCharacterIfDone(characterCopy)
     }
 
     deleteCharacterProperty ({ path, index }: { path: string, index: number | string }) {
@@ -139,6 +151,13 @@
       let property = omit(oldProperty, index)
       if (Array.isArray(oldProperty)) property = Object.values(property)
       this.replaceCharacterProperty({ path, property })
+    }
+
+    handleSaveCharacter () {
+      if (this.character) {
+        this.isDirty = false
+        this.saveCharacter(this.character)
+      }
     }
 
     handleDeleteCharacter () {
@@ -152,23 +171,13 @@
 <template lang="pug">
   div(v-if="hasFetchedData")
     vue-headful(v-bind="{ title }")
-    v-banner(
-      :value="isDirty",
-      sticky,
-      color="white",
-      icon-color="red",
-      :icon="$vuetify.breakpoint.name === 'xs' ? '' : 'fa-exclamation'",
-      mobile-break-point="600",
-      :class="$style.banner"
-    ).white--text.mb-3
-      div.d-flex.align-center.justify-space-around
-        div Character has unsaved changes!
     BackButton(label="My Characters")
     CharacterBuilder(
       v-if="isEditing",
-      v-bind="{ character, characterValidation, currentStep, classes, archetypes, equipment, powers, feats, backgrounds, species }",
+      v-bind="{ character, characterValidation, currentStep, classes, archetypes, equipment, powers, feats, backgrounds, species, isDirty }",
       v-on="{ updateCharacter, deleteCharacterProperty, replaceCharacterProperty, replaceCharacterProperties, goToStep }",
       @deleteCharacter="handleDeleteCharacter",
+      @saveCharacter="handleSaveCharacter",
       @viewSheet="goToSheet"
     )
     CharacterSheet(
@@ -181,23 +190,3 @@
     )
   Loading(v-else)
 </template>
-
-<style module lang="scss">
-  @import '@/assets/styles/colors.scss';
-
-  .banner {
-    z-index: 4 !important;
-    background-color: $alert !important;
-    border-radius: 10px !important;
-  }
-</style>
-
-<style lang="scss">
-  .v-banner.v-banner--is-mobile .v-banner__wrapper {
-    padding: 5px;
-  }
-
-  .v-banner__text {
-    flex-grow: 1;
-  }
-</style>

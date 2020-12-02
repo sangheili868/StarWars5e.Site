@@ -136,15 +136,20 @@ export default class Character extends VuexModule {
         userId: characterResult.userId,
         id: characterResult.id
       }
-      let index = findIndex(characters, { id: newCharacter.id })
-      if (index < 0) index = characters.length
-      characters.splice(index, 1, newCharacter)
-      return { characters }
-    } else {
-        const index = findIndex(characters, { id: newCharacter.id })
-        characters.splice(index, 1, newCharacter)
-        return { characters }
     }
+    let index = findIndex(characters, { id: newCharacter.id })
+    if (index < 0) index = characters.length
+    characters.splice(index, 1, newCharacter)
+    return { characters }
+  }
+
+  @MutationAction({ mutate: ['characters'] })
+  async saveCharacterLocally (newCharacter: RawCharacterType) {
+    const characters = stateOf(this).characters
+    let index = findIndex(characters, { id: newCharacter.id })
+    if (index < 0) index = characters.length
+    characters.splice(index, 1, newCharacter)
+    return { characters }
   }
 
   @MutationAction({ mutate: ['characters'] })

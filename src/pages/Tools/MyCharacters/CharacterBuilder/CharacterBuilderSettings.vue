@@ -14,6 +14,7 @@
   })
   export default class CharacterBuilderSettings extends Vue {
     @Prop(Object) readonly rawCharacter!: RawCharacterType
+    @Prop(Boolean) readonly isDirty!: boolean
     isOpen = false
 
     handleChangeMethod (newMethod: AbilityScoreMethodType) {
@@ -35,11 +36,17 @@
 <template lang="pug">
   MyDialog(v-model="isOpen")
     template(v-slot:activator="{ on }")
-      v-btn(icon, v-on="on")
-        v-icon fa-cog
+      v-badge(:value="isDirty", color="primary", overlap)
+        template(v-slot:badge)
+          v-icon fa-exclamation
+        v-btn(icon, large, v-on="on")
+          v-icon fa-cog
     template(#title) Character Builder Settings
     template(#text)
       v-container.black--text
+        v-row(v-if="isDirty", align="center", no-gutters).mb-2.d-flex.justify-space-between.align-center
+          v-btn(color="primary", @click="$emit('saveCharacter')") Save Character
+          div.primary--text Character has unsaved changes!
         v-row(align="center", no-gutters).mb-2
           v-col Hit Points Calculation
           v-col(cols="8", sm="6").d-flex.justify-center

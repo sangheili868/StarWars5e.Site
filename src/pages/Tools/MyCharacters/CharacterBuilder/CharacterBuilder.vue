@@ -35,6 +35,7 @@
     @Prop(Array) readonly feats!: FeatType[]
     @Prop(Array) readonly backgrounds!: BackgroundType[]
     @Prop(Array) readonly species!: SpeciesType[]
+    @Prop(Boolean) readonly isDirty!: boolean
 
     get steps () {
       return [ {},
@@ -106,10 +107,12 @@
 
 <template lang="pug">
   div
-    h1.pb-3.d-flex.justify-center Character Builder (BETA)
+    h1.pb-3.d-flex.justify-center.align-center Character Builder (BETA)
       CharacterBuilderSettings(
         :rawCharacter="character",
+        v-bind="{ isDirty }",
         @updateCharacter="newCharacter => $emit('updateCharacter', newCharacter)",
+        @saveCharacter="$emit('saveCharacter')"
         @deleteCharacter="$emit('deleteCharacter')"
       )
     div.d-flex.justify-center

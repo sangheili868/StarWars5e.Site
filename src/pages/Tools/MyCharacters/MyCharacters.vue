@@ -21,9 +21,14 @@
     searchText = ''
     isFabOpen = false
     isImportOpen = false
+    characterLimit = 20
 
     created () {
       this.fetchCharacters()
+    }
+
+    get isOverCharacterLimit () {
+      return this.characters.length >= this.characterLimit
     }
 
     get filteredCharacters () {
@@ -55,9 +60,16 @@
 <template lang="pug">
   div
     JSONReader(v-model="isImportOpen" @import="handleCreateCharacter")
-    v-speed-dial(v-model="isFabOpen", fixed, bottom, right)
+    div(v-if="isOverCharacterLimit", :class="$style.disabledButton")
+      v-tooltip(top)
+        template(v-slot:activator="{ on }")
+          span(v-on="on")
+            v-btn(disabled, fab, x-large)
+              v-icon fa-plus
+        div Over Character Limit
+    v-speed-dial(v-else, v-model="isFabOpen", fixed, bottom, right)
       template(#activator)
-        v-btn(v-model="isFabOpen", color="primary", fab, x-large)
+        v-btn(color="primary", fab, x-large)
           v-icon(v-if="!isFabOpen") fa-plus
           v-icon(v-else) fa-times
       v-btn(color="secondary", fab, @click="handleCreateCharacter()")
@@ -65,7 +77,8 @@
       v-btn(color="secondary", fab, @click="isImportOpen=true")
         v-icon fa-download
     h1.mb-5.text-h1 My Characters
-    div(v-if="characters.length > 4").d-flex.justify-center.align-center
+      span(v-if="characters.length > 14").pl-3 ({{characters.length}} / {{characterLimit}})
+    div(v-if="characters.length > 5").d-flex.justify-center.align-center.mb-5
       v-text-field(
         label="Search",
         v-model="searchText",
@@ -112,5 +125,11 @@
 
   .searchBox {
     max-width: 600px !important;
+  }
+
+  .disabledButton {
+    position: fixed;
+    bottom: 16px;
+    right: 16px;
   }
 </style>

@@ -12,6 +12,7 @@
   import { EquipmentType } from '@/types/lootTypes'
   import { every } from 'lodash'
   import CharacterBuilderSettings from './CharacterBuilderSettings.vue'
+  import { CompleteCharacterType } from '@/types/completeCharacterTypes'
 
 @Component({
   components: {
@@ -26,6 +27,7 @@
   })
   export default class CharacterBuilder extends Vue {
     @Prop(Object) readonly character!: RawCharacterType
+    @Prop(Object) readonly completeCharacter!: CompleteCharacterType
     @Prop(Object) readonly characterValidation!: CharacterValidationType
     @Prop(Number) readonly currentStep!: number
     @Prop(Array) readonly classes!: ClassType[]
@@ -111,7 +113,7 @@
       CharacterBuilderSettings(
         v-if="currentStep",
         :rawCharacter="character",
-        v-bind="{ isDirty }",
+        v-bind="{ isDirty, completeCharacter, characterValidation }",
         @updateCharacter="newCharacter => $emit('updateCharacter', newCharacter)",
         @saveCharacter="$emit('saveCharacter')"
         @deleteCharacter="$emit('deleteCharacter')"

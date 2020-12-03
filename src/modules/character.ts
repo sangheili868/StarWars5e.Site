@@ -157,7 +157,6 @@ export default class Character extends VuexModule {
 
   @MutationAction({ mutate: ['characters'] })
   async saveCharacterLocally (newCharacter: RawCharacterType) {
-    console.log('save locally: ', newCharacter)
     return { characters: updateCharacterList(stateOf(this).characters, {
       ...newCharacter,
       builderVersion,

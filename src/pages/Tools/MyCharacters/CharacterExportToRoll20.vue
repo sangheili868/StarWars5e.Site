@@ -7,15 +7,17 @@
   import { saveAs } from 'file-saver'
   import { camelCase, map, mapValues, chain, snakeCase } from 'lodash'
   import { isEnhancedItem } from '@/types/lootTypes'
+  import { CharacterValidationType } from '@/types/utilityTypes'
 
   @Component({
     components: {
       MyDialog
     }
   })
-  export default class CharacterSheetExportToRoll20 extends Vue {
+  export default class CharacterExportToRoll20 extends Vue {
     @Prop(Object) readonly completeCharacter!: CompleteCharacterType;
     @Prop(Object) readonly rawCharacter!: RawCharacterType
+    @Prop(Object) readonly characterValidation!: CharacterValidationType
     isOpen = false
 
     get jsonData (): Roll20CharacterType {
@@ -294,7 +296,11 @@
 </script>
 
 <template lang="pug">
-  MyDialog(v-model="isOpen")
+  v-tooltip(v-if="characterValidation.code !== 0", top)
+    template(v-slot:activator="{ on }")
+      span(v-on="on")
+        v-btn(disabled, v-on="on") Export to Roll20
+  MyDialog(v-else, v-model="isOpen")
     template(v-slot:activator="{ on }")
       v-btn(v-on="on") Export to Roll20
     template(#title) Export Character to Roll 20

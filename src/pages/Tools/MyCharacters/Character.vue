@@ -176,7 +176,7 @@
     BackButton(label="My Characters")
     CharacterBuilder(
       v-if="isEditing",
-      v-bind="{ character, characterValidation, currentStep, classes, archetypes, equipment, powers, feats, backgrounds, species, isDirty }",
+      v-bind="{ character, completeCharacter, characterValidation, currentStep, classes, archetypes, equipment, powers, feats, backgrounds, species, isDirty }",
       v-on="{ updateCharacter, deleteCharacterProperty, replaceCharacterProperty, replaceCharacterProperties, goToStep }",
       @deleteCharacter="handleDeleteCharacter",
       @saveCharacter="handleSaveCharacter",
@@ -184,7 +184,7 @@
     )
     CharacterSheet(
       v-else-if="completeCharacter",
-      v-bind="{ completeCharacter }",
+      v-bind="{ completeCharacter, characterValidation }",
       :rawCharacter="character",
       v-on="{ updateCharacter, deleteCharacterProperty, replaceCharacterProperty, replaceCharacterProperties, goToStep }",
       @deleteCharacter="handleDeleteCharacter",

@@ -2,8 +2,9 @@
   import { Component, Prop, Vue } from 'vue-property-decorator'
   import CharacterSheetTop from './CharacterSheetTop.vue'
   import CharacterSheetSection from './CharacterSheetSection.vue'
-  import { CompleteCharacterType } from '@/types/completeCharacterTypes'
   import { RawCharacterType } from '@/types/rawCharacterTypes'
+  import { CompleteCharacterType } from '@/types/completeCharacterTypes'
+  import { CharacterValidationType } from '@/types/utilityTypes'
   import { range } from 'lodash'
   import { namespace } from 'vuex-class'
 
@@ -18,6 +19,7 @@
   export default class CharacterSheet extends Vue {
     @Prop(Object) readonly completeCharacter!: CompleteCharacterType
     @Prop(Object) readonly rawCharacter!: RawCharacterType
+    @Prop(Object) readonly characterValidation!: CharacterValidationType
 
     range = range
     openTabs: number[] = [0, 1, 2]
@@ -42,7 +44,7 @@
   div
     CharacterSheetTop(
       v-if="completeCharacter",
-      v-bind="{ completeCharacter, rawCharacter }",
+      v-bind="{ completeCharacter, rawCharacter, characterValidation }",
       @updateCharacter="newCharacter => $emit('updateCharacter', newCharacter)",
       @replaceCharacterProperty="payload => $emit('replaceCharacterProperty', payload)",
       @replaceCharacterProperties="payload => $emit('replaceCharacterProperties', payload)",

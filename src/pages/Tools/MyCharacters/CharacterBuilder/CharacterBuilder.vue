@@ -109,6 +109,7 @@
   div
     h1.pb-3.d-flex.justify-center.align-center Character Builder (BETA)
       CharacterBuilderSettings(
+        v-if="currentStep",
         :rawCharacter="character",
         v-bind="{ isDirty }",
         @updateCharacter="newCharacter => $emit('updateCharacter', newCharacter)",

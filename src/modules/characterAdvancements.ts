@@ -9,7 +9,7 @@ export default class CharacterAdvancements extends VuexModule {
 
   @MutationAction({ mutate: ['characterAdvancements', 'cachedVersion'] })
   async fetchCharacterAdvancements () {
-    const { data: characterAdvancements, cachedVersion } = await fetchFromCache(this, 'characterAdvancements', 'characterAdvancement')
+    const { data: characterAdvancements, cachedVersion } = await fetchFromCache(this, 'characterAdvancements', 'characterAdvancement', 'characterAdvancementLU')
     return { characterAdvancements, cachedVersion }
   }
 }

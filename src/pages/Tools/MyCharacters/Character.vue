@@ -38,6 +38,7 @@
   })
   export default class Characters extends Vue {
     @Prop(String) readonly characterId!: string
+    @Prop(String) readonly isNew!: string
     @characterModule.State characters!: RawCharacterType[]
     @characterModule.Getter generateCompleteCharacter!: (rawCharacter: RawCharacterType) => CompleteCharacterType | null
     @characterModule.Getter getCharacterById!: (characterId: string) => RawCharacterType | undefined
@@ -88,6 +89,7 @@
         if (!this.character) window.alert('Character not found: ' + this.characterId)
         this.hasFetchedData = true
         this.isEditing = !this.characterValidation.isValid
+        this.isDirty = this.isNew === 'true'
         this.currentStep = this.getIsEmptyCharacter(this.character) ? 0 : 1
       })
     }
@@ -169,7 +171,7 @@
 </script>
 
 <template lang="pug">
-  div(v-if="hasFetchedData")
+  div(v-if="hasFetchedData && character")
     vue-headful(v-bind="{ title }")
     BackButton(label="My Characters")
     CharacterBuilder(

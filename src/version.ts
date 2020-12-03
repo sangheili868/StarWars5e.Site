@@ -1,6 +1,12 @@
 export default '0.4.34'
 
 /*
+0.5.0
+- Added login button
+- Automatically save characters to the cloud while logged in
+- Allow up to 20 characters saved to an account
+- Changed "My Content" to "Tools" and added My Characters page
+
 0.4.34
 - Added raw view of Expanded Content files. Can be found under Rules -> Expanded Content
 

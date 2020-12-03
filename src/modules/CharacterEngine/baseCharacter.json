@@ -81,5 +81,7 @@
     "isFixedHitPoints": false,
     "abilityScoreMethod": "Standard Array"
   },
-  "notes": ""
+  "notes": "",
+  "createdAt": 0,
+  "changedAt": 0
 }

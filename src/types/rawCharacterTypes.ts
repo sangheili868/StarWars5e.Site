@@ -246,7 +246,9 @@ export interface RawCharacterType {
   customForcePowers: string[],
   settings: SettingsType,
   customEquipment: CustomEquipmentType[],
-  notes: string
+  notes: string,
+  createdAt: number,
+  changedAt: number
 }
 
 export function isCustomProficiency (proficiency: CustomProficiencyType | CharacterProficiency): proficiency is CustomProficiencyType {

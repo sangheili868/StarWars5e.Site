@@ -115,8 +115,9 @@
         :rawCharacter="character",
         v-bind="{ isDirty, completeCharacter, characterValidation }",
         @updateCharacter="newCharacter => $emit('updateCharacter', newCharacter)",
-        @saveCharacter="$emit('saveCharacter')"
-        @deleteCharacter="$emit('deleteCharacter')"
+        @saveCharacter="$emit('saveCharacter')",
+        @deleteCharacter="$emit('deleteCharacter')",
+        @setClean="$emit('setClean')"
       )
     div.d-flex.justify-center
       div(v-if="currentStep === 0", :class="$style.page").text-left

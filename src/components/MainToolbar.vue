@@ -19,7 +19,7 @@
     @uiModule.State isSideBarOpen!: boolean
     @uiModule.State isDarkSide!: boolean
     @uiModule.Action updateSideBar!: (value: boolean) => void
-    @authenticationModule.State accessToken!: string
+    @authenticationModule.Getter isLoggedIn!: boolean
     @authenticationModule.Action initMSAL!: any
     @authenticationModule.Action setAccessToken!: (accessToken?: string) => Promise<any>
     @characterModule.Action clearLocalCharacters!: () => Promise<any>
@@ -163,7 +163,7 @@
             v-list-item(:to="to + nestedRoute.to")
               v-list-item-title {{ nestedRoute.title }}
           template(v-if="!nested || !nested.length") {{ title }}
-        v-menu(v-if="accessToken", offset-y)
+        v-menu(v-if="isLoggedIn", offset-y)
           template(v-slot:activator="{ on }")
             v-btn(text, :color="darkColor", v-on="on")
               v-icon(:color="darkColor") fa-user
@@ -176,7 +176,7 @@
     v-toolbar-items.hidden-md-and-up
       v-btn(icon, @click="isSearchOpen = !isSearchOpen")
         v-icon {{ isSearchOpen ? 'fa-times' : 'fa-search' }}
-      v-menu(v-if="accessToken", offset-y)
+      v-menu(v-if="isLoggedIn", offset-y)
         template(v-slot:activator="{ on }")
           v-btn(text, :color="darkColor", v-on="on")
             v-icon(:color="darkColor") fa-user

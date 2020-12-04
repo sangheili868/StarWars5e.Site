@@ -27,6 +27,7 @@
   const skillsModule = namespace('skills')
   const conditionsModule = namespace('conditions')
   const enhancedItemsModule = namespace('enhancedItems')
+  const authenticationModule = namespace('authentication')
 
   @Component({
     components: {
@@ -47,6 +48,7 @@
     @characterModule.Action saveCharacter!: (newCharacter: RawCharacterType) => void
     @characterModule.Action saveCharacterLocally!: (newCharacter: RawCharacterType) => void
     @characterModule.Action deleteCharacter!: (character: RawCharacterType) => Promise<any>
+    @authenticationModule.Getter isLoggedIn!: boolean
 
     @classesModule.State classes!: ClassType[]
     @classesModule.Action fetchClasses!: () => void
@@ -86,10 +88,13 @@
         this.fetchConditions(),
         this.fetchEnhancedItems()
       ]).then(() => {
-        if (!this.character) window.alert('Character not found: ' + this.characterId)
+        if (!this.character) {
+          window.alert('Character not found')
+          this.$router.push('/tools/mycharacters')
+        }
         this.hasFetchedData = true
         this.isEditing = !this.characterValidation.isValid
-        this.isDirty = this.isNew === 'true'
+        this.isDirty = !this.isLoggedIn || this.isNew === 'true'
         this.currentStep = this.getIsEmptyCharacter(this.character) ? 0 : 1
       })
     }
@@ -118,12 +123,13 @@
 
     goToSheet () {
       this.isEditing = false
-      this.handleSaveCharacter()
+      if (this.isLoggedIn) this.handleSaveCharacter()
+      else if (this.character) this.saveCharacterLocally(this.character)
       window.scrollTo(0, 0)
     }
 
     saveCharacterIfDone (newCharacter: RawCharacterType) {
-      if (this.isEditing) {
+      if (this.isEditing || !this.isLoggedIn) {
         this.isDirty = true
         this.saveCharacterLocally(newCharacter)
       } else {
@@ -180,11 +186,12 @@
       v-on="{ updateCharacter, deleteCharacterProperty, replaceCharacterProperty, replaceCharacterProperties, goToStep }",
       @deleteCharacter="handleDeleteCharacter",
       @saveCharacter="handleSaveCharacter",
-      @viewSheet="goToSheet"
+      @viewSheet="goToSheet",
+      @setClean="isDirty=false"
     )
     CharacterSheet(
       v-else-if="completeCharacter",
-      v-bind="{ completeCharacter, characterValidation }",
+      v-bind="{ completeCharacter, characterValidation, isDirty }",
       :rawCharacter="character",
       v-on="{ updateCharacter, deleteCharacterProperty, replaceCharacterProperty, replaceCharacterProperties, goToStep }",
       @deleteCharacter="handleDeleteCharacter",

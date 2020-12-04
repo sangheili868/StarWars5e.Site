@@ -20,6 +20,7 @@
     @Prop(Object) readonly completeCharacter!: CompleteCharacterType
     @Prop(Object) readonly rawCharacter!: RawCharacterType
     @Prop(Object) readonly characterValidation!: CharacterValidationType
+    @Prop(Boolean) readonly isDirty!: boolean
 
     range = range
     openTabs: number[] = [0, 1, 2]
@@ -44,7 +45,7 @@
   div
     CharacterSheetTop(
       v-if="completeCharacter",
-      v-bind="{ completeCharacter, rawCharacter, characterValidation }",
+      v-bind="{ completeCharacter, rawCharacter, characterValidation, isDirty }",
       @updateCharacter="newCharacter => $emit('updateCharacter', newCharacter)",
       @replaceCharacterProperty="payload => $emit('replaceCharacterProperty', payload)",
       @replaceCharacterProperties="payload => $emit('replaceCharacterProperties', payload)",

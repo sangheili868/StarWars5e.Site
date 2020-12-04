@@ -1,21 +1,25 @@
 <script lang="ts">
-  import { Component, Prop, Vue } from 'vue-property-decorator'
+  import { Component, Prop, Vue, Watch } from 'vue-property-decorator'
   import { namespace } from 'vuex-class'
   import generateID from '@/utilities/generateID'
   import JSONReader from '@/components/JSONReader.vue'
   import baseCharacter from '@/modules/CharacterEngine/baseCharacter.json'
   import { RawCharacterType } from '@/types/rawCharacterTypes'
   import Loading from '@/components/Loading.vue'
+  import SignInButton from '@/components/SignInButton.vue'
 
   const characterModule = namespace('character')
+  const authenticationModule = namespace('authentication')
 
   @Component({
     components: {
       JSONReader,
+      SignInButton,
       Loading
     }
   })
   export default class MyCharacters extends Vue {
+    @authenticationModule.Getter isLoggedIn!: boolean
     @characterModule.State characters!: RawCharacterType[]
     @characterModule.Action fetchCharacters!: () => Promise<any>
     @characterModule.Action saveCharacter!: (newCharacter: RawCharacterType) => Promise<any>
@@ -28,7 +32,17 @@
     isLoadingCharacter = true
 
     created () {
-      this.fetchCharacters().then(() => { this.isLoadingCharacter = false })
+      this.fetchCharacters().then(() => {
+        this.saveCharactersWithoutIds()
+        this.isLoadingCharacter = false
+      })
+    }
+
+    @Watch('isLoggedIn')
+    saveTempCharacters () {
+      this.fetchCharacters().then(() => {
+        this.saveCharactersWithoutIds()
+      })
     }
 
     get isOverCharacterLimit () {
@@ -38,7 +52,13 @@
     get filteredCharacters () {
       return this.characters
         .filter(({ name }) => (name && name.toLowerCase() ? name.toLowerCase() : 'unnamed character').includes(this.searchText.toLowerCase()))
-        .sort((char1, char2) => char1.name && (char1.name < char2.name) ? -1 : 1)
+        .sort((char1, char2) => char1.changedAt && (char1.changedAt < char2.changedAt) ? 1 : -1)
+    }
+
+    saveCharactersWithoutIds () {
+      if (this.isLoggedIn) {
+        this.characters.filter(({ id }) => !id).forEach(character => this.saveCharacter(character))
+      }
     }
 
     getClassText (character: RawCharacterType): string {
@@ -54,20 +74,20 @@
       const localId = 'temp-' + generateID()
       this.isLoadingCharacter = true
       if (newCharacter) {
+        // Save a character after importing
         this.saveCharacter({
           ...baseCharacter,
           ...newCharacter,
           createdAt: newCharacter.createdAt ? newCharacter.createdAt : Date.now(),
-          changedAt: newCharacter.changedAt ? newCharacter.changedAt : Date.now(),
           localId
         })
           .then(() => this.$router.push('mycharacters/' + encodeURIComponent(localId) + '?isNew=true'))
           .finally(() => { this.isLoadingCharacter = false })
       } else {
+        // Don't save a new, empty character
         this.saveCharacterLocally({
           ...baseCharacter,
           createdAt: Date.now(),
-          changedAt: Date.now(),
           localId
         })
           .then(() => this.$router.push('mycharacters/' + encodeURIComponent(localId) + '?isNew=true'))
@@ -87,7 +107,7 @@
             span(v-on="on")
               v-btn(disabled, fab, x-large)
                 v-icon fa-plus
-          div Over Character Limit
+          div 20 Character Limit
       v-speed-dial(v-else, v-model="isFabOpen", fixed, bottom, right)
         template(#activator)
           v-btn(color="primary", fab, x-large)
@@ -99,6 +119,9 @@
           v-icon fa-download
       h1.mb-5.text-h1 My Characters
         span(v-if="characters.length > 14").pl-3 ({{characters.length}} / {{characterLimit}})
+      div(v-if="!isLoggedIn && characters.length").mb-3 Your characters have not been saved! Click
+        SignInButton.mx-2
+        | to create an account or login to an existing account.
       div(v-if="characters.length > 5").d-flex.justify-center.align-center.mb-5
         v-text-field(
           label="Search",
@@ -123,7 +146,7 @@
           :key="index",
           hover,
           :class="$style.characterCard"
-          :to="'mycharacters/' + encodeURIComponent(character.id)"
+          :to="'mycharacters/' + encodeURIComponent(isLoggedIn ? character.id : character.localId)"
         ).d-flex.pa-3.ma-3.align-start
           v-img(
             v-if="character.image",

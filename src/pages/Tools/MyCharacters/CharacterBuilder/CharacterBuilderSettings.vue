@@ -1,5 +1,6 @@
 <script lang="ts">
   import { Component, Prop, Vue } from 'vue-property-decorator'
+  import { namespace } from 'vuex-class'
   import MyDialog from '@/components/MyDialog.vue'
   import { RawCharacterType, AbilityScoreMethodType } from '@/types/rawCharacterTypes'
   import { CompleteCharacterType } from '@/types/completeCharacterTypes'
@@ -7,6 +8,8 @@
   import BooleanSelect from '@/components/BooleanSelect.vue'
   import ConfirmDelete from '@/components/ConfirmDelete.vue'
   import CharacterMenu from '../CharacterMenu.vue'
+
+  const authenticationModule = namespace('authentication')
 
   @Component({
     components: {
@@ -21,6 +24,7 @@
     @Prop(Object) readonly completeCharacter!: CompleteCharacterType
     @Prop(Object) readonly characterValidation!: CharacterValidationType
     @Prop(Boolean) readonly isDirty!: boolean
+    @authenticationModule.Getter isLoggedIn!: boolean
     isOpen = false
 
     handleChangeMethod (newMethod: AbilityScoreMethodType) {
@@ -55,9 +59,10 @@
         @deleteCharacter="$emit('deleteCharacter')"
       )
         v-container
-          v-row(v-if="isDirty", align="center", no-gutters).mb-2.d-flex.justify-space-between.align-center
-            v-btn(color="primary", @click="$emit('saveCharacter')") Save Character
+          v-row(v-if="isDirty", align="center", no-gutters).mb-2.d-flex.justify-space-around.align-center
+            v-btn(v-if="isLoggedIn", color="primary", @click="$emit('saveCharacter')") Save Character
             div.primary--text Character has unsaved changes!
+            div(v-if="!isLoggedIn").primary--text Login, export to file, or copy text to save
           v-row(align="center", no-gutters).mb-2
             v-col Hit Points Calculation
             v-col(cols="8", sm="6").d-flex.justify-center

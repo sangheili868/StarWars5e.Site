@@ -38,6 +38,7 @@
 
     copyCharacter () {
       copy(JSON.stringify(this.rawCharacter))
+      window.alert('Character data copied to clipboard!')
       this.$emit('setClean')
     }
   }

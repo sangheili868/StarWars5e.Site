@@ -2,6 +2,9 @@ export default '0.4.34'
 
 /*
 
+0.4.38
+- Upgrade to Vuetify version 2.3.19 to fix an issue where screen readers don't read contents of dropdown menus (reported by @zheadings#6134)
+
 0.4.37
 - Minor visual improvements to monster power modal
 

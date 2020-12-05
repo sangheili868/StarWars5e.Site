@@ -34,7 +34,7 @@
         v-if="hasTitle"
         primary-title,
         :class="{ ['darken-1']: isDark, ['lighten-2']: !isDark }"
-      ).primary--text.headline.grey
+      ).primary--text.text-h5.grey
         slot(name="title")
       v-card-text
         slot(name="text")

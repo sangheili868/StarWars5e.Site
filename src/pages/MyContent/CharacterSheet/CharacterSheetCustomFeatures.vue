@@ -62,7 +62,7 @@
         v-expansion-panel(v-for="({ name, content }, index) in features", :key="index").featurePanel
           v-expansion-panel-header.pa-2
             h4 {{ name }}
-          v-expansion-panel-content.ma-2.caption
+          v-expansion-panel-content.ma-2.text-caption
             TextEditor(
               :value="content",
               hasOwnState,

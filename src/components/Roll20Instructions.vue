@@ -8,7 +8,7 @@
 <template lang="pug">
   div
       h2.mt-3 Instructions
-      div.caption You must be the GM of the campaign to import a character
+      div.text-caption You must be the GM of the campaign to import a character
       ol
         li Ensure that the Roll 20 Campaign is using the
           u.pl-1

@@ -148,9 +148,8 @@
       color="white",
       icon-color="red",
       :icon="$vuetify.breakpoint.name === 'xs' ? '' : 'fa-exclamation'",
-      mobile-break-point="600",
-      :class="$style.banner"
-    ).white--text.mb-3
+      mobile-breakpoint="600"
+    ).white--text.mb-3.alertBanner
       div.d-flex.align-center.justify-space-around
         div Character has unsaved changes!
         JSONWriter(:jsonData="character", v-bind="{ filename }", @save="setClean").ml-1 Save
@@ -175,17 +174,15 @@
   Loading(v-else)
 </template>
 
-<style module lang="scss">
+<style lang="scss">
   @import '@/assets/styles/colors.scss';
 
-  .banner {
+  .v-main .alertBanner.v-banner {
     z-index: 4 !important;
     background-color: $alert !important;
     border-radius: 10px !important;
   }
-</style>
 
-<style lang="scss">
   .v-banner.v-banner--is-mobile .v-banner__wrapper {
     padding: 5px;
   }

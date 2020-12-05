@@ -151,9 +151,9 @@
           v-btn(color="primary", :disabled="!newProficiency", @click="handleAddProficiency") Add {{ newProficiency }}
           v-spacer
           v-btn(color="primary", text, @click="isOpen=false") Close
-    div(v-for="proficiency in proficiencies", :key="proficiency.name").caption {{ startCase(proficiency.name) }}
+    div(v-for="proficiency in proficiencies", :key="proficiency.name").text-caption {{ startCase(proficiency.name) }}
     div(v-for="({ name, proficiencyLevel }, index) in customProficiencies", :key="'prof' + index").d-flex.align-center.justify-space-between
-      div.caption {{ startCase(name) + (proficiencyLevel === 'expertise' ? ' (Expertise)' : '') }}
+      div.text-caption {{ startCase(name) + (proficiencyLevel === 'expertise' ? ' (Expertise)' : '') }}
       ConfirmDelete(
         label="Proficiency",
         :item="startCase(name) + '' + (proficiencyLevel === 'expertise' ? ' expertise' : ' proficiency')",

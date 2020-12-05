@@ -67,7 +67,7 @@
       tweakPath="armorClass",
       @replaceCharacterProperty="payload => $emit('replaceCharacterProperty', payload)"
     )
-      div.caption {{ armorList.join(', ') }}
+      div.text-caption {{ armorList.join(', ') }}
     CharacterSheetModifier(
       :value="parseInt(speed.base)"
       label="Speed",
@@ -95,7 +95,7 @@
       v-bind="{ weapon }",
       @replaceCharacterProperty="payload => $emit('replaceCharacterProperty', payload)"
     )
-    div(v-if="!weapons.length").caption Equip weapons by selecting them in the Equipment section
+    div(v-if="!weapons.length").text-caption Equip weapons by selecting them in the Equipment section
     CharacterSheetSuperiority(
       v-if="superiority"
       v-bind="{ superiority }"

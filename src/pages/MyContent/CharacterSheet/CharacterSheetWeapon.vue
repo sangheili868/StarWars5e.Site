@@ -52,7 +52,7 @@
         h4.flex-grow-1 {{ weapon.name }}
         div(:class="$style.toHit").text-left {{ addPlus(weapon.attackBonus) }}
         div(:class="$style.damage").text-right {{ damage }}
-    LootWeaponsProperties(:propertyList="weapon.properties").caption.px-1
+    LootWeaponsProperties(:propertyList="weapon.properties").text-caption.px-1
 </template>
 
 <style module lang="scss">

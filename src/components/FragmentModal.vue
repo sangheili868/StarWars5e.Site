@@ -57,7 +57,7 @@
 
     onCloseCallBack () {
       this.$router.push({
-        ...this.$route,
+        path: this.$route.path,
         hash: ''
       })
     }

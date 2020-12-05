@@ -127,5 +127,5 @@
           placeholder="Choose a feat",
           @input="handleUpdateFeat"
         ).mx-2
-    VueMarkdown(:source="featText").caption
+    VueMarkdown(:source="featText").text-caption
 </template>

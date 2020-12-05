@@ -130,7 +130,7 @@
     handleDeleteClass () {
       const advancement = this.characterAdvancements.find(({ level }) => level === this.totalOtherClassesLevels)
       const experiencePoints = advancement ? advancement.experiencePoints : 0
-      let newClasses = Object.values(omit(this.character.classes, this.index))
+      let newClasses = this.character.classes.filter((_, index) => index !== this.index)
       // Starting class changed, so use its max hit points for level 1
       if (this.index === 0 && newClasses.length) newClasses[0].hitPoints = newClasses[0].hitPoints.slice(1)
       this.$emit('replaceCharacterProperties', [

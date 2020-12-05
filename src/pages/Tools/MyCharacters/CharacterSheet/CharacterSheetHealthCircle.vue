@@ -33,7 +33,7 @@
     )
       div(:class="$style.circle")
         h2 {{ current }}
-          span(v-if="temporary").caption.text--accent-3.green--text.ml-1 ({{ temporary }})
+          span(v-if="temporary").text-caption.text--accent-3.green--text.ml-1 ({{ temporary }})
         v-divider(width="80", :class="$style.divider")
         h2 {{ maximum }}
     v-progress-circular(

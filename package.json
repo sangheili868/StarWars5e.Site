@@ -47,7 +47,7 @@
     "vue-router": "^3.0.3",
     "vue-sessionstorage": "^1.0.0",
     "vuedraggable": "^2.23.2",
-    "vuetify": "2.0.18",
+    "vuetify": "^2.3.19",
     "vuetify-scss": "^1.4.0",
     "vuex": "^3.0.1",
     "vuex-class": "^0.3.2",

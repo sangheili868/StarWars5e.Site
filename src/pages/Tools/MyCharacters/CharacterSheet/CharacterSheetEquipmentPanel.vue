@@ -60,7 +60,7 @@
 <template lang="pug">
   v-expansion-panel.equipmentPanel
     v-expansion-panel-header.pa-2 {{ item.name }} {{ item.quantity > 1 ? `(${item.quantity})` : '' }}
-    v-expansion-panel-content.ma-2.caption
+    v-expansion-panel-content.ma-2.text-caption
       v-row
         v-col.d-flex.align-center
           strong Quantity

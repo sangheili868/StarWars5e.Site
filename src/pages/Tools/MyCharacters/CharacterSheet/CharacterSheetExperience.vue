@@ -63,8 +63,8 @@
 </script>
 
 <template lang="pug">
-  v-badge(overlap).my-3.mr-3
-    template(v-slot:badge, v-if="!completeCharacter.experiencePoints.isCorrect")
+  v-badge(:value="!completeCharacter.experiencePoints.isCorrect", overlap).my-3.mr-3
+    template(v-slot:badge)
       v-icon.white--text fa-exclamation
     ValueEditor(:value="completeCharacter.experiencePoints.current", label="Experience", @input="updateExperience")
       div.d-flex.align-center.xpBar

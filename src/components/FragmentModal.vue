@@ -4,8 +4,11 @@
   import { namespace } from 'vuex-class'
   import { ReferenceTableType } from '@/types/utilityTypes'
   import MyDialog from '@/components/MyDialog.vue'
+  import { PowerType } from '@/types/characterTypes'
+  import { startCase } from 'lodash'
 
   const referenceTableModules = namespace('referenceTables')
+  const powersModule = namespace('powers')
 
   @Component({
     components: {
@@ -17,18 +20,27 @@
     @Prop(String) readonly title!: string
     @referenceTableModules.State referenceTables!: ReferenceTableType[]
     @referenceTableModules.Action fetchReferenceTables!: () => void
+    @powersModule.State powers!: PowerType[]
+    @powersModule.Action fetchPowers!: () => void
+    startCase = startCase
 
     created () {
       this.fetchReferenceTables()
+      this.fetchPowers()
     }
 
     get hash () {
       return decodeURI(this.$route.hash).substring(1)
     }
 
+    get power () {
+      return this.powers.find(({ name }) => name.toLowerCase() === this.hash.toLowerCase())
+    }
+
     get content () {
-      const data = this.hash && this.referenceTables.find(({ name }) => name === this.hash)
-      return data && data.content
+      if (!this.hash) return ''
+      const tableData = this.referenceTables.find(({ name }) => name === this.hash)
+      return this.power ? this.power.description : tableData ? tableData.content : ''
     }
 
     get hasContent () {
@@ -42,14 +54,29 @@
         hash: ''
       })
     }
+
+    onCloseCallBack () {
+      this.$router.push({
+        path: this.$route.path,
+        hash: ''
+      })
+    }
   }
 </script>
 
 <template lang="pug">
-  MyDialog(v-if="content", :value="hasContent")
-    template(#title) {{ hash }}
+  MyDialog(v-if="content", :value="hasContent" :onClose="onCloseCallBack")
+    template(#title) {{ startCase(hash) }}
     template(#text)
-      VueMarkdown(:source="content")
+      div(v-if="power").mt-3
+        div #[strong Level:] {{ (power.level || 'At-will').toString() }}
+        div #[strong Casting Period:] {{ power.castingPeriodText }}
+        div #[strong Range:] {{ power.range }}
+        div #[strong Duration:] {{ power.duration }}
+        div #[strong Concentration:] {{ power.concentration }}
+        br
+        VueMarkdown(:source="content")
+      VueMarkdown(v-else, :source="content")
     template(#actions)
       v-spacer
       v-btn(color="primary", text, :to="route") Close

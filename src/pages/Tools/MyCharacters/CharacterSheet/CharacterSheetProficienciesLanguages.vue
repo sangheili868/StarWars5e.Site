@@ -45,8 +45,8 @@
           v-btn(color="primary", :disabled="!newLanguage", @click="handleAdd") Add
           v-spacer
           v-btn(color="primary", text, @click="isOpen=false") Close
-    div(v-for="language in languages", :key="language").caption {{ language }}
+    div(v-for="language in languages", :key="language").text-caption {{ language }}
     div(v-for="(language, index) in customLanguages", :key="'language' + index").d-flex.align-center.justify-space-between
-      div.caption {{ language }}
+      div.text-caption {{ language }}
       ConfirmDelete(label="Language", :item="language", @delete="handleDelete(index)")
 </template>

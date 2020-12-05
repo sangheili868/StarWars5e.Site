@@ -106,8 +106,8 @@
             )
             div
               h4 {{ feature.name }}
-              div(v-if="isAlreadyKnown(feature.name)").caption Power already known
-              div(v-else-if="feature.prerequisite").caption Prerequisite: #[strong {{ feature.prerequisite }}]
+              div(v-if="isAlreadyKnown(feature.name)").text-caption Power already known
+              div(v-else-if="feature.prerequisite").text-caption Prerequisite: #[strong {{ feature.prerequisite }}]
     template(#actions)
       v-spacer
       v-btn(color="primary", text, @click="isOpen=false") Done

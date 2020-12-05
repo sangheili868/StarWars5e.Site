@@ -29,7 +29,7 @@
   v-app(:dark="isDarkSide")
     MainToolbar
     FragmentModal(v-if="isDataLoaded")
-    v-content(:class="[ $style.content, $style.noPadding, { [$style.darkSide]: isDarkSide } ]")
+    v-main(:class="[ $style.content, $style.noPadding, { [$style.darkSide]: isDarkSide } ]")
       v-alert(v-if="!hasInternet", type="error", :class="$style.alert") Warning: Could not connect to database. Check your internet connection.
       v-container(fluid, :class="[$style.noPadding, { [$style.alertMargin]: !hasInternet }]")
         router-view

@@ -117,7 +117,7 @@
           v-icon fa-plus
         v-btn(color="secondary", fab, @click="isImportOpen=true")
           v-icon fa-download
-      h1.mb-5.text-h1 My Characters
+      h1.mb-5 My Characters
         span(v-if="characters.length > 14").pl-3 ({{characters.length}} / {{characterLimit}})
       div(v-if="!isLoggedIn && characters.length").mb-3 Your characters have not been saved! Click
         SignInButton.mx-2

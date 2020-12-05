@@ -43,7 +43,7 @@
       size="100",
       :rotate="360 * current / maximum - 90",
       width="10"
-    )
+    ).greenCircle
 </template>
 
 <style module lang="scss">
@@ -57,5 +57,11 @@
     &.red {
       position: absolute;
     }
+  }
+</style>
+
+<style lang="scss">
+  .greenCircle .v-progress-circular__underlay {
+    stroke: transparent;
   }
 </style>

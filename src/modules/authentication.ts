@@ -5,17 +5,17 @@ import { AxiosRequestConfig } from 'axios'
 
 export const authConfig = {
   names: {
-    signUpSignIn: 'B2C_1_signupin'
-    // forgotPassword: "B2C_1_reset",
+    signUpSignIn: 'B2C_1_signupin',
+    forgotPassword: 'B2C_1_reset'
     // editProfile: "B2C_1_edit_profile"
   },
   authorities: {
     signUpSignIn: {
       authority: 'https://sw5edev.b2clogin.com/sw5edev.onmicrosoft.com/B2C_1_signupin'
+    },
+    forgotPassword: {
+        authority: 'https://sw5edev.b2clogin.com/sw5edev.onmicrosoft.com/B2C_1_reset'
     }
-    // forgotPassword: {
-    //     authority: "https://sw5edev.b2clogin.com/sw5edev.onmicrosoft.com/B2C_1_reset",
-    // },
     // editProfile: {
     //     authority: "https://sw5edev.b2clogin.com/sw5edev.onmicrosoft.com/B2C_1_edit_profile"
     // }
@@ -65,7 +65,17 @@ export default class Authentication extends VuexModule {
         if (tokenResponse && tokenResponse.accessToken) {
           accessToken = tokenResponse.accessToken
         }
-      }).catch((error) => console.error('Token failure: ' + JSON.stringify(error)))
+      }).catch((error) => {
+        if (error.errorMessage.includes('AADB2C90118')) {
+          try {
+            Vue.prototype.$msal.loginRedirect(authConfig.authorities.forgotPassword)
+          } catch (err) {
+              console.error(err)
+          }
+        } else {
+          console.error('Token failure: ' + JSON.stringify(error))
+        }
+      })
       return { accessToken }
     }
 

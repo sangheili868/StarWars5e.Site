@@ -3,6 +3,7 @@ import HandbookNavigation from './HandbookNavigation.vue'
 import HandbookChapter from './HandbookChapter.vue'
 import HandbookSpecies from './HandbookSpecies.vue'
 import CharactersSpeciesDetail from '@/pages/Characters/CharactersSpeciesDetail.vue'
+import CharactersBackgroundDetail from '@/pages/Characters/CharactersBackgroundDetail.vue'
 import CharactersForcePowers from '@/pages/Characters/CharactersForcePowers.vue'
 import CharactersTechPowers from '@/pages/Characters/CharactersTechPowers.vue'
 import HandbookClasses from './HandbookClasses.vue'
@@ -55,6 +56,14 @@ export default {
     {
       path: 'backgrounds',
       component: HandbookBackgrounds
+    },
+    {
+      path: 'backgrounds/:backgroundName',
+      component: CharactersBackgroundDetail,
+      props: true,
+      meta: {
+        title: 'Backgrounds'
+      }
     },
     {
       path: 'customization',

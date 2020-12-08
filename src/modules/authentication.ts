@@ -57,6 +57,10 @@ export default class Authentication extends VuexModule {
     return Vue.prototype.$msal.getAllAccounts()[0]
   }
 
+  get isLoggedIn (): Boolean {
+    return this.accessToken ? this.accessToken.length > 0 : false
+  }
+
   @MutationAction({ mutate: ['accessToken'] })
   async initMSAL () {
       if (!Vue.prototype.$msal) Vue.prototype.$msal = new msalBrowser.PublicClientApplication(msalConfig)

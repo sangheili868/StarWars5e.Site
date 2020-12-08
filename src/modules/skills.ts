@@ -9,7 +9,7 @@ export default class Skills extends VuexModule {
 
   @MutationAction({ mutate: ['skills', 'cachedVersion'] })
   async fetchSkills () {
-    const { data: skills, cachedVersion } = await fetchFromCache(this, 'skills', 'skills')
+    const { data: skills, cachedVersion } = await fetchFromCache(this, 'skills', 'skills', 'skillsLU')
     return { skills, cachedVersion }
   }
 }

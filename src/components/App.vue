@@ -17,9 +17,10 @@
     @uiModule.State isDarkSide!: boolean
     @dataVersionsModule.State hasInternet!: boolean
     @dataVersionsModule.Action fetchDataVersions!: () => Promise<any>
+    isDataLoaded = false
 
     created () {
-      this.fetchDataVersions()
+      this.fetchDataVersions().then(() => { this.isDataLoaded = true })
     }
   }
 </script>
@@ -27,8 +28,8 @@
 <template lang="pug">
   v-app(:dark="isDarkSide")
     MainToolbar
-    FragmentModal
-    v-content(:class="[ $style.content, $style.noPadding, { [$style.darkSide]: isDarkSide } ]")
+    FragmentModal(v-if="isDataLoaded")
+    v-main(:class="[ $style.content, $style.noPadding, { [$style.darkSide]: isDarkSide } ]")
       v-alert(v-if="!hasInternet", type="error", :class="$style.alert") Warning: Could not connect to database. Check your internet connection.
       v-container(fluid, :class="[$style.noPadding, { [$style.alertMargin]: !hasInternet }]")
         router-view

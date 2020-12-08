@@ -1,7 +1,7 @@
 import { Module, VuexModule, MutationAction } from 'vuex-module-decorators'
 import { CharacterResult, RawCharacterType } from '@/types/rawCharacterTypes'
 import baseCharacter from './CharacterEngine/baseCharacter.json'
-import { findIndex, isEmpty, isEqual } from 'lodash'
+import { findIndex, isEmpty, isEqual, debounce } from 'lodash'
 import generateCharacter from './CharacterEngine/generateCharacter'
 import { CharacterValidationType } from '@/types/utilityTypes'
 import builderVersion from '@/version'
@@ -28,14 +28,40 @@ function stateOf (context: any) {
 function rootOf (myThis: any) {
   return (myThis as {
     rootGetters: {
-      'authentication/axiosHeader': AxiosRequestConfig
-    },
-    rootState: {
-      authentication: {
-        accessToken: string
-      }
+      'authentication/axiosHeader': AxiosRequestConfig,
+      'authentication/isLoggedIn': boolean
     }
   })
+}
+
+const saveCharacterToDB = debounce(async (
+  newCharacter: RawCharacterType,
+  header: AxiosRequestConfig,
+  myThis: any
+): Promise<void> => {
+  const characterResult = (await axios.post(
+    `${process.env.VUE_APP_sw5eapiurl}/api/character`,
+    {
+      jsonData: JSON.stringify(newCharacter),
+      id: newCharacter.id
+    },
+    header
+  )).data
+  myThis.dispatch('saveCharacterLocally', {
+    ...JSON.parse(characterResult.jsonData),
+    userId: characterResult.userId,
+    id: characterResult.id
+  })
+}, 1000)
+
+const updateCharacterList = (characters: RawCharacterType[], newCharacter: RawCharacterType) => {
+  let index = findIndex(characters, ({ id, localId }) => id && newCharacter.id
+    ? newCharacter.id === id
+    : localId && newCharacter.localId ? newCharacter.localId === localId : false
+  )
+  if (index < 0) index = characters.length
+  characters.splice(index, 1, newCharacter)
+  return characters
 }
 
 @Module({ namespaced: true, name: 'character' })
@@ -118,48 +144,38 @@ export default class Character extends VuexModule {
 
   @MutationAction({ mutate: ['characters'] })
   async saveCharacter (newCharacter: RawCharacterType) {
-    const characters = stateOf(this).characters
-    if (rootOf(this).rootState.authentication.accessToken) {
-      const characterResult = (await axios.post(
-        `${process.env.VUE_APP_sw5eapiurl}/api/character`,
-        {
-          jsonData: JSON.stringify({
-            ...newCharacter,
-            builderVersion
-          }),
-          id: newCharacter.id
-        },
-        rootOf(this).rootGetters['authentication/axiosHeader']
-      )).data
-      newCharacter = {
-        ...JSON.parse(characterResult.jsonData),
-        userId: characterResult.userId,
-        id: characterResult.id
-      }
-      let index = findIndex(characters, { id: newCharacter.id })
-      if (index < 0) index = characters.length
-      characters.splice(index, 1, newCharacter)
-      return { characters }
-    } else {
-        const index = findIndex(characters, { id: newCharacter.id })
-        characters.splice(index, 1, newCharacter)
-        return { characters }
+    newCharacter = { ...newCharacter, builderVersion, changedAt: Date.now() }
+    if (rootOf(this).rootGetters['authentication/isLoggedIn']) {
+      saveCharacterToDB(newCharacter, rootOf(this).rootGetters['authentication/axiosHeader'], this)
     }
+    return { characters: updateCharacterList(stateOf(this).characters, newCharacter) }
+  }
+
+  @MutationAction({ mutate: ['characters'] })
+  async saveCharacterLocally (newCharacter: RawCharacterType) {
+    return { characters: updateCharacterList(stateOf(this).characters, {
+      ...newCharacter,
+      builderVersion,
+      changedAt: Date.now()
+    }) }
   }
 
   @MutationAction({ mutate: ['characters'] })
   async fetchCharacters () {
-    if (rootOf(this).rootState.authentication.accessToken) {
+    if (rootOf(this).rootGetters['authentication/isLoggedIn']) {
       const characterResults: CharacterResult[] = (await axios.get(
         `${process.env.VUE_APP_sw5eapiurl}/api/character`,
         rootOf(this).rootGetters['authentication/axiosHeader']
       )).data
 
-      return { characters: characterResults.map(({ id, userId, jsonData }) => ({
-        ...JSON.parse(jsonData) as RawCharacterType,
-        id,
-        userId
-      })) }
+      return { characters: [
+        ...characterResults.map(({ id, userId, jsonData }) => ({
+          ...JSON.parse(jsonData) as RawCharacterType,
+          id,
+          userId
+        })),
+        ...stateOf(this).characters.filter(({ id }) => !id)
+      ].slice(0, 20) }
     } else {
       return { characters: stateOf(this).characters }
     }
@@ -167,7 +183,7 @@ export default class Character extends VuexModule {
 
   @MutationAction({ mutate: ['characters'] })
   async deleteCharacter (character: RawCharacterType) {
-    if (rootOf(this).rootState.authentication.accessToken) {
+    if (rootOf(this).rootGetters['authentication/isLoggedIn']) {
       await axios.delete(
         `${process.env.VUE_APP_sw5eapiurl}/api/character/${character.id}`,
         rootOf(this).rootGetters['authentication/axiosHeader']

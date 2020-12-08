@@ -7,15 +7,20 @@
   import { saveAs } from 'file-saver'
   import { camelCase, map, mapValues, chain, snakeCase } from 'lodash'
   import { isEnhancedItem } from '@/types/lootTypes'
+  import { CharacterValidationType } from '@/types/utilityTypes'
+  import Roll20Instructions from '@/components/Roll20Instructions.vue'
+  import makeRoll20ID from '@/utilities/makeRoll20ID'
 
   @Component({
     components: {
-      MyDialog
+      MyDialog,
+      Roll20Instructions
     }
   })
-  export default class CharacterSheetExportToRoll20 extends Vue {
+  export default class CharacterExportToRoll20 extends Vue {
     @Prop(Object) readonly completeCharacter!: CompleteCharacterType;
     @Prop(Object) readonly rawCharacter!: RawCharacterType
+    @Prop(Object) readonly characterValidation!: CharacterValidationType
     isOpen = false
 
     get jsonData (): Roll20CharacterType {
@@ -46,7 +51,7 @@
 
       const powers = allPowers.map(power => {
         const levelText = power.level ? power.level : 'cantrip'
-        const header = `repeating_power-${levelText}_${this.makeId()}_`
+        const header = `repeating_power-${levelText}_${makeRoll20ID()}_`
         const ability = power.powerType === 'Force' ? ({
             Universal: 'power',
             Light: '@{wisdom_mod}+',
@@ -67,7 +72,7 @@
       })
 
       const equipment = c.equipment.map(equipment => {
-        const header = 'repeating_inventory_' + this.makeId() + '_item'
+        const header = 'repeating_inventory_' + makeRoll20ID() + '_item'
         return {
           [header + 'name']: equipment.name,
           [header + 'weight']: !isCharacterEnhancedItem(equipment) && isCharacterValidLootType(equipment) ? equipment.weight : 0,
@@ -76,7 +81,7 @@
       })
 
       const languages = [ ...c.languages, ...c.customLanguages ].map(proficiency => {
-        const header = 'repeating_proficiencies_' + this.makeId() + '_'
+        const header = 'repeating_proficiencies_' + makeRoll20ID() + '_'
         return {
           [header + 'name']: proficiency,
           [header + 'options-flag']: '0'
@@ -85,7 +90,7 @@
 
       const proficiencies = [ ...c.proficiencies, ...c.customProficiencies ].map(proficiency => {
         if (proficiency.type === 'tool') {
-          const header = 'repeating_tool_' + this.makeId() + '_'
+          const header = 'repeating_tool_' + makeRoll20ID() + '_'
           const proficiencyLevel = isCustomProficiency(proficiency) ? proficiency.proficiencyLevel : 'proficiency'
           return {
             [header + 'toolname']: proficiency.name,
@@ -99,7 +104,7 @@
             [header + 'options-flag']: '0'
           }
         } else {
-          const header = 'repeating_proficiencies_' + this.makeId() + '_'
+          const header = 'repeating_proficiencies_' + makeRoll20ID() + '_'
           return {
             [header + 'name']: proficiency.name,
             [header + 'prof_type']: proficiency.type ? proficiency.type.toUpperCase() : 'OTHER',
@@ -108,10 +113,10 @@
         }
       })
 
-      const bgheader = 'repeating_traits_' + this.makeId() + '_'
+      const bgheader = 'repeating_traits_' + makeRoll20ID() + '_'
       const traits = [
         ...c.combatFeatures.map(combatFeature => {
-          const header = 'repeating_traits_' + this.makeId() + '_'
+          const header = 'repeating_traits_' + makeRoll20ID() + '_'
           return {
             [header + 'name']: combatFeature.name,
             [header + 'source']: 'Feat',
@@ -128,7 +133,7 @@
           [bgheader + 'display_flag']: 'on'
         },
         ...c.customFeatures.map(customFeature => {
-          const header = 'repeating_traits_' + this.makeId() + '_'
+          const header = 'repeating_traits_' + makeRoll20ID() + '_'
           return {
             [header + 'name']: customFeature.name,
             [header + 'source']: 'Other',
@@ -140,7 +145,7 @@
       ]
 
       const attacks = c.weapons.map(weapon => {
-        const header = 'repeating_attack_' + this.makeId() + '_'
+        const header = 'repeating_attack_' + makeRoll20ID() + '_'
         const hasDice = weapon.damageNumberOfDice && weapon.damageDieType
         const damage = hasDice ? weapon.damageNumberOfDice + 'd' + weapon.damageDieType : '1'
         const range = weapon.properties[0] !== null && (weapon.properties as string[]).find(property => property.includes('range'))
@@ -267,16 +272,6 @@
       }
     }
 
-    makeId (): string {
-      let result = '-M'
-      const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789'
-      const charactersLength = characters.length
-      for (var i = 0; i < 18; i++) {
-          result += characters.charAt(Math.floor(Math.random() * charactersLength))
-      }
-      return result
-    }
-
     saveToFile () {
       try {
         saveAs(
@@ -294,27 +289,25 @@
 </script>
 
 <template lang="pug">
-  MyDialog(v-model="isOpen")
+  v-tooltip(v-if="characterValidation.code !== 0", top)
     template(v-slot:activator="{ on }")
-      v-btn(v-on="on") Export to Roll20
+      span(v-on="on")
+        v-btn(disabled, :class="$style.button") Export to Roll20
+    div {{ characterValidation.message }}
+  MyDialog(v-else, v-model="isOpen")
+    template(v-slot:activator="{ on }")
+      v-btn(:class="$style.button", v-on="on") Export to Roll20
     template(#title) Export Character to Roll 20
     template(#text)
-      h2.mt-3 Instructions
-      div.caption You must be the GM of the campaign to import a character
-      ol
-        li Ensure that the Roll 20 Campaign is using the
-          u.pl-1
-            a(href="https://wiki.roll20.net/StarWars5E-Sheet", target="_blank") SW5E character sheet
-        li Install #[strong Firefox] and the
-          u.pl-1
-            a(href="https://addons.mozilla.org/en-US/firefox/addon/roll20-enhancement-suite/", target="_blank") VTT Enhancement Suite
-        li Click #[span.primary--text Save File] below to download the character File
-        li Go to the Roll 20 campaign and open the journal tab
-        li At the top of the journal tab, under "Import Character", click "Browse"
-        li Open the file you downloaded from this pop-up
-        li Click the "Import Character" button that appears once the file is opened
+      Roll20Instructions
     template(#actions)
       v-btn.mt-3(color="primary", @click="saveToFile") Save file
       v-spacer
       v-btn(color="primary", text, @click="isOpen=false") Close
 </template>
+
+<style module lang="scss">
+  .button {
+    width: 100%;
+  }
+</style>

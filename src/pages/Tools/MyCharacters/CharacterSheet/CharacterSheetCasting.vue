@@ -112,7 +112,7 @@
         )
           div.d-flex
             h4 Tech Points
-            div(v-if="techCasting.maxPoints === 0").caption.ml-3 None
+            div(v-if="techCasting.maxPoints === 0").text-caption.ml-3 None
         CharacterSheetTicker(
           v-if="techCasting.maxPoints > 10",
           :current="Math.max(0, techCasting.maxPoints - techCasting.pointsUsed)",
@@ -182,7 +182,7 @@
         )
           div.d-flex
             h4 Force Points
-            div(v-if="forceCasting.maxPoints === 0").caption.ml-3 None
+            div(v-if="forceCasting.maxPoints === 0").text-caption.ml-3 None
         CharacterSheetTicker(
           v-if="forceCasting.maxPoints > 10",
           :current="Math.max(0, forceCasting.maxPoints - forceCasting.pointsUsed)",

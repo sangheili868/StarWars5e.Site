@@ -27,6 +27,7 @@
   const skillsModule = namespace('skills')
   const conditionsModule = namespace('conditions')
   const enhancedItemsModule = namespace('enhancedItems')
+  const authenticationModule = namespace('authentication')
 
   @Component({
     components: {
@@ -38,13 +39,16 @@
   })
   export default class Characters extends Vue {
     @Prop(String) readonly characterId!: string
+    @Prop(String) readonly isNew!: string
     @characterModule.State characters!: RawCharacterType[]
     @characterModule.Getter generateCompleteCharacter!: (rawCharacter: RawCharacterType) => CompleteCharacterType | null
     @characterModule.Getter getCharacterById!: (characterId: string) => RawCharacterType | undefined
     @characterModule.Getter getIsEmptyCharacter!: (character: RawCharacterType | undefined) => boolean
     @characterModule.Getter getCharacterValidation!: (character: RawCharacterType | undefined) => CharacterValidationType
     @characterModule.Action saveCharacter!: (newCharacter: RawCharacterType) => void
+    @characterModule.Action saveCharacterLocally!: (newCharacter: RawCharacterType) => void
     @characterModule.Action deleteCharacter!: (character: RawCharacterType) => Promise<any>
+    @authenticationModule.Getter isLoggedIn!: boolean
 
     @classesModule.State classes!: ClassType[]
     @classesModule.Action fetchClasses!: () => void
@@ -84,9 +88,13 @@
         this.fetchConditions(),
         this.fetchEnhancedItems()
       ]).then(() => {
-        if (!this.character) window.alert('Character not found: ' + this.characterId)
+        if (!this.character) {
+          window.alert('Character not found')
+          this.$router.push('/tools/mycharacters')
+        }
         this.hasFetchedData = true
         this.isEditing = !this.characterValidation.isValid
+        this.isDirty = !this.isLoggedIn || this.isNew === 'true'
         this.currentStep = this.getIsEmptyCharacter(this.character) ? 0 : 1
       })
     }
@@ -115,23 +123,35 @@
 
     goToSheet () {
       this.isEditing = false
+      if (this.isLoggedIn) this.handleSaveCharacter()
+      else if (this.character) this.saveCharacterLocally(this.character)
       window.scrollTo(0, 0)
     }
 
+    saveCharacterIfDone (newCharacter: RawCharacterType) {
+      if (this.isEditing || !this.isLoggedIn) {
+        this.isDirty = true
+        this.saveCharacterLocally(newCharacter)
+      } else {
+        this.isDirty = false
+        this.saveCharacter(newCharacter)
+      }
+    }
+
     updateCharacter (newCharacter: RawCharacterType) {
-      this.saveCharacter(merge({}, this.character, newCharacter))
+      this.saveCharacterIfDone(merge({}, this.character, newCharacter))
     }
 
     replaceCharacterProperty ({ path, property }: { path: string, property: any }) {
       let characterCopy = merge({}, this.character)
       set(characterCopy, path, property)
-      this.saveCharacter(characterCopy)
+      this.saveCharacterIfDone(characterCopy)
     }
 
     replaceCharacterProperties (replacements: { path: string, property: any }[]) {
       let characterCopy = merge({}, this.character)
       replacements.forEach(({ path, property }) => set(characterCopy, path, property))
-      this.saveCharacter(characterCopy)
+      this.saveCharacterIfDone(characterCopy)
     }
 
     deleteCharacterProperty ({ path, index }: { path: string, index: number | string }) {
@@ -139,6 +159,13 @@
       let property = omit(oldProperty, index)
       if (Array.isArray(oldProperty)) property = Object.values(property)
       this.replaceCharacterProperty({ path, property })
+    }
+
+    handleSaveCharacter () {
+      if (this.character) {
+        this.isDirty = false
+        this.saveCharacter(this.character)
+      }
     }
 
     handleDeleteCharacter () {
@@ -150,30 +177,21 @@
 </script>
 
 <template lang="pug">
-  div(v-if="hasFetchedData")
+  div(v-if="hasFetchedData && character")
     vue-headful(v-bind="{ title }")
-    v-banner(
-      :value="isDirty",
-      sticky,
-      color="white",
-      icon-color="red",
-      :icon="$vuetify.breakpoint.name === 'xs' ? '' : 'fa-exclamation'",
-      mobile-break-point="600",
-      :class="$style.banner"
-    ).white--text.mb-3
-      div.d-flex.align-center.justify-space-around
-        div Character has unsaved changes!
     BackButton(label="My Characters")
     CharacterBuilder(
       v-if="isEditing",
-      v-bind="{ character, characterValidation, currentStep, classes, archetypes, equipment, powers, feats, backgrounds, species }",
+      v-bind="{ character, completeCharacter, characterValidation, currentStep, classes, archetypes, equipment, powers, feats, backgrounds, species, isDirty }",
       v-on="{ updateCharacter, deleteCharacterProperty, replaceCharacterProperty, replaceCharacterProperties, goToStep }",
       @deleteCharacter="handleDeleteCharacter",
-      @viewSheet="goToSheet"
+      @saveCharacter="handleSaveCharacter",
+      @viewSheet="goToSheet",
+      @setClean="isDirty=false"
     )
     CharacterSheet(
       v-else-if="completeCharacter",
-      v-bind="{ completeCharacter }",
+      v-bind="{ completeCharacter, characterValidation, isDirty }",
       :rawCharacter="character",
       v-on="{ updateCharacter, deleteCharacterProperty, replaceCharacterProperty, replaceCharacterProperties, goToStep }",
       @deleteCharacter="handleDeleteCharacter",
@@ -181,23 +199,3 @@
     )
   Loading(v-else)
 </template>
-
-<style module lang="scss">
-  @import '@/assets/styles/colors.scss';
-
-  .banner {
-    z-index: 4 !important;
-    background-color: $alert !important;
-    border-radius: 10px !important;
-  }
-</style>
-
-<style lang="scss">
-  .v-banner.v-banner--is-mobile .v-banner__wrapper {
-    padding: 5px;
-  }
-
-  .v-banner__text {
-    flex-grow: 1;
-  }
-</style>

@@ -4,7 +4,7 @@ import axios from 'axios'
   2. On page load, compare dataVersiontimeout to current date, and fetch if out of date.
   3. Next on page load, for each table needed by page, check version and fetch if cache is empty or out of date
 */
-export default async function fetchFromCache (context: any, dataName: string, endpoint: string) {
+export default async function fetchFromCache (context: any, dataName: string, endpoint: string, dbName?: string) {
   let data = context.state[dataName]
   let cachedVersion = context.state.cachedVersion
   const dataVersions = context.rootState.dataVersions
@@ -12,7 +12,10 @@ export default async function fetchFromCache (context: any, dataName: string, en
     await context.dispatch('dataVersions/fetchDataVersions', null, { root: true })
   }
   try {
-    const dataVersion = dataVersions.dataVersions.find(({ name }: { name: string }) => name === dataName)
+    const dataVersion = dataVersions.dataVersions.find(({ name }: { name: string }) =>
+      name === dataName ||
+      (dbName && name === dbName)
+    )
     if (!data || !dataVersion || (context.state.cachedVersion < dataVersion.version)) {
       console.info(`Fetching ${dataName} from database`)
       data = (await axios.get(`${process.env.VUE_APP_sw5eapiurl}/api/${endpoint}`)).data

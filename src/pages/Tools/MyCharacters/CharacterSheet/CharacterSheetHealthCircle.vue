@@ -33,7 +33,7 @@
     )
       div(:class="$style.circle")
         h2 {{ current }}
-          span(v-if="temporary").caption.text--accent-3.green--text.ml-1 ({{ temporary }})
+          span(v-if="temporary").text-caption.text--accent-3.green--text.ml-1 ({{ temporary }})
         v-divider(width="80", :class="$style.divider")
         h2 {{ maximum }}
     v-progress-circular(
@@ -43,7 +43,7 @@
       size="100",
       :rotate="360 * current / maximum - 90",
       width="10"
-    )
+    ).greenCircle
 </template>
 
 <style module lang="scss">
@@ -57,5 +57,11 @@
     &.red {
       position: absolute;
     }
+  }
+</style>
+
+<style lang="scss">
+  .greenCircle .v-progress-circular__underlay {
+    stroke: transparent;
   }
 </style>

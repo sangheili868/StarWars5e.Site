@@ -25,7 +25,7 @@
       v-expansion-panel-header.pa-3
         slot(v-bind="{ feature }")
           h4 {{ feature.name }}
-      v-expansion-panel-content.ma-2.caption
+      v-expansion-panel-content.ma-2.text-caption
         CheckList(
           v-if="feature.usage",
           :current="feature.usage.used",

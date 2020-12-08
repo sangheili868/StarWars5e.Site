@@ -80,7 +80,7 @@
         v-expansion-panel-header
           div.d-flex.align-center
             h4 {{ getClassTitle(myClass) }}
-            span(v-if="(index === 0) && currentClasses.length > 1").grey--text.pl-3.caption Starting Class
+            span(v-if="(index === 0) && currentClasses.length > 1").grey--text.pl-3.text-caption Starting Class
         v-expansion-panel-content
           CharacterBuilderClass(
             v-bind="{ character, myClass, classes, index, isFixedHitPoints, characterAdvancements }",

@@ -152,7 +152,7 @@
       label="Choose a feat",
       @change="handleChangeBackgroundFeat"
     )
-    VueMarkdown(:source="featText").caption
+    VueMarkdown(:source="featText").text-caption
     h3.mb-3 Characteristics
     v-text-field(
       v-for="characteristic in characteristicsList",

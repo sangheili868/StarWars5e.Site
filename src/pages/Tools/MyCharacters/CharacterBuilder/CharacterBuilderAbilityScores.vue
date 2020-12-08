@@ -59,7 +59,7 @@
 <template lang="pug">
   div
     h1 Determine Ability Scores
-    div.caption.mb-5 Choose a method by clicking the #[v-icon(x-small) fa-cog] icon above
+    div.text-caption.mb-5 Choose a method by clicking the #[v-icon(x-small) fa-cog] icon above
     div(v-if="abilityScoreMethod === 'Point Buy'")
       div #[strong Remaining Points:] {{ remainingPoints}}
     div(v-if="abilityScoreMethod === 'Manual'").d-flex.flex-wrap

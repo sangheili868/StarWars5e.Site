@@ -5,27 +5,42 @@
   import CharacterSheetHealth from './CharacterSheetHealth.vue'
   import CharacterSheetExperience from './CharacterSheetExperience.vue'
   import CharacterSheetConditions from './CharacterSheetConditions.vue'
-  import CharacterSheetMenu from './CharacterSheetMenu.vue'
+  import CharacterMenu from '../CharacterMenu.vue'
   import CharacterSheetMenuButton from './CharacterSheetMenuButton.vue'
+  import MyDialog from '@/components/MyDialog.vue'
+  import { CharacterValidationType } from '@/types/utilityTypes'
+  import { namespace } from 'vuex-class'
+
+  const authenticationModule = namespace('authentication')
 
   @Component({
     components: {
       CharacterSheetHealth,
       CharacterSheetExperience,
       CharacterSheetConditions,
-      CharacterSheetMenu,
-      CharacterSheetMenuButton
+      CharacterMenu,
+      CharacterSheetMenuButton,
+      MyDialog
     }
   })
   export default class CharacterSheetTop extends Vue {
     @Prop(Object) readonly completeCharacter!: CompleteCharacterType
     @Prop(Object) readonly rawCharacter!: RawCharacterType
+    @Prop(Object) readonly characterValidation!: CharacterValidationType
+    @Prop(Boolean) readonly isDirty!: boolean
+    @authenticationModule.Getter isLoggedIn!: boolean
+    isMenuOpen = false
+
+    clearAllTweaks () {
+      this.$emit('replaceCharacterProperty', { path: 'tweaks', property: {} })
+      window.alert('All tweaks cleared!')
+    }
   }
 </script>
 
 <template lang="pug">
   v-card.px-3.d-flex.justify-space-around.flex-wrap.align-center
-    v-img(:src="completeCharacter.image", contain, max-height="90", max-width="90", min-width="100").my-2
+    v-img(v-if="completeCharacter.image", :src="completeCharacter.image", contain, max-height="90", max-width="90", min-width="100").my-2
     div.text-left
       h1 {{ completeCharacter.name }}
       h5 {{ completeCharacter.species }} {{ completeCharacter.classText }}
@@ -42,12 +57,26 @@
     )
     v-card.d-flex.flex-column.align-start.mb-2.mx-3
       CharacterSheetMenuButton(text="Edit Character", icon="edit", @click="$emit('goToStep', 1)")
-      CharacterSheetMenu(
-        v-bind="{ completeCharacter, rawCharacter }",
-        @setClean="$emit('setClean')",
-        @replaceCharacterProperty="payload => $emit('replaceCharacterProperty', payload)"
-        @deleteCharacter="$emit('deleteCharacter')"
-      )
+      MyDialog(v-model="isMenuOpen")
+        template(v-slot:activator="{ on }")
+          v-badge(:value="isDirty", color="primary", overlap)
+            template(v-slot:badge)
+              v-icon.white--text fa-exclamation
+            CharacterSheetMenuButton(text="Menu", icon="bars", :on="on")
+        template(#title) Character Sheet Menu
+        template(#text)
+          CharacterMenu(
+            v-bind="{ completeCharacter, rawCharacter, characterValidation }",
+            @setClean="$emit('setClean')",
+            @deleteCharacter="$emit('deleteCharacter')"
+          )
+            div(v-if="isDirty && !isLoggedIn").primary--text.d-flex.flex-wrap.justify-space-around.mt-2
+              div Character has unsaved changes!
+              div Login, export to file, or copy text to save
+            v-btn(color="red", @click="clearAllTweaks").white--text.mt-2 Clear All Tweaks
+        template(#actions)
+          v-spacer
+          v-btn(color="primary", text, @click="isMenuOpen=false") Close
       CharacterSheetConditions(
         :myConditions="completeCharacter.conditions",
         :exhaustion="completeCharacter.exhaustion",

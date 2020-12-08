@@ -12,7 +12,7 @@
   div.d-flex.align-center
     v-btn(icon, small, elevation="4" color="primary", :disabled="current <= 0" @click="$emit('changeCount', current - 1)").ma-2
       v-icon fa-minus
-    h5(:class="$style.count").title {{ current }} / {{ max }}
+    h5(:class="$style.count").text-h6 {{ current }} / {{ max }}
     v-btn(icon, small, elevation="4" color="primary", :disabled="current >= max" @click="$emit('changeCount', current + 1)").ma-2
       v-icon fa-plus
 </template>

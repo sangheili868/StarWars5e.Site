@@ -27,7 +27,7 @@ export default {
     {
       path: '/tools/mycharacters/:characterId',
       component: Characters,
-      props: true,
+      props: ({ params, query }: Route) => ({ ...params, ...query }),
       meta: {
         title: 'Character Creator'
       }

@@ -41,7 +41,7 @@ function getMulticlassDice (
       const archetypeData = myArchetypes.find(({ name }) => name === get(multiclassClass, 'archetype.name'))
       const archetypeGains = (archetypeData ? chain(archetypeData.leveledTable)
         .pickBy((fields, level) => parseInt(level) <= multiclassClass.levels)
-        .map(fields => fields[1].value)
+        .map(fields => fields ? fields[1].value : 0)
         .uniq()
         .value()
         .length : 0)

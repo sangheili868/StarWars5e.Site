@@ -1,6 +1,25 @@
 export default '0.4.34'
 
 /*
+0.5.0
+- Added login button
+- Automatically save characters to the cloud while logged in
+- Allow up to 20 characters saved to an account
+- Changed "My Content" to "Tools" and added My Characters page
+
+0.4.38
+- Upgrade to Vuetify version 2.3.19 to fix an issue where screen readers don't read contents of dropdown menus (reported by @zheadings#6134)
+
+0.4.37
+- Minor visual improvements to monster power modal
+
+0.4.36
+- Added links that open modals for each power in monster spellcasting blocks.
+
+0.4.35
+- Added button to export monster to roll20
+- Fixed bug where backgrounds in the PHB chapter open to a blank page found by @SirFallout
+
 0.4.34
 - Added raw view of Expanded Content files. Can be found under Rules -> Expanded Content
 

@@ -67,7 +67,7 @@
         v-btn(color="primary", @click="print").mb-5
           v-icon.mr-2 fa-print
           | Print
-      div.d-print-none.caption.text-left Known Issues:
+      div.d-print-none.text-caption.text-left Known Issues:
         ul
           li Fields have limited space and can be cut off (especially Features)
           li Size and vision are missing

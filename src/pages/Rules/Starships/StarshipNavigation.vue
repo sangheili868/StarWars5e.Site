@@ -15,12 +15,12 @@
         route: '/rules/sotg'
       },
       {
-        title: 'Step-By-Step Starships',
+        title: '1. Step-By-Step Starships',
         icon: 'fa-pencil-ruler',
         route: '/rules/sotg/stepByStep'
       },
       {
-        title: 'Deployments',
+        title: '2. Deployments',
         icon: 'fa-user-friends',
         route: '/rules/sotg/deployments',
         items: [
@@ -52,7 +52,7 @@
         ]
       },
       {
-        title: 'Starships',
+        title: '3. Starships',
         icon: 'fa-rocket',
         route: '/rules/sotg/starshipSizes',
         items: [
@@ -83,42 +83,42 @@
         ]
       },
       {
-        title: 'Modifications',
+        title: '4. Modifications',
         icon: 'fa-hammer',
         route: '/rules/sotg/modifications'
       },
       {
-        title: 'Equipment',
+        title: '5. Equipment',
         icon: 'fa-tools',
         route: '/rules/sotg/equipment'
       },
       {
-        title: 'Customization Options',
+        title: '6. Customization Options',
         icon: 'fa-edit',
         route: '/rules/sotg/customization'
       },
       {
-        title: 'Using Ability Scores',
+        title: '7. Using Ability Scores',
         icon: 'fa-dice-d20',
         route: '/rules/sotg/abilityScores'
       },
       {
-        title: 'Adventuring',
+        title: '8. Adventuring',
         icon: 'fa-plane',
         route: '/rules/sotg/adventuring'
       },
       {
-        title: 'Combat',
+        title: '9. Combat',
         icon: 'fa-meteor',
         route: '/rules/sotg/combat'
       },
       {
-        title: 'Generating Encounters',
+        title: '10. Generating Encounters',
         icon: 'fa-dna',
         route: '/rules/sotg/generatingEncounters'
       },
       {
-        title: 'Conditions',
+        title: 'A. Conditions',
         icon: 'fa-biohazard',
         route: '/rules/sotg/conditions'
       },

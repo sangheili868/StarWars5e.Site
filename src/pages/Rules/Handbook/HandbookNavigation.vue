@@ -38,12 +38,12 @@
           route: '/rules/phb/whatsDifferent'
         },
         {
-          title: 'Step-By-Step Characters',
+          title: '1. Step-By-Step Characters',
           icon: 'fa-male',
           route: '/rules/phb/stepByStep'
         },
         {
-          title: 'Species',
+          title: '2. Species',
           icon: 'fa-users',
           route: '/rules/phb/species',
           items: this.species.filter(({ contentType }) => contentType === 'Core').map(({ name }) => ({
@@ -53,7 +53,7 @@
           }))
         },
         {
-          title: 'Classes',
+          title: '3. Classes',
           icon: 'fab fa-galactic-republic',
           route: '/rules/phb/classes',
           items: [
@@ -110,37 +110,37 @@
           ]
         },
         {
-          title: 'Backgrounds',
+          title: '4. Backgrounds',
           icon: 'fa-briefcase',
           route: '/rules/phb/backgrounds'
         },
         {
-          title: 'Equipment',
+          title: '5. Equipment',
           icon: 'fa-tools',
           route: '/rules/phb/equipment'
         },
         {
-          title: 'Customization Options',
+          title: '6. Customization Options',
           icon: 'fa-edit',
           route: '/rules/phb/customization'
         },
         {
-          title: 'Using Ability Scores',
+          title: '7. Using Ability Scores',
           icon: 'fa-dice-d20',
           route: '/rules/phb/abilityScores'
         },
         {
-          title: 'Adventuring',
+          title: '8. Adventuring',
           icon: 'fa-rocket',
           route: '/rules/phb/adventuring'
         },
         {
-          title: 'Combat',
+          title: '9. Combat',
           icon: 'fa-fist-raised',
           route: '/rules/phb/combat'
         },
         {
-          title: 'Casting',
+          title: '10. Casting',
           icon: 'fa-bolt',
           route: '/rules/phb/casting',
           items: [
@@ -157,12 +157,12 @@
           ]
         },
         {
-          title: 'Conditions',
+          title: 'A. Conditions',
           icon: 'fa-biohazard',
           route: '/rules/phb/conditions'
         },
         {
-          title: 'Variant Rules',
+          title: 'B. Variant Rules',
           icon: 'fa-cogs',
           route: '/rules/phb/variantRules'
         },

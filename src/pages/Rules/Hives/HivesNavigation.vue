@@ -15,42 +15,42 @@
         route: '/rules/wh'
       },
       {
-        title: 'Step-By-Step Factions',
+        title: '1. Step-By-Step Factions',
         icon: 'fa-beer',
         route: '/rules/wh/stepByStepFactions'
       },
       {
-        title: 'Entertainment and Downtime',
+        title: '2. Entertainment and Downtime',
         icon: 'fa-pencil-ruler',
         route: '/rules/wh/downtime'
       },
       {
-        title: 'Factions and Membership',
+        title: '3. Factions and Membership',
         icon: 'fa-globe',
         route: '/rules/wh/factionsAndMembership'
       },
       {
-        title: 'Using Ability Scores',
+        title: '4. Using Ability Scores',
         icon: 'fa-dice-d20',
         route: '/rules/wh/abilityScores'
       },
       {
-        title: 'Equipment',
+        title: '5. Equipment',
         icon: 'fa-shopping-bag',
         route: '/rules/wh/equipment'
       },
       {
-        title: 'Customization Options',
+        title: '6. Customization Options',
         icon: 'fa-tools',
         route: '/rules/wh/customizationOptions'
       },
       {
-        title: 'Enhanced Items',
+        title: '7. Enhanced Items',
         icon: 'fa-hat-wizard',
         route: '/rules/wh/enhancedItems'
       },
       {
-        title: 'Tool Proficiencies',
+        title: '8. Tool Proficiencies',
         icon: 'fa-mortar-pestle',
         route: '/rules/wh/toolProficiencies'
       },

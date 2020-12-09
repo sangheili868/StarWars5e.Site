@@ -1,11 +1,15 @@
 export default '0.4.34'
 
 /*
+
 0.5.0
 - Added login button
-- Automatically save characters to the cloud while logged in
+- Save characters to the cloud while logged in
 - Allow up to 20 characters saved to an account
 - Changed "My Content" to "Tools" and added My Characters page
+
+0.4.39
+- Add Ch. # to each book chapter in the navigation menus
 
 0.4.38
 - Upgrade to Vuetify version 2.3.19 to fix an issue where screen readers don't read contents of dropdown menus (reported by @zheadings#6134)

@@ -3,6 +3,8 @@ import { Module, VuexModule, MutationAction } from 'vuex-module-decorators'
 import * as msalBrowser from '@azure/msal-browser'
 import { AxiosRequestConfig } from 'axios'
 
+const domain = process.env.VUE_APP_sw5eauthdomain
+
 export const authConfig = {
   names: {
     signUpSignIn: 'B2C_1_signupin',
@@ -11,27 +13,27 @@ export const authConfig = {
   },
   authorities: {
     signUpSignIn: {
-      authority: 'https://sw5edev.b2clogin.com/sw5edev.onmicrosoft.com/B2C_1_signupin'
+      authority: `https://${domain}.b2clogin.com/${domain}.onmicrosoft.com/B2C_1_signupin`
     },
     forgotPassword: {
-        authority: 'https://sw5edev.b2clogin.com/sw5edev.onmicrosoft.com/B2C_1_reset'
+        authority: `https://${domain}.b2clogin.com/${domain}.onmicrosoft.com/B2C_1_reset`
     }
     // editProfile: {
     //     authority: "https://sw5edev.b2clogin.com/sw5edev.onmicrosoft.com/B2C_1_edit_profile"
     // }
   },
-  authorityDomain: 'sw5edev.b2clogin.com',
+  authorityDomain: `${domain}.b2clogin.com`,
   scopes: [
-    'https://sw5edev.onmicrosoft.com/api/api.readCharacterData',
-    'https://sw5edev.onmicrosoft.com/api/api.writeCharacterData',
+    `https://${domain}.onmicrosoft.com/api/api.readCharacterData`,
+    `https://${domain}.onmicrosoft.com/api/api.writeCharacterData`,
     'offline_access'
   ]
 }
 
 const msalConfig = {
   auth: {
-    clientId: 'd172ddd0-140a-4fab-b9b1-82241d7c3f03',
-    redirectUri: 'http://localhost:8080/profile',
+    clientId: `${process.env.VUE_APP_clientid}`,
+    redirectUri: `${process.env.VUE_APP_baseurl}/profile`,
     knownAuthorities: [authConfig.authorityDomain],
     authority: authConfig.authorities.signUpSignIn.authority,
     requireAuthOnInitialize: false

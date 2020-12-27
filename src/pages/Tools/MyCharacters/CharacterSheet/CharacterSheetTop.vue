@@ -70,7 +70,7 @@
             @setClean="$emit('setClean')",
             @deleteCharacter="$emit('deleteCharacter')"
           )
-            div(v-if="isDirty && !isLoggedIn").primary--text.d-flex.flex-wrap.justify-space-around.mt-2
+            div(v-if="isDirty").primary--text.d-flex.flex-wrap.justify-space-around.mt-2
               div Character has unsaved changes!
               div Login, export to file, or copy text to save
             v-btn(color="red", @click="clearAllTweaks").white--text.mt-2 Clear All Tweaks

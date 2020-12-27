@@ -1,6 +1,9 @@
-export default '0.5.1'
+export default '0.5.2'
 
 /*
+0.5.2
+- Fixed issue where a ! icon appears next to Menu, but there is no message when it is clicked on.
+
 0.5.1
 - Fixed issue with images not loading
 - Added error message when image fails to load

@@ -94,7 +94,7 @@
         }
         this.hasFetchedData = true
         this.isEditing = !this.characterValidation.isValid
-        this.isDirty = !this.isLoggedIn || this.isNew === 'true'
+        this.isDirty = !this.isLoggedIn || (this.isNew === 'true' && this.isEditing)
         this.currentStep = this.getIsEmptyCharacter(this.character) ? 0 : 1
       })
     }

@@ -50,7 +50,7 @@
     v-btn(@click="saveToFile").mt-2 Export To File
     v-btn(@click="copyCharacter").mt-2 Copy Text
     v-btn(:to="printRoute").mt-2 Print Sheet
-    CharacterExportToRoll20(v-bind="{ completeCharacter, rawCharacter, characterValidation }").mt-2
+    CharacterExportToRoll20(v-bind="{ completeCharacter, rawCharacter, characterValidation }")
     ConfirmDelete(
       :label="rawCharacter.name || 'Unnamed Character'",
       :item="rawCharacter.name || 'Unnamed Character'",

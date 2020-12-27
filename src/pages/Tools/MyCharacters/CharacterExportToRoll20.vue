@@ -292,11 +292,11 @@
   v-tooltip(v-if="characterValidation.code !== 0", top)
     template(v-slot:activator="{ on }")
       span(v-on="on")
-        v-btn(disabled, :class="$style.button") Export to Roll20
+        v-btn(disabled, :class="$style.button").mt-2 Export to Roll20
     div {{ characterValidation.message }}
   MyDialog(v-else, v-model="isOpen")
     template(v-slot:activator="{ on }")
-      v-btn(:class="$style.button", v-on="on") Export to Roll20
+      v-btn(:class="$style.button", v-on="on").mt-2 Export to Roll20
     template(#title) Export Character to Roll 20
     template(#text)
       Roll20Instructions

@@ -6,7 +6,7 @@ export default '0.4.34'
 - Added login button
 - Save characters to the cloud while logged in
 - Allow up to 20 characters saved to an account
-- Changed "My Content" to "Tools" and added My Characters page
+- Changed "My Content" to "Tools" and added My Characters page to manage multiple characters
 
 0.4.39
 - Add Ch. # to each book chapter in the navigation menus

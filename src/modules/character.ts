@@ -152,6 +152,25 @@ export default class Character extends VuexModule {
   }
 
   @MutationAction({ mutate: ['characters'] })
+  async saveCharacters (newCharacters: RawCharacterType[]) {
+    let characters = stateOf(this).characters
+    if (newCharacters.length && rootOf(this).rootGetters['authentication/isLoggedIn']) {
+      const response = await axios.post(`${process.env.VUE_APP_sw5eapiurl}/api/character/multiple`, {
+        characterRequests: newCharacters.map(character => ({
+          jsonData: JSON.stringify(character),
+          id: character.id
+        }))
+      }, rootOf(this).rootGetters['authentication/axiosHeader'])
+      response.data.forEach((characterResult: { id: string, jsonData: string, userId: string }) => updateCharacterList(characters, {
+        ...JSON.parse(characterResult.jsonData),
+        userId: characterResult.userId,
+        id: characterResult.id
+      }))
+    }
+    return { characters }
+  }
+
+  @MutationAction({ mutate: ['characters'] })
   async saveCharacterLocally (newCharacter: RawCharacterType) {
     return { characters: updateCharacterList(stateOf(this).characters, {
       ...newCharacter,
@@ -163,19 +182,25 @@ export default class Character extends VuexModule {
   @MutationAction({ mutate: ['characters'] })
   async fetchCharacters () {
     if (rootOf(this).rootGetters['authentication/isLoggedIn']) {
-      const characterResults: CharacterResult[] = (await axios.get(
-        `${process.env.VUE_APP_sw5eapiurl}/api/character`,
-        rootOf(this).rootGetters['authentication/axiosHeader']
-      )).data
+      try {
+        console.log('Fetching characters from database')
+        const characterResults: CharacterResult[] = (await axios.get(
+          `${process.env.VUE_APP_sw5eapiurl}/api/character`,
+          rootOf(this).rootGetters['authentication/axiosHeader']
+        )).data
 
-      return { characters: [
-        ...characterResults.map(({ id, userId, jsonData }) => ({
-          ...JSON.parse(jsonData) as RawCharacterType,
-          id,
-          userId
-        })),
-        ...stateOf(this).characters.filter(({ id }) => !id)
-      ].slice(0, 20) }
+        return { characters: [
+          ...characterResults.map(({ id, userId, jsonData }) => ({
+            ...JSON.parse(jsonData) as RawCharacterType,
+            id,
+            userId
+          })),
+          ...stateOf(this).characters.filter(({ id }) => !id)
+        ].slice(0, 20) }
+      } catch (e) {
+        console.warn('Could not fetch characters from database')
+        return { characters: stateOf(this).characters }
+      }
     } else {
       return { characters: stateOf(this).characters }
     }

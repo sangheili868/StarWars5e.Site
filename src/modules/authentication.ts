@@ -92,7 +92,7 @@ export default class Authentication extends VuexModule {
 
   @MutationAction({ mutate: ['accessToken'] })
   async fetchAccessToken () {
-    const tokenRequest = { account: this.account, scopes: authConfig.scopes }
+    const tokenRequest = { account: Vue.prototype.$msal.getAllAccounts()[0], scopes: authConfig.scopes }
     let accessToken: string | null = null
 
     try {

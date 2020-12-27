@@ -1,6 +1,6 @@
 import { PowerType } from '@/types/characterTypes'
 import { EquipmentType, EnhancedItemType, GearType, ArmorType, WeaponType } from '@/types/lootTypes'
-import { TweaksType, CustomProficiencyType, HighLevelCastingType, SettingsType, CustomEquipmentType, ProficiencyType } from './rawCharacterTypes'
+import { TweaksType, CustomProficiencyType, HighLevelCastingType, SettingsType, CustomEquipmentType, ProficiencyType, EquipmentTweakType } from './rawCharacterTypes'
 import { ConditionType } from './lookupTypes'
 
 export interface AbilityScoreType {
@@ -149,7 +149,8 @@ export interface CharacterWeaponType extends WeaponType, CharacterBaseLootType {
   attackBonus: number,
   damageBonus: number,
   ability: string,
-  isCustom: false
+  isCustom: false,
+  tweaks: EquipmentTweakType
 }
 
 export interface CharacterEnhancedItemType extends EnhancedItemType, CharacterBaseLootType {

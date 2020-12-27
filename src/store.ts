@@ -25,43 +25,60 @@ import ui from './modules/ui'
 import ventures from './modules/ventures'
 import weaponProperties from './modules/weaponProperties'
 import character from './modules/character'
-import createPersistedState from 'vuex-persistedstate'
+import { VuexPersistence } from 'vuex-persist'
 import characterAdvancements from './modules/characterAdvancements'
 import conditions from './modules/conditions'
 import skills from './modules/skills'
+import authentication from './modules/authentication'
+import localforage from 'localforage'
+import _ from 'lodash'
 
 Vue.use(Vuex)
 
-export default new Vuex.Store({
-  plugins: [createPersistedState()],
-  modules: {
-    archetypes,
-    dataVersions,
-    armorProperties,
-    backgrounds,
-    blobs,
-    character,
-    characterAdvancements,
-    classes,
-    conditions,
-    deployments,
-    enhancedItems,
-    feats,
-    fightingMasteries,
-    fightingStyles,
-    equipment,
-    lightsaberForms,
-    monsters,
-    powers,
-    species,
-    referenceTables,
-    searchResults,
-    skills,
-    starshipEquipment,
-    starshipModifications,
-    starshipSizes,
-    ui,
-    ventures,
-    weaponProperties
+const modules = {
+  archetypes,
+  authentication,
+  dataVersions,
+  armorProperties,
+  backgrounds,
+  blobs,
+  character,
+  characterAdvancements,
+  classes,
+  conditions,
+  deployments,
+  enhancedItems,
+  feats,
+  fightingMasteries,
+  fightingStyles,
+  equipment,
+  lightsaberForms,
+  monsters,
+  powers,
+  species,
+  referenceTables,
+  searchResults,
+  skills,
+  starshipEquipment,
+  starshipModifications,
+  starshipSizes,
+  ui,
+  ventures,
+  weaponProperties
   }
+
+const persistToLocalStorage = new VuexPersistence({
+  storage: window.localStorage,
+  modules: ['ui']
+})
+
+const persistToIndexedDB = new VuexPersistence({
+  storage: localforage,
+  asyncStorage: true,
+  modules: _.pull(Object.getOwnPropertyNames(modules), 'ui')
+})
+
+export default new Vuex.Store({
+  plugins: [persistToIndexedDB.plugin, persistToLocalStorage.plugin],
+  modules: modules
 })

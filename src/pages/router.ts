@@ -8,7 +8,8 @@ import rulesRoutes from './Rules/router'
 import charactersRoutes from './Characters/router'
 import lootRoutes from './Loot/router'
 import starshipsRoutes from './Starships/router'
-import myContentRoutes from './MyContent/router'
+import toolsRoutes from './Tools/router'
+import UserProfile from './UserProfile.vue'
 
 Vue.use(Router)
 
@@ -25,7 +26,7 @@ export default new Router({
     charactersRoutes,
     lootRoutes,
     starshipsRoutes,
-    myContentRoutes,
+    toolsRoutes,
     {
       path: '/credits',
       component: CreditsPage,
@@ -46,6 +47,13 @@ export default new Router({
       props: ({ query }) => query,
       meta: {
         title: 'Search'
+      }
+    },
+    {
+      path: '/profile',
+      component: UserProfile,
+      meta: {
+        title: 'Profile'
       }
     }
   ],

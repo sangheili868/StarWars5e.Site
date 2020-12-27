@@ -4,13 +4,14 @@
     "module": "esnext",
     "resolveJsonModule": true,
     "strict": true,
+    "strictPropertyInitialization": false,
     "jsx": "preserve",
     "importHelpers": true,
     "moduleResolution": "node",
     "experimentalDecorators": true,
     "esModuleInterop": true,
     "allowSyntheticDefaultImports": true,
-    "sourceMap": true,
+    "sourceMap": false,
     "baseUrl": ".",
     "types": [
       "webpack-env"
@@ -35,6 +36,7 @@
     "tests/**/*.tsx", "src/store.ts"
   ],
   "exclude": [
-    "node_modules"
+    "node_modules",
+    "node_modules/*"
   ]
 }

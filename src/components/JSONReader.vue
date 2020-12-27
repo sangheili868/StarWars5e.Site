@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { Component, Prop, Vue } from 'vue-property-decorator'
+  import { Component, Prop, Vue, Watch } from 'vue-property-decorator'
   import MyDialog from '@/components/MyDialog.vue'
   import { isEmpty } from 'lodash'
 
@@ -9,10 +9,10 @@
     }
   })
   export default class JSONReader extends Vue {
-    fileReader = new FileReader()
-    @Prop(String) readonly label!: string
+    @Prop(Boolean) readonly value!: Boolean
 
-    isOpen = false
+    fileReader = new FileReader()
+
     filename = ''
     characterText = ''
     isEmpty = isEmpty
@@ -44,10 +44,11 @@
     }
 
     handleLoad () {
-      this.$emit('input', this.character, this.filename)
-      this.isOpen = false
+      this.$emit('import', this.character, this.filename)
+      this.$emit('input', false)
     }
 
+    @Watch('value')
     resetValues () {
       this.characterText = ''
       this.filename = ''
@@ -56,14 +57,12 @@
 </script>
 
 <template lang="pug">
-  MyDialog(v-model="isOpen")
-    template(v-slot:activator="{ on }")
-      v-btn(v-on="on", @click="resetValues") Load Character
-    template(#title) Save Character
+  MyDialog(v-bind="{ value }", @input="input => $emit('input', input)")
+    template(#title) Import Character
     template(#text)
       v-file-input(
         v-model="myFile"
-        v-bind="{ label }",
+        label="Load Character From File"
         accept=".json",
         filled,
         hide-details,
@@ -82,7 +81,7 @@
     template(#actions)
       v-btn(color="primary", :disabled="hasNoCharacter", @click="handleLoad") Load {{ character && character.name }}
       v-spacer
-      v-btn(color="primary", text, @click="isOpen=false") Cancel
+      v-btn(color="primary", text, @click="$emit('input', false)") Cancel
 </template>
 
 <style module lang="scss">

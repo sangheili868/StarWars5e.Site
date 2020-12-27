@@ -9,7 +9,7 @@ export default class Conditions extends VuexModule {
 
   @MutationAction({ mutate: ['conditions', 'cachedVersion'] })
   async fetchConditions () {
-    const { data: conditions, cachedVersion } = await fetchFromCache(this, 'conditions', 'conditions')
+    const { data: conditions, cachedVersion } = await fetchFromCache(this, 'conditions', 'conditions', 'conditionsLU')
     return { conditions, cachedVersion }
   }
 }

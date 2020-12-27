@@ -1,7 +1,3 @@
-/// ////////////////////////////////////////////////////////
-// IF YOU CHANGE THIS FILE, INCREMENT BUILDER VERSION IN src/version.ts
-/// ////////////////////////////////////////////////////////
-
 import { CharacterProficiency } from './completeCharacterTypes'
 
 export interface RawSpeciesType {
@@ -123,11 +119,7 @@ export interface TweaksType {
     toHit?: TweakType,
     damage?: TweakType
   }
-  unarmed?: {
-    damageDice?: TweakType,
-    toHit?: TweakType,
-    damage?: TweakType
-  }
+  unarmed?: EquipmentTweakType
   hitPoints?: {
     maximum?: TweakType,
     hitDice?: {
@@ -195,8 +187,17 @@ export interface CustomEquipmentType extends RawEquipmentType {
   damageNumberOfDice?: number
 }
 
+export interface CharacterResult {
+  id: string,
+  userId: string,
+  jsonData: string
+}
+
 export interface RawCharacterType {
   name: string,
+  id: string,
+  localId?: string,
+  userId: string,
   builderVersion: string,
   image: string,
   experiencePoints: number,
@@ -245,7 +246,9 @@ export interface RawCharacterType {
   customForcePowers: string[],
   settings: SettingsType,
   customEquipment: CustomEquipmentType[],
-  notes: string
+  notes: string,
+  createdAt: number,
+  changedAt: number
 }
 
 export function isCustomProficiency (proficiency: CustomProficiencyType | CharacterProficiency): proficiency is CustomProficiencyType {

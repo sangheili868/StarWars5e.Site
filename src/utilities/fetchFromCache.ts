@@ -4,7 +4,7 @@ import axios from 'axios'
   2. On page load, compare dataVersiontimeout to current date, and fetch if out of date.
   3. Next on page load, for each table needed by page, check version and fetch if cache is empty or out of date
 */
-export default async function fetchFromCache (context: any, dataName: string, endpoint: string) {
+export default async function fetchFromCache (context: any, dataName: string, endpoint: string, dbName?: string) {
   let data = context.state[dataName]
   let cachedVersion = context.state.cachedVersion
   const dataVersions = context.rootState.dataVersions
@@ -12,9 +12,12 @@ export default async function fetchFromCache (context: any, dataName: string, en
     await context.dispatch('dataVersions/fetchDataVersions', null, { root: true })
   }
   try {
-    const dataVersion = dataVersions.dataVersions.find(({ name }: { name: string }) => name === dataName)
+    const dataVersion = dataVersions.dataVersions.find(({ name }: { name: string }) =>
+      name === dataName ||
+      (dbName && name === dbName)
+    )
     if (!data || !dataVersion || (context.state.cachedVersion < dataVersion.version)) {
-      console.log(`Fetching ${dataName} from database`)
+      console.info(`Fetching ${dataName} from database`)
       data = (await axios.get(`${process.env.VUE_APP_sw5eapiurl}/api/${endpoint}`)).data
       cachedVersion = dataVersion ? dataVersion.version : 0
       await context.dispatch('dataVersions/setInternet', null, { root: true })
@@ -44,7 +47,7 @@ export async function fetchBlobFromCache (context: any, bookName: string, chapte
       isNaN(cachedVersions[bookName]) || // fix a bug
       (cachedVersions[bookName] < dataVersion.version)
     ) {
-      console.log(`Fetching ${chapterName} blob from database`)
+      console.info(`Fetching ${chapterName} blob from database`)
       const chapter = (await axios.get(`${process.env.VUE_APP_sw5eapiurl}/api/${endpoint}/${chapterName}.json`)).data
       blobs = {
         ...blobs,
@@ -81,7 +84,7 @@ export async function fetchBlobsFromCache (context: any, dataName: string, dataV
       isNaN(cachedVersions[dataName]) || // fix a bug
       (cachedVersions[dataName] < dataVersion.version)
     ) {
-      console.log(`Fetching ${dataName} blobs from database`)
+      console.info(`Fetching ${dataName} blobs from database`)
       data = (await axios.get(`${process.env.VUE_APP_sw5eapiurl}/api/${endpoint}`)).data
       cachedVersions = {
         ...cachedVersions,

@@ -2,19 +2,33 @@
   import { Component, Prop, Vue, Watch } from 'vue-property-decorator'
   import { namespace } from 'vuex-class'
   import SearchBox from '@/components/SearchBox.vue'
+  import SignInButton from '@/components/SignInButton.vue'
+  import _ from 'lodash'
 
   const uiModule = namespace('ui')
+  const authenticationModule = namespace('authentication')
+  const characterModule = namespace('character')
 
   @Component({
     components: {
-      SearchBox
+      SearchBox,
+      SignInButton
     }
   })
   export default class MainToolbar extends Vue {
     @uiModule.State isSideBarOpen!: boolean
+    @uiModule.State isDarkSide!: boolean
     @uiModule.Action updateSideBar!: (value: boolean) => void
+    @authenticationModule.Getter isLoggedIn!: boolean
+    @authenticationModule.Action initMSAL!: any
+    @authenticationModule.Action setAccessToken!: (accessToken?: string) => Promise<any>
+    @characterModule.Action clearLocalCharacters!: () => Promise<any>
 
     isSearchOpen = false
+
+    async created () {
+      this.initMSAL()
+    }
 
     @Watch('$route')
     resetSearch () {
@@ -77,10 +91,10 @@
           ]
         },
         {
-          to: '/myContent',
-          title: 'My Content',
+          to: '/tools',
+          title: 'Tools',
           nested: [
-            { to: '/characters', title: 'Characters' }
+            { to: '/mycharacters', title: 'Character Creator' }
           ]
         },
         {
@@ -119,6 +133,15 @@
     handleSideIconClick () {
       this.updateSideBar(true)
     }
+
+    logOut () {
+      Promise.all([
+        this.setAccessToken(),
+        this.clearLocalCharacters()
+      ]).then(() => {
+        Vue.prototype.$msal && Vue.prototype.$msal.logout()
+      })
+    }
   }
 </script>
 
@@ -134,17 +157,33 @@
       template(v-if="!isSearchOpen")
         component(v-for="({ to, title, nested }) in routes", :key="title", v-bind="buildComponentProps(to, nested)")
           template(v-if="nested && nested.length", v-slot:activator="{ on }")
-            v-btn(text, :color="darkColor", v-on="on" :to="to") {{ title }}
+            v-btn(text, :color="darkColor", v-on="on", :to="to") {{ title }}
               v-icon.pl-2 fa-caret-down
           v-list(v-for="nestedRoute in nested", :key="nestedRoute.title", dense)
             v-list-item(:to="to + nestedRoute.to")
               v-list-item-title {{ nestedRoute.title }}
           template(v-if="!nested || !nested.length") {{ title }}
+        v-menu(v-if="isLoggedIn", offset-y)
+          template(v-slot:activator="{ on }")
+            v-btn(text, :color="darkColor", v-on="on")
+              v-icon(:color="darkColor") fa-user
+          v-list(dense)
+            v-list-item(@click="logOut")
+              v-list-item-title Logout
+        SignInButton(v-else) Login
       v-btn(icon, @click="isSearchOpen = !isSearchOpen")
         v-icon(:color="darkColor") {{ isSearchOpen ? 'fa-times' : 'fa-search' }}
     v-toolbar-items.hidden-md-and-up
       v-btn(icon, @click="isSearchOpen = !isSearchOpen")
         v-icon {{ isSearchOpen ? 'fa-times' : 'fa-search' }}
+      v-menu(v-if="isLoggedIn", offset-y)
+        template(v-slot:activator="{ on }")
+          v-btn(text, :color="darkColor", v-on="on")
+            v-icon(:color="darkColor") fa-user
+        v-list(dense)
+          v-list-item(@click="logOut")
+            v-list-item-title Logout
+      SignInButton(v-else) Login
       v-menu(v-if="!isSearchOpen", bottom, left, offset-y, attach)
         template(v-slot:activator="{ on }")
           v-btn(icon, v-on="on")

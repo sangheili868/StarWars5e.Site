@@ -55,6 +55,7 @@ function getWeaponStats (
     equipped,
     quantity,
     index,
+    tweaks: tweaks || {},
     isFound: true
   }
 }

@@ -1,5 +1,7 @@
 {
   "name": "",
+  "id": "",
+  "userId": "",
   "builderVersion": "0.0.0",
   "image": "",
   "user": "",
@@ -79,5 +81,7 @@
     "isFixedHitPoints": false,
     "abilityScoreMethod": "Standard Array"
   },
-  "notes": ""
+  "notes": "",
+  "createdAt": 0,
+  "changedAt": 0
 }

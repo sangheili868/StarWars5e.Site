@@ -1,4 +1,4 @@
-import { Module, VuexModule, MutationAction } from 'vuex-module-decorators'
+import { Module, VuexModule, MutationAction, Mutation } from 'vuex-module-decorators'
 
 @Module({ namespaced: true, name: 'ui' })
 export default class Ui extends VuexModule {

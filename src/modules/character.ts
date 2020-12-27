@@ -28,7 +28,7 @@ function stateOf (context: any) {
 function rootOf (myThis: any) {
   return (myThis as {
     rootGetters: {
-      'authentication/axiosHeader': AxiosRequestConfig,
+      'authentication/axiosHeader': Promise<AxiosRequestConfig>,
       'authentication/isLoggedIn': boolean
     }
   })
@@ -146,7 +146,8 @@ export default class Character extends VuexModule {
   async saveCharacter (newCharacter: RawCharacterType) {
     newCharacter = { ...newCharacter, builderVersion, changedAt: Date.now() }
     if (rootOf(this).rootGetters['authentication/isLoggedIn']) {
-      saveCharacterToDB(newCharacter, rootOf(this).rootGetters['authentication/axiosHeader'], this)
+      const header = await rootOf(this).rootGetters['authentication/axiosHeader']
+      saveCharacterToDB(newCharacter, header, this)
     }
     return { characters: updateCharacterList(stateOf(this).characters, newCharacter) }
   }
@@ -163,9 +164,11 @@ export default class Character extends VuexModule {
   @MutationAction({ mutate: ['characters'] })
   async fetchCharacters () {
     if (rootOf(this).rootGetters['authentication/isLoggedIn']) {
+      const header = await rootOf(this).rootGetters['authentication/axiosHeader']
+
       const characterResults: CharacterResult[] = (await axios.get(
         `${process.env.VUE_APP_sw5eapiurl}/api/character`,
-        rootOf(this).rootGetters['authentication/axiosHeader']
+        header
       )).data
 
       return { characters: [
@@ -184,9 +187,11 @@ export default class Character extends VuexModule {
   @MutationAction({ mutate: ['characters'] })
   async deleteCharacter (character: RawCharacterType) {
     if (rootOf(this).rootGetters['authentication/isLoggedIn']) {
+      const header = await rootOf(this).rootGetters['authentication/axiosHeader']
+
       await axios.delete(
         `${process.env.VUE_APP_sw5eapiurl}/api/character/${character.id}`,
-        rootOf(this).rootGetters['authentication/axiosHeader']
+        header
       )
     }
     return { characters: stateOf(this).characters.filter(({ localId, id }) => localId !== character.localId && id !== character.id) }

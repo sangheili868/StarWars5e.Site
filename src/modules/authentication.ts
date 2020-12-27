@@ -47,12 +47,14 @@ const msalConfig = {
 export default class Authentication extends VuexModule {
   accessToken: string | null = null
 
-  get axiosHeader (): AxiosRequestConfig {
-    return {
-      headers: {
-        Authorization: `Bearer ${this.accessToken}`
+  get axiosHeader (): Promise<AxiosRequestConfig> {
+    return (this as any).dispatch('fetchAccessToken').then(() => {
+      return {
+        headers: {
+          Authorization: `Bearer ${this.accessToken}`
+        }
       }
-    }
+    })
   }
 
   get account (): msalBrowser.AccountInfo {
@@ -87,6 +89,27 @@ export default class Authentication extends VuexModule {
 
   @MutationAction({ mutate: ['accessToken'] })
   async setAccessToken (accessToken?: string) {
+    return { accessToken }
+  }
+
+  @MutationAction({ mutate: ['accessToken'] })
+  async fetchAccessToken () {
+    const tokenRequest = { account: this.account, scopes: authConfig.scopes }
+    let accessToken: string | null = null
+
+    try {
+      await (Vue.prototype.$msal as msalBrowser.PublicClientApplication).acquireTokenSilent(tokenRequest).then(tokenResponse => {
+        accessToken = tokenResponse.accessToken
+      })
+    } catch (tokenError) {
+      try {
+        Vue.prototype.$msal.acquireTokenRedirect(tokenRequest).then(
+        )
+      } catch (tokenRedirectError) {
+        console.error('Problem getting token with redirect flow: ' + tokenRedirectError)
+      }
+    }
+
     return { accessToken }
   }
 }

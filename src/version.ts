@@ -1,6 +1,9 @@
 export default '0.5.0'
 
 /*
+0.5.1
+- Fixed issue with images not loading
+- Added error message when image fails to load
 
 0.5.0
 - Added login button

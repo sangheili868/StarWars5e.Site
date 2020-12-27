@@ -89,4 +89,25 @@ export default class Authentication extends VuexModule {
   async setAccessToken (accessToken?: string) {
     return { accessToken }
   }
+
+  @MutationAction({ mutate: ['accessToken'] })
+  async fetchAccessToken () {
+    const tokenRequest = { account: Vue.prototype.$msal.getAllAccounts()[0], scopes: authConfig.scopes }
+    let accessToken: string | null = null
+
+    try {
+      await (Vue.prototype.$msal as msalBrowser.PublicClientApplication).acquireTokenSilent(tokenRequest).then(tokenResponse => {
+        accessToken = tokenResponse.accessToken
+      })
+    } catch (tokenError) {
+      try {
+        Vue.prototype.$msal.acquireTokenRedirect(tokenRequest).then(
+        )
+      } catch (tokenRedirectError) {
+        console.error('Problem getting token with redirect flow: ' + tokenRedirectError)
+      }
+    }
+
+    return { accessToken: accessToken || (this as any).state.accessToken }
+  }
 }

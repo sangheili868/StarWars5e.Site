@@ -28,7 +28,6 @@ function stateOf (context: any) {
 function rootOf (myThis: any) {
   return (myThis as {
     rootGetters: {
-      'authentication/axiosHeader': Promise<AxiosRequestConfig>,
       'authentication/isLoggedIn': boolean
     }
   })
@@ -67,6 +66,13 @@ const updateCharacterList = (characters: RawCharacterType[], newCharacter: RawCh
 @Module({ namespaced: true, name: 'character' })
 export default class Character extends VuexModule {
   public characters: RawCharacterType[] = []
+
+  get authenticationHeader (): (myThis: any) => Promise<AxiosRequestConfig> {
+    return async (myThis) => {
+      await myThis.dispatch('authentication/fetchAccessToken', {}, { root: 'true' })
+      return myThis.rootGetters['authentication/axiosHeader']
+    }
+  }
 
   get getCharacterById () {
     return (characterId: string) => {
@@ -146,7 +152,7 @@ export default class Character extends VuexModule {
   async saveCharacter (newCharacter: RawCharacterType) {
     newCharacter = { ...newCharacter, builderVersion, changedAt: Date.now() }
     if (rootOf(this).rootGetters['authentication/isLoggedIn']) {
-      const header = await rootOf(this).rootGetters['authentication/axiosHeader']
+      const header = await (this as any).getters.authenticationHeader(this) as AxiosRequestConfig
       saveCharacterToDB(newCharacter, header, this)
     }
     return { characters: updateCharacterList(stateOf(this).characters, newCharacter) }
@@ -164,8 +170,7 @@ export default class Character extends VuexModule {
   @MutationAction({ mutate: ['characters'] })
   async fetchCharacters () {
     if (rootOf(this).rootGetters['authentication/isLoggedIn']) {
-      const header = await rootOf(this).rootGetters['authentication/axiosHeader']
-
+      const header = await (this as any).getters.authenticationHeader(this) as AxiosRequestConfig
       const characterResults: CharacterResult[] = (await axios.get(
         `${process.env.VUE_APP_sw5eapiurl}/api/character`,
         header
@@ -187,7 +192,7 @@ export default class Character extends VuexModule {
   @MutationAction({ mutate: ['characters'] })
   async deleteCharacter (character: RawCharacterType) {
     if (rootOf(this).rootGetters['authentication/isLoggedIn']) {
-      const header = await rootOf(this).rootGetters['authentication/axiosHeader']
+      const header = await (this as any).getters.authenticationHeader(this) as AxiosRequestConfig
 
       await axios.delete(
         `${process.env.VUE_APP_sw5eapiurl}/api/character/${character.id}`,

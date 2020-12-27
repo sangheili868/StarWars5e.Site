@@ -47,14 +47,12 @@ const msalConfig = {
 export default class Authentication extends VuexModule {
   accessToken: string | null = null
 
-  get axiosHeader (): Promise<AxiosRequestConfig> {
-    return (this as any).dispatch('fetchAccessToken').then(() => {
-      return {
-        headers: {
-          Authorization: `Bearer ${this.accessToken}`
-        }
+  get axiosHeader (): AxiosRequestConfig {
+    return {
+      headers: {
+        Authorization: `Bearer ${this.accessToken}`
       }
-    })
+    }
   }
 
   get account (): msalBrowser.AccountInfo {
@@ -110,6 +108,6 @@ export default class Authentication extends VuexModule {
       }
     }
 
-    return { accessToken }
+    return { accessToken: accessToken || (this as any).state.accessToken }
   }
 }

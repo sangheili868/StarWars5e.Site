@@ -1,6 +1,10 @@
-export default '0.5.2'
+export default '0.5.3'
 
 /*
+0.5.3
+- Added undo button after clearing tweaks (suggested by @Proper_Indifference)
+- Fixed a bug where sentinel max power level was calculated incorrectly (found by @NootjeMCBootje)
+
 0.5.2
 - Fixed issue where a ! icon appears next to Menu, but there is no message when it is clicked on.
 

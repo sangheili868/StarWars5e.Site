@@ -68,21 +68,27 @@ function getMaxPowerLevel (
   myArchetypes: ArchetypeType[],
   castingType: 'Tech' | 'Force'
 ) {
-  let maxPowerLevel = reduce(rawCharacter.classes, (acc, myClass) => {
-    const potential = getMaxPowerLevelPotential(
-      myClass.name,
-      myClasses,
-      myClass.archetype && myClass.archetype.name,
-      myArchetypes,
-      castingType
-    )
-    const levels = myClass.levels * potential / 9
-    return Math.max(levels, 0) + acc
-  }, 0)
   let maxPower = 0
-  if (consular && maxPowerLevel > 0) {
-    const effectiveLevel = Math.max(1, Math.floor(maxPowerLevel))
-    maxPower = parseInt(consular.levelChanges[effectiveLevel]['Max Power Level'])
+  if (rawCharacter.classes.length === 1 && rawCharacter.classes[0].name === 'Sentinel') {
+    // Sentinels don't follow the multiclass rules for max power level
+    maxPower = parseInt(myClasses[0].levelChanges[rawCharacter.classes[0].levels]['Max Power Level'])
+  } else {
+    // Use multiclass rules to determine max power level
+    let maxPowerLevel = reduce(rawCharacter.classes, (acc, myClass) => {
+      const potential = getMaxPowerLevelPotential(
+        myClass.name,
+        myClasses,
+        myClass.archetype && myClass.archetype.name,
+        myArchetypes,
+        castingType
+      )
+      const levels = myClass.levels * potential / 9
+      return Math.max(levels, 0) + acc
+    }, 0)
+    if (consular && maxPowerLevel > 0) {
+      const effectiveLevel = Math.max(1, Math.floor(maxPowerLevel))
+      maxPower = parseInt(consular.levelChanges[effectiveLevel]['Max Power Level'])
+    }
   }
   return applyTweak(rawCharacter, lowerCase(castingType) + 'Casting.maxPowerLevel', maxPower)
 }

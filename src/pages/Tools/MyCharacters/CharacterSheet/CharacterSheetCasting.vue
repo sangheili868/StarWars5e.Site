@@ -158,7 +158,7 @@
             rounded,
             @click.stop="castTechPower(level)"
           ).ma-1 Cast
-            span(v-if="level > 5") (1/long rest)
+            span(v-if="level > 5").ml-1 (1/LR)
         CharacterSheetExpansionFeatures(:features="powers")
       div(v-if="techCasting.powersKnown.length <= 0").mt-5
         div Click Menu then Edit Character above to choose tech powers
@@ -303,7 +303,7 @@
             rounded,
             @click.stop="castForcePower(level)"
           ).ma-1 Cast
-            span(v-if="level > 5") (1/long rest)
+            span(v-if="level > 5").ml-1 (1/LR)
         CharacterSheetExpansionFeatures(:features="powers")
       div(v-if="forceCasting.powersKnown.length <= 0").mt-3
         v-btn(color="primary", @click="$emit('goToStep', 2)") Choose Powers

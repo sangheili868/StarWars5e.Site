@@ -10,6 +10,7 @@
   import MyDialog from '@/components/MyDialog.vue'
   import { CharacterValidationType } from '@/types/utilityTypes'
   import { namespace } from 'vuex-class'
+  import { isEmpty, merge } from 'lodash'
 
   const authenticationModule = namespace('authentication')
 
@@ -30,10 +31,22 @@
     @Prop(Boolean) readonly isDirty!: boolean
     @authenticationModule.Getter isLoggedIn!: boolean
     isMenuOpen = false
+    clearedTweaks = {}
+    isEmpty = isEmpty
 
     clearAllTweaks () {
+      this.clearedTweaks = this.rawCharacter.tweaks
       this.$emit('replaceCharacterProperty', { path: 'tweaks', property: {} })
       window.alert('All tweaks cleared!')
+    }
+
+    undoClearTweaks () {
+      this.$emit('replaceCharacterProperty', {
+        path: 'tweaks',
+        property: merge({}, this.rawCharacter.tweaks, this.clearedTweaks)
+      })
+      this.clearedTweaks = {}
+      window.alert('Tweaks restored!')
     }
   }
 </script>
@@ -73,7 +86,8 @@
             div(v-if="isDirty").primary--text.d-flex.flex-wrap.justify-space-around.mt-2
               div Character has unsaved changes!
               div Login, export to file, or copy text to save
-            v-btn(color="red", @click="clearAllTweaks").white--text.mt-2 Clear All Tweaks
+            v-btn(v-if="!isEmpty(rawCharacter.tweaks)", color="red", @click="clearAllTweaks").white--text.mt-2 Clear All Tweaks
+            v-btn(v-if="!isEmpty(clearedTweaks)", color="red", @click="undoClearTweaks").white--text.mt-2 Undo Last Clear Tweaks
         template(#actions)
           v-spacer
           v-btn(color="primary", text, @click="isMenuOpen=false") Close

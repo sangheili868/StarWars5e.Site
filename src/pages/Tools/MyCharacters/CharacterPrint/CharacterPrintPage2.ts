@@ -60,8 +60,10 @@ export default function CharacterPrintPage2 (
     { top: 302, left: 303, width: 447, height: 35, myClass: myClasses.multiline, text: completeCharacter.characteristics.Ideal },
     { top: 355, left: 303, width: 447, height: 35, myClass: myClasses.multiline, text: completeCharacter.characteristics.Bond },
     { top: 408, left: 303, width: 447, height: 35, myClass: myClasses.multiline, text: completeCharacter.characteristics.Flaw },
-    { top: 445, left: 404, width: 346, myClass: 'text-left', text: completeCharacter.backgroundFeature.name },
-    { top: 462, left: 303, width: 447, height: 216, myClass: myClasses.multiline, text: completeCharacter.backgroundFeature.text },
+    ...completeCharacter.backgroundFeature ? [
+      { top: 445, left: 404, width: 346, myClass: 'text-left', text: completeCharacter.backgroundFeature.name },
+      { top: 462, left: 303, width: 447, height: 216, myClass: myClasses.multiline, text: completeCharacter.backgroundFeature.text }
+    ] : [],
     { top: 712, left: 303, width: 447, height: 291, myClass: myClasses.multiline, text: completeCharacter.characteristics.Backstory }
   ]
 }

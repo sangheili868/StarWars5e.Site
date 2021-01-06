@@ -15,7 +15,7 @@
   })
   export default class CharacterSheetProficiencies extends Vue {
     @Prop(Array) readonly nonCombatFeatures!: CompletedFeatureType[]
-    @Prop(Object) readonly backgroundFeature!: CompletedFeatureType
+    @Prop(Object) readonly backgroundFeature!: CompletedFeatureType | undefined
     @Prop(Array) readonly customLanguages!: string[]
     @Prop(Array) readonly languages!: string[]
     @Prop(Array) readonly proficiencies!: CharacterProficiency[]
@@ -26,11 +26,12 @@
 
 <template lang="pug">
   div
-    h3 Background Feature
-    CharacterSheetExpansionFeatures(
-      :features="[ backgroundFeature ]",
-      @updateCharacter="newCharacter => $emit('updateCharacter', newCharacter)"
-    )
+    template(v-if="backgroundFeature")
+      h3 Background Feature
+      CharacterSheetExpansionFeatures(
+        :features="[ backgroundFeature ]",
+        @updateCharacter="newCharacter => $emit('updateCharacter', newCharacter)"
+      )
     CharacterSheetProficienciesLanguages(
       v-bind="{ languages, customLanguages }",
       @updateCharacter="newCharacter => $emit('updateCharacter', newCharacter)",

@@ -226,7 +226,7 @@ export interface CompleteCharacterType {
   allForcePowers: string[],
   combatFeatures: CompletedFeatureType[],
   nonCombatFeatures: CompletedFeatureType[],
-  backgroundFeature: CompletedFeatureType,
+  backgroundFeature: CompletedFeatureType | undefined,
   tweaks: TweaksType,
   customLanguages: string[],
   customProficiencies: CustomProficiencyType[],

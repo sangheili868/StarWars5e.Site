@@ -3,6 +3,7 @@ export default '0.5.4'
 /*
 0.5.4
 - Display species, archetype, and class features on the character sheet
+- Allow Custom Backgrounds with any feat
 - Fixed bug when trying to print characters with certain items (reported by @SGE17 and @Kraiten)
 
 0.5.3

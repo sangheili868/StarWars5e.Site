@@ -125,13 +125,13 @@
             [header + 'display_flag']: 'on'
           }
         }),
-        {
+        ...c.backgroundFeature ? [{
           [bgheader + 'name']: c.backgroundFeature.name,
           [bgheader + 'source']: 'Background',
           [bgheader + 'description']: c.backgroundFeature.text,
           [bgheader + 'options-flag']: '0',
           [bgheader + 'display_flag']: 'on'
-        },
+        }] : [],
         ...c.customFeatures.map(customFeature => {
           const header = 'repeating_traits_' + makeRoll20ID() + '_'
           return {

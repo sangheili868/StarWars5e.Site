@@ -30,12 +30,13 @@ export default function generateFeatures (
   features: FeatureType[],
   currentLevel: number,
   myFeats: CompletedFeatureType[],
-  myBackground: BackgroundType,
+  myBackground: BackgroundType | undefined,
+  backgrounds: BackgroundType[],
   abilityScores: AbilityScoresType
 ) : {
   combatFeatures: CompletedFeatureType[],
   nonCombatFeatures: CompletedFeatureType[],
-  backgroundFeature: CompletedFeatureType
+  backgroundFeature: CompletedFeatureType | undefined
 } {
   const featureSources = {
     [rawCharacter.species.name]: currentLevel,
@@ -54,13 +55,16 @@ export default function generateFeatures (
     ...myFeats
   ].map(feature => calculateUsage(rawCharacter, abilityScores, feature as CompletedFeatureType))
 
+  const backgroundWithFeature = rawCharacter.background.name === 'Custom' ? backgrounds.find(({ featureName }) => featureName === rawCharacter.background.feature) : myBackground
+  const backgroundFeature = backgroundWithFeature ? {
+      name: backgroundWithFeature.featureName,
+      combat: false,
+      text: backgroundWithFeature.featureText
+  } : undefined
+
   return {
     combatFeatures: myCompletedFeatures.filter(({ combat }) => combat),
     nonCombatFeatures: myCompletedFeatures.filter(({ combat }) => !combat),
-    backgroundFeature: {
-      name: myBackground.featureName,
-      combat: false,
-      text: myBackground.featureText
-    }
+    backgroundFeature
   }
 }

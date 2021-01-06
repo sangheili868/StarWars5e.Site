@@ -27,7 +27,7 @@ export default function generateFeats (rawCharacter: RawCharacterType, feats: Fe
     .value()
   const myFeatsList = [
     ...fromClasses,
-    rawCharacter.background.feat && rawCharacter.background.feat.name
+    ...(rawCharacter.background.feat && rawCharacter.background.feat.name ? [rawCharacter.background.feat.name] : [])
   ]
   return [
     ...findFeats(myFeatsList, feats, false),

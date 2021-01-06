@@ -1,7 +1,7 @@
 import { RawCharacterType, ProficiencyType } from '@/types/rawCharacterTypes'
 import { ClassType, BackgroundType } from '@/types/characterTypes'
-import { CompletedFeatureType, CharacterProficiency } from '@/types/completeCharacterTypes'
-import { compact, uniqBy, lowerCase, toUpper } from 'lodash'
+import { CharacterProficiency } from '@/types/completeCharacterTypes'
+import { uniqBy, lowerCase } from 'lodash'
 
 export default function generateProficiencies (
   rawCharacter: RawCharacterType,

@@ -138,11 +138,7 @@ export default class Character extends VuexModule {
             isEqual(Object.keys(character.baseAbilityScores).sort(), abilityScores.sort()) &&
             Object.values(character.baseAbilityScores).every(score => score > 0)
         },
-        { message: 'Missing a background', isValid: character.background && character.background.name !== '' },
-        {
-          message: 'Missing a background feat',
-          isValid: character.background && character.background.feat !== undefined && character.background.feat.name !== ''
-        }
+        { message: 'Missing a background', isValid: character.background && character.background.name !== '' }
       ]
         .map((validation, index) => ({ code: index + 1, ...validation }))
         .find(({ isValid }) => !isValid) || { code: 0, message: 'All checks passed', isValid: true }

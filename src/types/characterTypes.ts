@@ -144,7 +144,7 @@ export interface FeatType {
   contentSource: string,
   contentType: string,
   name: string,
-  prerequisites: string,
+  prerequisite: string,
   attributesIncreased: string[]
 }
 

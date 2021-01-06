@@ -65,10 +65,13 @@
     ]
 
     get backgroundChoices () {
-      return chain(this.backgrounds)
-        .sortBy('contentType')
-        .map('name')
-        .value()
+      return [
+        'Custom',
+        ...chain(this.backgrounds)
+          .sortBy('contentType')
+          .map('name')
+          .value()
+      ]
     }
 
     get chosenBackground () {
@@ -76,7 +79,22 @@
     }
 
     get featOptions () {
-      return this.chosenBackground && this.chosenBackground.featOptions.map(({ name }) => name)
+      if (this.currentBackground.name === 'Custom') {
+        return this.feats
+          .filter(({ prerequisite }) => !prerequisite || !prerequisite.toLowerCase().includes('level'))
+          .map(({ name }) => name)
+      } else {
+        return this.chosenBackground && this.chosenBackground.featOptions.map(({ name }) => name)
+      }
+    }
+
+    get featureOptions () {
+      return this.backgrounds.map(({ featureName }) => featureName)
+    }
+
+    get featureText () {
+      const featureData = this.backgrounds.find(({ featureName }) => featureName === this.currentBackground.feature)
+      return featureData ? featureData.featureText : ''
     }
 
     get featText () {
@@ -98,11 +116,15 @@
     }
 
     handleChangeBackground (newBackground: string) {
-      this.$emit('updateCharacter', { background: { name: newBackground, feat: { name: '' } } })
+      this.$emit('updateCharacter', { background: { name: newBackground, feat: { name: '' }, feature: '' } })
     }
 
     handleChangeBackgroundFeat (newFeat: string) {
-      this.$emit('updateCharacter', { background: { feat: { name: newFeat } } })
+      this.$emit('updateCharacter', { background: { feat: { name: newFeat || '' } } })
+    }
+
+    handleChangeBackgroundFeature (newFeature: string) {
+      this.$emit('updateCharacter', { background: { feature: newFeature || '' } })
     }
   }
 </script>
@@ -146,14 +168,24 @@
           v-spacer
           v-btn(color="primary", text, @click="isOpen=false") Close
     MySelect(
-      v-if="chosenBackground",
+      v-if="chosenBackground || currentBackground.name === 'Custom'",
       :value="currentBackground.feat.name",
       :items="featOptions"
+      clearable
       label="Choose a feat",
       @change="handleChangeBackgroundFeat"
     )
     VueMarkdown(:source="featText").text-caption
-    h3.mb-3 Characteristics
+    MySelect(
+      v-if="currentBackground.name ==='Custom'",
+      :value="currentBackground.feature",
+      :items="featureOptions"
+      clearable
+      label="Choose a background feature",
+      @change="handleChangeBackgroundFeature"
+    )
+    div.text-caption {{ featureText }}
+    h3.my-3 Characteristics
     v-text-field(
       v-for="characteristic in characteristicsList",
       :key="characteristic"

@@ -79,8 +79,7 @@
             characteristics: this.character.characteristics
           },
           isComplete: this.character.name !== '' &&
-            this.character.background.name !== '' &&
-            this.character.background.feat.name !== ''
+            this.character.background.name !== ''
         },
         {
           name: 'Equipment',

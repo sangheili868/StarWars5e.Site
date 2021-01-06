@@ -53,6 +53,7 @@ export interface RawBackgroundType {
   name: string,
   skills?: string[],
   languages?: string[],
+  feature?: string, // Only used for custom background
   feat: RawFeatType
 }
 

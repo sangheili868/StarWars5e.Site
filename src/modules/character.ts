@@ -104,6 +104,7 @@ export default class Character extends VuexModule {
             rootState.enhancedItems.enhancedItems,
             rootState.powers.powers,
             rootState.feats.feats,
+            rootState.features.features,
             rootState.backgrounds.backgrounds,
             rootState.characterAdvancements.characterAdvancements,
             rootState.skills.skills,

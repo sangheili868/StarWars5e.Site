@@ -40,7 +40,7 @@
         div(v-if="feature.duration") #[strong Duration:] {{ feature.duration }} {{ feature.concentration ? '(Concentration)' : ''}}
         div(v-if="feature.prerequisite") #[strong Prerequisite:] {{ feature.prerequisite }}
         br(v-if="feature.castingPeriodText || feature.range || feature.duration")
-        VueMarkdown {{ feature.description }}
+        VueMarkdown {{ feature.description || feature.text }}
         div(v-if="feature.customIndex > -1").d-flex.justify-end
           ConfirmDelete(
             label="Feature",

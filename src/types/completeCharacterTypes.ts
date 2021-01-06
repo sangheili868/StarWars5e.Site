@@ -96,7 +96,7 @@ export interface SuperiorityType {
 
 export interface CompletedFeatureType {
   name: string,
-  description: string,
+  text: string,
   combat: boolean,
   customIndex?: number,
   usage?: {

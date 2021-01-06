@@ -39,8 +39,8 @@ export default function CharacterPrintPage2 (
       height: 676,
       myClass: myClasses.multiline,
       text: [
-        ...completeCharacter.combatFeatures.map(({ name, description }: CompletedFeatureType) => name + ': ' + description),
-        ...completeCharacter.nonCombatFeatures.map(({ name, description }: CompletedFeatureType) => name + ': ' + description),
+        ...completeCharacter.combatFeatures.map(({ name, text }: CompletedFeatureType) => name + ': ' + text),
+        ...completeCharacter.nonCombatFeatures.map(({ name, text }: CompletedFeatureType) => name + ': ' + text),
         ...completeCharacter.customFeatures.map(({ name, content }: CustomFeaturesType) => name + ': ' + content)
       ].join('\n')
     },
@@ -61,7 +61,7 @@ export default function CharacterPrintPage2 (
     { top: 355, left: 303, width: 447, height: 35, myClass: myClasses.multiline, text: completeCharacter.characteristics.Bond },
     { top: 408, left: 303, width: 447, height: 35, myClass: myClasses.multiline, text: completeCharacter.characteristics.Flaw },
     { top: 445, left: 404, width: 346, myClass: 'text-left', text: completeCharacter.backgroundFeature.name },
-    { top: 462, left: 303, width: 447, height: 216, myClass: myClasses.multiline, text: completeCharacter.backgroundFeature.description },
+    { top: 462, left: 303, width: 447, height: 216, myClass: myClasses.multiline, text: completeCharacter.backgroundFeature.text },
     { top: 712, left: 303, width: 447, height: 291, myClass: myClasses.multiline, text: completeCharacter.characteristics.Backstory }
   ]
 }

@@ -2,6 +2,10 @@ import { CompleteCharacterType, isCharacterEnhancedItem, isEquippable, isCharact
 import { printFieldType } from '@/types/utilityTypes'
 import math from 'mathjs'
 
+function fractionToDecimal (fraction: string) {
+  return math.number(math.fraction(fraction.trim())) as number
+}
+
 export default function CharacterPrintPage3 (
   completeCharacter: CompleteCharacterType,
   myClasses: { [key: string]: string }
@@ -16,17 +20,17 @@ export default function CharacterPrintPage3 (
       width: 35,
       fontSize: 10,
       myClass: myClasses.openSans,
-      text: equipment.quantity * (math.number(math.fraction(equipment.weight)) as number) + ' lbs.'
+      text: equipment.quantity * fractionToDecimal(equipment.weight) + ' lbs.'
     }] : [])
   ]).flat()
   const equippedGear = validEquipment.filter(isEquippable).filter(equipment => equipment.equipped)
-  const totalDonned = equippedGear.filter(({ equipped }) => equipped).reduce((sum, { quantity, weight }) => sum + quantity * (math.number(math.fraction(weight)) as number), 0)
+  const totalDonned = equippedGear.filter(({ equipped }) => equipped).reduce((sum, { quantity, weight }) => sum + quantity * fractionToDecimal(weight), 0)
 
   const unequippedGear = [
     ...validEquipment.filter(isCharacterGearType),
     ...validEquipment.filter(isEquippable).filter(({ equipped }) => !equipped)
   ]
-  const totalBag = unequippedGear.reduce((sum, { quantity, weight }) => sum + quantity * (math.number(math.fraction(weight)) as number), 0)
+  const totalBag = unequippedGear.reduce((sum, { quantity, weight }) => sum + quantity * fractionToDecimal(weight), 0)
   const totalWeight = totalDonned + totalBag
 
   return [

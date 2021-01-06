@@ -1,29 +1,19 @@
 import { RawCharacterType } from '@/types/rawCharacterTypes'
-import { FightingStyleType, FeatType, FeatureType, FeaturesType, BackgroundType } from '@/types/characterTypes'
-import { chain, compact } from 'lodash'
+import { FeatureType, BackgroundType } from '@/types/characterTypes'
+import { chain } from 'lodash'
 import { CompletedFeatureType, AbilityScoresType } from '@/types/completeCharacterTypes'
-
-function getValidFeatures (
-  features: FeatureType[],
-  levelsInClass: number,
-  discoveries?: { name: string }[]
-) {
-  return features ? features.filter(({ name: featureName, level, type }) => {
-    const isRequiredLevel = level && level <= levelsInClass
-    const isBase = type === 'base'
-    const isDiscovery = discoveries &&
-      (type === 'discovery') &&
-      discoveries.some(({ name: discoveryName }) => discoveryName === featureName)
-    return isRequiredLevel && (isBase || isDiscovery)
-  }) : []
-}
 
 function calculateUsage (
   rawCharacter: RawCharacterType,
   abilityScores: AbilityScoresType,
   feature: CompletedFeatureType
 ) {
-  if (!feature.usage) return feature
+  if (!feature.usage) {
+    return {
+      ...feature,
+      combat: true
+    }
+  }
   const maximum = isNaN(feature.usage.maximum) ? abilityScores[feature.usage.maximum].modifier : feature.usage.maximum
   return {
     ...feature,
@@ -37,11 +27,8 @@ function calculateUsage (
 
 export default function generateFeatures (
   rawCharacter: RawCharacterType,
-  classFeatures: FeaturesType,
-  archetypeFeatures: FeaturesType,
-  speciesFeatures: FeaturesType,
+  features: FeatureType[],
   currentLevel: number,
-  fightingStyles: FightingStyleType[],
   myFeats: CompletedFeatureType[],
   myBackground: BackgroundType,
   abilityScores: AbilityScoresType
@@ -50,36 +37,30 @@ export default function generateFeatures (
   nonCombatFeatures: CompletedFeatureType[],
   backgroundFeature: CompletedFeatureType
 } {
-  const mySpeciesFeatures = getValidFeatures(speciesFeatures[rawCharacter.species.name], currentLevel)
-  const myClassFeatures = rawCharacter.classes.map(({ name: className, levels, discoveries }) =>
-    getValidFeatures(classFeatures[className], levels, discoveries)
-  ).flat()
-  const myArchetypeFeatures = chain(rawCharacter.classes)
-    .map(({ archetype, levels, discoveries }) =>
-      archetype && getValidFeatures(archetypeFeatures[archetype.name], levels, discoveries)
-    )
-    .compact()
-    .flatten()
-    .value()
-  const myFightingStyles = compact(rawCharacter.classes
-    .map(({ fightingStyle }) => fightingStyles.find(({ name }) => name === fightingStyle))
-  )
-  const backgroundFeature = {
-    name: myBackground.featureName,
-    combat: false,
-    description: myBackground.featureText
+  const featureSources = {
+    [rawCharacter.species.name]: currentLevel,
+    ...chain(rawCharacter.classes).groupBy('name').mapValues(classes => classes[0].levels).value(),
+    ...chain(rawCharacter.classes).filter('archetype').groupBy('archetype.name').mapValues(classes => classes[0].levels).value()
   }
-  const myFeatures = [
-    ...myClassFeatures,
-    ...myArchetypeFeatures,
-    ...myFeats,
-    ...myFightingStyles,
-    ...mySpeciesFeatures
+  const myFeatures = chain(features)
+    .filter(({ sourceName, level }) =>
+      Object.keys(featureSources).includes(sourceName) &&
+      level <= featureSources[sourceName]
+    )
+    .sortBy('level')
+    .value()
+  const myCompletedFeatures = [
+    ...myFeatures,
+    ...myFeats
   ].map(feature => calculateUsage(rawCharacter, abilityScores, feature as CompletedFeatureType))
 
   return {
-    combatFeatures: myFeatures.filter(({ combat }) => combat),
-    nonCombatFeatures: myFeatures.filter(({ combat }) => !combat),
-    backgroundFeature
+    combatFeatures: myCompletedFeatures.filter(({ combat }) => combat),
+    nonCombatFeatures: myCompletedFeatures.filter(({ combat }) => !combat),
+    backgroundFeature: {
+      name: myBackground.featureName,
+      combat: false,
+      text: myBackground.featureText
+    }
   }
 }

@@ -11,7 +11,6 @@ function findFeats (myFeats: string[], feats: FeatType[], isCustom: boolean): (C
       return {
         ...foundFeat,
         customIndex: isCustom ? index : -1,
-        description: foundFeat.text,
         combat: true
       }
     }

@@ -1,6 +1,10 @@
-export default '0.5.3'
+export default '0.5.4'
 
 /*
+0.5.4
+- Display species, archetype, and class features on the character sheet
+- Fixed bug when trying to print characters with certain items (reported by @SGE17 and @Kraiten)
+
 0.5.3
 - Added undo button after clearing tweaks (suggested by @Proper_Indifference)
 - Fixed a bug where sentinel max power level was calculated incorrectly (found by @NootjeMCBootje)

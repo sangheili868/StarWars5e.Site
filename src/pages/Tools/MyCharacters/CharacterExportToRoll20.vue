@@ -120,7 +120,7 @@
           return {
             [header + 'name']: combatFeature.name,
             [header + 'source']: 'Feat',
-            [header + 'description']: combatFeature.description,
+            [header + 'description']: combatFeature.text,
             [header + 'options-flag']: '0',
             [header + 'display_flag']: 'on'
           }
@@ -128,7 +128,7 @@
         {
           [bgheader + 'name']: c.backgroundFeature.name,
           [bgheader + 'source']: 'Background',
-          [bgheader + 'description']: c.backgroundFeature.description,
+          [bgheader + 'description']: c.backgroundFeature.text,
           [bgheader + 'options-flag']: '0',
           [bgheader + 'display_flag']: 'on'
         },

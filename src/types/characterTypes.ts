@@ -171,11 +171,9 @@ export interface LightsaberFormType {
 
 export interface FeatureType {
   name: string,
-  level?: number,
-  type?: string,
-  description: string
-}
-
-export interface FeaturesType {
-  [ myClass: string ]: FeatureType[]
+  level: number,
+  text: string,
+  source: string,
+  sourceName: string,
+  metadata: string
 }

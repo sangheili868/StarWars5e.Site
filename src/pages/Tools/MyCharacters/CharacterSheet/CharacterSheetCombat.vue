@@ -109,7 +109,7 @@
       @updateCharacter="newCharacter => $emit('updateCharacter', newCharacter)",
       @replaceCharacterProperty="payload => $emit('replaceCharacterProperty', payload)"
     )
-    h3.mt-2.d-flex.justify-space-between.align-end Feats
+    h3.mt-2.d-flex.justify-space-between.align-end Features
       CharacterSheetCustomFeats(
         v-bind="{ combatFeatures, numCustomFeats }",
         @updateCharacter="newCharacter => $emit('updateCharacter', newCharacter)",

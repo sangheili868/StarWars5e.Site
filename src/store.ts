@@ -9,6 +9,7 @@ import classes from './modules/classes'
 import deployments from './modules/deployments'
 import enhancedItems from './modules/enhancedItems'
 import feats from './modules/feats'
+import features from './modules/features'
 import fightingStyles from './modules/fightingStyles'
 import fightingMasteries from './modules/fightingMasteries'
 import equipment from './modules/equipment'
@@ -49,6 +50,7 @@ const modules = {
   deployments,
   enhancedItems,
   feats,
+  features,
   fightingMasteries,
   fightingStyles,
   equipment,
@@ -65,7 +67,7 @@ const modules = {
   ui,
   ventures,
   weaponProperties
-  }
+}
 
 const persistToLocalStorage = new VuexPersistence({
   storage: window.localStorage,

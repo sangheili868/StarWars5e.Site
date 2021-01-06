@@ -1,6 +1,6 @@
 import { RawCharacterType } from '@/types/rawCharacterTypes'
-import { pick, compact, chain } from 'lodash'
-import { ClassType, PowerType, FeatType, BackgroundType, SpeciesType, ArchetypeType, ManeuverType, FeaturesType, FightingStyleType } from '@/types/characterTypes'
+import { compact, chain } from 'lodash'
+import { ClassType, PowerType, FeatType, BackgroundType, SpeciesType, ArchetypeType, ManeuverType, FeatureType } from '@/types/characterTypes'
 import { EquipmentType, EnhancedItemType } from '@/types/lootTypes'
 import generateAbilityScores from './generateAbilityScores'
 import generateCombatStats from './generateCombatStats'
@@ -29,6 +29,7 @@ export default function generateCharacter (
   enhancedItems: EnhancedItemType[],
   powers: PowerType[],
   feats: FeatType[],
+  features: FeatureType[],
   backgrounds: BackgroundType[],
   characterAdvancements: CharacterAdvancementType[],
   skills: SkillType[],
@@ -36,11 +37,6 @@ export default function generateCharacter (
 ): CompleteCharacterType {
   // To Do
   const maneuvers = [] as ManeuverType[]
-  const classFeatures = {} as FeaturesType
-  const archetypeFeatures = {} as FeaturesType
-  const speciesFeatures = {} as FeaturesType
-  const fightingStyles = [] as FightingStyleType[]
-
   const classText = rawCharacter.classes
     .map(({ name, levels, archetype }) => `${name}${archetype ? ` (${archetype.name})` : ''} ${levels}`)
     .join(', ')
@@ -78,13 +74,10 @@ export default function generateCharacter (
   const myEquipment = generateEquipment(rawCharacter, equipment, enhancedItems, abilityScores, proficiencyBonus, proficiencies)
   const casting = generateCasting(rawCharacter, abilityScores, powers, proficiencyBonus, myFoundClasses, consular, myArchetypes)
   const superiority = generateSuperiorty(rawCharacter, myFoundClasses, myArchetypes, abilityScores, proficiencyBonus, maneuvers)
-  const features = generateFeatures(
+  const myFeatures = generateFeatures(
     rawCharacter,
-    classFeatures,
-    archetypeFeatures,
-    speciesFeatures,
+    features,
     currentLevel,
-    fightingStyles,
     myFeats,
     myBackground as BackgroundType,
     abilityScores
@@ -112,7 +105,7 @@ export default function generateCharacter (
     abilityScores,
     proficiencyBonus,
     ...generateCombatStats(rawCharacter, abilityScores, myEquipment, proficiencyBonus),
-    hitPoints: generateHitPoints(rawCharacter, abilityScores, myFoundClasses, currentLevel, features),
+    hitPoints: generateHitPoints(rawCharacter, abilityScores, myFoundClasses, currentLevel, myFeatures),
     conditions: myConditions,
     exhaustion: rawCharacter.currentStats.exhaustion,
     proficiencies,
@@ -125,7 +118,7 @@ export default function generateCharacter (
     carryingCapacity: generateCarryingCapacity(abilityScores),
     superiority,
     ...casting,
-    ...features,
+    ...myFeatures,
     settings: rawCharacter.settings,
     notes: rawCharacter.notes
   }

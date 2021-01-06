@@ -22,6 +22,7 @@
   const equipmentModule = namespace('equipment')
   const powersModule = namespace('powers')
   const featsModule = namespace('feats')
+  const featuresModule = namespace('features')
   const backgroundsModule = namespace('backgrounds')
   const characterAdvancementsModule = namespace('characterAdvancements')
   const skillsModule = namespace('skills')
@@ -62,6 +63,7 @@
     @powersModule.Action fetchPowers!: () => void
     @featsModule.State feats!: FeatType[]
     @featsModule.Action fetchFeats!: () => void
+    @featuresModule.Action fetchFeatures!: () => void
     @backgroundsModule.State backgrounds!: BackgroundType[]
     @backgroundsModule.Action fetchBackgrounds!: () => void
     @characterAdvancementsModule.Action fetchCharacterAdvancements!: () => void
@@ -81,6 +83,7 @@
         this.fetchEquipment(),
         this.fetchPowers(),
         this.fetchFeats(),
+        this.fetchFeatures(),
         this.fetchBackgrounds(),
         this.fetchSpecies(),
         this.fetchCharacterAdvancements(),

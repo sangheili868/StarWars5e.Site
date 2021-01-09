@@ -1,6 +1,10 @@
-export default '0.5.4'
+export default '0.5.5'
 
 /*
+0.5.5
+- Display multi-level features properly with new parsing strategy
+- Display class and archetype features in the character builder
+
 0.5.4
 - Display species, archetype, and class features on the character sheet
 - Allow Custom Backgrounds with any feat

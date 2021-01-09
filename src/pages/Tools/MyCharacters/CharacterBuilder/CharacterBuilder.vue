@@ -8,7 +8,7 @@
   import CharacterBuilderEquipment from './CharacterBuilderEquipment.vue'
   import { CharacterValidationType } from '@/types/utilityTypes'
   import { RawCharacterType } from '@/types/rawCharacterTypes'
-  import { SpeciesType, ClassType, PowerType, FeatType, BackgroundType, ArchetypeType } from '@/types/characterTypes'
+  import { SpeciesType, ClassType, PowerType, FeatType, BackgroundType, ArchetypeType, FeatureType } from '@/types/characterTypes'
   import { EquipmentType } from '@/types/lootTypes'
   import { every } from 'lodash'
   import CharacterBuilderSettings from './CharacterBuilderSettings.vue'
@@ -35,6 +35,7 @@
     @Prop(Array) readonly equipment!: EquipmentType[]
     @Prop(Array) readonly powers!: PowerType[]
     @Prop(Array) readonly feats!: FeatType[]
+    @Prop(Array) readonly features!: FeatureType[]
     @Prop(Array) readonly backgrounds!: BackgroundType[]
     @Prop(Array) readonly species!: SpeciesType[]
     @Prop(Boolean) readonly isDirty!: boolean
@@ -55,7 +56,8 @@
           component: 'CharacterBuilderClasses',
           props: {
             character: this.character,
-            classes: this.classes
+            classes: this.classes,
+            features: this.features
           },
           isComplete: this.character.classes.length > 0
         },

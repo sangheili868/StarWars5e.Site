@@ -9,7 +9,7 @@
   import builderVersion from '@/version'
   import BackButton from '@/components/BackButton.vue'
 
-  import { ClassType, ArchetypeType, PowerType, FeatType, BackgroundType, SpeciesType } from '@/types/characterTypes'
+  import { ClassType, ArchetypeType, PowerType, FeatType, BackgroundType, SpeciesType, FeatureType } from '@/types/characterTypes'
   import { EquipmentType } from '@/types/lootTypes'
   import { CompleteCharacterType } from '@/types/completeCharacterTypes'
   import { RawCharacterType } from '@/types/rawCharacterTypes'
@@ -63,6 +63,7 @@
     @powersModule.Action fetchPowers!: () => void
     @featsModule.State feats!: FeatType[]
     @featsModule.Action fetchFeats!: () => void
+    @featuresModule.State features!: FeatureType[]
     @featuresModule.Action fetchFeatures!: () => void
     @backgroundsModule.State backgrounds!: BackgroundType[]
     @backgroundsModule.Action fetchBackgrounds!: () => void
@@ -185,7 +186,7 @@
     BackButton(label="My Characters")
     CharacterBuilder(
       v-if="isEditing",
-      v-bind="{ character, completeCharacter, characterValidation, currentStep, classes, archetypes, equipment, powers, feats, backgrounds, species, isDirty }",
+      v-bind="{ character, completeCharacter, characterValidation, currentStep, classes, archetypes, equipment, powers, feats, features, backgrounds, species, isDirty }",
       v-on="{ updateCharacter, deleteCharacterProperty, replaceCharacterProperty, replaceCharacterProperties, goToStep }",
       @deleteCharacter="handleDeleteCharacter",
       @saveCharacter="handleSaveCharacter",

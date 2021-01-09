@@ -49,6 +49,9 @@ export default function generateFeatures (
       level <= featureSources[sourceName]
     )
     .sortBy('level')
+    .reverse()
+    .uniqBy(({ name, sourceName }) => name + sourceName)
+    .reverse()
     .value()
   const myCompletedFeatures = [
     ...myFeatures,

@@ -2,7 +2,7 @@
   import { Component, Prop, Vue } from 'vue-property-decorator'
   import { namespace } from 'vuex-class'
   import { chain, range, merge, omit, set } from 'lodash'
-  import { ClassType, ArchetypeType } from '@/types/characterTypes'
+  import { ClassType, ArchetypeType, FeatureType } from '@/types/characterTypes'
   import { RawClassType, RawASIType, RawCharacterType } from '@/types/rawCharacterTypes'
   import { CharacterAdvancementType } from '@/types/lookupTypes'
   import CharacterBuilderClassHitPoints from './CharacterBuilderClassHitPoints.vue'
@@ -12,6 +12,7 @@
   import MySelect from '@/components/MySelect.vue'
   import ClassDetail from '@/components/ClassDetail.vue'
   import CharactersArchetypeDetail from '@/pages/Characters/CharactersArchetypeDetail.vue'
+  import CharacterSheetExpansionFeatures from '../CharacterSheet/CharacterSheetExpansionFeatures.vue'
   import MyDialog from '@/components/MyDialog.vue'
 
   const archetypesModule = namespace('archetypes')
@@ -21,6 +22,7 @@
       CharacterBuilderClassHitPoints,
       CharacterBuilderClassASI,
       CharacterBuilderClassPowers,
+      CharacterSheetExpansionFeatures,
       ConfirmDelete,
       ClassDetail,
       CharactersArchetypeDetail,
@@ -31,6 +33,7 @@
   export default class CharacterBuilderClass extends Vue {
     @Prop(Object) readonly character!: RawCharacterType
     @Prop(Array) readonly classes!: ClassType[]
+    @Prop(Array) readonly features!: FeatureType[]
     @Prop(Object) readonly myClass!: RawClassType
     @Prop(Number) readonly index!: number
     @Prop(Boolean) readonly isFixedHitPoints!: boolean
@@ -83,6 +86,32 @@
         ...this.character.customForcePowers,
         ...this.character.classes.map(({ forcePowers }) => forcePowers || []).flat()
       ]
+    }
+
+    get classFeatures () {
+      return chain(this.features)
+        .filter(({ sourceName, level }) => this.classData
+          ? this.classData.name === sourceName && level <= this.myClass.levels
+          : false
+        )
+        .sortBy('level')
+        .reverse()
+        .uniqBy(({ name, sourceName }) => name + sourceName)
+        .reverse()
+        .value()
+    }
+
+    get archetypeFeatures () {
+      return chain(this.features)
+        .filter(({ sourceName, level }) => this.archetypeData
+          ? this.archetypeData.name === sourceName && level <= this.myClass.levels
+          : false
+        )
+        .sortBy('level')
+        .reverse()
+        .uniqBy(({ name, sourceName }) => name + sourceName)
+        .reverse()
+        .value()
     }
 
     handleUpdateLevels (levels: number) {
@@ -152,7 +181,7 @@
 </script>
 
 <template lang="pug">
-  div
+  div.text-left
     div.d-flex.align-center.flex-wrap
       MyDialog(v-model="isClassOpen", wide)
         template(v-slot:activator="{ on }")
@@ -196,7 +225,11 @@
       label="Archetype",
       @change="handleUpdateArchetype"
     )
-    h3(v-if="asiLevels.length > 0") Ability Score Improvements
+    h3 Class Features
+    CharacterSheetExpansionFeatures(:features="classFeatures")
+    h3(v-if="archetypeFeatures.length > 0").mt-3 Archetype Features
+    CharacterSheetExpansionFeatures(:features="archetypeFeatures")
+    h3(v-if="asiLevels.length > 0").mt-3 Ability Score Improvements
     CharacterBuilderClassASI(
       v-for="(asiLevel, index) in asiLevels",
       :key="asiLevel",

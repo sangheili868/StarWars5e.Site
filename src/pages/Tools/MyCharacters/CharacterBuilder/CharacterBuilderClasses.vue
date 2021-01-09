@@ -1,7 +1,7 @@
 <script lang="ts">
   import { Component, Prop, Vue } from 'vue-property-decorator'
   import { namespace } from 'vuex-class'
-  import { ClassType } from '@/types/characterTypes'
+  import { ClassType, FeatureType } from '@/types/characterTypes'
   import { RawClassType, RawCharacterType } from '@/types/rawCharacterTypes'
   import { CharacterAdvancementType } from '@/types/lookupTypes'
   import CharacterBuilderClassNew from './CharacterBuilderClassNew.vue'
@@ -22,6 +22,7 @@
   export default class CharacterBuilderClasses extends Vue {
     @Prop(Object) readonly character!: RawCharacterType
     @Prop(Array) readonly classes!: ClassType[]
+    @Prop(Array) readonly features!: FeatureType[]
 
     @characterAdvancementsModule.State characterAdvancements!: CharacterAdvancementType[]
     @characterAdvancementsModule.Action fetchCharacterAdvancements!: () => void
@@ -83,7 +84,7 @@
             span(v-if="(index === 0) && currentClasses.length > 1").grey--text.pl-3.text-caption Starting Class
         v-expansion-panel-content
           CharacterBuilderClass(
-            v-bind="{ character, myClass, classes, index, isFixedHitPoints, characterAdvancements }",
+            v-bind="{ character, myClass, classes, features, index, isFixedHitPoints, characterAdvancements }",
             @updateCharacter="newCharacter => $emit('updateCharacter', newCharacter)",
             @replaceCharacterProperty="payload => $emit('replaceCharacterProperty', payload)",
             @replaceCharacterProperties="payload => $emit('replaceCharacterProperties', payload)",

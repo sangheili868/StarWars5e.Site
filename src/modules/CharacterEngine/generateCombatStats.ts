@@ -41,8 +41,7 @@ function generateSpeed (rawCharacter: RawCharacterType, armor: CharacterArmorTyp
 export default function generateCombatStats (
   rawCharacter: RawCharacterType,
   abilityScores: AbilityScoresType,
-  equipment: CharacterLootType[],
-  proficiencyBonus: number
+  equipment: CharacterLootType[]
 ) {
   const equippedArmor = equipment.filter(isCharacterArmorType).filter(armor => armor.equipped)
   const armorList = [
@@ -52,11 +51,10 @@ export default function generateCombatStats (
 
   const perceptionModifier = abilityScores.Wisdom.skills.find(({ name }) => name === 'Perception')
   const isScout = rawCharacter.classes.find(({ name }) => name === 'Scout')
-  const initiative = abilityScores.Dexterity.modifier + (isScout ? proficiencyBonus : 0)
   const passivePerception = 10 + (perceptionModifier ? perceptionModifier.modifier : 0)
 
   return {
-    initiative: applyTweak(rawCharacter, 'initiative', initiative),
+    initiative: applyTweak(rawCharacter, 'initiative', abilityScores.Dexterity.modifier),
     armorClass: generateArmorClass(rawCharacter, abilityScores, equippedArmor),
     armorList,
     passivePerception: applyTweak(rawCharacter, 'passivePerception', passivePerception),

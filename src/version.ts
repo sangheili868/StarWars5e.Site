@@ -1,6 +1,9 @@
-export default '0.5.5'
+export default '0.5.6'
 
 /*
+0.5.6
+- Fix bug where scouts get proficiency bonus added to initiative (found by @S'badu)
+
 0.5.5
 - Display multi-level features properly with new parsing strategy
 - Display class and archetype features in the character builder

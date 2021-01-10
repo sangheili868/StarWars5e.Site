@@ -104,7 +104,7 @@ export default function generateCharacter (
     experiencePoints,
     abilityScores,
     proficiencyBonus,
-    ...generateCombatStats(rawCharacter, abilityScores, myEquipment, proficiencyBonus),
+    ...generateCombatStats(rawCharacter, abilityScores, myEquipment),
     hitPoints: generateHitPoints(rawCharacter, abilityScores, myFoundClasses, currentLevel, myFeatures),
     conditions: myConditions,
     exhaustion: rawCharacter.currentStats.exhaustion,

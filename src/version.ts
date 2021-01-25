@@ -1,6 +1,9 @@
-export default '0.5.6'
+export default '0.5.7'
 
 /*
+0.5.7
+- Fix bug with exporting monsters to roll20 when data is parsed incorrectly (found by @darthrevan1128)
+
 0.5.6
 - Fix bug where scouts get proficiency bonus added to initiative (found by @S'badu)
 

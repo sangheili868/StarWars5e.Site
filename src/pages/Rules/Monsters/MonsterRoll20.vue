@@ -64,6 +64,7 @@
       let npcSavingFlag = ''
       const saves = m.savingThrows ? m.savingThrows.map(save => {
         const splitSave = save.split(' ')
+        if (splitSave.length !== 2) return {}
         const name = splitSave[0].toLowerCase()
         const value = parseInt(splitSave[1])
         npcSavingFlag += value.toString()
@@ -96,7 +97,7 @@
             [header + 'attack_damagetype']: behavior.damageType.toLowerCase(),
             [header + 'attack_flag']: 'on',
             [header + 'attack_onhit']: behavior.damage + ' (' + behavior.damageRoll + ') ' + behavior.damageType.toLowerCase() + ' damage',
-            [header + 'attack_range']: behavior.range ? behavior.range.split(' ')[1] : '',
+            [header + 'attack_range']: behavior.range ? behavior.range.split(' ')[1] || '' : '',
             [header + 'attack_target']: behavior.numberOfTargets,
             [header + 'attack_tohit']: behavior.attackBonus.toString(),
             [header + 'attack_tohitrange']: '+' + behavior.attackBonus + ', ' + behavior.range + ', ' + behavior.numberOfTargets,

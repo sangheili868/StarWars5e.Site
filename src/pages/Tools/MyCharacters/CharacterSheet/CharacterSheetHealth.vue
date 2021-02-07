@@ -2,12 +2,14 @@
   import { Component, Prop, Vue } from 'vue-property-decorator'
   import { HitPointsType } from '@/types/completeCharacterTypes'
   import CharacterSheetRest from './CharacterSheetRest.vue'
+  import CharacterSheetTweaker from './CharacterSheetTweaker.vue'
   import CharacterSheetHealthCircle from './CharacterSheetHealthCircle.vue'
   import CheckList from '@/components/CheckList.vue'
   import { TweaksType } from '@/types/rawCharacterTypes'
 
   @Component({
     components: {
+      CharacterSheetTweaker,
       CharacterSheetRest,
       CharacterSheetHealthCircle,
       CheckList
@@ -58,7 +60,13 @@
         @replaceCharacterProperty="payload => $emit('replaceCharacterProperty', payload)"
       )
       div(v-else)
-        h3 Death Saves
+        CharacterSheetTweaker(
+          v-bind="{ tweaks }",
+          title="Maximum Hit Points"
+          :tweakPaths="[{ name: 'Maximum Hit Points', path: 'hitPoints.maximum' }]",
+          @replaceCharacterProperty="payload => $emit('replaceCharacterProperty', payload)"
+        )
+          h3 Death Saves
         div.d-flex
           v-icon(dense) fa-heart
           CheckList(

@@ -5,7 +5,6 @@
   import MyDialog from '@/components/MyDialog.vue'
   import { get, set, parseInt as _parseInt, cloneDeep } from 'lodash'
   import vueSetPath from '@/utilities/vueSetPath'
-  import { namespace } from 'vuex-class'
 
   @Component({
     components: {
@@ -28,7 +27,7 @@
     }
 
     resetValues () {
-      this.myTweaks = Object.assign({}, this.tweaks)
+      this.myTweaks = cloneDeep(this.tweaks)
     }
 
     sanitize (value: string) {

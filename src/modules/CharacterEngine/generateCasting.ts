@@ -40,7 +40,8 @@ function getCastingLevel (
   ) || 0), 0)
 }
 
-function getMaxPowerLevelPotential (
+function getMaxPowerLevelAtClassLevel (
+  classLevel: number,
   className: string,
   myClasses: ClassType[],
   archetypeName: string | undefined,
@@ -54,11 +55,11 @@ function getMaxPowerLevelPotential (
   if (myArchetype) {
     const leveledTable = myArchetype.leveledTable
     if (leveledTable) {
-      const maxPowerLevelValue = leveledTable[20].find(({ key }) => key === 'Max Power Level')
+      const maxPowerLevelValue = leveledTable[classLevel].find(({ key }) => key === 'Max Power Level')
       return maxPowerLevelValue ? parseInt(maxPowerLevelValue.value) : 0
     }
   }
-  return myClass ? parseInt(myClass.levelChanges[20]['Max Power Level']) : 0
+  return myClass ? parseInt(myClass.levelChanges[classLevel]['Max Power Level']) : 0
 }
 
 function getMaxPowerLevel (
@@ -69,13 +70,21 @@ function getMaxPowerLevel (
   castingType: 'Tech' | 'Force'
 ) {
   let maxPower = 0
-  if (rawCharacter.classes.length === 1 && rawCharacter.classes[0].name === 'Sentinel') {
-    // Sentinels don't follow the multiclass rules for max power level
-    maxPower = parseInt(myClasses[0].levelChanges[rawCharacter.classes[0].levels]['Max Power Level'])
+  if (rawCharacter.classes.length === 1) {
+    // Use class or archetype table to determine max power level
+    maxPower = getMaxPowerLevelAtClassLevel(
+      rawCharacter.classes[0].levels,
+      rawCharacter.classes[0].name,
+      myClasses,
+      rawCharacter.classes[0].archetype && rawCharacter.classes[0].archetype.name,
+      myArchetypes,
+      castingType
+    )
   } else {
     // Use multiclass rules to determine max power level
     let maxPowerLevel = reduce(rawCharacter.classes, (acc, myClass) => {
-      const potential = getMaxPowerLevelPotential(
+      const potential = getMaxPowerLevelAtClassLevel(
+        20,
         myClass.name,
         myClasses,
         myClass.archetype && myClass.archetype.name,

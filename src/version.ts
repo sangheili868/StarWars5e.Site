@@ -1,6 +1,11 @@
-export default '0.5.7'
+export default '0.5.8'
 
 /*
+0.5.8
+- Redesigned homepage to add more descriptive text
+- Fix bug when a character has 0 max hit points from a tweak (found by @sakito86)
+- Fix bug where level 5 Guardian max power level calculated incorrectly (found by @Bas)
+
 0.5.7
 - Fix bug with exporting monsters to roll20 when data is parsed incorrectly (found by @darthrevan1128)
 

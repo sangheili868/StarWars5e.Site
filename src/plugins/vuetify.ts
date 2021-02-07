@@ -13,7 +13,8 @@ const theme = {
   Reddit: '#ff4500',
   Discord: '#7289da',
   Twitter: '#1da1f2',
-  Patreon: '#f96854'
+  Patreon: '#f96854',
+  Facebook: '#3b5998'
 }
 
 export default new Vuetify({

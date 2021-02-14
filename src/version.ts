@@ -1,6 +1,9 @@
-export default '0.5.8'
+export default '0.5.9'
 
 /*
+0.5.9
+- Redesigned homepage again, but with @toddmoonbounce's suggestions
+
 0.5.8
 - Redesigned homepage to add more descriptive text
 - Fix bug when a character has 0 max hit points from a tweak (found by @sakito86)

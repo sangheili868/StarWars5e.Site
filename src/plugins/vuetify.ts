@@ -24,7 +24,8 @@ export default new Vuetify({
       light: theme,
       dark: {
         ...theme,
-        secondary: '000000'
+        secondary: '000000',
+        background: '#333333'
       }
     }
   },

@@ -1,21 +1,15 @@
 <script lang="ts">
-  import { Component, Prop, Vue, Watch } from 'vue-property-decorator'
+  import { Component, Vue } from 'vue-property-decorator'
   import { namespace } from 'vuex-class'
-  import RoutesList from '@/components/RoutesList.vue'
-  import CardSet from '@/components/CardSet.vue'
-  import { omit } from 'lodash'
 
   const uiModule = namespace('ui')
 
-  @Component({
-    components: {
-      RoutesList,
-      CardSet
-    }
-  })
+  @Component
   export default class HomePage extends Vue {
     @uiModule.State isDarkSide!: boolean
     @uiModule.Action toggleDarkSide!: (value: boolean) => Promise<void>
+
+    book = 0
 
     get books () {
       return [
@@ -23,8 +17,7 @@
           to: 'rules/phb',
           title: 'The Player\'s Handbook',
           image: 'phb_cover',
-          subText: 'The Player\'s Handbook mirrors the traditional 5th edition Player\'s Handbook, with some deviations for playing in the Star Wars Universe.',
-          whatsDifferent: 'rules/phb/whatsDifferent'
+          subText: 'The Player\'s Handbook mirrors the traditional 5th edition Player\'s Handbook, with some deviations for playing in the Star Wars Universe.'
         },
         {
           to: 'rules/snv',
@@ -36,7 +29,7 @@
           to: 'rules/sotg',
           title: 'Starships of the Galaxy',
           image: 'sotg_cover',
-          subText: 'Starships of the Galaxy features rules governing more in depth space adventuring, including rules for deploying in a spaceship, building and upgrading a spaceship, adventuring in a spaceship, and combat in a spaceship.'
+          subText: 'Starships of the Galaxy features rules governing spaceships, space adventuring, and space combat.'
         },
         {
           to: 'rules/wh',
@@ -52,67 +45,44 @@
         {
           to: 'rules',
           title: 'Rules',
-          subText: 'The Rules tab includes the four existing books, broken down by chapter, for easier reading. Additionally, it has a link that includes all sponsored variant rules for Star Wars 5e. Finally, it has a link to Expanded Content—which is generally character options that aren\'t tied to a specific book yet—that is broken down by category.'
+          icon: 'fa-journal-whills',
+          subText: 'The four books, broken down by chapter, as well as a link to some SW5e variant rules.'
         },
         {
           to: 'characters',
           title: 'Characters',
-          subText: 'The Characters tab includes all character options for Star Wars 5e, broken down by relevant section. The characters tab generally assumes you have read the books and understand the mechanics; it does not reiterate them, it just makes it easier to find all like content for character building in one place.'
+          icon: 'fa-users',
+          subText: 'Everything you need for your character, from fighting styles to force powers.'
         },
         {
           to: 'loot',
           title: 'Loot',
-          subText: 'Loot has sections for all of the weapons, armor, and adventuring gear available across all of the books. Additionally, it has a filterable table for enhanced items.'
+          icon: 'fa-toolbox',
+          subText: 'Grab your blaster, a nice suit of armor, a few thermal detonators, and take on the galaxy! Also, check out the tab for enhanced items.'
         },
         {
           to: 'starships',
           title: 'Starships',
-          subText: 'Like the Characters tab, Starships includes all of the customization information for the mechanics implemented in Starships of the Galaxy.'
+          icon: 'fa-rocket',
+          subText: 'Just like the characters tab, but for your ship. Hyperdrives, quad-cannons, and navicomputers -- it\'s all here.'
         },
         {
           to: 'tools',
           title: 'Tools',
-          subText: 'The tools tab includes a character builder that is in development.'
+          icon: 'fa-edit',
+          subText: 'Create your character right here on the SW5e website! (Currently in development)'
         },
         {
           to: 'assets',
           title: 'Assets',
-          subText: 'The Assets tab includes all of the links necessary for running and playing a Star Wars 5e game.',
-          subSections: [
-            {
-              title: 'Source Books',
-              subText: 'All four source books are linked here as PDFs, including a print friendly version of the Player\'s Handbook.'
-            },
-            {
-              title: 'Expanded Content',
-              subText: 'This includes GMBinder links to three of the expanded content documents for character options.'
-            },
-            {
-              title: 'Sponsored Content',
-              subText: 'Sponsored content is content created by members of the moderation team that hasn\'t been officially adopted, but should still be considered for use.'
-            },
-            {
-              title: 'Character Sheets',
-              subText: 'This includes the official character sheet as well as as form-fillable version.'
-            },
-            {
-              title: 'Deployment and Starship Sheets',
-              subText: 'As with character sheets, these are the official sheets for use in deployments and starships.'
-            },
-            {
-              title: 'Podcasts and Other Media',
-              subText: 'This includes links to any officially sponsored media related to Star Wars 5e, including Dungeon Jedi Masters—a podcast and more elucidating the Star Wars 5e experience.'
-            },
-            {
-              title: 'Other',
-              subText: 'This includes links to a teespring store where you can get some Star Wars 5e swag, a guide to printing the Player\'s Handbook (no other book is endorsed for printing yet), as well as some pre-generated characters.'
-            }
-          ]
+          icon: 'fa-file-download',
+          subText: 'Downloadable pdfs, character sheets, podcasts and more.'
         },
         {
           to: 'credits',
           title: 'Credits',
-          subText: 'The credits tab is a comprehensive list of contributors to this project.'
+          icon: 'fa-list',
+          subText: 'A comprehensive list of contributors to the SW5e project.'
         }
       ]
     }
@@ -120,6 +90,7 @@
     get socialLinks () {
       return [
         {
+          title: 'Development',
           channels: [
             {
               href: 'https://discord.gg/zYcPYTu',
@@ -130,6 +101,7 @@
           subText: 'Discord is where the development occurs. If you have questions that you\'ve otherwise not been able to find answers to, or you want to develop content for Star Wars 5e, this is the place to do it.'
         },
         {
+          title: 'Connect',
           channels: [
             {
               href: 'https://www.reddit.com/r/sw5e',
@@ -150,6 +122,7 @@
           subText: 'These three channels are used for sharing Star Wars 5e content, questions, and more.'
         },
         {
+          title: 'Support',
           channels: [
             {
               href: 'https://www.patreon.com/sw5e',
@@ -163,18 +136,7 @@
     }
 
     get themeToggleColor () {
-      return this.isDarkSide ? this.$vuetify.theme.themes.light.secondary : 'primary'
-    }
-
-    getBookWrapperClasses (index: number) {
-      let classes = []
-      if (!['sm', 'xs'].includes(this.$vuetify.breakpoint.name) && index !== this.books.length - 1) {
-        classes.push((this as any).$style.bookWrapper)
-      }
-      if (index % 2) {
-        classes.push('flex-row-reverse')
-      }
-      return classes
+      return this.isDarkSide ? this.$vuetify.theme.themes.light.secondary : this.$vuetify.theme.themes.dark.background
     }
 
     toggleDarkSideTheme () {
@@ -185,82 +147,142 @@
 </script>
 
 <template lang="pug">
-  div(:class="$style.homeContainer")
-    h1(:class="$style.sw5eTitle") Star Wars 5e
-    p Star Wars 5e is a comprehensive overhaul of Dungeons and Dragons 5th edition for a Star Wars campaign. It is built on the same mechanics as 5th edition, with those mechanics expanded. In these books, and on this website, you will find everything you need to run a Star Wars 5e campaign.
-    div.text-left
+  div
+    div(:class="$style.hero")
+      v-parallax(:src="require(`@/assets/hero${isDarkSide ? '-dark' : ''}.jpg`)")
+        v-row(align="center", justify="center")
+          v-col.d-flex.align-center.flex-column
+            v-img(:src="require('@/assets/sw5e-logo.png')", max-width="300").mb-5
+            div(:class="$style.heroText").mt-5 Welcome to Star Wars 5e, a comprehensive overhaul of Dungeons and Dragons 5th edition for a Star Wars campaign. It is built on the same mechanics as 5th edition, with those mechanics expanded. In these books, and on this website, you will find everything you need to run a Star Wars 5e campaign.
+      div(:class="$style.shadow")
+    div(:class="$style.homeContainer").text-left
 
-      h1(:class="$style.sectionTitle") The Books
-      p.px-3 Star Wars 5e is currently comprised of four books—The Player's Handbook, Scum and Villainy, Starships of the Galaxy, and Wretched Hives—with two more books planned.
-      div(
-        v-for="book, index in books",
-        :key="book.title"
-        :class="getBookWrapperClasses(index)"
-      ).d-md-flex.align-center.justify-space-between
-        div.pa-5.d-flex.flex-column.flex-grow-1
-          h2 {{ book.title }}
-          p {{ book.subText }}
-          div(v-if="book.whatsDifferent").mt-5
-            v-btn(:to="book.whatsDifferent", color="primary") What's Different?
-
-        v-card(:to="book.to", hover, exact, height="100%", max-width="350", min-height="452", color="black").flex-shrink.mx-auto
-          v-img(:src="require(`@/assets/${book.image}.jpg`)", :class="$style.image")
+      h1(:class="$style.sectionTitle") The Rulebooks
+      p Star Wars 5e is currently comprised of four books—The Player's Handbook, Scum and Villainy, Starships of the Galaxy, and Wretched Hives—with two more books planned.
+      div(v-if="$vuetify.breakpoint.mdAndUp").d-flex.justify-space-between
+        v-card(
+          v-for="book, index in books",
+          :key="book.title"
+          :to="book.to",
+          hover,
+          exact,
+          max-width="20%",
+          color="black"
+        )
+          v-hover(v-slot="{ hover }")
+            v-img(:src="require(`@/assets/${book.image}.jpg`)", :class="$style.image")
+              v-expand-transition
+                div(v-if="hover", :class="$style.imageCover").text-center.transition-fast-in-fast-out.d-flex.flex-column
+                  component(
+                    :is="$vuetify.breakpoint.lgAndUp ? 'h2' : 'h4'",
+                    :class="$vuetify.breakpoint.lgAndUp ? $style.imageCoverHeaderBig : $style.imageCoverHeader"
+                  ).pt-5.px-3 {{ book.title }}
+                  p(:class="$vuetify.breakpoint.lgAndUp ? '' : $style.imageSmallText").flex-grow-1.px-5 {{ book.subText }}
+                  v-btn(color="primary").mx-5.mb-5 Read More
+      div(v-else).pa-3.elevation-10.rounded-lg
+        v-slide-group(v-model="book", center-active, mandatory)
+          v-slide-item(v-for="book, index in books", :key="book.title", v-slot="{ active, toggle }")
+            div(v-ripple, @click="toggle").mx-3.rounded
+              v-img(
+                :src="require(`@/assets/${book.image}.jpg`)",
+                :class="[$style.image, active ? '' : $style.inactive]",
+                max-width="200px"
+              ).rounded
+        div.mt-3.text-center
+          h2.mb-2 {{ books[book].title }}
+          div {{ books[book].subText }}
+          v-btn(color="primary", :to="books[book].to", exact).mt-5 Read More
 
       h1(:class="$style.sectionTitle") The Website
-      p.px-3 The website is designed to make this information present in the books more accessible for both players and GMs.
-      div(v-for="sitePage in sitePages", :key="sitePage.title").my-3
-        v-btn(:to="sitePage.to", color="primary", width="200") {{ sitePage.title }}
-        div.ml-5 {{ sitePage.subText }}
-          div(v-for="subSection in sitePage.subSections", :key="subSection.title").ml-5
-            h4 {{ subSection.title }}
-            div {{ subSection.subText }}
+      p The website is designed to make this information present in the books more accessible for both players and GMs.
+      div.d-flex.flex-wrap.justify-space-around
+        div(v-for="sitePage in sitePages", :key="sitePage.title", :class="$style.sitePage").d-flex.flex-column.align-center.mb-5
+          v-btn(:to="sitePage.to", color="primary", width="200").mb-3
+            v-icon.mr-3 {{ sitePage.icon }}
+            div {{ sitePage.title }}
+          div {{ sitePage.subText }}
 
-      h1(:class="$style.sectionTitle") Social Media
-      p.px-3 Star Wars 5e has five social media channels. Any time there is a content update or expanded content release, I share it across all five channels simultaneously, so you can follow on whichever you prefer.
-      div(v-for="socialLink in socialLinks", :key="subText").my-3
-        div.d-flex.flex-wrap
+      h1(:class="$style.sectionTitle") Getting in Touch
+      p Star Wars 5e has five social media channels. Any time there is a content update or expanded content release, I share it across all five channels simultaneously, so you can follow on whichever you prefer.
+      v-row
+        v-col(v-for="socialLink in socialLinks", :key="socialLink.subText").d-flex.flex-column.align-center
+          h1 {{ socialLink.title }}
+          div.mb-5 {{ socialLink.subText }}
           div(v-for="{ href, icon, title } in socialLink.channels", :key="title").ma-2
             a(:href="href", target="_blank")
               v-btn(light, width="150")
                 v-icon(:color="title").mr-3 {{ icon }}
                 | {{ title }}
-        div.ml-5 {{ socialLink.subText }}
-    v-btn(:color="themeToggleColor", @click="toggleDarkSideTheme").mt-5 Join the {{ isDarkSide ? 'Light' : 'Dark' }} Side
+    v-btn(:color="themeToggleColor", @click="toggleDarkSideTheme").mt-5.white--text Join the {{ isDarkSide ? 'Light' : 'Dark' }} Side
 </template>
 
 <style module lang="scss">
   @import "src/assets/styles/colors.scss";
 
+  .hero {
+    margin: -12px -12px 0 -12px;
+    position: relative;
+
+    .heroText {
+      max-width: 600px;
+    }
+
+    .shadow {
+      box-shadow:
+        inset 0 10px 13px 20px rgba(0,0,0,.2),
+        inset 0 20px 31px 20px rgba(0,0,0,.14),
+        inset 0 8px 38px 20px rgba(0,0,0,.12);
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      top: 0;
+      left: 0;
+    }
+  }
+
   .homeContainer {
     max-width: 1185px;
     margin: auto;
 
-    .sw5eTitle {
-      font-size: 50px;
-    }
-
     .sectionTitle {
       border-bottom: 2px solid $secondary;
-      margin-top: 50px;
+      margin-top: 60px;
+      margin-bottom: 5px;
     }
 
-    .bookWrapper {
-      margin-bottom: -120px;
+    .image {
+      background-color: $black;
+      height: 100%;
+      opacity: 1;
+
+      &.inactive {
+        opacity: 0.3;
+        transition: opacity 1s;
+      }
+
+      .imageCover {
+        background-color: $background;
+        height: 100%;
+        opacity: 0.95;
+        bottom: 0;
+        position: absolute;
+
+        .imageSmallText {
+          font-size: 12px;
+        }
+
+        .imageCoverHeader {
+          min-height: 60px;
+        }
+
+        .imageCoverHeaderBig {
+          min-height: 80px;
+        }
+      }
     }
-  }
 
-  .image {
-    background-color: $black;
-    min-width: 350px;
-  }
-
-  .routes {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-  }
-
-  .darkSideSwitch {
-    justify-content: center;
+    .sitePage {
+      max-width: 300px;
+    }
   }
 </style>

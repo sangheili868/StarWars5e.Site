@@ -7,6 +7,7 @@
       return [
         {
           category: 'Source Books',
+          subText: 'All four source books are linked here as PDFs, including a print friendly version of the Player\'s Handbook.',
           routes: [
             {
               href: 'https://drive.google.com/file/d/1W1S-fqkMyyeU1PaB3H4pAxYUric_u1eX/view?usp=sharing',
@@ -32,6 +33,7 @@
         },
         {
           category: 'Expanded Content',
+          subText: 'This includes GMBinder links to three of the expanded content documents for character options.',
           routes: [
             {
               href: 'https://www.gmbinder.com/share/-LM7Sz_VhFOf0IYKXHQG',
@@ -49,6 +51,7 @@
         },
         {
           category: 'Sponsored Content',
+          subText: 'Sponsored content is content created by members of the moderation team that hasn\'t been officially adopted, but should still be considered for use.',
           routes: [
             {
               href: 'https://www.gmbinder.com/share/-M-qA_FYgTwJjU8yFjjx',
@@ -78,6 +81,7 @@
         },
         {
           category: 'Character Sheets',
+          subText: 'This includes the official character sheet as well as as form-fillable version.',
           routes: [
             {
               href: 'https://drive.google.com/file/d/16b0luhTq6xBuQUUf8jm6vnLAImnmjuAF/view?usp=sharing',
@@ -91,6 +95,7 @@
         },
         {
           category: 'Deployment and Starship Sheets',
+          subText: 'As with character sheets, these are the official sheets for use in deployments and starships.',
           routes: [
             {
               href: 'https://drive.google.com/file/d/11zxAf6O7FHrXMP5kZQgBuAyY_6Sgck6f/view?usp=sharing',
@@ -116,6 +121,7 @@
         },
         {
           category: 'Podcasts and other media',
+          subText: 'This includes links to any officially sponsored media related to Star Wars 5e, including Dungeon Jedi Masters—a podcast and more elucidating the Star Wars 5e experience.',
           routes: [
             {
               href: 'https://dungeonjedimasters.com/',
@@ -125,6 +131,7 @@
         },
         {
           category: 'Other',
+          subText: 'This includes links to a teespring store where you can get some Star Wars 5e swag, a guide to printing the Player\'s Handbook (no other book is endorsed for printing yet), as well as some pre-generated characters.',
           routes: [
             {
               href: 'https://teespring.com/stores/sw5e',
@@ -154,10 +161,11 @@
 </script>
 
 <template lang="pug">
-  div
-    div(v-for="{ category, routes } in categories", :key="category").mb-5
-      h3 {{ category }}
-      div(:class="$style.routes")
+  div(:class="$style.assets")
+    div(v-for="{ category, subText, routes } in categories", :key="category").mb-5
+      h1(:class="$style.assetTitle") {{ category }}
+      div.mb-5 {{ subText }}
+      div.d-flex.flex-wrap.justify-center
         div(v-for="{ href, title, author } in routes", :key="title" )
           a(:href="href", target="_blank")
             v-btn(color="primary").mx-2.mt-2 {{ title }}
@@ -165,9 +173,16 @@
 </template>
 
 <style module lang="scss">
-  .routes {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
+  @import "src/assets/styles/colors.scss";
+
+  .assets {
+    max-width: 1185px;
+    margin: auto;
+
+    .assetTitle {
+      border-bottom: 2px solid $secondary;
+      margin-top: 60px;
+      margin-bottom: 5px;
+    }
   }
 </style>

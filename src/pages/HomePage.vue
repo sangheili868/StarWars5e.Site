@@ -205,7 +205,7 @@
       h1(:class="$style.sectionTitle") Getting in Touch
       p Star Wars 5e has five social media channels. Any time there is a content update or expanded content release, I share it across all five channels simultaneously, so you can follow on whichever you prefer.
       v-row
-        v-col(v-for="socialLink in socialLinks", :key="socialLink.subText").d-flex.flex-column.align-center
+        v-col(v-for="socialLink in socialLinks", :key="socialLink.subText", cols="12", md="4").d-flex.flex-column.align-center
           h1 {{ socialLink.title }}
           div.mb-5 {{ socialLink.subText }}
           div(v-for="{ href, icon, title } in socialLink.channels", :key="title").ma-2

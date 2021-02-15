@@ -1,6 +1,10 @@
 export default '0.5.9'
 
 /*
+0.5.10
+- Adjust hero image height
+- Properly stack contact links on mobile
+
 0.5.9
 - Redesigned homepage again, but with @toddmoonbounce's suggestions
 

@@ -1,6 +1,9 @@
-export default '0.5.9'
+export default '0.5.11'
 
 /*
+0.5.11
+- Fix bug when exporting a monster without senses (found by @potroclo)
+
 0.5.10
 - Adjust hero image height
 - Properly stack contact links on mobile

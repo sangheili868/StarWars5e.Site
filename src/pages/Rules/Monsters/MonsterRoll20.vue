@@ -146,7 +146,7 @@
         npc_hpformula: m.hitPointRoll,
         npc_languages: m.languages.join(', '),
         npc_name: m.name,
-        npc_senses: m.senses.join(', '),
+        npc_senses: m.senses && m.senses.length ? m.senses.join(', ') : '',
         npc_speed: m.speeds,
         npc_type: m.size + ' ' + m.types.join(', ') + ', ' + m.alignment,
         npc_xp: m.experiencePoints.toLocaleString(),

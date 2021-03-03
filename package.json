@@ -36,7 +36,7 @@
     "mathjs": "^5.10.3",
     "ordinal": "^1.0.3",
     "pluralize": "^8.0.0",
-    "pug": "^2.0.3",
+    "pug": "^3.0.1",
     "pug-plain-loader": "^1.0.0",
     "register-service-worker": "^1.6.2",
     "semver": "^7.2.1",

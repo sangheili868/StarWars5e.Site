@@ -1,6 +1,9 @@
-export default '0.5.11'
+export default '0.5.12'
 
 /*
+0.5.12
+- Fix bug with unequipped custom armor showing in armor list (found by @Adriel Wattson)
+
 0.5.11
 - Fix bug when exporting a monster without senses (found by @potroclo)
 

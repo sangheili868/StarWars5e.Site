@@ -46,11 +46,10 @@ export default function generateCombatStats (
   const equippedArmor = equipment.filter(isCharacterArmorType).filter(armor => armor.equipped)
   const armorList = [
     ...equippedArmor,
-    ...rawCharacter.customEquipment.filter(({ equipmentCategory }) => equipmentCategory === 'Armor')
+    ...rawCharacter.customEquipment.filter(({ equipmentCategory, equipped }) => equipped && equipmentCategory === 'Armor')
   ].map(({ name }) => name)
 
   const perceptionModifier = abilityScores.Wisdom.skills.find(({ name }) => name === 'Perception')
-  const isScout = rawCharacter.classes.find(({ name }) => name === 'Scout')
   const passivePerception = 10 + (perceptionModifier ? perceptionModifier.modifier : 0)
 
   return {

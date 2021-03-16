@@ -43,9 +43,10 @@
         {
           text: 'Type',
           value: 'type',
-          filterChoices: ['Ammunition', 'Armor', 'Hyperdrive', 'Navcomputer', 'Shield'],
+          filterChoices: ['Ammunition', 'Armor', 'Hyperdrive', 'Power Coupling', 'Reactor', 'Shield'],
           isMultiSelect: true,
-          filterFunction: ({ type }: StarshipEquipmentType, filterValue: string[]) => _.some(filterValue, (filter: string) => filter === type)
+          filterFunction: ({ type }: StarshipEquipmentType, filterValue: string[]) => _.some(filterValue, (filter: string) => filter === _.startCase(type)),
+          render: (type: string) => _.startCase(type)
         }
       ]
     }

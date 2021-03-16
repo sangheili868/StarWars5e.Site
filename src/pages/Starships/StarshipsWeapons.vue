@@ -50,8 +50,7 @@
         },
         { text: 'Cost', value: 'cost' },
         { text: 'Damage', value: 'damageNumberOfDice', render: this.weaponDamage },
-        { text: 'Attack Bonus', value: 'attackBonus' },
-        { text: 'Attacks per Round', value: 'attacksPerRound' }
+        { text: 'Properties', value: 'properties' }
       ]
     }
 

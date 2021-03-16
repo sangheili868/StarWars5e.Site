@@ -1,6 +1,9 @@
 export default '0.5.12'
 
 /*
+0.5.13
+- Updated filter choices for starship weapons and equipement to reflect changes in the text
+
 0.5.12
 - Fix bug with unequipped custom armor showing in armor list (found by @Adriel Wattson)
 

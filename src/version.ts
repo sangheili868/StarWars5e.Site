@@ -1,6 +1,9 @@
 export default '0.5.12'
 
 /*
+0.5.14
+- Fixed missing technician deployment in Starship navigation menu
+
 0.5.13
 - Updated filter choices for starship weapons and equipement to reflect changes in the text
 

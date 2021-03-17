@@ -48,6 +48,11 @@
             title: 'Pilot',
             icon: 'fa-helicopter',
             route: '/rules/sotg/deployments/Pilot'
+          },
+          {
+            title: 'Technician',
+            icon: 'fa-shield-alt',
+            route: '/rules/sotg/deployments/Technician'
           }
         ]
       },

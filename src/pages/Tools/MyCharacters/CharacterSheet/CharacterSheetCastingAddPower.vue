@@ -61,7 +61,7 @@
 
     isDisabled (powerName: string, prerequisite: string) {
       const hasEnforcablePrerequisite = prerequisite && this.isEnforcingForcePrerequisites
-      const isMeetingPrerequisite = !hasEnforcablePrerequisite || this.allForcePowers.includes(prerequisite)
+      const isMeetingPrerequisite = !hasEnforcablePrerequisite || this.allForcePowers.some(forcePower => prerequisite === forcePower || prerequisite === forcePower + 's')
       return (this.disabled || !isMeetingPrerequisite || this.isAlreadyKnown(powerName)) && !this.powersSelected.includes(powerName)
     }
 

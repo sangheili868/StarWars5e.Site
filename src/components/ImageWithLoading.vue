@@ -23,7 +23,7 @@
 
 <template lang="pug">
   span
-    v-img(v-show="!isError", v-bind="$attrs", @error="handleError")
+    v-img(v-show="!isError", v-bind="$attrs", @error="handleError").ma-auto
       template(v-slot:placeholder)
         div.d-flex.justify-center.align-center.fill-height
           Loading

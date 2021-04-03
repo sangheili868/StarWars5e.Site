@@ -2,6 +2,7 @@
   import { Component, Prop, Vue } from 'vue-property-decorator'
   import Loading from '@/components/Loading.vue'
   import { pickBy, every, merge } from 'lodash'
+  import ImageWithLoading from '@/components/ImageWithLoading.vue'
 
   interface HeaderType {
     text: string
@@ -20,7 +21,8 @@
 
   @Component({
     components: {
-      Loading
+      Loading,
+      ImageWithLoading
     }
   })
   export default class SearchTable extends Vue {
@@ -127,8 +129,10 @@
           tr(v-if="item.isExpandable", :class="$style.clickableRow", @click="expand(!isExpanded)")
             td(v-for="{ value, render } in alignedHeaders", :to="item.to") {{ render(item[value], item) }}
           tr(v-else-if="item.to", :class="$style.clickableRow")
-            td(v-for="{ value, render } in alignedHeaders", :class="$style.clickableCell")
-              router-link(:to="item.to", :class="$style.clickableAnchor") {{ render(item[value], item) }}
+            td(v-for="{ value, render, isImage } in alignedHeaders", :class="$style.clickableCell")
+              div(v-if="isImage").pt-5
+                ImageWithLoading(:src="render(item[value])", height="100", position="top", width="150")
+              router-link(v-else, :to="item.to", :class="$style.clickableAnchor") {{ render(item[value], item) }}
           tr(v-else)
             td(v-for="{ value, render } in alignedHeaders", :to="item.to") {{ render(item[value], item) }}
         template(v-slot:expanded-item="{ item, headers }")

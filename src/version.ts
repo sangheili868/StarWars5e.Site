@@ -1,6 +1,10 @@
-export default '0.5.12'
+export default '0.5.15'
 
 /*
+0.5.15
+- Add species thumbnails to search tables (suggested by @Rick Fisto)
+- Added temporary workaround for probe mind prerequisite bug (found by @Kris)
+
 0.5.14
 - Fixed missing technician deployment in Starship navigation menu
 

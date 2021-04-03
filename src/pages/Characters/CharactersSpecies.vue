@@ -44,6 +44,12 @@
 
     get headers () {
       return [
+        {
+          value: 'imageUrls',
+          render: (value: string[]) => value[0],
+          sortable: false,
+          isImage: true
+        },
         { text: 'Name', value: 'name' },
         {
           text: 'Ability Score Increase',

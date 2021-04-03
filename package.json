@@ -25,7 +25,7 @@
     "@types/vue-markdown": "^2.2.1",
     "@types/vuedraggable": "^2.23.1",
     "@vue/cli": "^3.11.0",
-    "axios": "0.18.1",
+    "axios": "0.21.1",
     "copy-to-clipboard": "^3.2.0",
     "core-js": "^2.6.5",
     "file-saver": "^2.0.2",

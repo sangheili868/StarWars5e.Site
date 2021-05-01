@@ -22,7 +22,7 @@
 </script>
 
 <template lang="pug">
-  span
+  span(v-if="$attrs.src")
     v-img(v-show="!isError", v-bind="$attrs", @error="handleError").ma-auto
       template(v-slot:placeholder)
         div.d-flex.justify-center.align-center.fill-height

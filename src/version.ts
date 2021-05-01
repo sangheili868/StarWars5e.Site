@@ -1,6 +1,9 @@
-export default '0.5.15'
+export default '0.5.16'
 
 /*
+0.5.16
+- Fixed bug with half-human image showing error message (found by @Uproar)
+
 0.5.15
 - Add species thumbnails to search tables (suggested by @Rick Fisto)
 - Added temporary workaround for probe mind prerequisite bug (found by @Kris)

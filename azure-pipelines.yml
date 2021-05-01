@@ -12,7 +12,7 @@ pool:
 steps:
 - task: AzureKeyVault@1
   inputs:
-    ConnectedServiceName: 'Azure'
+    ConnectedServiceName: 'Azure Prod'
     KeyVaultName: $(keyVault)
 
 - task: YarnInstaller@2

@@ -38,6 +38,7 @@ steps:
     script: yarn; yarn build;
   env:
     VUE_APP_sw5eapiurl: $(sw5eapiurl)
+    VUE_APP_characterLimitPerUser: $(characterLimitPerUser)
   displayName: 'Yarn Build'
   
 - task: ArchiveFiles@2

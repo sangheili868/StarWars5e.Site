@@ -200,7 +200,7 @@ export default class Character extends VuexModule {
           userId
         })),
         ...stateOf(this).characters.filter(({ id }) => !id)
-      ].slice(0, 20) }
+      ] }
     } else {
       return { characters: stateOf(this).characters }
     }

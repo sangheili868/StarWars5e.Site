@@ -29,7 +29,7 @@
     searchText = ''
     isFabOpen = false
     isImportOpen = false
-    characterLimit = 20
+    characterLimit = process.env.VUE_APP_characterLimitPerUser
     isLoadingCharacter = true
 
     created () {

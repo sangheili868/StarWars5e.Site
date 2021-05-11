@@ -1,6 +1,9 @@
 export default '0.5.16'
 
 /*
+0.5.17
+- Upped character limit per user to 50
+
 0.5.16
 - Fixed bug with half-human image showing error message (found by @Uproar)
 

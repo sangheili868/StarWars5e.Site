@@ -137,12 +137,13 @@
     }
 
     logOut () {
-      this.setIsAuthLoading(true)
       Promise.all([
         this.setAccessToken(),
         this.clearLocalCharacters()
       ]).then(() => {
-        Vue.prototype.$msal && Vue.prototype.$msal.logoutRedirect()
+        Vue.prototype.$msal && Vue.prototype.$msal.logoutRedirect({
+          postLogoutRedirectUri: window.location.pathname + '#logged-out'
+        })
       })
     }
   }

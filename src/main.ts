@@ -76,13 +76,13 @@ Vue.prototype.$msal.handleRedirectPromise().then(async (tokenResponse: any) => {
   }
 })
 Vue.prototype.$msal.addEventCallback(async (message: msalBrowser.EventMessage) => {
+  if (message.eventType === msalBrowser.EventType.LOGOUT_START) {
+    await store.dispatch('authentication/setIsAuthLoading', true, { root: true })
+  }
+  if (message.eventType === msalBrowser.EventType.LOGIN_START) {
+    await store.dispatch('authentication/setIsAuthLoading', true, { root: true })
+  }
   if (message.eventType === msalBrowser.EventType.HANDLE_REDIRECT_END) {
-    await store.dispatch('authentication/setIsAuthLoading', false, { root: true })
-  }
-  if (message.eventType === msalBrowser.EventType.LOGOUT_FAILURE) {
-    await store.dispatch('authentication/setIsAuthLoading', false, { root: true })
-  }
-  if (message.eventType === msalBrowser.EventType.LOGOUT_SUCCESS) {
     await store.dispatch('authentication/setIsAuthLoading', false, { root: true })
   }
 })
@@ -93,6 +93,13 @@ router.beforeEach(async (to, from, next) => {
     : 'SW5E'
   await (store as any).restored
   next()
+})
+
+router.afterEach(async (to, from) => {
+  if (to.hash === '#logged-out') {
+    router.push(to.path)
+    await store.dispatch('authentication/setIsAuthLoading', false, { root: true })
+  }
 })
 
 Vue.use(VueAppInsights, {

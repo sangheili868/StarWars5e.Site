@@ -12,7 +12,6 @@
 
     async signIn () {
       if (Vue.prototype.$msal) {
-        await this.setIsAuthLoading(true)
         await this.fetchAccessToken()
       }
     }

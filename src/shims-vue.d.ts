@@ -4,5 +4,3 @@ declare module '*.vue' {
 }
 
 declare module 'vue-sessionstorage'
-
-declare module 'vuex-module-decorators'

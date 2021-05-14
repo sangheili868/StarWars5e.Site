@@ -3,6 +3,8 @@ export default '0.5.16'
 /*
 0.5.17
 - Upped character limit per user to 50
+- Added a user profile with a username that can be set and reset as needed. Not used anywhere, yet
+- Tweaked some of the login/logout flow to make it a little more intuitive
 
 0.5.16
 - Fixed bug with half-human image showing error message (found by @Uproar)

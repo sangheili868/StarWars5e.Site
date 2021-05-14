@@ -20,14 +20,16 @@
     @uiModule.State isDarkSide!: boolean
     @uiModule.Action updateSideBar!: (value: boolean) => void
     @authenticationModule.Getter isLoggedIn!: boolean
-    @authenticationModule.Action initMSAL!: any
     @authenticationModule.Action setAccessToken!: (accessToken?: string) => Promise<any>
+    @authenticationModule.State isAuthLoading!: boolean
+    @authenticationModule.Action setIsAuthLoading!: (isAuthLoading: boolean) => Promise<any>
     @characterModule.Action clearLocalCharacters!: () => Promise<any>
 
     isSearchOpen = false
+    toolbarLoading = true
 
-    async created () {
-      this.initMSAL()
+    async mounted () {
+      this.toolbarLoading = false
     }
 
     @Watch('$route')
@@ -135,11 +137,12 @@
     }
 
     logOut () {
+      this.setIsAuthLoading(true)
       Promise.all([
         this.setAccessToken(),
         this.clearLocalCharacters()
       ]).then(() => {
-        Vue.prototype.$msal && Vue.prototype.$msal.logout()
+        Vue.prototype.$msal && Vue.prototype.$msal.logoutRedirect()
       })
     }
   }
@@ -163,11 +166,15 @@
             v-list-item(:to="to + nestedRoute.to")
               v-list-item-title {{ nestedRoute.title }}
           template(v-if="!nested || !nested.length") {{ title }}
-        v-menu(v-if="isLoggedIn", offset-y)
+        v-btn(v-if="(isAuthLoading || toolbarLoading)", :color="darkColor")
+          v-progress-circular(indeterminate, color="white", size="15")
+        v-menu(v-else-if="isLoggedIn", offset-y)
           template(v-slot:activator="{ on }")
             v-btn(text, :color="darkColor", v-on="on")
               v-icon(:color="darkColor") fa-user
           v-list(dense)
+            v-list-item(to="/profile")
+              v-list-item-title Profile
             v-list-item(@click="logOut")
               v-list-item-title Logout
         SignInButton(v-else) Login
@@ -176,11 +183,15 @@
     v-toolbar-items.hidden-md-and-up
       v-btn(icon, @click="isSearchOpen = !isSearchOpen")
         v-icon {{ isSearchOpen ? 'fa-times' : 'fa-search' }}
-      v-menu(v-if="isLoggedIn", offset-y)
+      v-btn(v-if="(isAuthLoading || toolbarLoading)", :color="darkColor")
+        v-progress-circular(indeterminate, color="white", size="15")
+      v-menu(v-else-if="isLoggedIn", offset-y)
         template(v-slot:activator="{ on }")
           v-btn(text, :color="darkColor", v-on="on")
             v-icon(:color="darkColor") fa-user
         v-list(dense)
+          v-list-item(to="/profile")
+            v-list-item-title Profile
           v-list-item(@click="logOut")
             v-list-item-title Logout
       SignInButton(v-else) Login

@@ -42,17 +42,17 @@
   dependencies:
     xss "^1.0.6"
 
-"@azure/msal-browser@^2.4.0":
-  version "2.7.0"
-  resolved "https://registry.yarnpkg.com/@azure/msal-browser/-/msal-browser-2.7.0.tgz#4033731f8d9465e2cb731edb8c7082580360f38d"
-  integrity sha512-mTswpOf1IbEu70fMaJFZyGUzsx1oIdKLPE/CBCuTN3mh9CmYE3r8P/D/R0y7TqZiUYPN7BsxIA6umLce2qKZpQ==
+"@azure/msal-browser@^2.14.1":
+  version "2.14.1"
+  resolved "https://registry.yarnpkg.com/@azure/msal-browser/-/msal-browser-2.14.1.tgz#6c4f283069e7bedb8cea664f728a2069338fc043"
+  integrity sha512-J2YgonII+/ureLk7jZddup15y5QlR1bj9dLSIcIluwn9l1TdqZXfbwvMeLgd2xmMPIuEKVyRwUkw2QMxZ7lehQ==
   dependencies:
-    "@azure/msal-common" "^1.7.2"
+    "@azure/msal-common" "^4.2.1"
 
-"@azure/msal-common@^1.7.2":
-  version "1.7.2"
-  resolved "https://registry.yarnpkg.com/@azure/msal-common/-/msal-common-1.7.2.tgz#b0061367efbfd459ebd11f6851ff36121db3278c"
-  integrity sha512-3/voCdFKONENX+5tMrNOBSrVJb6NbE7YB8vc4FZ/4ZbjpK7GVtq9Bu1MW+HZhrmsUzSF/joHx0ZIJDYIequ/jg==
+"@azure/msal-common@^4.2.1":
+  version "4.2.1"
+  resolved "https://registry.yarnpkg.com/@azure/msal-common/-/msal-common-4.2.1.tgz#0377c980aeebaaf3c768fef9165159759c9a9176"
+  integrity sha512-f6na0yqY+rUJ54m79TmFbG8BH1nFvlW+ETtYUGdZpJUO+/RgDVnRzkoj5PVQd6y7czKYlrBRetAcZEE+yGh+/g==
   dependencies:
     debug "^4.1.1"
 

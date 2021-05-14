@@ -22,6 +22,7 @@ import searchResults from './modules/searchResults'
 import starshipEquipment from './modules/starshipEquipment'
 import starshipModifications from './modules/starshipModifications'
 import starshipSizes from './modules/starshipSizes'
+import user from './modules/user'
 import ui from './modules/ui'
 import ventures from './modules/ventures'
 import weaponProperties from './modules/weaponProperties'
@@ -65,6 +66,7 @@ const modules = {
   starshipModifications,
   starshipSizes,
   ui,
+  user,
   ventures,
   weaponProperties
 }

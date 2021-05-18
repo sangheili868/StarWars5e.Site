@@ -33,7 +33,7 @@
     "js-cookie": "^2.2.1",
     "localforage": "1.8.1",
     "material-design-icons-iconfont": "^4.0.5",
-    "mathjs": "^5.10.3",
+    "mathjs": "^7.5.1",
     "ordinal": "^1.0.3",
     "pluralize": "^8.0.0",
     "pug": "^3.0.1",

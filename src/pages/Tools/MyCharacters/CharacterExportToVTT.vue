@@ -9,19 +9,27 @@
   import { isEnhancedItem } from '@/types/lootTypes'
   import { CharacterValidationType } from '@/types/utilityTypes'
   import Roll20Instructions from '@/components/Roll20Instructions.vue'
+  import FoundryVTTInstructions from '@/components/FoundryVTTInstructions.vue'
   import makeRoll20ID from '@/utilities/makeRoll20ID'
+  import copy from 'copy-to-clipboard'
 
   @Component({
     components: {
       MyDialog,
-      Roll20Instructions
+      Roll20Instructions,
+      FoundryVTTInstructions
     }
   })
-  export default class CharacterExportToRoll20 extends Vue {
+  export default class CharacterExportToVTT extends Vue {
     @Prop(Object) readonly completeCharacter!: CompleteCharacterType;
     @Prop(Object) readonly rawCharacter!: RawCharacterType
     @Prop(Object) readonly characterValidation!: CharacterValidationType
+    @Prop(Boolean) readonly isRoll20!: Boolean
     isOpen = false
+
+    get label (): string {
+      return this.isRoll20 ? 'Roll20' : 'Foundry VTT'
+    }
 
     get jsonData (): Roll20CharacterType {
       const c = this.completeCharacter
@@ -285,6 +293,11 @@
         throw (e)
       }
     }
+
+    copyCharacter () {
+      copy(JSON.stringify(this.jsonData, null, 2))
+      window.alert('Foundry VTT character data copied to clipboard!')
+    }
   }
 </script>
 
@@ -292,16 +305,18 @@
   v-tooltip(v-if="characterValidation.code !== 0", top)
     template(v-slot:activator="{ on }")
       span(v-on="on")
-        v-btn(disabled, :class="$style.button").mt-2 Export to Roll20
+        v-btn(disabled, :class="$style.button").mt-2 Export to {{label}}
     div {{ characterValidation.message }}
   MyDialog(v-else, v-model="isOpen")
     template(v-slot:activator="{ on }")
-      v-btn(:class="$style.button", v-on="on").mt-2 Export to Roll20
-    template(#title) Export Character to Roll 20
+      v-btn(:class="$style.button", v-on="on").mt-2 Export to {{label}}
+    template(#title) Export Character to {{label}}
     template(#text)
-      Roll20Instructions
+      Roll20Instructions(v-if="isRoll20")
+      FoundryVTTInstructions(v-else)
     template(#actions)
-      v-btn.mt-3(color="primary", @click="saveToFile") Save file
+      v-btn.mt-3(v-if="isRoll20", color="primary", @click="saveToFile") Save file
+      v-btn.mt-3(v-else, color="primary", @click="copyCharacter") Copy file
       v-spacer
       v-btn(color="primary", text, @click="isOpen=false") Close
 </template>

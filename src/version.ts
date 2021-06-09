@@ -1,6 +1,9 @@
-export default '0.5.16'
+export default '0.5.18'
 
 /*
+0.5.18
+- Add Export To Foundry VTT button in the Character Menu
+
 0.5.17
 - Upped character limit per user to 50
 - Added a user profile with a username that can be set and reset as needed. Not used anywhere, yet

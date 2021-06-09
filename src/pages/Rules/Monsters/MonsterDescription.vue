@@ -1,6 +1,6 @@
 <script lang="ts">
   import { Component, Prop, Vue } from 'vue-property-decorator'
-  import { MonsterType } from '@/types/referenceTypes.ts'
+  import { MonsterType } from '@/types/referenceTypes'
   import VueMarkdown from 'vue-markdown'
   import Loading from '@/components/Loading.vue'
   import _ from 'lodash'

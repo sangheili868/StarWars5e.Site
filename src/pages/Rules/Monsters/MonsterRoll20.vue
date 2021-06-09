@@ -4,7 +4,7 @@
   import MyDialog from '@/components/MyDialog.vue'
   import { camelCase, map } from 'lodash'
   import { Roll20CharacterType } from '@/types/exportTypes'
-  import { MonsterType } from '@/types/referenceTypes.ts'
+  import { MonsterType } from '@/types/referenceTypes'
   import makeRoll20ID from '@/utilities/makeRoll20ID'
 
   const abilities = [

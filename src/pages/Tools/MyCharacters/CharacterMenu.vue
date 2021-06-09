@@ -2,7 +2,7 @@
   import { Component, Prop, Vue } from 'vue-property-decorator'
   import MyDialog from '@/components/MyDialog.vue'
   import { CompleteCharacterType } from '@/types/completeCharacterTypes'
-  import CharacterExportToRoll20 from './CharacterExportToRoll20.vue'
+  import CharacterExportToVTT from './CharacterExportToVTT.vue'
   import ConfirmDelete from '@/components/ConfirmDelete.vue'
   import copy from 'copy-to-clipboard'
   import { RawCharacterType } from '@/types/rawCharacterTypes'
@@ -14,7 +14,7 @@
     components: {
       MyDialog,
       ConfirmDelete,
-      CharacterExportToRoll20
+      CharacterExportToVTT
     }
   })
   export default class CharacterMenu extends Vue {
@@ -50,7 +50,8 @@
     v-btn(@click="saveToFile").mt-2 Export To File
     v-btn(@click="copyCharacter").mt-2 Copy Text
     v-btn(:to="printRoute").mt-2 Print Sheet
-    CharacterExportToRoll20(v-bind="{ completeCharacter, rawCharacter, characterValidation }")
+    CharacterExportToVTT(v-bind="{ completeCharacter, rawCharacter, characterValidation }", isRoll20)
+    CharacterExportToVTT(v-bind="{ completeCharacter, rawCharacter, characterValidation }")
     ConfirmDelete(
       :label="rawCharacter.name || 'Unnamed Character'",
       :item="rawCharacter.name || 'Unnamed Character'",

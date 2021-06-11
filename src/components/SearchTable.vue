@@ -1,7 +1,7 @@
 <script lang="ts">
   import { Component, Prop, Vue } from 'vue-property-decorator'
   import Loading from '@/components/Loading.vue'
-  import { pickBy, every, merge } from 'lodash'
+  import { pickBy, every, merge, chain, isEmpty } from 'lodash'
   import ImageWithLoading from '@/components/ImageWithLoading.vue'
 
   interface HeaderType {
@@ -9,6 +9,7 @@
     value: string
     align: string
     filterChoices: string[]
+    filterDefault?: string
     filterFunction: (item: { [key: string]: string }, filterValue: string | string[]) => boolean
   }
 
@@ -42,7 +43,12 @@
       const tableQueries = session.get('sw5eTableQueries') || {}
       if (!tableQueries[this.name]) session.set('sw5eTableQueries', { ...tableQueries, [this.name]: {} })
       this.search = this.initialSearch || (this.storedQuery ? this.storedQuery.Search as string : '')
-      this.filterSelections = this.storedQuery || {}
+      const headersWithDefault = chain(this.headers)
+        .filter('filterDefault')
+        .keyBy('text')
+        .mapValues('filterDefault')
+        .value()
+      this.filterSelections = isEmpty(headersWithDefault) ? this.storedQuery : headersWithDefault
       this.tabTitle = this.tableType
     }
 

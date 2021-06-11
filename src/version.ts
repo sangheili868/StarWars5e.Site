@@ -1,6 +1,10 @@
-export default '0.5.18'
+export default '0.5.19'
 
 /*
+0.5.19
+- Change archetype button to use Class Specific archetype name
+- Show only archetypes of class when clicking archetype button at the bottom of the class detail page
+
 0.5.18
 - Add Export To Foundry VTT button in the Character Menu
 

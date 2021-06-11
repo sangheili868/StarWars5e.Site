@@ -1,6 +1,6 @@
 <script lang="ts">
   import { Component, Prop, Vue } from 'vue-property-decorator'
-  import { ClassType } from '@/types/characterTypes.ts'
+  import { ClassType } from '@/types/characterTypes'
   import VueMarkdown from 'vue-markdown'
   import LevelTable from '@/components/LevelTable.vue'
   import ImageWithLoading from '@/components/ImageWithLoading.vue'

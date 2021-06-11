@@ -3,7 +3,7 @@
   import { namespace } from 'vuex-class'
   import SearchTable from '@/components/SearchTable.vue'
   import { ArchetypeType } from '@/types/characterTypes'
-  import _ from 'lodash'
+  import { startCase, isArray, isEmpty, chain } from 'lodash'
   import BackButton from '@/components/BackButton.vue'
 
   const archetypeModule = namespace('archetypes')
@@ -19,16 +19,20 @@
     @archetypeModule.Action fetchArchetypes!: () => void
     @Prop({ type: Boolean, default: false }) readonly isInHandbook!: boolean
     initialSearch: string | (string | null)[] = ''
+    defaultClass: string | (string | null)[] = ''
+    className: string = ''
     tableType: string = 'Archetypes'
 
     created () {
       this.fetchArchetypes()
       this.initialSearch = this.$route.query.search
+      const defClass = this.$route.query.class
+      this.defaultClass = startCase((isArray(defClass) ? defClass[0] : defClass) || undefined)
     }
 
     get items () {
       const page = this.isInHandbook ? 'phb' : 'characters'
-      return _(this.archetypes)
+      return chain(this.archetypes)
         .filter(({ contentType }) => !this.isInHandbook || contentType === 'Core')
         .map(archetype => ({
           ...archetype,
@@ -48,6 +52,7 @@
           text: 'Class',
           value: 'className',
           filterChoices: ['Berserker', 'Consular', 'Engineer', 'Fighter', 'Guardian', 'Monk', 'Operative', 'Scholar', 'Scout', 'Sentinel'],
+          filterDefault: this.defaultClass,
           filterFunction: ({ className }: ArchetypeType, filterValue: string) => className === filterValue
         },
         {
@@ -57,14 +62,14 @@
           render: (casterTypes: string[]) => casterTypes.join(', ') || 'None',
           filterChoices: ['Tech', 'Force', 'None'],
           filterFunction: ({ casterTypes }: { casterTypes: string[] }, filterValue: string[]) => casterTypes.some(casterType => filterValue.includes(casterType)) ||
-            (filterValue.includes('None') && _.isEmpty(casterTypes))
+            (filterValue.includes('None') && isEmpty(casterTypes))
         },
         {
           text: 'Source',
           value: 'contentSource',
-          render: _.startCase,
+          render: startCase,
           filterChoices: ['PHB', 'EC'],
-          filterFunction: ({ contentSource }: ArchetypeType, filterValue: string) => _.startCase(contentSource) === filterValue
+          filterFunction: ({ contentSource }: ArchetypeType, filterValue: string) => startCase(contentSource) === filterValue
         }
       ]
     }

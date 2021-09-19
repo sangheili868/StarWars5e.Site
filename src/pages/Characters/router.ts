@@ -14,6 +14,7 @@ import CharactersFeats from './CharactersFeats.vue'
 import CharactersFightingStyles from './CharactersFightingStyles.vue'
 import CharactersFightingMasteries from './CharactersFightingMasteries.vue'
 import CharactersLightsaberForms from './CharactersLightsaberForms.vue'
+import CharactersCustomizationOptions from './CharactersCustomizationOptions.vue'
 
 export default {
   path: '/characters',
@@ -94,14 +95,21 @@ export default {
       }
     },
     {
-      path: '/characters/fightingStyles',
+      path: '/characters/customizationOptions',
+      component: CharactersCustomizationOptions,
+      meta: {
+        title: 'Customization Options'
+      }
+    },
+    {
+      path: '/characters/customizationOptions/fightingStyles',
       component: CharactersFightingStyles,
       meta: {
         title: 'Fighting Styles'
       }
     },
     {
-      path: '/characters/fightingMasteries',
+      path: '/characters/customizationOptions/fightingMasteries',
       component: CharactersFightingMasteries,
       meta: {
         title: 'Fighting Masteries'
@@ -122,7 +130,7 @@ export default {
       }
     },
     {
-      path: '/characters/lightsaberForms',
+      path: '/characters/customizationOptions/lightsaberForms',
       component: CharactersLightsaberForms,
       meta: {
         title: 'Lightsaber Forms'

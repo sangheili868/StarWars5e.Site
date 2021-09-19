@@ -18,9 +18,7 @@
             { to: '/characters/archetypes', title: 'Archetypes' },
             { to: '/characters/backgrounds', title: 'Backgrounds' },
             { to: '/characters/feats', title: 'Feats' },
-            { to: '/characters/fightingStyles', title: 'Fighting Styles' },
-            { to: '/characters/fightingMasteries', title: 'Fighting Masteries' },
-            { to: '/characters/lightsaberForms', title: 'Lightsaber Forms' },
+            { to: '/characters/customizationOptions', title: 'Customization Options' },
             { to: '/characters/forcePowers', title: 'Force Powers' },
             { to: '/characters/techPowers', title: 'Tech Powers' }
           ]

@@ -1,6 +1,10 @@
-export default '0.5.19'
+export default '0.6.0'
 
 /*
+0.6.0
+- Updated character customization options with Weapon Focuses, Weapon Supremacies, Class Improvements, Multiclass Improvements, and Splashclass Improvements
+- Changed Characters menu ordering, moved customization options to new subpage
+
 0.5.19
 - Change archetype button to use Class Specific archetype name
 - Show only archetypes of class when clicking archetype button at the bottom of the class detail page

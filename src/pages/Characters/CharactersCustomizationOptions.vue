@@ -21,6 +21,11 @@
     get customizationOptions () {
       return [
         {
+          name: 'Class Improvements',
+          to: 'customizationOptions/classImprovements'
+        },
+
+        {
           name: 'Fighting Styles',
           to: 'customizationOptions/fightingStyles'
         },
@@ -31,6 +36,22 @@
         {
           name: 'Lightsaber Forms',
           to: 'customizationOptions/lightsaberForms'
+        },
+        {
+          name: 'Multiclass Improvements',
+          to: 'customizationOptions/multiclassImprovements'
+        },
+        {
+          name: 'Splashclass Improvements',
+          to: 'customizationOptions/splashclassImprovements'
+        },
+        {
+          name: 'Weapon Focuses',
+          to: 'customizationOptions/weaponFocuses'
+        },
+        {
+          name: 'Weapon Supremacies',
+          to: 'customizationOptions/weaponSupremacies'
         }
       ]
     }

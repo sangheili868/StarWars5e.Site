@@ -6,6 +6,7 @@ import armorProperties from './modules/armorProperties'
 import backgrounds from './modules/backgrounds'
 import blobs from './modules/blobs'
 import classes from './modules/classes'
+import classImprovements from './modules/classImprovements'
 import deployments from './modules/deployments'
 import enhancedItems from './modules/enhancedItems'
 import feats from './modules/feats'
@@ -15,17 +16,21 @@ import fightingMasteries from './modules/fightingMasteries'
 import equipment from './modules/equipment'
 import lightsaberForms from './modules/lightsaberForms'
 import monsters from './modules/monsters'
+import multiclassImprovements from './modules/multiclassImprovements'
 import powers from './modules/powers'
 import species from './modules/species'
 import referenceTables from './modules/referenceTable'
 import searchResults from './modules/searchResults'
+import splashclassImprovements from './modules/splashclassImprovements'
 import starshipEquipment from './modules/starshipEquipment'
 import starshipModifications from './modules/starshipModifications'
 import starshipSizes from './modules/starshipSizes'
 import user from './modules/user'
 import ui from './modules/ui'
 import ventures from './modules/ventures'
+import weaponFocuses from './modules/weaponFocuses'
 import weaponProperties from './modules/weaponProperties'
+import weaponSupremacies from './modules/weaponSupremacies'
 import character from './modules/character'
 import { VuexPersistence } from 'vuex-persist'
 import characterAdvancements from './modules/characterAdvancements'
@@ -47,6 +52,7 @@ const modules = {
   character,
   characterAdvancements,
   classes,
+  classImprovements,
   conditions,
   deployments,
   enhancedItems,
@@ -57,18 +63,22 @@ const modules = {
   equipment,
   lightsaberForms,
   monsters,
+  multiclassImprovements,
   powers,
   species,
   referenceTables,
   searchResults,
   skills,
+  splashclassImprovements,
   starshipEquipment,
   starshipModifications,
   starshipSizes,
   ui,
   user,
   ventures,
-  weaponProperties
+  weaponFocuses,
+  weaponProperties,
+  weaponSupremacies
 }
 
 const persistToLocalStorage = new VuexPersistence({

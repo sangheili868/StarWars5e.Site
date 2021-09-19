@@ -177,3 +177,40 @@ export interface FeatureType {
   sourceName: string,
   metadata: string
 }
+
+export interface ClassImprovementType {
+  name: string,
+  description: string,
+  contentSource: string,
+  contentType: string,
+  prerequisite: string
+}
+
+export interface SplashclassImprovementType {
+  name: string,
+  description: string,
+  contentSource: string,
+  contentType: string,
+  prerequisite: string
+}
+
+export interface MulticlassImprovementType {
+  name: string,
+  description: string,
+  contentSource: string,
+  contentType: string,
+  prerequisite: string
+}
+
+export interface WeaponFocusType {
+  name: string,
+  description: string,
+  contentSource: string,
+  contentType: string
+}
+export interface WeaponSupremacyType {
+  name: string,
+  description: string,
+  contentSource: string,
+  contentType: string
+}

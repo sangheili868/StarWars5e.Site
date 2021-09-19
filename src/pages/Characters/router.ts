@@ -2,6 +2,9 @@ import PageNester from '@/components/PageNester.vue'
 import CharactersPage from './CharactersPage.vue'
 import CharactersClasses from './CharactersClasses.vue'
 import CharactersClassDetail from './CharactersClassDetail.vue'
+import CharactersClassImprovements from './CharactersClassImprovements.vue'
+import CharactersMulticlassImprovements from './CharactersMulticlassImprovements.vue'
+import CharactersSplashclassImprovements from './CharactersSplashclassImprovements.vue'
 import CharactersSpecies from './CharactersSpecies.vue'
 import CharactersSpeciesDetail from '@/pages/Characters/CharactersSpeciesDetail.vue'
 import CharactersForcePowers from '@/pages/Characters/CharactersForcePowers.vue'
@@ -15,6 +18,8 @@ import CharactersFightingStyles from './CharactersFightingStyles.vue'
 import CharactersFightingMasteries from './CharactersFightingMasteries.vue'
 import CharactersLightsaberForms from './CharactersLightsaberForms.vue'
 import CharactersCustomizationOptions from './CharactersCustomizationOptions.vue'
+import CharactersWeaponFocuses from './CharactersWeaponFocuses.vue'
+import CharactersWeaponSupremacies from './CharactersWeaponSupremacies.vue'
 
 export default {
   path: '/characters',
@@ -102,6 +107,13 @@ export default {
       }
     },
     {
+      path: '/characters/customizationOptions/classImprovements',
+      component: CharactersClassImprovements,
+      meta: {
+        title: 'Class Improvements'
+      }
+    },
+    {
       path: '/characters/customizationOptions/fightingStyles',
       component: CharactersFightingStyles,
       meta: {
@@ -113,6 +125,34 @@ export default {
       component: CharactersFightingMasteries,
       meta: {
         title: 'Fighting Masteries'
+      }
+    },
+    {
+      path: '/characters/customizationOptions/multiclassImprovements',
+      component: CharactersMulticlassImprovements,
+      meta: {
+        title: 'Multiclass Improvements'
+      }
+    },
+    {
+      path: '/characters/customizationOptions/splashclassImprovements',
+      component: CharactersSplashclassImprovements,
+      meta: {
+        title: 'Splashclass Improvements'
+      }
+    },
+    {
+      path: '/characters/customizationOptions/weaponFocuses',
+      component: CharactersWeaponFocuses,
+      meta: {
+        title: 'Weapon Focuses'
+      }
+    },
+    {
+      path: '/characters/customizationOptions/weaponSupremacies',
+      component: CharactersWeaponSupremacies,
+      meta: {
+        title: 'Weapon Supremacies'
       }
     },
     {

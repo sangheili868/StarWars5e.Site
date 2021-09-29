@@ -21,7 +21,7 @@
     @weaponSupremacyModule.Action fetchWeaponSupremacies!: () => void
     @Prop({ type: Boolean, default: false }) readonly isInHandbook!: boolean
     initialSearch: string | (string | null)[] = ''
-    tableType: string = 'Weapon Focuses'
+    tableType: string = 'Weapon Supremacies'
 
     created () {
       this.fetchWeaponSupremacies()

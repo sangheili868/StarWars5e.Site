@@ -1,6 +1,9 @@
-export default '0.6.0'
+export default '0.6.1'
 
 /*
+0.6.1
+- Fixed tab name on Weapon Supremacies page (found by @Uproar)
+
 0.6.0
 - Updated character customization options with Weapon Focuses, Weapon Supremacies, Class Improvements, Multiclass Improvements, and Splashclass Improvements
 - Changed Characters menu ordering, moved customization options to new subpage

@@ -37,6 +37,12 @@
         })).value()
     }
 
+    get grades () {
+      return _(this.items).map(({ grade }) => (
+          grade
+      )).sortBy().uniq().value()
+    }
+
     get headers () {
       return [
         { text: 'Name', value: 'name' },
@@ -46,6 +52,13 @@
           filterChoices: ['Engineering', 'Operation', 'Suite', 'Universal', 'Weapon'],
           isMultiSelect: true,
           filterFunction: ({ type }: StarshipModificationType, filterValue: string[]) => _.some(filterValue, (filter: string) => filter === type)
+        },
+        {
+          text: 'Grade',
+          value: 'grade',
+          filterChoices: this.grades,
+          isMultiSelect: true,
+          filterFunction: ({ grade }: StarshipModificationType, filterValue: string[]) => _.some(filterValue, (filter: number) => filter === grade)
         },
         {
           text: 'Prerequisites',

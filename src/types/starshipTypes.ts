@@ -68,7 +68,8 @@ export interface StarshipModificationType {
   contentType: string,
   name: string,
   prerequisites: string[],
-  type: string
+  type: string,
+  grade: number
 }
 
 export interface VentureType {

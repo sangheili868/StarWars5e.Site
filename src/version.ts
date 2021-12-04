@@ -1,6 +1,9 @@
 export default '0.6.1'
 
 /*
+0.6.2
+- Added Starship Modification Grade filtering
+
 0.6.1
 - Fixed tab name on Weapon Supremacies page (found by @Uproar)
 

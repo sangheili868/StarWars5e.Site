@@ -1,4 +1,5 @@
 # Node.js with Vue
+
 # Build a Node.js project that uses Vue.
 # Add steps that analyze code, save build artifacts, deploy, and more:
 # https://docs.microsoft.com/azure/devops/pipelines/languages/javascript
@@ -14,6 +15,10 @@ steps:
   inputs:
     ConnectedServiceName: 'Azure Prod'
     KeyVaultName: $(keyVault)
+    
+- task: NodeTool@0
+  inputs:
+    versionSpec: '15.14.0'
 
 - task: YarnInstaller@2
   inputs:

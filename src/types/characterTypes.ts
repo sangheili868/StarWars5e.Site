@@ -108,6 +108,16 @@ export interface ManeuverType {
   description: string
 }
 
+// didn't want to reuse the existing type above without understanding what it's currently used for
+export interface ManeuverReferenceType {
+  name: string,
+  type: string,
+  contentSource: string,
+  contentType: string,
+  prerequisite: string,
+  description: string
+}
+
 export interface AbilitiesIncreasedType {
   abilities: string[],
   amount: number

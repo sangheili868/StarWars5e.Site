@@ -1,6 +1,9 @@
-export default '0.6.1'
+export default '0.7.0'
 
 /*
+0.7.0
+- Added table for Maneuvers
+
 0.6.2
 - Added Starship Modification Grade filtering
 

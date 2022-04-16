@@ -20,6 +20,7 @@ import CharactersLightsaberForms from './CharactersLightsaberForms.vue'
 import CharactersCustomizationOptions from './CharactersCustomizationOptions.vue'
 import CharactersWeaponFocuses from './CharactersWeaponFocuses.vue'
 import CharactersWeaponSupremacies from './CharactersWeaponSupremacies.vue'
+import CharactersManeuvers from './CharactersManeuvers.vue'
 
 export default {
   path: '/characters',
@@ -174,6 +175,13 @@ export default {
       component: CharactersLightsaberForms,
       meta: {
         title: 'Lightsaber Forms'
+      }
+    },
+    {
+      path: '/characters/maneuvers',
+      component: CharactersManeuvers,
+      meta: {
+        title: 'Maneuvers'
       }
     }
   ]

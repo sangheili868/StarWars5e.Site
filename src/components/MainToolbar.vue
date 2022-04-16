@@ -66,7 +66,8 @@
             { to: '/feats', title: 'Feats' },
             { to: '/customizationOptions', title: 'Customization Options' },
             { to: '/forcePowers', title: 'Force Powers' },
-            { to: '/techPowers', title: 'Tech Powers' }
+            { to: '/techPowers', title: 'Tech Powers' },
+            { to: '/maneuvers', title: 'Maneuvers' }
           ]
         },
         {

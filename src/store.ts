@@ -15,6 +15,7 @@ import fightingStyles from './modules/fightingStyles'
 import fightingMasteries from './modules/fightingMasteries'
 import equipment from './modules/equipment'
 import lightsaberForms from './modules/lightsaberForms'
+import maneuvers from './modules/maneuvers'
 import monsters from './modules/monsters'
 import multiclassImprovements from './modules/multiclassImprovements'
 import powers from './modules/powers'
@@ -62,6 +63,7 @@ const modules = {
   fightingStyles,
   equipment,
   lightsaberForms,
+  maneuvers,
   monsters,
   multiclassImprovements,
   powers,

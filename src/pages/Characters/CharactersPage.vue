@@ -20,7 +20,8 @@
             { to: '/characters/feats', title: 'Feats' },
             { to: '/characters/customizationOptions', title: 'Customization Options' },
             { to: '/characters/forcePowers', title: 'Force Powers' },
-            { to: '/characters/techPowers', title: 'Tech Powers' }
+            { to: '/characters/techPowers', title: 'Tech Powers' },
+            { to: '/characters/maneuvers', title: 'Maneuvers' }
           ]
         }
       ]

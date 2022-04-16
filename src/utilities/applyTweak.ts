@@ -59,7 +59,12 @@ Possible Tweaks:
   "forceCasting.saveDC",
   "forceCasting.maxPowerLevel",
   "superiority.maxDice",
-  "superiority.maneuverSaveDC"
+  "superiority.physicalModifier",
+  "superiority.physicalSaveDC",
+  "superiority.mentalModifier",
+  "superiority.mentalSaveDC",
+  "superiority.generalModifier",
+  "superiority.generalSaveDC"
 */
 
 /*

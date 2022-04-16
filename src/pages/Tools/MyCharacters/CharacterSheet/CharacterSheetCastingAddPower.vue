@@ -45,12 +45,11 @@
           powerType === this.castingType
         )
         .sortBy(({ name, prerequisite }) => {
-          if (this.powersSelected.includes(name)) return 2
-          else if (this.isAlreadyKnown(name)) return 1
-          else if (this.isDisabled(name, prerequisite)) return -1
+          if (this.powersSelected.includes(name)) return -2
+          else if (this.isAlreadyKnown(name)) return -1
+          else if (this.isDisabled(name, prerequisite)) return 1
           else return 0
         })
-        .reverse()
         .groupBy('level')
         .value()
     }

@@ -35,6 +35,7 @@
         )
         div(v-if="isShowingLevel") #[strong Level:] {{ feature.level }}
         div(v-if="feature.forceAlignment") #[strong Alignment:] {{ feature.forceAlignment }}
+        div(v-if="feature.type") #[strong Type:] {{ feature.type}}
         div(v-if="feature.castingPeriodText") #[strong Casting Time:] {{ feature.castingPeriodText }}
         div(v-if="feature.range") #[strong Range:] {{ feature.range }}
         div(v-if="feature.duration") #[strong Duration:] {{ feature.duration }} {{ feature.concentration ? '(Concentration)' : ''}}

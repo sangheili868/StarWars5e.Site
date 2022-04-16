@@ -28,6 +28,7 @@ export default function generateCharacter (
   equipment: EquipmentType[],
   enhancedItems: EnhancedItemType[],
   powers: PowerType[],
+  maneuvers: ManeuverType[],
   feats: FeatType[],
   features: FeatureType[],
   backgrounds: BackgroundType[],
@@ -36,7 +37,6 @@ export default function generateCharacter (
   conditions: ConditionType[]
 ): CompleteCharacterType {
   // To Do
-  const maneuvers = [] as ManeuverType[]
   const classText = rawCharacter.classes
     .map(({ name, levels, archetype }) => `${name}${archetype ? ` (${archetype.name})` : ''} ${levels}`)
     .join(', ')

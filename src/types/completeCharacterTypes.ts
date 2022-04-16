@@ -1,4 +1,4 @@
-import { PowerType } from '@/types/characterTypes'
+import { ManeuverType, PowerType } from '@/types/characterTypes'
 import { EquipmentType, EnhancedItemType, GearType, ArmorType, WeaponType } from '@/types/lootTypes'
 import { TweaksType, CustomProficiencyType, HighLevelCastingType, SettingsType, CustomEquipmentType, ProficiencyType, EquipmentTweakType } from './rawCharacterTypes'
 import { ConditionType } from './lookupTypes'
@@ -87,11 +87,13 @@ export interface SuperiorityType {
   currentDice: number,
   maxDice: number,
   diceSize: string,
-  maneuverSaveDC: number,
-  maneuvers: {
-    name: string,
-    description: string
-  }[]
+  physicalModifier: number,
+  physicalSaveDC: number,
+  mentalModifier: number,
+  mentalSaveDC: number,
+  generalModifier: number,
+  generalSaveDC: number,
+  maneuvers: ManeuverType[]
 }
 
 export interface CompletedFeatureType {

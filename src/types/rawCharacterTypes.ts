@@ -150,7 +150,12 @@ export interface TweaksType {
   }
   superiority?: {
     maxDice?: TweakType,
-    maneuverSaveDC?: TweakType
+    physicalModifier?: TweakType,
+    physicalSaveDC?: TweakType
+    mentalModifier?: TweakType,
+    mentalSaveDC?: TweakType
+    generalModifier?: TweakType,
+    generalSaveDC?: TweakType
   }
 }
 

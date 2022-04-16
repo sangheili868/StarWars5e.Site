@@ -104,13 +104,6 @@ export interface PowerType {
 
 export interface ManeuverType {
   name: string,
-  classes: string[],
-  description: string
-}
-
-// didn't want to reuse the existing type above without understanding what it's currently used for
-export interface ManeuverReferenceType {
-  name: string,
   type: string,
   contentSource: string,
   contentType: string,

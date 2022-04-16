@@ -2,7 +2,7 @@
   import { Component, Prop, Vue } from 'vue-property-decorator'
   import { namespace } from 'vuex-class'
   import SearchTable from '@/components/SearchTable.vue'
-  import { ManeuverReferenceType } from '@/types/characterTypes'
+  import { ManeuverType } from '@/types/characterTypes'
   import _ from 'lodash'
   import VueMarkdown from 'vue-markdown'
   import BackButton from '@/components/BackButton.vue'
@@ -17,7 +17,7 @@
     }
   })
   export default class CharactersManeuvers extends Vue {
-    @maneuversModule.State maneuvers!: ManeuverReferenceType[]
+    @maneuversModule.State maneuvers!: ManeuverType[]
     @maneuversModule.Action fetchManeuvers!: () => void
     initialSearch: string | (string | null)[] = ''
     tableType: string = 'Maneuvers'
@@ -44,21 +44,21 @@
           value: 'type',
           render: _.startCase,
           filterChoices: ['General', 'Mental', 'Physical'],
-          filterFunction: ({ type }: ManeuverReferenceType, filterValue: string) => _.startCase(type) === filterValue
+          filterFunction: ({ type }: ManeuverType, filterValue: string) => _.startCase(type) === filterValue
         },
         {
           text: 'Prerequisite',
           value: 'prerequisite',
           render: (prerequisite: string) => prerequisite ? 'Yes' : 'No',
           filterChoices: [ 'Yes', 'No' ],
-          filterFunction: ({ prerequisite }: ManeuverReferenceType, filterValue: string) => (prerequisite ? 'Yes' : 'No') === filterValue
+          filterFunction: ({ prerequisite }: ManeuverType, filterValue: string) => (prerequisite ? 'Yes' : 'No') === filterValue
         },
         {
           text: 'Source',
           value: 'contentSource',
           render: _.startCase,
           filterChoices: ['PHB', 'EC'],
-          filterFunction: ({ contentSource }: ManeuverReferenceType, filterValue: string) => _.startCase(contentSource) === filterValue
+          filterFunction: ({ contentSource }: ManeuverType, filterValue: string) => _.startCase(contentSource) === filterValue
         }
       ]
     }

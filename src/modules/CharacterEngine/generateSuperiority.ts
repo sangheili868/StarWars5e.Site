@@ -18,100 +18,46 @@ function getArchetypeField (archetypeData: ArchetypeType, level: number, index: 
   return get(archetypeData, `leveledTable.${level}.${index}.value`) as (string | undefined) || '0'
 }
 
-function getMulticlassDice (
+function getMaxDice (
   rawCharacter: RawCharacterType,
   myClasses: ClassType[],
-  myArchetypes: ArchetypeType[],
-  initialClass: string
+  myArchetypes: ArchetypeType[]
 ) {
   return chain(rawCharacter.classes)
-    .filter(multiclassClass =>
-      isSuperiorityClass(multiclassClass) &&
-      multiclassClass.name !== initialClass
-    )
-    .reduce((sum, multiclassClass) => {
-      const classData = myClasses.find(({ name }) => name === multiclassClass.name)
-      const classGains = (classData ? chain(classData.levelChanges)
-        .map('Superiority Dice')
-        .slice(0, multiclassClass.levels)
-        .filter((level: string) => parseInt(level) > 0)
-        .uniq()
-        .value()
-        .length : 0)
-      const archetypeData = myArchetypes.find(({ name }) => name === get(multiclassClass, 'archetype.name'))
-      const archetypeGains = (archetypeData ? chain(archetypeData.leveledTable)
-        .pickBy((fields, level) => parseInt(level) <= multiclassClass.levels)
-        .map(fields => fields ? fields[1].value : 0)
-        .uniq()
-        .value()
-        .length : 0)
-      return sum + classGains + archetypeGains
+    .filter(isSuperiorityClass)
+    .reduce((sum, thisClass) => {
+      const classData = myClasses.find(({ name }) => name === thisClass.name)
+      const classGains = classData ? parseInt(classData.levelChanges[thisClass.levels]['Superiority Dice']) : 0
+      const archetypeData = myArchetypes.find(({ name }) => name === get(thisClass, 'archetype.name'))
+      const archetypeGains = archetypeData ? parseInt(archetypeData.leveledTable[thisClass.levels].find(({ key }) => key === 'Superiority Dice')!.value) : 0
+      return sum + Math.max(classGains || 0, archetypeGains || 0)
     }, 0)
     .value()
 }
 
-function getSuperiorityValues (
+function getDiceSize (
   rawCharacter: RawCharacterType,
   myClasses: ClassType[],
   myArchetypes: ArchetypeType[]
-): {
-  maxDice: number,
-  diceSize: string,
-  saveDcAbilities: string[]
-} | false {
-  const completeClass = rawCharacter.classes.find(isSuperiorityClass)
-  if (!completeClass) return false
-  const classData = myClasses.find(({ name }) => name === completeClass.name)
-  if (!classData) return false
-  const archetypeData = myArchetypes.find(({ name }) => name === get(completeClass, 'archetype.name'))
-  const multiclassDice = getMulticlassDice(rawCharacter, myClasses, myArchetypes, completeClass.name)
-
-  switch (completeClass.name) {
-    case 'Fighter':
-      const maxDice = parseInt(getClassField(classData, completeClass.levels, 'Superiority Dice')) + multiclassDice
-      const diceSize = getClassField(classData, completeClass.levels, 'Martial Superiority')
-      const saveDcAbilities = ['Strength', 'Dexterity']
-      const isTactical = completeClass.archetype && completeClass.archetype.name === 'Tactical Specialist'
-      if (isTactical && archetypeData) {
-        return {
-          diceSize,
-          maxDice: maxDice + parseInt(getArchetypeField(archetypeData, completeClass.levels, 0)),
-          saveDcAbilities
-        }
-      } else if (completeClass.levels === 1) {
-        return false
-      } else {
-        return {
-          diceSize,
-          maxDice,
-          saveDcAbilities
-        }
-      }
-    case 'Scholar':
-      return {
-        diceSize: getClassField(classData, completeClass.levels, 'Academic Superiority'),
-        maxDice: parseInt(getClassField(classData, completeClass.levels, 'Superiority Dice')) + multiclassDice,
-        saveDcAbilities: ['Intelligence']
-      }
-    case 'Scout':
-      return archetypeData ? {
-        diceSize: getArchetypeField(archetypeData, completeClass.levels, 0),
-        maxDice: parseInt(getArchetypeField(archetypeData, completeClass.levels, 1)) + multiclassDice,
-        saveDcAbilities: ['Dexterity']
-      } : false
-    default:
-      return false
+): string {
+  const firstSuperiorityClass = rawCharacter.classes.find(isSuperiorityClass)
+  if (!firstSuperiorityClass) return 'd0'
+  const classData = myClasses.find(({ name }) => name === firstSuperiorityClass.name)
+  if (!classData) return 'd0'
+  const archetypeData = myArchetypes.find(({ name }) => name === get(firstSuperiorityClass, 'archetype.name'))
+  const superiorityLevel = chain(rawCharacter.classes)
+    .filter(isSuperiorityClass)
+    .reduce((sum, thisClass) => sum + thisClass.levels, 0)
+    .value()
+  if (firstSuperiorityClass.name === 'Fighter') {
+    return getClassField(classData, superiorityLevel, 'Combat Superiority')
+  } else if (firstSuperiorityClass.name === 'Scholar') {
+    return getClassField(classData, superiorityLevel, 'Academic Superiority')
+  } else if (firstSuperiorityClass.name === 'Scout' && archetypeData) {
+    return getArchetypeField(archetypeData, superiorityLevel, 0)
+  } else {
+    return 'd0'
   }
-}
-
-function getSaveDC (
-  rawCharacter: RawCharacterType,
-  proficiencyBonus: number,
-  abilityScores: AbilityScoresType,
-  saveDcAbilities: string[]
-): number {
-  const maxModifier = Math.max(...saveDcAbilities.map(saveDcAbility => abilityScores[saveDcAbility].modifier))
-  return applyTweak(rawCharacter, 'superiority.maneuverSaveDC', 8 + proficiencyBonus + maxModifier)
 }
 
 function getManeuvers (rawCharacter: RawCharacterType, maneuvers: ManeuverType[]): ManeuverType[] {
@@ -136,12 +82,21 @@ export default function generateSuperiority (
   proficiencyBonus: number,
   maneuvers: ManeuverType[]
 ): SuperiorityType | false {
-  const superiority = getSuperiorityValues(rawCharacter, myClasses, myArchetypes)
-  return superiority && {
+  const maxDice = getMaxDice(rawCharacter, myClasses, myArchetypes)
+  const physicalModifier = Math.max(...['Strength', 'Dexterity', 'Constitution'].map(ability => abilityScores[ability].modifier))
+  const mentalModifier = Math.max(...['Intelligence', 'Wisdom', 'Charisma'].map(ability => abilityScores[ability].modifier))
+  const generalModifier = chain(abilityScores).map('modifier').max().value()
+
+  return maxDice > 0 && {
     currentDice: rawCharacter.currentStats.superiorityDiceUsed,
-    maxDice: applyTweak(rawCharacter, 'superiority.maxDice', superiority.maxDice),
-    diceSize: superiority.diceSize,
-    maneuverSaveDC: getSaveDC(rawCharacter, proficiencyBonus, abilityScores, superiority.saveDcAbilities),
+    maxDice: applyTweak(rawCharacter, 'superiority.maxDice', maxDice),
+    diceSize: getDiceSize(rawCharacter, myClasses, myArchetypes),
+    physicalModifier: applyTweak(rawCharacter, `superiority.physicalModifier`, physicalModifier),
+    physicalSaveDC: applyTweak(rawCharacter, `superiority.physicalSaveDC`, 8 + proficiencyBonus + physicalModifier),
+    mentalModifier: applyTweak(rawCharacter, `superiority.mentalModifier`, mentalModifier),
+    mentalSaveDC: applyTweak(rawCharacter, `superiority.mentalSaveDC`, 8 + proficiencyBonus + mentalModifier),
+    generalModifier: applyTweak(rawCharacter, `superiority.generalModifier`, generalModifier),
+    generalSaveDC: applyTweak(rawCharacter, `superiority.generalSaveDC`, 8 + proficiencyBonus + generalModifier),
     maneuvers: getManeuvers(rawCharacter, maneuvers)
   }
 }

@@ -8,6 +8,7 @@
   import CharacterBuilderClassHitPoints from './CharacterBuilderClassHitPoints.vue'
   import CharacterBuilderClassASI from './CharacterBuilderClassASI.vue'
   import CharacterBuilderClassPowers from './CharacterBuilderClassPowers.vue'
+  import CharacterBuilderClassManeuvers from './CharacterBuilderClassManeuvers.vue'
   import ConfirmDelete from '@/components/ConfirmDelete.vue'
   import MySelect from '@/components/MySelect.vue'
   import ClassDetail from '@/components/ClassDetail.vue'
@@ -22,6 +23,7 @@
       CharacterBuilderClassHitPoints,
       CharacterBuilderClassASI,
       CharacterBuilderClassPowers,
+      CharacterBuilderClassManeuvers,
       CharacterSheetExpansionFeatures,
       ConfirmDelete,
       ClassDetail,
@@ -159,6 +161,13 @@
       })
     }
 
+    handleUpdateManeuvers (newManeuvers: string[], isArchetype: boolean) {
+      this.$emit('replaceCharacterProperty', {
+        path: `classes.${this.index}.${isArchetype ? 'archetype.' : ''}maneuvers`,
+        property: newManeuvers
+      })
+    }
+
     handleUpdateHitPoints (newValue: number, hpIndex: number) {
       this.$emit('updateCharacter', { classes: { [this.index]: { hitPoints: { [hpIndex]: newValue } } } })
     }
@@ -240,5 +249,10 @@
       v-bind="{ myClass, classData, archetypeData, allForcePowers }",
       :settings="character.settings",
       @updatePowers="({ newPowers, type, isArchetype }) => handleUpdatePowers(newPowers, type, isArchetype)"
+    )
+    CharacterBuilderClassManeuvers(
+      v-bind="{ myClass, classData, archetypeData, allForcePowers }",
+      :settings="character.settings",
+      @updateManeuvers="({ newManeuvers, isArchetype }) => handleUpdateManeuvers(newManeuvers, isArchetype)"
     )
 </template>

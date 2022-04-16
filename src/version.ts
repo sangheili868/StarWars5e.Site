@@ -3,6 +3,9 @@ export default '0.7.0'
 /*
 0.7.0
 - Added table for Maneuvers
+- Added support for selecting maneuvers in character builder
+- Added physical, mental, and general maneuver save DC calculation on character sheet
+- Update multiclass superiority calculations
 
 0.6.2
 - Added Starship Modification Grade filtering

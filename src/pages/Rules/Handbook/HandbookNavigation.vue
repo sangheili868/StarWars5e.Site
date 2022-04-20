@@ -145,16 +145,21 @@
           route: '/rules/phb/casting',
           items: [
             {
-              title: 'Force Powers',
+              title: '11. Force Powers',
               icon: 'fas fa-jedi',
               route: '/rules/phb/casting/forcePowers'
             },
             {
-              title: 'Tech Powers',
+              title: '12. Tech Powers',
               icon: 'fa-microchip',
               route: '/rules/phb/casting/techPowers'
             }
           ]
+        },
+        {
+          title: '13. Maneuvers',
+          icon: 'fa-exchange-alt',
+          route: '/rules/phb/maneuvers'
         },
         {
           title: 'A. Conditions',

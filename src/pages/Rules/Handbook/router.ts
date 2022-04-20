@@ -6,6 +6,7 @@ import CharactersSpeciesDetail from '@/pages/Characters/CharactersSpeciesDetail.
 import CharactersBackgroundDetail from '@/pages/Characters/CharactersBackgroundDetail.vue'
 import CharactersForcePowers from '@/pages/Characters/CharactersForcePowers.vue'
 import CharactersTechPowers from '@/pages/Characters/CharactersTechPowers.vue'
+import CharactersManeuvers from '@/pages/Characters/CharactersManeuvers.vue'
 import HandbookClasses from './HandbookClasses.vue'
 import HandbookClassesDetail from './HandbookClassesDetail.vue'
 import HandbookCasting from './HandbookCasting.vue'
@@ -73,6 +74,13 @@ export default {
       path: 'classes/:className',
       component: HandbookClassesDetail,
       props: true
+    },
+    {
+      path: 'maneuvers',
+      component: CharactersManeuvers,
+      meta: {
+        title: 'Maneuvers | Handbook'
+      }
     },
     {
       path: ':chapter',

@@ -1,6 +1,10 @@
-export default '0.7.0'
+export default '0.7.1'
 
 /*
+0.7.1
+- Fix bug found by @Lotu and @CocoThun-Da where some fighters and scholars would break character builder
+- FIx bug found by @PunRyan where blaster weapon ranges are missing from character creator
+
 0.7.0
 - Added table for Maneuvers
 - Added support for selecting maneuvers in character builder

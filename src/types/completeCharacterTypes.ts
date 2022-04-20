@@ -123,7 +123,7 @@ export interface CustomWeaponType extends CustomEquipmentType {
   ability: string,
   damageDieType: number,
   index: number,
-  properties: null[],
+  properties: string[],
   isCustom: true
 }
 

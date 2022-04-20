@@ -27,9 +27,9 @@ function getMaxDice (
     .filter(isSuperiorityClass)
     .reduce((sum, thisClass) => {
       const classData = myClasses.find(({ name }) => name === thisClass.name)
-      const classGains = classData ? parseInt(classData.levelChanges[thisClass.levels]['Superiority Dice']) : 0
+      const classGains = classData ? parseInt(getClassField(classData, thisClass.levels, 'Superiority Dice')) : 0
       const archetypeData = myArchetypes.find(({ name }) => name === get(thisClass, 'archetype.name'))
-      const archetypeGains = archetypeData ? parseInt(archetypeData.leveledTable[thisClass.levels].find(({ key }) => key === 'Superiority Dice')!.value) : 0
+      const archetypeGains = archetypeData ? parseInt(getArchetypeField(archetypeData, thisClass.levels, 1)) : 0
       return sum + Math.max(classGains || 0, archetypeGains || 0)
     }, 0)
     .value()

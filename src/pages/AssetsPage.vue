@@ -29,7 +29,11 @@
               href: 'https://drive.google.com/file/d/1-SJrGjriK2qgGaQSzcqEGiuRwLPvgqOS/view?usp=sharing',
               title: 'Wretched Hives'
             }
-          ]
+          ],
+          bottomLink: {
+            text: 'Older Versions',
+            href: 'https://drive.google.com/drive/folders/1GwhBxObXuRiKo100dFgAZo2NpicHWyU5?usp=sharing'
+          }
         },
         {
           category: 'Expanded Content',
@@ -162,7 +166,7 @@
 
 <template lang="pug">
   div(:class="$style.assets")
-    div(v-for="{ category, subText, routes } in categories", :key="category").mb-5
+    div(v-for="{ category, subText, routes, bottomLink } in categories", :key="category").mb-5
       h1(:class="$style.assetTitle") {{ category }}
       div.mb-5 {{ subText }}
       div.d-flex.flex-wrap.justify-center
@@ -170,6 +174,8 @@
           a(:href="href", target="_blank")
             v-btn(color="primary").mx-2.mt-2 {{ title }}
           div(v-if="author") courtesy of #[a(:href="`https://www.reddit.com${author}`", target="_blank") {{ author }}]
+      div(v-if="bottomLink").mt-4
+        a(:href="bottomLink.href", target="_blank") {{bottomLink.text}}
 </template>
 
 <style module lang="scss">

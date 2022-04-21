@@ -1,6 +1,9 @@
-export default '0.7.1'
+export default '0.7.2'
 
 /*
+0.7.2
+- Added a link on the assets page to older PDF versions
+
 0.7.1
 - Fix bug found by @Lotu and @CocoThun-Da where some fighters and scholars would break character builder
 - FIx bug found by @PunRyan where blaster weapon ranges are missing from character creator

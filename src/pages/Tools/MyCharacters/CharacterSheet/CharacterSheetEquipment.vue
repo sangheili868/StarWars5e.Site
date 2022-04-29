@@ -6,14 +6,16 @@
   import CharacterSheetEquipmentPanel from './CharacterSheetEquipmentPanel.vue'
   import CharacterSheetEquipmentAdder from './CharacterSheetEquipmentAdder.vue'
   import CharacterSheetEquipmentCustomAdder from './CharacterSheetEquipmentCustomAdder.vue'
+  import CharacterSheetEquipmentWeight from './CharacterSheetEquipmentWeight.vue'
   import ValueEditor from '@/components/ValueEditor.vue'
-  import { AttunementType } from '@/types/completeCharacterTypes'
+  import { AbilityScoresType, AttunementType } from '@/types/completeCharacterTypes'
 
   @Component({
     components: {
       CharacterSheetEquipmentPanel,
       CharacterSheetEquipmentAdder,
       CharacterSheetEquipmentCustomAdder,
+      CharacterSheetEquipmentWeight,
       ValueEditor
     }
   })
@@ -23,6 +25,7 @@
     @Prop(Object) readonly attunement!: AttunementType
     @Prop(Number) readonly credits!: number
     @Prop(Boolean) readonly isBuilder!: boolean
+    @Prop(Object) readonly abilityScores!: AbilityScoresType
   }
 </script>
 
@@ -73,4 +76,9 @@
         @updateCharacter="newCharacter => $emit('updateCharacter', newCharacter)",
         @deleteCharacterProperty="payload => $emit('deleteCharacterProperty', payload)"
       )
+    CharacterSheetEquipmentWeight(
+      :equipment="equipment",
+      :customEquipment="customEquipment",
+      :abilityScores="abilityScores",
+    )
 </template>

@@ -59,7 +59,8 @@
           text: 'Type',
           value: 'weaponClassification',
           render: _.startCase,
-          filterChoices: ['Simple Blaster', 'Martial Blaster', 'Simple Lightweapon', 'Martial Lightweapon', 'Simple Vibroweapon', 'Martial Vibroweapon'],
+          filterChoices: ['Simple Blaster', 'Martial Blaster', 'Simple Lightweapon', 'Martial Lightweapon',
+             'Simple Vibroweapon', 'Martial Vibroweapon', 'Exotic Blaster', 'Exotic Lightweapon', 'Exotic Vibroweapon'],
           filterFunction: ({ weaponClassification }: WeaponType, filterValue: string) => _.startCase(weaponClassification) === filterValue
         },
         {

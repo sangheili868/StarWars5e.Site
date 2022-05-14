@@ -16,7 +16,7 @@
   div
     HandbookChapter(chapter="customization")
       v-btn(to="/characters/feats", color="primary" target="_blank").mx-2 Feats
-      v-btn(to="/characters/fightingStyles", color="primary" target="_blank").mx-2 Fighting Styles
-      v-btn(to="/characters/fightingMasteries", color="primary" target="_blank").mx-2 Fighting Masteries
-      v-btn(to="/characters/lightsaberForms", color="primary" target="_blank").mx-2 Lightsaber Forms
+      v-btn(to="/characters/customizationOptions/fightingStyles", color="primary" target="_blank").mx-2 Fighting Styles
+      v-btn(to="/characters/customizationOptions/fightingMasteries", color="primary" target="_blank").mx-2 Fighting Masteries
+      v-btn(to="/characters/customizationOptions/lightsaberForms", color="primary" target="_blank").mx-2 Lightsaber Forms
 </template>

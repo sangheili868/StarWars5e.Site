@@ -1,6 +1,10 @@
 export default '0.7.2'
 
 /*
+0.7.3
+- Added exotic weapon filters to the weapons table
+- Fixed incorrect routes to customization options
+
 0.7.2
 - Added a link on the assets page to older PDF versions
 

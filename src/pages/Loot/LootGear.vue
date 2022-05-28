@@ -32,9 +32,9 @@
       items.sort((a, b) => {
         if (sortBy[0] === 'weight' && parseFloat(a[sortBy[0]]) && parseFloat(b[sortBy[0]])) {
           if (!sortDesc[0]) {
-            return math.eval(a[sortBy[0]]) < math.eval(b[sortBy[0]]) ? -1 : 1
+            return math.evaluate(a[sortBy[0]]) < math.evaluate(b[sortBy[0]]) ? -1 : 1
           } else {
-            return math.eval(b[sortBy[0]]) < math.eval(a[sortBy[0]]) ? -1 : 1
+            return math.evaluate(b[sortBy[0]]) < math.evaluate(a[sortBy[0]]) ? -1 : 1
           }
         } else {
           if (!sortDesc[0]) {

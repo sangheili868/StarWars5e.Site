@@ -1,9 +1,9 @@
 import { CompleteCharacterType, isCharacterEnhancedItem, isEquippable, isCharacterGearType, isCharacterValidLootType } from '@/types/completeCharacterTypes'
 import { printFieldType } from '@/types/utilityTypes'
-import math from 'mathjs'
+import { number, fraction } from 'mathjs'
 
-function fractionToDecimal (fraction: string) {
-  return math.number(math.fraction(fraction.trim())) as number
+function fractionToDecimal (fractionValue: string) {
+  return number(fraction(fractionValue.trim())) as number
 }
 
 export default function CharacterPrintPage3 (

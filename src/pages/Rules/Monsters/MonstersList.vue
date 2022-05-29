@@ -5,7 +5,7 @@
   import { MonsterType } from '@/types/referenceTypes'
   import _ from 'lodash'
   import MonsterDescription from './MonsterDescription.vue'
-  import math from 'mathjs'
+  import { evaluate } from 'mathjs'
 
   const monsterModule = namespace('monsters')
 
@@ -30,9 +30,9 @@
       items.sort((a, b) => {
         if (sortBy[0] === 'challengeRating' && parseFloat(a[sortBy[0]]) && parseFloat(b[sortBy[0]])) {
           if (!sortDesc[0]) {
-            return math.evaluate(a[sortBy[0]]) < math.evaluate(b[sortBy[0]]) ? -1 : 1
+            return evaluate(a[sortBy[0]]) < evaluate(b[sortBy[0]]) ? -1 : 1
           } else {
-            return math.evaluate(b[sortBy[0]]) < math.evaluate(a[sortBy[0]]) ? -1 : 1
+            return evaluate(b[sortBy[0]]) < evaluate(a[sortBy[0]]) ? -1 : 1
           }
         } else if (sortBy[0] === 'types') {
           if (!sortDesc[0]) {
@@ -82,7 +82,7 @@
     get challengeRatings () {
         return _(this.items).map(({ challengeRating }) => (
           challengeRating
-      )).compact().uniq().sortBy((value) => { return parseFloat(value) ? math.evaluate(value) : value }).value()
+      )).compact().uniq().sortBy((value) => { return parseFloat(value) ? evaluate(value) : value }).value()
     }
 
     get headers () {

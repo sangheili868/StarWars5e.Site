@@ -6,7 +6,7 @@
   import _ from 'lodash'
   import VueMarkdown from 'vue-markdown'
   import BackButton from '@/components/BackButton.vue'
-  import math from 'mathjs'
+  import { evaluate } from 'mathjs'
 
   const equipmentModule = namespace('equipment')
 
@@ -32,9 +32,9 @@
       items.sort((a, b) => {
         if (sortBy[0] === 'weight' && parseFloat(a[sortBy[0]]) && parseFloat(b[sortBy[0]])) {
           if (!sortDesc[0]) {
-            return math.evaluate(a[sortBy[0]]) < math.evaluate(b[sortBy[0]]) ? -1 : 1
+            return evaluate(a[sortBy[0]]) < evaluate(b[sortBy[0]]) ? -1 : 1
           } else {
-            return math.evaluate(b[sortBy[0]]) < math.evaluate(a[sortBy[0]]) ? -1 : 1
+            return evaluate(b[sortBy[0]]) < evaluate(a[sortBy[0]]) ? -1 : 1
           }
         } else {
           if (!sortDesc[0]) {

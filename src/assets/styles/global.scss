@@ -133,7 +133,8 @@ table.v-table {
   }
 
   h1, h2, h3, h4 {
-    color: $darkSidePrimary
+    color: $darkSidePrimary;
+    text-shadow: 2px 2px 2px $black;
   }
 
   blockquote {

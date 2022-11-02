@@ -1,6 +1,10 @@
-export default '0.7.2'
+export default '0.7.4'
 
 /*
+0.7.4
+- Added message about change of website ownership
+- Added drop shadow to red text on dark side mode and changed dark side gradient to make pages more readable.
+
 0.7.3
 - Added exotic weapon filters to the weapons table
 - Fixed incorrect routes to customization options

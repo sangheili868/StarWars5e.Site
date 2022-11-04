@@ -32,11 +32,8 @@
     v-main(:class="[ $style.content, $style.noPadding, { [$style.darkSide]: isDarkSide } ]")
       v-alert(v-if="!hasInternet", type="error", :class="$style.alert") Warning: Could not connect to database. Check your internet connection.
       v-alert(type="warning", :class="$style.alert").px-5
-        div There will be some upcoming changes in management for SW5e and this website by the end of the year.
-          a(href='https://www.reddit.com/r/sw5e/comments/yif45b/so_long_and_thanks_for_the_all_the_fish/').px-1.text-decoration-underline.primary--text.font-weight-bold Click here to read more about this change.
-          | We are still working out exactly what this transition will entail, but our goal is for this to be a seamless as possible.
-          | There shouldn't be any changes to this website when this transition happens.
-          | Just in case, we recommend you #[strong.primary--text export your characters] to back them up, either as JSON files, Roll20 characters, or Foundry VTT characters.
+        div sw5e.com is under new management!
+          a(href='https://www.reddit.com/r/sw5e/comments/ym1kcd/sw5e_website_under_new_management_introducing/').px-1.text-decoration-underline.primary--text.font-weight-bold Click here to read more about Delta Squad.
       v-container(fluid, :class="[$style.noPadding, { [$style.alertMargin]: !hasInternet }]")
         router-view
     router-view(name="navigation")

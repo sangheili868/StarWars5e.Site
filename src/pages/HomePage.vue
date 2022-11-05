@@ -125,12 +125,12 @@
           title: 'Support',
           channels: [
             {
-              href: 'https://www.patreon.com/sw5e',
+              href: 'https://www.patreon.com/noble_delta_squad_dev_team',
               icon: 'fab fa-patreon',
               title: 'Patreon'
             }
           ],
-          subText: 'The Patreon is set up to cover the costs of the website. As a benefit of being a patron, you also get access to a special channel where you get to see finished products that haven\'t yet been released, and you get to vote on each week\'s expanded content release.'
+          subText: 'The Patreon is set up to cover the costs of this website. It supports Delta Squad, the team that manages this site and n7.world, a Mass Effect 5e conversion. As a Patron, you can choose to have your contribution go towards this site, n7.world, or both.'
         }
       ]
     }

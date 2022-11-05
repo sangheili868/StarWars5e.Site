@@ -135,7 +135,7 @@
         },
         {
           category: 'Other',
-          subText: 'This includes links to a teespring store where you can get some Star Wars 5e swag, a guide to printing the Player\'s Handbook (no other book is endorsed for printing yet), as well as some pre-generated characters.',
+          subText: 'This includes links to a teespring store where you can get some Star Wars 5e swag and a guide to printing the Player\'s Handbook (no other book is endorsed for printing yet).',
           routes: [
             {
               href: 'https://teespring.com/stores/sw5e',
@@ -144,18 +144,6 @@
             {
               href: 'https://www.reddit.com/r/sw5e/comments/cb1i87/printing_a_star_wars_5e_story/',
               title: 'Printing Instructions'
-            },
-            {
-              href: 'https://www.reddit.com/r/sw5e/comments/9v487b/10_pregenerated_level_1_player_characters_1_for/',
-              title: 'Pre-generated Characters',
-              author: '/u/papasmurf008',
-              authorLink: 'https://www.reddit.com/u/papasmurf008'
-            },
-            {
-              href: 'https://drive.google.com/drive/folders/1TsJZYSlY_wwTKPxv1a34fGxJNZJWE0a2',
-              title: 'More Pre-generated Characters (level 5)',
-              author: '/u/cpthogie',
-              authorLink: 'https://www.reddit.com/u/papasmurf008'
             }
           ]
         }

@@ -1,6 +1,11 @@
-export default '0.7.4'
+export default '0.7.5'
 
 /*
+0.7.5
+- Fix bug where management change banner shows up on print character page
+- Change patreon link to point to delta squad patreon
+- Remove pre-generated character links
+
 0.7.4
 - Added message about change of website ownership
 - Added drop shadow to red text on dark side mode and changed dark side gradient to make pages more readable.

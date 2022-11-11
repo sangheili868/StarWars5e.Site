@@ -1,6 +1,7 @@
 
 <script lang="ts">
   import { Component, Prop, Vue } from 'vue-property-decorator'
+  import DraggableList from '@/components/DraggableList.vue'
   import { EquipmentType } from '@/types/lootTypes'
   import { CustomEquipmentType } from '@/types/rawCharacterTypes'
   import CharacterSheetEquipmentPanel from './CharacterSheetEquipmentPanel.vue'
@@ -14,6 +15,7 @@
       CharacterSheetEquipmentPanel,
       CharacterSheetEquipmentAdder,
       CharacterSheetEquipmentCustomAdder,
+      DraggableList,
       ValueEditor
     }
   })
@@ -52,13 +54,14 @@
           @updateCharacter="newCharacter => $emit('updateCharacter', newCharacter)"
         )
     v-expansion-panels(accordion, multiple)
-      CharacterSheetEquipmentPanel(
-        v-for="(item, index) in equipment",
-        :key="index",
-        v-bind="{ item, index, attunement }",
-        @updateCharacter="newCharacter => $emit('updateCharacter', newCharacter)",
-        @deleteCharacterProperty="payload => $emit('deleteCharacterProperty', payload)"
-      )
+      DraggableList(:items="equipment", @update="equipment => $emit('updateCharacter', { equipment })")
+        CharacterSheetEquipmentPanel(
+          v-for="(item, index) in equipment",
+          :key="index",
+          v-bind="{ item, index, attunement }",
+          @updateCharacter="newCharacter => $emit('updateCharacter', newCharacter)",
+          @deleteCharacterProperty="payload => $emit('deleteCharacterProperty', payload)"
+        )
     h3.mt-3.text-left.d-flex.justify-space-between.align-end Custom Items
       CharacterSheetEquipmentCustomAdder(
         :position="customEquipment.length",

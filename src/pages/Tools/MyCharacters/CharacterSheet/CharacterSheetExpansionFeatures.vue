@@ -18,6 +18,7 @@
   })
   export default class CharacterSheetExpansionFeatures extends Vue {
     @Prop(Array) readonly features!: CompletedFeatureType[] | PowerType[]
+    @Prop(Array) readonly featureConfigs!: CompletedFeatureType[] | PowerType[]
     @Prop(Boolean) readonly isShowingLevel!: boolean
 
     @fightingStyleModule.State fightingStyles!: FightingStyleType[]
@@ -35,6 +36,15 @@
         'Class-Fighter-Fighting Style-1'
       ].indexOf((feature as any).rowKey) > -1
     }
+    getFightingStyle (key: string) {
+      console.log('attempting to find fs ' + JSON.stringify(key))
+      var fs = this.fightingStyles.find(f => (f as any).rowKey === key)
+      if (fs) {
+        console.log('Spotted fs ' + fs.name)
+        return fs
+      }
+      return undefined
+    }
   }
 </script>
 
@@ -43,7 +53,8 @@
     v-expansion-panel(v-for="(feature, index) in features", :key="feature.name + index").powerPanel
       v-expansion-panel-header.pa-3
         slot(v-bind="{ feature }")
-          h4 {{ feature.name }}
+          h4.d-inline {{ feature.name }}
+          span(v-if="featureHasFightingStyle(feature) && !feature.config").op-40.mr-3.text-right Choice Needed
       v-expansion-panel-content.ma-2.text-caption
         CheckList(
           v-if="feature.usage",
@@ -62,9 +73,17 @@
         br(v-if="feature.castingPeriodText || feature.range || feature.duration")
         VueMarkdown {{ feature.description || feature.text }}
         div(v-if="featureHasFightingStyle(feature)")
-          v-btn(color="primary" @click="chooseFightingStyle()")
+          hr
+          v-btn(v-if="!feature.config" color="primary" @click="chooseFightingStyle()")
             v-icon fa-plus mr-2
             template Choose Fighting Style
+          p(v-if="feature.config")
+            strong
+              u Chosen Style
+            strong : {{ getFightingStyle(feature.config.data).name }}
+            VueMarkdown(:source="getFightingStyle(feature.config.data).description")
+            a
+              strong(v-if="feature.config" @click="chooseFightingStyle()") Change Style
         div(v-if="feature.customIndex > -1").d-flex.justify-end
           ConfirmDelete(
             label="Feature",

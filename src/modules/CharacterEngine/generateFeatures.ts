@@ -1,4 +1,4 @@
-import { RawCharacterType } from '@/types/rawCharacterTypes'
+import { FeatureConfigType, RawCharacterType } from '@/types/rawCharacterTypes'
 import { FeatureType, BackgroundType } from '@/types/characterTypes'
 import { chain } from 'lodash'
 import { CompletedFeatureType, AbilityScoresType } from '@/types/completeCharacterTypes'
@@ -15,6 +15,7 @@ function calculateUsage (
     }
   }
   const maximum = isNaN(feature.usage.maximum) ? abilityScores[feature.usage.maximum].modifier : feature.usage.maximum
+  
   return {
     ...feature,
     usage: {
@@ -23,6 +24,24 @@ function calculateUsage (
       maximum
     }
   }
+}
+
+// Combines rawCharacter.featureConfig with real feature data for easy consumption. When a featureConfig is matched it is removed from the pool
+function mapFeatureConfigs (
+  feature: CompletedFeatureType, 
+  remainingFeatureConfigs: FeatureConfigType[]) {
+  if (remainingFeatureConfigs.length > 0) {
+    // if there are any remaining feature configs then lets try to map it
+    let configIx = remainingFeatureConfigs.findIndex(f => f.featureRowKey === (feature as any).rowKey);
+    if (configIx > -1) {
+      // found a matching feature config
+      feature.config = remainingFeatureConfigs[configIx];
+      remainingFeatureConfigs = remainingFeatureConfigs.slice(configIx, 1);
+    } else {
+      feature.config = null;
+    }
+  }
+  return remainingFeatureConfigs;
 }
 
 export default function generateFeatures (
@@ -58,10 +77,16 @@ export default function generateFeatures (
     ...myFeats
   ].map(feature => calculateUsage(rawCharacter, abilityScores, feature as CompletedFeatureType))
 
+  let remainingFeatureConfigs: FeatureConfigType[] = JSON.parse(JSON.stringify(rawCharacter.featureConfigs));
+  for (var feat of myCompletedFeatures) {
+    remainingFeatureConfigs = mapFeatureConfigs(feat, remainingFeatureConfigs);
+  }
+
   const backgroundWithFeature = rawCharacter.background.name === 'Custom' ? backgrounds.find(({ featureName }) => featureName === rawCharacter.background.feature) : myBackground
   const backgroundFeature = backgroundWithFeature ? {
       name: backgroundWithFeature.featureName,
       combat: false,
+      config: null,
       text: backgroundWithFeature.featureText
   } : undefined
 

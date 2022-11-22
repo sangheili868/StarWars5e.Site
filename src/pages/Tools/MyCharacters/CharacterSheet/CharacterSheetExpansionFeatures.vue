@@ -73,7 +73,6 @@
         br(v-if="feature.castingPeriodText || feature.range || feature.duration")
         VueMarkdown {{ feature.description || feature.text }}
         div(v-if="featureHasFightingStyle(feature)")
-          hr
           v-btn(v-if="!feature.config" color="primary" @click="chooseFightingStyle()")
             v-icon fa-plus mr-2
             template Choose Fighting Style

@@ -42,6 +42,10 @@
         div(v-if="feature.prerequisite") #[strong Prerequisite:] {{ feature.prerequisite }}
         br(v-if="feature.castingPeriodText || feature.range || feature.duration")
         VueMarkdown {{ feature.description || feature.text }}
+        div(v-if="['Class-Fighter-Fighting Style-1'].indexOf(feature.rowKey) > -1")
+          v-btn(v-on="on", :icon="icon", @click="levelFilter=0", color="primary")
+            v-icon(v-if="icon") fa-plus
+            template(v-else) Choose Fighting Style
         div(v-if="feature.customIndex > -1").d-flex.justify-end
           ConfirmDelete(
             label="Feature",

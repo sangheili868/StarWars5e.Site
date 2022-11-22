@@ -1,10 +1,13 @@
 <script lang="ts">
   import { Component, Prop, Vue } from 'vue-property-decorator'
   import { CompletedFeatureType } from '@/types/completeCharacterTypes'
-  import { PowerType } from '@/types/characterTypes'
+  import { FightingStyleType, PowerType } from '@/types/characterTypes'
   import VueMarkdown from 'vue-markdown'
   import CheckList from '@/components/CheckList.vue'
   import ConfirmDelete from '@/components/ConfirmDelete.vue'
+  import { namespace } from 'vuex-class'
+
+  const fightingStyleModule = namespace('fightingStyles')
 
   @Component({
     components: {
@@ -16,6 +19,22 @@
   export default class CharacterSheetExpansionFeatures extends Vue {
     @Prop(Array) readonly features!: CompletedFeatureType[] | PowerType[]
     @Prop(Boolean) readonly isShowingLevel!: boolean
+
+    @fightingStyleModule.State fightingStyles!: FightingStyleType[]
+    @fightingStyleModule.Action fetchFightingStyles!: () => void
+
+    created () {
+      console.log('Creating CharSheetExpansionFeatures')
+      this.fetchFightingStyles()
+    }
+    chooseFightingStyle () {
+      console.log(this.fightingStyles)
+    }
+    featureHasFightingStyle (feature: CompletedFeatureType | PowerType) : boolean {
+      return [
+        'Class-Fighter-Fighting Style-1'
+      ].indexOf((feature as any).rowKey) > -1
+    }
   }
 </script>
 
@@ -42,10 +61,10 @@
         div(v-if="feature.prerequisite") #[strong Prerequisite:] {{ feature.prerequisite }}
         br(v-if="feature.castingPeriodText || feature.range || feature.duration")
         VueMarkdown {{ feature.description || feature.text }}
-        div(v-if="['Class-Fighter-Fighting Style-1'].indexOf(feature.rowKey) > -1")
-          v-btn(v-on="on", :icon="icon", @click="levelFilter=0", color="primary")
-            v-icon(v-if="icon") fa-plus
-            template(v-else) Choose Fighting Style
+        div(v-if="featureHasFightingStyle(feature)")
+          v-btn(color="primary" @click="chooseFightingStyle()")
+            v-icon fa-plus mr-2
+            template Choose Fighting Style
         div(v-if="feature.customIndex > -1").d-flex.justify-end
           ConfirmDelete(
             label="Feature",

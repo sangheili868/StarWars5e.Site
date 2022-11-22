@@ -10,6 +10,7 @@ export default class FightingStyles extends VuexModule {
   @MutationAction({ mutate: ['fightingStyles', 'cachedVersion'] })
   async fetchFightingStyles () {
     const { data: fightingStyles, cachedVersion } = await fetchFromCache(this, 'fightingStyles', 'fightingStyle')
+    console.log('Fighting Styles Fetched!')
     return { fightingStyles, cachedVersion }
   }
 }

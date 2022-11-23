@@ -15,6 +15,7 @@
   import CharactersArchetypeDetail from '@/pages/Characters/CharactersArchetypeDetail.vue'
   import CharacterSheetExpansionFeatures from '../CharacterSheet/CharacterSheetExpansionFeatures.vue'
   import MyDialog from '@/components/MyDialog.vue'
+  import { mapFeatureConfigs } from '@/modules/CharacterEngine/generateFeatures'
 
   const archetypesModule = namespace('archetypes')
 
@@ -91,7 +92,8 @@
     }
 
     get classFeatures () {
-      return chain(this.features)
+      var tempFeatureConfigs = JSON.parse(JSON.stringify(this.character.featureConfigs))
+      var features = chain(this.features.map(f => f))
         .filter(({ sourceName, level }) => this.classData
           ? this.classData.name === sourceName && level <= this.myClass.levels
           : false
@@ -101,10 +103,13 @@
         .uniqBy(({ name, sourceName }) => name + sourceName)
         .reverse()
         .value()
+      features.forEach(f => mapFeatureConfigs(f, tempFeatureConfigs))
+      return features
     }
 
     get archetypeFeatures () {
-      return chain(this.features)
+      var tempFeatureConfigs = JSON.parse(JSON.stringify(this.character.featureConfigs))
+      var features = chain(this.features.map(f => f))
         .filter(({ sourceName, level }) => this.archetypeData
           ? this.archetypeData.name === sourceName && level <= this.myClass.levels
           : false
@@ -114,6 +119,8 @@
         .uniqBy(({ name, sourceName }) => name + sourceName)
         .reverse()
         .value()
+      features.forEach(f => mapFeatureConfigs(f, tempFeatureConfigs))
+      return features
     }
 
     handleUpdateLevels (levels: number) {

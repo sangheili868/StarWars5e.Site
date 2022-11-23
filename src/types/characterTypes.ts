@@ -178,7 +178,8 @@ export interface FeatureType {
   text: string,
   source: string,
   sourceName: string,
-  metadata: string
+  metadata: string,
+  config: any
 }
 
 export interface ClassImprovementType {

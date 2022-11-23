@@ -6,6 +6,7 @@
   import CheckList from '@/components/CheckList.vue'
   import ConfirmDelete from '@/components/ConfirmDelete.vue'
   import { namespace } from 'vuex-class'
+  import CharacterSheetChooseFightingStyle from './CharacterSheetChooseFightingStyle.vue'
 
   const fightingStyleModule = namespace('fightingStyles')
 
@@ -13,7 +14,8 @@
     components: {
       CheckList,
       VueMarkdown,
-      ConfirmDelete
+      ConfirmDelete,
+      CharacterSheetChooseFightingStyle
     }
   })
   export default class CharacterSheetExpansionFeatures extends Vue {
@@ -37,6 +39,7 @@
       ].indexOf((feature as any).rowKey) > -1
     }
     getFightingStyle (key: string) {
+      // debugger;
       console.log('attempting to find fs ' + JSON.stringify(key))
       var fs = this.fightingStyles.find(f => (f as any).rowKey === key)
       if (fs) {
@@ -73,9 +76,7 @@
         br(v-if="feature.castingPeriodText || feature.range || feature.duration")
         VueMarkdown {{ feature.description || feature.text }}
         div(v-if="featureHasFightingStyle(feature)")
-          v-btn(v-if="!feature.config" color="primary" @click="chooseFightingStyle()")
-            v-icon fa-plus mr-2
-            template Choose Fighting Style
+          CharacterSheetChooseFightingStyle(v-if="!feature.config", feature="feature")
           p(v-if="feature.config")
             strong
               u Chosen Style

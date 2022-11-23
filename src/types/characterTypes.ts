@@ -99,7 +99,8 @@ export interface PowerType {
   level: number,
   powerType: string,
   range: string,
-  prerequisite: string
+  prerequisite: string,
+  config: any
 }
 
 export interface ManeuverType {

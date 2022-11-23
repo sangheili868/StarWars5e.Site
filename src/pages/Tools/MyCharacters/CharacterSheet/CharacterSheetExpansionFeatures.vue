@@ -48,6 +48,9 @@
       }
       return undefined
     }
+    isFeatureConfigured (f: CompletedFeatureType | PowerType) : boolean {
+      return f && f.config && f.config.data
+    }
   }
 </script>
 
@@ -76,14 +79,12 @@
         br(v-if="feature.castingPeriodText || feature.range || feature.duration")
         VueMarkdown {{ feature.description || feature.text }}
         div(v-if="featureHasFightingStyle(feature)")
-          CharacterSheetChooseFightingStyle(v-if="!feature.config", feature="feature")
-          p(v-if="feature.config")
+          p(v-if="feature.config && feature.config.data")
             strong
               u Chosen Style
             strong : {{ getFightingStyle(feature.config.data).name }}
             VueMarkdown(:source="getFightingStyle(feature.config.data).description")
-            a
-              strong(v-if="feature.config" @click="chooseFightingStyle()") Change Style
+          CharacterSheetChooseFightingStyle(:feature="feature")
         div(v-if="feature.customIndex > -1").d-flex.justify-end
           ConfirmDelete(
             label="Feature",

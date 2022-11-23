@@ -62,7 +62,7 @@ export default function generateFeatures (
     ...chain(rawCharacter.classes).groupBy('name').mapValues(classes => classes[0].levels).value(),
     ...chain(rawCharacter.classes).filter('archetype').groupBy('archetype.name').mapValues(classes => classes[0].levels).value()
   }
-  const myFeatures = chain(features)
+  const myFeatures = chain(features.map(f => JSON.parse(JSON.stringify(f))))
     .filter(({ sourceName, level }) =>
       Object.keys(featureSources).includes(sourceName) &&
       level <= featureSources[sourceName]

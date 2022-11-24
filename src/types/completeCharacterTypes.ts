@@ -102,9 +102,15 @@ export interface CompletedFeatureType {
   name: string,
   text: string,
   combat: boolean,
+  metadata?: {
+    fightingStyles?: {
+      number: number
+    }
+  }
   source?: string,
   sourceName?: string,
   customIndex?: number,
+  rowKey: string,
   usage?: {
     recharge: string,
     used: number,

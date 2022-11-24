@@ -150,6 +150,7 @@ export interface FeatType {
   contentSource: string,
   contentType: string,
   name: string,
+  rowKey: string,
   prerequisite: string,
   attributesIncreased: string[]
 }

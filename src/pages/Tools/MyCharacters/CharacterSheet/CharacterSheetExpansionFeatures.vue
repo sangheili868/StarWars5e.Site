@@ -30,12 +30,6 @@
       this.fetchFightingStyles()
     }
 
-    featureHasFightingStyle (feature: CompletedFeatureType | PowerType) : boolean {
-      return [
-        'Class-Fighter-Fighting Style-1'
-      ].indexOf((feature as any).rowKey) > -1
-    }
-
     getFightingStyle (key: string) {
       var fs = this.fightingStyles.find(f => (f as any).rowKey === key)
       if (fs) {
@@ -43,6 +37,7 @@
       }
       return undefined
     }
+
     isFeatureConfigured (f: CompletedFeatureType | PowerType) : boolean {
       return f && f.config && f.config.data
     }
@@ -55,7 +50,7 @@
       v-expansion-panel-header.pa-3
         slot(v-bind="{ feature }")
           h4.d-inline {{ feature.name }}
-          span(v-if="featureHasFightingStyle(feature) && !feature.config").op-40.mr-3.text-right Choice Needed
+          span(v-if="feature.metadata && feature.metadata.fightingStyles && !isFeatureConfigured(feature)").op-40.mr-3.text-right Choice Needed
       v-expansion-panel-content.ma-2.text-caption
         CheckList(
           v-if="feature.usage",
@@ -73,7 +68,7 @@
         div(v-if="feature.prerequisite") #[strong Prerequisite:] {{ feature.prerequisite }}
         br(v-if="feature.castingPeriodText || feature.range || feature.duration")
         VueMarkdown {{ feature.description || feature.text }}
-        div(v-if="featureHasFightingStyle(feature)")
+        div(v-if="feature.metadata && feature.metadata.fightingStyles")
           p(v-if="feature.config && feature.config.data")
             strong
               u Chosen Style
@@ -86,6 +81,7 @@
             :item="feature.name",
             @delete="$emit('deleteFeature', feature)"
           )
+        // pre {{ JSON.stringify(feature, null, 4) }}
 </template>
 
 <style lang="scss">

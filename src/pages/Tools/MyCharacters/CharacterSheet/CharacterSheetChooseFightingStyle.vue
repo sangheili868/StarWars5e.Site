@@ -7,6 +7,7 @@
   import { namespace } from 'vuex-class'
   import VueMarkdown from 'vue-markdown'
   import { CompleteCharacterType, CompletedFeatureType } from '@/types/completeCharacterTypes'
+  import { e } from 'mathjs'
 
   const fightingStylesModule = namespace('fightingStyles')
 
@@ -45,13 +46,15 @@
     isOpen = false
 
     select (fs: any) {
-      debugger
-      this.feature.config = {
-        data: fs.rowKey,
-        featureRowKey: (this.feature as any).rowKey,
-        configType: 'FightingStyleType'
-      }
       this.isOpen = false
+      setTimeout(() => {
+      this.$emit('saveFeatureConfig', {
+          data: fs.rowKey,
+          featureRowKey: (this.feature as any).rowKey,
+          configType: 'FightingStyleType',
+          localId: this.feature.config && this.feature.config.localId ? this.feature.config.localId : undefined
+        })
+      }, 500)
     }
 
     finish () {
@@ -64,8 +67,10 @@
 <template lang="pug">
   MyDialog(v-model="isOpen", wide)
     template(v-slot:activator="{ on }")
-      v-btn(v-if="!feature.config || !feature.config.data", color="primary", v-on="on").mt-3 Choose Fighting Style
-      a(v-if="feature.config && feature.config.data", v-on="on").mt-3 Change Fighting Style
+      div
+        v-btn(v-if="!feature.config || !feature.config.data", color="primary", v-on="on").mt-3 Choose Fighting Style
+      div
+        a(v-if="feature.config && feature.config.data", v-on="on").mt-3 Change Fighting Style
     template(#title) Choose Fighting Style
     template(#text)
       v-expansion-panels(accordion, multiple).mt-5

@@ -5,6 +5,8 @@
   FeatType
 */
 
+import { FeatureConfigType } from "./rawCharacterTypes"
+
 export interface ArchetypeType {
   className: string,
   contentSource: string,
@@ -180,7 +182,7 @@ export interface FeatureType {
   source: string,
   sourceName: string,
   metadata: string,
-  config: any
+  config?: FeatureConfigType
 }
 
 export interface ClassImprovementType {

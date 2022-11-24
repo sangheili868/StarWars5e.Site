@@ -29,7 +29,7 @@
     template(v-if="backgroundFeature")
       h3 Background Feature
       CharacterSheetExpansionFeatures(
-        :features="[ backgroundFeature ]",
+        :features="[ backgroundFeature ]", @saveFeatureConfig="(fc) => $emit('saveFeatureConfig', fc)",
         @updateCharacter="newCharacter => $emit('updateCharacter', newCharacter)"
       )
     CharacterSheetProficienciesLanguages(

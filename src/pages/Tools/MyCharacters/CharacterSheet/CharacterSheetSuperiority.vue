@@ -144,5 +144,5 @@
             tweakPath="superiority.generalSaveDC",
             @replaceCharacterProperty="payload => $emit('replaceCharacterProperty', payload)"
           )
-    CharacterSheetExpansionFeatures(:features="superiority.maneuvers")
+    CharacterSheetExpansionFeatures(:features="superiority.maneuvers", @saveFeatureConfig="(fc) => $emit('saveFeatureConfig', fc)")
 </template>

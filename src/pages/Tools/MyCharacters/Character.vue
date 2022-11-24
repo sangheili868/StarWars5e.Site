@@ -4,15 +4,15 @@
   import CharacterSheet from './CharacterSheet/CharacterSheet.vue'
   import Loading from '@/components/Loading.vue'
   import { namespace } from 'vuex-class'
-  import { merge, get, set, camelCase, omit } from 'lodash'
+  import { merge, get, set, camelCase, omit, uniqueId } from 'lodash'
   import baseCharacter from '@/modules/CharacterEngine/baseCharacter.json'
   import builderVersion from '@/version'
   import BackButton from '@/components/BackButton.vue'
 
   import { ClassType, ArchetypeType, PowerType, FeatType, BackgroundType, SpeciesType, FeatureType } from '@/types/characterTypes'
   import { EquipmentType } from '@/types/lootTypes'
-  import { CompleteCharacterType } from '@/types/completeCharacterTypes'
-  import { RawCharacterType } from '@/types/rawCharacterTypes'
+  import { CompleteCharacterType, CompletedFeatureType } from '@/types/completeCharacterTypes'
+  import { FeatureConfigType, RawCharacterType } from '@/types/rawCharacterTypes'
   import { CharacterValidationType } from '@/types/utilityTypes'
 
   const characterModule = namespace('character')
@@ -165,6 +165,28 @@
       this.replaceCharacterProperty({ path, property })
     }
 
+    handleSaveFeatureConfig (featureConfig: FeatureConfigType) {
+      if (this.character && featureConfig) {
+        var existingConfigIx = this.character.featureConfigs.findIndex(fc => fc.localId === featureConfig.localId)
+        if (existingConfigIx > -1) {
+          this.replaceCharacterProperty({
+            path: `featureConfigs.${existingConfigIx}`,
+            property: featureConfig
+          })
+        } else {
+          featureConfig.localId = uniqueId()
+          this.replaceCharacterProperty({
+            path: `featureConfigs`,
+            property: [
+              ...[featureConfig],
+              ...this.character && this.character.featureConfigs ? this.character.featureConfigs : []
+            ]
+          })
+        }
+        console.log('Event: saveFeatureConfig', featureConfig)
+      }
+    }
+
     handleSaveCharacter () {
       if (this.character) {
         this.isDirty = false
@@ -188,6 +210,7 @@
       v-if="isEditing",
       v-bind="{ character, completeCharacter, characterValidation, currentStep, classes, archetypes, equipment, powers, feats, features, backgrounds, species, isDirty }",
       v-on="{ updateCharacter, deleteCharacterProperty, replaceCharacterProperty, replaceCharacterProperties, goToStep }",
+      @saveFeatureConfig="handleSaveFeatureConfig",
       @deleteCharacter="handleDeleteCharacter",
       @saveCharacter="handleSaveCharacter",
       @viewSheet="goToSheet",
@@ -199,7 +222,8 @@
       :rawCharacter="character",
       v-on="{ updateCharacter, deleteCharacterProperty, replaceCharacterProperty, replaceCharacterProperties, goToStep }",
       @deleteCharacter="handleDeleteCharacter",
-      @setClean="isDirty=false"
+      @setClean="isDirty=false",
+      @saveFeatureConfig="handleSaveFeatureConfig"
     )
   Loading(v-else)
 </template>

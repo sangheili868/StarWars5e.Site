@@ -1,7 +1,7 @@
 <script lang="ts">
   import { Component, Prop, Vue } from 'vue-property-decorator'
   import { CompletedFeatureType } from '@/types/completeCharacterTypes'
-  import { FightingStyleType, PowerType } from '@/types/characterTypes'
+  import { FeatureType, FightingStyleType, PowerType } from '@/types/characterTypes'
   import VueMarkdown from 'vue-markdown'
   import CheckList from '@/components/CheckList.vue'
   import ConfirmDelete from '@/components/ConfirmDelete.vue'
@@ -27,23 +27,18 @@
     @fightingStyleModule.Action fetchFightingStyles!: () => void
 
     created () {
-      console.log('Creating CharSheetExpansionFeatures')
       this.fetchFightingStyles()
     }
-    chooseFightingStyle () {
-      console.log(this.fightingStyles)
-    }
+
     featureHasFightingStyle (feature: CompletedFeatureType | PowerType) : boolean {
       return [
         'Class-Fighter-Fighting Style-1'
       ].indexOf((feature as any).rowKey) > -1
     }
+
     getFightingStyle (key: string) {
-      // debugger;
-      console.log('attempting to find fs ' + JSON.stringify(key))
       var fs = this.fightingStyles.find(f => (f as any).rowKey === key)
       if (fs) {
-        console.log('Spotted fs ' + fs.name)
         return fs
       }
       return undefined
@@ -84,7 +79,7 @@
               u Chosen Style
             strong : {{ getFightingStyle(feature.config.data).name }}
             VueMarkdown(:source="getFightingStyle(feature.config.data).description")
-          CharacterSheetChooseFightingStyle(:feature="feature")
+          CharacterSheetChooseFightingStyle(:feature="feature", @saveFeatureConfig="(fc) => $emit('saveFeatureConfig', fc)")
         div(v-if="feature.customIndex > -1").d-flex.justify-end
           ConfirmDelete(
             label="Feature",

@@ -1,6 +1,6 @@
-import { ManeuverType, PowerType } from '@/types/characterTypes'
+import { BackgroundType, FeatureType, ManeuverType, PowerType } from '@/types/characterTypes'
 import { EquipmentType, EnhancedItemType, GearType, ArmorType, WeaponType } from '@/types/lootTypes'
-import { TweaksType, CustomProficiencyType, HighLevelCastingType, SettingsType, CustomEquipmentType, ProficiencyType, EquipmentTweakType } from './rawCharacterTypes'
+import { TweaksType, CustomProficiencyType, HighLevelCastingType, SettingsType, CustomEquipmentType, ProficiencyType, EquipmentTweakType, FeatureConfigType } from './rawCharacterTypes'
 import { ConditionType } from './lookupTypes'
 
 export interface AbilityScoreType {
@@ -97,10 +97,13 @@ export interface SuperiorityType {
 }
 
 export interface CompletedFeatureType {
-  config: any,
+  config?: FeatureConfigType,
+  level?: number,
   name: string,
   text: string,
   combat: boolean,
+  source?: string,
+  sourceName?: string,
   customIndex?: number,
   usage?: {
     recharge: string,

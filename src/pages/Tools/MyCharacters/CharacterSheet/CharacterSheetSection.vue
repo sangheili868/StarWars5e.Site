@@ -76,6 +76,7 @@
         component(
           :is="sections[index - 1].component",
           v-bind="completeCharacter",
+          @saveFeatureConfig="(fc) => $emit('saveFeatureConfig', fc)",
           @goToStep="step => $emit('goToStep', step)"
           @updateCharacter="newCharacter => $emit('updateCharacter', newCharacter)",
           @deleteCharacterProperty="payload => $emit('deleteCharacterProperty', payload)",

@@ -76,6 +76,7 @@ export interface RawCharacteristicsType {
 }
 
 export interface FeatureConfigType {
+  localId: string
   configType: string,
   featureRowKey: string,
   data: any

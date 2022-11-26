@@ -105,7 +105,8 @@
     div(v-if="!weapons.length").text-caption Equip weapons by selecting them in the Equipment section
     CharacterSheetSuperiority(
       v-if="superiority"
-      v-bind="{ superiority, tweaks }"
+      v-bind="{ superiority, tweaks }",
+      @saveFeatureConfig="(fc) => $emit('saveFeatureConfig', fc)"
       @updateCharacter="newCharacter => $emit('updateCharacter', newCharacter)",
       @replaceCharacterProperty="payload => $emit('replaceCharacterProperty', payload)"
     )
@@ -116,7 +117,7 @@
         @deleteCharacterProperty="payload => $emit('deleteCharacterProperty', payload)"
       )
     CharacterSheetExpansionFeatures(
-      :features="combatFeatures",
+      :features="combatFeatures", @saveFeatureConfig="(fc) => $emit('saveFeatureConfig', fc)",
       @updateCharacter="newCharacter => $emit('updateCharacter', newCharacter)",
       @deleteFeature="({ customIndex }) => $emit('deleteCharacterProperty', { path: 'customFeats', index: customIndex })"
     )

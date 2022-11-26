@@ -11,7 +11,8 @@ function findFeats (myFeats: string[], feats: FeatType[], isCustom: boolean): (C
       return {
         ...foundFeat,
         customIndex: isCustom ? index : -1,
-        combat: true
+        combat: true,
+        config: undefined
       }
     }
   }).compact().value()

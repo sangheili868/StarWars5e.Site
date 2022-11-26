@@ -88,6 +88,7 @@
         // Don't save a new, empty character
         this.saveCharacterLocally({
           ...baseCharacter,
+          featureConfigs: [],
           createdAt: Date.now(),
           localId
         })

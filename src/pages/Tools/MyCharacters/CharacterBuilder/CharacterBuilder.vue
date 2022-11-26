@@ -57,7 +57,7 @@
           props: {
             character: this.character,
             classes: this.classes,
-            features: this.features
+            features: this.completeCharacter ? [...this.completeCharacter.combatFeatures, ...this.completeCharacter.nonCombatFeatures] : []
           },
           isComplete: this.character.classes.length > 0
         },
@@ -164,6 +164,7 @@
             component(
               :is="steps[n].component",
               v-bind="steps[n].props",
+              @saveFeatureConfig="fc => $emit('saveFeatureConfig', fc)"
               @updateCharacter="newCharacter => $emit('updateCharacter', newCharacter)",
               @deleteCharacterProperty="payload => $emit('deleteCharacterProperty', payload)",
               @replaceCharacterProperty="payload => $emit('replaceCharacterProperty', payload)"

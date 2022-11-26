@@ -91,7 +91,7 @@
         clearable,
         label="Filter by Alignment"
       ).mt-3
-      CharacterSheetExpansionFeatures(:features="filteredPowers[levelFilter]", isShowingLevel).text-left
+      CharacterSheetExpansionFeatures(:features="filteredPowers[levelFilter]", isShowingLevel, @saveFeatureConfig="(fc) => $emit('saveFeatureConfig', fc)").text-left
         template(v-slot="{ feature }")
           div.d-flex.align-center
             v-checkbox(

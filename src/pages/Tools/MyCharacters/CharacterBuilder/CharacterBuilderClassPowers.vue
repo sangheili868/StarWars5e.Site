@@ -78,11 +78,14 @@
   div(v-if="['Force', 'Tech'].includes(castingType) && numberPowersKnown > 0").mt-4
     h3 {{ castingType }} Powers
     div {{ powersSelected.length }} / {{ numberPowersKnown }} Known
-    CharacterSheetExpansionFeatures(:features="powersSelectedData", isShowingLevel, :class="$style.powersList").text-left
+    CharacterSheetExpansionFeatures(:features="powersSelectedData",
+      @saveFeatureConfig="(fc) => $emit('saveFeatureConfig', fc)",
+      isShowingLevel, :class="$style.powersList").text-left
     CharacterSheetCastingAddPower(
       :disabled="this.powersSelected.length >= this.numberPowersKnown",
       v-bind="{ castingType, maxPowerLevel, powersSelected, allForcePowers }",
-      :isEnforcingForcePrerequisites="settings.isEnforcingForcePrerequisites"
+      :isEnforcingForcePrerequisites="settings.isEnforcingForcePrerequisites",
+      @saveFeatureConfig="(fc) => $emit('saveFeatureConfig', fc)",
       @updatePowers="handleUpdatePowers"
     )
 </template>

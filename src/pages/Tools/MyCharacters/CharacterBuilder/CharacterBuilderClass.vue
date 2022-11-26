@@ -15,6 +15,8 @@
   import CharactersArchetypeDetail from '@/pages/Characters/CharactersArchetypeDetail.vue'
   import CharacterSheetExpansionFeatures from '../CharacterSheet/CharacterSheetExpansionFeatures.vue'
   import MyDialog from '@/components/MyDialog.vue'
+  import { mapFeatureConfigs } from '@/modules/CharacterEngine/generateFeatures'
+  import { CompletedFeatureType } from '@/types/completeCharacterTypes'
 
   const archetypesModule = namespace('archetypes')
 
@@ -35,7 +37,7 @@
   export default class CharacterBuilderClass extends Vue {
     @Prop(Object) readonly character!: RawCharacterType
     @Prop(Array) readonly classes!: ClassType[]
-    @Prop(Array) readonly features!: FeatureType[]
+    @Prop(Array) readonly features!: CompletedFeatureType[]
     @Prop(Object) readonly myClass!: RawClassType
     @Prop(Number) readonly index!: number
     @Prop(Boolean) readonly isFixedHitPoints!: boolean
@@ -91,9 +93,10 @@
     }
 
     get classFeatures () {
-      return chain(this.features)
+      var tempFeatureConfigs = JSON.parse(JSON.stringify(this.character.featureConfigs))
+      var features = chain(this.features.map(f => f))
         .filter(({ sourceName, level }) => this.classData
-          ? this.classData.name === sourceName && level <= this.myClass.levels
+          ? this.classData.name === sourceName && level !== undefined && level <= this.myClass.levels
           : false
         )
         .sortBy('level')
@@ -101,12 +104,15 @@
         .uniqBy(({ name, sourceName }) => name + sourceName)
         .reverse()
         .value()
+      features.forEach(f => mapFeatureConfigs(f, tempFeatureConfigs))
+      return features
     }
 
     get archetypeFeatures () {
-      return chain(this.features)
+      var tempFeatureConfigs = JSON.parse(JSON.stringify(this.character.featureConfigs))
+      var features = chain(this.features.map(f => f))
         .filter(({ sourceName, level }) => this.archetypeData
-          ? this.archetypeData.name === sourceName && level <= this.myClass.levels
+          ? this.archetypeData.name === sourceName && level !== undefined && level <= this.myClass.levels
           : false
         )
         .sortBy('level')
@@ -114,6 +120,8 @@
         .uniqBy(({ name, sourceName }) => name + sourceName)
         .reverse()
         .value()
+      features.forEach(f => mapFeatureConfigs(f, tempFeatureConfigs))
+      return features
     }
 
     handleUpdateLevels (levels: number) {
@@ -235,9 +243,9 @@
       @change="handleUpdateArchetype"
     )
     h3 Class Features
-    CharacterSheetExpansionFeatures(:features="classFeatures")
+    CharacterSheetExpansionFeatures(:features="classFeatures", @saveFeatureConfig="(fc) => $emit('saveFeatureConfig', fc)")
     h3(v-if="archetypeFeatures.length > 0").mt-3 Archetype Features
-    CharacterSheetExpansionFeatures(:features="archetypeFeatures")
+    CharacterSheetExpansionFeatures(:features="archetypeFeatures", @saveFeatureConfig="(fc) => $emit('saveFeatureConfig', fc)")
     h3(v-if="asiLevels.length > 0").mt-3 Ability Score Improvements
     CharacterBuilderClassASI(
       v-for="(asiLevel, index) in asiLevels",
@@ -248,6 +256,7 @@
     CharacterBuilderClassPowers(
       v-bind="{ myClass, classData, archetypeData, allForcePowers }",
       :settings="character.settings",
+      @saveFeatureConfig="(fc) => $emit('saveFeatureConfig', fc)",
       @updatePowers="({ newPowers, type, isArchetype }) => handleUpdatePowers(newPowers, type, isArchetype)"
     )
     CharacterBuilderClassManeuvers(

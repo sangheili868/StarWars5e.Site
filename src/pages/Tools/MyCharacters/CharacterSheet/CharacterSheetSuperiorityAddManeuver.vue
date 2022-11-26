@@ -64,7 +64,7 @@
         clearable,
         label="Filter by Type"
       ).mt-3
-      CharacterSheetExpansionFeatures(:features="filteredManeuvers").text-left
+      CharacterSheetExpansionFeatures(:features="filteredManeuvers", @saveFeatureConfig="(fc) => $emit('saveFeatureConfig', fc)").text-left
         template(v-slot="{ feature }")
           div.d-flex.align-center
             v-checkbox(

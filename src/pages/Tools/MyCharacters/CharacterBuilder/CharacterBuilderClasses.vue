@@ -85,6 +85,7 @@
         v-expansion-panel-content
           CharacterBuilderClass(
             v-bind="{ character, myClass, classes, features, index, isFixedHitPoints, characterAdvancements }",
+            @saveFeatureConfig="fc => $emit('saveFeatureConfig', fc)"
             @updateCharacter="newCharacter => $emit('updateCharacter', newCharacter)",
             @replaceCharacterProperty="payload => $emit('replaceCharacterProperty', payload)",
             @replaceCharacterProperties="payload => $emit('replaceCharacterProperties', payload)",

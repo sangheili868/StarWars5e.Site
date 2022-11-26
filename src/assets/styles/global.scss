@@ -10,6 +10,28 @@ a {
   }
 }
 
+.text-right {
+  text-align: right;
+}
+
+.flex-none {
+  flex: none !important;
+}
+
+.op-10 { opacity: 0.1; }
+.op-20 { opacity: 0.2; }
+.op-30 { opacity: 0.3; }
+.op-40 { opacity: 0.4; }
+.op-50 { opacity: 0.5; }
+.op-60 { opacity: 0.6; }
+.op-70 { opacity: 0.7; }
+.op-80 { opacity: 0.8; }
+.op-90 { opacity: 0.9; }
+
+.pull-right {
+  float: right;
+}
+
 h1, h2, h3, h4 {
   font-family: 'Russo One', sans-serif;
   color: $primary;

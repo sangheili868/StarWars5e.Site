@@ -5,6 +5,8 @@
   FeatType
 */
 
+import { FeatureConfigType } from "./rawCharacterTypes"
+
 export interface ArchetypeType {
   className: string,
   contentSource: string,
@@ -99,7 +101,8 @@ export interface PowerType {
   level: number,
   powerType: string,
   range: string,
-  prerequisite: string
+  prerequisite: string,
+  config: any
 }
 
 export interface ManeuverType {
@@ -147,6 +150,7 @@ export interface FeatType {
   contentSource: string,
   contentType: string,
   name: string,
+  rowKey: string,
   prerequisite: string,
   attributesIncreased: string[]
 }
@@ -178,7 +182,8 @@ export interface FeatureType {
   text: string,
   source: string,
   sourceName: string,
-  metadata: string
+  metadata: string,
+  config?: FeatureConfigType
 }
 
 export interface ClassImprovementType {
